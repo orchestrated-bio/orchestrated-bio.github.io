@@ -8,10 +8,10 @@
 <a href="{{ '/products/' | append: p.slug | append: '/' | relative_url }}" class="block">
 <div class="product-card group relative rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/20 overflow-hidden">
     <div class="relative">
-        <div class="overflow-hidden border-b border-white/5">
-            <img src="{{ p.image | relative_url }}" alt="{{ p.image_alt }}" class="w-full" loading="lazy">
+        <div class="overflow-hidden border-b border-white/5 aspect-video">
+            <img src="{{ p.image | relative_url }}" alt="{{ p.image_alt }}" class="w-full h-full object-cover" loading="lazy">
         </div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-{{ p.icon_gradient_from }} to-{{ p.icon_gradient_to }} flex items-center justify-center">
                     <svg class="w-4.5 h-4.5 text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,12 +21,16 @@
                 <span class="px-2 py-0.5 rounded-full bg-{{ color }}-500/10 text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %} text-[10px] font-medium">{{ p.category }}</span>
             </div>
             <h3 class="text-lg font-semibold text-white mb-1">{{ p.name }}</h3>
-            <p class="text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %} text-xs font-medium mb-3">{{ p.tagline }}</p>
+            <p class="text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %} text-sm font-semibold mb-3">{{ p.tagline }}</p>
             <p class="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2">{{ p.description }}</p>
-            <div class="flex flex-wrap gap-1.5">
+            <div class="flex flex-wrap gap-1.5 mb-4">
                 {% for tag in p.tags %}
                 <span class="px-2 py-0.5 rounded bg-{{ color }}-500/10 text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %} text-[10px]">{{ tag }}</span>
                 {% endfor %}
+            </div>
+            <div class="mt-auto flex items-center gap-1 text-xs text-{{ color }}-{% if color == 'brand' %}300{% elsif color == 'amber' %}400{% else %}400{% endif %} font-medium">
+                View product
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </div>
         </div>
     </div>
