@@ -5,7 +5,7 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
 ---
 
 <!-- Hero Section -->
-<section class="relative min-h-[85vh] flex items-center hero-bg overflow-hidden">
+<section class="relative min-h-[60vh] lg:min-h-[85vh] flex items-center hero-bg overflow-hidden">
     <!-- Decorative elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
@@ -14,88 +14,60 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
         <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
     </div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-8">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-32 lg:pb-20">
+        <div class="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+            <!-- Copy -->
+            <div class="max-w-xl space-y-6">
+                <p class="text-brand-400 text-sm font-semibold uppercase tracking-widest">Agentic AI for Life Sciences</p>
+
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                    Agentic AI That
-                    <span class="gradient-text">Understands the Science</span>
+                    From Biomedical Data<br>to <span class="gradient-text">Deployed AI</span> — Fast
                 </h1>
 
-                <p class="text-lg text-gray-400 max-w-xl leading-relaxed">
-                    We build AI tools that accelerate cancer genomics, spatial transcriptomics,
-                    and biomedical research. Designed by scientists who publish in the field,
-                    deployable on your own infrastructure.
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Built by scientists who publish in the field. Deployable on your own infrastructure.
                 </p>
 
-                <div class="flex flex-wrap gap-4">
+                <div class="flex flex-wrap items-center gap-4 pt-2">
                     <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
                         Schedule a Demo
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                     </a>
-                    <a href="#products" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 hover:border-brand-500/30 text-gray-300 hover:text-white font-medium transition-all">
+                    <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
                         Explore Our Portfolio
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
                 </div>
-
-                <!-- Stats bar -->
-                <div class="flex flex-wrap gap-8 pt-4">
-                    <div>
-                        <div class="text-2xl font-bold text-white">5</div>
-                        <div class="text-xs text-gray-500 mt-1">AI Products Built</div>
-                    </div>
-                    <div class="w-px bg-white/10"></div>
-                    <div>
-                        <div class="text-sm font-medium text-brand-400 mt-1">Patent Pending</div>
-                        <div class="text-xs text-gray-500 mt-1">Core Technology</div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Hero visual: product screenshot -->
-            <div class="hidden lg:flex items-center justify-center relative">
-                <div class="relative" style="perspective: 1000px;">
-                    <div class="rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10" style="transform: rotateY(-6deg) rotateX(2deg);">
-                        <img src="{{ '/images/insight-demo.gif' | relative_url }}" alt="Insight cancer genomics platform, conversational AI demo with streaming results" class="w-full" loading="eager">
+            <!-- Product visual -->
+            <div class="lg:flex-1 lg:min-w-0">
+                <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none z-10"></div>
+                    <img src="{{ '/images/insight-demo.png' | relative_url }}" alt="Insight — conversational cancer genomics AI" class="w-full" loading="eager">
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <span class="px-2.5 py-1 rounded-full bg-navy-950/80 border border-white/10 text-brand-400 text-xs font-medium backdrop-blur-sm">Insight&trade; — Cancer Genomics AI</span>
                     </div>
-                    <!-- Glow behind -->
-                    <div class="absolute -inset-8 bg-gradient-to-br from-brand-500/10 via-brand-400/5 to-navy-600/10 rounded-3xl blur-3xl -z-10"></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-
-<!-- Products Section -->
-<section id="products" class="py-24 lg:py-32">
+<!-- Lead offering: Custom Solutions -->
+<section class="py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 text-brand-400 text-xs font-medium mb-6">
-                Our Portfolio
-            </div>
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
-                From Research to <span class="gradient-text">Deployed Solutions</span>
-            </h2>
-            <p class="text-gray-400 text-lg leading-relaxed">
-                We build agentic AI that accelerates research workflows and enables novel data analysis
-                while keeping scientists in control, from biomedical research to government intelligence.
-            </p>
-        </div>
-
-        <!-- Lead offering: Custom Solutions -->
-        <div class="mb-8 p-8 rounded-2xl bg-gradient-to-br from-brand-900/30 to-navy-900/50 border border-brand-500/10">
+        <div class="p-8 rounded-2xl bg-gradient-to-br from-brand-900/30 to-navy-900/50 border border-brand-500/10">
             <div class="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
                     <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-medium mb-4">
                         Custom Agentic AI Solutions
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">AI That Accelerates Your Workflows, Not Replaces Them</h3>
+                    <h2 class="text-2xl font-bold text-white mb-4">AI That Accelerates Your Workflows, Not Replaces Them</h2>
                     <p class="text-gray-400 leading-relaxed mb-4">
                         Your scientists are the experts. We build AI systems that automate the
                         cumbersome parts: data wrangling, repetitive analysis, and literature
@@ -150,77 +122,6 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
                 </div>
             </div>
         </div>
-
-        <!-- Flagship: Insight full-width hero card -->
-        <div class="product-card group relative mb-6 rounded-2xl bg-navy-900/50 border border-brand-500/10 hover:border-brand-500/25 overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-r from-brand-500/[0.03] to-transparent"></div>
-            <div class="relative">
-                <div class="p-8 lg:p-10">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-700/20 flex items-center justify-center">
-                            <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
-                            </svg>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-medium">Flagship &middot; Patent Pending</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Insight&trade;</h3>
-                    <p class="text-brand-400 text-sm font-medium mb-4">Conversational Cancer Genomics Intelligence</p>
-                    <p class="text-gray-400 text-base leading-relaxed mb-6">
-                        Ask questions about TCGA cancer data in plain English and get instant,
-                        publication-quality visualizations with AI-generated analysis. Survival curves,
-                        differential expression, mutation landscapes, and clinical stratification across
-                        199+ metadata fields. From question to chart in a single sentence.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">TCGA Data</span>
-                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">33 Cancer Types</span>
-                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">Real-time</span>
-                    </div>
-                    <a href="{{ site.insight_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
-                        Try Insight
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product portfolio grid (data-driven) -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {% for product in site.data.products %}
-            {% include product-card.html product=product %}
-            {% endfor %}
-        </div>
     </div>
 </section>
-
-
-
-<!-- Team Section -->
-<section id="team" class="py-24 lg:py-32 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center mb-16">
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 text-brand-400 text-xs font-medium mb-6">
-                Our Team
-            </div>
-            <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
-                Built by <span class="gradient-text">Scientists &amp; Engineers</span>
-            </h2>
-            <p class="text-gray-400 text-lg leading-relaxed">
-                Our founding team brings together deep biomedical research, agentic AI development,
-                military-grade discipline, and strategic business execution.
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {% for member in site.data.team %}
-            {% include team-card.html member=member %}
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
 

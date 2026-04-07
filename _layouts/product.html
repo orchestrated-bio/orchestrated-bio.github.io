@@ -101,16 +101,62 @@ layout: default
 <!-- CTA -->
 <section class="py-20 border-t border-white/5">
     <div class="max-w-5xl mx-auto px-4 text-center">
-        <h2 class="text-2xl font-bold text-white mb-4">Interested in {{ page.product_name }}?</h2>
+        <h2 class="text-2xl font-bold text-white mb-4">{{ page.cta_title | default: "Interested in " | append: page.product_name | append: "?" }}</h2>
         <p class="text-gray-400 mb-8 max-w-lg mx-auto">{{ page.cta_description | default: "Request a demo or learn more about how this product can help your team." }}</p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-{{ page.cta_bg | default: 'brand-600' }} hover:bg-{{ page.cta_hover | default: 'brand-500' }} text-{% if page.cta_text_dark %}navy-950{% else %}white{% endif %} font-medium transition-all hover:shadow-lg hover:shadow-{{ page.accent_color | default: 'brand' }}-500/20">
                 Request Access
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
             </a>
-            <a href="{{ '/#products' | relative_url }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 hover:border-{{ page.accent_color | default: 'brand' }}-500/30 text-gray-300 hover:text-white font-medium transition-all">
+            <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 hover:border-{{ page.accent_color | default: 'brand' }}-500/30 text-gray-300 hover:text-white font-medium transition-all">
                 &larr; Back to Portfolio
             </a>
         </div>
     </div>
 </section>
+
+<!-- Cross-navigation -->
+{% assign products = site.data.products %}
+{% assign prev_product = nil %}
+{% assign next_product = nil %}
+{% for p in products %}
+  {% if page.url contains p.slug %}
+    {% if forloop.index0 > 0 %}
+      {% assign prev_index = forloop.index0 | minus: 1 %}
+      {% assign prev_product = products[prev_index] %}
+    {% endif %}
+    {% unless forloop.last %}
+      {% assign next_index = forloop.index0 | plus: 1 %}
+      {% assign next_product = products[next_index] %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+{% if prev_product or next_product %}
+<nav class="border-t border-white/5" aria-label="Product navigation">
+    <div class="max-w-5xl mx-auto px-4 py-6 flex items-center justify-between gap-4">
+        <div class="flex-1">
+            {% if prev_product %}
+            <a href="{{ '/products/' | append: prev_product.slug | append: '/' | relative_url }}" class="inline-flex items-center gap-3 group text-left">
+                <svg class="w-4 h-4 text-gray-500 group-hover:text-white transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/></svg>
+                <div>
+                    <p class="text-xs text-gray-500 mb-0.5">Previous</p>
+                    <p class="text-sm text-gray-300 group-hover:text-white font-medium transition-colors">{{ prev_product.name }}</p>
+                </div>
+            </a>
+            {% endif %}
+        </div>
+        <a href="{{ '/portfolio/' | relative_url }}" class="text-xs text-gray-500 hover:text-gray-300 transition-colors flex-shrink-0">All Products</a>
+        <div class="flex-1 flex justify-end">
+            {% if next_product %}
+            <a href="{{ '/products/' | append: next_product.slug | append: '/' | relative_url }}" class="inline-flex items-center gap-3 group text-right">
+                <div>
+                    <p class="text-xs text-gray-500 mb-0.5">Next</p>
+                    <p class="text-sm text-gray-300 group-hover:text-white font-medium transition-colors">{{ next_product.name }}</p>
+                </div>
+                <svg class="w-4 h-4 text-gray-500 group-hover:text-white transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endif %}

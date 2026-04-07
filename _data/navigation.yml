@@ -1,9 +1,9 @@
 # Header navigation
 header:
   - title: Portfolio
-    url: "/#products"
+    url: "/portfolio/"
   - title: Team
-    url: "/#team"
+    url: "/team/"
   - title: Blog
     url: "/blog/"
 
@@ -40,7 +40,7 @@ footer:
     title: Company
     links:
       - title: Team
-        url: "/#team"
+        url: "/team/"
       - title: Privacy Policy
         url: /privacy-policy.html
       - title: Terms of Service

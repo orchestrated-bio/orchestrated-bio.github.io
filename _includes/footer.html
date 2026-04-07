@@ -10,7 +10,7 @@
                         Orchestrated<span class="text-brand-400">.bio</span>
                     </span>
                 </div>
-                <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                <p class="text-gray-400 text-sm leading-relaxed max-w-xs">
                     Agentic AI for precision medicine, biomedical research, and government missions.
                     Built by scientists and veterans.
                 </p>
@@ -26,7 +26,7 @@
                     <li>
                         <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
                            {% if link.external %}target="_blank" rel="noopener"{% endif %}
-                           class="text-sm text-gray-500 hover:text-brand-400 transition-colors">{{ link.title }}</a>
+                           class="text-sm text-gray-400 hover:text-brand-400 transition-colors">{{ link.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
@@ -40,11 +40,11 @@
                     <li>
                         {% if link.url == "BOOKING_URL" %}
                         <a href="{{ site.booking_url }}" target="_blank" rel="noopener"
-                           class="text-sm text-gray-500 hover:text-brand-400 transition-colors">{{ link.title }}</a>
+                           class="text-sm text-gray-400 hover:text-brand-400 transition-colors">{{ link.title }}</a>
                         {% else %}
                         <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
                            {% if link.external %}target="_blank" rel="noopener"{% endif %}
-                           class="text-sm text-gray-500 hover:text-brand-400 transition-colors">{{ link.title }}</a>
+                           class="text-sm text-gray-400 hover:text-brand-400 transition-colors">{{ link.title }}</a>
                         {% endif %}
                     </li>
                     {% endfor %}
@@ -58,7 +58,7 @@
                     {% for link in nav.company.links %}
                     <li>
                         <a href="{% if link.url contains 'mailto:' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
-                           class="text-sm text-gray-500 hover:text-brand-400 transition-colors">{{ link.title }}</a>
+                           class="text-sm text-gray-400 hover:text-brand-400 transition-colors">{{ link.title }}</a>
                     </li>
                     {% endfor %}
                 </ul>
