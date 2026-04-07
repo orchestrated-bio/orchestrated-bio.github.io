@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<div class="pt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <!-- Portfolio header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 text-brand-400 text-xs font-medium mb-6">
+                Our Portfolio
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+                From Research to <span class="text-brand-400">Deployed Solutions</span>
+            </h1>
+            <p class="text-gray-400 text-lg leading-relaxed">
+                We build agentic AI that accelerates research workflows and enables novel data analysis
+                while keeping scientists in control, from biomedical research to government intelligence.
+            </p>
+        </div>
+
+        {{ content }}
+
+        <!-- Flagship: Insight full-width hero card -->
+        <div class="product-card group relative mb-6 rounded-2xl bg-navy-900/50 border border-brand-500/10 hover:border-brand-500/25 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-500/[0.03] to-transparent"></div>
+            <div class="relative">
+                <div class="p-8 lg:p-10">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500/20 to-brand-700/20 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/>
+                            </svg>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-medium">Flagship &middot; Patent Pending</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-2">Insight&trade;</h2>
+                    <p class="text-brand-400 text-sm font-medium mb-4">Conversational Cancer Genomics Intelligence</p>
+                    <!-- Demo GIF -->
+                    <div class="mb-6 rounded-xl overflow-hidden border border-white/5 mx-2">
+                        <img src="{{ '/images/insight-demo.gif' | relative_url }}" alt="Insight cancer genomics platform, conversational AI demo with streaming results" class="w-full" loading="lazy">
+                    </div>
+                    <p class="text-gray-400 text-base leading-relaxed mb-6">
+                        Ask questions about TCGA cancer data in plain English and get instant,
+                        publication-quality visualizations with AI-generated analysis. Survival curves,
+                        differential expression, mutation landscapes, and clinical stratification across
+                        199+ metadata fields. From question to chart in a single sentence.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">TCGA Data</span>
+                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">33 Cancer Types</span>
+                        <span class="px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 text-xs">Real-time</span>
+                    </div>
+                    <a href="{{ site.insight_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-sm font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
+                        Try Insight
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product portfolio grid (data-driven) -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {% for product in site.data.products %}
+            {% include product-card.html product=product %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

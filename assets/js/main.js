@@ -3,55 +3,96 @@ const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    mobileMenuBtn.setAttribute('aria-controls', 'mobile-menu');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+
+    const openMenu = () => {
+        mobileMenu.classList.remove('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        const firstLink = mobileMenu.querySelector('a');
+        if (firstLink) firstLink.focus();
+    };
+
+    const closeMenu = () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileMenuBtn.focus();
+    };
+
     mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
+        mobileMenu.classList.contains('hidden') ? openMenu() : closeMenu();
     });
 
-    // Close mobile menu when clicking a link
     mobileMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+            closeMenu();
+        }
     });
 }
 
 // Navbar scroll effect
 const navbar = document.getElementById('navbar');
+if (navbar) {
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY > 100;
+        navbar.classList.toggle('shadow-lg', scrolled);
+        navbar.classList.toggle('shadow-black/10', scrolled);
+    }, { passive: true });
+}
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.classList.add('shadow-lg', 'shadow-black/10');
-    } else {
-        navbar.classList.remove('shadow-lg', 'shadow-black/10');
-    }
-});
+// Scroll animations
+const observerOpts = { threshold: 0.08, rootMargin: '0px 0px -40px 0px' };
 
-// Smooth reveal animation on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
+// Fade-up for non-grid sections
+const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            sectionObserver.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, observerOpts);
 
-// Observe all sections
-document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(section);
+// Staggered reveal for grid children
+const gridObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            Array.from(entry.target.children).forEach((child, i) => {
+                setTimeout(() => {
+                    child.style.opacity = '1';
+                    child.style.transform = 'translateY(0) scale(1)';
+                }, i * 100);
+            });
+            gridObserver.unobserve(entry.target);
+        }
+    });
+}, observerOpts);
+
+document.querySelectorAll('section').forEach((section, i) => {
+    if (i === 0) return; // Hero is always visible
+
+    const grids = section.querySelectorAll('.grid');
+    if (grids.length) {
+        grids.forEach(grid => {
+            Array.from(grid.children).forEach(child => {
+                child.style.opacity = '0';
+                child.style.transform = 'translateY(16px) scale(0.97)';
+                child.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            gridObserver.observe(grid);
+        });
+    } else {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        sectionObserver.observe(section);
+    }
 });
-
-// Make hero visible immediately
-const heroSection = document.querySelector('section:first-of-type');
-if (heroSection) {
-    heroSection.style.opacity = '1';
-    heroSection.style.transform = 'translateY(0)';
-}
