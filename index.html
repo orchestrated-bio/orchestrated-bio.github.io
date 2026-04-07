@@ -15,48 +15,45 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
     </div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
-        <div class="max-w-3xl">
-            <div class="space-y-8">
+        <div class="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
+            <!-- Copy -->
+            <div class="max-w-xl space-y-6">
+                <p class="text-brand-400 text-sm font-semibold uppercase tracking-widest">Agentic AI for Life Sciences</p>
+
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                    Agentic AI That
-                    <span class="gradient-text">Understands the Science</span>
+                    From Biomedical Data<br>to <span class="gradient-text">Deployed AI</span> — Fast
                 </h1>
 
-                <p class="text-lg text-gray-400 max-w-xl leading-relaxed">
-                    We build AI tools that accelerate cancer genomics, spatial transcriptomics,
-                    and biomedical research. Designed by scientists who publish in the field,
-                    deployable on your own infrastructure.
+                <p class="text-lg text-gray-400 leading-relaxed">
+                    Built by scientists who publish in the field. Deployable on your own infrastructure.
                 </p>
 
-                <div class="flex flex-wrap gap-4">
-                    <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-4 sm:py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
                         Schedule a Demo
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                     </a>
-                    <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-2 px-6 py-4 sm:py-3 rounded-lg border border-white/10 hover:border-brand-500/30 text-gray-300 hover:text-white font-medium transition-all">
+                    <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
                         Explore Our Portfolio
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
                 </div>
+            </div>
 
-                <!-- Stats bar -->
-                <div class="flex flex-wrap gap-8 pt-4">
-                    <div>
-                        <div class="text-2xl font-bold text-white">5</div>
-                        <div class="text-xs text-gray-500 mt-1">AI Products Built</div>
-                    </div>
-                    <div class="w-px bg-white/10"></div>
-                    <div>
-                        <div class="text-sm font-medium text-brand-400 mt-1">Patent Pending</div>
-                        <div class="text-xs text-gray-500 mt-1">Core Technology</div>
+            <!-- Product visual -->
+            <div class="hidden lg:block flex-1 min-w-0">
+                <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none z-10"></div>
+                    <img src="{{ '/images/insight-demo.png' | relative_url }}" alt="Insight — conversational cancer genomics AI" class="w-full" loading="eager">
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <span class="px-2.5 py-1 rounded-full bg-navy-950/80 border border-white/10 text-brand-400 text-xs font-medium backdrop-blur-sm">Insight&trade; — Cancer Genomics AI</span>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
