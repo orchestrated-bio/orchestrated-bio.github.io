@@ -5,7 +5,7 @@
                     <!-- ═══ Icon sidebar ═══ -->
                     <div class="mock-part mock-sidebar absolute left-0 top-0 bottom-0 flex flex-col items-center gap-[0.6em] py-[1.2em] px-[0.5em] bg-[#111b2b] border-r border-white/5 z-20" style="width: 3em; --d:0.2s;">
                         <div class="w-[1.6em] h-[1.6em] rounded-[0.4em] bg-brand-500/20 flex items-center justify-center">
-                            <svg class="w-[1em] h-[1em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+                            <img src="{{ '/images/logo-icon-white.svg' | relative_url }}" alt="" class="w-[1.1em] h-[1.1em]">
                         </div>
                         <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5 flex items-center justify-center">
                             <svg class="w-[0.8em] h-[0.8em] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6z"/></svg>
@@ -124,7 +124,7 @@
                                 <!-- Mini top bar with app icon -->
                                 <div class="flex items-center gap-[0.3em] mb-[0.5em] px-[0.1em]">
                                     <div class="w-[1.4em] h-[1.4em] rounded-[0.35em] bg-brand-500/20 flex items-center justify-center">
-                                        <svg class="w-[0.8em] h-[0.8em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5"/></svg>
+                                        <img src="{{ '/images/logo-icon-white.svg' | relative_url }}" alt="" class="w-[0.9em] h-[0.9em]">
                                     </div>
                                     <span class="text-[0.6em] text-white font-semibold">Insight</span>
                                     <span class="text-[0.4em] text-gray-500 ml-auto px-[0.4em] py-[0.15em] rounded-[0.2em] bg-amber-500/15 text-amber-400">BRCA</span>
@@ -334,10 +334,10 @@ plt.xlabel(<span class="text-brand-300">"Time (days)"</span>)</code></pre>
                                                 points="30,14 42,14 42,34 55,34 55,54 68,54 68,70 80,70 80,80 95,80 95,88 115,88 115,94 150,94 210,98"/>
                                             <!-- Legend box -->
                                             <rect x="145" y="14" width="62" height="22" rx="2" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
-                                            <line x1="149" y1="22" x2="161" y2="22" stroke="#f59e0b" stroke-width="2"/>
-                                            <text x="164" y="24" fill="#e5e7eb" font-size="5">Wild-type</text>
-                                            <line x1="149" y1="31" x2="161" y2="31" stroke="#16b17e" stroke-width="2"/>
-                                            <text x="164" y="33" fill="#e5e7eb" font-size="5">KRAS Mutant</text>
+                                            <line class="mock-colab-legend-swatch" x1="149" y1="22" x2="161" y2="22" stroke="#f59e0b" stroke-width="2" style="transition: stroke 0.6s ease"/>
+                                            <text class="mock-colab-legend-text" x="164" y="24" fill="#e5e7eb" font-size="5">Wild-type</text>
+                                            <line class="mock-colab-legend-swatch" x1="149" y1="31" x2="161" y2="31" stroke="#16b17e" stroke-width="2" style="transition: stroke 0.6s ease"/>
+                                            <text class="mock-colab-legend-text" x="164" y="33" fill="#e5e7eb" font-size="5">KRAS Mutant</text>
                                         </svg>
                                         <div class="flex items-center gap-[0.4em] mt-[0.3em]">
                                             <span class="text-[0.5em] text-gray-300 font-mono">&#9654; Output: KM plot rendered (0.34s)</span>
