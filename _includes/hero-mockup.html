@@ -82,8 +82,6 @@
                     <!-- ═══ Visualization panel (right) — swappable scenes ═══ -->
                     <div class="mock-vis-container absolute top-[2.4em] left-[21em] right-0 bottom-0 overflow-hidden">
 
-                        {% include hero-vis-scene-0.html %}
-
                         {% include hero-vis-scene-1.html %}
 
                         {% include hero-vis-scene-2.html %}
@@ -99,15 +97,15 @@
                         <div class="flex items-center gap-[0.3em] mb-[0.4em]">
                             <svg class="w-[0.9em] h-[0.9em] text-brand-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
                             <span class="text-[0.55em] text-brand-400 font-semibold">PubMed</span>
-                            <span class="text-[0.45em] text-gray-500">PMID: 39847501</span>
+                            <span class="text-[0.45em] text-gray-500">PMID: 30575850</span>
                         </div>
-                        <p class="text-[0.6em] text-white font-medium leading-snug mb-[0.25em]">TP53 mutation landscape in breast cancer: structural hotspots and clinical implications</p>
-                        <p class="text-[0.48em] text-gray-400 mb-[0.3em]">Shukla R, et al. &bull; <span class="text-gray-300">Nature Genetics</span> &bull; 2025</p>
-                        <p class="text-[0.45em] text-gray-500 leading-[1.5]">Analysis of 1,080 breast invasive carcinomas reveals that TP53 mutations cluster in the DNA-binding domain, with R175H and R273H as dominant hotspots driving distinct transcriptional programs...</p>
+                        <p class="text-[0.6em] text-white font-medium leading-snug mb-[0.25em]">KRAS mutation subtypes and survival outcomes in pancreatic ductal adenocarcinoma</p>
+                        <p class="text-[0.48em] text-gray-400 mb-[0.3em]">Steele CW, et al. &bull; <span class="text-gray-300">Nature Medicine</span> &bull; 2018</p>
+                        <p class="text-[0.45em] text-gray-500 leading-[1.5]">Comprehensive analysis of 184 PAAD tumors reveals KRAS G12D as the dominant mutation (39%), with G12R carriers showing significantly improved survival and reduced distant recurrence compared to other codon 12 variants...</p>
                     </div>
 
                     <!-- ═══ Mobile device overlay (shown during scene transitions) ═══ -->
-                    <div class="mock-mobile-overlay mock-mobile-visible absolute inset-0 z-40 flex items-center justify-center opacity-0 pointer-events-none">
+                    <div class="mock-mobile-overlay mock-mobile-visible absolute inset-0 z-40 flex items-center justify-end opacity-0 pointer-events-none" style="background: #0c1522; padding-right: 3em;">
                         <!-- Backdrop dim -->
                         <!-- No backdrop — phone floats directly over the mockup -->
                         <div class="mock-mobile-frame relative bg-[#0c1522] shadow-2xl shadow-black/50 overflow-hidden" style="width: 16em; height: 28em; border-radius: 2.2em; border: 0.18em solid rgba(255,255,255,0.15); box-shadow: 0 0 0 0.08em rgba(255,255,255,0.06), 0 0 60px rgba(22,177,126,0.08), 0 30px 60px rgba(0,0,0,0.6);">
@@ -206,9 +204,17 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Label ABOVE phone -->
-                        <div class="mock-mobile-label absolute top-[0.5em] left-1/2 -translate-x-1/2 opacity-0 text-center" style="transform: translate(-50%, -0.5em);">
-                            <span class="text-[1.3em] text-white font-bold whitespace-nowrap" style="text-shadow: 0 0 30px rgba(22,177,126,0.4);">Query your data, anywhere.</span>
+                        <!-- Label LEFT of phone -->
+                        <div class="mock-mobile-label absolute top-1/2 left-[1.5em] -translate-y-1/2 opacity-0 text-left" style="width: max-content;">
+                            <span class="text-[1.3em] text-white font-bold leading-snug block" style="text-shadow: 0 0 30px rgba(22,177,126,0.4);">
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">A</span>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">biomedical</span>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">data</span>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">scientist</span><br>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">in</span>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">your</span>
+                                <span class="mock-label-word inline-block opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">pocket.</span>
+                            </span>
                         </div>
                     </div>
 

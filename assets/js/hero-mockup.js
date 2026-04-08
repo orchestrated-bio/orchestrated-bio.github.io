@@ -6,27 +6,6 @@
 
     var scenes = [
         {
-            subtitle: 'Cancer Genomics',
-            query: 'TP53 mutations in breast cancer',
-            steps: 'Investigated with 5 steps',
-            crumbs: [
-                { text: 'FOCUS', cls: 'bg-brand-500/20 text-brand-400' },
-                { text: 'Brca TCGA Pan Can Atlas 2018', cls: 'bg-amber-500/15 text-amber-400' },
-                { text: 'TP53', cls: 'bg-sky-500/15 text-sky-400' }
-            ],
-            cohort: 'COHORT: N=1,080',
-            paras: [
-                'TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations identified across 41 distinct protein positions.',
-                'The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y.',
-                'These structural and contact mutations are found across both ER-positive and ER-negative tumors.'
-            ],
-            cites: ['D1', 'Shukla 2025'],
-            followups: [
-                '1. How do TP53 mutations correlate with ER/PR/HER2 status?',
-                '2. Impact on overall survival in TCGA breast cancer patients?'
-            ]
-        },
-        {
             subtitle: 'Survival Analysis',
             query: 'How do KRAS mutations impact survival in pancreatic cancer?',
             steps: 'Investigated with 3 steps',
@@ -41,7 +20,7 @@
                 'This disparity is driven by near-universal mutations at codon 12 (86.6%), primarily G12D (39%), G12V, and G12R variants.',
                 'KRAS G12R is associated with improved survival and decreased distant recurrence compared to G12D.'
             ],
-            cites: ['D3', 'Steele 2018'],
+            cites: ['D1', 'Steele 2018'],
             followups: [
                 '1. Do specific KRAS codons show different survival outcomes?',
                 '2. What about drug sensitivity?'
@@ -108,7 +87,7 @@
                 if (s.cites[i]) {
                     var cite = document.createElement('span');
                     cite.className = 'px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em] ml-[0.3em]';
-                    if (i === 1 && current === 0) {
+                    if (i === 0 && current === 0) {
                         cite.className += ' mock-cite-d1';
                     }
                     cite.textContent = s.cites[i];
@@ -137,15 +116,32 @@
     var followWrap   = mockup.querySelector('.mock-followups-wrap');
 
     function hideChatElements() {
-        if (stepsWrap)  stepsWrap.style.opacity = '0';
-        if (parasEl)    parasEl.style.opacity = '0';
-        if (followWrap) followWrap.style.opacity = '0';
+        // Instant hide — no transition so content is invisible immediately
         [stepsWrap, parasEl, followWrap].forEach(function (el) {
             if (el) {
-                el.style.transition = 'opacity 0.4s ease';
+                el.style.transition = 'none';
+                el.style.opacity = '0';
                 el.style.transform = 'translateY(0)';
             }
         });
+        // Also hide individual paragraphs immediately
+        if (parasEl) {
+            var paras = parasEl.children;
+            for (var i = 0; i < paras.length; i++) {
+                paras[i].style.transition = 'none';
+                paras[i].style.opacity = '0';
+                paras[i].style.transform = 'translateY(6px)';
+            }
+        }
+        // Also hide individual follow-up items
+        if (followEl) {
+            var items = followEl.children;
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.transition = 'none';
+                items[i].style.opacity = '0';
+                items[i].style.transform = 'translateY(6px)';
+            }
+        }
     }
 
     function staggerChatReveal(scene) {
@@ -159,20 +155,25 @@
 
         // Show investigation badge
         addTimer(function () {
-            if (stepsWrap) stepsWrap.style.opacity = '1';
+            if (stepsWrap) {
+                stepsWrap.style.transition = 'opacity 0.4s ease';
+                stepsWrap.style.opacity = '1';
+            }
         }, typeDone);
 
         // Show paragraphs one by one
         addTimer(function () {
-            if (parasEl) parasEl.style.opacity = '1';
+            // Make the container visible but keep individual paras hidden
+            if (parasEl) {
+                parasEl.style.transition = 'none';
+                parasEl.style.opacity = '1';
+            }
             // Stagger individual paragraphs
             var paras = parasEl ? parasEl.children : [];
             for (var i = 0; i < paras.length; i++) {
                 (function(p, delay) {
-                    p.style.opacity = '0';
-                    p.style.transform = 'translateY(6px)';
-                    p.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                     addTimer(function () {
+                        p.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
                         p.style.opacity = '1';
                         p.style.transform = 'translateY(0)';
                     }, delay);
@@ -180,10 +181,25 @@
             }
         }, typeDone + 300);
 
-        // Show follow-ups last
+        // Show follow-ups last, one by one
+        var followStart = typeDone + 300 + (parasEl ? parasEl.children.length : 0) * 400 + 300;
         addTimer(function () {
-            if (followWrap) followWrap.style.opacity = '1';
-        }, typeDone + 300 + (parasEl ? parasEl.children.length : 0) * 400 + 300);
+            if (followWrap) {
+                followWrap.style.transition = 'none';
+                followWrap.style.opacity = '1';
+            }
+            // Stagger individual follow-up items
+            var items = followEl ? followEl.children : [];
+            for (var i = 0; i < items.length; i++) {
+                (function(item, delay) {
+                    addTimer(function () {
+                        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                        item.style.opacity = '1';
+                        item.style.transform = 'translateY(0)';
+                    }, delay);
+                })(items[i], i * 300);
+            }
+        }, followStart);
     }
 
     function showVisScene(index) {
@@ -238,14 +254,30 @@
                 rotateEl.classList.remove('is-swapping');
             }
             updateChat(scene);
-            showVisScene(current);
+
+            // Instantly swap vis scenes (no CSS transition during hidden state)
+            visScenes.forEach(function (s) {
+                s.style.transition = 'none';
+                s.classList.remove('mock-vis-active');
+            });
+            var target = visScenes[current];
+            if (target) {
+                target.classList.add('mock-reset');
+                void target.offsetWidth;
+                target.classList.remove('mock-reset');
+                target.style.transition = 'none';
+                target.classList.add('mock-vis-active');
+            }
 
             // Hide chat elements before revealing
             hideChatElements();
 
+            // Ensure everything is committed while hidden
             void mockup.offsetWidth;
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
+                    // Restore vis transitions for future use
+                    visScenes.forEach(function (s) { s.style.transition = ''; });
                     mockup.classList.remove('mock-fading');
                     staggerChatReveal(scene);
                 });
@@ -404,6 +436,24 @@
     // Mobile overlay elements
     var mobileOverlay  = mockup.querySelector('.mock-mobile-overlay');
     var mobileLabel    = mockup.querySelector('.mock-mobile-label');
+    var mobileLabelWords = mockup.querySelectorAll('.mock-label-word');
+
+    function revealLabelWords() {
+        mobileLabelWords.forEach(function (word, i) {
+            word.classList.remove('is-visible');
+        });
+        mobileLabelWords.forEach(function (word, i) {
+            setTimeout(function () {
+                word.classList.add('is-visible');
+            }, 200 + i * 250);
+        });
+    }
+
+    function resetLabelWords() {
+        mobileLabelWords.forEach(function (word) {
+            word.classList.remove('is-visible');
+        });
+    }
 
     // Mobile phone inner elements
     var mobileQueryText    = mockup.querySelector('.mock-mobile-query-text');
@@ -416,6 +466,8 @@
     var mobileDots         = mockup.querySelectorAll('.mock-mini-dot');
 
     function resetMobilePhone() {
+        // Reset label words
+        resetLabelWords();
         // Reset all mobile phone elements to initial state
         if (mobileQueryText) mobileQueryText.textContent = '';
         if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
@@ -498,6 +550,7 @@
 
         mobileOverlay.classList.remove('mock-mobile-expanding');
         mobileOverlay.classList.add('mock-mobile-visible');
+        revealLabelWords();
 
         // Condensed mobile sequence: type query, show results, animate chart
         setTimeout(function () {
@@ -552,6 +605,8 @@
                 // Ensure visible
                 mobileOverlay.classList.add('mock-mobile-visible');
             }
+            // Reveal label words with stagger
+            revealLabelWords();
         });
 
         // Step 2 (800ms): Type query in phone
@@ -639,8 +694,8 @@
         clearAllInteractions();
         if (sceneTimer) clearTimeout(sceneTimer);
 
-        // Scene 2 → Colab takeover → mobile transition → Scene 0
-        if (current === 2) {
+        // Last scene → Colab takeover → mobile transition → Scene 0
+        if (current === 1) {
             playColabTakeover(function () {
                 // After Colab fades out, play mobile transition back to Scene 0
                 mockup.classList.add('mock-fading');
@@ -651,11 +706,26 @@
                         rotateEl.classList.remove('is-swapping');
                     }
                     updateChat(scenes[0]);
-                    showVisScene(0);
+
+                    // Instantly swap vis scenes while hidden
+                    visScenes.forEach(function (s) {
+                        s.style.transition = 'none';
+                        s.classList.remove('mock-vis-active');
+                    });
+                    var target = visScenes[0];
+                    if (target) {
+                        target.classList.add('mock-reset');
+                        void target.offsetWidth;
+                        target.classList.remove('mock-reset');
+                        target.style.transition = 'none';
+                        target.classList.add('mock-vis-active');
+                    }
+                    hideChatElements();
 
                     // Keep desktop HIDDEN — show mobile overlay on top first
                     playMobileTransition(function () {
                         void mockup.offsetWidth;
+                        visScenes.forEach(function (s) { s.style.transition = ''; });
                         mockup.classList.remove('mock-fading');
                         staggerChatReveal(scenes[0]);
                         playScene0Interactions();
@@ -666,13 +736,49 @@
             return;
         }
 
-        // Normal advance: Scene 0 → Scene 1, Scene 1 → Scene 2
+        // Normal advance: Scene 0 → Scene 1
         advance();
         setTimeout(function () {
             if (current === 0) playScene0Interactions();
             scheduleNext();
         }, 600);
     }
+
+    // ═══ Hero text state toggling ═══
+    var heroState1 = document.getElementById('hero-state-1');
+    var heroState2 = document.getElementById('hero-state-2');
+    var heroTextState = 1; // track which state is visible
+    var cycleCount = 0;    // count full scene cycles
+
+    function showHeroState(stateNum) {
+        if (!heroState1 || !heroState2) return;
+        if (stateNum === heroTextState) return;
+        heroTextState = stateNum;
+
+        if (stateNum === 2) {
+            heroState1.style.opacity = '0';
+            heroState1.style.pointerEvents = 'none';
+            heroState2.style.opacity = '1';
+            heroState2.style.pointerEvents = 'auto';
+        } else {
+            heroState2.style.opacity = '0';
+            heroState2.style.pointerEvents = 'none';
+            heroState1.style.opacity = '1';
+            heroState1.style.pointerEvents = 'auto';
+        }
+    }
+
+    // Hook into scene advance — toggle hero text every full cycle (3 scenes)
+    var origAdvanceWithInteractions = advanceWithInteractions;
+    advanceWithInteractions = function () {
+        // When we're about to leave scene 1 (last scene), that's a full cycle
+        if (current === 1) {
+            cycleCount++;
+            // Toggle hero text state on each full cycle
+            showHeroState(cycleCount % 2 === 0 ? 1 : 2);
+        }
+        origAdvanceWithInteractions();
+    };
 
     // ═══ Start with mobile-first sequence instead of immediate cycling ═══
     initialMobileSequence();
