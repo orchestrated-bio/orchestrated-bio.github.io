@@ -1,8 +1,8 @@
 // Hero rotation — syncs subtitle, chat panel text, and visualization scenes
 (function () {
-    var rotateEl = document.getElementById('hero-rotate-text');
+    var rotateEl = document.getElementById('hero-rotate-text'); // may be null if not in HTML
     var mockup   = document.querySelector('.hero-mockup');
-    if (!rotateEl || !mockup) return;
+    if (!mockup) return;
 
     var scenes = [
         {
@@ -226,15 +226,17 @@
     }
 
     function advance() {
-        rotateEl.classList.add('is-swapping');
+        if (rotateEl) rotateEl.classList.add('is-swapping');
         mockup.classList.add('mock-fading');
 
         setTimeout(function () {
             current = (current + 1) % scenes.length;
             var scene = scenes[current];
 
-            rotateEl.textContent = scene.subtitle;
-            rotateEl.classList.remove('is-swapping');
+            if (rotateEl) {
+                rotateEl.textContent = scene.subtitle;
+                rotateEl.classList.remove('is-swapping');
+            }
             updateChat(scene);
             showVisScene(current);
 
@@ -643,8 +645,10 @@
             setTimeout(function () {
                 // Swap content while hidden
                 current = 0;
-                rotateEl.textContent = scenes[0].subtitle;
-                rotateEl.classList.remove('is-swapping');
+                if (rotateEl) {
+                    rotateEl.textContent = scenes[0].subtitle;
+                    rotateEl.classList.remove('is-swapping');
+                }
                 updateChat(scenes[0]);
                 showVisScene(0);
 
