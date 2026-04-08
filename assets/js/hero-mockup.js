@@ -524,16 +524,33 @@
         mobileOverlay.classList.remove('mock-mobile-expanding');
         mobileOverlay.classList.add('mock-mobile-visible');
 
-        // After 2.5s viewing, start expanding
+        // Condensed mobile sequence: type query, show results, animate chart
         setTimeout(function () {
-            mobileOverlay.classList.add('mock-mobile-expanding');
+            typeInPhone('TP53 mutations in breast cancer', function () {
+                // Quick reveal: investigating -> badge + response -> chart
+                setTimeout(function () {
+                    if (mobileInvestigating) mobileInvestigating.style.opacity = '1';
+                    setTimeout(function () {
+                        if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
+                        if (mobileBadge) mobileBadge.style.opacity = '1';
+                        if (mobileResponse) mobileResponse.style.opacity = '1';
+                        setTimeout(function () {
+                            animateMobileChart();
 
-            setTimeout(function () {
-                mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
-                if (frame) frame.style.transform = '';
-                callback();
-            }, 1100);
-        }, 2500);
+                            // After chart animates, pause briefly then expand
+                            setTimeout(function () {
+                                mobileOverlay.classList.add('mock-mobile-expanding');
+                                setTimeout(function () {
+                                    mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
+                                    if (frame) frame.style.transform = '';
+                                    callback();
+                                }, 1100);
+                            }, 1000);
+                        }, 150);
+                    }, 500);
+                }, 150);
+            });
+        }, 400);
     }
 
     // ═══ Initial mobile-first sequence ═══
@@ -591,12 +608,12 @@
                                     mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
                                     if (frame) frame.style.transform = '';
 
-                                    // Fade in desktop
+                                    // Fade in desktop with staggered chat reveal
                                     void mockup.offsetWidth;
                                     requestAnimationFrame(function () {
                                         requestAnimationFrame(function () {
                                             mockup.classList.remove('mock-fading');
-                                            typeQuery(scenes[0].query);
+                                            staggerChatReveal(scenes[0]);
                                             playScene0Interactions();
                                             // Start the scene cycling
                                             startSceneCycling();

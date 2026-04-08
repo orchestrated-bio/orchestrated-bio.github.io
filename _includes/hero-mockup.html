@@ -154,33 +154,50 @@
                                     <div class="mock-mobile-chart rounded-[0.3em] bg-[#111b2b] border border-white/5 p-[0.45em] opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">
                                         <div class="flex items-center gap-[0.25em] mb-[0.25em]">
                                             <span class="w-[0.8em] h-[0.8em] rounded-[0.15em] bg-brand-500/20 text-brand-400 text-[0.32em] font-bold flex items-center justify-center">#1</span>
-                                            <span class="text-[0.4em] text-white font-medium">Mutation Hotspots</span>
+                                            <span class="text-[0.4em] text-white font-medium">TP53 Mutation Hotspots</span>
                                         </div>
-                                        <!-- Mini lollipop stems -->
-                                        <div class="mock-mobile-stems flex items-end gap-[3px] h-[4em] px-[0.25em]">
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[25%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
+                                        <!-- Mini lollipop with axes, labels, and domain bar -->
+                                        <div class="relative h-[5.2em]">
+                                            <!-- Y-axis line -->
+                                            <div class="absolute left-[1.2em] top-0 bottom-[1em] w-px bg-white/10"></div>
+                                            <!-- X-axis line -->
+                                            <div class="absolute left-[1.2em] right-0 bottom-[1em] h-px bg-white/10"></div>
+                                            <!-- Y-axis labels -->
+                                            <span class="absolute left-0 top-0 text-[0.25em] text-gray-500">20</span>
+                                            <span class="absolute left-[0.15em] bottom-[1em] text-[0.25em] text-gray-500">0</span>
+                                            <!-- Lollipop stems area -->
+                                            <div class="mock-mobile-stems absolute left-[1.2em] right-[0.2em] bottom-[1em] flex items-end justify-around" style="height: calc(100% - 1em);">
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[25%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-brand-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[18%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-brand-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[80%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><span class="absolute -top-[8px] left-1/2 -translate-x-1/2 text-[0.22em] text-gray-400 whitespace-nowrap">R175H</span><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-amber-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[15%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-brand-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[65%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><span class="absolute -top-[8px] left-1/2 -translate-x-1/2 text-[0.22em] text-gray-400 whitespace-nowrap">H193R</span><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-amber-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[22%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-brand-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[50%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><span class="absolute -top-[8px] left-1/2 -translate-x-1/2 text-[0.22em] text-gray-400 whitespace-nowrap">R273H</span><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-amber-500" style="transform: scale(0);"></div></div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col items-center justify-end">
+                                                    <div class="mock-mini-stem w-[2px] h-[12%] bg-white/15 rounded-[1px] relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-red-500" style="transform: scale(0);"></div></div>
+                                                </div>
                                             </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[18%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[80%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[15%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[65%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[22%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[50%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
-                                            </div>
-                                            <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="mock-mini-stem w-[3px] h-[12%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
+                                            <!-- Protein domain bar -->
+                                            <div class="absolute left-[1.2em] right-[0.2em] bottom-0 h-[0.6em] flex gap-px">
+                                                <div class="flex-[1] rounded-[0.1em] bg-sky-600/50 flex items-center justify-center"><span class="text-[0.2em] text-white font-medium">PTM</span></div>
+                                                <div class="flex-[1] rounded-[0.1em] bg-amber-500/50 flex items-center justify-center"><span class="text-[0.2em] text-white font-medium">TAD</span></div>
+                                                <div class="flex-[4] rounded-[0.1em] bg-emerald-600/40 flex items-center justify-center"><span class="text-[0.2em] text-white font-medium">DNA-binding</span></div>
+                                                <div class="flex-[1] rounded-[0.1em] bg-sky-600/50 flex items-center justify-center"><span class="text-[0.2em] text-white font-medium">PTM</span></div>
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-[0.3em] mt-[0.2em]">
