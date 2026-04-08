@@ -223,7 +223,7 @@
 }
 .mock-mobile-overlay.mock-mobile-expanding .mock-mobile-label {
     opacity: 0 !important;
-    transform: translate(-50%, 0.5em) !important;
+    transform: translate(-50%, -0.5em) !important;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
