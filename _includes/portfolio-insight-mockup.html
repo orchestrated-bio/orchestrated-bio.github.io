@@ -1,0 +1,65 @@
+<!-- Static Insight UI mockup for portfolio page -->
+<div class="relative rounded-xl overflow-hidden border border-white/5 bg-[#0c1522]" style="aspect-ratio: 16/10; font-size: clamp(7px, 0.9vw, 12px);">
+
+    <!-- Icon sidebar -->
+    <div class="absolute left-0 top-0 bottom-0 flex flex-col items-center gap-[0.6em] py-[1.2em] px-[0.5em] bg-[#111b2b] border-r border-white/5 z-20" style="width: 3em;">
+        <div class="w-[1.6em] h-[1.6em] rounded-[0.4em] bg-brand-500/20 flex items-center justify-center">
+            <svg class="w-[1em] h-[1em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3"/></svg>
+        </div>
+        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5"></div>
+        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5"></div>
+        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5"></div>
+        <div class="mt-auto w-[1.4em] h-[1.4em] rounded-full bg-brand-500/30 flex items-center justify-center">
+            <span class="text-[0.6em] text-brand-300 font-bold">A</span>
+        </div>
+    </div>
+
+    <!-- Top breadcrumb bar -->
+    <div class="absolute top-0 left-[3em] right-0 h-[2.4em] bg-[#0e1829] border-b border-white/5 flex items-center px-[1em] z-10">
+        <div class="flex items-center gap-[0.8em]">
+            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-brand-500/20 text-brand-400 text-[0.7em] font-medium">FOCUS</span>
+            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-amber-500/15 text-amber-400 text-[0.7em]">Brca TCGA Pan Can Atlas 2018</span>
+            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-sky-500/15 text-sky-400 text-[0.7em]">TP53</span>
+        </div>
+        <span class="ml-auto text-[0.6em] text-gray-400">COHORT: N=1,080</span>
+    </div>
+
+    <!-- Chat panel (left) -->
+    <div class="absolute top-[2.4em] left-[3em] bottom-0 overflow-hidden border-r border-white/5 flex flex-col" style="width: 18em;">
+        <div class="px-[1em] pt-[1em] pb-[0.5em]">
+            <div class="px-[0.6em] py-[0.4em] rounded-[0.4em] bg-brand-600/30 text-brand-300 text-[0.8em] font-medium leading-snug">
+                TP53 mutations in breast cancer
+            </div>
+        </div>
+        <div class="flex items-center gap-[0.3em] px-[1em] pb-[0.5em]">
+            <div class="w-[0.8em] h-[0.8em] rounded-full bg-brand-500/40 flex items-center justify-center">
+                <svg class="w-[0.5em] h-[0.5em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            </div>
+            <span class="text-[0.65em] text-gray-300">Investigated with 5 steps</span>
+        </div>
+        <div class="flex-1 px-[1em] space-y-[0.5em] overflow-hidden">
+            <p class="text-[0.7em] leading-[1.5] text-gray-300">TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations identified across 41 distinct protein positions.</p>
+            <p class="text-[0.7em] leading-[1.5] text-gray-300">The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y. <span class="px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em]">D1</span></p>
+            <p class="text-[0.7em] leading-[1.5] text-gray-300">These structural and contact mutations are found across both ER-positive and ER-negative tumors. <span class="px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em]">Shukla 2025</span></p>
+        </div>
+        <div class="border-t border-white/5 px-[1em] py-[0.6em]">
+            <p class="text-[0.6em] text-gray-400 mb-[0.3em]">Follow-ups</p>
+            <p class="text-[0.6em] text-gray-300">1. How do TP53 mutations correlate with ER/PR/HER2 status?</p>
+            <p class="text-[0.6em] text-gray-300">2. Impact on overall survival in TCGA breast cancer patients?</p>
+        </div>
+        <div class="border-t border-white/5 px-[1em] py-[0.6em]">
+            <div class="flex items-center gap-[0.4em] px-[0.6em] py-[0.4em] rounded-[0.4em] bg-white/5 border border-white/10">
+                <span class="text-[0.65em] text-gray-400 flex-1">Ask a follow-up question...</span>
+                <div class="w-[1.2em] h-[1.2em] rounded-full bg-brand-500/30 flex items-center justify-center">
+                    <svg class="w-[0.6em] h-[0.6em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Visualization panel (right) -->
+    <div class="absolute top-[2.4em] left-[21em] right-0 bottom-0 overflow-hidden p-[0.8em] space-y-[0.6em]">
+        {% include hero-vis-scene-0.html %}
+    </div>
+
+</div>
