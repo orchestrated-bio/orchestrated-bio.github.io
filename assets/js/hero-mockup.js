@@ -333,6 +333,14 @@
     var colabPlotTitle = mockup.querySelector('.mock-colab-plot-title');
     var colabCellStatus = mockup.querySelector('.mock-colab-cell-status');
     var colabOutputStatus = mockup.querySelector('.mock-colab-output-status');
+    var colabKmLines   = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-km-line') : [];
+    var colabCiBands   = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-ci') : [];
+    var colabLegendLines = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-legend-swatch') : [];
+    var colabLegendTexts = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-legend-text') : [];
+    var colabColorArgs   = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-color-arg') : [];
+    // New colors for the G12D vs G12R re-run (more dramatic split)
+    var colabOrigColors = ['#f59e0b', '#16b17e'];
+    var colabNewColors  = ['#ef4444', '#3b82f6'];
 
     function resetColabOverlay() {
         if (colabOverlay) {
@@ -349,6 +357,25 @@
         if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
         if (colabCellStatus) colabCellStatus.textContent = '';
         if (colabOutputStatus) colabOutputStatus.textContent = '';
+        // Reset line/CI/legend colors to originals
+        for (var i = 0; i < colabKmLines.length; i++) {
+            colabKmLines[i].style.stroke = '';
+        }
+        for (var i = 0; i < colabCiBands.length; i++) {
+            colabCiBands[i].style.fill = '';
+        }
+        for (var i = 0; i < colabLegendLines.length; i++) {
+            colabLegendLines[i].style.stroke = '';
+        }
+        if (colabLegendTexts.length >= 2) {
+            colabLegendTexts[0].textContent = 'Wild-type';
+            colabLegendTexts[1].textContent = 'KRAS Mutant';
+        }
+        // Hide color= args in code cell
+        for (var i = 0; i < colabColorArgs.length; i++) {
+            colabColorArgs[i].style.opacity = '0';
+            colabColorArgs[i].style.display = 'none';
+        }
     }
 
     function clearAllInteractions() {
@@ -434,18 +461,42 @@
                 }
             }, 3500);
 
+            // Step 5b (4800ms): Reveal color= args in code cell
+            addTimer(function () {
+                for (var i = 0; i < colabColorArgs.length; i++) {
+                    colabColorArgs[i].style.display = '';
+                    // Force reflow so the opacity transition fires
+                    colabColorArgs[i].offsetWidth;
+                    colabColorArgs[i].style.opacity = '1';
+                }
+            }, 4800);
+
             // Step 6 (5500ms): Re-run — pulse run button, update plot title
             addTimer(function () {
                 if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
                 if (colabCellStatus) colabCellStatus.textContent = 'Running...';
-            }, 5000);
+            }, 5200);
 
             addTimer(function () {
                 if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
                 if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
                 if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
                 if (colabCellStatus) colabCellStatus.textContent = '0.28s';
-            }, 5600);
+                // Swap line colors: amber→red (G12D), green→blue (G12R)
+                for (var i = 0; i < colabKmLines.length && i < colabNewColors.length; i++) {
+                    colabKmLines[i].style.stroke = colabNewColors[i];
+                }
+                for (var i = 0; i < colabCiBands.length && i < colabNewColors.length; i++) {
+                    colabCiBands[i].style.fill = colabNewColors[i];
+                }
+                for (var i = 0; i < colabLegendLines.length && i < colabNewColors.length; i++) {
+                    colabLegendLines[i].style.stroke = colabNewColors[i];
+                }
+                if (colabLegendTexts.length >= 2) {
+                    colabLegendTexts[0].textContent = 'G12D';
+                    colabLegendTexts[1].textContent = 'G12R';
+                }
+            }, 5800);
 
             // Step 7 (7500ms): Fade out Colab, callback to resume scene cycling
             addTimer(function () {
@@ -461,7 +512,7 @@
                     resetColabOverlay();
                     callback();
                 }, 600);
-            }, 7000);
+            }, 7200);
 
         }, 600);
     }

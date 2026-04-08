@@ -270,11 +270,11 @@ kmf = KaplanMeierFitter()
 
 <span class="text-gray-400"># Fit KRAS Mutant group</span>
 kmf.fit(T_mut, E_mut, label=<span class="text-brand-300">"KRAS Mutant"</span>)
-kmf.plot(ci_show=<span class="text-amber-300">True</span>)
+kmf.plot(<span class="mock-colab-color-arg mock-colab-color-arg-0" style="transition: opacity 0.3s ease; opacity: 0; display: none">color=<span class="text-brand-300">"red"</span>, </span>ci_show=<span class="text-amber-300">True</span>)
 
 <span class="text-gray-400"># Fit Wild-type group</span>
 kmf.fit(T_wt, E_wt, label=<span class="text-brand-300">"Wild-type"</span>)
-kmf.plot(ci_show=<span class="text-amber-300">True</span>)
+kmf.plot(<span class="mock-colab-color-arg mock-colab-color-arg-1" style="transition: opacity 0.3s ease; opacity: 0; display: none">color=<span class="text-brand-300">"blue"</span>, </span>ci_show=<span class="text-amber-300">True</span>)
 
 plt.title(<span class="text-brand-300">"<span class="mock-colab-title-line">KRAS Survival</span>"</span>)
 plt.xlabel(<span class="text-brand-300">"Time (days)"</span>)</code></pre>
