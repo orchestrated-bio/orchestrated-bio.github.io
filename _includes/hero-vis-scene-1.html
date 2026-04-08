@@ -40,9 +40,6 @@
                                     </span>
                                 </div>
                                 <div class="relative h-[6em] mt-[0.2em]">
-                                    <!-- Axes -->
-                                    <div class="absolute left-[2em] top-[0.2em] bottom-[1.4em] w-px bg-white/10"></div>
-                                    <div class="absolute left-[2em] right-0 bottom-[1.4em] h-px bg-white/10"></div>
                                     <!-- Y labels -->
                                     <span class="absolute left-0 top-[0.1em] text-[0.4em] text-gray-400">1.0</span>
                                     <span class="absolute left-0 top-[42%] text-[0.4em] text-gray-400">0.5</span>
@@ -53,19 +50,21 @@
                                     <span class="absolute left-[62%] bottom-[0.2em] text-[0.38em] text-gray-400">1,000</span>
                                     <span class="absolute left-[85%] bottom-[0.2em] text-[0.38em] text-gray-400">1,500</span>
                                     <span class="absolute right-0 bottom-[0.2em] text-[0.38em] text-gray-500">Time (days)</span>
-                                    <!-- KM curves — proper step functions, viewBox matched to avoid stretching -->
-                                    <svg class="absolute left-[2em] top-[0.2em] right-0 bottom-[1.4em]" viewBox="-1 -1 202 102" preserveAspectRatio="none">
-                                        <!-- Confidence interval shading for wild-type -->
-                                        <path fill="#f59e0b" fill-opacity="0.06" d="M0,2 40,2 40,5 70,5 70,10 95,10 95,14 120,14 120,18 145,18 145,22 170,22 170,28 200,28 200,42 170,42 170,36 145,36 145,32 120,32 120,28 95,28 95,24 70,24 70,18 40,18 40,10 0,10 Z"/>
-                                        <!-- Confidence interval shading for mutant -->
-                                        <path fill="#16b17e" fill-opacity="0.06" d="M0,2 12,2 12,18 22,18 22,38 32,38 32,55 42,55 42,68 55,68 55,76 70,76 70,82 95,82 95,86 140,86 200,90 200,98 140,96 95,94 70,92 55,88 42,82 32,72 22,55 12,35 0,10 Z"/>
-                                        <!-- Wild-type (better survival) — amber, stays high ~60-70% at 500 days -->
-                                        <polyline class="mock-km-line" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"
-                                            points="0,5 40,5 40,8 70,8 70,14 95,14 95,20 120,20 120,24 145,24 145,28 170,28 170,34 200,34"/>
-                                        <!-- Mutant (worse survival) — green, drops steeply to ~20% by 500 days -->
-                                        <polyline class="mock-km-line" fill="none" stroke="#16b17e" stroke-width="2" stroke-linejoin="round"
-                                            points="0,5 12,5 12,24 22,24 22,45 32,45 32,62 42,62 42,74 55,74 55,82 70,82 70,88 95,88 95,92 140,92 200,95"/>
-                                    </svg>
+                                    <!-- Axes -->
+                                    <div class="absolute left-[2em] top-[0.2em] bottom-[1.4em] w-px bg-white/10 z-10"></div>
+                                    <div class="absolute left-[2em] right-0 bottom-[1.4em] h-px bg-white/10"></div>
+                                    <!-- Plot area: curves clipped by overflow-hidden wrapper -->
+                                    <div class="absolute left-[2em] top-[0.2em] right-0 bottom-[1.4em] overflow-hidden">
+                                        <!-- KM curves — offset 2px right so strokes don't overlap the axis -->
+                                        <svg class="absolute top-0 right-0 bottom-0" style="left:2px" viewBox="0 0 200 100" preserveAspectRatio="none">
+                                            <!-- Wild-type (better survival) — amber -->
+                                            <polyline class="mock-km-line" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"
+                                                points="0,5 40,5 40,8 70,8 70,14 95,14 95,20 120,20 120,24 145,24 145,28 170,28 170,34 200,34"/>
+                                            <!-- Mutant (worse survival) — green -->
+                                            <polyline class="mock-km-line" fill="none" stroke="#16b17e" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"
+                                                points="0,5 12,5 12,24 22,24 22,45 32,45 32,62 42,62 42,74 55,74 55,82 70,82 70,88 95,88 95,92 140,92 200,95"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <!-- Legend + risk table hint -->
                                 <div class="flex items-center gap-[0.6em] mt-[0.15em]">

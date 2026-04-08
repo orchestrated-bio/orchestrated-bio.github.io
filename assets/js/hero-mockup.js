@@ -1,12 +1,35 @@
 // Hero rotation — syncs subtitle, chat panel text, and visualization scenes
 (function () {
     var rotateEl = document.getElementById('hero-rotate-text'); // may be null if not in HTML
+    var subtextEl = document.getElementById('hero-subtext');
     var mockup   = document.querySelector('.hero-mockup');
     if (!mockup) return;
+
+    // Hero subtexts keyed by phase
+    var heroSubtexts = {
+        mobile:  'Seamless experience \u2014 start your research anywhere',
+        scene0:  'We bring you the literature and the data',
+        scene1:  'Accelerate drug discovery with real patient data',
+        colab:   'Bioinformatician approved, 100% reproducible code'
+    };
+
+    function setHeroSubtext(key) {
+        if (!subtextEl) return;
+        var text = heroSubtexts[key];
+        if (!text || subtextEl.textContent === text) return;
+        subtextEl.style.opacity = '0';
+        subtextEl.style.transform = 'translateY(6px)';
+        setTimeout(function () {
+            subtextEl.textContent = text;
+            subtextEl.style.opacity = '1';
+            subtextEl.style.transform = 'translateY(0)';
+        }, 300);
+    }
 
     var scenes = [
         {
             subtitle: 'Survival Analysis',
+            heroSubtextKey: 'scene0',
             query: 'How do KRAS mutations impact survival in pancreatic cancer?',
             steps: 'Investigated with 3 steps',
             crumbs: [
@@ -28,6 +51,7 @@
         },
         {
             subtitle: 'Drug Sensitivity',
+            heroSubtextKey: 'scene1',
             query: 'What about drug sensitivity?',
             steps: 'Investigated with 4 steps',
             crumbs: [
@@ -253,6 +277,7 @@
                 rotateEl.textContent = scene.subtitle;
                 rotateEl.classList.remove('is-swapping');
             }
+            if (scene.heroSubtextKey) setHeroSubtext(scene.heroSubtextKey);
             updateChat(scene);
 
             // Instantly swap vis scenes (no CSS transition during hidden state)
@@ -369,6 +394,7 @@
         addTimer(function () {
             if (colabOverlay) colabOverlay.classList.add('mock-colab-visible');
             if (colabBtn) colabBtn.classList.remove('mock-colab-active');
+            setHeroSubtext('colab');
 
             // Step 3 (1200ms): Run button pulse + show spinner
             addTimer(function () {
@@ -423,6 +449,13 @@
 
             // Step 7 (7500ms): Fade out Colab, callback to resume scene cycling
             addTimer(function () {
+                // Hide the underlying drug-sensitivity scene BEFORE the overlay fades,
+                // so it doesn't flash through during the Colab-out transition.
+                visScenes.forEach(function (s) {
+                    s.style.transition = 'none';
+                    s.classList.remove('mock-vis-active');
+                });
+                mockup.classList.add('mock-fading');
                 if (colabOverlay) colabOverlay.classList.remove('mock-colab-visible');
                 addTimer(function () {
                     resetColabOverlay();
@@ -551,6 +584,7 @@
         mobileOverlay.classList.remove('mock-mobile-expanding');
         mobileOverlay.classList.add('mock-mobile-visible');
         revealLabelWords();
+        setHeroSubtext('mobile');
 
         // Condensed mobile sequence: type query, show results, animate chart
         setTimeout(function () {
@@ -577,8 +611,11 @@
                             setTimeout(function () {
                                 mobileOverlay.classList.add('mock-mobile-expanding');
                                 setTimeout(function () {
+                                    mobileOverlay.style.transition = 'none';
                                     mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
                                     if (frame) frame.style.transform = '';
+                                    void mobileOverlay.offsetWidth;
+                                    mobileOverlay.style.transition = '';
                                     callback();
                                 }, 1100);
                             }, 2000);
@@ -642,30 +679,26 @@
                                 // Prep desktop content underneath before expansion
                                 updateChat(scenes[0]);
                                 showVisScene(0);
-                                // Remove the desktop-hidden class so parts are ready
-                                mockup.classList.remove('mock-desktop-hidden');
-                                // But keep fading class so it appears through the expansion
-                                mockup.classList.add('mock-fading');
+                                hideChatElements();
 
                                 // Start phone expansion
                                 mobileOverlay.classList.add('mock-mobile-expanding');
 
-                                // Step 7 (1000ms): Expansion done, reveal desktop
+                                // Step 7 (1100ms): Expansion done, reveal desktop
                                 setTimeout(function () {
+                                    // Kill overlay instantly — no fade-out transition
+                                    mobileOverlay.style.transition = 'none';
                                     mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
                                     if (frame) frame.style.transform = '';
-
-                                    // Fade in desktop with staggered chat reveal
-                                    void mockup.offsetWidth;
-                                    requestAnimationFrame(function () {
-                                        requestAnimationFrame(function () {
-                                            mockup.classList.remove('mock-fading');
-                                            staggerChatReveal(scenes[0]);
-                                            playScene0Interactions();
-                                            // Start the scene cycling
-                                            startSceneCycling();
-                                        });
-                                    });
+                                    // Force reflow then restore transitions
+                                    void mobileOverlay.offsetWidth;
+                                    mobileOverlay.style.transition = '';
+                                    // Desktop appears instantly
+                                    mockup.classList.remove('mock-desktop-hidden');
+                                    setHeroSubtext('scene0');
+                                    staggerChatReveal(scenes[0]);
+                                    playScene0Interactions();
+                                    startSceneCycling();
                                 }, 1100);
                             }, 2200);
                         }, 600);
@@ -697,8 +730,8 @@
         // Last scene → Colab takeover → mobile transition → Scene 0
         if (current === 1) {
             playColabTakeover(function () {
-                // After Colab fades out, play mobile transition back to Scene 0
-                mockup.classList.add('mock-fading');
+                // After Colab fades out — mockup is already fading & vis scenes already cleared
+                // inside playColabTakeover, so go straight to scene 0 setup
                 setTimeout(function () {
                     current = 0;
                     if (rotateEl) {
@@ -707,11 +740,6 @@
                     }
                     updateChat(scenes[0]);
 
-                    // Instantly swap vis scenes while hidden
-                    visScenes.forEach(function (s) {
-                        s.style.transition = 'none';
-                        s.classList.remove('mock-vis-active');
-                    });
                     var target = visScenes[0];
                     if (target) {
                         target.classList.add('mock-reset');
@@ -727,6 +755,7 @@
                         void mockup.offsetWidth;
                         visScenes.forEach(function (s) { s.style.transition = ''; });
                         mockup.classList.remove('mock-fading');
+                        setHeroSubtext('scene0');
                         staggerChatReveal(scenes[0]);
                         playScene0Interactions();
                         scheduleNext();
@@ -743,42 +772,6 @@
             scheduleNext();
         }, 600);
     }
-
-    // ═══ Hero text state toggling ═══
-    var heroState1 = document.getElementById('hero-state-1');
-    var heroState2 = document.getElementById('hero-state-2');
-    var heroTextState = 1; // track which state is visible
-    var cycleCount = 0;    // count full scene cycles
-
-    function showHeroState(stateNum) {
-        if (!heroState1 || !heroState2) return;
-        if (stateNum === heroTextState) return;
-        heroTextState = stateNum;
-
-        if (stateNum === 2) {
-            heroState1.style.opacity = '0';
-            heroState1.style.pointerEvents = 'none';
-            heroState2.style.opacity = '1';
-            heroState2.style.pointerEvents = 'auto';
-        } else {
-            heroState2.style.opacity = '0';
-            heroState2.style.pointerEvents = 'none';
-            heroState1.style.opacity = '1';
-            heroState1.style.pointerEvents = 'auto';
-        }
-    }
-
-    // Hook into scene advance — toggle hero text every full cycle (3 scenes)
-    var origAdvanceWithInteractions = advanceWithInteractions;
-    advanceWithInteractions = function () {
-        // When we're about to leave scene 1 (last scene), that's a full cycle
-        if (current === 1) {
-            cycleCount++;
-            // Toggle hero text state on each full cycle
-            showHeroState(cycleCount % 2 === 0 ? 1 : 2);
-        }
-        origAdvanceWithInteractions();
-    };
 
     // ═══ Start with mobile-first sequence instead of immediate cycling ═══
     initialMobileSequence();

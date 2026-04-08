@@ -14,19 +14,21 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-32 lg:pb-20 w-full">
         <div class="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-12">
-            <!-- Copy — two-state hero text -->
+            <!-- Copy — static headline + rotating subtext -->
             <div class="max-w-lg lg:flex-shrink-0 relative" style="min-height: 280px;">
-                <!-- State 1: Tagline -->
-                <div id="hero-state-1" class="hero-text-state space-y-5 transition-all duration-700 ease-in-out">
+                <div class="space-y-5">
                     <p class="text-brand-400 text-sm font-semibold uppercase tracking-widest">Agentic AI for Life Sciences</p>
 
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-                        A Biomedical Data Scientist<br><span class="gradient-text">In Your Pocket</span>
+                        Biomedical Insight,<br><span class="gradient-text">One Question Away</span>
                     </h1>
 
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        Built by scientists who publish in the field. Deployable on your own infrastructure.
-                    </p>
+                    <!-- Rotating subtext — synced to hero animation scenes -->
+                    <div class="relative" style="min-height: 2em;">
+                        <p id="hero-subtext" class="text-lg text-gray-400 leading-relaxed transition-all duration-500 ease-in-out">
+                            Seamless experience &mdash; start your research anywhere
+                        </p>
+                    </div>
 
                     <div class="flex flex-wrap items-center gap-4 pt-2">
                         <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
@@ -37,32 +39,6 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
                         </a>
                         <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
                             Explore Our Portfolio
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- State 2: CTA panel (hidden initially) -->
-                <div id="hero-state-2" class="hero-text-state absolute inset-0 flex flex-col justify-center space-y-6 opacity-0 pointer-events-none transition-all duration-700 ease-in-out">
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-                        Now Everyone Is a<br><span class="gradient-text">Data Scientist</span>
-                    </h2>
-
-                    <p class="text-lg text-gray-400 leading-relaxed">
-                        Use our public data or deploy locally on your own infrastructure.
-                    </p>
-
-                    <div class="flex flex-wrap items-center gap-4 pt-2">
-                        <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
-                            Try Insight Free
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                        </a>
-                        <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-                            Deploy On-Prem
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
