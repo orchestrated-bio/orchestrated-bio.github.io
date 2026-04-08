@@ -72,7 +72,6 @@
 
     var current = 0;
     var INTERVAL = 8000; // 8s per scene for better readability
-    var SCENE1_INTERVAL = 12000; // Longer for Colab animation
 
     // Cache chat panel elements
     var queryEl   = mockup.querySelector('.mock-query-text');
@@ -204,17 +203,36 @@
     }
 
     var colabBtn     = mockup.querySelector('.mock-colab-btn');
-    var colabPopup   = mockup.querySelector('.mock-colab-popup');
     var pubPopup     = mockup.querySelector('.mock-pubmed-popup');
     var pubBackdrop  = mockup.querySelector('.mock-pubmed-backdrop');
 
-    // Colab output elements
-    var colabOutput    = mockup.querySelector('.mock-colab-output');
+    // Colab overlay elements
+    var colabOverlay   = mockup.querySelector('.mock-colab-overlay');
+    var colabRunBtnEl  = mockup.querySelector('.mock-colab-run-btn');
     var colabSpinner   = mockup.querySelector('.mock-colab-spinner');
     var colabPlotArea  = mockup.querySelector('.mock-colab-plot-area');
+    var colabEmpty     = mockup.querySelector('.mock-colab-empty');
     var colabTitleLine = mockup.querySelector('.mock-colab-title-line');
     var colabPlotTitle = mockup.querySelector('.mock-colab-plot-title');
-    var colabRunBtn    = colabPopup ? colabPopup.querySelector('svg[viewBox="0 0 24 24"]') : null;
+    var colabCellStatus = mockup.querySelector('.mock-colab-cell-status');
+    var colabOutputStatus = mockup.querySelector('.mock-colab-output-status');
+
+    function resetColabOverlay() {
+        if (colabOverlay) {
+            colabOverlay.classList.remove('mock-colab-visible', 'mock-colab-plotted');
+        }
+        if (colabSpinner) colabSpinner.style.display = 'none';
+        if (colabPlotArea) colabPlotArea.style.display = 'none';
+        if (colabEmpty) colabEmpty.style.display = '';
+        if (colabTitleLine) {
+            colabTitleLine.textContent = 'KRAS Survival';
+            colabTitleLine.classList.remove('mock-colab-highlight');
+        }
+        if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival';
+        if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
+        if (colabCellStatus) colabCellStatus.textContent = '';
+        if (colabOutputStatus) colabOutputStatus.textContent = '';
+    }
 
     function clearAllInteractions() {
         interactionTimers.forEach(clearTimeout);
@@ -225,14 +243,7 @@
         var citeD1 = mockup.querySelector('.mock-cite-d1');
         if (citeD1) citeD1.classList.remove('mock-cite-active');
         if (colabBtn) colabBtn.classList.remove('mock-colab-active');
-        if (colabPopup) colabPopup.classList.remove('mock-popup-visible');
-        // Reset Colab output state
-        if (colabOutput) { colabOutput.style.maxHeight = '0'; colabOutput.style.opacity = '0'; }
-        if (colabSpinner) colabSpinner.style.display = '';
-        if (colabPlotArea) colabPlotArea.style.display = 'none';
-        if (colabTitleLine) { colabTitleLine.textContent = 'KRAS Survival'; colabTitleLine.classList.remove('mock-colab-highlight'); }
-        if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival';
-        if (colabRunBtn) colabRunBtn.classList.remove('mock-colab-run-pulse');
+        resetColabOverlay();
         var addedTag = mockup.querySelector('.mock-added-crumb');
         if (addedTag && addedTag.parentNode) addedTag.parentNode.removeChild(addedTag);
     }
@@ -284,81 +295,80 @@
         }, 5000);
     }
 
-    function playScene1Interactions() {
-        if (current !== 1) return;
+    function playColabTakeover(callback) {
+        if (!colabOverlay) { callback(); return; }
 
-        // Colab export at 3s — highlight button, show Colab popup with animated execution
+        resetColabOverlay();
+
+        // Step 1 (0ms): Highlight export button in scene 1
+        if (colabBtn) colabBtn.classList.add('mock-colab-active');
+
+        // Step 2 (600ms): Fade in the Colab overlay
         addTimer(function () {
-            if (colabBtn) colabBtn.classList.add('mock-colab-active');
+            if (colabOverlay) colabOverlay.classList.add('mock-colab-visible');
+            if (colabBtn) colabBtn.classList.remove('mock-colab-active');
+
+            // Step 3 (1200ms): Run button pulse + show spinner
             addTimer(function () {
-                if (colabPopup) colabPopup.classList.add('mock-popup-visible');
+                if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
+                if (colabCellStatus) colabCellStatus.textContent = 'Running...';
+                if (colabEmpty) colabEmpty.style.display = 'none';
+                if (colabSpinner) colabSpinner.style.display = '';
+            }, 600);
 
-                // +0.8s: Run button pulse
+            // Step 4 (2200ms): Hide spinner, show plot, draw lines
+            addTimer(function () {
+                if (colabSpinner) colabSpinner.style.display = 'none';
+                if (colabPlotArea) colabPlotArea.style.display = '';
+                if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
+                if (colabCellStatus) colabCellStatus.textContent = '0.34s';
+                if (colabOutputStatus) colabOutputStatus.textContent = 'matplotlib inline';
+                // Trigger line draw animation
+                if (colabOverlay) colabOverlay.classList.add('mock-colab-plotted');
+            }, 1600);
+
+            // Step 5 (4000ms): Highlight title line, start typing edit
+            addTimer(function () {
+                if (colabTitleLine) {
+                    colabTitleLine.classList.add('mock-colab-highlight');
+                    var newTitle = 'KRAS Survival \u2014 G12D vs G12R';
+                    var baseTitle = 'KRAS Survival';
+                    var ci = baseTitle.length;
+                    var titleTimer = setInterval(function () {
+                        if (ci < newTitle.length) {
+                            colabTitleLine.textContent = newTitle.slice(0, ci + 1);
+                            ci++;
+                        } else {
+                            clearInterval(titleTimer);
+                        }
+                    }, 50);
+                    interactionTimers.push(titleTimer);
+                }
+            }, 3500);
+
+            // Step 6 (5500ms): Re-run — pulse run button, update plot title
+            addTimer(function () {
+                if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
+                if (colabCellStatus) colabCellStatus.textContent = 'Running...';
+            }, 5000);
+
+            addTimer(function () {
+                if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
+                if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
+                if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
+                if (colabCellStatus) colabCellStatus.textContent = '0.28s';
+            }, 5600);
+
+            // Step 7 (7500ms): Fade out Colab, callback to resume scene cycling
+            addTimer(function () {
+                if (colabOverlay) colabOverlay.classList.remove('mock-colab-visible');
                 addTimer(function () {
-                    if (colabRunBtn) {
-                        colabRunBtn.classList.add('mock-colab-run-pulse');
-                    }
-                }, 800);
+                    resetColabOverlay();
+                    callback();
+                }, 600);
+            }, 7000);
 
-                // +1.2s: Show output area with spinner
-                addTimer(function () {
-                    if (colabOutput) {
-                        colabOutput.style.maxHeight = '6em';
-                        colabOutput.style.opacity = '1';
-                    }
-                }, 1200);
-
-                // +1.8s: Replace spinner with KM plot
-                addTimer(function () {
-                    if (colabSpinner) colabSpinner.style.display = 'none';
-                    if (colabPlotArea) colabPlotArea.style.display = '';
-                }, 1800);
-
-                // +3.0s: Highlight title line, start editing it
-                addTimer(function () {
-                    if (colabTitleLine) {
-                        colabTitleLine.classList.add('mock-colab-highlight');
-                        // Type the new title char by char
-                        var newTitle = 'KRAS Survival \u2014 G12D vs G12R';
-                        var baseTitle = 'KRAS Survival';
-                        var ci = baseTitle.length;
-                        var titleTimer = setInterval(function () {
-                            if (ci < newTitle.length) {
-                                colabTitleLine.textContent = newTitle.slice(0, ci + 1);
-                                ci++;
-                            } else {
-                                clearInterval(titleTimer);
-                            }
-                        }, 50);
-                        interactionTimers.push(titleTimer);
-                    }
-                }, 3000);
-
-                // +4.0s: Run button pulse again, brief spinner
-                addTimer(function () {
-                    if (colabRunBtn) {
-                        colabRunBtn.classList.remove('mock-colab-run-pulse');
-                        void (colabRunBtn.offsetWidth);
-                        colabRunBtn.classList.add('mock-colab-run-pulse');
-                    }
-                }, 4000);
-
-                // +4.5s: Update plot title
-                addTimer(function () {
-                    if (colabPlotTitle) {
-                        colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
-                    }
-                    if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
-                }, 4500);
-
-                // +5.5s: Dismiss popup
-                addTimer(function () {
-                    if (colabPopup) colabPopup.classList.remove('mock-popup-visible');
-                    if (colabBtn) colabBtn.classList.remove('mock-colab-active');
-                }, 5500);
-
-            }, 400);
-        }, 3000);
+        }, 600);
     }
 
     // Mobile overlay elements
@@ -548,8 +558,7 @@
     var sceneTimer = null;
 
     function scheduleNext() {
-        // Use longer interval for scene 1 (Colab animation)
-        var delay = (current === 1) ? SCENE1_INTERVAL : INTERVAL;
+        var delay = INTERVAL;
         sceneTimer = setTimeout(function () {
             advanceWithInteractions();
         }, delay);
@@ -568,7 +577,6 @@
         if (current === 2) {
             mockup.classList.add('mock-fading');
             setTimeout(function () {
-                // Swap to scene 0 content while faded out (TASK 3 FIX)
                 current = 0;
                 rotateEl.textContent = scenes[0].subtitle;
                 rotateEl.classList.remove('is-swapping');
@@ -593,11 +601,22 @@
             return;
         }
 
-        // Normal advance for other scenes
+        // Scene 1 → Colab takeover → Scene 2
+        if (current === 1) {
+            playColabTakeover(function () {
+                // After Colab fades out, advance to Scene 2
+                advance();
+                setTimeout(function () {
+                    scheduleNext();
+                }, 600);
+            });
+            return;
+        }
+
+        // Normal advance for Scene 0 → Scene 1
         advance();
         setTimeout(function () {
             if (current === 0) playScene0Interactions();
-            if (current === 1) playScene1Interactions();
             scheduleNext();
         }, 600);
     }

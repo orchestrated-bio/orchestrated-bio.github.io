@@ -205,59 +205,137 @@
                         </div>
                     </div>
 
-                    <!-- ═══ Google Colab export popup (hidden, shown by JS) ═══ -->
-                    <div class="mock-colab-popup absolute z-30 rounded-[0.5em] bg-[#1a1a2e]/98 border border-amber-500/30 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 overflow-hidden" style="width: 26em; bottom: 1em; left: 22em; transform: translateY(10px); box-shadow: 0 -4px 30px rgba(249,171,0,0.08), 0 20px 40px rgba(0,0,0,0.4);">
-                        <!-- Connecting arrow pointing toward Export button area -->
-                        <div class="absolute -top-[0.4em] right-[3em] w-0 h-0 border-l-[0.4em] border-l-transparent border-r-[0.4em] border-r-transparent border-b-[0.4em] border-b-amber-500/30"></div>
+                    <!-- ═══ Google Colab full-scene overlay (hidden, shown by JS) ═══ -->
+                    <div class="mock-colab-overlay absolute inset-0 z-50 flex flex-col" style="background: #0a0f1a;">
                         <!-- Colab header bar -->
-                        <div class="flex items-center gap-[0.4em] px-[0.8em] py-[0.45em] bg-[#f9ab00]/10 border-b border-amber-500/15">
-                            <svg class="w-[1.1em] h-[1.1em] text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
-                            <span class="text-[0.65em] text-amber-400 font-semibold">Google Colab</span>
-                            <span class="text-[0.52em] text-gray-400 ml-[0.2em]">&mdash; kras_survival_analysis.ipynb</span>
+                        <div class="mock-colab-header flex items-center gap-[0.4em] px-[1em] py-[0.55em] border-b border-amber-400/40" style="background: linear-gradient(90deg, rgba(249,171,0,0.25) 0%, rgba(249,171,0,0.08) 100%);">
+                            <svg class="w-[1.4em] h-[1.4em] text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
+                            <span class="text-[0.85em] text-amber-300 font-bold">Google Colab</span>
+                            <span class="text-[0.65em] text-gray-200 ml-[0.2em]">&mdash; kras_survival_analysis.ipynb</span>
                             <span class="ml-auto flex items-center gap-[0.3em]">
-                                <span class="w-[0.5em] h-[0.5em] rounded-full bg-brand-500/60"></span>
-                                <span class="text-[0.42em] text-gray-500">Connected</span>
+                                <span class="w-[0.55em] h-[0.55em] rounded-full bg-brand-400"></span>
+                                <span class="text-[0.5em] text-gray-200">Connected (T4 GPU)</span>
                             </span>
                         </div>
-                        <!-- Code cell -->
-                        <div class="px-[0.8em] py-[0.6em]" style="background: #0d1117;">
-                            <div class="flex items-start gap-[0.4em]">
-                                <div class="flex-shrink-0 mt-[0.15em]">
-                                    <svg class="w-[0.9em] h-[0.9em] text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <!-- Main split area -->
+                        <div class="flex flex-1 min-h-0 overflow-hidden">
+                            <!-- Left: Code cell -->
+                            <div class="flex-1 flex flex-col border-r border-white/10 overflow-hidden">
+                                <!-- Cell header -->
+                                <div class="flex items-center gap-[0.3em] px-[0.8em] py-[0.35em] border-b border-white/10" style="background: rgba(255,255,255,0.04);">
+                                    <div class="mock-colab-run-btn flex-shrink-0 w-[1.5em] h-[1.5em] rounded-full flex items-center justify-center cursor-pointer" style="background: rgba(22,177,126,0.15); border: 1px solid rgba(22,177,126,0.3);">
+                                        <svg class="w-[0.75em] h-[0.75em] text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                    <span class="text-[0.55em] text-gray-400 font-mono">[1]</span>
+                                    <span class="mock-colab-cell-status text-[0.48em] text-gray-400 ml-auto"></span>
                                 </div>
-                                <pre class="flex-1 text-[0.56em] leading-[1.8] text-gray-200 font-mono overflow-hidden"><code><span class="text-violet-400">from</span> lifelines <span class="text-violet-400">import</span> KaplanMeierFitter
-<span class="text-violet-400">import</span> matplotlib.pyplot <span class="text-violet-400">as</span> plt
+                                <!-- Code area with line numbers -->
+                                <div class="flex-1 flex overflow-auto" style="background: #0c1220;">
+                                    <!-- Line numbers -->
+                                    <div class="flex-shrink-0 py-[0.6em] px-[0.5em] text-right select-none border-r border-white/10" style="min-width: 2.2em;">
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">1</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">2</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">3</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">4</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">5</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">6</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">7</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">8</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">9</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">10</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">11</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">12</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">13</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">14</div>
+                                        <div class="text-[0.58em] leading-[1.85] text-gray-400 font-mono">15</div>
+                                    </div>
+                                    <!-- Code content -->
+                                    <pre class="flex-1 py-[0.6em] px-[0.6em] text-[0.65em] leading-[1.85] text-white font-mono overflow-hidden"><code><span class="text-violet-300">from</span> lifelines <span class="text-violet-300">import</span> KaplanMeierFitter
+<span class="text-violet-300">import</span> matplotlib.pyplot <span class="text-violet-300">as</span> plt
 
 kmf = KaplanMeierFitter()
 
-<span class="text-gray-500"># KRAS Mutant group</span>
-kmf.fit(T_mut, E_mut, label=<span class="text-brand-400">"KRAS Mutant"</span>)
-kmf.plot(ci_show=<span class="text-amber-400">True</span>)
+<span class="text-gray-400"># Fit KRAS Mutant group</span>
+kmf.fit(T_mut, E_mut, label=<span class="text-brand-300">"KRAS Mutant"</span>)
+kmf.plot(ci_show=<span class="text-amber-300">True</span>)
 
-<span class="text-gray-500"># Wild-type group</span>
-kmf.fit(T_wt, E_wt, label=<span class="text-brand-400">"Wild-type"</span>)
-kmf.plot(ci_show=<span class="text-amber-400">True</span>)
+<span class="text-gray-400"># Fit Wild-type group</span>
+kmf.fit(T_wt, E_wt, label=<span class="text-brand-300">"Wild-type"</span>)
+kmf.plot(ci_show=<span class="text-amber-300">True</span>)
 
-plt.title(<span class="text-brand-400">"<span class="mock-colab-title-line">KRAS Survival</span>"</span>)
-plt.xlabel(<span class="text-brand-400">"Time (days)"</span>)
-plt.ylabel(<span class="text-brand-400">"Survival Probability"</span>)</code></pre>
+plt.title(<span class="text-brand-300">"<span class="mock-colab-title-line">KRAS Survival</span>"</span>)
+plt.xlabel(<span class="text-brand-300">"Time (days)"</span>)</code></pre>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Output area (animated by JS) -->
-                        <div class="mock-colab-output px-[0.8em] py-[0.4em] border-t border-white/5 bg-[#111b2b]/50 overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease;">
-                            <!-- Loading spinner (shown first, then replaced) -->
-                            <div class="mock-colab-spinner flex items-center gap-[0.3em] py-[0.2em]">
-                                <div class="w-[0.7em] h-[0.7em] rounded-full border-2 border-brand-400 border-t-transparent" style="animation: mockMobileSpin 0.6s linear infinite;"></div>
-                                <span class="text-[0.42em] text-gray-500">Running...</span>
-                            </div>
-                            <!-- KM plot output (hidden initially) -->
-                            <div class="mock-colab-plot-area" style="display: none;">
-                                <svg viewBox="0 0 100 50" class="w-full" style="height: 3em;">
-                                    <polyline points="0,5 20,5 20,15 40,15 40,25 60,25 80,30 100,32" stroke="#f59e0b" fill="none" stroke-width="1.5"/>
-                                    <polyline points="0,5 15,5 15,20 30,20 30,35 45,35 60,42 80,45 100,47" stroke="#16b17e" fill="none" stroke-width="1.5"/>
-                                    <text x="50" y="4" text-anchor="middle" fill="#9ca3af" font-size="4" class="mock-colab-plot-title">KRAS Survival</text>
-                                </svg>
-                                <span class="text-[0.42em] text-gray-500">&#9654; Output: KM plot rendered (0.34s)</span>
+                            <!-- Right: Output area -->
+                            <div class="flex-1 flex flex-col overflow-hidden" style="background: #10182a;">
+                                <!-- Output header -->
+                                <div class="flex items-center gap-[0.3em] px-[0.8em] py-[0.35em] border-b border-white/10" style="background: rgba(255,255,255,0.04);">
+                                    <span class="text-[0.55em] text-gray-300">Output</span>
+                                    <span class="mock-colab-output-status text-[0.48em] text-gray-400 ml-auto"></span>
+                                </div>
+                                <!-- Output content -->
+                                <div class="mock-colab-output flex-1 flex flex-col items-center justify-center p-[0.8em] overflow-hidden">
+                                    <!-- Loading spinner (shown first) -->
+                                    <div class="mock-colab-spinner flex items-center gap-[0.4em]" style="display: none;">
+                                        <div class="w-[1.2em] h-[1.2em] rounded-full border-2 border-brand-400 border-t-transparent" style="animation: mockMobileSpin 0.6s linear infinite;"></div>
+                                        <span class="text-[0.6em] text-gray-300">Executing cell...</span>
+                                    </div>
+                                    <!-- KM plot output (hidden initially) -->
+                                    <div class="mock-colab-plot-area w-full" style="display: none;">
+                                        <svg viewBox="0 0 220 130" class="w-full" style="max-height: 14em;">
+                                            <!-- Plot background -->
+                                            <rect x="28" y="8" width="186" height="100" rx="2" fill="rgba(0,0,0,0.2)"/>
+                                            <!-- Background grid -->
+                                            <line x1="30" y1="10" x2="30" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+                                            <line x1="30" y1="105" x2="210" y2="105" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+                                            <line x1="30" y1="34" x2="210" y2="34" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" stroke-dasharray="2,2"/>
+                                            <line x1="30" y1="58" x2="210" y2="58" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" stroke-dasharray="2,2"/>
+                                            <line x1="30" y1="82" x2="210" y2="82" stroke="rgba(255,255,255,0.06)" stroke-width="0.5" stroke-dasharray="2,2"/>
+                                            <!-- Y-axis labels -->
+                                            <text x="26" y="14" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">1.0</text>
+                                            <text x="26" y="38" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">0.75</text>
+                                            <text x="26" y="62" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">0.5</text>
+                                            <text x="26" y="86" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">0.25</text>
+                                            <text x="26" y="109" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">0.0</text>
+                                            <!-- X-axis labels -->
+                                            <text x="30" y="115" text-anchor="start" fill="#9ca3af" font-size="5" font-family="monospace">0</text>
+                                            <text x="75" y="115" text-anchor="middle" fill="#9ca3af" font-size="5" font-family="monospace">500</text>
+                                            <text x="120" y="115" text-anchor="middle" fill="#9ca3af" font-size="5" font-family="monospace">1000</text>
+                                            <text x="165" y="115" text-anchor="middle" fill="#9ca3af" font-size="5" font-family="monospace">1500</text>
+                                            <text x="210" y="115" text-anchor="end" fill="#9ca3af" font-size="5" font-family="monospace">2000</text>
+                                            <!-- Axis labels -->
+                                            <text x="120" y="125" text-anchor="middle" fill="#d1d5db" font-size="5.5">Time (days)</text>
+                                            <text x="8" y="58" text-anchor="middle" fill="#d1d5db" font-size="5.5" transform="rotate(-90,8,58)">Survival Prob.</text>
+                                            <!-- Plot title -->
+                                            <text x="120" y="8" text-anchor="middle" fill="#f3f4f6" font-size="7" font-weight="600" class="mock-colab-plot-title">KRAS Survival</text>
+                                            <!-- CI shading — wild-type -->
+                                            <path class="mock-colab-ci" fill="#f59e0b" fill-opacity="0.12" d="M30,12 60,12 60,16 90,16 90,22 115,22 115,28 140,28 140,34 165,34 165,40 190,40 210,42 210,52 190,50 165,48 140,42 115,36 90,30 60,22 30,18 Z"/>
+                                            <!-- CI shading — mutant -->
+                                            <path class="mock-colab-ci" fill="#16b17e" fill-opacity="0.12" d="M30,12 42,12 42,28 55,28 55,48 68,48 68,64 80,64 80,76 95,76 95,84 115,84 115,90 150,90 210,94 210,102 150,98 115,96 95,92 80,86 68,78 55,62 42,42 30,22 Z"/>
+                                            <!-- Wild-type (better survival) — amber -->
+                                            <polyline class="mock-colab-km-line" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linejoin="round"
+                                                points="30,14 60,14 60,18 90,18 90,25 115,25 115,32 140,32 140,38 165,38 165,44 190,44 210,46"/>
+                                            <!-- Mutant (worse survival) — green -->
+                                            <polyline class="mock-colab-km-line" fill="none" stroke="#16b17e" stroke-width="2.5" stroke-linejoin="round"
+                                                points="30,14 42,14 42,34 55,34 55,54 68,54 68,70 80,70 80,80 95,80 95,88 115,88 115,94 150,94 210,98"/>
+                                            <!-- Legend box -->
+                                            <rect x="145" y="14" width="62" height="22" rx="2" fill="rgba(0,0,0,0.4)" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>
+                                            <line x1="149" y1="22" x2="161" y2="22" stroke="#f59e0b" stroke-width="2"/>
+                                            <text x="164" y="24" fill="#e5e7eb" font-size="5">Wild-type</text>
+                                            <line x1="149" y1="31" x2="161" y2="31" stroke="#16b17e" stroke-width="2"/>
+                                            <text x="164" y="33" fill="#e5e7eb" font-size="5">KRAS Mutant</text>
+                                        </svg>
+                                        <div class="flex items-center gap-[0.4em] mt-[0.3em]">
+                                            <span class="text-[0.5em] text-gray-300 font-mono">&#9654; Output: KM plot rendered (0.34s)</span>
+                                        </div>
+                                    </div>
+                                    <!-- Empty state shown by default -->
+                                    <div class="mock-colab-empty flex flex-col items-center gap-[0.4em]">
+                                        <svg class="w-[2.5em] h-[2.5em] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6z"/></svg>
+                                        <span class="text-[0.55em] text-gray-400">Run cell to see output</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

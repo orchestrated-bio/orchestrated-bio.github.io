@@ -131,15 +131,43 @@
     pointer-events: auto;
 }
 
-/* Colab popup visible — slide up animation */
-.mock-colab-popup {
-    transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+/* Colab full-scene overlay */
+.mock-colab-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.mock-colab-popup.mock-popup-visible {
+.mock-colab-overlay.mock-colab-visible {
     opacity: 1;
-    transform: translateY(0);
     pointer-events: auto;
+}
+
+/* Colab KM lines — draw-in animation */
+.mock-colab-km-line {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mock-colab-overlay.mock-colab-plotted .mock-colab-km-line {
+    stroke-dashoffset: 0;
+}
+
+/* Colab CI shading fades in */
+.mock-colab-ci {
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s;
+}
+.mock-colab-overlay.mock-colab-plotted .mock-colab-ci {
+    opacity: 1;
+}
+
+/* Run button pulse */
+.mock-colab-run-btn.mock-colab-running {
+    background: rgba(22, 177, 126, 0.2);
+    box-shadow: 0 0 0 2px rgba(22, 177, 126, 0.3);
+}
+.mock-colab-run-btn.mock-colab-running svg {
+    animation: colabRunPulse 0.6s ease 2;
 }
 
 /* Mobile device overlay */
