@@ -639,46 +639,34 @@
         clearAllInteractions();
         if (sceneTimer) clearTimeout(sceneTimer);
 
-        // If transitioning from Scene 2 back to Scene 0, play mobile transition
+        // Scene 2 → Colab takeover → mobile transition → Scene 0
         if (current === 2) {
-            mockup.classList.add('mock-fading');
-            setTimeout(function () {
-                // Swap content while hidden
-                current = 0;
-                if (rotateEl) {
-                    rotateEl.textContent = scenes[0].subtitle;
-                    rotateEl.classList.remove('is-swapping');
-                }
-                updateChat(scenes[0]);
-                showVisScene(0);
-
-                // Keep desktop HIDDEN — show mobile overlay on top first
-                // Do NOT remove mock-fading yet
-                playMobileTransition(function () {
-                    // Phone has expanded — now reveal the desktop underneath
-                    void mockup.offsetWidth;
-                    mockup.classList.remove('mock-fading');
-                    staggerChatReveal(scenes[0]);
-                    playScene0Interactions();
-                    scheduleNext();
-                });
-            }, 500);
-            return;
-        }
-
-        // Scene 1 → Colab takeover → Scene 2
-        if (current === 1) {
             playColabTakeover(function () {
-                // After Colab fades out, advance to Scene 2
-                advance();
+                // After Colab fades out, play mobile transition back to Scene 0
+                mockup.classList.add('mock-fading');
                 setTimeout(function () {
-                    scheduleNext();
-                }, 600);
+                    current = 0;
+                    if (rotateEl) {
+                        rotateEl.textContent = scenes[0].subtitle;
+                        rotateEl.classList.remove('is-swapping');
+                    }
+                    updateChat(scenes[0]);
+                    showVisScene(0);
+
+                    // Keep desktop HIDDEN — show mobile overlay on top first
+                    playMobileTransition(function () {
+                        void mockup.offsetWidth;
+                        mockup.classList.remove('mock-fading');
+                        staggerChatReveal(scenes[0]);
+                        playScene0Interactions();
+                        scheduleNext();
+                    });
+                }, 300);
             });
             return;
         }
 
-        // Normal advance for Scene 0 → Scene 1
+        // Normal advance: Scene 0 → Scene 1, Scene 1 → Scene 2
         advance();
         setTimeout(function () {
             if (current === 0) playScene0Interactions();
