@@ -1,0 +1,244 @@
+            <!-- Animated Insight UI mockup -->
+            <div class="lg:flex-1 lg:min-w-0 hidden lg:block">
+                <div class="hero-mockup relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10 bg-[#0c1522]" style="aspect-ratio: 16/11; font-size: clamp(9px, 1.05vw, 14px);">
+
+                    <!-- ═══ Icon sidebar ═══ -->
+                    <div class="mock-part mock-sidebar absolute left-0 top-0 bottom-0 flex flex-col items-center gap-[0.6em] py-[1.2em] px-[0.5em] bg-[#111b2b] border-r border-white/5 z-20" style="width: 3em; --d:0.2s;">
+                        <div class="w-[1.6em] h-[1.6em] rounded-[0.4em] bg-brand-500/20 flex items-center justify-center">
+                            <svg class="w-[1em] h-[1em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+                        </div>
+                        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5 flex items-center justify-center">
+                            <svg class="w-[0.8em] h-[0.8em] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6z"/></svg>
+                        </div>
+                        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5 flex items-center justify-center">
+                            <svg class="w-[0.8em] h-[0.8em] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"/></svg>
+                        </div>
+                        <div class="w-[1.4em] h-[1.4em] rounded-[0.3em] bg-white/5 flex items-center justify-center">
+                            <svg class="w-[0.8em] h-[0.8em] text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                        </div>
+                        <div class="mt-auto w-[1.4em] h-[1.4em] rounded-full bg-brand-500/30 flex items-center justify-center">
+                            <span class="text-[0.6em] text-brand-300 font-bold">A</span>
+                        </div>
+                    </div>
+
+                    <!-- ═══ Top breadcrumb bar ═══ -->
+                    <div class="mock-part mock-topbar absolute top-0 left-[3em] right-0 h-[2.4em] bg-[#0e1829] border-b border-white/5 flex items-center px-[1em] z-10" style="--d:0.4s;">
+                        <div class="mock-crumbs flex items-center gap-[0.8em]">
+                            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-brand-500/20 text-brand-400 text-[0.7em] font-medium">FOCUS</span>
+                            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-amber-500/15 text-amber-400 text-[0.7em]">Brca TCGA Pan Can Atlas 2018</span>
+                            <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-sky-500/15 text-sky-400 text-[0.7em]">TP53</span>
+                        </div>
+                        <span class="mock-cohort ml-auto text-[0.6em] text-gray-400">COHORT: N=1,080</span>
+                    </div>
+
+                    <!-- ═══ Chat / analysis panel (left) ═══ -->
+                    <div class="mock-part mock-chat absolute top-[2.4em] left-[3em] bottom-0 overflow-hidden border-r border-white/5 flex flex-col" style="width: 18em; --d:0.6s;">
+                        <!-- Query pill -->
+                        <div class="mock-part px-[1em] pt-[1em] pb-[0.5em]" style="--d:0.8s;">
+                            <div class="px-[0.6em] py-[0.4em] rounded-[0.4em] bg-brand-600/30 text-brand-300 text-[0.8em] font-medium leading-snug">
+                                <span class="mock-query-text">TP53 mutations in breast cancer</span>
+                            </div>
+                        </div>
+                        <!-- Investigation badge -->
+                        <div class="mock-part flex items-center gap-[0.3em] px-[1em] pb-[0.5em]" style="--d:1.0s;">
+                            <div class="w-[0.8em] h-[0.8em] rounded-full bg-brand-500/40 flex items-center justify-center">
+                                <svg class="w-[0.5em] h-[0.5em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                            </div>
+                            <span class="mock-steps-text text-[0.65em] text-gray-300">Investigated with 5 steps</span>
+                        </div>
+                        <!-- AI response text — faux paragraphs -->
+                        <div class="mock-part mock-paragraphs flex-1 px-[1em] space-y-[0.5em] overflow-hidden" style="--d:1.2s;">
+                            <p class="text-[0.7em] leading-[1.5] text-gray-300">
+                                TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations identified across 41 distinct protein positions.
+                            </p>
+                            <p class="text-[0.7em] leading-[1.5] text-gray-300">
+                                The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y.
+                                <span class="mock-cite-d1 px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em] cursor-pointer transition-all duration-200">D1</span>
+                            </p>
+                            <p class="text-[0.7em] leading-[1.5] text-gray-300">
+                                These structural and contact mutations are found across both ER-positive and ER-negative tumors and are linked to distinct transcriptional states.
+                                <span class="px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em]">Shukla 2025</span>
+                            </p>
+                        </div>
+                        <!-- Follow-ups -->
+                        <div class="mock-part border-t border-white/5 px-[1em] py-[0.6em]" style="--d:1.8s;">
+                            <p class="text-[0.6em] text-gray-400 mb-[0.3em]">Follow-ups</p>
+                            <div class="mock-followups space-y-[0.2em]">
+                                <p class="text-[0.6em] text-gray-300">1. How do TP53 mutations correlate with ER/PR/HER2 status?</p>
+                                <p class="text-[0.6em] text-gray-300">2. Impact on overall survival in TCGA breast cancer patients?</p>
+                            </div>
+                        </div>
+                        <!-- Chat input -->
+                        <div class="mock-part border-t border-white/5 px-[1em] py-[0.6em]" style="--d:2.0s;">
+                            <div class="flex items-center gap-[0.4em] px-[0.6em] py-[0.4em] rounded-[0.4em] bg-white/5 border border-white/10">
+                                <span class="mock-chat-input-text text-[0.65em] text-gray-400 flex-1">Ask a follow-up question...</span>
+                                <div class="w-[1.2em] h-[1.2em] rounded-full bg-brand-500/30 flex items-center justify-center">
+                                    <svg class="w-[0.6em] h-[0.6em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═══ Visualization panel (right) — swappable scenes ═══ -->
+                    <div class="mock-vis-container absolute top-[2.4em] left-[21em] right-0 bottom-0 overflow-hidden">
+
+                        {% include hero-vis-scene-0.html %}
+
+                        {% include hero-vis-scene-1.html %}
+
+                        {% include hero-vis-scene-2.html %}
+
+                    </div>
+                    <!-- End visualization panel -->
+
+                    <!-- ═══ PubMed citation popup (hidden, shown by JS) ═══ -->
+                    <div class="mock-pubmed-backdrop absolute inset-0 z-25 bg-black/20 backdrop-blur-[1px] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+                    <div class="mock-pubmed-popup absolute z-30 rounded-[0.5em] bg-[#162036]/95 border border-brand-500/30 shadow-2xl shadow-brand-500/10 p-[0.7em] opacity-0 pointer-events-none transition-all duration-300" style="width: 18em; top: 12em; left: 8em; transform: translateY(8px);">
+                        <!-- Arrow pointing up toward citation -->
+                        <div class="absolute -top-[0.4em] left-[5em] w-0 h-0 border-l-[0.4em] border-l-transparent border-r-[0.4em] border-r-transparent border-b-[0.4em] border-b-brand-500/30"></div>
+                        <div class="flex items-center gap-[0.3em] mb-[0.4em]">
+                            <svg class="w-[0.9em] h-[0.9em] text-brand-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+                            <span class="text-[0.55em] text-brand-400 font-semibold">PubMed</span>
+                            <span class="text-[0.45em] text-gray-500">PMID: 39847501</span>
+                        </div>
+                        <p class="text-[0.6em] text-white font-medium leading-snug mb-[0.25em]">TP53 mutation landscape in breast cancer: structural hotspots and clinical implications</p>
+                        <p class="text-[0.48em] text-gray-400 mb-[0.3em]">Shukla R, et al. &bull; <span class="text-gray-300">Nature Genetics</span> &bull; 2025</p>
+                        <p class="text-[0.45em] text-gray-500 leading-[1.5]">Analysis of 1,080 breast invasive carcinomas reveals that TP53 mutations cluster in the DNA-binding domain, with R175H and R273H as dominant hotspots driving distinct transcriptional programs...</p>
+                    </div>
+
+                    <!-- ═══ Mobile device overlay (shown during scene transitions) ═══ -->
+                    <div class="mock-mobile-overlay absolute inset-0 z-40 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-700">
+                        <!-- Backdrop dim -->
+                        <div class="mock-mobile-backdrop absolute inset-0 bg-[#0c1522]/80 opacity-0 transition-opacity duration-500"></div>
+                        <div class="mock-mobile-frame relative bg-[#0c1522] shadow-2xl shadow-black/50 overflow-hidden" style="width: 10em; height: 18em; border-radius: 1.6em; border: 0.15em solid rgba(255,255,255,0.12); box-shadow: 0 0 0 0.08em rgba(255,255,255,0.05), 0 25px 50px rgba(0,0,0,0.5);">
+                            <!-- Phone status bar (time, signal, battery) -->
+                            <div class="flex items-center justify-between px-[0.6em] pt-[0.35em] pb-[0.15em]">
+                                <span class="text-[0.28em] text-gray-400 font-medium">9:41</span>
+                                <!-- Dynamic island / notch -->
+                                <div class="w-[2.2em] h-[0.5em] bg-black rounded-full"></div>
+                                <div class="flex items-center gap-[0.15em]">
+                                    <svg class="w-[0.35em] h-[0.35em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z"/></svg>
+                                    <svg class="w-[0.4em] h-[0.4em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2z"/></svg>
+                                </div>
+                            </div>
+                            <!-- Mini Insight UI -->
+                            <div class="px-[0.4em] h-full flex flex-col" style="padding-bottom: 0.8em;">
+                                <!-- Mini top bar with app icon -->
+                                <div class="flex items-center gap-[0.2em] mb-[0.3em] px-[0.1em]">
+                                    <div class="w-[0.9em] h-[0.9em] rounded-[0.25em] bg-brand-500/20 flex items-center justify-center">
+                                        <svg class="w-[0.55em] h-[0.55em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5"/></svg>
+                                    </div>
+                                    <span class="text-[0.38em] text-white font-semibold">Insight</span>
+                                    <span class="text-[0.28em] text-gray-500 ml-auto px-[0.3em] py-[0.1em] rounded-[0.15em] bg-amber-500/15 text-amber-400">BRCA</span>
+                                </div>
+                                <!-- Mini query pill -->
+                                <div class="px-[0.35em] py-[0.25em] rounded-[0.25em] bg-brand-600/30 mb-[0.35em]">
+                                    <span class="text-[0.32em] text-brand-300 font-medium">TP53 mutations in breast cancer</span>
+                                </div>
+                                <!-- Mini investigation badge -->
+                                <div class="flex items-center gap-[0.15em] mb-[0.25em] px-[0.1em]">
+                                    <div class="w-[0.45em] h-[0.45em] rounded-full bg-brand-500/40"></div>
+                                    <span class="text-[0.25em] text-gray-400">Investigated with 5 steps</span>
+                                </div>
+                                <!-- Mini AI response -->
+                                <div class="flex-1 space-y-[0.2em] overflow-hidden">
+                                    <p class="text-[0.28em] text-gray-300 leading-[1.5]">TP53 is mutated in ~34% of breast invasive carcinomas (368/1,080 samples)...</p>
+                                    <!-- Mini chart card -->
+                                    <div class="rounded-[0.2em] bg-[#111b2b] border border-white/5 p-[0.25em]">
+                                        <div class="flex items-center gap-[0.15em] mb-[0.15em]">
+                                            <span class="w-[0.5em] h-[0.5em] rounded-[0.1em] bg-brand-500/20 text-brand-400 text-[0.2em] font-bold flex items-center justify-center">#1</span>
+                                            <span class="text-[0.24em] text-white font-medium">Mutation Hotspots</span>
+                                        </div>
+                                        <!-- Mini lollipop stems -->
+                                        <div class="flex items-end gap-[1px] h-[2em] px-[0.15em]">
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[25%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[18%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[80%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-amber-500/70"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[15%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[65%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-amber-500/70"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="w-[2px] h-[22%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-[0.2em] mt-[0.1em]">
+                                            <span class="px-[0.15em] py-[0.05em] rounded-[0.1em] bg-brand-500/15 text-brand-400 text-[0.2em]">5 hotspots</span>
+                                            <span class="px-[0.15em] py-[0.05em] rounded-[0.1em] bg-sky-500/15 text-sky-400 text-[0.2em]">211 mut</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[0.25em] text-gray-400 leading-[1.4]">The mutation landscape is dominated by hotspots in the DNA-binding domain...</p>
+                                </div>
+                                <!-- Mini input bar -->
+                                <div class="mt-auto flex items-center gap-[0.2em] px-[0.25em] py-[0.2em] rounded-[0.25em] bg-white/5 border border-white/10">
+                                    <span class="text-[0.26em] text-gray-500 flex-1">Ask a follow-up...</span>
+                                    <div class="w-[0.6em] h-[0.6em] rounded-full bg-brand-500/30 flex items-center justify-center">
+                                        <svg class="w-[0.3em] h-[0.3em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Label below phone -->
+                        <div class="mock-mobile-label absolute bottom-[2em] left-1/2 -translate-x-1/2 opacity-0 transition-all duration-500" style="transform: translate(-50%, 0.5em);">
+                            <span class="text-[0.95em] text-white font-semibold whitespace-nowrap">Query your data, anywhere.</span>
+                        </div>
+                    </div>
+
+                    <!-- ═══ Google Colab export popup (hidden, shown by JS) ═══ -->
+                    <div class="mock-colab-popup absolute z-30 rounded-[0.5em] bg-[#1a1a2e] border border-amber-500/25 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 overflow-hidden" style="width: 24em; top: 4em; left: 22em; transform: translateY(8px);">
+                        <!-- Colab header bar -->
+                        <div class="flex items-center gap-[0.4em] px-[0.7em] py-[0.4em] bg-[#f9ab00]/10 border-b border-amber-500/15">
+                            <svg class="w-[1em] h-[1em] text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
+                            <span class="text-[0.6em] text-amber-400 font-semibold">Google Colab</span>
+                            <span class="text-[0.5em] text-gray-400 ml-[0.2em]">&mdash; kras_survival_analysis.ipynb</span>
+                            <span class="ml-auto flex items-center gap-[0.3em]">
+                                <span class="w-[0.5em] h-[0.5em] rounded-full bg-brand-500/60"></span>
+                                <span class="text-[0.4em] text-gray-500">Connected</span>
+                            </span>
+                        </div>
+                        <!-- Code cell -->
+                        <div class="px-[0.7em] py-[0.5em]">
+                            <div class="flex items-start gap-[0.4em]">
+                                <div class="flex-shrink-0 mt-[0.15em]">
+                                    <svg class="w-[0.9em] h-[0.9em] text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                                <pre class="flex-1 text-[0.52em] leading-[1.7] text-gray-300 font-mono overflow-hidden"><code><span class="text-violet-400">from</span> lifelines <span class="text-violet-400">import</span> KaplanMeierFitter
+<span class="text-violet-400">import</span> matplotlib.pyplot <span class="text-violet-400">as</span> plt
+
+kmf = KaplanMeierFitter()
+
+<span class="text-gray-500"># KRAS Mutant group</span>
+kmf.fit(T_mut, E_mut, label=<span class="text-brand-400">"KRAS Mutant"</span>)
+kmf.plot(ci_show=<span class="text-amber-400">True</span>)
+
+<span class="text-gray-500"># Wild-type group</span>
+kmf.fit(T_wt, E_wt, label=<span class="text-brand-400">"Wild-type"</span>)
+kmf.plot(ci_show=<span class="text-amber-400">True</span>)
+
+plt.title(<span class="text-brand-400">"KRAS Survival"</span>)
+plt.xlabel(<span class="text-brand-400">"Time (days)"</span>)
+plt.ylabel(<span class="text-brand-400">"Survival Probability"</span>)</code></pre>
+                            </div>
+                        </div>
+                        <!-- Output hint -->
+                        <div class="px-[0.7em] py-[0.35em] border-t border-white/5 bg-[#111b2b]/50">
+                            <span class="text-[0.4em] text-gray-500">&#9654; Output: KM plot rendered (0.34s)</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Mobile fallback: static screenshot -->
+            <div class="lg:hidden flex-1">
+                <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10">
+                    <img src="{{ '/images/insight-demo.png' | relative_url }}" alt="Insight — conversational cancer genomics AI" class="w-full" loading="eager">
+                </div>
+            </div>

@@ -36,6 +36,33 @@
     background: linear-gradient(to right, transparent, rgba(39, 159, 129, 0.3), rgba(85, 116, 194, 0.3), transparent);
 }
 
+/* Hero rotating text */
+.hero-rotate-wrapper {
+    min-height: 1.5em;
+}
+.hero-rotate-text {
+    display: inline-block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.hero-rotate-text.is-swapping {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+/* Typing cursor */
+.hero-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: #16b17e;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: hero-blink 0.8s step-end infinite;
+}
+@keyframes hero-blink {
+    50% { opacity: 0; }
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #111826; }

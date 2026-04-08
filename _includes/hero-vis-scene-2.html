@@ -1,0 +1,71 @@
+                        <div class="mock-vis-scene absolute inset-0 p-[0.8em] space-y-[0.6em]" data-vis="2">
+                            <!-- Druggability Assessment bubble chart -->
+                            <div class="mock-part mock-chart rounded-[0.4em] bg-[#111b2b] border border-white/5 p-[0.6em]" style="--d:1.0s;">
+                                <div class="flex items-center gap-[0.3em] mb-[0.3em]">
+                                    <span class="w-[1.2em] h-[1.2em] rounded-[0.2em] bg-violet-500/20 text-violet-400 text-[0.6em] font-bold flex items-center justify-center">#4</span>
+                                    <span class="text-[0.75em] text-white font-medium">Druggability Assessment</span>
+                                    <span class="text-[0.5em] text-gray-400 ml-[0.3em]">11 drugs</span>
+                                </div>
+                                <!-- Bubble chart area -->
+                                <div class="relative h-[5.5em] mt-[0.3em]">
+                                    <div class="absolute left-[5em] top-0 bottom-[1.4em] w-px bg-white/10"></div>
+                                    <div class="absolute left-[5em] right-0 bottom-[1.4em] h-px bg-white/10"></div>
+                                    <!-- Drug labels (Y axis) -->
+                                    <span class="absolute left-0 top-[2%] text-[0.4em] text-gray-300 leading-none">Adagrasib</span>
+                                    <span class="absolute left-0 top-[14%] text-[0.4em] text-gray-300 leading-none">Sotorasib</span>
+                                    <span class="absolute left-0 top-[26%] text-[0.4em] text-gray-300 leading-none">Idasanutlin</span>
+                                    <span class="absolute left-0 top-[38%] text-[0.4em] text-gray-300 leading-none">APG-115</span>
+                                    <span class="absolute left-0 top-[50%] text-[0.4em] text-gray-300 leading-none">Navitoclax</span>
+                                    <span class="absolute left-0 top-[62%] text-[0.4em] text-gray-300 leading-none">Sirenadlin</span>
+                                    <span class="absolute left-0 top-[74%] text-[0.4em] text-gray-300 leading-none">Teprasiran</span>
+                                    <!-- Phase labels (X axis) -->
+                                    <span class="absolute left-[20%] bottom-0 text-[0.35em] text-gray-500">Phase I</span>
+                                    <span class="absolute left-[40%] bottom-0 text-[0.35em] text-gray-500">Phase II</span>
+                                    <span class="absolute left-[60%] bottom-0 text-[0.35em] text-gray-500">Phase III</span>
+                                    <span class="absolute right-[1em] bottom-0 text-[0.35em] text-gray-500">Approved</span>
+                                    <!-- Bubbles -->
+                                    <div class="mock-bubble absolute w-[0.9em] h-[0.9em] rounded-full bg-sky-500/60" style="left:70%; top:3%; --bbd:0.15s;"></div>
+                                    <div class="mock-bubble absolute w-[0.7em] h-[0.7em] rounded-full bg-sky-500/60" style="left:65%; top:15%; --bbd:0.25s;"></div>
+                                    <div class="mock-bubble absolute w-[0.5em] h-[0.5em] rounded-full bg-brand-500/60" style="left:35%; top:27%; --bbd:0.35s;"></div>
+                                    <div class="mock-bubble absolute w-[0.45em] h-[0.45em] rounded-full bg-brand-500/60" style="left:30%; top:39%; --bbd:0.4s;"></div>
+                                    <div class="mock-bubble absolute w-[0.6em] h-[0.6em] rounded-full bg-brand-500/60" style="left:40%; top:51%; --bbd:0.45s;"></div>
+                                    <div class="mock-bubble absolute w-[0.4em] h-[0.4em] rounded-full bg-brand-500/60" style="left:25%; top:63%; --bbd:0.5s;"></div>
+                                    <div class="mock-bubble absolute w-[0.35em] h-[0.35em] rounded-full bg-violet-500/60" style="left:20%; top:75%; --bbd:0.55s;"></div>
+                                </div>
+                                <div class="flex items-center gap-[0.5em] mt-[0.2em]">
+                                    <div class="flex items-center gap-[0.15em]"><span class="w-[0.35em] h-[0.35em] rounded-full bg-sky-500/60 inline-block"></span><span class="text-[0.4em] text-gray-400">Small molecule</span></div>
+                                    <div class="flex items-center gap-[0.15em]"><span class="w-[0.35em] h-[0.35em] rounded-full bg-brand-500/60 inline-block"></span><span class="text-[0.4em] text-gray-400">Oligonucleotide</span></div>
+                                    <div class="flex items-center gap-[0.15em]"><span class="w-[0.35em] h-[0.35em] rounded-full bg-violet-500/60 inline-block"></span><span class="text-[0.4em] text-gray-400">Gene</span></div>
+                                </div>
+                            </div>
+                            <!-- Drug-Gene Interactions table -->
+                            <div class="mock-part mock-chart rounded-[0.4em] bg-[#111b2b] border border-white/5 p-[0.6em]" style="--d:1.4s;">
+                                <div class="flex items-center gap-[0.3em] mb-[0.3em]">
+                                    <span class="w-[1.2em] h-[1.2em] rounded-[0.2em] bg-emerald-500/20 text-emerald-400 text-[0.6em] font-bold flex items-center justify-center">#5</span>
+                                    <span class="text-[0.7em] text-white font-medium">Drug-Gene Interactions</span>
+                                    <span class="text-[0.5em] text-gray-400 ml-[0.3em]">581 interactions</span>
+                                </div>
+                                <!-- Mini table -->
+                                <div class="border border-white/5 rounded-[0.2em] overflow-hidden">
+                                    <div class="grid grid-cols-5 gap-px bg-white/5 text-[0.45em] font-medium text-gray-400 px-[0.4em] py-[0.2em]">
+                                        <span>Drug</span><span>Gene</span><span>Type</span><span>Approved</span><span>Sources</span>
+                                    </div>
+                                    <div class="mock-part grid grid-cols-5 gap-px text-[0.42em] text-gray-300 px-[0.4em] py-[0.15em] border-t border-white/5" style="--d:1.6s;">
+                                        <span>Palbociclib</span><span class="text-brand-400">CDKN2A</span><span>unknown</span><span class="text-emerald-400">Yes</span><span class="text-gray-500 truncate">PharmGKB, CIVIC</span>
+                                    </div>
+                                    <div class="mock-part grid grid-cols-5 gap-px text-[0.42em] text-gray-300 px-[0.4em] py-[0.15em] border-t border-white/5" style="--d:1.7s;">
+                                        <span>Panitumumab</span><span class="text-brand-400">KRAS</span><span>unknown</span><span class="text-emerald-400">Yes</span><span class="text-gray-500 truncate">CancerGenome</span>
+                                    </div>
+                                    <div class="mock-part grid grid-cols-5 gap-px text-[0.42em] text-gray-300 px-[0.4em] py-[0.15em] border-t border-white/5" style="--d:1.8s;">
+                                        <span>Adagrasib</span><span class="text-brand-400">KRAS</span><span>inhibitor</span><span class="text-emerald-400">Yes</span><span class="text-gray-500 truncate">PharmGKB, CIVIC</span>
+                                    </div>
+                                    <div class="mock-part grid grid-cols-5 gap-px text-[0.42em] text-gray-300 px-[0.4em] py-[0.15em] border-t border-white/5" style="--d:1.9s;">
+                                        <span>Abemaciclib</span><span class="text-brand-400">CDKN2A</span><span>unknown</span><span class="text-emerald-400">Yes</span><span class="text-gray-500 truncate">OncoKB, Clearify</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-[0.4em] mt-[0.3em]">
+                                    <span class="text-[0.55em] text-gray-400">Details &amp; Methods</span>
+                                    <span class="text-[0.45em] text-gray-500 ml-auto">Show all 581 rows &darr;</span>
+                                </div>
+                            </div>
+                        </div>

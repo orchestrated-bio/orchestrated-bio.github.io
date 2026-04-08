@@ -6,37 +6,38 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
 
 <!-- Hero Section -->
 <section class="relative min-h-[60vh] lg:min-h-[85vh] flex items-center hero-bg overflow-hidden">
-    <!-- Decorative elements -->
+    <!-- Subtle decorative elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500/5 rounded-full blur-3xl animate-pulse-slow"></div>
         <div class="absolute bottom-20 right-10 w-96 h-96 bg-navy-600/5 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-        <!-- Grid pattern -->
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 60px 60px;"></div>
     </div>
 
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-32 lg:pb-20">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-32 lg:pb-20 w-full">
         <div class="flex flex-col lg:flex-row lg:items-center gap-12 lg:gap-16">
-            <!-- Copy -->
-            <div class="max-w-xl space-y-6">
-                <p class="text-brand-400 text-sm font-semibold uppercase tracking-widest">Agentic AI for Life Sciences</p>
-
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
-                    From Biomedical Data<br>to <span class="gradient-text">Deployed AI</span> — Fast
+            <!-- Copy — Benchling-style clean left column -->
+            <div class="max-w-xl space-y-6 lg:flex-shrink-0">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight text-white">
+                    Ask your data.<br>
+                    <span class="gradient-text">Get answers.</span>
                 </h1>
 
                 <p class="text-lg text-gray-400 leading-relaxed">
-                    Built by scientists who publish in the field. Deployable on your own infrastructure.
+                    Agentic AI that investigates biomedical questions across
                 </p>
+                <div class="text-lg">
+                    <!-- Rotating subtitle -->
+                    <span class="hero-rotate-wrapper relative inline-block">
+                        <span id="hero-rotate-text" class="hero-rotate-text text-brand-400 font-semibold">Cancer Genomics</span>
+                        <span class="hero-cursor"></span>
+                    </span>
+                </div>
 
-                <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-medium transition-all hover:shadow-lg hover:shadow-brand-600/20">
-                        Schedule a Demo
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                        </svg>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="{{ site.booking_url }}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-all hover:shadow-lg hover:shadow-brand-600/25">
+                        Request a Demo
                     </a>
                     <a href="{{ '/portfolio/' | relative_url }}" class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors">
-                        Explore Our Portfolio
+                        Explore Products
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
@@ -44,16 +45,7 @@ description: "Orchestrated Biosciences combines agentic AI with biomedical exper
                 </div>
             </div>
 
-            <!-- Product visual -->
-            <div class="lg:flex-1 lg:min-w-0">
-                <div class="relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10">
-                    <div class="absolute inset-0 bg-gradient-to-t from-navy-950/40 to-transparent pointer-events-none z-10"></div>
-                    <img src="{{ '/images/insight-demo.png' | relative_url }}" alt="Insight — conversational cancer genomics AI" class="w-full" loading="eager">
-                    <div class="absolute bottom-4 left-4 z-20">
-                        <span class="px-2.5 py-1 rounded-full bg-navy-950/80 border border-white/10 text-brand-400 text-xs font-medium backdrop-blur-sm">Insight&trade; — Cancer Genomics AI</span>
-                    </div>
-                </div>
-            </div>
+            {% include hero-mockup.html %}
         </div>
     </div>
 </section>

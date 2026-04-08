@@ -1,0 +1,196 @@
+/* ═══ Hero mockup staggered reveal ═══ */
+.mock-part {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: mockReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0s);
+}
+@keyframes mockReveal {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Lollipop chart stems grow upward */
+.mock-lollipop-stem {
+    position: relative;
+    width: 2px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 1px;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: stemGrow 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(1.4s + var(--ld, 0s));
+}
+@keyframes stemGrow {
+    to { transform: scaleY(1); }
+}
+
+.mock-lollipop-dot {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: dotPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(1.8s + var(--ld, 0s));
+}
+@keyframes dotPop {
+    to { transform: translateX(-50%) scale(1); }
+}
+.mock-dot-green  { background: #16b17e; }
+.mock-dot-orange { background: #f59e0b; }
+.mock-dot-red    { background: #ef4444; }
+
+.mock-lollipop-label {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.45em;
+    color: #d1d5db;
+    white-space: nowrap;
+}
+
+/* Bar chart bars grow upward */
+.mock-bar {
+    transform-origin: bottom;
+    transform: scaleY(0);
+    animation: barGrow 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(1.8s + var(--bd, 0s));
+}
+@keyframes barGrow {
+    to { transform: scaleY(1); }
+}
+
+/* Scene swap: fade the whole mockup out/in */
+.hero-mockup {
+    transition: opacity 0.5s ease;
+}
+.hero-mockup.mock-fading {
+    opacity: 0 !important;
+    transition: opacity 0.4s ease;
+}
+
+/* Typing animation in chat input */
+.mock-typing-cursor {
+    display: inline-block;
+    width: 1px;
+    height: 0.9em;
+    background: #16b17e;
+    vertical-align: text-bottom;
+    animation: hero-blink 0.6s step-end infinite;
+}
+
+/* Vis scene swap */
+.mock-vis-scene {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.mock-vis-scene.mock-vis-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* KM survival curves — draw-in animation */
+.mock-km-line {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: kmDraw 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 1.6s;
+}
+@keyframes kmDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+/* Druggability bubbles — pop in */
+.mock-bubble {
+    transform: scale(0);
+    animation: bubblePop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(1.4s + var(--bbd, 0s));
+}
+@keyframes bubblePop {
+    to { transform: scale(1); }
+}
+
+/* Citation click highlight */
+.mock-cite-d1.mock-cite-active {
+    background: rgba(22, 177, 126, 0.4);
+    box-shadow: 0 0 0 2px rgba(22, 177, 126, 0.5);
+}
+
+/* PubMed backdrop + popup visible state */
+.mock-pubmed-backdrop.mock-backdrop-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.mock-pubmed-popup.mock-popup-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Colab popup visible */
+.mock-colab-popup.mock-popup-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Mobile device overlay */
+.mock-mobile-overlay.mock-mobile-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+.mock-mobile-overlay .mock-mobile-backdrop {
+    transition: opacity 0.5s ease;
+}
+.mock-mobile-overlay.mock-mobile-visible .mock-mobile-backdrop {
+    opacity: 1;
+}
+.mock-mobile-overlay .mock-mobile-frame {
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                width 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                height 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                border-radius 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                border-width 0.5s ease,
+                box-shadow 0.9s ease;
+}
+.mock-mobile-overlay.mock-mobile-expanding .mock-mobile-frame {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0.75em !important;
+    border-width: 0 !important;
+    box-shadow: none !important;
+}
+.mock-mobile-overlay.mock-mobile-expanding .mock-mobile-backdrop {
+    opacity: 0 !important;
+    transition: opacity 0.6s ease;
+}
+.mock-mobile-overlay .mock-mobile-label {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.mock-mobile-overlay.mock-mobile-visible .mock-mobile-label {
+    opacity: 1;
+    transform: translate(-50%, 0) !important;
+}
+.mock-mobile-overlay.mock-mobile-expanding .mock-mobile-label {
+    opacity: 0 !important;
+    transform: translate(-50%, 0.5em) !important;
+}
+
+/* Colab export button highlight */
+.mock-colab-btn.mock-colab-active {
+    background: rgba(249, 171, 0, 0.15);
+    border-color: rgba(249, 171, 0, 0.4);
+    color: #f9ab00;
+}
+
+/* Reset animation class — added briefly to force replay via reflow trick */
+.mock-reset .mock-part           { animation: none !important; opacity: 1 !important; transform: none !important; }
+.mock-reset .mock-lollipop-stem  { animation: none !important; transform: scaleY(1) !important; }
+.mock-reset .mock-lollipop-dot   { animation: none !important; transform: translateX(-50%) scale(1) !important; }
+.mock-reset .mock-bar            { animation: none !important; transform: scaleY(1) !important; }
+.mock-reset .mock-km-line        { animation: none !important; stroke-dashoffset: 0 !important; }
+.mock-reset .mock-bubble         { animation: none !important; transform: scale(1) !important; }

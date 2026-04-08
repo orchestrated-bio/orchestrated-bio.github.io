@@ -1,0 +1,73 @@
+                        <div class="mock-vis-scene absolute inset-0 p-[0.8em] space-y-[0.6em]" data-vis="1">
+                            <!-- Lollipop: KRAS hotspots -->
+                            <div class="mock-part mock-chart rounded-[0.4em] bg-[#111b2b] border border-white/5 p-[0.6em]" style="--d:1.0s;">
+                                <div class="flex items-center gap-[0.3em] mb-[0.3em]">
+                                    <span class="w-[1.2em] h-[1.2em] rounded-[0.2em] bg-brand-500/20 text-brand-400 text-[0.6em] font-bold flex items-center justify-center">#2</span>
+                                    <span class="text-[0.75em] text-white font-medium">KRAS Mutation Hotspots in Pancreatic Adenocarcinoma</span>
+                                </div>
+                                <div class="relative h-[4.5em] mt-[0.4em]">
+                                    <div class="absolute left-[2em] top-0 bottom-[1em] w-px bg-white/10"></div>
+                                    <div class="absolute left-[2em] right-0 bottom-[1em] h-px bg-white/10"></div>
+                                    <span class="absolute left-0 top-0 text-[0.5em] text-gray-400">100</span>
+                                    <span class="absolute left-[0.3em] bottom-[1em] text-[0.5em] text-gray-400">0</span>
+                                    <div class="mock-lollipop absolute left-[2em] right-[0.5em] bottom-[1em] flex items-end gap-[0.5em] pl-[1em]" style="height: calc(100% - 1em);">
+                                        <div class="mock-lollipop-stem" style="height:95%; --ld:0.1s;"><span class="mock-lollipop-label">G12D</span><div class="mock-lollipop-dot mock-dot-green"></div></div>
+                                        <div class="mock-lollipop-stem" style="height:8%; --ld:0.2s;"><span class="mock-lollipop-label">G13C</span><div class="mock-lollipop-dot mock-dot-green"></div></div>
+                                        <div class="mock-lollipop-stem" style="height:12%; --ld:0.3s;"><span class="mock-lollipop-label">Q61H</span><div class="mock-lollipop-dot mock-dot-green"></div></div>
+                                        <div class="mock-lollipop-stem" style="height:5%; --ld:0.4s;"><div class="mock-lollipop-dot mock-dot-green"></div></div>
+                                    </div>
+                                    <div class="absolute left-[2em] right-[0.5em] bottom-0 h-[0.8em] flex gap-px">
+                                        <div class="flex-1 rounded-[0.15em] bg-amber-500/40 flex items-center justify-center"><span class="text-[0.4em] text-white font-medium">Ras family</span></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-[0.4em] mt-[0.3em]">
+                                    <span class="text-[0.55em] text-gray-400">Details &amp; Methods</span>
+                                    <span class="px-[0.3em] py-[0.1em] rounded-[0.15em] bg-brand-500/15 text-brand-400 text-[0.5em]">4 hotspots</span>
+                                    <span class="px-[0.3em] py-[0.1em] rounded-[0.15em] bg-sky-500/15 text-sky-400 text-[0.5em]">127 mutations</span>
+                                    <span class="px-[0.3em] py-[0.1em] rounded-[0.15em] bg-gray-500/15 text-gray-400 text-[0.5em]">26ms</span>
+                                </div>
+                            </div>
+                            <!-- Kaplan-Meier Survival Curve -->
+                            <div class="mock-part mock-chart rounded-[0.4em] bg-[#111b2b] border border-white/5 p-[0.6em]" style="--d:1.4s;">
+                                <div class="flex items-center gap-[0.3em] mb-[0.2em]">
+                                    <span class="w-[1.2em] h-[1.2em] rounded-[0.2em] bg-amber-500/20 text-amber-400 text-[0.6em] font-bold flex items-center justify-center">#3</span>
+                                    <span class="text-[0.7em] text-white font-medium">Survival by KRAS Mutation</span>
+                                    <span class="px-[0.3em] py-[0.1em] rounded-[0.15em] bg-red-500/15 text-red-400 text-[0.45em] ml-[0.3em]">p&lt;0.001</span>
+                                    <!-- Export to Colab button -->
+                                    <span class="mock-colab-btn ml-auto px-[0.4em] py-[0.15em] rounded-[0.2em] bg-white/5 border border-white/10 text-[0.42em] text-gray-400 flex items-center gap-[0.2em] cursor-pointer transition-all duration-200">
+                                        <svg class="w-[0.7em] h-[0.7em]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
+                                        Export
+                                    </span>
+                                </div>
+                                <div class="relative h-[5.5em] mt-[0.2em]">
+                                    <!-- Axes -->
+                                    <div class="absolute left-[2em] top-[0.2em] bottom-[1.4em] w-px bg-white/10"></div>
+                                    <div class="absolute left-[2em] right-0 bottom-[1.4em] h-px bg-white/10"></div>
+                                    <!-- Y labels -->
+                                    <span class="absolute left-0 top-[0.1em] text-[0.4em] text-gray-400">1.0</span>
+                                    <span class="absolute left-0 top-[42%] text-[0.4em] text-gray-400">0.5</span>
+                                    <span class="absolute left-0 bottom-[1.5em] text-[0.4em] text-gray-400">0.0</span>
+                                    <!-- X labels -->
+                                    <span class="absolute left-[2em] bottom-[0.2em] text-[0.38em] text-gray-400">0</span>
+                                    <span class="absolute left-[35%] bottom-[0.2em] text-[0.38em] text-gray-400">500</span>
+                                    <span class="absolute left-[62%] bottom-[0.2em] text-[0.38em] text-gray-400">1,000</span>
+                                    <span class="absolute left-[85%] bottom-[0.2em] text-[0.38em] text-gray-400">1,500</span>
+                                    <span class="absolute right-0 bottom-[0.2em] text-[0.38em] text-gray-500">Time (days)</span>
+                                    <!-- KM curves — proper step functions, viewBox matched to avoid stretching -->
+                                    <svg class="absolute left-[2em] top-[0.2em] right-0 bottom-[1.4em]" viewBox="0 0 200 100" preserveAspectRatio="none" style="overflow:visible;">
+                                        <!-- Wild-type (better survival) — amber, gradual decline, ends ~40% -->
+                                        <polyline class="mock-km-line" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"
+                                            points="0,5 40,5 40,10 65,10 65,16 85,16 85,22 100,22 100,28 120,28 120,34 140,34 140,40 165,40 165,46 200,46"/>
+                                        <!-- Mutant (worse survival) — green, steep early drop, ends ~92% -->
+                                        <polyline class="mock-km-line" fill="none" stroke="#16b17e" stroke-width="2" stroke-linejoin="round"
+                                            points="0,5 15,5 15,22 27,22 27,40 38,40 38,55 50,55 50,67 65,67 65,76 82,76 82,83 105,83 105,88 145,88 200,92"/>
+                                    </svg>
+                                </div>
+                                <!-- Legend + risk table hint -->
+                                <div class="flex items-center gap-[0.6em] mt-[0.15em]">
+                                    <div class="flex items-center gap-[0.2em]"><span class="w-[0.6em] h-[2px] bg-[#16b17e] inline-block"></span><span class="text-[0.42em] text-gray-300">KRAS Mutant</span><span class="text-[0.38em] text-amber-400/70 ml-[0.15em]">49</span></div>
+                                    <div class="flex items-center gap-[0.2em]"><span class="w-[0.6em] h-[2px] bg-[#f59e0b] inline-block"></span><span class="text-[0.42em] text-gray-300">KRAS Wild-type</span><span class="text-[0.38em] text-brand-400/70 ml-[0.15em]">32</span></div>
+                                    <span class="text-[0.42em] text-gray-500 ml-auto">286ms</span>
+                                </div>
+                            </div>
+                        </div>
