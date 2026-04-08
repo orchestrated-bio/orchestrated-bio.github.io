@@ -131,6 +131,60 @@
         if (chatInput) chatInput.textContent = 'Ask a follow-up question...';
     }
 
+    // Stagger chat elements: type query → show steps → paragraphs one by one → follow-ups
+    var stepsWrap    = mockup.querySelector('.mock-steps-wrap');
+    var followWrap   = mockup.querySelector('.mock-followups-wrap');
+
+    function hideChatElements() {
+        if (stepsWrap)  stepsWrap.style.opacity = '0';
+        if (parasEl)    parasEl.style.opacity = '0';
+        if (followWrap) followWrap.style.opacity = '0';
+        [stepsWrap, parasEl, followWrap].forEach(function (el) {
+            if (el) {
+                el.style.transition = 'opacity 0.4s ease';
+                el.style.transform = 'translateY(0)';
+            }
+        });
+    }
+
+    function staggerChatReveal(scene) {
+        hideChatElements();
+
+        // Type the query first
+        typeQuery(scene.query);
+
+        // After typing finishes (~query.length * 30ms + 400ms cursor hide)
+        var typeDone = scene.query.length * 30 + 500;
+
+        // Show investigation badge
+        addTimer(function () {
+            if (stepsWrap) stepsWrap.style.opacity = '1';
+        }, typeDone);
+
+        // Show paragraphs one by one
+        addTimer(function () {
+            if (parasEl) parasEl.style.opacity = '1';
+            // Stagger individual paragraphs
+            var paras = parasEl ? parasEl.children : [];
+            for (var i = 0; i < paras.length; i++) {
+                (function(p, delay) {
+                    p.style.opacity = '0';
+                    p.style.transform = 'translateY(6px)';
+                    p.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    addTimer(function () {
+                        p.style.opacity = '1';
+                        p.style.transform = 'translateY(0)';
+                    }, delay);
+                })(paras[i], i * 400);
+            }
+        }, typeDone + 300);
+
+        // Show follow-ups last
+        addTimer(function () {
+            if (followWrap) followWrap.style.opacity = '1';
+        }, typeDone + 300 + (parasEl ? parasEl.children.length : 0) * 400 + 300);
+    }
+
     function showVisScene(index) {
         visScenes.forEach(function (s) { s.classList.remove('mock-vis-active'); });
         var target = visScenes[index];
@@ -183,11 +237,14 @@
             updateChat(scene);
             showVisScene(current);
 
+            // Hide chat elements before revealing
+            hideChatElements();
+
             void mockup.offsetWidth;
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
                     mockup.classList.remove('mock-fading');
-                    typeQuery(scene.query);
+                    staggerChatReveal(scene);
                 });
             });
         }, 500);
@@ -577,25 +634,22 @@
         if (current === 2) {
             mockup.classList.add('mock-fading');
             setTimeout(function () {
+                // Swap content while hidden
                 current = 0;
                 rotateEl.textContent = scenes[0].subtitle;
                 rotateEl.classList.remove('is-swapping');
                 updateChat(scenes[0]);
                 showVisScene(0);
 
-                void mockup.offsetWidth;
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        mockup.classList.remove('mock-fading');
-
-                        setTimeout(function () {
-                            playMobileTransition(function () {
-                                typeQuery(scenes[0].query);
-                                playScene0Interactions();
-                                scheduleNext();
-                            });
-                        }, 100);
-                    });
+                // Keep desktop HIDDEN — show mobile overlay on top first
+                // Do NOT remove mock-fading yet
+                playMobileTransition(function () {
+                    // Phone has expanded — now reveal the desktop underneath
+                    void mockup.offsetWidth;
+                    mockup.classList.remove('mock-fading');
+                    staggerChatReveal(scenes[0]);
+                    playScene0Interactions();
+                    scheduleNext();
                 });
             }, 500);
             return;
