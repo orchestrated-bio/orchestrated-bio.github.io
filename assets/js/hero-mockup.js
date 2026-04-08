@@ -409,6 +409,7 @@
     var mobileBadge        = mockup.querySelector('.mock-mobile-badge');
     var mobileResponse     = mockup.querySelector('.mock-mobile-response');
     var mobileChart        = mockup.querySelector('.mock-mobile-chart');
+    var mobileFollowups    = mockup.querySelector('.mock-mobile-followups');
     var mobileStems        = mockup.querySelectorAll('.mock-mini-stem');
     var mobileDots         = mockup.querySelectorAll('.mock-mini-dot');
 
@@ -419,6 +420,7 @@
         if (mobileBadge) mobileBadge.style.opacity = '0';
         if (mobileResponse) mobileResponse.style.opacity = '0';
         if (mobileChart) { mobileChart.style.opacity = '0'; mobileChart.style.transform = 'translateY(0.3em)'; }
+        if (mobileFollowups) mobileFollowups.style.opacity = '0';
         // Reset stems and dots
         mobileStems.forEach(function (s) { s.style.transform = 'scaleY(0)'; });
         mobileDots.forEach(function (d) { d.style.transform = 'scale(0)'; });
@@ -498,17 +500,25 @@
         // Condensed mobile sequence: type query, show results, animate chart
         setTimeout(function () {
             typeInPhone('TP53 mutations in breast cancer', function () {
-                // Quick reveal: investigating -> badge + response -> chart
+                // Quick reveal: investigating -> badge -> response -> chart
                 setTimeout(function () {
                     if (mobileInvestigating) mobileInvestigating.style.opacity = '1';
                     setTimeout(function () {
                         if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
                         if (mobileBadge) mobileBadge.style.opacity = '1';
-                        if (mobileResponse) mobileResponse.style.opacity = '1';
+                        // Response fades in after badge
+                        setTimeout(function () {
+                            if (mobileResponse) mobileResponse.style.opacity = '1';
+                        }, 300);
                         setTimeout(function () {
                             animateMobileChart();
 
-                            // After chart animates, pause briefly then expand
+                            // Show follow-ups after chart renders
+                            setTimeout(function () {
+                                if (mobileFollowups) mobileFollowups.style.opacity = '1';
+                            }, 1000);
+
+                            // Wait for chart + follow-ups, then expand
                             setTimeout(function () {
                                 mobileOverlay.classList.add('mock-mobile-expanding');
                                 setTimeout(function () {
@@ -516,7 +526,7 @@
                                     if (frame) frame.style.transform = '';
                                     callback();
                                 }, 1100);
-                            }, 1000);
+                            }, 2000);
                         }, 150);
                     }, 500);
                 }, 150);
@@ -550,17 +560,26 @@
                 setTimeout(function () {
                     if (mobileInvestigating) mobileInvestigating.style.opacity = '1';
 
-                    // Step 3.5 (~700ms later): Replace investigating with badge + response
+                    // Step 3.5 (~700ms later): Replace investigating with badge
                     setTimeout(function () {
                         if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
                         if (mobileBadge) mobileBadge.style.opacity = '1';
-                        if (mobileResponse) mobileResponse.style.opacity = '1';
 
-                        // Step 4 (200ms later): Animate chart
+                        // Step 3.7 (400ms later): Fade in response text
+                        setTimeout(function () {
+                            if (mobileResponse) mobileResponse.style.opacity = '1';
+                        }, 400);
+
+                        // Step 4 (600ms later): Animate chart
                         setTimeout(function () {
                             animateMobileChart();
 
-                            // Step 5 (1300ms pause): Let users register the mobile experience
+                            // Step 4.5: Show follow-ups after chart renders
+                            setTimeout(function () {
+                                if (mobileFollowups) mobileFollowups.style.opacity = '1';
+                            }, 1000);
+
+                            // Step 5 (2200ms pause): Let chart + follow-ups render
                             // Step 6 (after pause): Expand phone to desktop
                             setTimeout(function () {
                                 // Prep desktop content underneath before expansion
@@ -591,8 +610,8 @@
                                         });
                                     });
                                 }, 1100);
-                            }, 1300);
-                        }, 200);
+                            }, 2200);
+                        }, 600);
                     }, 700);
                 }, 200);
             });
