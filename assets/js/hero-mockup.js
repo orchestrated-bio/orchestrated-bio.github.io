@@ -237,32 +237,50 @@
         target.classList.add('mock-vis-active');
     }
 
-    // Typing effect now targets the query pill (top), not the chat input
-    var typingTimer = null;
-    function typeQuery(text) {
-        if (!queryEl) return;
-        if (typingTimer) clearInterval(typingTimer);
-        queryEl.textContent = '';
-        var cursor = queryEl.parentNode.querySelector('.mock-typing-cursor');
-        if (!cursor) {
-            cursor = document.createElement('span');
-            cursor.className = 'mock-typing-cursor';
-            queryEl.parentNode.appendChild(cursor);
+    // Shared typing effect — types text character-by-character into a target element
+    var activeTypingTimers = [];
+    function typeText(targetEl, opts) {
+        if (!targetEl) { if (opts.onDone) opts.onDone(); return; }
+        var text     = opts.text || '';
+        var speed    = opts.speed || 30;
+        var cursorEl = opts.cursor;
+        var onDone   = opts.onDone;
+
+        // Clear any previous typing timer for this element
+        activeTypingTimers.forEach(clearInterval);
+        activeTypingTimers = [];
+
+        targetEl.textContent = '';
+
+        // Ensure cursor is visible
+        if (!cursorEl) {
+            var parent = targetEl.parentNode;
+            cursorEl = parent.querySelector('.mock-typing-cursor');
+            if (!cursorEl) {
+                cursorEl = document.createElement('span');
+                cursorEl.className = 'mock-typing-cursor';
+                parent.appendChild(cursorEl);
+            }
         }
-        cursor.style.display = '';
+        cursorEl.style.display = '';
+
         var i = 0;
-        typingTimer = setInterval(function () {
+        var timer = setInterval(function () {
             if (i < text.length) {
-                queryEl.textContent = text.slice(0, i + 1);
+                targetEl.textContent = text.slice(0, i + 1);
                 i++;
             } else {
-                clearInterval(typingTimer);
-                typingTimer = null;
-                setTimeout(function () {
-                    cursor.style.display = 'none';
-                }, 400);
+                clearInterval(timer);
+                setTimeout(function () { cursorEl.style.display = 'none'; }, 350);
+                if (onDone) onDone();
             }
-        }, 30);
+        }, speed);
+        activeTypingTimers.push(timer);
+    }
+
+    // Desktop query typing (30ms/char)
+    function typeQuery(text) {
+        typeText(queryEl, { text: text, speed: 30 });
     }
 
     function advance() {
@@ -338,9 +356,8 @@
     var colabLegendLines = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-legend-swatch') : [];
     var colabLegendTexts = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-legend-text') : [];
     var colabColorArgs   = colabOverlay ? colabOverlay.querySelectorAll('.mock-colab-color-arg') : [];
-    // New colors for the G12D vs G12R re-run (more dramatic split)
-    var colabOrigColors = ['#f59e0b', '#16b17e'];
-    var colabNewColors  = ['#ef4444', '#3b82f6'];
+    // Colors for the G12D vs G12R re-run
+    var colabNewColors = ['#ef4444', '#3b82f6'];
 
     function resetColabOverlay() {
         if (colabOverlay) {
@@ -381,7 +398,8 @@
     function clearAllInteractions() {
         interactionTimers.forEach(clearTimeout);
         interactionTimers = [];
-        if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
+        activeTypingTimers.forEach(clearInterval);
+        activeTypingTimers = [];
         if (pubPopup) pubPopup.classList.remove('mock-popup-visible');
         if (pubBackdrop) pubBackdrop.classList.remove('mock-backdrop-visible');
         var citeD1 = mockup.querySelector('.mock-cite-d1');
@@ -409,112 +427,111 @@
         }, 4000);
     }
 
+    // ── Colab takeover: individual step functions ──
+
+    function colabShowOverlay() {
+        if (colabOverlay) colabOverlay.classList.add('mock-colab-visible');
+        if (colabBtn) colabBtn.classList.remove('mock-colab-active');
+        setHeroSubtext('colab');
+    }
+
+    function colabStartRun() {
+        if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
+        if (colabCellStatus) colabCellStatus.textContent = 'Running...';
+        if (colabEmpty) colabEmpty.style.display = 'none';
+        if (colabSpinner) colabSpinner.style.display = '';
+    }
+
+    function colabShowPlot() {
+        if (colabSpinner) colabSpinner.style.display = 'none';
+        if (colabPlotArea) colabPlotArea.style.display = '';
+        if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
+        if (colabCellStatus) colabCellStatus.textContent = '0.34s';
+        if (colabOutputStatus) colabOutputStatus.textContent = 'matplotlib inline';
+        if (colabOverlay) colabOverlay.classList.add('mock-colab-plotted');
+    }
+
+    function colabEditTitle() {
+        if (!colabTitleLine) return;
+        colabTitleLine.classList.add('mock-colab-highlight');
+        var newTitle = 'KRAS Survival \u2014 G12D vs G12R';
+        var baseTitle = 'KRAS Survival';
+        var ci = baseTitle.length;
+        var titleTimer = setInterval(function () {
+            if (ci < newTitle.length) {
+                colabTitleLine.textContent = newTitle.slice(0, ci + 1);
+                ci++;
+            } else {
+                clearInterval(titleTimer);
+            }
+        }, 50);
+        interactionTimers.push(titleTimer);
+    }
+
+    function colabRevealColorArgs() {
+        for (var i = 0; i < colabColorArgs.length; i++) {
+            colabColorArgs[i].style.display = '';
+            colabColorArgs[i].offsetWidth; // reflow to trigger transition
+            colabColorArgs[i].style.opacity = '1';
+        }
+    }
+
+    function colabSwapColors() {
+        if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
+        if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
+        if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
+        if (colabCellStatus) colabCellStatus.textContent = '0.28s';
+        for (var i = 0; i < colabKmLines.length && i < colabNewColors.length; i++) {
+            colabKmLines[i].style.stroke = colabNewColors[i];
+        }
+        for (var i = 0; i < colabCiBands.length && i < colabNewColors.length; i++) {
+            colabCiBands[i].style.fill = colabNewColors[i];
+        }
+        for (var i = 0; i < colabLegendLines.length && i < colabNewColors.length; i++) {
+            colabLegendLines[i].style.stroke = colabNewColors[i];
+        }
+        if (colabLegendTexts.length >= 2) {
+            colabLegendTexts[0].textContent = 'G12D';
+            colabLegendTexts[1].textContent = 'G12R';
+        }
+    }
+
+    function colabFadeOut(callback) {
+        // Hide underlying scene BEFORE overlay fades to prevent flash-through
+        visScenes.forEach(function (s) {
+            s.style.transition = 'none';
+            s.classList.remove('mock-vis-active');
+        });
+        mockup.classList.add('mock-fading');
+        if (colabOverlay) colabOverlay.classList.remove('mock-colab-visible');
+        addTimer(function () {
+            resetColabOverlay();
+            callback();
+        }, 600);
+    }
+
+    // ── Colab takeover: orchestrator (flat timeline, all offsets from T0) ──
+
     function playColabTakeover(callback) {
         if (!colabOverlay) { callback(); return; }
-
         resetColabOverlay();
 
-        // Step 1 (0ms): Highlight export button in scene 1
+        // T0: Highlight export button
         if (colabBtn) colabBtn.classList.add('mock-colab-active');
 
-        // Step 2 (600ms): Fade in the Colab overlay
-        addTimer(function () {
-            if (colabOverlay) colabOverlay.classList.add('mock-colab-visible');
-            if (colabBtn) colabBtn.classList.remove('mock-colab-active');
-            setHeroSubtext('colab');
-
-            // Step 3 (1200ms): Run button pulse + show spinner
-            addTimer(function () {
-                if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
-                if (colabCellStatus) colabCellStatus.textContent = 'Running...';
-                if (colabEmpty) colabEmpty.style.display = 'none';
-                if (colabSpinner) colabSpinner.style.display = '';
-            }, 600);
-
-            // Step 4 (2200ms): Hide spinner, show plot, draw lines
-            addTimer(function () {
-                if (colabSpinner) colabSpinner.style.display = 'none';
-                if (colabPlotArea) colabPlotArea.style.display = '';
-                if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
-                if (colabCellStatus) colabCellStatus.textContent = '0.34s';
-                if (colabOutputStatus) colabOutputStatus.textContent = 'matplotlib inline';
-                // Trigger line draw animation
-                if (colabOverlay) colabOverlay.classList.add('mock-colab-plotted');
-            }, 1600);
-
-            // Step 5 (4000ms): Highlight title line, start typing edit
-            addTimer(function () {
-                if (colabTitleLine) {
-                    colabTitleLine.classList.add('mock-colab-highlight');
-                    var newTitle = 'KRAS Survival \u2014 G12D vs G12R';
-                    var baseTitle = 'KRAS Survival';
-                    var ci = baseTitle.length;
-                    var titleTimer = setInterval(function () {
-                        if (ci < newTitle.length) {
-                            colabTitleLine.textContent = newTitle.slice(0, ci + 1);
-                            ci++;
-                        } else {
-                            clearInterval(titleTimer);
-                        }
-                    }, 50);
-                    interactionTimers.push(titleTimer);
-                }
-            }, 3500);
-
-            // Step 5b (4800ms): Reveal color= args in code cell
-            addTimer(function () {
-                for (var i = 0; i < colabColorArgs.length; i++) {
-                    colabColorArgs[i].style.display = '';
-                    // Force reflow so the opacity transition fires
-                    colabColorArgs[i].offsetWidth;
-                    colabColorArgs[i].style.opacity = '1';
-                }
-            }, 4800);
-
-            // Step 6 (5500ms): Re-run — pulse run button, update plot title
-            addTimer(function () {
-                if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
-                if (colabCellStatus) colabCellStatus.textContent = 'Running...';
-            }, 5200);
-
-            addTimer(function () {
-                if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
-                if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
-                if (colabRunBtnEl) colabRunBtnEl.classList.remove('mock-colab-running');
-                if (colabCellStatus) colabCellStatus.textContent = '0.28s';
-                // Swap line colors: amber→red (G12D), green→blue (G12R)
-                for (var i = 0; i < colabKmLines.length && i < colabNewColors.length; i++) {
-                    colabKmLines[i].style.stroke = colabNewColors[i];
-                }
-                for (var i = 0; i < colabCiBands.length && i < colabNewColors.length; i++) {
-                    colabCiBands[i].style.fill = colabNewColors[i];
-                }
-                for (var i = 0; i < colabLegendLines.length && i < colabNewColors.length; i++) {
-                    colabLegendLines[i].style.stroke = colabNewColors[i];
-                }
-                if (colabLegendTexts.length >= 2) {
-                    colabLegendTexts[0].textContent = 'G12D';
-                    colabLegendTexts[1].textContent = 'G12R';
-                }
-            }, 5800);
-
-            // Step 7 (7500ms): Fade out Colab, callback to resume scene cycling
-            addTimer(function () {
-                // Hide the underlying drug-sensitivity scene BEFORE the overlay fades,
-                // so it doesn't flash through during the Colab-out transition.
-                visScenes.forEach(function (s) {
-                    s.style.transition = 'none';
-                    s.classList.remove('mock-vis-active');
-                });
-                mockup.classList.add('mock-fading');
-                if (colabOverlay) colabOverlay.classList.remove('mock-colab-visible');
-                addTimer(function () {
-                    resetColabOverlay();
-                    callback();
-                }, 600);
-            }, 7200);
-
-        }, 600);
+        addTimer(colabShowOverlay,    600);   // T+600ms:  overlay fades in
+        addTimer(colabStartRun,       1200);  // T+1200ms: run button + spinner
+        addTimer(colabShowPlot,       2200);  // T+2200ms: plot appears, lines draw
+        addTimer(colabEditTitle,      4100);  // T+4100ms: type new title in code cell
+        addTimer(colabRevealColorArgs,5400);  // T+5400ms: show color= args
+        addTimer(function () {               // T+5800ms: re-run pulse
+            if (colabRunBtnEl) colabRunBtnEl.classList.add('mock-colab-running');
+            if (colabCellStatus) colabCellStatus.textContent = 'Running...';
+        }, 5800);
+        addTimer(colabSwapColors,     6400);  // T+6400ms: plot updates with new colors
+        addTimer(function () {               // T+7800ms: fade out → callback
+            colabFadeOut(callback);
+        }, 7800);
     }
 
     // Mobile overlay elements
@@ -567,39 +584,23 @@
         if (phoneCursor) phoneCursor.style.display = 'none';
     }
 
-    var mobileTypingTimer = null;
-
-    function typeInPhone(text, callback) {
-        if (!mobileQueryText) { if (callback) callback(); return; }
-        mobileQueryText.textContent = '';
-
-        // Add cursor
+    // Mobile phone cursor (created once, reused)
+    var mobileCursor = (function () {
         var pill = mockup.querySelector('.mock-mobile-query-pill');
-        var cursor = pill ? pill.querySelector('.mock-typing-cursor') : null;
-        if (!cursor && pill) {
-            cursor = document.createElement('span');
-            cursor.className = 'mock-typing-cursor';
-            cursor.style.height = '0.7em';
-            cursor.style.verticalAlign = 'text-bottom';
-            pill.appendChild(cursor);
+        var c = pill ? pill.querySelector('.mock-typing-cursor') : null;
+        if (!c && pill) {
+            c = document.createElement('span');
+            c.className = 'mock-typing-cursor';
+            c.style.height = '0.7em';
+            c.style.verticalAlign = 'text-bottom';
+            pill.appendChild(c);
         }
-        if (cursor) cursor.style.display = '';
+        return c;
+    })();
 
-        var i = 0;
-        if (mobileTypingTimer) clearInterval(mobileTypingTimer);
-        mobileTypingTimer = setInterval(function () {
-            if (i < text.length) {
-                mobileQueryText.textContent = text.slice(0, i + 1);
-                i++;
-            } else {
-                clearInterval(mobileTypingTimer);
-                mobileTypingTimer = null;
-                if (cursor) {
-                    setTimeout(function () { cursor.style.display = 'none'; }, 300);
-                }
-                if (callback) callback();
-            }
-        }, 35);
+    // Mobile phone typing (35ms/char, slightly slower feel)
+    function typeInPhone(text, callback) {
+        typeText(mobileQueryText, { text: text, speed: 35, cursor: mobileCursor, onDone: callback });
     }
 
     function animateMobileChart() {
@@ -611,14 +612,14 @@
         // Animate stems staggered
         mobileStems.forEach(function (stem, idx) {
             setTimeout(function () {
-                stem.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                stem.style.transition = 'transform 0.4s var(--ease-out)';
                 stem.style.transform = 'scaleY(1)';
             }, idx * 60);
         });
         // Animate dots after stems
         mobileDots.forEach(function (dot, idx) {
             setTimeout(function () {
-                dot.style.transition = 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                dot.style.transition = 'transform 0.25s var(--ease-bounce)';
                 dot.style.transform = 'scale(1)';
             }, 300 + idx * 60);
         });
