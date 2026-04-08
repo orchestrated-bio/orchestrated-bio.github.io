@@ -1,6 +1,6 @@
             <!-- Animated Insight UI mockup -->
             <div class="lg:flex-1 lg:min-w-0 hidden lg:block">
-                <div class="hero-mockup relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10 bg-[#0c1522]" style="aspect-ratio: 16/11; font-size: clamp(9px, 1.05vw, 14px);">
+                <div class="hero-mockup mock-desktop-hidden relative rounded-xl overflow-hidden border border-white/10 shadow-2xl shadow-brand-500/10 bg-[#0c1522]" style="aspect-ratio: 16/11; font-size: clamp(9px, 1.05vw, 14px);">
 
                     <!-- ═══ Icon sidebar ═══ -->
                     <div class="mock-part mock-sidebar absolute left-0 top-0 bottom-0 flex flex-col items-center gap-[0.6em] py-[1.2em] px-[0.5em] bg-[#111b2b] border-r border-white/5 z-20" style="width: 3em; --d:0.2s;">
@@ -107,110 +107,125 @@
                     </div>
 
                     <!-- ═══ Mobile device overlay (shown during scene transitions) ═══ -->
-                    <div class="mock-mobile-overlay absolute inset-0 z-40 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-700">
+                    <div class="mock-mobile-overlay mock-mobile-visible absolute inset-0 z-40 flex items-center justify-center opacity-0 pointer-events-none">
                         <!-- Backdrop dim -->
-                        <div class="mock-mobile-backdrop absolute inset-0 bg-[#0c1522]/80 opacity-0 transition-opacity duration-500"></div>
-                        <div class="mock-mobile-frame relative bg-[#0c1522] shadow-2xl shadow-black/50 overflow-hidden" style="width: 10em; height: 18em; border-radius: 1.6em; border: 0.15em solid rgba(255,255,255,0.12); box-shadow: 0 0 0 0.08em rgba(255,255,255,0.05), 0 25px 50px rgba(0,0,0,0.5);">
+                        <div class="mock-mobile-backdrop absolute inset-0 bg-[#0c1522]/90 backdrop-blur-[2px] opacity-0 transition-opacity duration-600"></div>
+                        <div class="mock-mobile-frame relative bg-[#0c1522] shadow-2xl shadow-black/50 overflow-hidden" style="width: 16em; height: 28em; border-radius: 2.2em; border: 0.18em solid rgba(255,255,255,0.15); box-shadow: 0 0 0 0.08em rgba(255,255,255,0.06), 0 0 60px rgba(22,177,126,0.08), 0 30px 60px rgba(0,0,0,0.6);">
                             <!-- Phone status bar (time, signal, battery) -->
-                            <div class="flex items-center justify-between px-[0.6em] pt-[0.35em] pb-[0.15em]">
-                                <span class="text-[0.28em] text-gray-400 font-medium">9:41</span>
+                            <div class="flex items-center justify-between px-[1em] pt-[0.5em] pb-[0.25em]">
+                                <span class="text-[0.45em] text-gray-400 font-medium">9:41</span>
                                 <!-- Dynamic island / notch -->
-                                <div class="w-[2.2em] h-[0.5em] bg-black rounded-full"></div>
-                                <div class="flex items-center gap-[0.15em]">
-                                    <svg class="w-[0.35em] h-[0.35em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z"/></svg>
-                                    <svg class="w-[0.4em] h-[0.4em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2z"/></svg>
+                                <div class="w-[3.5em] h-[0.7em] bg-black rounded-full"></div>
+                                <div class="flex items-center gap-[0.25em]">
+                                    <svg class="w-[0.5em] h-[0.5em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                                    <svg class="w-[0.55em] h-[0.55em] text-gray-400" fill="currentColor" viewBox="0 0 24 24"><rect x="2" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="20" y="10" width="2" height="4" rx="1" fill="currentColor"/><rect x="4" y="8" width="10" height="8" rx="1" fill="currentColor" opacity="0.6"/></svg>
                                 </div>
                             </div>
                             <!-- Mini Insight UI -->
-                            <div class="px-[0.4em] h-full flex flex-col" style="padding-bottom: 0.8em;">
+                            <div class="px-[0.7em] h-full flex flex-col" style="padding-bottom: 1.2em;">
                                 <!-- Mini top bar with app icon -->
-                                <div class="flex items-center gap-[0.2em] mb-[0.3em] px-[0.1em]">
-                                    <div class="w-[0.9em] h-[0.9em] rounded-[0.25em] bg-brand-500/20 flex items-center justify-center">
-                                        <svg class="w-[0.55em] h-[0.55em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5"/></svg>
+                                <div class="flex items-center gap-[0.3em] mb-[0.5em] px-[0.1em]">
+                                    <div class="w-[1.4em] h-[1.4em] rounded-[0.35em] bg-brand-500/20 flex items-center justify-center">
+                                        <svg class="w-[0.8em] h-[0.8em] text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5"/></svg>
                                     </div>
-                                    <span class="text-[0.38em] text-white font-semibold">Insight</span>
-                                    <span class="text-[0.28em] text-gray-500 ml-auto px-[0.3em] py-[0.1em] rounded-[0.15em] bg-amber-500/15 text-amber-400">BRCA</span>
+                                    <span class="text-[0.6em] text-white font-semibold">Insight</span>
+                                    <span class="text-[0.4em] text-gray-500 ml-auto px-[0.4em] py-[0.15em] rounded-[0.2em] bg-amber-500/15 text-amber-400">BRCA</span>
                                 </div>
                                 <!-- Mini query pill -->
-                                <div class="px-[0.35em] py-[0.25em] rounded-[0.25em] bg-brand-600/30 mb-[0.35em]">
-                                    <span class="text-[0.32em] text-brand-300 font-medium">TP53 mutations in breast cancer</span>
+                                <div class="mock-mobile-query-pill px-[0.55em] py-[0.4em] rounded-[0.35em] bg-brand-600/30 mb-[0.5em]">
+                                    <span class="mock-mobile-query-text text-[0.5em] text-brand-300 font-medium"></span>
+                                </div>
+                                <!-- Mini investigating state (hidden initially) -->
+                                <div class="mock-mobile-investigating flex items-center gap-[0.25em] mb-[0.4em] px-[0.1em] opacity-0" style="transition: opacity 0.3s ease;">
+                                    <div class="mock-mobile-spinner w-[0.6em] h-[0.6em] rounded-full border-[1.5px] border-brand-400 border-t-transparent"></div>
+                                    <span class="text-[0.42em] text-brand-300">Investigating...</span>
                                 </div>
                                 <!-- Mini investigation badge -->
-                                <div class="flex items-center gap-[0.15em] mb-[0.25em] px-[0.1em]">
-                                    <div class="w-[0.45em] h-[0.45em] rounded-full bg-brand-500/40"></div>
-                                    <span class="text-[0.25em] text-gray-400">Investigated with 5 steps</span>
+                                <div class="mock-mobile-badge flex items-center gap-[0.25em] mb-[0.4em] px-[0.1em] opacity-0" style="transition: opacity 0.3s ease;">
+                                    <div class="w-[0.65em] h-[0.65em] rounded-full bg-brand-500/40 flex items-center justify-center">
+                                        <svg class="w-[0.4em] h-[0.4em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 12.75l6 6 9-13.5"/></svg>
+                                    </div>
+                                    <span class="text-[0.4em] text-gray-300">Investigated with 5 steps</span>
                                 </div>
                                 <!-- Mini AI response -->
-                                <div class="flex-1 space-y-[0.2em] overflow-hidden">
-                                    <p class="text-[0.28em] text-gray-300 leading-[1.5]">TP53 is mutated in ~34% of breast invasive carcinomas (368/1,080 samples)...</p>
+                                <div class="mock-mobile-response flex-1 space-y-[0.35em] overflow-hidden opacity-0" style="transition: opacity 0.3s ease;">
+                                    <p class="text-[0.44em] text-gray-300 leading-[1.5]">TP53 is mutated in ~34% of breast invasive carcinomas (368/1,080 samples)...</p>
                                     <!-- Mini chart card -->
-                                    <div class="rounded-[0.2em] bg-[#111b2b] border border-white/5 p-[0.25em]">
-                                        <div class="flex items-center gap-[0.15em] mb-[0.15em]">
-                                            <span class="w-[0.5em] h-[0.5em] rounded-[0.1em] bg-brand-500/20 text-brand-400 text-[0.2em] font-bold flex items-center justify-center">#1</span>
-                                            <span class="text-[0.24em] text-white font-medium">Mutation Hotspots</span>
+                                    <div class="mock-mobile-chart rounded-[0.3em] bg-[#111b2b] border border-white/5 p-[0.45em] opacity-0" style="transition: opacity 0.4s ease, transform 0.4s ease; transform: translateY(0.3em);">
+                                        <div class="flex items-center gap-[0.25em] mb-[0.25em]">
+                                            <span class="w-[0.8em] h-[0.8em] rounded-[0.15em] bg-brand-500/20 text-brand-400 text-[0.32em] font-bold flex items-center justify-center">#1</span>
+                                            <span class="text-[0.4em] text-white font-medium">Mutation Hotspots</span>
                                         </div>
                                         <!-- Mini lollipop stems -->
-                                        <div class="flex items-end gap-[1px] h-[2em] px-[0.15em]">
+                                        <div class="mock-mobile-stems flex items-end gap-[3px] h-[4em] px-[0.25em]">
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[25%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[25%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[18%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[18%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[80%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-amber-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[80%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[15%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[15%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[65%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-amber-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[65%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                             <div class="flex-1 flex flex-col items-center justify-end">
-                                                <div class="w-[2px] h-[22%] bg-white/15 rounded-full relative"><div class="absolute -top-[2px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-brand-500/70"></div></div>
+                                                <div class="mock-mini-stem w-[3px] h-[22%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="mock-mini-stem w-[3px] h-[50%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-amber-500/70" style="transform: scale(0);"></div></div>
+                                            </div>
+                                            <div class="flex-1 flex flex-col items-center justify-end">
+                                                <div class="mock-mini-stem w-[3px] h-[12%] bg-white/20 rounded-full relative" style="transform-origin: bottom; transform: scaleY(0);"><div class="mock-mini-dot absolute -top-[4px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-brand-500/70" style="transform: scale(0);"></div></div>
                                             </div>
                                         </div>
-                                        <div class="flex items-center gap-[0.2em] mt-[0.1em]">
-                                            <span class="px-[0.15em] py-[0.05em] rounded-[0.1em] bg-brand-500/15 text-brand-400 text-[0.2em]">5 hotspots</span>
-                                            <span class="px-[0.15em] py-[0.05em] rounded-[0.1em] bg-sky-500/15 text-sky-400 text-[0.2em]">211 mut</span>
+                                        <div class="flex items-center gap-[0.3em] mt-[0.2em]">
+                                            <span class="px-[0.25em] py-[0.08em] rounded-[0.15em] bg-brand-500/15 text-brand-400 text-[0.32em]">5 hotspots</span>
+                                            <span class="px-[0.25em] py-[0.08em] rounded-[0.15em] bg-sky-500/15 text-sky-400 text-[0.32em]">211 mutations</span>
                                         </div>
                                     </div>
-                                    <p class="text-[0.25em] text-gray-400 leading-[1.4]">The mutation landscape is dominated by hotspots in the DNA-binding domain...</p>
+                                    <p class="text-[0.4em] text-gray-400 leading-[1.4]">The mutation landscape is dominated by hotspots in the DNA-binding domain...</p>
                                 </div>
                                 <!-- Mini input bar -->
-                                <div class="mt-auto flex items-center gap-[0.2em] px-[0.25em] py-[0.2em] rounded-[0.25em] bg-white/5 border border-white/10">
-                                    <span class="text-[0.26em] text-gray-500 flex-1">Ask a follow-up...</span>
-                                    <div class="w-[0.6em] h-[0.6em] rounded-full bg-brand-500/30 flex items-center justify-center">
-                                        <svg class="w-[0.3em] h-[0.3em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></svg>
+                                <div class="mt-auto flex items-center gap-[0.3em] px-[0.4em] py-[0.35em] rounded-[0.35em] bg-white/5 border border-white/10">
+                                    <span class="text-[0.4em] text-gray-500 flex-1">Ask a follow-up...</span>
+                                    <div class="w-[1em] h-[1em] rounded-full bg-brand-500/30 flex items-center justify-center">
+                                        <svg class="w-[0.5em] h-[0.5em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18"/></svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Label below phone -->
-                        <div class="mock-mobile-label absolute bottom-[2em] left-1/2 -translate-x-1/2 opacity-0 transition-all duration-500" style="transform: translate(-50%, 0.5em);">
-                            <span class="text-[0.95em] text-white font-semibold whitespace-nowrap">Query your data, anywhere.</span>
+                        <div class="mock-mobile-label absolute bottom-[1.5em] left-1/2 -translate-x-1/2 opacity-0 text-center" style="transform: translate(-50%, 0.8em);">
+                            <span class="text-[1.1em] text-white font-semibold whitespace-nowrap" style="text-shadow: 0 0 20px rgba(22,177,126,0.3);">Query your data, anywhere.</span>
                         </div>
                     </div>
 
                     <!-- ═══ Google Colab export popup (hidden, shown by JS) ═══ -->
-                    <div class="mock-colab-popup absolute z-30 rounded-[0.5em] bg-[#1a1a2e] border border-amber-500/25 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 overflow-hidden" style="width: 24em; top: 4em; left: 22em; transform: translateY(8px);">
+                    <div class="mock-colab-popup absolute z-30 rounded-[0.5em] bg-[#1a1a2e]/98 border border-amber-500/30 shadow-2xl opacity-0 pointer-events-none transition-all duration-300 overflow-hidden" style="width: 26em; bottom: 1em; left: 22em; transform: translateY(10px); box-shadow: 0 -4px 30px rgba(249,171,0,0.08), 0 20px 40px rgba(0,0,0,0.4);">
+                        <!-- Connecting arrow pointing toward Export button area -->
+                        <div class="absolute -top-[0.4em] right-[3em] w-0 h-0 border-l-[0.4em] border-l-transparent border-r-[0.4em] border-r-transparent border-b-[0.4em] border-b-amber-500/30"></div>
                         <!-- Colab header bar -->
-                        <div class="flex items-center gap-[0.4em] px-[0.7em] py-[0.4em] bg-[#f9ab00]/10 border-b border-amber-500/15">
-                            <svg class="w-[1em] h-[1em] text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
-                            <span class="text-[0.6em] text-amber-400 font-semibold">Google Colab</span>
-                            <span class="text-[0.5em] text-gray-400 ml-[0.2em]">&mdash; kras_survival_analysis.ipynb</span>
+                        <div class="flex items-center gap-[0.4em] px-[0.8em] py-[0.45em] bg-[#f9ab00]/10 border-b border-amber-500/15">
+                            <svg class="w-[1.1em] h-[1.1em] text-amber-400 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-7v4h4l-5 7z"/></svg>
+                            <span class="text-[0.65em] text-amber-400 font-semibold">Google Colab</span>
+                            <span class="text-[0.52em] text-gray-400 ml-[0.2em]">&mdash; kras_survival_analysis.ipynb</span>
                             <span class="ml-auto flex items-center gap-[0.3em]">
                                 <span class="w-[0.5em] h-[0.5em] rounded-full bg-brand-500/60"></span>
-                                <span class="text-[0.4em] text-gray-500">Connected</span>
+                                <span class="text-[0.42em] text-gray-500">Connected</span>
                             </span>
                         </div>
                         <!-- Code cell -->
-                        <div class="px-[0.7em] py-[0.5em]">
+                        <div class="px-[0.8em] py-[0.6em]" style="background: #0d1117;">
                             <div class="flex items-start gap-[0.4em]">
                                 <div class="flex-shrink-0 mt-[0.15em]">
                                     <svg class="w-[0.9em] h-[0.9em] text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
-                                <pre class="flex-1 text-[0.52em] leading-[1.7] text-gray-300 font-mono overflow-hidden"><code><span class="text-violet-400">from</span> lifelines <span class="text-violet-400">import</span> KaplanMeierFitter
+                                <pre class="flex-1 text-[0.56em] leading-[1.8] text-gray-200 font-mono overflow-hidden"><code><span class="text-violet-400">from</span> lifelines <span class="text-violet-400">import</span> KaplanMeierFitter
 <span class="text-violet-400">import</span> matplotlib.pyplot <span class="text-violet-400">as</span> plt
 
 kmf = KaplanMeierFitter()
@@ -223,14 +238,27 @@ kmf.plot(ci_show=<span class="text-amber-400">True</span>)
 kmf.fit(T_wt, E_wt, label=<span class="text-brand-400">"Wild-type"</span>)
 kmf.plot(ci_show=<span class="text-amber-400">True</span>)
 
-plt.title(<span class="text-brand-400">"KRAS Survival"</span>)
+plt.title(<span class="text-brand-400">"<span class="mock-colab-title-line">KRAS Survival</span>"</span>)
 plt.xlabel(<span class="text-brand-400">"Time (days)"</span>)
 plt.ylabel(<span class="text-brand-400">"Survival Probability"</span>)</code></pre>
                             </div>
                         </div>
-                        <!-- Output hint -->
-                        <div class="px-[0.7em] py-[0.35em] border-t border-white/5 bg-[#111b2b]/50">
-                            <span class="text-[0.4em] text-gray-500">&#9654; Output: KM plot rendered (0.34s)</span>
+                        <!-- Output area (animated by JS) -->
+                        <div class="mock-colab-output px-[0.8em] py-[0.4em] border-t border-white/5 bg-[#111b2b]/50 overflow-hidden" style="max-height: 0; opacity: 0; transition: max-height 0.4s ease, opacity 0.3s ease;">
+                            <!-- Loading spinner (shown first, then replaced) -->
+                            <div class="mock-colab-spinner flex items-center gap-[0.3em] py-[0.2em]">
+                                <div class="w-[0.7em] h-[0.7em] rounded-full border-2 border-brand-400 border-t-transparent" style="animation: mockMobileSpin 0.6s linear infinite;"></div>
+                                <span class="text-[0.42em] text-gray-500">Running...</span>
+                            </div>
+                            <!-- KM plot output (hidden initially) -->
+                            <div class="mock-colab-plot-area" style="display: none;">
+                                <svg viewBox="0 0 100 50" class="w-full" style="height: 3em;">
+                                    <polyline points="0,5 20,5 20,15 40,15 40,25 60,25 80,30 100,32" stroke="#f59e0b" fill="none" stroke-width="1.5"/>
+                                    <polyline points="0,5 15,5 15,20 30,20 30,35 45,35 60,42 80,45 100,47" stroke="#16b17e" fill="none" stroke-width="1.5"/>
+                                    <text x="50" y="4" text-anchor="middle" fill="#9ca3af" font-size="4" class="mock-colab-plot-title">KRAS Survival</text>
+                                </svg>
+                                <span class="text-[0.42em] text-gray-500">&#9654; Output: KM plot rendered (0.34s)</span>
+                            </div>
                         </div>
                     </div>
 

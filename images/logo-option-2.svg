@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <!-- Icon -->
+  <g transform="translate(20, 15)">
+    <path d="M10 10 L 40 10 C 62 10, 80 28, 80 50 C 80 72, 62 90, 40 90 L 10 90 Z" fill="none" stroke="#087253" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M40 50 C 62 50, 80 68, 80 90 C 80 112, 62 130, 40 130 L 10 130 L 10 50 Z" fill="none" stroke="#16B17E" stroke-width="12" stroke-linejoin="round"/>
+    <circle cx="40" cy="50" r="8" fill="#16B17E"/>
+    <circle cx="40" cy="90" r="8" fill="#087253"/>
+  </g>
+  <!-- Text -->
+  <text x="140" y="80" font-family="Georgia, serif" font-size="44" font-weight="bold" fill="#0A2540">Orchestrated</text>
+  <text x="145" y="115" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#16B17E" letter-spacing="6">BIOSCIENCES</text>
+</svg>

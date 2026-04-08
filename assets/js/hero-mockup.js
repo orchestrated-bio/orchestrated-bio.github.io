@@ -72,6 +72,7 @@
 
     var current = 0;
     var INTERVAL = 8000; // 8s per scene for better readability
+    var SCENE1_INTERVAL = 12000; // Longer for Colab animation
 
     // Cache chat panel elements
     var queryEl   = mockup.querySelector('.mock-query-text');
@@ -146,10 +147,8 @@
     var typingTimer = null;
     function typeQuery(text) {
         if (!queryEl) return;
-        // Clear any running typing timer
         if (typingTimer) clearInterval(typingTimer);
         queryEl.textContent = '';
-        // Add cursor to query pill parent
         var cursor = queryEl.parentNode.querySelector('.mock-typing-cursor');
         if (!cursor) {
             cursor = document.createElement('span');
@@ -176,18 +175,15 @@
         rotateEl.classList.add('is-swapping');
         mockup.classList.add('mock-fading');
 
-        // Wait for CSS fade-out transition to fully complete (0.4s + buffer)
         setTimeout(function () {
             current = (current + 1) % scenes.length;
             var scene = scenes[current];
 
-            // Update content while invisible
             rotateEl.textContent = scene.subtitle;
             rotateEl.classList.remove('is-swapping');
             updateChat(scene);
             showVisScene(current);
 
-            // Force layout flush, then fade back in on next frame
             void mockup.offsetWidth;
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
@@ -195,12 +191,11 @@
                     typeQuery(scene.query);
                 });
             });
-        }, 500); // Wait a full 500ms to ensure fade-out is done
+        }, 500);
     }
 
     // ═══ Micro-interactions ═══
 
-    // Track all interaction timers so we can clean up on scene swap
     var interactionTimers = [];
     function addTimer(fn, delay) {
         var t = setTimeout(fn, delay);
@@ -213,18 +208,31 @@
     var pubPopup     = mockup.querySelector('.mock-pubmed-popup');
     var pubBackdrop  = mockup.querySelector('.mock-pubmed-backdrop');
 
+    // Colab output elements
+    var colabOutput    = mockup.querySelector('.mock-colab-output');
+    var colabSpinner   = mockup.querySelector('.mock-colab-spinner');
+    var colabPlotArea  = mockup.querySelector('.mock-colab-plot-area');
+    var colabTitleLine = mockup.querySelector('.mock-colab-title-line');
+    var colabPlotTitle = mockup.querySelector('.mock-colab-plot-title');
+    var colabRunBtn    = colabPopup ? colabPopup.querySelector('svg[viewBox="0 0 24 24"]') : null;
+
     function clearAllInteractions() {
         interactionTimers.forEach(clearTimeout);
         interactionTimers = [];
         if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
         if (pubPopup) pubPopup.classList.remove('mock-popup-visible');
         if (pubBackdrop) pubBackdrop.classList.remove('mock-backdrop-visible');
-        // Find the dynamic D1 cite and clear it
         var citeD1 = mockup.querySelector('.mock-cite-d1');
         if (citeD1) citeD1.classList.remove('mock-cite-active');
         if (colabBtn) colabBtn.classList.remove('mock-colab-active');
         if (colabPopup) colabPopup.classList.remove('mock-popup-visible');
-        // Remove any added breadcrumb tags
+        // Reset Colab output state
+        if (colabOutput) { colabOutput.style.maxHeight = '0'; colabOutput.style.opacity = '0'; }
+        if (colabSpinner) colabSpinner.style.display = '';
+        if (colabPlotArea) colabPlotArea.style.display = 'none';
+        if (colabTitleLine) { colabTitleLine.textContent = 'KRAS Survival'; colabTitleLine.classList.remove('mock-colab-highlight'); }
+        if (colabPlotTitle) colabPlotTitle.textContent = 'KRAS Survival';
+        if (colabRunBtn) colabRunBtn.classList.remove('mock-colab-run-pulse');
         var addedTag = mockup.querySelector('.mock-added-crumb');
         if (addedTag && addedTag.parentNode) addedTag.parentNode.removeChild(addedTag);
     }
@@ -260,8 +268,7 @@
             }
         }, 3000);
 
-        // 2) Citation click at 5s — highlight D1 + show PubMed popup
-        //    Popup dismisses at 7s, full 1s before scene transition at 8s
+        // 2) Citation click at 5s
         addTimer(function () {
             var citeD1 = mockup.querySelector('.mock-cite-d1');
             if (citeD1) citeD1.classList.add('mock-cite-active');
@@ -269,7 +276,6 @@
                 if (pubBackdrop) pubBackdrop.classList.add('mock-backdrop-visible');
                 if (pubPopup) pubPopup.classList.add('mock-popup-visible');
             }, 300);
-            // Dismiss at 7s (5s + 2s)
             addTimer(function () {
                 if (pubPopup) pubPopup.classList.remove('mock-popup-visible');
                 if (pubBackdrop) pubBackdrop.classList.remove('mock-backdrop-visible');
@@ -281,56 +287,288 @@
     function playScene1Interactions() {
         if (current !== 1) return;
 
-        // Colab export at 4s — highlight button, show Colab popup
-        // Dismiss at 7s, 1s before scene transition
+        // Colab export at 3s — highlight button, show Colab popup with animated execution
         addTimer(function () {
             if (colabBtn) colabBtn.classList.add('mock-colab-active');
             addTimer(function () {
                 if (colabPopup) colabPopup.classList.add('mock-popup-visible');
+
+                // +0.8s: Run button pulse
+                addTimer(function () {
+                    if (colabRunBtn) {
+                        colabRunBtn.classList.add('mock-colab-run-pulse');
+                    }
+                }, 800);
+
+                // +1.2s: Show output area with spinner
+                addTimer(function () {
+                    if (colabOutput) {
+                        colabOutput.style.maxHeight = '6em';
+                        colabOutput.style.opacity = '1';
+                    }
+                }, 1200);
+
+                // +1.8s: Replace spinner with KM plot
+                addTimer(function () {
+                    if (colabSpinner) colabSpinner.style.display = 'none';
+                    if (colabPlotArea) colabPlotArea.style.display = '';
+                }, 1800);
+
+                // +3.0s: Highlight title line, start editing it
+                addTimer(function () {
+                    if (colabTitleLine) {
+                        colabTitleLine.classList.add('mock-colab-highlight');
+                        // Type the new title char by char
+                        var newTitle = 'KRAS Survival \u2014 G12D vs G12R';
+                        var baseTitle = 'KRAS Survival';
+                        var ci = baseTitle.length;
+                        var titleTimer = setInterval(function () {
+                            if (ci < newTitle.length) {
+                                colabTitleLine.textContent = newTitle.slice(0, ci + 1);
+                                ci++;
+                            } else {
+                                clearInterval(titleTimer);
+                            }
+                        }, 50);
+                        interactionTimers.push(titleTimer);
+                    }
+                }, 3000);
+
+                // +4.0s: Run button pulse again, brief spinner
+                addTimer(function () {
+                    if (colabRunBtn) {
+                        colabRunBtn.classList.remove('mock-colab-run-pulse');
+                        void (colabRunBtn.offsetWidth);
+                        colabRunBtn.classList.add('mock-colab-run-pulse');
+                    }
+                }, 4000);
+
+                // +4.5s: Update plot title
+                addTimer(function () {
+                    if (colabPlotTitle) {
+                        colabPlotTitle.textContent = 'KRAS Survival \u2014 G12D vs G12R';
+                    }
+                    if (colabTitleLine) colabTitleLine.classList.remove('mock-colab-highlight');
+                }, 4500);
+
+                // +5.5s: Dismiss popup
+                addTimer(function () {
+                    if (colabPopup) colabPopup.classList.remove('mock-popup-visible');
+                    if (colabBtn) colabBtn.classList.remove('mock-colab-active');
+                }, 5500);
+
             }, 400);
-            // Dismiss at 7s (4s + 3s)
-            addTimer(function () {
-                if (colabPopup) colabPopup.classList.remove('mock-popup-visible');
-                if (colabBtn) colabBtn.classList.remove('mock-colab-active');
-            }, 3000);
-        }, 4000);
+        }, 3000);
     }
 
     // Mobile overlay elements
     var mobileOverlay  = mockup.querySelector('.mock-mobile-overlay');
     var mobileLabel    = mockup.querySelector('.mock-mobile-label');
 
+    // Mobile phone inner elements
+    var mobileQueryText    = mockup.querySelector('.mock-mobile-query-text');
+    var mobileInvestigating = mockup.querySelector('.mock-mobile-investigating');
+    var mobileBadge        = mockup.querySelector('.mock-mobile-badge');
+    var mobileResponse     = mockup.querySelector('.mock-mobile-response');
+    var mobileChart        = mockup.querySelector('.mock-mobile-chart');
+    var mobileStems        = mockup.querySelectorAll('.mock-mini-stem');
+    var mobileDots         = mockup.querySelectorAll('.mock-mini-dot');
+
+    function resetMobilePhone() {
+        // Reset all mobile phone elements to initial state
+        if (mobileQueryText) mobileQueryText.textContent = '';
+        if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
+        if (mobileBadge) mobileBadge.style.opacity = '0';
+        if (mobileResponse) mobileResponse.style.opacity = '0';
+        if (mobileChart) { mobileChart.style.opacity = '0'; mobileChart.style.transform = 'translateY(0.3em)'; }
+        // Reset stems and dots
+        mobileStems.forEach(function (s) { s.style.transform = 'scaleY(0)'; });
+        mobileDots.forEach(function (d) { d.style.transform = 'scale(0)'; });
+        // Remove any cursor
+        var phoneCursor = mockup.querySelector('.mock-mobile-query-pill .mock-typing-cursor');
+        if (phoneCursor) phoneCursor.style.display = 'none';
+    }
+
+    var mobileTypingTimer = null;
+
+    function typeInPhone(text, callback) {
+        if (!mobileQueryText) { if (callback) callback(); return; }
+        mobileQueryText.textContent = '';
+
+        // Add cursor
+        var pill = mockup.querySelector('.mock-mobile-query-pill');
+        var cursor = pill ? pill.querySelector('.mock-typing-cursor') : null;
+        if (!cursor && pill) {
+            cursor = document.createElement('span');
+            cursor.className = 'mock-typing-cursor';
+            cursor.style.height = '0.7em';
+            cursor.style.verticalAlign = 'text-bottom';
+            pill.appendChild(cursor);
+        }
+        if (cursor) cursor.style.display = '';
+
+        var i = 0;
+        if (mobileTypingTimer) clearInterval(mobileTypingTimer);
+        mobileTypingTimer = setInterval(function () {
+            if (i < text.length) {
+                mobileQueryText.textContent = text.slice(0, i + 1);
+                i++;
+            } else {
+                clearInterval(mobileTypingTimer);
+                mobileTypingTimer = null;
+                if (cursor) {
+                    setTimeout(function () { cursor.style.display = 'none'; }, 300);
+                }
+                if (callback) callback();
+            }
+        }, 35);
+    }
+
+    function animateMobileChart() {
+        // Show chart card
+        if (mobileChart) {
+            mobileChart.style.opacity = '1';
+            mobileChart.style.transform = 'translateY(0)';
+        }
+        // Animate stems staggered
+        mobileStems.forEach(function (stem, idx) {
+            setTimeout(function () {
+                stem.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                stem.style.transform = 'scaleY(1)';
+            }, idx * 60);
+        });
+        // Animate dots after stems
+        mobileDots.forEach(function (dot, idx) {
+            setTimeout(function () {
+                dot.style.transition = 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                dot.style.transform = 'scale(1)';
+            }, 300 + idx * 60);
+        });
+    }
+
     function playMobileTransition(callback) {
         if (!mobileOverlay) { callback(); return; }
 
-        // Show mobile device with fade in
+        resetMobilePhone();
+
+        var frame = mobileOverlay.querySelector('.mock-mobile-frame');
+        if (frame) frame.style.transform = 'scale(0.85)';
+
+        mobileOverlay.classList.remove('mock-mobile-expanding');
         mobileOverlay.classList.add('mock-mobile-visible');
 
-        // After 2s viewing the phone, expand to desktop
+        // After 2.5s viewing, start expanding
         setTimeout(function () {
             mobileOverlay.classList.add('mock-mobile-expanding');
 
-            // After expansion (0.9s), hide overlay and show desktop
             setTimeout(function () {
                 mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
+                if (frame) frame.style.transform = '';
                 callback();
-            }, 900);
-        }, 2000);
+            }, 1100);
+        }, 2500);
     }
 
-    // Initial play
-    typeQuery(scenes[0].query);
-    playScene0Interactions();
+    // ═══ Initial mobile-first sequence ═══
+    function initialMobileSequence() {
+        resetMobilePhone();
+
+        var frame = mobileOverlay ? mobileOverlay.querySelector('.mock-mobile-frame') : null;
+
+        // Step 1 (0ms): Mobile is already visible via HTML class. Ensure frame is at scale.
+        if (frame) frame.style.transform = 'scale(0.85)';
+        // Trigger the scale(1) transition
+        requestAnimationFrame(function () {
+            if (frame) frame.style.transform = '';
+            if (mobileOverlay) {
+                mobileOverlay.classList.remove('mock-mobile-expanding');
+                // Ensure visible
+                mobileOverlay.classList.add('mock-mobile-visible');
+            }
+        });
+
+        // Step 2 (800ms): Type query in phone
+        setTimeout(function () {
+            typeInPhone('TP53 mutations in breast cancer', function () {
+
+                // Step 3 (after typing ~1700ms): Show investigating state
+                setTimeout(function () {
+                    if (mobileInvestigating) mobileInvestigating.style.opacity = '1';
+
+                    // Step 3.5 (~700ms later): Replace investigating with badge + response
+                    setTimeout(function () {
+                        if (mobileInvestigating) mobileInvestigating.style.opacity = '0';
+                        if (mobileBadge) mobileBadge.style.opacity = '1';
+                        if (mobileResponse) mobileResponse.style.opacity = '1';
+
+                        // Step 4 (200ms later): Animate chart
+                        setTimeout(function () {
+                            animateMobileChart();
+
+                            // Step 5 (1300ms pause): Let users register the mobile experience
+                            // Step 6 (after pause): Expand phone to desktop
+                            setTimeout(function () {
+                                // Prep desktop content underneath before expansion
+                                updateChat(scenes[0]);
+                                showVisScene(0);
+                                // Remove the desktop-hidden class so parts are ready
+                                mockup.classList.remove('mock-desktop-hidden');
+                                // But keep fading class so it appears through the expansion
+                                mockup.classList.add('mock-fading');
+
+                                // Start phone expansion
+                                mobileOverlay.classList.add('mock-mobile-expanding');
+
+                                // Step 7 (1000ms): Expansion done, reveal desktop
+                                setTimeout(function () {
+                                    mobileOverlay.classList.remove('mock-mobile-visible', 'mock-mobile-expanding');
+                                    if (frame) frame.style.transform = '';
+
+                                    // Fade in desktop
+                                    void mockup.offsetWidth;
+                                    requestAnimationFrame(function () {
+                                        requestAnimationFrame(function () {
+                                            mockup.classList.remove('mock-fading');
+                                            typeQuery(scenes[0].query);
+                                            playScene0Interactions();
+                                            // Start the scene cycling
+                                            startSceneCycling();
+                                        });
+                                    });
+                                }, 1100);
+                            }, 1300);
+                        }, 200);
+                    }, 700);
+                }, 200);
+            });
+        }, 800);
+    }
 
     // ═══ Scene timer ═══
+    var sceneTimer = null;
+
+    function scheduleNext() {
+        // Use longer interval for scene 1 (Colab animation)
+        var delay = (current === 1) ? SCENE1_INTERVAL : INTERVAL;
+        sceneTimer = setTimeout(function () {
+            advanceWithInteractions();
+        }, delay);
+    }
+
+    function startSceneCycling() {
+        if (sceneTimer) clearTimeout(sceneTimer);
+        scheduleNext();
+    }
+
     function advanceWithInteractions() {
         clearAllInteractions();
+        if (sceneTimer) clearTimeout(sceneTimer);
 
         // If transitioning from Scene 2 back to Scene 0, play mobile transition
         if (current === 2) {
             mockup.classList.add('mock-fading');
             setTimeout(function () {
-                // Swap to scene 0 while hidden
+                // Swap to scene 0 content while faded out (TASK 3 FIX)
                 current = 0;
                 rotateEl.textContent = scenes[0].subtitle;
                 rotateEl.classList.remove('is-swapping');
@@ -342,11 +580,13 @@
                     requestAnimationFrame(function () {
                         mockup.classList.remove('mock-fading');
 
-                        // Show mobile overlay, then expand to desktop
-                        playMobileTransition(function () {
-                            typeQuery(scenes[0].query);
-                            playScene0Interactions();
-                        });
+                        setTimeout(function () {
+                            playMobileTransition(function () {
+                                typeQuery(scenes[0].query);
+                                playScene0Interactions();
+                                scheduleNext();
+                            });
+                        }, 100);
                     });
                 });
             }, 500);
@@ -358,8 +598,10 @@
         setTimeout(function () {
             if (current === 0) playScene0Interactions();
             if (current === 1) playScene1Interactions();
+            scheduleNext();
         }, 600);
     }
 
-    setInterval(advanceWithInteractions, INTERVAL);
+    // ═══ Start with mobile-first sequence instead of immediate cycling ═══
+    initialMobileSequence();
 })();

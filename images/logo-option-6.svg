@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(40, 25)">
+    <!-- Outer orchestrated ring -->
+    <path d="M 50 0 A 50 50 0 1 1 0 50" fill="none" stroke="url(#circleGrad)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M 0 50 A 50 50 0 0 1 50 0" fill="none" stroke="#087253" stroke-width="10" stroke-linecap="round" opacity="0.3" stroke-dasharray="8 12"/>
+    
+    <!-- Inner dynamic DNA wave -->
+    <path d="M 15 50 Q 50 15, 85 50" fill="none" stroke="#16b17e" stroke-width="6" stroke-linecap="round"/>
+    <path d="M 15 50 Q 50 85, 85 50" fill="none" stroke="#087253" stroke-width="6" stroke-linecap="round"/>
+    
+    <!-- Center node -->
+    <circle cx="50" cy="50" r="6" fill="#16b17e"/>
+  </g>
+  <!-- Text -->
+  <text x="170" y="75" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="40" font-weight="bold" fill="#2D3748">Orchestrated</text>
+  <text x="175" y="110" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="500" fill="#16b17e" letter-spacing="7">BIOSCIENCES</text>
+</svg>

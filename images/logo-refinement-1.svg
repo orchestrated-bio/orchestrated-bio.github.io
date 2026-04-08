@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="dnaGradR1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(10, 35)">
+    <!-- DNA Rungs -->
+    <g stroke="#087253" stroke-width="2" opacity="0.6" stroke-linecap="round">
+      <line x1="7" y1="36" x2="7" y2="44"/> <line x1="14" y1="30" x2="14" y2="50"/> <line x1="20" y1="26" x2="20" y2="54"/> <line x1="26" y1="30" x2="26" y2="50"/> <line x1="33" y1="36" x2="33" y2="44"/>
+      <line x1="47" y1="36" x2="47" y2="44"/> <line x1="54" y1="30" x2="54" y2="50"/> <line x1="60" y1="26" x2="60" y2="54"/> <line x1="66" y1="30" x2="66" y2="50"/> <line x1="73" y1="36" x2="73" y2="44"/>
+      <line x1="87" y1="36" x2="87" y2="44"/> <line x1="94" y1="30" x2="94" y2="50"/> <line x1="100" y1="26" x2="100" y2="54"/> <line x1="106" y1="30" x2="106" y2="50"/> <line x1="113" y1="36" x2="113" y2="44"/>
+      <line x1="127" y1="36" x2="127" y2="44"/> <line x1="134" y1="30" x2="134" y2="50"/> <line x1="140" y1="26" x2="140" y2="54"/> <line x1="146" y1="30" x2="146" y2="50"/> <line x1="153" y1="36" x2="153" y2="44"/>
+    </g>
+    <!-- Waves -->
+    <path d="M0 40 Q 20 0, 40 40 T 80 40 T 120 40 T 160 40" fill="none" stroke="url(#dnaGradR1)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M0 40 Q 20 80, 40 40 T 80 40 T 120 40 T 160 40" fill="none" stroke="#087253" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+    <!-- Intersections -->
+    <circle cx="40" cy="40" r="5" fill="#16b17e"/>
+    <circle cx="80" cy="40" r="5" fill="#087253"/>
+    <circle cx="120" cy="40" r="5" fill="#16b17e"/>
+  </g>
+  <!-- Text Refinement: Tighter layout, better alignment, darker main text -->
+  <g transform="translate(195, 75)">
+    <text x="0" y="0" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="40" font-weight="800" fill="#111827" letter-spacing="-0.5">Orchestrated</text>
+    <text x="5" y="28" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#087253" letter-spacing="9">BIOSCIENCES</text>
+  </g>
+</svg>

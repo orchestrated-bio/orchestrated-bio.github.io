@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <!-- Icon -->
+  <g transform="translate(30, 35)">
+    <!-- Simulated vertical sound/data wave -->
+    <line x1="0" y1="35" x2="0" y2="45" stroke="#16b17e" stroke-width="12" stroke-linecap="round"/>
+    <line x1="20" y1="20" x2="20" y2="60" stroke="#12a273" stroke-width="12" stroke-linecap="round"/>
+    <line x1="40" y1="0" x2="40" y2="80" stroke="#087253" stroke-width="12" stroke-linecap="round"/>
+    <line x1="60" y1="15" x2="60" y2="65" stroke="#0c8760" stroke-width="12" stroke-linecap="round"/>
+    <line x1="80" y1="30" x2="80" y2="50" stroke="#16b17e" stroke-width="12" stroke-linecap="round"/>
+    
+    <!-- Connecting strand emphasizing the biology link -->
+    <path d="M -10 40 Q 40 40, 90 40" fill="none" stroke="#087253" stroke-width="3" opacity="0.5" stroke-dasharray="4 4"/>
+  </g>
+  <!-- Text -->
+  <text x="150" y="80" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="42" font-weight="800" fill="#1A202C">Orchestrated</text>
+  <text x="155" y="115" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" font-weight="300" fill="#087253" letter-spacing="6">BIOSCIENCES</text>
+</svg>

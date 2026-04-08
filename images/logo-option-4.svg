@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(20, 35)">
+    <path d="M0 40 C 30 0, 50 0, 80 40 C 110 80, 130 80, 160 40" fill="none" stroke="url(#waveGrad)" stroke-width="10" stroke-linecap="round"/>
+    <path d="M0 40 C 30 80, 50 80, 80 40 C 110 0, 130 0, 160 40" fill="none" stroke="#087253" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="80" cy="40" r="7" fill="#16b17e"/>
+  </g>
+  <!-- Text -->
+  <text x="190" y="85" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="38" font-weight="700" fill="#2B2D42">ORCHESTRATED</text>
+  <text x="195" y="115" font-family="'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="20" font-weight="400" fill="#087253" letter-spacing="8">BIOSCIENCES</text>
+</svg>

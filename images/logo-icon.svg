@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <defs>
+    <linearGradient id="dnaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Zoomed: ~1.5 loops of helix, centered -->
+  <g transform="translate(4, 16)">
+    <!-- DNA Rungs (8 rungs across ~1.5 loops) -->
+    <g stroke="#054f39" stroke-width="3" opacity="0.7" stroke-linecap="round">
+      <line x1="6" y1="21" x2="6" y2="27"/>
+      <line x1="14" y1="16" x2="14" y2="32"/>
+      <line x1="22" y1="12" x2="22" y2="36"/>
+      <line x1="30" y1="16" x2="30" y2="32"/>
+      <line x1="38" y1="21" x2="38" y2="27"/>
+      <line x1="46" y1="16" x2="46" y2="32"/>
+      <line x1="54" y1="12" x2="54" y2="36"/>
+      <line x1="62" y1="16" x2="62" y2="32"/>
+      <line x1="70" y1="21" x2="70" y2="27"/>
+    </g>
+    <!-- Waves -->
+    <path d="M-4 24 Q 14 -4, 36 24 T 76 24" fill="none" stroke="url(#dnaGrad)" stroke-width="5.5" stroke-linecap="round"/>
+    <path d="M-4 24 Q 14 52, 36 24 T 76 24" fill="none" stroke="#054f39" stroke-width="5.5" stroke-linecap="round" opacity="0.7"/>
+    <!-- Intersections -->
+    <circle cx="36" cy="24" r="4.5" fill="#16b17e"/>
+  </g>
+</svg>

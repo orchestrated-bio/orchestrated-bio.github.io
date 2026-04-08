@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="dnaGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(20, 35)">
+    <!-- Back strand -->
+    <path d="M0 40 Q 20 80, 40 40 T 80 40 T 120 40" fill="none" stroke="#087253" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    
+    <!-- DNA Connecting Rungs -->
+    <path d="M 12 24 L 12 56 M 28 24 L 28 56 M 52 24 L 52 56 M 68 24 L 68 56 M 92 24 L 92 56 M 108 24 L 108 56" fill="none" stroke="#087253" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+
+    <!-- Front strand -->
+    <path d="M0 40 Q 20 0, 40 40 T 80 40 T 120 40" fill="none" stroke="url(#dnaGrad3)" stroke-width="8" stroke-linecap="round"/>
+    
+    <!-- Emphasis on crossing nodes -->
+    <circle cx="40" cy="40" r="6" fill="#ffffff" stroke="#087253" stroke-width="3"/>
+    <circle cx="80" cy="40" r="6" fill="#ffffff" stroke="#16b17e" stroke-width="3"/>
+  </g>
+  <!-- Text -->
+  <text x="160" y="85" font-family="'Montserrat', sans-serif" font-size="38" font-weight="700" fill="#2B2D42">ORCHESTRATED</text>
+  <text x="165" y="115" font-family="'Montserrat', sans-serif" font-size="20" font-weight="400" fill="#087253" letter-spacing="8">BIOSCIENCES</text>
+</svg>

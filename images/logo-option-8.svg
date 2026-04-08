@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 150">
+  <defs>
+    <linearGradient id="dnaGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#16b17e" />
+      <stop offset="100%" stop-color="#087253" />
+    </linearGradient>
+  </defs>
+  <!-- Icon -->
+  <g transform="translate(10, 35)">
+    <!-- DNA Rungs -->
+    <line x1="20" y1="20" x2="20" y2="60" stroke="#087253" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+    <line x1="60" y1="20" x2="60" y2="60" stroke="#087253" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+    <line x1="100" y1="20" x2="100" y2="60" stroke="#087253" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+    <line x1="140" y1="20" x2="140" y2="60" stroke="#087253" stroke-width="2.5" opacity="0.4" stroke-linecap="round"/>
+
+    <!-- Wave 1 (Front) -->
+    <path d="M0 40 Q 20 0, 40 40 T 80 40 T 120 40 T 160 40" fill="none" stroke="url(#dnaGrad2)" stroke-width="7" stroke-linecap="round"/>
+    <!-- Wave 2 (Back) -->
+    <path d="M0 40 Q 20 80, 40 40 T 80 40 T 120 40 T 160 40" fill="none" stroke="#087253" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+    
+    <!-- Intersections -->
+    <circle cx="40" cy="40" r="5" fill="#16b17e"/>
+    <circle cx="80" cy="40" r="5" fill="#087253"/>
+    <circle cx="120" cy="40" r="5" fill="#16b17e"/>
+  </g>
+  <!-- Text -->
+  <text x="190" y="85" font-family="'Montserrat', sans-serif" font-size="36" font-weight="700" fill="#2B2D42">ORCHESTRATED</text>
+  <text x="195" y="115" font-family="'Montserrat', sans-serif" font-size="19" font-weight="400" fill="#087253" letter-spacing="8">BIOSCIENCES</text>
+</svg>
