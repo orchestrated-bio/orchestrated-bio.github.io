@@ -84,7 +84,8 @@
     var visScenes = mockup.querySelectorAll('.mock-vis-scene');
 
     function updateChat(s) {
-        if (queryEl) queryEl.textContent = s.query;
+        // Don't set query text here — staggerChatReveal will type it
+        if (queryEl) queryEl.textContent = '';
         if (stepsEl) stepsEl.textContent = s.steps;
         if (cohortEl) cohortEl.textContent = s.cohort;
 
@@ -301,42 +302,12 @@
         if (citeD1) citeD1.classList.remove('mock-cite-active');
         if (colabBtn) colabBtn.classList.remove('mock-colab-active');
         resetColabOverlay();
-        var addedTag = mockup.querySelector('.mock-added-crumb');
-        if (addedTag && addedTag.parentNode) addedTag.parentNode.removeChild(addedTag);
     }
 
     function playScene0Interactions() {
         if (current !== 0) return;
 
-        // 1) Plot click at 3s — highlight R175H lollipop and add breadcrumb
-        addTimer(function () {
-            var scene0 = mockup.querySelector('[data-vis="0"]');
-            var stems = scene0 ? scene0.querySelectorAll('.mock-lollipop-stem') : [];
-            var r175h = stems[4];
-            if (r175h) {
-                var dot = r175h.querySelector('.mock-lollipop-dot');
-                if (dot) dot.style.boxShadow = '0 0 0 3px rgba(245, 158, 11, 0.5)';
-                var crumbBox = mockup.querySelector('.mock-crumbs');
-                if (crumbBox) {
-                    var tag = document.createElement('span');
-                    tag.className = 'mock-added-crumb px-[0.5em] py-[0.15em] rounded-[0.2em] bg-amber-500/20 text-amber-300 text-[0.7em]';
-                    tag.textContent = 'R175H';
-                    tag.style.opacity = '0';
-                    tag.style.transform = 'scale(0.8)';
-                    tag.style.transition = 'all 0.3s ease';
-                    crumbBox.appendChild(tag);
-                    requestAnimationFrame(function () {
-                        tag.style.opacity = '1';
-                        tag.style.transform = 'scale(1)';
-                    });
-                }
-                addTimer(function () {
-                    if (dot) dot.style.boxShadow = '';
-                }, 1500);
-            }
-        }, 3000);
-
-        // 2) Citation click at 5s
+        // Citation click at 4s — highlight D1, show PubMed popup
         addTimer(function () {
             var citeD1 = mockup.querySelector('.mock-cite-d1');
             if (citeD1) citeD1.classList.add('mock-cite-active');
@@ -348,8 +319,8 @@
                 if (pubPopup) pubPopup.classList.remove('mock-popup-visible');
                 if (pubBackdrop) pubBackdrop.classList.remove('mock-backdrop-visible');
                 if (citeD1) citeD1.classList.remove('mock-cite-active');
-            }, 2000);
-        }, 5000);
+            }, 2500);
+        }, 4000);
     }
 
     function playColabTakeover(callback) {
