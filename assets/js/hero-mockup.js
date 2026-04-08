@@ -554,7 +554,7 @@
 
         // Condensed mobile sequence: type query, show results, animate chart
         setTimeout(function () {
-            typeInPhone('TP53 mutations in breast cancer', function () {
+            typeInPhone(scenes[0].query, function () {
                 // Quick reveal: investigating -> badge -> response -> chart
                 setTimeout(function () {
                     if (mobileInvestigating) mobileInvestigating.style.opacity = '1';

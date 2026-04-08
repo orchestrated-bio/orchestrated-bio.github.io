@@ -1,3 +1,8 @@
+/* ═══ Hero text state transitions ═══ */
+.hero-text-state {
+    transition: opacity 0.7s ease-in-out;
+}
+
 /* ═══ Hero mockup staggered reveal ═══ */
 .mock-part {
     opacity: 0;
@@ -63,11 +68,18 @@
     to { transform: scaleY(1); }
 }
 
-/* Scene swap: fade the whole mockup out/in */
-.hero-mockup {
+/* Scene swap: fade the inner desktop UI, not the container itself.
+   This keeps overlays (mobile, Colab, PubMed) visible during transitions. */
+.hero-mockup .mock-sidebar,
+.hero-mockup .mock-topbar,
+.hero-mockup .mock-chat,
+.hero-mockup .mock-vis-container {
     transition: opacity 0.5s ease;
 }
-.hero-mockup.mock-fading {
+.hero-mockup.mock-fading .mock-sidebar,
+.hero-mockup.mock-fading .mock-topbar,
+.hero-mockup.mock-fading .mock-chat,
+.hero-mockup.mock-fading .mock-vis-container {
     opacity: 0 !important;
     transition: opacity 0.4s ease;
 }
@@ -214,17 +226,19 @@
     transition: opacity 0.8s ease;
 }
 .mock-mobile-overlay .mock-mobile-label {
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .mock-mobile-overlay.mock-mobile-visible .mock-mobile-label {
     opacity: 1;
-    transform: translate(-50%, 0) !important;
 }
 .mock-mobile-overlay.mock-mobile-expanding .mock-mobile-label {
     opacity: 0 !important;
-    transform: translate(-50%, -0.5em) !important;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
+}
+/* Word-by-word reveal */
+.mock-mobile-overlay.mock-mobile-visible .mock-mobile-label .mock-label-word.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Colab export button highlight */
@@ -232,6 +246,12 @@
     background: rgba(249, 171, 0, 0.15);
     border-color: rgba(249, 171, 0, 0.4);
     color: #f9ab00;
+}
+
+/* Portfolio page — larger font-size for the mockup */
+.portfolio-mockup-wrap .hero-mockup {
+    font-size: clamp(10px, 1.4vw, 16px) !important;
+    aspect-ratio: 16/10 !important;
 }
 
 /* Desktop hidden on initial load (mobile-first sequence) */

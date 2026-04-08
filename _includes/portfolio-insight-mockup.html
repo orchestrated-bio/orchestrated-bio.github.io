@@ -1,5 +1,5 @@
-<!-- Static Insight UI mockup for portfolio page -->
-<div class="relative rounded-xl overflow-hidden border border-white/5 bg-[#0c1522]" style="aspect-ratio: 16/10; font-size: clamp(7px, 0.9vw, 12px);">
+<!-- Animated Insight UI mockup for portfolio page -->
+<div class="portfolio-mockup relative rounded-xl overflow-hidden border border-white/5 bg-[#0c1522]" style="aspect-ratio: 16/10; font-size: clamp(10px, 1.2vw, 16px);">
 
     <!-- Icon sidebar -->
     <div class="absolute left-0 top-0 bottom-0 flex flex-col items-center gap-[0.6em] py-[1.2em] px-[0.5em] bg-[#111b2b] border-r border-white/5 z-20" style="width: 3em;">
@@ -16,36 +16,38 @@
 
     <!-- Top breadcrumb bar -->
     <div class="absolute top-0 left-[3em] right-0 h-[2.4em] bg-[#0e1829] border-b border-white/5 flex items-center px-[1em] z-10">
-        <div class="flex items-center gap-[0.8em]">
+        <div class="port-crumbs flex items-center gap-[0.8em]">
             <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-brand-500/20 text-brand-400 text-[0.7em] font-medium">FOCUS</span>
             <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-amber-500/15 text-amber-400 text-[0.7em]">Brca TCGA Pan Can Atlas 2018</span>
             <span class="px-[0.5em] py-[0.15em] rounded-[0.2em] bg-sky-500/15 text-sky-400 text-[0.7em]">TP53</span>
         </div>
-        <span class="ml-auto text-[0.6em] text-gray-400">COHORT: N=1,080</span>
+        <span class="port-cohort ml-auto text-[0.6em] text-gray-400">COHORT: N=1,080</span>
     </div>
 
     <!-- Chat panel (left) -->
     <div class="absolute top-[2.4em] left-[3em] bottom-0 overflow-hidden border-r border-white/5 flex flex-col" style="width: 18em;">
         <div class="px-[1em] pt-[1em] pb-[0.5em]">
             <div class="px-[0.6em] py-[0.4em] rounded-[0.4em] bg-brand-600/30 text-brand-300 text-[0.8em] font-medium leading-snug">
-                TP53 mutations in breast cancer
+                <span class="port-query-text">TP53 mutations in breast cancer</span><span class="port-typing-cursor mock-typing-cursor" style="display:none;"></span>
             </div>
         </div>
-        <div class="flex items-center gap-[0.3em] px-[1em] pb-[0.5em]">
+        <div class="port-steps-wrap flex items-center gap-[0.3em] px-[1em] pb-[0.5em]" style="transition: opacity 0.4s ease;">
             <div class="w-[0.8em] h-[0.8em] rounded-full bg-brand-500/40 flex items-center justify-center">
                 <svg class="w-[0.5em] h-[0.5em] text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.5 12.75l6 6 9-13.5"/></svg>
             </div>
-            <span class="text-[0.65em] text-gray-300">Investigated with 5 steps</span>
+            <span class="port-steps-text text-[0.65em] text-gray-300">Investigated with 5 steps</span>
         </div>
-        <div class="flex-1 px-[1em] space-y-[0.5em] overflow-hidden">
+        <div class="port-paragraphs flex-1 px-[1em] space-y-[0.5em] overflow-hidden" style="transition: opacity 0.4s ease;">
             <p class="text-[0.7em] leading-[1.5] text-gray-300">TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations identified across 41 distinct protein positions.</p>
             <p class="text-[0.7em] leading-[1.5] text-gray-300">The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y. <span class="px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em]">D1</span></p>
             <p class="text-[0.7em] leading-[1.5] text-gray-300">These structural and contact mutations are found across both ER-positive and ER-negative tumors. <span class="px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em]">Shukla 2025</span></p>
         </div>
         <div class="border-t border-white/5 px-[1em] py-[0.6em]">
             <p class="text-[0.6em] text-gray-400 mb-[0.3em]">Follow-ups</p>
-            <p class="text-[0.6em] text-gray-300">1. How do TP53 mutations correlate with ER/PR/HER2 status?</p>
-            <p class="text-[0.6em] text-gray-300">2. Impact on overall survival in TCGA breast cancer patients?</p>
+            <div class="port-followups">
+                <p class="text-[0.6em] text-gray-300">1. How do TP53 mutations correlate with ER/PR/HER2 status?</p>
+                <p class="text-[0.6em] text-gray-300">2. Impact on overall survival in TCGA breast cancer patients?</p>
+            </div>
         </div>
         <div class="border-t border-white/5 px-[1em] py-[0.6em]">
             <div class="flex items-center gap-[0.4em] px-[0.6em] py-[0.4em] rounded-[0.4em] bg-white/5 border border-white/10">
@@ -57,9 +59,241 @@
         </div>
     </div>
 
-    <!-- Visualization panel (right) -->
-    <div class="absolute top-[2.4em] left-[21em] right-0 bottom-0 overflow-hidden p-[0.8em] space-y-[0.6em]">
+    <!-- Visualization panel (right) — swappable scenes -->
+    <div class="absolute top-[2.4em] left-[21em] right-0 bottom-0 overflow-hidden">
         {% include hero-vis-scene-0.html %}
+        {% include hero-vis-scene-1.html %}
+        {% include hero-vis-scene-2.html %}
     </div>
 
 </div>
+
+<script>
+// Portfolio mockup — simplified scene cycling (no mobile/colab overlays)
+(function () {
+    var mockup = document.querySelector('.portfolio-mockup');
+    if (!mockup) return;
+
+    var scenes = [
+        {
+            query: 'TP53 mutations in breast cancer',
+            steps: 'Investigated with 5 steps',
+            crumbs: [
+                { text: 'FOCUS', cls: 'bg-brand-500/20 text-brand-400' },
+                { text: 'Brca TCGA Pan Can Atlas 2018', cls: 'bg-amber-500/15 text-amber-400' },
+                { text: 'TP53', cls: 'bg-sky-500/15 text-sky-400' }
+            ],
+            cohort: 'COHORT: N=1,080',
+            paras: [
+                'TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations identified across 41 distinct protein positions.',
+                'The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y.',
+                'These structural and contact mutations are found across both ER-positive and ER-negative tumors.'
+            ],
+            cites: ['D1', 'Shukla 2025'],
+            followups: [
+                '1. How do TP53 mutations correlate with ER/PR/HER2 status?',
+                '2. Impact on overall survival in TCGA breast cancer patients?'
+            ]
+        },
+        {
+            query: 'How do KRAS mutations impact survival in pancreatic cancer?',
+            steps: 'Investigated with 3 steps',
+            crumbs: [
+                { text: 'FOCUS', cls: 'bg-brand-500/20 text-brand-400' },
+                { text: 'Paad TCGA Pan Can Atlas 2018', cls: 'bg-amber-500/15 text-amber-400' },
+                { text: 'KRAS', cls: 'bg-sky-500/15 text-sky-400' }
+            ],
+            cohort: 'COHORT: N=184',
+            paras: [
+                'KRAS mutations significantly reduce overall survival in pancreatic cancer, with mutant carriers reaching a median survival of only 1.4 years compared to 3.6 years for wild-type patients (p=0.00029).',
+                'This disparity is driven by near-universal mutations at codon 12 (86.6%), primarily G12D (39%), G12V, and G12R variants.',
+                'KRAS G12R is associated with improved survival and decreased distant recurrence compared to G12D.'
+            ],
+            cites: ['D3', 'Steele 2018'],
+            followups: [
+                '1. Do specific KRAS codons show different survival outcomes?',
+                '2. What about drug sensitivity?'
+            ]
+        },
+        {
+            query: 'What about drug sensitivity?',
+            steps: 'Investigated with 4 steps',
+            crumbs: [
+                { text: 'FOCUS', cls: 'bg-brand-500/20 text-brand-400' },
+                { text: 'Paad TCGA Pan Can Atlas 2018', cls: 'bg-amber-500/15 text-amber-400' },
+                { text: 'KRAS', cls: 'bg-sky-500/15 text-sky-400' }
+            ],
+            cohort: 'COHORT: N=184',
+            paras: [
+                'Drug sensitivity in pancreatic cancer is characterized by high resistance to standard therapies, though molecular profiling reveals emerging therapeutic targets.',
+                'KRAS was long considered undruggable, but is now tractable via small molecules and PROTACs, with two FDA-approved inhibitors targeting G12C.',
+                'TP53, CDKN2A, and SMAD4 present varying degrees of druggability and clinical tractability.'
+            ],
+            cites: ['D4', 'Raj 2026'],
+            followups: [
+                '1. How does KRAS G12D vs G12V affect sensitivity to MEK inhibitors?',
+                '2. Are there emerging drugs targeting TP53-mutant pancreatic cancer?'
+            ]
+        }
+    ];
+
+    var current = 0;
+    var INTERVAL = 8000;
+    var timers = [];
+
+    var queryEl   = mockup.querySelector('.port-query-text');
+    var cursor    = mockup.querySelector('.port-typing-cursor');
+    var stepsEl   = mockup.querySelector('.port-steps-text');
+    var stepsWrap = mockup.querySelector('.port-steps-wrap');
+    var crumbBox  = mockup.querySelector('.port-crumbs');
+    var cohortEl  = mockup.querySelector('.port-cohort');
+    var parasEl   = mockup.querySelector('.port-paragraphs');
+    var followEl  = mockup.querySelector('.port-followups');
+    var visScenes = mockup.querySelectorAll('.mock-vis-scene');
+
+    function addTimer(fn, delay) {
+        var t = setTimeout(fn, delay);
+        timers.push(t);
+        return t;
+    }
+
+    function clearTimers() {
+        timers.forEach(clearTimeout);
+        timers = [];
+        if (typingTimer) { clearInterval(typingTimer); typingTimer = null; }
+    }
+
+    var typingTimer = null;
+    function typeQuery(text) {
+        if (!queryEl) return;
+        if (typingTimer) clearInterval(typingTimer);
+        queryEl.textContent = '';
+        if (cursor) cursor.style.display = '';
+        var i = 0;
+        typingTimer = setInterval(function () {
+            if (i < text.length) {
+                queryEl.textContent = text.slice(0, i + 1);
+                i++;
+            } else {
+                clearInterval(typingTimer);
+                typingTimer = null;
+                addTimer(function () { if (cursor) cursor.style.display = 'none'; }, 400);
+            }
+        }, 30);
+    }
+
+    function updateChat(s) {
+        if (stepsEl) stepsEl.textContent = s.steps;
+        if (cohortEl) cohortEl.textContent = s.cohort;
+
+        if (crumbBox) {
+            while (crumbBox.firstChild) crumbBox.removeChild(crumbBox.firstChild);
+            s.crumbs.forEach(function (b) {
+                var span = document.createElement('span');
+                span.className = 'px-[0.5em] py-[0.15em] rounded-[0.2em] text-[0.7em] ' + b.cls;
+                span.textContent = b.text;
+                crumbBox.appendChild(span);
+            });
+        }
+
+        if (parasEl) {
+            while (parasEl.firstChild) parasEl.removeChild(parasEl.firstChild);
+            s.paras.forEach(function (txt, i) {
+                var p = document.createElement('p');
+                p.className = 'text-[0.7em] leading-[1.5] text-gray-300';
+                p.textContent = txt;
+                if (s.cites[i]) {
+                    var cite = document.createElement('span');
+                    cite.className = 'px-[0.3em] py-[0.1em] rounded bg-brand-600/25 text-brand-400 text-[0.85em] ml-[0.3em]';
+                    cite.textContent = s.cites[i];
+                    p.appendChild(cite);
+                }
+                parasEl.appendChild(p);
+            });
+        }
+
+        if (followEl) {
+            while (followEl.firstChild) followEl.removeChild(followEl.firstChild);
+            s.followups.forEach(function (txt) {
+                var p = document.createElement('p');
+                p.className = 'text-[0.6em] text-gray-300';
+                p.textContent = txt;
+                followEl.appendChild(p);
+            });
+        }
+    }
+
+    function showVisScene(index) {
+        visScenes.forEach(function (s) { s.classList.remove('mock-vis-active'); });
+        var target = visScenes[index];
+        if (!target) return;
+        target.classList.add('mock-reset');
+        void target.offsetWidth;
+        target.classList.remove('mock-reset');
+        target.classList.add('mock-vis-active');
+    }
+
+    function hideChatElements() {
+        if (stepsWrap) stepsWrap.style.opacity = '0';
+        if (parasEl) parasEl.style.opacity = '0';
+    }
+
+    function staggerReveal(scene) {
+        hideChatElements();
+        typeQuery(scene.query);
+
+        var typeDone = scene.query.length * 30 + 500;
+
+        addTimer(function () {
+            if (stepsWrap) stepsWrap.style.opacity = '1';
+        }, typeDone);
+
+        addTimer(function () {
+            if (parasEl) parasEl.style.opacity = '1';
+            var paras = parasEl ? parasEl.children : [];
+            for (var i = 0; i < paras.length; i++) {
+                (function (p, delay) {
+                    p.style.opacity = '0';
+                    p.style.transform = 'translateY(6px)';
+                    p.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                    addTimer(function () {
+                        p.style.opacity = '1';
+                        p.style.transform = 'translateY(0)';
+                    }, delay);
+                })(paras[i], i * 400);
+            }
+        }, typeDone + 300);
+    }
+
+    function advance() {
+        clearTimers();
+        mockup.style.transition = 'opacity 0.4s ease';
+        mockup.style.opacity = '0.4';
+
+        setTimeout(function () {
+            current = (current + 1) % scenes.length;
+            var scene = scenes[current];
+            updateChat(scene);
+            showVisScene(current);
+            hideChatElements();
+
+            mockup.style.opacity = '1';
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    staggerReveal(scene);
+                });
+            });
+
+            scheduleNext();
+        }, 500);
+    }
+
+    function scheduleNext() {
+        addTimer(advance, INTERVAL);
+    }
+
+    // Initial state: scene 0 is already showing via HTML, start cycling
+    showVisScene(0);
+    scheduleNext();
+})();
+</script>
