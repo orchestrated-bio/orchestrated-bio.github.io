@@ -88,24 +88,24 @@
       icon: email
   showcase_label: "Career Highlights"
   showcase:
-    - title: ""
-      description: ""
+    - title: "U.S. Coast Guard — Active Duty Service"
+      description: "Served as a commissioned officer aboard U.S. Coast Guard cutters, leading operations across maritime law enforcement, search and rescue, and national defense missions."
       image: images/team/proj-cutter.png
-    - title: ""
-      description: ""
+    - title: "Coast Guard Commendation Medal"
+      description: "Awarded by the Commandant of the U.S. Coast Guard to Lieutenant Noel J. Cruz for outstanding achievement from July 2017 to June 2020."
       image: images/team/proj-comm.png
-    - title: ""
-      description: ""
+    - title: "UCLA Extension — Full Stack Web Development"
+      description: "Completed the Full Stack Web Development Coding Boot Camp at the University of California, Los Angeles."
       image: images/team/proj-ucla.png
-    - title: ""
-      description: ""
+    - title: "L3Harris — Mission Planning Tool (MPT)"
+      description: "Contributed to the L3Harris Mission Planning Tool, a space mission lifecycle platform supporting planning, execution, and asset disposition in a single interface."
       image: images/team/proj-mpt.png
-    - title: ""
-      description: ""
+    - title: "Engineering Award — Industry Advancement"
+      description: "Recognized for leading the Spacecraft Mission Integration IRAD — AWS cloud and microservice-based SmallSat mission planning, automated AI sensor tasking, and establishing FIRST Amazon GovCloud CI/CD pipelines."
       image: images/team/proj-award.png
-    - title: ""
-      description: ""
+    - title: "Stanford / Coursera — Machine Learning Specialization"
+      description: "Completed all three courses of the Machine Learning Specialization by Andrew Ng, covering supervised learning, advanced algorithms, and unsupervised learning techniques."
       image: images/team/proj-mls.png
-    - title: ""
-      description: ""
+    - title: "Google — Project Management Professional Certificate"
+      description: "Completed six courses in the Google Project Management Certificate program, covering Agile, Scrum, project planning, execution, and stakeholder management."
       image: images/team/proj-pmp.png
