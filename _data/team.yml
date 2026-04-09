@@ -86,23 +86,26 @@
     - url: "mailto:noel@orchestrated.bio"
       label: Email
       icon: email
-  showcase_label: "Featured Projects"
+  showcase_label: "Career Highlights"
   showcase:
-    - title: "Toby Management"
-      description: "Full-stack H.R. platform with user authentication, session management, file uploads, and database CRUD. Built with Node.js, Express, and MySQL."
-      image: images/team/proj-toby-management.png
-    - title: "Rum Runner"
-      description: "Pirate-themed browser game built with Phaser.js. Full-stack app with a MySQL-backed leaderboard system."
-      image: images/team/proj-rum-runner.png
-    - title: "Memory Game"
-      description: "Pokemon-themed memory card game built in React. Cards re-shuffle after each click — goal is to select each one only once."
-      image: images/team/proj-memory-game.png
-    - title: "ChefTastic"
-      description: "Recipe discovery app connecting to the Recipe Puppy and Google Maps APIs. Enter ingredients, get recipe suggestions and nearby grocery stores."
-      image: images/team/proj-cheftastic.png
-    - title: "Giphy Sports"
-      description: "Sports GIF browser powered by the Giphy API. Click buttons to browse categories, click images to activate the animations."
-      image: images/team/proj-giphy-sports.png
-    - title: "Errand List"
-      description: "React to-do app with localStorage persistence, nested sub-items, and linked parent/child completion tracking."
-      image: images/team/proj-errand-list.png
+    - title: ""
+      description: ""
+      image: images/team/proj-cutter.png
+    - title: ""
+      description: ""
+      image: images/team/proj-comm.png
+    - title: ""
+      description: ""
+      image: images/team/proj-ucla.png
+    - title: ""
+      description: ""
+      image: images/team/proj-mpt.png
+    - title: ""
+      description: ""
+      image: images/team/proj-award.png
+    - title: ""
+      description: ""
+      image: images/team/proj-mls.png
+    - title: ""
+      description: ""
+      image: images/team/proj-pmp.png
