@@ -22,6 +22,41 @@
     - url: "mailto:alex@orchestrated.bio"
       label: Email
       icon: email
+  showcase_label: "Selected Publications"
+  showcase:
+    - title: "Clinical Safety and Preliminary Efficacy of Regulatory T Cells for ALS"
+      journal: "NEJM Evidence 2025;4(5)"
+      contribution: "Developed the response-slope analysis framework to quantify patient response and identified cytokine-level biomarker correlations. Phase I trial of allogeneic Treg therapy slowed ALS functional decline from −1.66 to −0.41 pts/month."
+      image: images/team/pub-nejm-evidence.png
+      url: "https://doi.org/10.1056/EVIDoa2400249"
+    - title: "A comprehensive long-read isoform analysis platform and sequencing resource for breast cancer"
+      journal: "Science Advances 2022;8(3)"
+      contribution: "Co-first author. PhD work at The Jackson Laboratory building a long-read RNA-seq platform that identified thousands of unannotated isoforms — 35 associated with patient survival, 21 absent from GENCODE."
+      image: images/team/pub-science-advances.png
+      url: "https://doi.org/10.1126/sciadv.abg6711"
+    - title: "Biomarker-driven prospective clinical trial in renal cell carcinoma"
+      journal: "J Clin Oncol 2023;41(suppl):4525"
+      contribution: "Built the sample processing pipeline and patient data management system at VUMC for the OPTIC RCC trial — a first-of-its-kind prospective study using RNA-seq biomarkers to assign kidney cancer patients to treatment arms."
+      image: images/team/pub-jco-biomarker.png
+      url: "https://doi.org/10.1200/JCO.2023.41.16_suppl.4525"
+    - title: "Efficacy of cabozantinib and nivolumab in ccRCC: Results from OPTIC RCC"
+      journal: "Ann Oncol 2025;36(S2):S1298"
+      contribution: "Managed clinical sample processing and data infrastructure for this phase II trial. Cabo/nivo achieved 76% objective response rate in RNA-seq-defined cluster 1/2 metastatic ccRCC patients, with zero progressive disease."
+      image: images/team/pub-annals-oncology-optic.png
+    - title: "HIF-2-mediated gene expression is highest in metastatic and cluster-exclude ccRCC tumors"
+      journal: "Cancer Res 2026;86(5_S2):A034"
+      contribution: "Supported sample processing and data management. Found that HIF-2 pathway expression is enriched in metastatic tumors and the biologically distinct cluster-exclude subtype of clear cell RCC."
+      image: images/team/pub-cancer-res-hif2.png
+      url: "https://doi.org/10.1158/1538-7445.KIDNEY26-A034"
+    - title: "Phase Ib/II trial of ipilimumab, nivolumab, and ciforadenant in first-line advanced RCC"
+      journal: "Ann Oncol 2025;36(S2):S1301"
+      contribution: "Supported sample processing and clinical data infrastructure. Kidney Cancer Research Consortium study testing adenosine A2a receptor antagonist triplet — 46% ORR with acceptable safety profile."
+      image: images/team/pub-annals-oncology-rcc.png
+    - title: "Circulating KIM-1 is a minimally invasive biomarker correlated with treatment response to nivolumab in mRCC"
+      journal: "The Oncologist 2023;28(S1):S2"
+      contribution: "Supported biomarker data analysis. Early KIM-1 decrease at 3 weeks post-nivolumab predicted progression-free survival (HR 0.22), validating a minimally invasive liquid biomarker for kidney cancer immunotherapy."
+      image: images/team/pub-oncologist-kim1.png
+      url: "https://doi.org/10.1093/oncolo/oyad216.004"
 
 - name: "Noel Cruz"
   role: "Co-Founder & Chief Operating Officer"
@@ -47,3 +82,23 @@
     - url: "mailto:noel@orchestrated.bio"
       label: Email
       icon: email
+  showcase_label: "Featured Projects"
+  showcase:
+    - title: "Toby Management"
+      description: "Full-stack H.R. platform with user authentication, session management, file uploads, and database CRUD. Built with Node.js, Express, and MySQL."
+      image: images/team/proj-toby-management.png
+    - title: "Rum Runner"
+      description: "Pirate-themed browser game built with Phaser.js. Full-stack app with a MySQL-backed leaderboard system."
+      image: images/team/proj-rum-runner.png
+    - title: "Memory Game"
+      description: "Pokemon-themed memory card game built in React. Cards re-shuffle after each click — goal is to select each one only once."
+      image: images/team/proj-memory-game.png
+    - title: "ChefTastic"
+      description: "Recipe discovery app connecting to the Recipe Puppy and Google Maps APIs. Enter ingredients, get recipe suggestions and nearby grocery stores."
+      image: images/team/proj-cheftastic.png
+    - title: "Giphy Sports"
+      description: "Sports GIF browser powered by the Giphy API. Click buttons to browse categories, click images to activate the animations."
+      image: images/team/proj-giphy-sports.png
+    - title: "Errand List"
+      description: "React to-do app with localStorage persistence, nested sub-items, and linked parent/child completion tracking."
+      image: images/team/proj-errand-list.png
