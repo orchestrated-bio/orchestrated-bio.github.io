@@ -3,11 +3,11 @@ layout: default
 ---
 
 <div class="pt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-16 relative">
         <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
 
         <!-- Team header -->
-        <div class="relative max-w-3xl mx-auto text-center mb-16">
+        <div class="relative max-w-3xl mx-auto text-center mb-10 lg:mb-16">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-brand-500/20 bg-brand-500/5 text-brand-400 text-xs font-medium mb-6">
                 Our Team
             </div>
@@ -23,21 +23,21 @@ layout: default
         {{ content }}
 
         <!-- Team members -->
-        <div class="relative space-y-16">
+        <div class="relative space-y-10 lg:space-y-16">
             {% for member in site.data.team %}
-            <div class="grid lg:grid-cols-5 gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-start">
                 <!-- Profile card — 2 cols -->
                 <div class="lg:col-span-2">
-                    <div class="group relative p-8 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/20 transition-all">
+                    <div class="group relative p-6 lg:p-8 rounded-2xl bg-navy-900/50 border border-white/5 hover:border-brand-500/20 transition-all">
                         <div class="flex flex-col items-center text-center">
-                            <img src="{{ member.photo | relative_url }}" alt="{{ member.name }}" class="w-28 h-28 rounded-full object-cover mb-6 ring-2 ring-brand-500/10 group-hover:ring-brand-500/30 transition-all" loading="lazy">
+                            <img src="{{ member.photo | relative_url }}" alt="{{ member.name }}" class="w-24 h-24 lg:w-28 lg:h-28 rounded-full object-cover mb-4 lg:mb-6 ring-2 ring-brand-500/10 group-hover:ring-brand-500/30 transition-all" loading="lazy">
 
                             <h3 class="text-xl font-semibold text-white mb-1">{{ member.name }}</h3>
                             <p class="text-brand-400 text-sm font-medium mb-4">{{ member.role }}</p>
 
-                            <p class="text-gray-400 text-base leading-relaxed mb-6">{{ member.bio }}</p>
+                            <p class="text-gray-400 text-sm lg:text-base leading-relaxed mb-4 lg:mb-6">{{ member.bio }}</p>
 
-                            <div class="mb-6">
+                            <div class="mb-4 lg:mb-6">
                                 <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Expertise</p>
                                 <div class="flex flex-wrap justify-center gap-2">
                                     {% for skill in member.skills %}
@@ -69,15 +69,15 @@ layout: default
 
                 <!-- Showcase carousel — 3 cols -->
                 {% if member.showcase %}
-                <div class="lg:col-span-3">
+                <div class="lg:col-span-3 min-w-0">
                     <div class="mb-4">
                         <h4 class="text-sm font-medium text-gray-400 uppercase tracking-wider">{{ member.showcase_label }}</h4>
                     </div>
-                    <div class="team-carousel relative overflow-hidden rounded-2xl bg-navy-900/50 border border-white/5" data-carousel>
+                    <div class="team-carousel relative overflow-hidden rounded-2xl bg-navy-900/50 border border-white/5 w-full" data-carousel>
                         <!-- Slides -->
                         <div class="carousel-track flex transition-transform duration-500 ease-out">
                             {% for item in member.showcase %}
-                            <div class="carousel-slide flex-shrink-0 w-full p-6">
+                            <div class="carousel-slide flex-shrink-0 w-full p-4 lg:p-6 min-w-0">
                                 {% if item.url %}
                                 <a href="{{ item.url }}" target="_blank" rel="noopener" class="block group/slide">
                                 {% endif %}

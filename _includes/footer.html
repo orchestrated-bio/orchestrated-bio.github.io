@@ -1,11 +1,11 @@
 <footer class="border-t border-white/5 bg-navy-950">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- 3-column footer inspired by digital.gov -->
-        <div class="grid md:grid-cols-4 gap-10">
+        <div class="grid md:grid-cols-4 gap-6">
             <!-- Brand column -->
             <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <img src="{{ '/images/logo-icon-white.svg' | relative_url }}" alt="{{ site.title }}" class="h-9 w-auto">
+                <div class="flex items-center gap-3 mb-3">
+                    <img src="{{ '/images/logo-icon-white.svg' | relative_url }}" alt="{{ site.title }}" class="h-7 w-auto">
                     <span class="text-lg font-semibold text-white">
                         Orchestrated<span class="text-brand-400">.bio</span>
                     </span>
@@ -20,8 +20,8 @@
 
             <!-- Products -->
             <div>
-                <h4 class="text-sm font-semibold text-white mb-4">{{ nav.products.title }}</h4>
-                <ul class="space-y-2.5">
+                <h4 class="text-sm font-semibold text-white mb-3">{{ nav.products.title }}</h4>
+                <ul class="space-y-1.5">
                     {% for link in nav.products.links %}
                     <li>
                         <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
@@ -34,8 +34,8 @@
 
             <!-- Resources -->
             <div>
-                <h4 class="text-sm font-semibold text-white mb-4">{{ nav.resources.title }}</h4>
-                <ul class="space-y-2.5">
+                <h4 class="text-sm font-semibold text-white mb-3">{{ nav.resources.title }}</h4>
+                <ul class="space-y-1.5">
                     {% for link in nav.resources.links %}
                     <li>
                         {% if link.url == "BOOKING_URL" %}
@@ -53,8 +53,8 @@
 
             <!-- Company -->
             <div>
-                <h4 class="text-sm font-semibold text-white mb-4">{{ nav.company.title }}</h4>
-                <ul class="space-y-2.5">
+                <h4 class="text-sm font-semibold text-white mb-3">{{ nav.company.title }}</h4>
+                <ul class="space-y-1.5">
                     {% for link in nav.company.links %}
                     <li>
                         <a href="{% if link.url contains 'mailto:' %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <div class="border-t border-white/5 mt-12 pt-8">
+        <div class="border-t border-white/5 mt-6 pt-5">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
                 <p class="text-xs text-gray-600">&copy; 2025-{{ 'now' | date: '%Y' }} Orchestrated Biosciences&reg;. All rights reserved.</p>
                 <div class="flex gap-6">
