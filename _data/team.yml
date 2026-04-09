@@ -1,8 +1,10 @@
 - name: "Alex Nesta, PhD"
-  role: "Co-Founder & Chief Technology Officer"
+  role: "Founder & Chief Technology Officer"
   photo: images/alex-nesta.jpg
-  bio: >-
-    A decade in cancer genomics and RNA biology at UConn and The Jackson Laboratory — now building agentic AI that makes complex genomic analysis accessible to every researcher.
+  bio:
+    - A decade of experience in Cancer Genomics and RNA Biology at UConn and The Jackson Laboratory.
+    - Utilizing Bioinformatics and Data Science skills to build agentic AI solutions.
+    - Making complex Genomic Data Analysis accessible to every researcher.
   skills:
     - Agentic AI
     - Cancer Genomics
@@ -22,7 +24,7 @@
     - url: "mailto:alex@orchestrated.bio"
       label: Email
       icon: email
-  showcase_label: "Selected Publications"
+  showcase_label: "Noteworthy Publications"
   showcase:
     - title: "Clinical Safety and Preliminary Efficacy of Regulatory T Cells for ALS"
       journal: "NEJM Evidence 2025;4(5)"
@@ -61,8 +63,10 @@
 - name: "Noel Cruz"
   role: "Co-Founder & Chief Operating Officer"
   photo: images/noel-cruz.jpg
-  bio: >-
-    Decorated Coast Guard veteran and software engineer with stints at Activision, L3Harris, and Microsoft — bringing military discipline and a deep gov/defense network to agentic AI.
+  bio:
+    - U.S. Coast Guard Veteran and former Intelligence Officer.
+    - Software Engineer specialized in Cloud Application development, Machine Learning, and Agile Project Management.
+    - Combining Military and Technical Experience to solve complex problems with agentic AI.
   skills:
     - Project Management
     - Software Engineering
