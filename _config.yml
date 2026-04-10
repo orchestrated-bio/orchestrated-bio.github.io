@@ -12,7 +12,11 @@ tagline: "AI-Driven Precision Medicine & Agentic AI Solutions"
 email: support@orchestrated.bio
 github_username: orchestrated-bio
 logo: /images/logo-icon.png
-og_image: /images/og-image.png
+og_image: /images/og-image.png  # legacy key kept for any manual references
+
+# jekyll-seo-tag social config
+social:
+  image: /images/og-image.png
 
 # Booking link (single source of truth)
 booking_url: "https://calendar.app.google/BUsnTrvrYw8Y5b9p6"
@@ -38,8 +42,9 @@ plugins:
 feed:
   path: /blog/feed.xml
 
-# SEO defaults
+# SEO defaults — jekyll-seo-tag reads twitter.username; card type is inferred from image presence
 twitter:
+  username: orchestratedbio
   card: summary_large_image
 
 # Exclude from build
@@ -54,6 +59,10 @@ exclude:
 
 # Default front matter
 defaults:
+  - scope:
+      path: ""
+    values:
+      image: /images/og-image.png
   - scope:
       path: ""
       type: "posts"

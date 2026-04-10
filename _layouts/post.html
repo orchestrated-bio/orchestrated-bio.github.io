@@ -2,6 +2,38 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.description | default: page.subtitle | strip_html | escape }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "url": "{{ page.url | absolute_url }}"{% if page.image %},
+  "image": "{{ page.image | absolute_url }}"{% endif %},
+  "author": {
+    "@type": "Person",
+    "name": "{{ page.author | escape }}"{% if page.author == "Alex Nesta, PhD" %},
+    "url": "https://www.linkedin.com/in/alex-v-nesta-phd-847547a5/"{% endif %}{% if page.author == "Noel Cruz" %},
+    "url": "https://www.linkedin.com/in/noeljcruz/"{% endif %}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Orchestrated Biosciences",
+    "url": "{{ site.url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}/images/logo-icon.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+}
+</script>
+
 <article class="pt-20">
     <div class="max-w-3xl mx-auto px-4 py-16">
         <!-- Post header -->
