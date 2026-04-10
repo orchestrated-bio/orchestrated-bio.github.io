@@ -1,22 +1,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}</title>
-<meta name="description" content="{{ page.description | default: site.description | strip_html | truncatewords: 50 }}">
 <link rel="icon" type="image/svg+xml" href="{{ '/images/favicon.svg' | relative_url }}">
 <link rel="icon" type="image/png" sizes="192x192" href="{{ '/images/logo-icon-192.png' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/images/apple-touch-icon.png' | relative_url }}">
-
-<!-- Open Graph / Social -->
-<meta property="og:type" content="{{ page.og_type | default: 'website' }}">
-<meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta property="og:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}">
-<meta property="og:description" content="{{ page.description | default: site.description | strip_html | truncatewords: 50 }}">
-<meta property="og:image" content="{{ page.image | default: site.og_image | absolute_url }}">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} | {{ site.tagline }}{% endif %}">
-<meta name="twitter:description" content="{{ page.description | default: site.description | strip_html | truncatewords: 50 }}">
-<meta name="twitter:image" content="{{ page.image | default: site.og_image | absolute_url }}">
-<link rel="canonical" href="{{ page.url | absolute_url }}">
 
 {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
 

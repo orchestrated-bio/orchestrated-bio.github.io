@@ -2,6 +2,28 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ page.product_name | escape }}",
+  "description": "{{ page.hero_description | strip_html | escape }}",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web",
+  "url": "{{ page.url | absolute_url }}",
+  "creator": {
+    "@type": "Organization",
+    "name": "Orchestrated Biosciences",
+    "url": "{{ site.url }}"
+  },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/OnlineOnly"
+  }{% if page.demo_image %},
+  "screenshot": "{{ page.demo_image | absolute_url }}"{% endif %}
+}
+</script>
+
 <!-- Hero -->
 <section class="relative pt-20 pb-16 overflow-hidden">
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
