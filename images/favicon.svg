@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 311.98 311.98" role="img" aria-labelledby="t">
   <title id="t">Orchestrated Biosciences</title>
 <g transform="translate(-127.01,-189.61)">
-  <g class="ink-dark" fill="#FFFFFF" stroke="#0d1020" stroke-width="50" stroke-linejoin="round" transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)">
+  <g class="ink-dark" fill="#FFFFFF" stroke="#111826" stroke-width="50" stroke-linejoin="round" transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)">
 <path d="M2300 4251 c-342 -153 -553 -338 -682 -596 -205 -410 -137 -870 205
 -1380 124 -184 205 -288 516 -660 469 -562 620 -825 638 -1111 9 -137 -30
 -280 -108 -398 l-21 -31 26 30 c37 43 123 219 142 290 24 95 28 236 10 350
@@ -14,7 +14,7 @@ l-78 -5 1 107 c0 60 6 132 12 162 l12 55 468 100 c392 84 466 103 461 116 -3
 -83 -399 -81 -8 9 61 129 118 205 67 89 174 187 281 258 l69 46 -46 49 c-69
 74 -106 162 -113 269 l-6 87 -105 -47z"/>
 </g>
-  <g class="ink-green" fill="#279F81" stroke="#0d1020" stroke-width="30" stroke-linejoin="round" transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)">
+  <g class="ink-green" fill="#279F81" stroke="#111826" stroke-width="30" stroke-linejoin="round" transform="translate(0.000000,640.000000) scale(0.100000,-0.100000)">
     <path d="M2789 6390 c-68 -20 -119 -88 -119 -156 0 -53 37 -114 85 -141 126
 -72 276 48 234 187 -15 49 -63 95 -116 109 -43 12 -48 12 -84 1z"/>
 <path d="M2402 5819 c-121 -60 -148 -223 -54 -322 66 -69 190 -77 272 -16 12
