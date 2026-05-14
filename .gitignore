@@ -28,3 +28,7 @@ node_modules/
 
 # Ruby
 .bundle/
+
+# Favicon legibility research (May 2026)
+favicon-test/
+.favicon-backup-2026-05-14/
