@@ -191,22 +191,46 @@ body {
 }
 .brand-word span { color: var(--accent); }
 
-.masthead-meta {
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.site-nav a {
   font-family: var(--mono);
   font-size: var(--step--1);
   color: var(--ink-3);
-  letter-spacing: 0.02em;
+  text-decoration: none;
+  padding-block: 0.2rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 
-/* The disclosure never hides — it shortens. Honesty is not a desktop feature. */
-.masthead-meta .meta-long { display: inline; }
-.masthead-meta .meta-short { display: none; }
+.nav-cta {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  padding: 0.42rem 0.75rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
 
-@media (max-width: 46rem) {
-  .masthead .shell { flex-wrap: wrap; gap: 0.3rem 1rem; }
-  .masthead-meta { font-size: 0.72rem; }
-  .masthead-meta .meta-long { display: none; }
-  .masthead-meta .meta-short { display: inline; }
+@media (max-width: 40rem) {
+  .masthead .shell { flex-wrap: wrap; gap: 0.5rem 1rem; padding-block: 0.7rem; }
+  .site-nav { gap: 1rem; margin-left: 0; order: 3; width: 100%; }
+  .nav-cta { padding: 0.35rem 0.6rem; }
 }
 
 /* --- Hero: the register itself ----------------------------------------- */
@@ -329,10 +353,35 @@ body {
 }
 .link-quiet:hover { color: var(--accent); border-color: var(--accent); }
 
+/* --- Sub-page head ------------------------------------------------------
+   Sub-pages open with a stated job, not a hero. Shorter than .opening so
+   the page's actual content starts above the fold. */
+
+.page-head {
+  padding-block: clamp(2.25rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.page-head h1 {
+  font-size: var(--step-3);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+.page-head .opening-lede { margin-bottom: 0; }
+
 /* --- Section scaffolding ----------------------------------------------- */
 
 .band { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 .band + .band { border-top: 1px solid var(--rule); }
+
+/* First band after a page head: no rule, tighter top — the head already
+   separated it, and a rule here reads as a false section break. */
+.band-first { padding-top: 0; }
 
 .band-head { margin-bottom: 2rem; max-width: var(--measure); }
 
