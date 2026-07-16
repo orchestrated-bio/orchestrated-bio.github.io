@@ -542,11 +542,22 @@ body {
 
 /* --- Axis sweep list ---------------------------------------------------- */
 
+/* Eight items: pin to 4 / 2 / 1 so the grid always divides evenly and the
+   bottom edge stays straight. auto-fit picks whatever fits the viewport,
+   which at ~1280px gave 5+3 — three empty cells and a ragged edge. */
 .axes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
   border: 1px solid var(--rule);
+}
+
+@media (max-width: 60rem) {
+  .axes { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 30rem) {
+  .axes { grid-template-columns: 1fr; }
 }
 
 .axis {
@@ -620,12 +631,17 @@ body {
 
 /* --- Product grid ------------------------------------------------------- */
 
+/* Four items: 2x2, never 3+1. */
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   border: 1px solid var(--rule);
   border-bottom: 0;
   border-right: 0;
+}
+
+@media (max-width: 40rem) {
+  .products { grid-template-columns: 1fr; }
 }
 
 .product {
