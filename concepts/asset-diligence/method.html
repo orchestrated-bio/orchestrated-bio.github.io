@@ -42,15 +42,14 @@
           <div class="band-head">
             <p class="band-label">The answer key</p>
             <h2>What the trial team published.</h2>
-            <p>Giudice et al. ran prexasertib in BRCA-wild-type, platinum-resistant high-grade serous ovarian carcinoma, then took pre-treatment biopsies from 15 patients and asked what separated the six who benefited from the nine who didn't.</p>
           </div>
           <div class="prose">
-            <p>Their finding: <strong>replication genes were elevated in the patients who did not benefit</strong> — POLE (p=0.011), GINS3 (p=0.02), POLA1 (p=0.037). Their model is that this high-fidelity machinery lets a tumor absorb the replication stress a CHK1 inhibitor creates, by servicing the backup origins that fire when the brake comes off. They followed it with cell-line work: POLA1 silencing plus prexasertib inhibited growth 83% and 75% where either alone did far less, and it still worked in prexasertib-resistant lines.</p>
-            <p>They also state plainly that no gene survives multiple-testing correction at n=15 (FDR q = 0.87–1), and call the biomarker work hypothesis-generating. The finding rests on the pathway-level signal and the functional validation, not on fifteen biopsies.</p>
+            <p>Giudice et al. ran prexasertib in platinum-resistant, BRCA-wild-type HGSOC, then biopsied 15 patients and asked what separated the six who benefited from the nine who didn't. <strong>Replication genes were elevated in the patients who did not benefit</strong>: POLE (p=0.011), GINS3 (p=0.02), POLA1 (p=0.037). Their model is that this machinery lets a tumor absorb the replication stress a CHK1 inhibitor creates, by servicing the backup origins that fire once the brake is off. POLA1 silencing plus prexasertib then inhibited growth 83% and 75% in cell lines, and still worked in prexasertib-resistant ones.</p>
+            <p>They also state that no gene survives multiple-testing correction at n=15 (FDR q = 0.87–1), and call the biomarker work hypothesis-generating.</p>
             <p class="prose-cite"><a class="src" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">Giudice et al., Nat Commun 2024 · PMID 38555285</a> <a class="src" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a></p>
           </div>
 
-          <p class="callout"><strong>What this run is not.</strong> It is not a discovery, and it is not blind. The GEO record for this dataset names POLA1, POLE, GINS3 and MCM7 in its summary and links the paper, so the answer was available to anyone who downloaded it. What a known-answer run can show is whether the pipeline gets there, and by what route. What it cannot show is whether the pipeline would have gotten there first.</p>
+          <p class="callout"><strong>What this run is not.</strong> Not a discovery, and not blind: the GEO record names POLA1, POLE, GINS3 and MCM7 in its summary and links the paper, so the answer came with the data. A known-answer run shows whether the pipeline gets there and by what route. It cannot show whether the pipeline would have gotten there first.</p>
         </div>
       </section>
 
@@ -119,12 +118,11 @@
         <div class="shell">
           <div class="band-head">
             <p class="band-label">Why run it against a solved case</p>
-            <h2>A method is only worth what it does on a question you can check.</h2>
+            <h2>On your target, you couldn't grade us.</h2>
           </div>
           <div class="prose">
-            <p>On your target, nobody has published the answer. That is the reason to run this, and it is also why you cannot grade the output. You would be taking our word for it.</p>
-            <p>So we ran it where the answer exists. Giudice's team had the trial, the biopsies, the cell lines, and years. We had the protocol PDF and the public record. <strong>The pipeline reached their genes, by a route you can inspect, and missed MCM7 that they report.</strong> A method that only shows you its hits is not showing you the method.</p>
-            <p>The next version of this run is the one worth more: strip the answer out of the inputs, run it blind, and see whether POLA1 still surfaces. Until we publish that, this page shows the route and not the foresight.</p>
+            <p>Nobody has published the answer for your asset. That is the reason to run this, and it is why you would be taking our word for the output. So we ran it where the answer exists. Giudice's team had the trial, the biopsies, the cell lines, and years; we had the protocol PDF and the public record.</p>
+            <p><strong>The pipeline reached their genes, by a route you can inspect, and missed MCM7 that they report.</strong> The run worth more is the next one: strip the answer out of the inputs, run it blind, see whether POLA1 still surfaces. Until we publish that, this page shows the route and not the foresight.</p>
           </div>
 
           <div class="method">
