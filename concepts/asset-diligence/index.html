@@ -29,13 +29,69 @@
     <main id="main">
       <section class="opening">
         <div class="shell">
-          <p class="tagline">Bioinformatics diligence for disease-focused teams</p>
-          <h1>You know the disease. Do the computational work before the&nbsp;bench.</h1>
-          <p class="opening-lede">You've spent years on the mechanism and you think you have a therapeutic. Some of what you're about to test at the bench is already answered in the public record. Our analysis engine works every dataset that touches your target: mechanism, PK/PD, toxicology, SAR, trial precedent. Then a bioinformatician who didn't fall in love with your hypothesis reads the output and signs it.</p>
-          <p class="opening-lede opening-lede-tight">You get a report that says what the evidence already supports, what it doesn't, and <strong>which assumption your bench should test first</strong>.</p>
-          <div class="opening-actions">
-            <a class="btn" href="./method.html">See a worked report <span aria-hidden="true">→</span></a>
-            <a class="link-quiet" href="./portfolio.html">The tools it runs on →</a>
+          <div class="opening-copy">
+            <p class="tagline">Bioinformatics diligence for disease-focused teams</p>
+            <h1>The computational work, before the&nbsp;bench.</h1>
+            <p class="opening-lede">Our engine reads the public evidence on your target: trial protocols, registries, chemical and target databases, public omics. A bioinformatician reviews the output, decides what holds, and signs the report.</p>
+            <p class="opening-lede opening-lede-tight">You get what the evidence supports, what it doesn't, and <strong>which assumption to test first</strong>.</p>
+            <div class="opening-actions">
+              <a class="btn" href="./method.html">See a worked report <span aria-hidden="true">→</span></a>
+              <a class="link-quiet" href="./portfolio.html">Our tools →</a>
+            </div>
+          </div>
+
+          <div class="demo" role="img" aria-label="A DrugAdopt diligence run on prexasertib: the engine extracts the drug identifier from a trial protocol PDF, grounds it to a knowledge-graph node, traverses to the CHK1 dependency neighborhood, and surfaces POLA1 as a candidate resistance axis with four approved POLA1-active drugs.">
+            <div class="demo-bar">
+              <span class="demo-chip demo-chip-run demo-part" style="--d:0.1s">RUN</span>
+              <span class="demo-chip demo-chip-asset demo-part" style="--d:0.2s">prexasertib · HGSOC</span>
+              <span class="demo-chip demo-chip-src demo-part" style="--d:0.3s">NCT02203513</span>
+              <span class="demo-elapsed demo-part" style="--d:0.4s">public sources only</span>
+            </div>
+
+            <div class="demo-body">
+              <div class="demo-steps">
+                <div class="demo-step demo-part" style="--d:0.6s">
+                  <span class="demo-tick">✓</span>
+                  <span><b>Parse protocol</b><span>118-page PDF · Docling</span></span>
+                </div>
+                <div class="demo-step demo-part" style="--d:0.9s">
+                  <span class="demo-tick">✓</span>
+                  <span><b>Extract entities</b><span>GLiNER · drugs, genes, endpoints</span></span>
+                </div>
+                <div class="demo-step demo-part" style="--d:1.2s">
+                  <span class="demo-tick">✓</span>
+                  <span><b>Ground to graph</b><span>OptimusKG · 190,531 nodes</span></span>
+                </div>
+                <div class="demo-step demo-part" style="--d:1.5s">
+                  <span class="demo-tick">✓</span>
+                  <span><b>Traverse neighborhood</b><span>224 gene interactions</span></span>
+                </div>
+                <div class="demo-step demo-step-live demo-part" style="--d:1.8s">
+                  <span class="demo-tick">→</span>
+                  <span><b>Test against expression</b><span>15 biopsies · 6 vs 9</span></span>
+                </div>
+              </div>
+
+              <div class="demo-panel">
+                <p class="demo-label demo-part" style="--d:2.0s">Grounding chain</p>
+                <div class="demo-chain">
+                  <div class="demo-node demo-part" style="--d:2.2s">extracted span <b>"LY2606368"</b></div>
+                  <div class="demo-arrow demo-part" style="--d:2.4s">↓ synonym match</div>
+                  <div class="demo-node demo-part" style="--d:2.5s">DRG : <b>CHEMBL3544911</b> (prexasertib)</div>
+                  <div class="demo-arrow demo-part" style="--d:2.7s">↓ stated mechanism target</div>
+                  <div class="demo-node demo-node-hit demo-part" style="--d:2.8s">GEN : <b>ENSG00000149554</b> (CHEK1)</div>
+                </div>
+                <div class="demo-find demo-part" style="--d:3.2s">
+                  <b>Candidate axis:</b> replication effectors including <span class="demo-gene">POLA1</span> elevated in non-responders. Rest of the CHK1 neighborhood flat.
+                  <div class="demo-drugs">
+                    <span class="demo-drug demo-part" style="--d:3.5s">nelarabine</span>
+                    <span class="demo-drug demo-part" style="--d:3.6s">fludarabine</span>
+                    <span class="demo-drug demo-part" style="--d:3.7s">cladribine</span>
+                    <span class="demo-drug demo-part" style="--d:3.8s">clofarabine</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -44,8 +100,8 @@
         <div class="shell">
           <div class="band-head">
             <p class="band-label">What gets worked</p>
-            <h2>Eight places an asset tends to break.</h2>
-            <p>Not all eight matter for every drug. We scope to the ones that can change your decision, and we say up front which ones public data can't settle at all.</p>
+            <h2>Eight axes of risk.</h2>
+            <p>Most assets carry risk on three or four of these. We scope to those, and the report states which questions public data cannot answer.</p>
           </div>
           <div class="axes">
             <div class="axis">
