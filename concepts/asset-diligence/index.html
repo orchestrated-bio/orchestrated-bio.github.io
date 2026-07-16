@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Systematic bioinformatics diligence on a drug asset. We work the public record across mechanism, PK/PD, toxicology, SAR, and trial precedent, and state the boundary of every finding." />
+    <title>Orchestrated Biosciences — Bioinformatics diligence on a drug asset</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
+          <img src="../../images/logo-icon.png" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <p class="masthead-meta">
+          <span class="meta-long">Two people · New Haven, CT · No client engagements to date</span>
+          <span class="meta-short">No client engagements to date</span>
+        </p>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <!-- ============================ OPENING ============================ -->
+      <section class="opening">
+        <div class="shell">
+          <p class="tagline">Bioinformatics diligence on a drug asset</p>
+          <h1>You have an asset. The public record already knows things about it.</h1>
+          <p class="opening-lede">Give us a drug, a target, or a disease. We work the public bioinformatics record across every axis that can kill it — mechanism, PK/PD, toxicology, SAR, trial precedent — and hand back what holds, what doesn't, and <strong>the exact boundary of each finding</strong>.</p>
+          <div class="opening-actions">
+            <a class="btn" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us an asset <span aria-hidden="true">→</span></a>
+            <a class="link-quiet" href="#worked">See a worked example ↓</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ REGISTER =========================== -->
+      <section class="band" id="worked">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">Worked example · public data only</p>
+            <h2>Nilotinib for Parkinson disease, worked on evidence available before 14 Dec 2020.</h2>
+            <p>Nobody paid for this. We built it to show the method on an asset where the answer was later published, so you can check our work against a known result. Every row states what the sources support and — the column that matters — what they don't.</p>
+          </div>
+
+          <article class="register">
+            <header class="register-head">
+              <span class="register-asset">nilotinib · Parkinson disease</span>
+              <span class="register-scope">evidence frozen 13 Dec 2020 · public sources only</span>
+            </header>
+
+            <div class="register-rows">
+
+              <div class="row">
+                <div class="row-axis">CNS exposure<span>PK/PD</span></div>
+                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />Small studies reported CSF detection, but no matched plasma/CSF pharmacokinetics and no bridge from measured exposure to the concentration c-Abl modulation would require. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/30906562/" target="_blank" rel="noreferrer">PMID 30906562</a></p>
+                <p class="row-bound"><b>Boundary</b>Detection in CSF is not exposure at the target site. This says the question was open, not that the drug fails to reach brain.</p>
+              </div>
+
+              <div class="row">
+                <div class="row-axis">Target engagement<span>Mechanism</span></div>
+                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />No qualified human marker showed the intended CNS pathway moved. Systemic dosing was treated as though it established brain-level engagement. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/31841599/" target="_blank" rel="noreferrer">PMID 31841599</a></p>
+                <p class="row-bound"><b>Boundary</b>Absence of a qualified marker is absence of evidence. The pathway may well move; it had not been shown to.</p>
+              </div>
+
+              <div class="row">
+                <div class="row-axis">Mechanism support<span>Preclinical</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Partial</span><br />Animal and cell work supported c-Abl involvement in α-synuclein handling. The biology was plausible. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/24412932/" target="_blank" rel="noreferrer">PMID 24412932</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/23666528/" target="_blank" rel="noreferrer">PMID 23666528</a></p>
+                <p class="row-bound"><b>Boundary</b>Plausible biology in model systems. Carries no information about human target engagement at a tolerable dose.</p>
+              </div>
+
+              <div class="row">
+                <div class="row-axis">Safety ceiling<span>Tox · SAR</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Decision-limiting</span><br />The approved label carries QTc, hepatic, vascular, hematologic, and pancreatic liabilities that plausibly cap dose below a CNS-active exposure. <a class="src" href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2007/022068lbl.pdf" target="_blank" rel="noreferrer">FDA NDA 22-068</a></p>
+                <p class="row-bound"><b>Boundary</b>A feasibility constraint from the oncology label. Patient-level risk in a PD population needs clinical review we would refer out.</p>
+              </div>
+
+              <div class="row">
+                <div class="row-axis">Potency anchor<span>SAR</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Rough screen</span><br />Reported CSF concentrations sit far below the ABL1 biochemical activity anchor — roughly 44× on the numbers available. <a class="src" href="https://www.ebi.ac.uk/chembl/explore/target/CHEMBL1862" target="_blank" rel="noreferrer">ChEMBL 1862</a></p>
+                <p class="row-bound"><b>Boundary</b>A back-of-envelope screen using total, not unbound, concentrations. Not occupancy, not proof of mechanism failure. Treat as a flag to investigate.</p>
+              </div>
+
+            </div>
+
+            <footer class="register-foot">Reading: at the freeze date, the case for another efficacy trial in the same oral formulation rested on an exposure question nobody had answered. That is a gap in the record — not a prediction that the trial would fail.</footer>
+          </article>
+
+          <p class="callout"><strong>The answer key, kept separate.</strong> The randomized NILO-PD trial reported afterward found no efficacy signal and very low CNS exposure (<a class="src" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7737147/" target="_blank" rel="noreferrer">PMID 33315105</a>). We excluded it from the rows above so you can judge the reasoning on its own. It does not prove the method predicts trial outcomes — one retrospective case can't. It shows the exposure gap was legible in the public record beforehand.</p>
+        </div>
+      </section>
+
+      <!-- ============================ THE SWEEP ========================== -->
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">What gets worked</p>
+            <h2>Every axis where a public dataset can change your confidence.</h2>
+            <p>Not every axis matters for every asset. We scope to the ones that can move your decision and say plainly which ones the public record can't settle.</p>
+          </div>
+          <div class="axes">
+            <div class="axis">
+              <h3>Mechanism</h3>
+              <p>Target biology, pathway support, expression and dependency evidence across public cohorts.</p>
+            </div>
+            <div class="axis">
+              <h3>PK / PD</h3>
+              <p>Exposure, distribution, and whether reported concentrations reach a defensible pharmacology anchor.</p>
+            </div>
+            <div class="axis">
+              <h3>Toxicology</h3>
+              <p>Label liabilities, class effects, and whether safety caps the dose below a useful exposure.</p>
+            </div>
+            <div class="axis">
+              <h3>SAR</h3>
+              <p>Potency anchors, analogue precedent, and structure-driven arguments for reformulation.</p>
+            </div>
+            <div class="axis">
+              <h3>Trial precedent</h3>
+              <p>What has been tried in the indication, how it was designed, how it read out, and why.</p>
+            </div>
+            <div class="axis">
+              <h3>Biomarker &amp; stratification</h3>
+              <p>Whether a responder population is definable, and whether the proposed marker survives scrutiny.</p>
+            </div>
+            <div class="axis">
+              <h3>RNA-level depth</h3>
+              <p>When the asset's risk is an RNA question — isoform, splicing, modification — we look below the gene-level view where standard analysis stops.</p>
+            </div>
+            <div class="axis">
+              <h3>Signal integrity</h3>
+              <p>Whether a reported effect survives batch, composition, and cross-cohort checks, or dissolves under them.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ HONEST ============================= -->
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">What we are</p>
+            <h2>Two people, no clients yet, and a method you can check.</h2>
+          </div>
+          <div class="prose">
+            <p>Orchestrated Biosciences is Alex Nesta and Noel Cruz. We have not run a paid engagement, and neither of us has shipped an approved drug. Any firm telling you otherwise about themselves is worth verifying.</p>
+            <p>So we are not asking you to trust a verdict. We are showing the work and the boundary on every claim, from sources you can open yourself. That is the whole pitch: <strong>if the reasoning above holds up when you check it, that is evidence. If it doesn't, you have lost ten minutes.</strong></p>
+            <p>What we would do for you is the same thing, scoped to your asset, before you commit the next tranche of money or the next experiment.</p>
+          </div>
+          <p class="callout"><strong>Where we stop.</strong> We sign our own analysis: whether a computational or RNA-level signal is real, mechanism and biomarker reasoning, reproducibility of a claim. Disease-specific clinical calls, endpoint and regulatory strategy go to a named reviewer. CMC, tox operations, DMPK, formulation, legal and IP we refer out and do not opine on.</p>
+        </div>
+      </section>
+
+      <!-- ============================ RECORD ============================= -->
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">The people</p>
+            <h2>Named, with a published record you can read.</h2>
+          </div>
+          <div class="people">
+            <div class="person">
+              <h3>Alex Nesta, PhD</h3>
+              <p class="person-role">Biomedical science</p>
+              <p>Long-read splicing and RNA modifications. Cancer genomics, biomarker analysis, and clinical research infrastructure.</p>
+            </div>
+            <div class="person">
+              <h3>Noel Cruz</h3>
+              <p class="person-role">Product &amp; engineering</p>
+              <p>Software engineering, cloud systems, machine learning, and mission-critical program delivery.</p>
+            </div>
+          </div>
+          <div class="pubs">
+            <a class="pub" href="https://doi.org/10.1056/EVIDoa2400249" target="_blank" rel="noreferrer">
+              <span class="pub-venue">NEJM Evidence · 2025</span>
+              <span class="pub-title">Clinical safety and preliminary efficacy of regulatory T cells for ALS</span>
+              <span class="pub-mark" aria-hidden="true">↗</span>
+            </a>
+            <a class="pub" href="https://doi.org/10.1126/sciadv.abg6711" target="_blank" rel="noreferrer">
+              <span class="pub-venue">Science Advances · 2022</span>
+              <span class="pub-title">Long-read isoform analysis and sequencing resource for breast cancer</span>
+              <span class="pub-mark" aria-hidden="true">↗</span>
+            </a>
+            <a class="pub" href="https://doi.org/10.1200/JCO.2023.41.16_suppl.4525" target="_blank" rel="noreferrer">
+              <span class="pub-venue">J Clinical Oncology · 2023</span>
+              <span class="pub-title">Biomarker-driven prospective trial infrastructure in renal cell carcinoma</span>
+              <span class="pub-mark" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ RAIL =============================== -->
+      <section class="band">
+        <div class="shell">
+          <p class="band-label">Affiliations</p>
+          <p class="rail-note">Institutions our work and training connect to. Not clients, not customers, and not endorsements of this company.</p>
+          <div class="rail">
+            <a href="https://praesage.bio/" target="_blank" rel="noreferrer">Praesage Bio</a>
+            <a href="https://nodesnedges.com/" target="_blank" rel="noreferrer">Nodes + Edges</a>
+            <a href="https://www.utep.edu/" target="_blank" rel="noreferrer">UTEP</a>
+            <a href="https://www.mountsinai.org/" target="_blank" rel="noreferrer">Mount Sinai</a>
+            <a href="https://health.uconn.edu/" target="_blank" rel="noreferrer">UConn Health</a>
+            <a href="https://www.jax.org/" target="_blank" rel="noreferrer">JAX</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================ CLOSE ============================== -->
+      <section class="close">
+        <div class="shell">
+          <p class="band-label">Send us something hard</p>
+          <h2>Name an asset. We'll tell you what the public record can and cannot settle about it.</h2>
+          <p>If the answer is "less than you'd hoped," that is the finding, and you will get it in plain language with the sources attached.</p>
+          <a class="btn btn-invert" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us an asset <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences</p>
+        <p>Worked examples use public data and are not client engagements.</p>
+      </div>
+    </footer>
+  </body>
+</html>
