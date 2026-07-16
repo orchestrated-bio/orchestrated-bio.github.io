@@ -572,6 +572,110 @@ body {
   color: var(--ink-3);
 }
 
+/* --- Flagship ----------------------------------------------------------
+   The one product that gets a full block. Everything else is a grid cell —
+   the hierarchy is the argument. */
+
+.flagship {
+  border: 1px solid var(--rule-firm);
+  border-left: 2px solid var(--accent);
+  background: var(--paper-raised);
+  padding: 1.5rem 1.6rem;
+  max-width: 46rem;
+}
+
+.flagship-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.flagship-head h2 {
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.flagship-sub {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  margin: 0;
+  flex-basis: 100%;
+}
+
+.flagship p {
+  margin: 0 0 1rem;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.flagship-links { margin-bottom: 0 !important; }
+
+/* --- Product grid ------------------------------------------------------- */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  border: 1px solid var(--rule);
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.product {
+  padding: 1.2rem 1.25rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-raised);
+}
+
+.product-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.product-head h3 {
+  font-size: var(--step-1);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.product-head .tm {
+  font-size: 0.6em;
+  vertical-align: super;
+  color: var(--ink-4);
+  font-weight: 400;
+}
+
+.product-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-4);
+  white-space: nowrap;
+}
+
+.product p {
+  margin: 0 0 0.8rem;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
+.product p:last-child { margin-bottom: 0; }
+
 /* --- Prose -------------------------------------------------------------- */
 
 .prose { max-width: var(--measure); }
