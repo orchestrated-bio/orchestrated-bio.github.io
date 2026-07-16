@@ -894,6 +894,24 @@ body {
 .prose strong { color: var(--ink); font-weight: 600; }
 .prose a { color: var(--accent); }
 
+/* Gene hits inside a finding — the three the run landed on. */
+.hit {
+  color: var(--partial);
+  font-family: var(--mono);
+  font-size: 0.94em;
+  font-weight: 600;
+  border-bottom: 1px dashed color-mix(in srgb, var(--partial) 45%, transparent);
+}
+
+.prose-cite {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+}
+
 .callout {
   border-left: 2px solid var(--rule-firm);
   padding: 0.1rem 0 0.1rem 1.1rem;

@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A worked bioinformatics diligence report on nilotinib for Parkinson disease, using only evidence available before the randomized trial reported. Every finding states the limit of its own source." />
-    <title>Method — a worked report on nilotinib | Orchestrated Biosciences</title>
+    <meta name="description" content="A worked DrugAdopt run on prexasertib in platinum-resistant HGSOC. The trial team found their resistance signal with a full translational program; our pipeline reached the same three genes from public data alone." />
+    <title>Method — a worked run on prexasertib | Orchestrated Biosciences</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -29,72 +29,109 @@
     <main id="main">
       <section class="page-head">
         <div class="shell">
-          <p class="tagline">Worked example · public data only</p>
-          <h1>Nilotinib for Parkinson disease, worked on evidence available before 14 Dec&nbsp;2020.</h1>
-          <p class="opening-lede">Nobody paid for this. We picked an asset whose answer was published later, so you can grade the method against a known result. Each row gives the finding, the source, and the limit of what that source establishes. <strong>The third column is the one worth reading.</strong></p>
+          <p class="tagline">Worked example · prexasertib · NCT02203513</p>
+          <h1>Graded against a known answer.</h1>
+          <p class="opening-lede">A CHK1 inhibitor worked in about a third of patients. The trial team spent a full translational program finding out why, published the answer, and deposited the data.</p>
+          <p class="opening-lede opening-lede-tight">We ran the pipeline against the same public record to see where it landed. <strong>Their result is the answer key, so you can grade every step of ours against it.</strong></p>
         </div>
       </section>
 
+      <!-- ===================== THE ANSWER KEY ===================== -->
       <section class="band band-first">
         <div class="shell">
+          <div class="band-head">
+            <p class="band-label">The answer key</p>
+            <h2>What the trial team published.</h2>
+            <p>Giudice et al. ran prexasertib in BRCA-wild-type, platinum-resistant high-grade serous ovarian carcinoma, then took pre-treatment biopsies from 15 patients and asked what separated the six who benefited from the nine who didn't.</p>
+          </div>
+          <div class="prose">
+            <p>Their finding: <strong>replication genes were elevated in the patients who did not benefit</strong> — POLE (p=0.011), GINS3 (p=0.02), POLA1 (p=0.037). Their model is that this high-fidelity machinery lets a tumor absorb the replication stress a CHK1 inhibitor creates, by servicing the backup origins that fire when the brake comes off. They followed it with cell-line work: POLA1 silencing plus prexasertib inhibited growth 83% and 75% where either alone did far less, and it still worked in prexasertib-resistant lines.</p>
+            <p>They also state plainly that no gene survives multiple-testing correction at n=15 (FDR q = 0.87–1), and call the biomarker work hypothesis-generating. The finding rests on the pathway-level signal and the functional validation, not on fifteen biopsies.</p>
+            <p class="prose-cite"><a class="src" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">Giudice et al., Nat Commun 2024 · PMID 38555285</a> <a class="src" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a></p>
+          </div>
+
+          <p class="callout"><strong>What this run is not.</strong> It is not a discovery, and it is not blind. The GEO record for this dataset names POLA1, POLE, GINS3 and MCM7 in its summary and links the paper, so the answer was available to anyone who downloaded it. What a known-answer run can show is whether the pipeline gets there, and by what route. What it cannot show is whether the pipeline would have gotten there first.</p>
+        </div>
+      </section>
+
+      <!-- ===================== THE RUN ===================== -->
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">The run</p>
+            <h2>Where our pipeline landed.</h2>
+            <p>Starting from the trial identifier and public sources only: the protocol PDF, a public knowledge graph, and the deposited expression data.</p>
+          </div>
+
           <article class="register">
             <header class="register-head">
-              <span class="register-asset">nilotinib · Parkinson disease</span>
-              <span class="register-scope">evidence frozen 13 Dec 2020 · public sources only</span>
+              <span class="register-asset">prexasertib · platinum-resistant HGSOC</span>
+              <span class="register-scope">public sources only · NCT02203513</span>
             </header>
 
             <div class="register-rows">
 
               <div class="row">
-                <div class="row-axis">CNS exposure<span>PK/PD</span></div>
-                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />Small studies reported CSF detection, but no matched plasma/CSF pharmacokinetics and no bridge from measured exposure to the concentration c-Abl modulation would require. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/30906562/" target="_blank" rel="noreferrer">PMID 30906562</a></p>
-                <p class="row-bound"><b>Boundary</b>Detection in CSF is not exposure at the target site. This says the question was open, not that the drug fails to reach brain.</p>
+                <div class="row-axis">Protocol text<span>Extraction</span></div>
+                <p class="row-finding"><span class="tag tag-resolved">Machine step</span><br />The registry entry carries little mechanism. The 100+ page protocol carries the pharmacology, the preclinical rationale, and the endpoint logic. Parsed with Docling, entities pulled with GLiNER.</p>
+                <p class="row-bound"><b>Boundary</b>Extraction finds strings. It does not know that "LY2606368" and "prexasertib" are the same molecule. That is the next step, and skipping it is where most pipelines break.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Target engagement<span>Mechanism</span></div>
-                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />No qualified human marker showed the intended CNS pathway moved. Systemic dosing was treated as though it established brain-level engagement. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/31841599/" target="_blank" rel="noreferrer">PMID 31841599</a></p>
-                <p class="row-bound"><b>Boundary</b>Absence of a qualified marker is absence of evidence. The pathway may well move; it had not been shown to.</p>
+                <div class="row-axis">Grounding<span>Knowledge graph</span></div>
+                <p class="row-finding"><span class="tag tag-resolved">Machine step</span><br />Span "LY2606368" → <b>CHEMBL3544911</b> (prexasertib) → stated target <b>ENSG00000149554</b> (CHEK1) → 224 curated gene interactions. <a class="src" href="https://zitniklab.hms.harvard.edu/" target="_blank" rel="noreferrer">OptimusKG</a></p>
+                <p class="row-bound"><b>Boundary</b>The graph narrows 20,000 genes to 224. It does not know which of them matter for this drug in this disease. It is built from structured resources rather than mined from papers, so the CHEK1–POLA1 link is replication-pathway membership, not an edge read out of the trial team's publication.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Mechanism support<span>Preclinical</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Partial</span><br />Animal and cell work supported c-Abl involvement in α-synuclein handling. The biology was plausible. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/24412932/" target="_blank" rel="noreferrer">PMID 24412932</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/23666528/" target="_blank" rel="noreferrer">PMID 23666528</a></p>
-                <p class="row-bound"><b>Boundary</b>Plausible biology in model systems. Carries no information about human target engagement at a tolerable dose.</p>
+                <div class="row-axis">Differential expression<span>Public omics</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Converges</span><br />Testing that neighborhood against responder vs non-responder biopsies: replication effectors <span class="hit">POLA1</span>, <span class="hit">POLE</span>, <span class="hit">GINS3</span> up in non-responders. The rest of the CHK1 neighborhood flat — CHEK1, CHEK2, CDK1, CDK2, CDC25A/B/C, TP53, ATR, RAD51, RB1.</p>
+                <p class="row-bound"><b>Boundary</b>Same three genes the authors report. Nominal p-values, uncorrected, n=15. This reproduces their result; it does not independently confirm it. The data is theirs.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Safety ceiling<span>Tox · SAR</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Decision-limiting</span><br />The approved label carries QTc, hepatic, vascular, hematologic, and pancreatic liabilities that plausibly cap dose below a CNS-active exposure. <a class="src" href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2007/022068lbl.pdf" target="_blank" rel="noreferrer">FDA NDA 22-068</a></p>
-                <p class="row-bound"><b>Boundary</b>A feasibility constraint from the oncology label. Patient-level risk in a PD population needs clinical review we would refer out.</p>
+                <div class="row-axis">Confounders<span>Signal integrity</span></div>
+                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />The replication genes do not move alone. Ribosome, base excision repair, homologous recombination and spliceosome rise with them, while the responder side is weighted toward stromal and immune programs. Coordinated movement like that is also what a more proliferative tumor, or a purer one, looks like.</p>
+                <p class="row-bound"><b>Boundary</b>Neither the published analysis nor ours separates POLA1 from proliferation rate or stromal content. Regressing out a proliferation score and deconvolving purity would test it. The authors' cell-line work argues the axis is real; the expression data alone cannot.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Potency anchor<span>SAR</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Rough screen</span><br />Reported CSF concentrations sit far below the ABL1 biochemical activity anchor — roughly 44× on the numbers available. <a class="src" href="https://www.ebi.ac.uk/chembl/explore/target/CHEMBL1862" target="_blank" rel="noreferrer">ChEMBL 1862</a></p>
-                <p class="row-bound"><b>Boundary</b>A back-of-envelope screen using total, not unbound, concentrations. Not occupancy, not proof of mechanism failure. Treat as a flag to investigate.</p>
+                <div class="row-axis">Escape routes<span>Inverse query</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Weaker than theirs</span><br />Querying the graph backwards from POLA1 returns approved nucleoside analogs: nelarabine, fludarabine, cladribine, clofarabine. The authors went to ST1926, a selective POLA1 inhibitor, and validated it.</p>
+                <p class="row-bound"><b>Boundary</b>Our list is looser than the one a specialist reached. These are promiscuous antimetabolites that hit ribonucleotide reductase and several polymerases; the POLA1 annotation is real for clofarabine and thin for nelarabine. A graph edge is a lead to check, not a pharmacology claim.</p>
+              </div>
+
+              <div class="row">
+                <div class="row-axis">Orthogonal check<span>DepMap</span></div>
+                <p class="row-finding"><span class="tag tag-partial">Cuts both ways</span><br />Across ~1,700 CRISPR-screened lines, TP53 status barely shifts CHEK1 dependency (Cohen's d = 0.17). The synthetic-lethality premise the cohort selection rested on is not a large selective-dependency signal in culture.</p>
+                <p class="row-bound"><b>Boundary</b>This does not refute synthetic lethality in vivo, where replication stress differs from monolayer culture. It does say p53 status alone was never going to be a sufficient selection biomarker.</p>
               </div>
 
             </div>
 
-            <footer class="register-foot">Reading: at the freeze date, the case for another efficacy trial in the same oral formulation rested on an exposure question nobody had answered. That is a gap in the record. It is not a prediction that the trial would fail.</footer>
+            <footer class="register-foot">Reading: the pipeline reached the trial team's own three genes from the public record. It did not discover them, and the confound the authors' cell-line work addresses is one we have not addressed computationally.</footer>
           </article>
-
-          <p class="callout"><strong>The answer key, kept separate.</strong> The randomized NILO-PD trial reported afterward found no efficacy signal and very low CNS exposure (<a class="src" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7737147/" target="_blank" rel="noreferrer">PMID 33315105</a>). We kept it out of the rows above so the reasoning stands on its own. One retrospective case cannot prove a method predicts trial outcomes, and we are not claiming it does. What it shows is that the exposure gap was already legible in the public record.</p>
         </div>
       </section>
 
+      <!-- ===================== WHY IT MATTERS ===================== -->
       <section class="band">
         <div class="shell">
           <div class="band-head">
-            <p class="band-label">How the report gets built</p>
-            <h2>The engine assembles. A person signs.</h2>
+            <p class="band-label">Why run it against a solved case</p>
+            <h2>A method is only worth what it does on a question you can check.</h2>
           </div>
+          <div class="prose">
+            <p>On your target, nobody has published the answer. That is the reason to run this, and it is also why you cannot grade the output. You would be taking our word for it.</p>
+            <p>So we ran it where the answer exists. Giudice's team had the trial, the biopsies, the cell lines, and years. We had the protocol PDF and the public record. <strong>The pipeline reached their genes, by a route you can inspect, and missed MCM7 that they report.</strong> A method that only shows you its hits is not showing you the method.</p>
+            <p>The next version of this run is the one worth more: strip the answer out of the inputs, run it blind, and see whether POLA1 still surfaces. Until we publish that, this page shows the route and not the foresight.</p>
+          </div>
+
           <div class="method">
             <p class="method-step">Engine</p>
-            <p>Retrieval agents work the literature, trial registries, chemical and target databases, and public omics in parallel, pulling out claims and cross-checking them against each other. This is the half that scales. It reads far more than two people can and flags every place the sources disagree.</p>
+            <p>Retrieval agents work the literature, trial registries, chemical and target databases, and public omics in parallel, pulling out claims and cross-checking them. This is the half that scales.</p>
             <p class="method-step">Human</p>
-            <p>Then a bioinformatician goes through the output and decides what survives. <strong>Every boundary in the table above is a human call</strong>, because knowing that a CSF detection isn't target-site exposure is judgment, not retrieval. The engine assembles the case. A person signs it, and the signature is the part you're paying for.</p>
+            <p>A bioinformatician reviews the output and decides what holds. Every boundary in the table above is a human call: knowing that a flat neighborhood is informative, and that a coordinated replication signature might be proliferation, is judgment rather than retrieval.</p>
           </div>
         </div>
       </section>
@@ -102,8 +139,8 @@
       <section class="close">
         <div class="shell">
           <p class="band-label">Do the cheap work first</p>
-          <h2>The same thing, scoped to your program.</h2>
-          <p>Nilotinib took days of compute and reading. The trial that answered the same question took years. Send us your target and find out what the record already settles before you commit the bench to it.</p>
+          <h2>The same run, on your target.</h2>
+          <p>This one took days against a trial that took years. Send us your target and find out what the public record settles before you commit the bench to it.</p>
           <a class="btn btn-invert" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target <span aria-hidden="true">↗</span></a>
         </div>
       </section>
