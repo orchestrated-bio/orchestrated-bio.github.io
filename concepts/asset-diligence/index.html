@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Bioinformatics diligence for small disease-focused drug development teams. Do the computational work before the bench: our analysis engine works the public evidence on your target, and a bioinformatician reads the output and signs it." />
-    <title>Orchestrated Biosciences — Bioinformatics diligence for disease-focused teams</title>
+    <meta name="description" content="DrugAdopt produces IND-readiness decision packets from public data. Eight modules mapped to 21 CFR 312.23 and ICH M3(R2), gated by a script that fails closed." />
+    <title>Orchestrated Biosciences — IND-readiness diligence from the public record</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -17,10 +17,9 @@
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
         <nav class="site-nav" aria-label="Primary">
-          <a href="./" aria-current="page">Home</a>
-          <a href="./method.html">Method</a>
-          <a href="./portfolio.html">Portfolio</a>
-          <a href="./team.html">Team</a>
+          <a href="./" aria-current="page">DrugAdopt</a>
+          <a href="./case.html">Case</a>
+          <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target</a>
         </nav>
       </div>
@@ -35,8 +34,8 @@
             <p class="opening-lede">DrugAdopt works your asset across the eight modules an IND has to answer, then refuses to call the report finished until every identifier resolves, every claim matches its source, and every artifact exists.</p>
             <p class="opening-lede opening-lede-tight">You get a decision packet, a gap map, and <strong>a verification report you can re-run yourself</strong>.</p>
             <div class="opening-actions">
-              <a class="btn" href="./method.html">See a verified case <span aria-hidden="true">→</span></a>
-              <a class="link-quiet" href="./portfolio.html">Our tools →</a>
+              <a class="btn" href="./case.html">See a verified case <span aria-hidden="true">→</span></a>
+              <a class="link-quiet" href="./company.html">Our other tools →</a>
             </div>
           </div>
 
@@ -91,11 +90,45 @@
         </div>
       </section>
 
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">The gate</p>
+            <h2>Verification is a script, not an assurance.</h2>
+            <p>A report is not product-grade because the prose reads well. It is product-grade when <code>verify_product_case.sh</code> passes, and it fails closed.</p>
+          </div>
+          <div class="prose">
+            <p>All eight modules must exist, each with its own search log. Every identifier must resolve, every artifact must be on disk, and semantic verification must find no place where a module says something its source does not. The rendered report must survive an offline audit for stale claims and broken links.</p>
+            <p>The result is bound to a manifest hash and a git commit, so the version you read is the version that passed.</p>
+          </div>
+
+          <div class="ladder">
+            <div class="rung">
+              <b>Candidate</b>
+              <p>Generated, not yet gated. Not a deliverable.</p>
+            </div>
+            <div class="rung rung-on">
+              <b>Product-grade</b>
+              <p>Manifest, citations, semantic checks, artifacts, render audit. Seven cases.</p>
+            </div>
+            <div class="rung rung-on">
+              <b>Ready for expert review</b>
+              <p>Plus the artifacts a reviewer needs to attest to a bounded scope. Three cases.</p>
+            </div>
+            <div class="rung">
+              <b>Expert-signed</b>
+              <p>A named human signs for a stated scope. <b class="rung-count">None yet.</b></p>
+            </div>
+          </div>
+          <p class="callout">The gate checks that the work is traceable, not that the judgment is right. Machine verification cannot tell you a conclusion is wise, which is what the reviewer attestation is for.</p>
+        </div>
+      </section>
+
       <section class="close">
         <div class="shell">
           <p class="band-label">Do the cheap work first</p>
           <h2>The computer is faster than the bench. Use it in that order.</h2>
-          <p>Every question the public record can already answer is a question you don't need an experiment for. Send us your target and we'll tell you which ones those are, and which ones only your bench can settle. The work you do run is then the work that had to be run.</p>
+          <p>Every question the public record can already answer is a question you don't need an experiment for. Send us a drug and an indication.</p>
           <a class="btn btn-invert" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target <span aria-hidden="true">↗</span></a>
         </div>
       </section>
