@@ -967,27 +967,31 @@ code {
    Each org says what the relationship actually was. A bare logo/name rail
    asks the reader to infer endorsement; naming the work does not. */
 
+/* Flow rather than a fixed column count: the number of partners will change,
+   and 5 divides evenly into no grid but 1 and 5. Rows instead of cells means
+   no orphan can appear regardless of how many tiles there are. */
 .orgs {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border: 1px solid var(--rule);
-  border-bottom: 0;
-  border-right: 0;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--rule);
 }
 
-@media (max-width: 52rem) { .orgs { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 34rem) { .orgs { grid-template-columns: 1fr; } }
-
 .org {
-  padding: 1.05rem 1.15rem;
-  border-right: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 13rem 9rem 1fr;
+  gap: 0 1.5rem;
+  align-items: baseline;
+  padding: 0.95rem 1.1rem;
   border-bottom: 1px solid var(--rule);
   background: var(--paper-raised);
   text-decoration: none;
-  display: block;
   transition: background 0.15s ease;
 }
 .org:hover { background: var(--accent-wash); }
+
+@media (max-width: 46rem) {
+  .org { grid-template-columns: 1fr; gap: 0.15rem; }
+}
 
 .org b {
   display: block;
@@ -995,7 +999,22 @@ code {
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.01em;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+}
+
+/* What kind of relationship this is. A customer and a grad school are not
+   the same claim, and a visitor should not have to guess which is which. */
+.org-kind {
+  font-size: 0.72rem;
+  font-weight: 590;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+}
+
+@media (max-width: 46rem) {
+  .org b { margin-bottom: 0.15rem; }
+  .org-kind { margin-bottom: 0.3rem; }
 }
 
 .org span {
