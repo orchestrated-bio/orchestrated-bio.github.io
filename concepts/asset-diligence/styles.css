@@ -414,7 +414,10 @@ body {
   text-wrap: balance;
 }
 
-.page-head .opening-lede { margin-bottom: 0; }
+/* Only the LAST lede loses its bottom margin. Zeroing every .opening-lede
+   here outranked the :has() rule above (0,2,0 beats 0,1,0) and collapsed the
+   gap between stacked ledes on sub-pages. */
+.page-head .opening-lede:last-of-type { margin-bottom: 0; }
 
 /* --- Section scaffolding ----------------------------------------------- */
 
@@ -734,52 +737,6 @@ body {
   text-wrap: pretty;
 }
 
-/* --- Flagship ----------------------------------------------------------
-   The one product that gets a full block. Everything else is a grid cell —
-   the hierarchy is the argument. */
-
-.flagship {
-  border: 1px solid var(--rule-firm);
-  border-left: 2px solid var(--accent);
-  background: var(--paper-raised);
-  padding: 1.5rem 1.6rem;
-  max-width: 46rem;
-}
-
-.flagship-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.6rem 0.9rem;
-  margin-bottom: 0.9rem;
-}
-
-.flagship-head h2 {
-  font-size: var(--step-2);
-  font-weight: 620;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  margin: 0;
-}
-
-.flagship-sub {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  color: var(--ink-3);
-  margin: 0;
-  flex-basis: 100%;
-}
-
-.flagship p {
-  margin: 0 0 1rem;
-  color: var(--ink-2);
-  font-size: var(--step--1);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-.flagship-links { margin-bottom: 0 !important; }
-
 /* --- Product grid ------------------------------------------------------- */
 
 /* Four items: 2x2, never 3+1. */
@@ -1005,34 +962,49 @@ code {
 .pub-mark { color: var(--ink-4); font-size: 0.85rem; }
 .pub:hover .pub-mark { color: var(--accent); }
 
-/* --- Network rail ------------------------------------------------------- */
 
-.rail-note {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  color: var(--ink-3);
-  margin: 0 0 1.1rem;
-  max-width: var(--measure);
-  line-height: 1.5;
+/* --- Affiliations ------------------------------------------------------
+   Each org says what the relationship actually was. A bare logo/name rail
+   asks the reader to infer endorsement; naming the work does not. */
+
+.orgs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--rule);
+  border-bottom: 0;
+  border-right: 0;
 }
 
-.rail {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 2.25rem;
-}
+@media (max-width: 52rem) { .orgs { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 34rem) { .orgs { grid-template-columns: 1fr; } }
 
-.rail a {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--ink-4);
+.org {
+  padding: 1.05rem 1.15rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-raised);
   text-decoration: none;
-  transition: color 0.15s ease;
+  display: block;
+  transition: background 0.15s ease;
 }
-.rail a:hover { color: var(--ink-2); }
+.org:hover { background: var(--accent-wash); }
+
+.org b {
+  display: block;
+  font-size: var(--step-0);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+
+.org span {
+  display: block;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
 
 /* --- Close -------------------------------------------------------------- */
 
