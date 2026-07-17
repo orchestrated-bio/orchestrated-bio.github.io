@@ -254,7 +254,7 @@ body {
   padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
 }
 
-/* Hero: copy left, running product right. The demo is the evidence the
+/* Hero: copy left, the deliverable right. The report is the evidence the
    copy's claims depend on, so it sits at equal weight, not below. */
 .opening .shell {
   display: grid;
@@ -623,243 +623,38 @@ body {
   color: var(--ink-3);
 }
 
-/* --- Product demo ------------------------------------------------------
-   A DrugAdopt run, staged. Everything sizes in em off one clamped root
-   font-size, so the whole panel scales from one declaration (the technique
-   the live site's hero-mockup uses). Each part stages in via its own --d.
+/* --- The deliverable ---------------------------------------------------
+   A screenshot of a real rendered report from docs/cases/. Not a mockup and
+   not animated: a verification report has no story in time, so staging it in
+   was motion applied to a still object. It's framed as paper on the page.
    ---------------------------------------------------------------------- */
 
-.demo {
+.shot {
+  margin: 0;
   position: relative;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
   border: 1px solid var(--rule-firm);
-  border-radius: 6px;
-  overflow: hidden;
-  background: #0e1620;
-  aspect-ratio: 16 / 11;
+  border-radius: 4px;
+  /* The report renders on white. Keep it white in both themes — it's paper,
+     and dimming it would misrepresent the artifact. */
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.10),
+    0 12px 32px -8px rgb(0 0 0 / 0.22);
+}
+
+.shot figcaption {
   font-family: var(--mono);
-  font-size: clamp(8px, 0.92vw, 13px);
-  color: #cfd8d4;
-  box-shadow: 0 12px 40px -12px rgb(0 0 0 / 0.4);
-}
-
-.demo-bar {
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 2.4em;
-  display: flex;
-  align-items: center;
-  gap: 0.7em;
-  padding-inline: 1em;
-  background: #111b26;
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
-  z-index: 2;
-}
-
-.demo-chip {
-  font-size: 0.68em;
-  letter-spacing: 0.06em;
-  padding: 0.2em 0.5em;
-  border-radius: 3px;
-  white-space: nowrap;
-}
-.demo-chip-run   { background: rgb(39 159 129 / 0.22); color: #6bdeb5; }
-.demo-chip-asset { background: rgb(85 116 194 / 0.18); color: #94a3bf; }
-.demo-chip-src   { background: rgb(255 255 255 / 0.06); color: #7e8882; }
-.demo-elapsed { margin-left: auto; font-size: 0.62em; color: #6b7480; }
-
-.demo-body {
-  position: absolute;
-  inset: 2.4em 0 0 0;
-  display: grid;
-  grid-template-columns: 15em 1fr;
-}
-
-.demo-steps {
-  border-right: 1px solid rgb(255 255 255 / 0.06);
-  padding: 1.1em 0.9em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 0.5em;
-  overflow: hidden;
-}
-
-.demo-step {
-  display: grid;
-  grid-template-columns: 1em 1fr;
-  gap: 0.6em;
-  align-items: start;
-  font-size: 0.72em;
-  line-height: 1.4;
-}
-
-/* The eight CFR-mapped modules, as a list the reader can count. */
-.demo-mods { display: flex; flex-direction: column; gap: 0.28em; }
-
-.demo-mod {
-  font-size: 0.7em;
-  color: #b6bcc4;
-  padding: 0.18em 0 0.18em 1.1em;
-  position: relative;
-  border-bottom: 1px solid rgb(255 255 255 / 0.04);
-}
-.demo-mod::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: #6bdeb5;
-  font-size: 0.85em;
-}
-
-.demo-modnote {
-  font-size: 0.6em;
-  color: #5d6661;
-  margin: 0.7em 0 0;
-  letter-spacing: 0.02em;
-}
-
-/* The gate output. Seven booleans, all of them checkable in the repo. */
-.demo-checks {
-  display: flex;
-  flex-direction: column;
-  gap: 0.22em;
-  margin-bottom: 0.9em;
-}
-
-.demo-check {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5em;
-  font-size: 0.66em;
-}
-.demo-check b { color: #8b958e; font-weight: 400; }
-.demo-check i {
-  font-style: normal;
-  color: #6bdeb5;
-  margin-left: auto;
-}
-
-.demo-kv {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5em;
-  font-size: 0.66em;
-  padding: 0.2em 0;
-}
-.demo-kv span { color: #5d6661; }
-.demo-kv b { color: #cfd8d4; font-weight: 400; margin-left: auto; }
-.demo-kv .demo-ok { color: #6bdeb5; font-weight: 600; }
-.demo-kv .demo-null { color: #e0b64e; }
-
-.demo-tick {
-  width: 1em;
-  height: 1em;
-  border-radius: 50%;
-  background: rgb(39 159 129 / 0.35);
-  color: #6bdeb5;
-  display: grid;
-  place-items: center;
-  font-size: 0.8em;
-  margin-top: 0.1em;
-}
-.demo-step-live .demo-tick {
-  background: rgb(85 116 194 / 0.3);
-  color: #94a3bf;
-}
-
-.demo-step b { color: #e8ece9; font-weight: 600; display: block; }
-.demo-step span { color: #7e8882; }
-
-.demo-panel {
-  padding: 1.1em 1em;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.demo-label {
-  font-size: 0.62em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #6b7480;
-  margin-bottom: 0.7em;
-}
-
-/* The grounding chain: string -> node -> target */
-.demo-chain { display: flex; flex-direction: column; gap: 0.4em; margin-bottom: 1.1em; }
-
-.demo-node {
-  border: 1px solid rgb(255 255 255 / 0.09);
-  border-radius: 3px;
-  padding: 0.45em 0.6em;
-  font-size: 0.68em;
-  background: rgb(255 255 255 / 0.02);
-  color: #b6bcc4;
-}
-.demo-node b { color: #e8ece9; }
-.demo-node-hit {
-  border-color: rgb(39 159 129 / 0.5);
-  background: rgb(39 159 129 / 0.1);
-}
-.demo-arrow { font-size: 0.6em; color: #5d6661; padding-left: 0.5em; }
-
-/* The finding */
-.demo-find {
-  border-top: 1px solid rgb(255 255 255 / 0.08);
-  padding-top: 0.85em;
-  font-size: 0.7em;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  margin-top: 0.85rem;
   line-height: 1.5;
-  color: #b6bcc4;
-}
-.demo-find b { color: #6bdeb5; }
-.demo-find .demo-gene {
-  color: #e0b64e;
-  border-bottom: 1px dashed rgb(224 182 78 / 0.5);
-}
-
-.demo-drugs { display: flex; flex-wrap: wrap; gap: 0.35em; margin-top: 0.6em; }
-.demo-drug {
-  font-size: 0.62em;
-  padding: 0.2em 0.45em;
-  border: 1px solid rgb(224 182 78 / 0.35);
-  border-radius: 3px;
-  color: #e0b64e;
-  background: rgb(224 182 78 / 0.08);
-}
-
-/* Staging */
-.demo-part {
-  opacity: 0;
-  transform: translateY(8px);
-  animation: demoIn 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
-  animation-delay: var(--d, 0s);
-}
-
-@keyframes demoIn { to { opacity: 1; transform: translateY(0); } }
-
-.demo-cursor {
-  display: inline-block;
-  width: 0.45em;
-  height: 1em;
-  background: #6bdeb5;
-  vertical-align: text-bottom;
-  animation: demoBlink 1.1s steps(2) infinite;
-  animation-delay: 3.4s;
-  opacity: 0;
-}
-@keyframes demoBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-
-@media (prefers-reduced-motion: reduce) {
-  .demo-part { opacity: 1; transform: none; animation: none; }
-  .demo-cursor { display: none; }
-}
-
-@media (max-width: 46rem) {
-  .demo-body { grid-template-columns: 1fr; }
-  .demo-steps { display: none; }
-  .demo { aspect-ratio: 4 / 5; }
+  text-wrap: pretty;
 }
 
 /* --- Flagship ----------------------------------------------------------
