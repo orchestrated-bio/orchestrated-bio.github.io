@@ -1,7 +1,13 @@
 /* ==========================================================================
    Orchestrated Biosciences — asset diligence concept
-   Design language: evidence register. Mono carries structure; sans carries
-   prose. Neutrals biased green-grey toward the logo accent. No display serif.
+
+   Type: one sans across the page. Weight, size and letter-spacing carry the
+   hierarchy — not a second typeface. Mono appears only where the content IS
+   data (source identifiers, gene symbols, the asset id, inline code), so it
+   reads as a signal rather than as decoration.
+
+   Ground: cool green-grey neutrals biased toward the logo accent. No display
+   serif. Both themes are token-level, so the viewer's toggle wins either way.
    ========================================================================== */
 
 :root {
@@ -34,8 +40,10 @@
   --resolved:        #155e4a;
   --resolved-wash:   #e2ece8;
 
-  --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, system-ui, sans-serif;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  /* -apple-system first so Apple platforms get SF Pro, whose optical sizing
+     is what makes the tight display tracking below hold together. */
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   --measure: 34rem;
   --shell: 68rem;
@@ -184,7 +192,7 @@ body {
 .brand img { width: 25px; height: 25px; display: block; }
 
 .brand-word {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -199,7 +207,7 @@ body {
 }
 
 .site-nav a {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   text-decoration: none;
@@ -214,7 +222,7 @@ body {
 }
 
 .nav-cta {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--paper);
@@ -268,9 +276,10 @@ body {
 }
 
 .tagline {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.055em;
+  font-weight: 590;
   text-transform: uppercase;
   color: var(--ink-3);
   margin: 0 0 1.4rem;
@@ -338,7 +347,7 @@ body {
 
 /* After .method p so the color lands — same specificity, later wins. */
 .method p.method-step {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-weight: 600;
   color: var(--accent);
   white-space: nowrap;
@@ -376,7 +385,7 @@ body {
 .btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
 
 .link-quiet {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-2);
   text-decoration: none;
@@ -419,9 +428,10 @@ body {
 .band-head { margin-bottom: 2rem; max-width: var(--measure); }
 
 .band-label {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.055em;
+  font-weight: 590;
   text-transform: uppercase;
   color: var(--ink-3);
   margin: 0 0 0.8rem;
@@ -470,7 +480,7 @@ body {
 }
 
 .register-scope {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
 }
@@ -492,7 +502,7 @@ body {
 }
 
 .row-axis {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink);
   font-weight: 600;
@@ -528,11 +538,12 @@ body {
 }
 
 .row-bound b {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-weight: 600;
   color: var(--ink-3);
   font-size: 0.9em;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.045em;
+  font-weight: 600;
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.2rem;
@@ -541,6 +552,72 @@ body {
 /* nowrap keeps short identifiers like "PMID 38555285" from breaking across
    lines, but a full citation is a sentence and must be allowed to wrap —
    it blew a 398px link through a 375px viewport. */
+/* --- Biomarker rows ----------------------------------------------------- */
+
+/* Biomarker names need more room than the 8.5rem axis column allows. */
+.row-bmk { grid-template-columns: 12rem 1fr 1fr; }
+@media (max-width: 46rem) { .row-bmk { grid-template-columns: 1fr; } }
+
+.row-bmk .row-axis { line-height: 1.35; }
+
+.bmk-id {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.78em;
+  font-weight: 400;
+  color: var(--ink-4);
+  letter-spacing: 0;
+  margin-bottom: 0.3rem;
+}
+
+.row-finding p { margin: 0 0 0.55rem; }
+.row-finding p:last-child { margin-bottom: 0; }
+
+.row-owner {
+  color: var(--ink-4) !important;
+  font-size: 0.92em;
+}
+
+/* Verdict chips. Semantic colors, deliberately not the accent. */
+.verdict {
+  font-size: 0.78em;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.verdict-go   { color: var(--resolved);   background: var(--resolved-wash); }
+.verdict-stop { color: var(--unresolved); background: var(--unresolved-wash); }
+.verdict-gap  { color: var(--partial);    background: var(--partial-wash); }
+
+/* --- Headshots ---------------------------------------------------------- */
+
+.person-photo {
+  display: block;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  margin-bottom: 0.9rem;
+  background: var(--paper-sunk);
+}
+
+.person-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 0.7rem 0 0 !important;
+}
+.person-links a {
+  font-size: var(--step--1);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.person-links a:hover { border-bottom-color: var(--accent); }
+
 .src {
   font-family: var(--mono);
   font-size: 0.92em;
@@ -556,10 +633,10 @@ body {
 .src:hover { border-bottom-color: var(--accent); }
 
 .tag {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.68rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
   padding: 0.2em 0.45em;
   border: 1px solid currentColor;
@@ -574,7 +651,7 @@ body {
   padding: 0.85rem 1.1rem;
   border-top: 1px solid var(--rule-firm);
   background: var(--paper-sunk);
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   line-height: 1.5;
@@ -608,7 +685,7 @@ body {
 }
 
 .axis h3 {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--ink);
@@ -649,7 +726,7 @@ body {
 }
 
 .shot figcaption {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   margin-top: 0.85rem;
@@ -686,7 +763,7 @@ body {
 }
 
 .flagship-sub {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   margin: 0;
@@ -750,7 +827,7 @@ body {
 }
 
 .product-tag {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   color: var(--ink-4);
@@ -815,7 +892,7 @@ code {
 
 .rung > b {
   display: block;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--ink-3);
@@ -881,7 +958,7 @@ code {
 }
 
 .person-role {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   margin: 0 0 0.6rem;
@@ -914,7 +991,7 @@ code {
 }
 
 .pub-venue {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
 }
@@ -931,7 +1008,7 @@ code {
 /* --- Network rail ------------------------------------------------------- */
 
 .rail-note {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
   margin: 0 0 1.1rem;
@@ -947,9 +1024,9 @@ code {
 }
 
 .rail a {
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--ink-4);
   text-decoration: none;
@@ -1011,7 +1088,7 @@ code {
 
 .foot p {
   margin: 0;
-  font-family: var(--mono);
+  font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-4);
 }
