@@ -964,67 +964,37 @@ code {
 
 
 /* --- Affiliations ------------------------------------------------------
-   Each org says what the relationship actually was. A bare logo/name rail
-   asks the reader to infer endorsement; naming the work does not. */
+   A quiet list of names. No descriptions, no relationship labels: the page
+   does not need to explain each one, and a name that has to justify itself
+   is doing less work than a name that doesn't.
+   ---------------------------------------------------------------------- */
 
-/* Flow rather than a fixed column count: the number of partners will change,
-   and 5 divides evenly into no grid but 1 and 5. Rows instead of cells means
-   no orphan can appear regardless of how many tiles there are. */
+.orgs-title {
+  font-size: var(--step-0) !important;
+  font-weight: 590 !important;
+  letter-spacing: 0 !important;
+  color: var(--ink-3) !important;
+  margin: 0 0 1rem !important;
+}
+
 .orgs {
   display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 0.6rem 2.25rem;
+  align-items: baseline;
 }
 
 .org {
-  display: grid;
-  /* The label column fits the longest kind ("Customer & partner") on one
-     line — wrapping it made those rows taller and broke the row rhythm. */
-  grid-template-columns: 12rem 11.5rem 1fr;
-  gap: 0 1.5rem;
-  align-items: baseline;
-  padding: 0.95rem 1.1rem;
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper-raised);
-  text-decoration: none;
-  transition: background 0.15s ease;
-}
-.org:hover { background: var(--accent-wash); }
-
-@media (max-width: 46rem) {
-  .org { grid-template-columns: 1fr; gap: 0.15rem; }
-}
-
-.org b {
-  display: block;
   font-size: var(--step-0);
-  font-weight: 600;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.org:hover {
   color: var(--ink);
-  letter-spacing: -0.01em;
-  margin-bottom: 0.2rem;
-}
-
-/* What kind of relationship this is. A customer and a grad school are not
-   the same claim, and a visitor should not have to guess which is which. */
-.org-kind {
-  font-size: 0.72rem;
-  font-weight: 590;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-  color: var(--accent) !important;
-}
-
-@media (max-width: 46rem) {
-  .org b { margin-bottom: 0.15rem; }
-  .org-kind { margin-bottom: 0.3rem; }
-}
-
-.org span {
-  display: block;
-  font-size: var(--step--1);
-  line-height: 1.5;
-  color: var(--ink-3);
-  text-wrap: pretty;
+  border-bottom-color: var(--rule-firm);
 }
 
 /* --- Close -------------------------------------------------------------- */
