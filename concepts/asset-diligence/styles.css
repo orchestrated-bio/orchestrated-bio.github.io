@@ -791,6 +791,23 @@ body {
   white-space: nowrap;
 }
 
+/* Product demos. All four captures are 16:10, so a fixed aspect-ratio holds
+   every card steady while the GIFs decode — no layout shift. The set mixes
+   dark UIs (Insight, Spatial, BioVenture) with a light one (Mouse Selector),
+   so the placeholder is a neutral token rather than a hardcoded dark. */
+.product-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--paper-sunk);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  margin-bottom: 0.85rem;
+}
+
 .product p {
   margin: 0 0 0.8rem;
   font-size: var(--step--1);
