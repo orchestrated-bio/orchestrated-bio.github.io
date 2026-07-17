@@ -978,7 +978,9 @@ code {
 
 .org {
   display: grid;
-  grid-template-columns: 13rem 9rem 1fr;
+  /* The label column fits the longest kind ("Customer & partner") on one
+     line — wrapping it made those rows taller and broke the row rhythm. */
+  grid-template-columns: 12rem 11.5rem 1fr;
   gap: 0 1.5rem;
   align-items: baseline;
   padding: 0.95rem 1.1rem;
