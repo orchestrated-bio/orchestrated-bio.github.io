@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A worked DrugAdopt run on prexasertib in platinum-resistant HGSOC. The trial team found their resistance signal with a full translational program; our pipeline reached the same three genes from public data alone." />
-    <title>Method — a worked run on prexasertib | Orchestrated Biosciences</title>
+    <meta name="description" content="A verified DrugAdopt case: gefitinib in EGFR-mutant NSCLC. Eight modules, six decision rows with source-backed claims, seven deterministic checks, and a verification report you can re-run." />
+    <title>Method — a verified case | Orchestrated Biosciences</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -29,116 +29,120 @@
     <main id="main">
       <section class="page-head">
         <div class="shell">
-          <p class="tagline">Worked example · prexasertib · NCT02203513</p>
-          <h1>Graded against a known answer.</h1>
-          <p class="opening-lede">A CHK1 inhibitor worked in about a third of patients. The trial team spent a full translational program finding out why, published the answer, and deposited the data.</p>
-          <p class="opening-lede opening-lede-tight">We ran the pipeline against the same public record to see where it landed. <strong>Their result is the answer key, so you can grade every step of ours against it.</strong></p>
+          <p class="tagline">Verified case · gefitinib · EGFR-mutant NSCLC</p>
+          <h1>A report that refuses to call itself finished.</h1>
+          <p class="opening-lede">Most diligence arrives as prose. Prose cannot tell you whether an identifier resolves, whether a cited paper says what the sentence claims, or whether a figure exists. <strong>Ours does not pass until a script says all of that is true.</strong></p>
         </div>
       </section>
 
-      <!-- ===================== THE ANSWER KEY ===================== -->
+      <!-- ===================== THE DECISION ===================== -->
       <section class="band band-first">
         <div class="shell">
           <div class="band-head">
-            <p class="band-label">The answer key</p>
-            <h2>What the trial team published.</h2>
-          </div>
-          <div class="prose">
-            <p>Giudice et al. ran prexasertib in platinum-resistant, BRCA-wild-type HGSOC, then biopsied 15 patients and asked what separated the six who benefited from the nine who didn't. <strong>Replication genes were elevated in the patients who did not benefit</strong>: POLE (p=0.011), GINS3 (p=0.02), POLA1 (p=0.037). Their model is that this machinery lets a tumor absorb the replication stress a CHK1 inhibitor creates, by servicing the backup origins that fire once the brake is off. POLA1 silencing plus prexasertib then inhibited growth 83% and 75% in cell lines, and still worked in prexasertib-resistant ones.</p>
-            <p>They also state that no gene survives multiple-testing correction at n=15 (FDR q = 0.87–1), and call the biomarker work hypothesis-generating.</p>
-            <p class="prose-cite"><a class="src" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">Giudice et al., Nat Commun 2024 · PMID 38555285</a> <a class="src" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a></p>
-          </div>
-
-          <p class="callout"><strong>What this run is not.</strong> Not a discovery, and not blind: the GEO record names POLA1, POLE, GINS3 and MCM7 in its summary and links the paper, so the answer came with the data. A known-answer run shows whether the pipeline gets there and by what route. It cannot show whether the pipeline would have gotten there first.</p>
-        </div>
-      </section>
-
-      <!-- ===================== THE RUN ===================== -->
-      <section class="band">
-        <div class="shell">
-          <div class="band-head">
-            <p class="band-label">The run</p>
-            <h2>Where our pipeline landed.</h2>
-            <p>Starting from the trial identifier and public sources only: the protocol PDF, a public knowledge graph, and the deposited expression data.</p>
+            <p class="band-label">The output</p>
+            <h2>Six rows, each tied to what it can and cannot support.</h2>
+            <p>Gefitinib failed in unselected NSCLC and worked in EGFR-mutant disease. We ran it as a reference case: an asset whose answer is known, so the report can be graded.</p>
           </div>
 
           <article class="register">
             <header class="register-head">
-              <span class="register-asset">prexasertib · platinum-resistant HGSOC</span>
-              <span class="register-scope">public sources only · NCT02203513</span>
+              <span class="register-asset">gefitinib · EGFR-mutant NSCLC</span>
+              <span class="register-scope">decision packet · 2026-06-17</span>
             </header>
 
             <div class="register-rows">
-
               <div class="row">
-                <div class="row-axis">Protocol text<span>Extraction</span></div>
-                <p class="row-finding"><span class="tag tag-resolved">Machine step</span><br />The registry entry carries little mechanism. The 100+ page protocol carries the pharmacology, the preclinical rationale, and the endpoint logic. Parsed with Docling, entities pulled with GLiNER.</p>
-                <p class="row-bound"><b>Boundary</b>Extraction finds strings. It does not know that "LY2606368" and "prexasertib" are the same molecule. That is the next step, and skipping it is where most pipelines break.</p>
+                <div class="row-axis">Pharmacology<span>high confidence</span></div>
+                <p class="row-finding">EGFR-mutant pharmacology is source-backed and does not block the reference decision. <a class="src" href="https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL939" target="_blank" rel="noreferrer">CHEMBL939</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/18378519/" target="_blank" rel="noreferrer">PMID 18378519</a></p>
+                <p class="row-bound"><b>Decision impact</b>Supports reference-case Go for biomarker-selected disease only.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Grounding<span>Knowledge graph</span></div>
-                <p class="row-finding"><span class="tag tag-resolved">Machine step</span><br />Span "LY2606368" → <b>CHEMBL3544911</b> (prexasertib) → stated target <b>ENSG00000149554</b> (CHEK1) → 224 curated gene interactions. <a class="src" href="https://zitniklab.hms.harvard.edu/" target="_blank" rel="noreferrer">OptimusKG</a></p>
-                <p class="row-bound"><b>Boundary</b>The graph narrows 20,000 genes to 224. It does not know which of them matter for this drug in this disease. It is built from structured resources rather than mined from papers, so the CHEK1–POLA1 link is replication-pathway membership, not an edge read out of the trial team's publication.</p>
+                <div class="row-axis">ADME<span>high confidence</span></div>
+                <p class="row-finding">Public ADME supports oral dosing but not a new exposure-response dose optimization claim. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/14578364/" target="_blank" rel="noreferrer">PMID 14578364</a> <a class="src" href="https://pubchem.ncbi.nlm.nih.gov/compound/123631" target="_blank" rel="noreferrer">CID 123631</a></p>
+                <p class="row-bound"><b>Decision impact</b>Conditional Go. Public data can sanity-check 250 mg daily but cannot replace sponsor PK/PD.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Differential expression<span>Public omics</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Converges</span><br />Testing that neighborhood against responder vs non-responder biopsies: replication effectors <span class="hit">POLA1</span>, <span class="hit">POLE</span>, <span class="hit">GINS3</span> up in non-responders. The rest of the CHK1 neighborhood flat — CHEK1, CHEK2, CDK1, CDK2, CDC25A/B/C, TP53, ATR, RAD51, RB1.</p>
-                <p class="row-bound"><b>Boundary</b>Same three genes the authors report. Nominal p-values, uncorrected, n=15. This reproduces their result; it does not independently confirm it. The data is theirs.</p>
+                <div class="row-axis">Toxicology<span>high confidence</span></div>
+                <p class="row-finding">Safety is monitorable for adult oncology but remains label-conditioned. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/15570342/" target="_blank" rel="noreferrer">PMID 15570342</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/16112005/" target="_blank" rel="noreferrer">PMID 16112005</a></p>
+                <p class="row-bound"><b>Decision impact</b>Conditional Go with ILD, hepatic, GI, ocular, and reproductive monitoring.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Confounders<span>Signal integrity</span></div>
-                <p class="row-finding"><span class="tag tag-unresolved">Unresolved</span><br />The replication genes do not move alone. Ribosome, base excision repair, homologous recombination and spliceosome rise with them, while the responder side is weighted toward stromal and immune programs. Coordinated movement like that is also what a more proliferative tumor, or a purer one, looks like.</p>
-                <p class="row-bound"><b>Boundary</b>Neither the published analysis nor ours separates POLA1 from proliferation rate or stromal content. Regressing out a proliferation score and deconvolving purity would test it. The authors' cell-line work argues the axis is real; the expression data alone cannot.</p>
+                <div class="row-axis">CMC<span>high confidence</span></div>
+                <p class="row-finding">CMC public data supports identity and marketed-product framing, not GMP transfer readiness. <a class="src" href="https://www.accessdata.fda.gov/drugsatfda_docs/nda/2003/21-399_Iressa.cfm" target="_blank" rel="noreferrer">FDA NDA 21-399</a></p>
+                <p class="row-bound"><b>Decision impact</b>Conditional Go. A data-room CMC package remains required before manufacturing spend.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Escape routes<span>Inverse query</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Weaker than theirs</span><br />Querying the graph backwards from POLA1 returns approved nucleoside analogs: nelarabine, fludarabine, cladribine, clofarabine. The authors went to ST1926, a selective POLA1 inhibitor, and validated it.</p>
-                <p class="row-bound"><b>Boundary</b>Our list is looser than the one a specialist reached. These are promiscuous antimetabolites that hit ribonucleotide reductase and several polymerases; the POLA1 annotation is real for clofarabine and thin for nelarabine. A graph edge is a lead to check, not a pharmacology claim.</p>
+                <div class="row-axis">Clinical<span>high confidence</span></div>
+                <p class="row-finding">Clinical history shows biomarker selection was the decision-changing historical lesson. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/19692680/" target="_blank" rel="noreferrer">PMID 19692680</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/28540278/" target="_blank" rel="noreferrer">PMID 28540278</a></p>
+                <p class="row-bound"><b>Decision impact</b>Go for retrospective validation. Stop for unselected-population or first-line competitive restart.</p>
               </div>
 
               <div class="row">
-                <div class="row-axis">Orthogonal check<span>DepMap</span></div>
-                <p class="row-finding"><span class="tag tag-partial">Cuts both ways</span><br />Across ~1,700 CRISPR-screened lines, TP53 status barely shifts CHEK1 dependency (Cohen's d = 0.17). The synthetic-lethality premise the cohort selection rested on is not a large selective-dependency signal in culture.</p>
-                <p class="row-bound"><b>Boundary</b>This does not refute synthetic lethality in vivo, where replication stress differs from monolayer culture. It does say p53 status alone was never going to be a sufficient selection biomarker.</p>
+                <div class="row-axis">Gaps<span>medium confidence</span></div>
+                <p class="row-finding">Remaining gaps are data-room and business-model gates, not missing public literature searches.</p>
+                <p class="row-bound"><b>Decision impact</b>Conditional. Public work is exhausted enough to define the requested files and the stop conditions.</p>
               </div>
-
             </div>
 
-            <footer class="register-foot">Reading: the pipeline reached the trial team's own three genes from the public record. It did not discover them, and the confound the authors' cell-line work addresses is one we have not addressed computationally.</footer>
+            <footer class="register-foot">Recommendation: use gefitinib as a historical reference calibration case for labeled EGFR exon 19 deletion / exon 21 L858R selection, while treating current development as conditional on comparator, rights, CMC, assay provenance, and data-room constraints.</footer>
           </article>
         </div>
       </section>
 
-      <!-- ===================== WHY IT MATTERS ===================== -->
+      <!-- ===================== THE GATE ===================== -->
       <section class="band">
         <div class="shell">
           <div class="band-head">
-            <p class="band-label">Why run it against a solved case</p>
-            <h2>On your target, you couldn't grade us.</h2>
+            <p class="band-label">The gate</p>
+            <h2>Verification is a script, not an assurance.</h2>
+            <p>A case is not product-grade because the prose reads well. It is product-grade when <code>verify_product_case.sh</code> passes, and it fails closed.</p>
           </div>
           <div class="prose">
-            <p>Nobody has published the answer for your asset. That is the reason to run this, and it is why you would be taking our word for the output. So we ran it where the answer exists. Giudice's team had the trial, the biopsies, the cell lines, and years; we had the protocol PDF and the public record.</p>
-            <p><strong>The pipeline reached their genes, by a route you can inspect, and missed MCM7 that they report.</strong> The run worth more is the next one: strip the answer out of the inputs, run it blind, see whether POLA1 still surfaces. Until we publish that, this page shows the route and not the foresight.</p>
+            <p>All eight modules must exist. Each needs its own search log. Every identifier must resolve, every artifact must be on disk, and semantic verification must find no unresolved defect where a module says something its source does not. The rendered site must exist and survive an offline audit for stale claims and broken links.</p>
+            <p>The report is then bound to a manifest hash and a git commit, so the version you read is the version that passed. <strong>You can re-run the gate yourself.</strong></p>
           </div>
+          <p class="callout"><strong>What the gate does not do.</strong> It checks that the work is traceable, not that the judgment is right. Machine verification cannot tell you a conclusion is wise. That is what the reviewer attestation is for, and the signoff field on every case we have published is currently null.</p>
+        </div>
+      </section>
 
-          <div class="method">
-            <p class="method-step">Engine</p>
-            <p>Retrieval agents work the literature, trial registries, chemical and target databases, and public omics in parallel, pulling out claims and cross-checking them. This is the half that scales.</p>
-            <p class="method-step">Human</p>
-            <p>A bioinformatician reviews the output and decides what holds. Every boundary in the table above is a human call: knowing that a flat neighborhood is informative, and that a coordinated replication signature might be proliferation, is judgment rather than retrieval.</p>
+      <!-- ===================== THE LADDER ===================== -->
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
+            <p class="band-label">Where a case can be</p>
+            <h2>Four states, and we tell you which one you are reading.</h2>
           </div>
+          <div class="ladder">
+            <div class="rung">
+              <b>Candidate</b>
+              <p>Generated, not yet gated. Not a deliverable.</p>
+            </div>
+            <div class="rung rung-on">
+              <b>Product-grade</b>
+              <p>Machine-verifiable: manifest, citations, semantic checks, artifacts, render audit. Seven cases.</p>
+            </div>
+            <div class="rung rung-on">
+              <b>Ready for expert review</b>
+              <p>Product-grade plus the artifacts a reviewer needs to attest to a bounded scope. Three cases.</p>
+            </div>
+            <div class="rung">
+              <b>Expert-signed</b>
+              <p>A named human signs for a stated scope and caveats. <b class="rung-count">None yet.</b></p>
+            </div>
+          </div>
+          <p class="callout">The library is seven product-grade cases: gefitinib, nilotinib, atabecestat, iniparib, selonsertib, angion ANG-3777, and crebankitug. Three are ready for expert review. None is expert-signed, and the readiness audit says so on its own front page rather than in a footnote.</p>
         </div>
       </section>
 
       <section class="close">
         <div class="shell">
           <p class="band-label">Do the cheap work first</p>
-          <h2>The same run, on your target.</h2>
-          <p>This one took days against a trial that took years. Send us your target and find out what the public record settles before you commit the bench to it.</p>
+          <h2>The same run, on your asset.</h2>
+          <p>Public evidence, worked across the eight modules, gated before it reaches you. Send us an asset and an indication.</p>
           <a class="btn btn-invert" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target <span aria-hidden="true">↗</span></a>
         </div>
       </section>
@@ -147,7 +151,7 @@
     <footer class="foot">
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · New Haven, CT</p>
-        <p>Worked examples use public data and are not client engagements.</p>
+        <p>Reference cases use public data and are not client engagements.</p>
       </div>
     </footer>
   </body>

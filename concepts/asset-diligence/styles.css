@@ -693,6 +693,64 @@ body {
   line-height: 1.4;
 }
 
+/* The eight CFR-mapped modules, as a list the reader can count. */
+.demo-mods { display: flex; flex-direction: column; gap: 0.28em; }
+
+.demo-mod {
+  font-size: 0.7em;
+  color: #b6bcc4;
+  padding: 0.18em 0 0.18em 1.1em;
+  position: relative;
+  border-bottom: 1px solid rgb(255 255 255 / 0.04);
+}
+.demo-mod::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #6bdeb5;
+  font-size: 0.85em;
+}
+
+.demo-modnote {
+  font-size: 0.6em;
+  color: #5d6661;
+  margin: 0.7em 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* The gate output. Seven booleans, all of them checkable in the repo. */
+.demo-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.22em;
+  margin-bottom: 0.9em;
+}
+
+.demo-check {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: 0.66em;
+}
+.demo-check b { color: #8b958e; font-weight: 400; }
+.demo-check i {
+  font-style: normal;
+  color: #6bdeb5;
+  margin-left: auto;
+}
+
+.demo-kv {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+  font-size: 0.66em;
+  padding: 0.2em 0;
+}
+.demo-kv span { color: #5d6661; }
+.demo-kv b { color: #cfd8d4; font-weight: 400; margin-left: auto; }
+.demo-kv .demo-ok { color: #6bdeb5; font-weight: 600; }
+.demo-kv .demo-null { color: #e0b64e; }
+
 .demo-tick {
   width: 1em;
   height: 1em;
@@ -929,6 +987,66 @@ body {
   font-weight: 600;
   border-bottom: 1px dashed color-mix(in srgb, var(--partial) 45%, transparent);
 }
+
+/* Inline code — file and script names in prose. */
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  padding: 0.12em 0.35em;
+  border-radius: 2px;
+}
+
+/* The state ladder. Reached rungs are marked; unreached ones stay quiet —
+   the honesty is that two of the four are not lit. */
+.ladder {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--rule);
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 52rem) { .ladder { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 30rem) { .ladder { grid-template-columns: 1fr; } }
+
+.rung {
+  padding: 1rem 1.1rem;
+  border-right: 1px solid var(--rule);
+  background: var(--paper-raised);
+  position: relative;
+}
+.ladder .rung:last-child { border-right: 0; }
+
+.rung > b {
+  display: block;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink-3);
+  margin-bottom: 0.4rem;
+  padding-left: 0.9rem;
+  position: relative;
+}
+.rung > b::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: var(--ink-4);
+  font-size: 0.85em;
+}
+
+.rung-on { background: var(--accent-wash); }
+.rung-on > b { color: var(--ink); }
+.rung-on > b::before { content: "●"; color: var(--accent); }
+
+.rung p {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.rung-count { color: var(--partial); font-weight: 600; }
 
 .prose-cite {
   display: flex;

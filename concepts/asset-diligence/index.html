@@ -31,64 +31,54 @@
         <div class="shell">
           <div class="opening-copy">
             <p class="tagline">Bioinformatics diligence for disease-focused teams</p>
-            <h1>The computational work, before the&nbsp;bench.</h1>
-            <p class="opening-lede">Our engine reads the public evidence on your target: trial protocols, registries, chemical and target databases, public omics. A bioinformatician reviews the output, decides what holds, and signs the report.</p>
-            <p class="opening-lede opening-lede-tight">You get what the evidence supports, what it doesn't, and <strong>which assumption to test first</strong>.</p>
+            <h1>IND-readiness, from the public record.</h1>
+            <p class="opening-lede">DrugAdopt works your asset across the eight modules an IND has to answer, then refuses to call the report finished until every identifier resolves, every claim matches its source, and every artifact exists.</p>
+            <p class="opening-lede opening-lede-tight">You get a decision packet, a gap map, and <strong>a verification report you can re-run yourself</strong>.</p>
             <div class="opening-actions">
-              <a class="btn" href="./method.html">See a worked report <span aria-hidden="true">→</span></a>
+              <a class="btn" href="./method.html">See a verified case <span aria-hidden="true">→</span></a>
               <a class="link-quiet" href="./portfolio.html">Our tools →</a>
             </div>
           </div>
 
-          <div class="demo" role="img" aria-label="A DrugAdopt diligence run on prexasertib: the engine extracts the drug identifier from a trial protocol PDF, grounds it to a knowledge-graph node, traverses to the CHK1 dependency neighborhood, and surfaces POLA1 as a candidate resistance axis with four approved POLA1-active drugs.">
+          <div class="demo" role="img" aria-label="A DrugAdopt verification report for the gefitinib EGFR-mutant NSCLC case: eight modules complete, seven deterministic checks passed, status product-grade, bound to a manifest hash and a git commit, with the reviewer signoff field still null.">
             <div class="demo-bar">
-              <span class="demo-chip demo-chip-run demo-part" style="--d:0.1s">RUN</span>
-              <span class="demo-chip demo-chip-asset demo-part" style="--d:0.2s">prexasertib · HGSOC</span>
-              <span class="demo-chip demo-chip-src demo-part" style="--d:0.3s">NCT02203513</span>
-              <span class="demo-elapsed demo-part" style="--d:0.4s">public sources only</span>
+              <span class="demo-chip demo-chip-run demo-part" style="--d:0.1s">VERIFY</span>
+              <span class="demo-chip demo-chip-asset demo-part" style="--d:0.2s">gefitinib · EGFR-mutant NSCLC</span>
+              <span class="demo-elapsed demo-part" style="--d:0.4s">fail closed</span>
             </div>
 
             <div class="demo-body">
               <div class="demo-steps">
-                <div class="demo-step demo-part" style="--d:0.6s">
-                  <span class="demo-tick">✓</span>
-                  <span><b>Parse protocol</b><span>118-page PDF · Docling</span></span>
+                <p class="demo-label demo-part" style="--d:0.5s">Modules</p>
+                <div class="demo-mods">
+                  <span class="demo-mod demo-part" style="--d:0.6s">plan-tpp</span>
+                  <span class="demo-mod demo-part" style="--d:0.7s">pharmacology</span>
+                  <span class="demo-mod demo-part" style="--d:0.8s">adme</span>
+                  <span class="demo-mod demo-part" style="--d:0.9s">toxicology</span>
+                  <span class="demo-mod demo-part" style="--d:1.0s">cmc</span>
+                  <span class="demo-mod demo-part" style="--d:1.1s">clinical</span>
+                  <span class="demo-mod demo-part" style="--d:1.2s">protocol</span>
+                  <span class="demo-mod demo-part" style="--d:1.3s">gaps</span>
                 </div>
-                <div class="demo-step demo-part" style="--d:0.9s">
-                  <span class="demo-tick">✓</span>
-                  <span><b>Extract entities</b><span>GLiNER · drugs, genes, endpoints</span></span>
-                </div>
-                <div class="demo-step demo-part" style="--d:1.2s">
-                  <span class="demo-tick">✓</span>
-                  <span><b>Ground to graph</b><span>OptimusKG · 190,531 nodes</span></span>
-                </div>
-                <div class="demo-step demo-part" style="--d:1.5s">
-                  <span class="demo-tick">✓</span>
-                  <span><b>Traverse neighborhood</b><span>224 gene interactions</span></span>
-                </div>
-                <div class="demo-step demo-step-live demo-part" style="--d:1.8s">
-                  <span class="demo-tick">→</span>
-                  <span><b>Test against expression</b><span>15 biopsies · 6 vs 9</span></span>
-                </div>
+                <p class="demo-modnote demo-part" style="--d:1.4s">21 CFR 312.23 · ICH M3(R2)</p>
               </div>
 
               <div class="demo-panel">
-                <p class="demo-label demo-part" style="--d:2.0s">Grounding chain</p>
-                <div class="demo-chain">
-                  <div class="demo-node demo-part" style="--d:2.2s">extracted span <b>"LY2606368"</b></div>
-                  <div class="demo-arrow demo-part" style="--d:2.4s">↓ synonym match</div>
-                  <div class="demo-node demo-part" style="--d:2.5s">DRG : <b>CHEMBL3544911</b> (prexasertib)</div>
-                  <div class="demo-arrow demo-part" style="--d:2.7s">↓ stated mechanism target</div>
-                  <div class="demo-node demo-node-hit demo-part" style="--d:2.8s">GEN : <b>ENSG00000149554</b> (CHEK1)</div>
+                <p class="demo-label demo-part" style="--d:1.5s">verification-report.json</p>
+                <div class="demo-checks">
+                  <div class="demo-check demo-part" style="--d:1.7s"><b>modules_complete</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:1.8s"><b>logs_complete</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:1.9s"><b>semantic_complete</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:2.0s"><b>manifest_present</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:2.1s"><b>figure_manifest_present</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:2.2s"><b>notes_present</b><i>true</i></div>
+                  <div class="demo-check demo-part" style="--d:2.3s"><b>site_present</b><i>true</i></div>
                 </div>
-                <div class="demo-find demo-part" style="--d:3.2s">
-                  <b>Candidate axis:</b> replication effectors including <span class="demo-gene">POLA1</span> elevated in non-responders. Rest of the CHK1 neighborhood flat.
-                  <div class="demo-drugs">
-                    <span class="demo-drug demo-part" style="--d:3.5s">nelarabine</span>
-                    <span class="demo-drug demo-part" style="--d:3.6s">fludarabine</span>
-                    <span class="demo-drug demo-part" style="--d:3.7s">cladribine</span>
-                    <span class="demo-drug demo-part" style="--d:3.8s">clofarabine</span>
-                  </div>
+                <div class="demo-find demo-part" style="--d:2.6s">
+                  <div class="demo-kv"><span>status</span><b class="demo-ok">product-grade</b></div>
+                  <div class="demo-kv"><span>commit</span><b>215da15</b></div>
+                  <div class="demo-kv"><span>manifest_sha256</span><b>da92d80788ce…</b></div>
+                  <div class="demo-kv"><span>signoff</span><b class="demo-null">null</b></div>
                 </div>
               </div>
             </div>
@@ -100,41 +90,41 @@
         <div class="shell">
           <div class="band-head">
             <p class="band-label">What gets worked</p>
-            <h2>Eight axes of risk.</h2>
-            <p>Most assets carry risk on three or four of these. We scope to those, and the report states which questions public data cannot answer.</p>
+            <h2>The eight modules an IND has to answer.</h2>
+            <p>Mapped to 21 CFR 312.23 and ICH M3(R2). Each one gets its own search log, its own artifacts, and its own semantic check that the sources say what the module claims they say.</p>
           </div>
           <div class="axes">
             <div class="axis">
-              <h3>Mechanism</h3>
-              <p>Target biology, pathway support, expression and dependency evidence across public cohorts.</p>
+              <h3>Plan / TPP</h3>
+              <p>The target product profile, the decision the report is being written to serve, and the scope it refuses.</p>
             </div>
             <div class="axis">
-              <h3>PK / PD</h3>
-              <p>Exposure, distribution, and whether reported concentrations reach a defensible pharmacology anchor.</p>
+              <h3>Pharmacology</h3>
+              <p>Target biology and mechanism, worked against public datasets rather than asserted from the label.</p>
+            </div>
+            <div class="axis">
+              <h3>ADME</h3>
+              <p>Absorption, distribution, metabolism, excretion, and whether public exposure data can sanity-check the dose.</p>
             </div>
             <div class="axis">
               <h3>Toxicology</h3>
-              <p>Label liabilities, class effects, and whether safety caps the dose below a useful exposure.</p>
+              <p>Label liabilities, class effects, and which safety questions public data cannot close.</p>
             </div>
             <div class="axis">
-              <h3>SAR</h3>
-              <p>Potency anchors, analogue precedent, and structure-driven arguments for reformulation.</p>
+              <h3>CMC</h3>
+              <p>Identity, marketed-product framing, and what stays a data-room gate no matter how good the public record is.</p>
             </div>
             <div class="axis">
-              <h3>Trial precedent</h3>
-              <p>What has been tried in the indication, how it was designed, how it read out, and why.</p>
+              <h3>Clinical</h3>
+              <p>Trial history, what was designed, how it read out, and whether selection was the decision that mattered.</p>
             </div>
             <div class="axis">
-              <h3>Biomarker &amp; stratification</h3>
-              <p>Whether a responder population is definable, and whether the proposed marker survives scrutiny.</p>
+              <h3>Protocol</h3>
+              <p>Population, assay, endpoint, comparator, and dose rationale, tied to the evidence that supports each.</p>
             </div>
             <div class="axis">
-              <h3>RNA-level depth</h3>
-              <p>When the risk is an RNA question (isoform, splicing, modification), we look below the gene-level view where standard analysis stops.</p>
-            </div>
-            <div class="axis">
-              <h3>Signal integrity</h3>
-              <p>Whether a reported effect survives batch, composition, and cross-cohort checks, or dissolves under them.</p>
+              <h3>Gaps</h3>
+              <p>What is missing, what would close it, and which gaps are business-model gates rather than science.</p>
             </div>
           </div>
         </div>
