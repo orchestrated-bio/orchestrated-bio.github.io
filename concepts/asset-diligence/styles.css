@@ -189,7 +189,22 @@ body {
   color: var(--ink);
 }
 
-.brand img { width: 25px; height: 25px; display: block; }
+/* Two logo files: the black-ringed PNG for light grounds, the white-ringed
+   SVG for dark. The near-black O disappears on the dark masthead, so swap by
+   theme rather than tint one file. Light shown by default; dark theme (via
+   media query or the toggle's data-theme) swaps them. */
+.brand-logo { width: 25px; height: 25px; }
+.brand-logo-light { display: block; }
+.brand-logo-dark  { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand-logo-light { display: none; }
+  :root:not([data-theme="light"]) .brand-logo-dark  { display: block; }
+}
+:root[data-theme="dark"]  .brand-logo-light { display: none; }
+:root[data-theme="dark"]  .brand-logo-dark  { display: block; }
+:root[data-theme="light"] .brand-logo-light { display: block; }
+:root[data-theme="light"] .brand-logo-dark  { display: none; }
 
 .brand-word {
   font-family: var(--sans);
