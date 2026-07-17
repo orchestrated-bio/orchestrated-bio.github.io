@@ -963,38 +963,60 @@ code {
 .pub:hover .pub-mark { color: var(--accent); }
 
 
-/* --- Affiliations ------------------------------------------------------
-   A quiet list of names. No descriptions, no relationship labels: the page
-   does not need to explain each one, and a name that has to justify itself
-   is doing less work than a name that doesn't.
+/* --- Affiliations banner ------------------------------------------------
+   A horizontal band of names, not a list. No logos: we hold no logo files
+   and no permission to use third-party marks, and a CSS-faked wordmark
+   reads as official while being wrong in typeface and colour. Names are
+   honest at any size.
+
+   Grayscale-at-rest / colour-on-hover is the logo-band idiom; the type
+   equivalent is muted ink that resolves to full ink on hover.
    ---------------------------------------------------------------------- */
 
+.orgs-band {
+  /* Defined by rules, not fill. Both --paper-sunk and --paper-raised sit
+     ~1.05:1 from the page background — they are hairline shades for small
+     surfaces, and neither reads as a band at full width. Rules are what
+     separates every other section here anyway. */
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
 .orgs-title {
-  font-size: var(--step-0) !important;
+  font-size: var(--step--1) !important;
   font-weight: 590 !important;
-  letter-spacing: 0 !important;
-  color: var(--ink-3) !important;
-  margin: 0 0 1rem !important;
+  letter-spacing: 0.055em !important;
+  text-transform: uppercase;
+  color: var(--ink-4) !important;
+  margin: 0 0 1.1rem !important;
+  text-align: center;
 }
 
 .orgs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem 2.25rem;
-  align-items: baseline;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem 2rem;
 }
 
 .org {
-  font-size: var(--step-0);
-  color: var(--ink-2);
+  font-size: var(--step-1);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  /* ink-4 fails AA on this surface (4.26 in light). ink-3 clears it and is
+     still muted enough for the hover to register as a lift. */
+  color: var(--ink-3);
   text-decoration: none;
-  border-bottom: 1px solid transparent;
-  padding-bottom: 1px;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  transition: color 0.2s ease;
 }
-.org:hover {
-  color: var(--ink);
-  border-bottom-color: var(--rule-firm);
+.org:hover { color: var(--ink); }
+
+@media (max-width: 46rem) {
+  .orgs { justify-content: center; gap: 0.85rem 1.75rem; }
+  .org { font-size: var(--step-0); }
 }
 
 /* --- Close -------------------------------------------------------------- */
