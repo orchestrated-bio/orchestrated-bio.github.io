@@ -815,6 +815,63 @@ body {
 }
 .product p:last-child { margin-bottom: 0; }
 
+/* --- Exhibits ----------------------------------------------------------
+   Real figures from the delivered report, each with a callout naming what
+   is differentiating about it. The image is the evidence; the caption is
+   the claim about it — so a caption never states a fact the figure cannot
+   show. Every claim below was checked against the case artifacts first.
+   ---------------------------------------------------------------------- */
+
+.exhibits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.25rem 1.75rem;
+}
+
+@media (max-width: 54rem) { .exhibits { grid-template-columns: 1fr; } }
+
+.exhibit { margin: 0; }
+
+.exhibit img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #fff;
+  margin-bottom: 0.9rem;
+}
+
+.exhibit figcaption b {
+  display: block;
+  font-size: var(--step-0);
+  font-weight: 620;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  text-wrap: balance;
+}
+
+.exhibit figcaption span {
+  display: block;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
+
+.exhibit figcaption em {
+  font-style: normal;
+  color: var(--ink-2);
+  border-bottom: 1px solid var(--rule-firm);
+}
+
+.exhibit figcaption code { font-size: 0.86em; }
+
+/* The traceability exhibit is a tall detail view — give it the full row. */
+.exhibit-wide { grid-column: 1 / -1; }
+.exhibit-wide img { max-width: 44rem; }
+
 /* --- Prose -------------------------------------------------------------- */
 
 .prose { max-width: var(--measure); }
