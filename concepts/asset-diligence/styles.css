@@ -454,142 +454,13 @@ body {
 
 /* --- The register (hero artifact) -------------------------------------- */
 
-.register {
-  border: 1px solid var(--rule-firm);
-  background: var(--paper-raised);
-}
-
-.register-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.9rem 1.1rem;
-  border-bottom: 1px solid var(--rule-firm);
-  background: var(--paper-sunk);
-}
-
-.register-asset {
-  font-family: var(--mono);
-  font-size: var(--step-0);
-  font-weight: 600;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-
-.register-scope {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  color: var(--ink-3);
-}
-
-.register-rows { display: flex; flex-direction: column; }
-
-.row {
-  display: grid;
-  grid-template-columns: 8.5rem 1fr 1fr;
-  gap: 1.25rem;
-  padding: 1.1rem;
-  border-top: 1px solid var(--rule);
-  align-items: start;
-}
-.register-rows .row:first-child { border-top: 0; }
-
-@media (max-width: 46rem) {
-  .row { grid-template-columns: 1fr; gap: 0.6rem; }
-}
-
-.row-axis {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  color: var(--ink);
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
-.row-axis span {
-  display: block;
-  font-weight: 400;
-  color: var(--ink-4);
-  margin-top: 0.2rem;
-}
-
-.row-finding {
-  color: var(--ink-2);
-  font-size: var(--step--1);
-  line-height: 1.55;
-  margin: 0;
-}
-.row-finding strong { color: var(--ink); font-weight: 600; }
-
-.row-bound {
-  font-size: var(--step--1);
-  line-height: 1.55;
-  color: var(--ink-3);
-  margin: 0;
-  padding-left: 1rem;
-  border-left: 2px solid var(--rule);
-}
-
-@media (max-width: 46rem) {
-  .row-bound { padding-left: 0.75rem; }
-}
-
-.row-bound b {
-  font-family: var(--sans);
-  font-weight: 600;
-  color: var(--ink-3);
-  font-size: 0.9em;
-  letter-spacing: 0.045em;
-  font-weight: 600;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 0.2rem;
-}
-
 /* nowrap keeps short identifiers like "PMID 38555285" from breaking across
    lines, but a full citation is a sentence and must be allowed to wrap —
    it blew a 398px link through a 375px viewport. */
 /* --- Biomarker rows ----------------------------------------------------- */
 
 /* Biomarker names need more room than the 8.5rem axis column allows. */
-.row-bmk { grid-template-columns: 12rem 1fr 1fr; }
-@media (max-width: 46rem) { .row-bmk { grid-template-columns: 1fr; } }
-
-.row-bmk .row-axis { line-height: 1.35; }
-
-.bmk-id {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.78em;
-  font-weight: 400;
-  color: var(--ink-4);
-  letter-spacing: 0;
-  margin-bottom: 0.3rem;
-}
-
-.row-finding p { margin: 0 0 0.55rem; }
-.row-finding p:last-child { margin-bottom: 0; }
-
-.row-owner {
-  color: var(--ink-4) !important;
-  font-size: 0.92em;
-}
-
 /* Verdict chips. Semantic colors, deliberately not the accent. */
-.verdict {
-  font-size: 0.78em;
-  font-weight: 650;
-  letter-spacing: 0.02em;
-  padding: 0.1em 0.4em;
-  border-radius: 3px;
-  white-space: nowrap;
-}
-.verdict-go   { color: var(--resolved);   background: var(--resolved-wash); }
-.verdict-stop { color: var(--unresolved); background: var(--unresolved-wash); }
-.verdict-gap  { color: var(--partial);    background: var(--partial-wash); }
-
 /* --- Headshots ---------------------------------------------------------- */
 
 .person-photo {
@@ -617,20 +488,6 @@ body {
 }
 .person-links a:hover { border-bottom-color: var(--accent); }
 
-.src {
-  font-family: var(--mono);
-  font-size: 0.92em;
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  white-space: nowrap;
-}
-
-@media (max-width: 40rem) {
-  .src { white-space: normal; }
-}
-.src:hover { border-bottom-color: var(--accent); }
-
 .tag {
   font-family: var(--sans);
   font-size: 0.68rem;
@@ -645,16 +502,6 @@ body {
 .tag-unresolved { color: var(--unresolved); background: var(--unresolved-wash); }
 .tag-partial    { color: var(--partial);    background: var(--partial-wash); }
 .tag-resolved   { color: var(--resolved);   background: var(--resolved-wash); }
-
-.register-foot {
-  padding: 0.85rem 1.1rem;
-  border-top: 1px solid var(--rule-firm);
-  background: var(--paper-sunk);
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  color: var(--ink-3);
-  line-height: 1.5;
-}
 
 /* --- Axis sweep list ---------------------------------------------------- */
 
@@ -881,14 +728,6 @@ body {
 .prose a { color: var(--accent); }
 
 /* Gene hits inside a finding — the three the run landed on. */
-.hit {
-  color: var(--partial);
-  font-family: var(--mono);
-  font-size: 0.94em;
-  font-weight: 600;
-  border-bottom: 1px dashed color-mix(in srgb, var(--partial) 45%, transparent);
-}
-
 /* Inline code — file and script names in prose. */
 
 /* The state ladder. Reached rungs are marked; unreached ones stay quiet —
