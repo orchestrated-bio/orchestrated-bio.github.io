@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A verified DrugAdopt case: gefitinib in EGFR-mutant NSCLC. The biomarker strategy matrix, with each row's verdict, evidence, and private-data boundary." />
-    <title>Case — gefitinib, EGFR-mutant NSCLC | Orchestrated Biosciences</title>
+    <meta name="description" content="A verified DrugAdopt case: prexasertib in platinum-resistant BRCA-wild-type HGSOC. Nine decision rows with statuses, evidence IDs, and the next action that would close each gap." />
+    <title>Case — prexasertib, platinum-resistant HGSOC | Orchestrated Biosciences</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -29,8 +29,8 @@
     <main id="main">
       <section class="page-head">
         <div class="shell">
-          <h1>Which marker, which population, which assay.</h1>
-          <p class="opening-lede">Gefitinib failed in unselected NSCLC and worked in EGFR-mutant disease. The lesson was a selection question, so the readout leads with the biomarker matrix and says where the public record stops on each row.</p>
+          <h1>What the evidence would not support.</h1>
+          <p class="opening-lede">Prexasertib is a CHK1 inhibitor in platinum-resistant BRCA-wild-type ovarian cancer. The mechanism is plausible and the early single-centre response rates looked strong. The report says the program does not yet rest on a demonstrated tumour vulnerability, and shows the work behind that.</p>
         </div>
       </section>
 
@@ -38,55 +38,65 @@
         <div class="shell">
           <article class="register">
             <header class="register-head">
-              <span class="register-asset">gefitinib · EGFR-mutant NSCLC</span>
-              <span class="register-scope">biomarker strategy matrix · 3 rows</span>
+              <span class="register-asset">prexasertib · platinum-resistant HGSOC</span>
+              <span class="register-scope">decision packet · 9 rows</span>
             </header>
 
             <div class="register-rows">
               <div class="row row-bmk">
                 <div class="row-axis">
-                  <span class="bmk-id">GEF-BMK-001</span>
-                  EGFR exon 19 del / exon 21 L858R
-                  <span>predictive · enrichment</span>
+                  <span class="bmk-id">H-004</span>
+                  Unselected efficacy
+                  <span>clinical</span>
                 </div>
                 <div class="row-finding">
-                  <p><b class="verdict verdict-go">Go</b> for biomarker-selected reference use. <b class="verdict verdict-stop">Stop</b> for unselected restart.</p>
-                  <p>Enriches for canonical sensitizing variants. Uncommon variants need variant-specific evidence rather than a generic activating-mutation claim. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/18378519/" target="_blank" rel="noreferrer">PMID 18378519</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/19692680/" target="_blank" rel="noreferrer">PMID 19692680</a></p>
-                  <p class="row-owner">Owner: translational oncology lead</p>
+                  <p><b class="verdict verdict-gap">Conditional</b> Do not advance an unselected monotherapy path.</p>
+                  <p>The independent multicentre signal is ORR <b>11&ndash;13%</b>. The single-centre <b>30&ndash;33%</b> results are genuine but non-portable, and cannot be pooled with them. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a></p>
                 </div>
-                <p class="row-bound"><b>Private-data boundary</b>Patient-level genotype and outcome tables, and assay chain-of-custody, stay data-room dependencies for a new protocol. Mutation status is a disease-substrate marker, not receptor occupancy.</p>
+                <p class="row-bound"><b>Next</b>Pursue biomarker enrichment, or a randomised comparison against physician's-choice chemotherapy.</p>
               </div>
 
               <div class="row row-bmk">
                 <div class="row-axis">
-                  <span class="bmk-id">GEF-BMK-002</span>
-                  Acquired resistance, e.g. EGFR T790M
-                  <span>resistance · stratification</span>
+                  <span class="bmk-id">H-005</span>
+                  Resistance signal
+                  <span>biomarker</span>
                 </div>
                 <div class="row-finding">
-                  <p><b class="verdict verdict-gap">Conditional gap</b> for any fresh-development strategy beyond the reference case.</p>
-                  <p>Separates historical EGFR-mutant sensitivity from resistant or modern first-line populations, where osimertinib changes the benchmark. <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/16923179/" target="_blank" rel="noreferrer">PMID 16923179</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/28540278/" target="_blank" rel="noreferrer">PMID 28540278</a></p>
-                  <p class="row-owner">Owner: clinical strategy lead</p>
+                  <p><b class="verdict verdict-gap">Gap</b> No validated resistance mechanism is established.</p>
+                  <p>The replication-machinery candidates (POLA1, POLE, GINS3) are reproducible in direction but <b>FDR-null and same-cohort</b>. The CCNE1 resistance interpretation is null. <a class="src" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a></p>
                 </div>
-                <p class="row-bound"><b>Private-data boundary</b>A rescue strategy needs patient-level resistance genotype, line-of-therapy, and comparator outcomes. Public evidence frames the risk; it cannot support a resistance-selected development claim.</p>
+                <p class="row-bound"><b>Next</b>Freeze a replication-stress score and test it in an independent cohort with multiplicity control and blinded analysis.</p>
               </div>
 
               <div class="row row-bmk">
                 <div class="row-axis">
-                  <span class="bmk-id">GEF-BMK-003</span>
-                  Exposure-linked EGFR pathway inhibition
-                  <span>pharmacodynamic · engagement</span>
+                  <span class="bmk-id">H-003</span>
+                  Tumour exposure
+                  <span>PK/PD</span>
                 </div>
                 <div class="row-finding">
-                  <p><b class="verdict verdict-gap">Gap</b> for any new regimen or reformulation claim.</p>
-                  <p>Public PK and potency anchors are supportive but are not a measured human PK/PD bridge. No validated phospho-EGFR or occupancy threshold is qualified by public data alone. <a class="src" href="https://www.ebi.ac.uk/chembl/explore/compound/CHEMBL939" target="_blank" rel="noreferrer">CHEMBL939</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/14578364/" target="_blank" rel="noreferrer">PMID 14578364</a></p>
-                  <p class="row-owner">Owner: DMPK / translational pharmacology lead</p>
+                  <p><b class="verdict verdict-gap">Gap</b> The exposure &rarr; engagement &rarr; response chain cannot be evaluated from public data.</p>
+                  <p>Plasma PK is well characterised and marrow toxicity confirms systemic delivery, but no public data establish that prexasertib reaches tumour CHK1 above the IC50.</p>
                 </div>
-                <p class="row-bound"><b>Private-data boundary</b>Sponsor PK/PD, tissue exposure, concentration-time and biomarker-response files are required before any dose or route change.</p>
+                <p class="row-bound"><b>Next</b>Sponsor tumour PK and a validated pathway-PD readout. Public evidence cannot close this.</p>
+              </div>
+
+              <div class="row row-bmk">
+                <div class="row-axis">
+                  <span class="bmk-id">H-006</span>
+                  Safety ceiling
+                  <span>toxicology</span>
+                </div>
+                <div class="row-finding">
+                  <p><b class="verdict verdict-gap">Conditional</b> On-target, largely transient, G-CSF-manageable but not benign.</p>
+                  <p>Grade 3&ndash;4 neutropenia across three datasets: <b>93%</b> (pilot), <b>85.7%</b> (cohorts 5/6), <b>37.9%</b> (independent multicentre). <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/29361470/" target="_blank" rel="noreferrer">PMID 29361470</a> <a class="src" href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a></p>
+                </div>
+                <p class="row-bound"><b>Next</b>A fresh IND needs the nonclinical GLP package; the therapeutic-index question stays open until tumour exposure is measured.</p>
               </div>
             </div>
 
-            <footer class="register-foot">Guardrail, verbatim from the packet: these rows are report-level translational decision support. They do not establish clinical utility, assay qualification, regulatory biomarker qualification, or companion-diagnostic readiness without the stated validation evidence.</footer>
+            <footer class="register-foot">Four of nine rows. Every row carries its status, its evidence IDs, and the specific next action that would close it &mdash; and every claim in the report resolves to a hash-bound source.</footer>
           </article>
         </div>
       </section>
@@ -94,12 +104,12 @@
       <section class="band">
         <div class="shell">
           <div class="band-head">
-            <p class="band-label">The recommendation</p>
-            <h2>What the report concluded.</h2>
+            <p class="band-label">The conclusion</p>
+            <h2>A plausible mechanism is not a demonstrated one.</h2>
           </div>
           <div class="prose">
-            <p>Use gefitinib as a historical reference calibration case for labeled EGFR exon 19 deletion and exon 21 L858R selection, while treating current development as conditional on comparator, rights, CMC, assay provenance, and data-room constraints.</p>
-            <p>The full report runs all eight modules with source-backed rows for pharmacology, ADME, toxicology, CMC, clinical history, and the remaining gaps. It is one of seven product-grade cases in the library.</p>
+            <p>CHK1 is a candidate vulnerability in this population, and the biology is coherent. But public evidence does not establish a measurable, load-bearing tumour CHK1-dependence mechanism, and no public biomarker supports patient selection today.</p>
+            <p>That is a decision, not a verdict on the drug. It says which experiment comes next and what it has to show &mdash; and it says so before anyone spends a trial finding out.</p>
           </div>
         </div>
       </section>
