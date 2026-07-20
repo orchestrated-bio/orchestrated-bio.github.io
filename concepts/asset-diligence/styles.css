@@ -714,6 +714,8 @@ body {
   display: block;
   width: 100%;
   height: auto;
+  /* Reserve the box before the GIF decodes so the hero never reflows. */
+  aspect-ratio: 760 / 475;
   border: 1px solid var(--rule-firm);
   border-radius: 4px;
   /* The report renders on white. Keep it white in both themes — it's paper,
