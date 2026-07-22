@@ -1086,7 +1086,6 @@ body {
 .dax-page::-webkit-scrollbar { width: 6px; }
 .dax-page::-webkit-scrollbar-thumb { background: #cbd3db; border-radius: 3px; }
 .dax-page-active { opacity: 1; pointer-events: auto; }
-.dax-cover { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
 
 /* running header + footer */
 .dax-rhead {
@@ -1115,33 +1114,56 @@ body {
 }
 .dax-figcap b { color: var(--kd-blue-2); font-weight: 700; }
 
-/* cover page */
-.dax-cover { text-align: center; }
-.dax-cover-rule { height: 2px; background: var(--kd-blue); margin: 0.4em auto 1.1em; width: 70%; }
-.dax-cover h2 {
+/* overview page — a report dashboard, not a title page: headline finding,
+   key numbers, verdict, and a section-status strip you can click into. */
+.dax-ov-top {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 1em;
+  padding-bottom: 0.8em; border-bottom: 2px solid var(--kd-blue); margin-bottom: 0.9em;
+}
+.dax-ov-asset {
   font-family: var(--kd-serif); color: var(--kd-blue);
-  font-size: 1.4em; font-weight: 700; line-height: 1.15; margin: 0.3em 0 0.4em;
+  font-size: 1.3em; font-weight: 700; line-height: 1.1; margin: 0.15em 0 0.15em;
 }
-.dax-cover-sub { color: var(--kd-amber); font-style: italic; font-size: 0.78em; margin: 0 0 0.2em; }
-.dax-cover-mod { color: var(--kd-muted); font-size: 0.64em; margin: 0 0 1.2em; }
-.dax-cover-meta {
-  display: grid; grid-template-columns: auto 1fr; gap: 0.25em 0.8em;
-  max-width: 22em; margin: 0.6em auto 1.1em; text-align: left;
-  font-size: 0.64em;
+.dax-ov-target { font-size: 0.58em; color: var(--kd-muted); margin: 0 0 0.3em; }
+.dax-ov-ind { color: var(--kd-amber); font-style: italic; font-size: 0.7em; margin: 0; max-width: 30ch; }
+.dax-ov-verdict {
+  flex: none; text-align: right;
+  border: 1px solid var(--kd-amber); border-radius: 3px; background: #fdf6ec;
+  padding: 0.5em 0.7em; display: flex; flex-direction: column; gap: 0.1em;
 }
-.dax-cover-meta dt { text-align: right; font-weight: 700; color: var(--kd-ink); }
-.dax-cover-meta dd { margin: 0; color: #333; }
-.dax-cover-rec {
-  border: 1px solid var(--kd-blue); border-radius: 3px;
-  background: #f2f6fb; padding: 0.7em 1em; max-width: 20em; margin: 0 auto;
+.dax-ov-verdict-label { font-size: 0.52em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--kd-muted); }
+.dax-ov-verdict-call { font-size: 0.78em; font-weight: 700; color: var(--kd-amber); text-transform: uppercase; letter-spacing: 0.02em; }
+.dax-ov-verdict-meta { font-size: 0.52em; color: var(--kd-muted); }
+
+.dax-ov-readout {
+  font-family: var(--kd-serif); font-size: 0.72em; line-height: 1.55;
+  color: #1c1c1c; margin: 0 0 1em; text-align: justify;
 }
-.dax-cover-rec-label { font-size: 0.6em; font-weight: 700; color: var(--kd-ink); }
-.dax-cover-rec-verdict {
-  font-size: 0.95em; font-weight: 700; color: var(--kd-amber);
-  letter-spacing: 0.03em; margin: 0.2em 0; text-transform: uppercase;
+
+.dax-ov-sechead {
+  font-size: 0.55em; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--kd-blue-2); margin: 0 0 0.4em;
 }
-.dax-cover-rec-score { font-size: 0.58em; color: var(--kd-muted); }
-.dax-cover-prep { font-size: 0.58em; color: var(--kd-muted); margin-top: 1.1em; }
+.dax-ov-sections { list-style: none; margin: 0 0 1em; padding: 0; }
+.dax-ov-sections li {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.6em;
+  padding: 0.45em 0.2em; border-bottom: 1px solid var(--kd-rule);
+  cursor: pointer; transition: background 0.15s ease;
+}
+.dax-ov-sections li:hover { background: #f4f7fb; }
+.dax-ov-sec-name { font-family: var(--kd-serif); font-size: 0.68em; color: var(--kd-ink); }
+.dax-ov-chip {
+  flex: none; font-size: 0.52em; padding: 0.15em 0.5em; border-radius: 0.7em; white-space: nowrap;
+}
+.dax-chip-ok   { color: #157347; background: #e6f4ec; border: 1px solid #b7ddc6; }
+.dax-chip-warn { color: #97600a; background: #fbf1df; border: 1px solid #e6cfa0; }
+.dax-chip-gap  { color: #a13d3d; background: #fbeaea; border: 1px solid #e3b9b9; }
+
+.dax-ov-foot {
+  display: flex; justify-content: space-between; gap: 1em;
+  font-size: 0.55em; color: var(--kd-muted);
+  padding-top: 0.6em; border-top: 1px solid var(--kd-rule);
+}
 
 /* section page */
 .dax-sec-num {

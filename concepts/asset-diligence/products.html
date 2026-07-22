@@ -58,7 +58,7 @@
                   <span class="dax-spine-title">DrugAdopt<span>IND-readiness report</span></span>
                 </div>
                 <ul class="dax-nav">
-                  <li class="dax-nav-item dax-nav-item-active" data-page="cover"><span class="dax-nav-num">—</span><span class="dax-nav-label">Cover</span></li>
+                  <li class="dax-nav-item dax-nav-item-active" data-page="cover"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Overview</span></li>
                   <li class="dax-nav-item" data-page="clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label">Clinical Phenotype &amp; Endpoints</span></li>
                   <li class="dax-nav-item" data-page="mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></li>
                   <li class="dax-nav-item" data-page="pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label">Pharmacology &amp; Exposure</span></li>
@@ -69,24 +69,36 @@
               </nav>
 
               <div class="dax-paper">
-                <!-- Cover -->
-                <article class="dax-page dax-page-active dax-cover" data-page="cover">
-                  <p class="dax-sec-num">Research diligence readout</p>
-                  <div class="dax-cover-rule"></div>
-                  <h2>Prexasertib</h2>
-                  <p class="dax-cover-sub">Platinum-resistant BRCA-wild-type high-grade serous ovarian carcinoma</p>
-                  <p class="dax-cover-mod">Small molecule · Target: CHEK1</p>
-                  <dl class="dax-cover-meta">
-                    <dt>Diligence question</dt><dd>What would have to be true before another prexasertib study?</dd>
-                    <dt>Evidence boundary</dt><dd>Public evidence and preserved artifacts</dd>
-                    <dt>Prepared</dt><dd>2026-07-16</dd>
-                  </dl>
-                  <div class="dax-cover-rec">
-                    <p class="dax-cover-rec-label">Recommendation</p>
-                    <p class="dax-cover-rec-verdict">Hold for named data</p>
-                    <p class="dax-cover-rec-score">Confidence: high · 6 blocking rows</p>
+                <!-- Overview -->
+                <article class="dax-page dax-page-active dax-overview" data-page="cover">
+                  <div class="dax-ov-top">
+                    <div>
+                      <p class="dax-sec-num">Research diligence readout</p>
+                      <h2 class="dax-ov-asset">Prexasertib</h2>
+                      <p class="dax-ov-target">Small molecule · Target CHEK1</p>
+                      <p class="dax-ov-ind">Platinum-resistant BRCA-wild-type high-grade serous ovarian carcinoma</p>
+                    </div>
+                    <div class="dax-ov-verdict">
+                      <span class="dax-ov-verdict-label">Recommendation</span>
+                      <span class="dax-ov-verdict-call">Hold for named data</span>
+                      <span class="dax-ov-verdict-meta">High confidence</span>
+                    </div>
                   </div>
-                  <p class="dax-cover-prep">Prepared by DrugAdopt · reviewed and signed by a bioinformatician</p>
+
+                  <p class="dax-ov-readout">A signal-seeking trial treated 49 patients and saw partial responses in twelve, but it stopped before its planned denominators and left the responders unexplained. The public data do not identify a validated responder biomarker, tie exposure to who responded, or establish a safety window for the POLA1-directed combination the biology points to. The activity is real; the case for another unselected study is not.</p>
+
+                  <p class="dax-ov-sechead">What each section found</p>
+                  <ul class="dax-ov-sections">
+                    <li data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Signal, not clean efficacy</span></li>
+                    <li data-goto="mechanism"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-chip dax-chip-gap">No selection biomarker</span></li>
+                    <li data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unmet</span></li>
+                    <li data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Window unproven</span></li>
+                  </ul>
+
+                  <div class="dax-ov-foot">
+                    <span>Prepared 2026-07-16 · from public evidence</span>
+                    <span>Reviewed &amp; signed by a bioinformatician</span>
+                  </div>
                 </article>
 
                 <!-- 1. Clinical -->
@@ -513,13 +525,21 @@
         function start() { if (running) return; running = true; schedule(); }
         function stop() { running = false; clearTimeout(timer); }
 
-        // Click a spine item: jump there and pause the auto-advance briefly so
-        // the reader can look, then resume.
-        navItems.forEach(function (n, i) {
-          n.addEventListener('click', function () {
-            show(i); held = true; clearTimeout(timer);
-            clearTimeout(n._resume);
-            n._resume = setTimeout(function () { held = false; schedule(); }, 6000);
+        // Jump to a section and pause the auto-advance briefly so the reader
+        // can look, then resume. Used by both the spine and the overview's
+        // clickable section rows.
+        var resumeT = null;
+        function jump(i) {
+          show(i); held = true; clearTimeout(timer);
+          clearTimeout(resumeT);
+          resumeT = setTimeout(function () { held = false; schedule(); }, 6000);
+        }
+        navItems.forEach(function (n, i) { n.addEventListener('click', function () { jump(i); }); });
+        // Overview section rows (data-goto="clinical" …) deep-link into a section.
+        [].forEach.call(ui.querySelectorAll('[data-goto]'), function (el) {
+          el.addEventListener('click', function () {
+            var idx = order.indexOf(el.dataset.goto);
+            if (idx >= 0) jump(idx);
           });
         });
 
