@@ -1062,14 +1062,20 @@ body {
 }
 .dax-page {
   position: absolute; inset: 0;
-  padding: 1.3em 1.7em 2.4em;
-  overflow: hidden;
+  padding: 1.3em 1.7em 1.1em;
+  /* Sections lead with a figure and run longer than the panel — the report
+     page scrolls, like the real PDF. Inactive pages are non-interactive. */
+  overflow-y: auto; overflow-x: hidden;
   color: var(--kd-ink);
   font-family: var(--kd-serif);
   opacity: 0; pointer-events: none;
   transition: opacity 0.4s ease;
+  scrollbar-width: thin; scrollbar-color: #cbd3db transparent;
 }
+.dax-page::-webkit-scrollbar { width: 6px; }
+.dax-page::-webkit-scrollbar-thumb { background: #cbd3db; border-radius: 3px; }
 .dax-page-active { opacity: 1; pointer-events: auto; }
+.dax-cover { display: flex; flex-direction: column; justify-content: center; min-height: 100%; }
 
 /* running header + footer */
 .dax-rhead {
@@ -1080,12 +1086,23 @@ body {
 }
 .dax-rhead b { font-style: normal; font-weight: 400; color: var(--kd-muted); }
 .dax-rfoot {
-  position: absolute; left: 1.7em; right: 1.7em; bottom: 0.7em;
   display: flex; justify-content: space-between;
   font-size: 0.55em; color: var(--kd-muted);
-  padding-top: 0.5em; border-top: 1px solid var(--kd-rule);
-  background: #fdfdfc;
+  margin-top: 1.2em; padding-top: 0.5em; border-top: 1px solid var(--kd-rule);
 }
+
+/* section-leading figure (the graphical summary) */
+.dax-figure { margin: 0.2em 0 0.7em; }
+.dax-figure img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--kd-rule); border-radius: 2px;
+  background: #fff;
+}
+.dax-figcap {
+  font-size: 0.58em; line-height: 1.45; color: #333;
+  margin-top: 0.4em; text-align: justify;
+}
+.dax-figcap b { color: var(--kd-blue-2); font-weight: 700; }
 
 /* cover page */
 .dax-cover { text-align: center; }
