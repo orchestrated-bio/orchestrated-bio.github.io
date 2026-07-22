@@ -40,9 +40,41 @@
             </div>
           </div>
 
-          <figure class="shot">
-            <img src="./img/drugadopt-demo.gif" width="1400" height="916" alt="A DrugAdopt report for prexasertib in platinum-resistant BRCA-wild-type HGSOC, moving through its tabs: the readout states that public evidence does not establish a load-bearing CHK1-dependence mechanism; figures reconcile response rates against an independent 11 to 13 percent benchmark, model the mechanism, audit which exposure questions are modelable, and show neutropenia rates across three datasets; the claim-source traceability page; and a closing gap-analysis plotting each remaining question by decision impact against how far public data can close it." loading="eager" decoding="async" />
-            <figcaption>A DrugAdopt report on prexasertib in platinum-resistant ovarian cancer, generated from public data.</figcaption>
+          <figure class="shot shot-render">
+            <div class="dax-ui" role="img" aria-label="The DrugAdopt pipeline working prexasertib in platinum-resistant ovarian cancer: an asset drops in, the eight IND modules work public evidence in parallel, each resolves to a graded verdict with the number behind it — mechanism graded insufficient, single-center response rates non-portable against an 11 to 13 percent benchmark, neutropenia confirmed three ways — and a nine-row gap map falls out.">
+              <div class="dax-head">
+                <div class="dax-head-logo"><img src="../../images/logo-icon-white.svg" alt="" aria-hidden="true" /></div>
+                <div class="dax-asset"><b class="dax-asset-name">Prexasertib</b> <span class="dax-ind">· platinum-resistant HGSOC</span><span class="dax-caret" style="display:none"></span></div>
+                <div class="dax-phase"><span class="dax-phase-dot"></span><span class="dax-phase-text">Working eight modules</span></div>
+              </div>
+              <div class="dax-body">
+                <div class="dax-board">
+                  <div class="dax-mod" data-mod="plan"><div class="dax-mod-name"><span>Plan / TPP</span><span class="dax-badge dax-badge-ok">Supported</span></div><div class="dax-mod-fact">Scope set: platinum-resistant HGSOC</div></div>
+                  <div class="dax-mod" data-mod="pharm"><div class="dax-mod-name"><span>Pharmacology</span><span class="dax-badge dax-badge-gap">Insufficient</span></div><div class="dax-mod-fact">No load-bearing CHK1 dependence shown</div></div>
+                  <div class="dax-mod" data-mod="adme"><div class="dax-mod-name"><span>ADME</span><span class="dax-badge dax-badge-warn">Partial</span></div><div class="dax-mod-fact">4 exposure questions not modelable</div></div>
+                  <div class="dax-mod" data-mod="tox"><div class="dax-mod-name"><span>Toxicology</span><span class="dax-badge dax-badge-ok">Supported</span></div><div class="dax-mod-fact">Neutropenia 93% / 85.7% / 37.9%</div></div>
+                  <div class="dax-mod" data-mod="cmc"><div class="dax-mod-name"><span>CMC</span><span class="dax-badge dax-badge-warn">Data-room gate</span></div><div class="dax-mod-fact">Not resolvable from public record</div></div>
+                  <div class="dax-mod" data-mod="clin"><div class="dax-mod-name"><span>Clinical</span><span class="dax-badge dax-badge-gap">Insufficient</span></div><div class="dax-mod-fact">30–33% single-center vs 11–13% bench</div></div>
+                  <div class="dax-mod" data-mod="prot"><div class="dax-mod-name"><span>Protocol</span><span class="dax-badge dax-badge-ok">Supported</span></div><div class="dax-mod-fact">Endpoint + comparator tied to evidence</div></div>
+                  <div class="dax-mod" data-mod="gaps"><div class="dax-mod-name"><span>Gaps</span><span class="dax-badge dax-badge-warn">9 rows</span></div><div class="dax-mod-fact">Each with the test that closes it</div></div>
+                </div>
+                <div class="dax-rail">
+                  <p class="dax-rail-label">Public evidence</p>
+                  <ul class="dax-src">
+                    <li>PMC10673677 · Table 2</li>
+                    <li>NCT02203513</li>
+                    <li>NCT03414047</li>
+                    <li>DepMap · CHK1 essentiality</li>
+                    <li>Friberg myelosuppression</li>
+                  </ul>
+                  <div class="dax-verdict">
+                    <p class="dax-verdict-call">Mechanism plausible, <b>not load-bearing</b>. No public biomarker selects patients today.</p>
+                    <p class="dax-verdict-gaps"><span class="dax-gapcount">9 gaps</span> each with the experiment that closes it</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figcaption>DrugAdopt working prexasertib in platinum-resistant ovarian cancer, from public data. The report says what holds, what falls short, and the number behind each call.</figcaption>
           </figure>
         </div>
       </section>
@@ -98,5 +130,84 @@
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
       </div>
     </footer>
+
+    <script>
+    /* DrugAdopt hero — narrates the pipeline the report runs. Four beats,
+       looping: the asset drops in, the eight IND modules fan in and "work"
+       public evidence in parallel, each resolves to a graded verdict with the
+       number behind it (sources tick past on the rail), then the verdict + gap
+       map reveal. Plain DOM + CSS classes; pauses when off-screen. Drives every
+       .dax-ui on the page independently, so the single-file artifact (which
+       carries one on the home route and one on the products route) works too. */
+    (function () {
+      // verdict class per module, in DOM order (matches the real report).
+      var grade = ['ok','gap','warn','ok','warn','gap','ok','warn'];
+
+      function wire(ui) {
+        if (ui.dataset.daxWired) return;   // artifact merges pages; wire once
+        ui.dataset.daxWired = '1';
+        var mods    = [].slice.call(ui.querySelectorAll('.dax-mod'));
+        var srcs    = [].slice.call(ui.querySelectorAll('.dax-src li'));
+        var caret   = ui.querySelector('.dax-caret');
+        var phase   = ui.querySelector('.dax-phase-text');
+        var verdict = ui.querySelector('.dax-verdict');
+        var timers = [], running = false;
+        function at(fn, d) { timers.push(setTimeout(fn, d)); }
+
+        function reset() {
+          timers.forEach(clearTimeout); timers = [];
+          mods.forEach(function (m) { m.className = 'dax-mod'; });
+          srcs.forEach(function (s) { s.classList.remove('dax-src-in'); });
+          verdict.classList.remove('dax-verdict-in');
+          caret.style.display = ''; phase.textContent = 'Reading the asset';
+        }
+
+        function run() {
+          reset();
+          at(function () { caret.style.display = 'none'; phase.textContent = 'Working eight modules'; }, 700);
+          mods.forEach(function (m, i) {
+            var inAt = 800 + i * 130;
+            at(function () { m.classList.add('dax-mod-in', 'dax-mod-working'); }, inAt);
+            at(function () {
+              m.classList.remove('dax-mod-working');
+              m.classList.add('dax-mod-graded', 'dax-mod-' + grade[i]);
+            }, inAt + 900 + i * 90);
+          });
+          srcs.forEach(function (s, i) { at(function () { s.classList.add('dax-src-in'); }, 1100 + i * 260); });
+          var settleAt = 800 + mods.length * 130 + 900 + mods.length * 90 + 300;
+          at(function () { phase.textContent = 'Report ready'; verdict.classList.add('dax-verdict-in'); }, settleAt);
+          at(run, settleAt + 4200);
+        }
+
+        function start() { if (running) return; running = true; run(); }
+        function stop() { running = false; timers.forEach(clearTimeout); timers = []; }
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          caret.style.display = 'none'; phase.textContent = 'Report ready';
+          mods.forEach(function (m, i) { m.classList.add('dax-mod-in', 'dax-mod-graded', 'dax-mod-' + grade[i]); });
+          srcs.forEach(function (s) { s.classList.add('dax-src-in'); });
+          verdict.classList.add('dax-verdict-in');
+          return;
+        }
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (es) {
+            es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+          }, { threshold: 0.25 }).observe(ui);
+        }
+        // Fallback for the artifact, where inactive routes are display:none and
+        // never intersect: poll layout, and re-check on hashchange.
+        setInterval(function () {
+          var vis = ui.offsetParent !== null && ui.getBoundingClientRect().height > 0;
+          if (vis && !running) start(); else if (!vis && running) stop();
+        }, 500);
+        window.addEventListener('hashchange', function () {
+          setTimeout(function () { if (ui.offsetParent !== null && !running) start(); }, 60);
+        });
+      }
+
+      [].forEach.call(document.querySelectorAll('.dax-ui'), wire);
+    })();
+    </script>
   </body>
 </html>
