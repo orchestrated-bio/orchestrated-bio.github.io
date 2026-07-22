@@ -115,6 +115,10 @@ def data_uri(src: str) -> str:
     elif name in {"orr.png", "biomarker.png", "modelability.png",
                   "neutropenia.png", "citation.png"}:
         raw, mime = _jpeg_shot(path, **SHOT_JPEG), "image/jpeg"
+    elif path.parent.name == "report":
+        # Section-leading report figures: detailed charts, keep them crisp but
+        # JPEG-encode to hold the artifact size down.
+        raw, mime = _jpeg_shot(path, quality=86, max_w=1000), "image/jpeg"
     else:
         raw, mime = path.read_bytes(), MIME[ext]
     uri = f"data:{mime};base64,{base64.b64encode(raw).decode()}"
