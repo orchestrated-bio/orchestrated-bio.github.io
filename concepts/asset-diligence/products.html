@@ -69,7 +69,52 @@
                 <a class="btn" href="https://insight.orchestrated.bio" target="_blank" rel="noreferrer">Try Insight <span aria-hidden="true">↗</span></a>
               </p>
             </div>
-            <img class="product-feature-shot" src="../../images/insight-demo.gif" width="800" height="500" alt="The Insight interface answering a cancer genomics question, with charts and analysis appearing as the query runs." loading="lazy" decoding="async" />
+            <div class="insight-ui" role="img" aria-label="The Insight interface: a chat panel typing a cancer-genomics question and returning a source-cited answer, alongside a mutation-frequency chart, cycling through example queries.">
+              <div class="iui-side">
+                <div class="iui-side-logo"><img src="../../images/logo-icon-white.svg" alt="" aria-hidden="true" /></div>
+                <div class="iui-side-icon"></div>
+                <div class="iui-side-icon"></div>
+                <div class="iui-side-icon"></div>
+                <div class="iui-side-user">A</div>
+              </div>
+
+              <div class="iui-bar">
+                <div class="iui-crumbs">
+                  <span class="iui-crumb iui-crumb-focus">FOCUS</span>
+                  <span class="iui-crumb iui-crumb-cohort iui-crumb-context">Brca TCGA Pan Can Atlas 2018</span>
+                  <span class="iui-crumb iui-crumb-gene iui-crumb-target">TP53</span>
+                </div>
+                <span class="iui-cohort">COHORT: N=1,080</span>
+              </div>
+
+              <div class="iui-chat">
+                <div class="iui-query"><span class="iui-query-text">TP53 mutations in breast cancer</span><span class="iui-cursor" style="display:none"></span></div>
+                <div class="iui-steps">
+                  <span class="iui-steps-tick">✓</span>
+                  <span class="iui-steps-text">Investigated with 5 steps</span>
+                </div>
+                <div class="iui-paras"></div>
+                <div class="iui-follow">
+                  <p class="iui-follow-label">Follow-ups</p>
+                  <div class="iui-follow-list"></div>
+                </div>
+                <div class="iui-ask">
+                  <div class="iui-ask-box"><span>Ask a follow-up question…</span><span class="iui-ask-send">↑</span></div>
+                </div>
+              </div>
+
+              <div class="iui-vis">
+                <p class="iui-vis-title">Mutation frequency by protein position</p>
+                <div class="iui-lolli">
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:90%"></div><span class="iui-lolli-label">R175H</span></div>
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:62%"></div><span class="iui-lolli-label">R273H</span></div>
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:48%"></div><span class="iui-lolli-label">H193R</span></div>
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:35%"></div><span class="iui-lolli-label">R248Q</span></div>
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:28%"></div><span class="iui-lolli-label">Y220C</span></div>
+                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:20%"></div><span class="iui-lolli-label">G245S</span></div>
+                </div>
+              </div>
+            </div>
           </article>
         </div>
       </section>
@@ -119,5 +164,161 @@
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
       </div>
     </footer>
+
+    <script>
+    /* Insight mockup — ported from the marketing site's animated portfolio
+       demo. Types the query, staggers in the answer, cycles three scenes.
+       Plain DOM + CSS classes; no framework. Pauses when off-screen. */
+    (function () {
+      var ui = document.querySelector('.insight-ui');
+      if (!ui) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var scenes = [
+        {
+          query: 'TP53 mutations in breast cancer',
+          steps: 'Investigated with 5 steps',
+          context: 'Brca TCGA Pan Can Atlas 2018', target: 'TP53', cohort: 'COHORT: N=1,080',
+          vis: 'Mutation frequency by protein position',
+          bars: [['R175H',90],['R273H',62],['H193R',48],['R248Q',35],['Y220C',28],['G245S',20]],
+          paras: [
+            'TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations across 41 distinct protein positions.',
+            'The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y.',
+            'These structural and contact mutations appear across both ER-positive and ER-negative tumors.'
+          ],
+          cites: ['D1', 'Shukla 2025'],
+          followups: ['1. How do TP53 mutations correlate with ER/PR/HER2 status?', '2. Impact on overall survival in TCGA breast cancer?']
+        },
+        {
+          query: 'How do KRAS mutations impact survival in pancreatic cancer?',
+          steps: 'Investigated with 3 steps',
+          context: 'Paad TCGA Pan Can Atlas 2018', target: 'KRAS', cohort: 'COHORT: N=184',
+          vis: 'Codon-12 variant frequency',
+          bars: [['G12D',88],['G12V',54],['G12R',40],['G13D',22],['Q61H',15],['A146T',10]],
+          paras: [
+            'KRAS mutations significantly reduce overall survival in pancreatic cancer: median 1.4 years for mutant carriers versus 3.6 years for wild-type (p=0.00029).',
+            'This is driven by near-universal codon-12 mutations (86.6%), primarily G12D (39%), G12V, and G12R.',
+            'KRAS G12R is associated with improved survival and reduced distant recurrence versus G12D.'
+          ],
+          cites: ['D3', 'Steele 2018'],
+          followups: ['1. Do specific KRAS codons show different survival outcomes?', '2. What about drug sensitivity?']
+        },
+        {
+          query: 'What about drug sensitivity?',
+          steps: 'Investigated with 4 steps',
+          context: 'Paad TCGA Pan Can Atlas 2018', target: 'KRAS', cohort: 'COHORT: N=184',
+          vis: 'Druggability by target',
+          bars: [['KRAS',75],['TP53',30],['CDKN2A',52],['SMAD4',38],['MYC',22],['ARID1A',44]],
+          paras: [
+            'Drug sensitivity in pancreatic cancer is marked by high resistance to standard therapies, though profiling reveals emerging targets.',
+            'KRAS was long considered undruggable, but is now tractable via small molecules and PROTACs, with two FDA-approved G12C inhibitors.',
+            'TP53, CDKN2A, and SMAD4 show varying degrees of druggability and clinical tractability.'
+          ],
+          cites: ['D4', 'Raj 2026'],
+          followups: ['1. How do G12D vs G12V affect MEK-inhibitor sensitivity?', '2. Emerging drugs for TP53-mutant pancreatic cancer?']
+        }
+      ];
+
+      var qText   = ui.querySelector('.iui-query-text');
+      var cursor  = ui.querySelector('.iui-cursor');
+      var stepsEl = ui.querySelector('.iui-steps-text');
+      var stepsW  = ui.querySelector('.iui-steps');
+      var ctxEl   = ui.querySelector('.iui-crumb-context');
+      var tgtEl   = ui.querySelector('.iui-crumb-target');
+      var cohEl   = ui.querySelector('.iui-cohort');
+      var parasEl = ui.querySelector('.iui-paras');
+      var followEl= ui.querySelector('.iui-follow-list');
+      var visTtl  = ui.querySelector('.iui-vis-title');
+      var visRoot = ui.querySelector('.iui-vis');
+      var lolli   = ui.querySelector('.iui-lolli');
+
+      var current = 0, INTERVAL = 8000, timers = [], typing = null, running = false;
+      function addTimer(fn, d) { var t = setTimeout(fn, d); timers.push(t); return t; }
+      function clearTimers() { timers.forEach(clearTimeout); timers = []; if (typing) { clearInterval(typing); typing = null; } }
+
+      function typeQuery(text) {
+        if (typing) clearInterval(typing);
+        qText.textContent = ''; cursor.style.display = '';
+        var i = 0;
+        typing = setInterval(function () {
+          if (i < text.length) { qText.textContent = text.slice(0, ++i); }
+          else { clearInterval(typing); typing = null; addTimer(function () { cursor.style.display = 'none'; }, 400); }
+        }, 30);
+      }
+
+      function render(s) {
+        stepsEl.textContent = s.steps;
+        cohEl.textContent = s.cohort;
+        ctxEl.textContent = s.context;
+        tgtEl.textContent = s.target;
+        visTtl.textContent = s.vis;
+
+        parasEl.innerHTML = '';
+        s.paras.forEach(function (txt, i) {
+          var p = document.createElement('p');
+          p.className = 'iui-part';
+          p.textContent = txt;
+          if (s.cites[i]) { var c = document.createElement('span'); c.className = 'iui-cite'; c.textContent = s.cites[i]; p.appendChild(c); }
+          parasEl.appendChild(p);
+        });
+
+        followEl.innerHTML = '';
+        s.followups.forEach(function (txt) { var p = document.createElement('p'); p.textContent = txt; followEl.appendChild(p); });
+
+        lolli.innerHTML = '';
+        s.bars.forEach(function (b) {
+          var item = document.createElement('div'); item.className = 'iui-lolli-item';
+          var bar = document.createElement('div'); bar.className = 'iui-lolli-bar'; bar.style.height = b[1] + '%';
+          var lbl = document.createElement('span'); lbl.className = 'iui-lolli-label'; lbl.textContent = b[0];
+          item.appendChild(bar); item.appendChild(lbl); lolli.appendChild(item);
+        });
+      }
+
+      function reveal(s) {
+        stepsW.style.opacity = '0'; parasEl.style.opacity = '0';
+        visRoot.classList.remove('iui-vis-active');
+        typeQuery(s.query);
+        var typeDone = s.query.length * 30 + 500;
+        addTimer(function () { stepsW.style.opacity = '1'; }, typeDone);
+        addTimer(function () {
+          parasEl.style.opacity = '1';
+          [].forEach.call(parasEl.children, function (p, i) { addTimer(function () { p.classList.add('iui-part-shown'); }, i * 400); });
+          void visRoot.offsetWidth;
+          visRoot.classList.add('iui-vis-active');   // grow the bars
+        }, typeDone + 300);
+      }
+
+      function advance() {
+        clearTimers();
+        ui.style.transition = 'opacity 0.4s ease'; ui.style.opacity = '0.45';
+        addTimer(function () {
+          current = (current + 1) % scenes.length;
+          render(scenes[current]);
+          ui.style.opacity = '1';
+          requestAnimationFrame(function () { requestAnimationFrame(function () { reveal(scenes[current]); }); });
+          addTimer(advance, INTERVAL);
+        }, 500);
+      }
+
+      function start() { if (running) return; running = true; render(scenes[0]); requestAnimationFrame(function(){ reveal(scenes[0]); }); addTimer(advance, INTERVAL); }
+      function stop() { running = false; clearTimers(); }
+
+      // Run while visible. IntersectionObserver reports isIntersecting=false
+      // for a display:none element (the artifact hides non-active routes), so
+      // also poll offsetParent as a fallback: when the route is shown, the
+      // element gains layout and we start; when hidden again, we stop.
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.2 }).observe(ui);
+      }
+      var poll = setInterval(function () {
+        var visible = ui.offsetParent !== null && ui.getBoundingClientRect().height > 0;
+        if (visible && !running) start();
+        else if (!visible && running) stop();
+      }, 500);
+      window.addEventListener('hashchange', function () { setTimeout(function () {
+        if (ui.offsetParent !== null && !running) start();
+      }, 60); });
+    })();
+    </script>
   </body>
 </html>

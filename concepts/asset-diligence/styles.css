@@ -582,6 +582,213 @@ body {
   text-wrap: pretty;
 }
 
+/* --- Insight mockup ----------------------------------------------------
+   A live CSS/JS port of the animated Insight UI from the marketing site
+   (was Tailwind + Jekyll; ported to plain CSS here). Sizes in em off one
+   clamped root font-size so it scales; JS types the query and cycles three
+   scenes. Dark UI in both themes — it is the product's own chrome. */
+
+.insight-ui {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #0c1522;
+  font-family: var(--sans);
+  font-size: clamp(10px, 1.1vw, 15px);
+  color: #cdd5df;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
+}
+
+.iui-side {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6em;
+  padding: 1.2em 0.5em;
+  background: #111b2b;
+  border-right: 1px solid rgb(255 255 255 / 0.05);
+  z-index: 3;
+}
+.iui-side-logo {
+  width: 1.7em; height: 1.7em;
+  border-radius: 0.4em;
+  background: rgb(39 159 129 / 0.20);
+  display: grid; place-items: center;
+}
+.iui-side-logo img { width: 1.1em; height: 1.1em; }
+.iui-side-icon { width: 1.4em; height: 1.4em; border-radius: 0.3em; background: rgb(255 255 255 / 0.05); }
+.iui-side-user {
+  margin-top: auto;
+  width: 1.5em; height: 1.5em; border-radius: 50%;
+  background: rgb(39 159 129 / 0.30);
+  display: grid; place-items: center;
+  font-size: 0.65em; font-weight: 700; color: #6bdeb5;
+}
+
+.iui-bar {
+  position: absolute;
+  top: 0; left: 3em; right: 0;
+  height: 2.4em;
+  display: flex; align-items: center;
+  gap: 0.7em;
+  padding-inline: 1em;
+  background: #0e1829;
+  border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  z-index: 2;
+}
+.iui-crumbs { display: flex; align-items: center; gap: 0.6em; }
+.iui-crumb {
+  font-size: 0.68em;
+  padding: 0.18em 0.5em;
+  border-radius: 0.25em;
+  white-space: nowrap;
+}
+.iui-crumb-focus  { background: rgb(39 159 129 / 0.20); color: #4fcfa5; }
+.iui-crumb-cohort { background: rgb(214 158 46 / 0.16); color: #e0b64e; }
+.iui-crumb-gene   { background: rgb(96 165 250 / 0.16); color: #7fb2f6; }
+.iui-cohort { margin-left: auto; font-size: 0.6em; color: #8b94a3; white-space: nowrap; }
+
+.iui-chat {
+  position: absolute;
+  top: 2.4em; left: 3em; bottom: 0;
+  width: 17em;
+  display: flex; flex-direction: column;
+  border-right: 1px solid rgb(255 255 255 / 0.05);
+  overflow: hidden;
+}
+.iui-query {
+  margin: 1em 1em 0.5em;
+  padding: 0.45em 0.6em;
+  border-radius: 0.4em;
+  background: rgb(27 119 96 / 0.30);
+  color: #7fe0c2;
+  font-size: 0.78em;
+  font-weight: 500;
+  line-height: 1.35;
+  min-height: 1.2em;
+}
+.iui-cursor {
+  display: inline-block;
+  width: 0.5em; height: 1em;
+  background: #7fe0c2;
+  vertical-align: text-bottom;
+  animation: iuiBlink 0.9s steps(2) infinite;
+}
+@keyframes iuiBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+.iui-steps {
+  display: flex; align-items: center; gap: 0.35em;
+  padding: 0 1em 0.5em;
+  transition: opacity 0.4s ease;
+}
+.iui-steps-tick {
+  width: 0.85em; height: 0.85em; border-radius: 50%;
+  background: rgb(39 159 129 / 0.40);
+  color: #6bdeb5;
+  display: grid; place-items: center;
+  font-size: 0.7em;
+}
+.iui-steps-text { font-size: 0.66em; color: #b6bdc9; }
+
+.iui-paras {
+  flex: 1;
+  padding: 0 1em;
+  display: flex; flex-direction: column; gap: 0.5em;
+  overflow: hidden;
+  transition: opacity 0.4s ease;
+}
+.iui-paras p { margin: 0; font-size: 0.7em; line-height: 1.5; color: #b6bdc9; }
+.iui-cite {
+  padding: 0.08em 0.32em;
+  border-radius: 0.2em;
+  background: rgb(27 119 96 / 0.25);
+  color: #4fcfa5;
+  font-size: 0.86em;
+  margin-left: 0.3em;
+  white-space: nowrap;
+}
+
+.iui-follow {
+  border-top: 1px solid rgb(255 255 255 / 0.05);
+  padding: 0.6em 1em;
+}
+.iui-follow-label { font-size: 0.6em; color: #8b94a3; margin: 0 0 0.3em; }
+.iui-follow p { margin: 0 0 0.2em; font-size: 0.6em; color: #aab2bf; line-height: 1.35; }
+
+.iui-ask {
+  border-top: 1px solid rgb(255 255 255 / 0.05);
+  padding: 0.6em 1em;
+}
+.iui-ask-box {
+  display: flex; align-items: center; gap: 0.4em;
+  padding: 0.4em 0.6em;
+  border-radius: 0.4em;
+  background: rgb(255 255 255 / 0.05);
+  border: 1px solid rgb(255 255 255 / 0.10);
+}
+/* Scope to the label span only — the send button is also a span, and a bare
+   `.iui-ask-box span` (0,1,1) was overriding .iui-ask-send (0,1,0), stretching
+   the send button flush and shrinking its font. */
+.iui-ask-box > span:first-child { font-size: 0.65em; color: #8b94a3; flex: 1; }
+.iui-ask-send {
+  flex: 0 0 auto;
+  width: 1.6em;
+  min-width: 1.6em;
+  height: 1.6em;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgb(39 159 129 / 0.30);
+  color: #6bdeb5;
+  display: grid;
+  place-items: center;
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+/* Right visualization panel — a simple lollipop track that swaps per scene */
+.iui-vis {
+  position: absolute;
+  top: 2.4em; left: 20em; right: 0; bottom: 0;
+  padding: 1.2em 1.4em;
+  overflow: hidden;
+}
+.iui-vis-title { font-size: 0.7em; color: #8b94a3; margin: 0 0 1em; }
+.iui-lolli { display: flex; align-items: flex-end; gap: 0.9em; height: 60%; }
+.iui-lolli-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.iui-lolli-bar {
+  width: 100%;
+  background: linear-gradient(180deg, rgb(39 159 129 / 0.55), rgb(39 159 129 / 0.15));
+  border-radius: 0.2em 0.2em 0 0;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.iui-vis-active .iui-lolli-bar { transform: scaleY(1); }
+.iui-lolli-label { font-size: 0.55em; color: #8b94a3; margin-top: 0.4em; white-space: nowrap; }
+
+.iui-part {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.iui-part-shown { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 30rem) {
+  .iui-chat { width: 100%; border-right: 0; }
+  .iui-vis { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iui-part { opacity: 1; transform: none; }
+  .iui-lolli-bar { transform: scaleY(1); transition: none; }
+  .iui-cursor { animation: none; }
+}
+
 /* --- Product feature ---------------------------------------------------
    The two shipping products (DrugAdopt, Insight) get a full-width feature
    row: copy on one side, a running demo on the other. Alternating sides
