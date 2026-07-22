@@ -1536,6 +1536,13 @@ body {
   line-height: 1.4;
 }
 
+.pubs-more {
+  margin: 0.9rem 0 0;
+  font-size: var(--step--1);
+}
+.pubs-more a { color: var(--ink-3); }
+.pubs-more a:hover { color: var(--accent); }
+
 .pub-mark { color: var(--ink-4); font-size: 0.85rem; }
 .pub:hover .pub-mark { color: var(--accent); }
 
