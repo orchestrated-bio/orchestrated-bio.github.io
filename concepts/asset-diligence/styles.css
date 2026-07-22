@@ -751,25 +751,205 @@ body {
 }
 
 /* Right visualization panel — a simple lollipop track that swaps per scene */
+/* Visualization panel — holds three swappable scenes (a port of the marketing
+   site's hero-mockup: TP53 lollipop, KRAS lollipop + Kaplan-Meier survival
+   curve, druggability bubble chart + drug-gene table). Each scene fades in and
+   its charts draw themselves; the JS swaps the active scene in sync with the
+   query. Eases shared with the chart animations below. */
 .iui-vis {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   position: absolute;
   top: 2.4em; left: 20em; right: 0; bottom: 0;
-  padding: 1.2em 1.4em;
   overflow: hidden;
 }
-.iui-vis-title { font-size: 0.7em; color: #8b94a3; margin: 0 0 1em; }
-.iui-lolli { display: flex; align-items: flex-end; gap: 0.9em; height: 60%; }
-.iui-lolli-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
-.iui-lolli-bar {
-  width: 100%;
-  background: linear-gradient(180deg, rgb(39 159 129 / 0.55), rgb(39 159 129 / 0.15));
-  border-radius: 0.2em 0.2em 0 0;
-  transform-origin: bottom;
-  transform: scaleY(0);
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+.iui-scene {
+  position: absolute; inset: 0;
+  padding: 0.8em;
+  display: flex; flex-direction: column; gap: 0.6em;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
 }
-.iui-vis-active .iui-lolli-bar { transform: scaleY(1); }
-.iui-lolli-label { font-size: 0.55em; color: #8b94a3; margin-top: 0.4em; white-space: nowrap; }
+.iui-scene-active { opacity: 1; pointer-events: auto; }
+
+.iui-card {
+  border-radius: 0.4em;
+  background: #111b2b;
+  border: 1px solid rgb(255 255 255 / 0.05);
+  padding: 0.6em;
+}
+.iui-card-head { display: flex; align-items: center; gap: 0.3em; margin-bottom: 0.3em; }
+.iui-card-num {
+  width: 1.2em; height: 1.2em; flex: none;
+  border-radius: 0.2em; font-size: 0.6em; font-weight: 700;
+  display: grid; place-items: center;
+}
+.iui-num-brand  { background: rgb(39 159 129 / 0.20); color: #5fbf9c; }
+.iui-num-amber  { background: rgb(245 158 11 / 0.20); color: #f5b544; }
+.iui-num-violet { background: rgb(139 92 246 / 0.20); color: #b39cf7; }
+.iui-num-emerald{ background: rgb(16 185 129 / 0.20); color: #34d399; }
+.iui-card-title { font-size: 0.72em; color: #fff; font-weight: 500; }
+.iui-card-note  { font-size: 0.5em; color: #8b94a3; margin-left: 0.3em; }
+.iui-card-foot  { display: flex; align-items: center; gap: 0.4em; margin-top: 0.3em; }
+.iui-card-foot .iui-foot-label { font-size: 0.55em; color: #8b94a3; }
+.iui-chip {
+  font-size: 0.5em; padding: 0.1em 0.3em; border-radius: 0.15em; white-space: nowrap;
+}
+.iui-chip-brand { background: rgb(39 159 129 / 0.15); color: #5fbf9c; }
+.iui-chip-sky   { background: rgb(56 189 248 / 0.15); color: #6fc9f5; }
+.iui-chip-gray  { background: rgb(148 163 184 / 0.15); color: #94a3b8; }
+.iui-chip-red   { background: rgb(239 68 68 / 0.15);  color: #f08b8b; }
+.iui-foot-ms { font-size: 0.42em; color: #6b7280; margin-left: auto; }
+
+/* Lollipop chart */
+.iui-lolli-wrap { position: relative; height: 5.5em; margin-top: 0.4em; }
+.iui-axis-y { position: absolute; left: 2em; top: 0; bottom: 1em; width: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-axis-x { position: absolute; left: 2em; right: 0; bottom: 1em; height: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-axis-max { position: absolute; left: 0; top: 0; font-size: 0.5em; color: #8b94a3; }
+.iui-axis-min { position: absolute; left: 0.3em; bottom: 1em; font-size: 0.5em; color: #8b94a3; }
+.iui-lolli {
+  position: absolute; left: 2em; right: 0.5em; bottom: 1em;
+  display: flex; align-items: flex-end; gap: 0.5em; padding-left: 1em;
+  height: calc(100% - 1em);
+}
+.iui-stem {
+  position: relative; width: 2px; border-radius: 1px;
+  background: rgb(255 255 255 / 0.28);
+  transform-origin: bottom; transform: scaleY(0);
+}
+.iui-scene-active .iui-stem {
+  animation: iui-stem-grow 0.5s var(--ease-out) forwards;
+  animation-delay: calc(0.3s + var(--ld, 0s));
+}
+@keyframes iui-stem-grow { to { transform: scaleY(1); } }
+.iui-dot {
+  position: absolute; top: -4px; left: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #16b17e; box-shadow: 0 0 6px rgb(22 177 126 / 0.5);
+  transform: translateX(-50%) scale(0);
+}
+.iui-scene-active .iui-dot {
+  animation: iui-dot-pop 0.3s var(--ease-bounce) forwards;
+  animation-delay: calc(0.7s + var(--ld, 0s));
+}
+@keyframes iui-dot-pop { to { transform: translateX(-50%) scale(1); } }
+.iui-stem-label {
+  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  font-size: 0.45em; color: #d1d5db; white-space: nowrap;
+}
+.iui-domain {
+  position: absolute; left: 2em; right: 0.5em; bottom: 0; height: 0.8em;
+  display: flex; gap: 1px;
+}
+.iui-domain-seg {
+  flex: 1; border-radius: 0.15em; background: rgb(245 158 11 / 0.40);
+  display: grid; place-items: center;
+}
+.iui-domain-seg span { font-size: 0.4em; color: #fff; font-weight: 500; }
+
+/* Kaplan-Meier survival curve */
+.iui-km { position: relative; height: 6em; margin-top: 0.2em; }
+.iui-km-yl { position: absolute; left: 0; font-size: 0.4em; color: #8b94a3; }
+.iui-km-xl { position: absolute; bottom: 0.2em; font-size: 0.38em; color: #8b94a3; }
+.iui-km-plot {
+  position: absolute; left: 2em; top: 0.2em; right: 0; bottom: 1.4em;
+  overflow: hidden;
+}
+.iui-km-plot svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.iui-km-line {
+  fill: none; stroke-width: 1.5; stroke-linejoin: round;
+  stroke-dasharray: 400; stroke-dashoffset: 400;
+}
+.iui-scene-active .iui-km-line {
+  animation: iui-km-draw 1.5s var(--ease-out) forwards;
+  animation-delay: 0.6s;
+}
+@keyframes iui-km-draw { to { stroke-dashoffset: 0; } }
+.iui-km-axisy { position: absolute; left: 2em; top: 0.2em; bottom: 1.4em; width: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-km-axisx { position: absolute; left: 2em; right: 0; bottom: 1.4em; height: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-km-legend { display: flex; align-items: center; gap: 0.6em; margin-top: 0.15em; }
+.iui-km-leg { display: flex; align-items: center; gap: 0.2em; font-size: 0.42em; color: #d1d5db; }
+.iui-km-swatch { width: 0.6em; height: 2px; display: inline-block; }
+.iui-km-n { font-size: 0.38em; margin-left: 0.15em; }
+
+/* Druggability bubble chart */
+.iui-bubbles { position: relative; height: 7em; margin-top: 0.3em; }
+.iui-bub-axisy { position: absolute; left: 4.5em; top: 0; bottom: 1.2em; width: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-bub-axisx { position: absolute; left: 4.5em; right: 0; bottom: 1.2em; height: 1px; background: rgb(255 255 255 / 0.10); }
+.iui-bub-yl { position: absolute; left: 0; font-size: 0.4em; color: #d1d5db; line-height: 1; }
+.iui-bub-xl { position: absolute; bottom: 0; font-size: 0.35em; color: #6b7280; }
+.iui-bubble {
+  position: absolute; border-radius: 50%; transform: scale(0);
+}
+.iui-scene-active .iui-bubble {
+  animation: iui-bub-pop 0.4s var(--ease-bounce) forwards;
+  animation-delay: calc(0.5s + var(--bbd, 0s));
+}
+@keyframes iui-bub-pop { to { transform: scale(1); } }
+.iui-bub-sky   { background: rgb(56 189 248 / 0.60); }
+.iui-bub-brand { background: rgb(39 159 129 / 0.60); }
+.iui-bub-violet{ background: rgb(139 92 246 / 0.60); }
+.iui-bub-legend { display: flex; gap: 0.5em; margin-top: 0.2em; }
+.iui-bub-leg { display: flex; align-items: center; gap: 0.15em; font-size: 0.4em; color: #8b94a3; }
+.iui-bub-leg span:first-child { width: 0.35em; height: 0.35em; border-radius: 50%; display: inline-block; }
+
+/* Drug-gene interactions table */
+.iui-table { border: 1px solid rgb(255 255 255 / 0.05); border-radius: 0.2em; overflow: hidden; }
+.iui-trow {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+  font-size: 0.42em; color: #d1d5db; padding: 0.15em 0.4em;
+  border-top: 1px solid rgb(255 255 255 / 0.05);
+}
+.iui-trow-head {
+  background: rgb(255 255 255 / 0.05); color: #8b94a3; font-weight: 500;
+  font-size: 0.45em; border-top: 0;
+}
+.iui-td-gene { color: #5fbf9c; }
+.iui-td-yes  { color: #34d399; }
+.iui-td-src  { color: #6b7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.iui-table-rows .iui-trow { opacity: 0; transform: translateY(6px); }
+.iui-scene-active .iui-table-rows .iui-trow {
+  animation: iui-row-in 0.4s var(--ease-out) forwards;
+  animation-delay: calc(0.8s + var(--rd, 0s));
+}
+@keyframes iui-row-in { to { opacity: 1; transform: none; } }
+.iui-table-more { font-size: 0.45em; color: #6b7280; margin-left: auto; }
+
+/* PubMed citation popup — shown when the D1 citation is "clicked" */
+.iui-cite-d1 { cursor: pointer; transition: background 0.2s ease, box-shadow 0.2s ease; }
+.iui-cite-d1.iui-cite-active {
+  background: rgb(22 177 126 / 0.40);
+  box-shadow: 0 0 0 2px rgb(22 177 126 / 0.50);
+}
+.iui-pub-backdrop {
+  position: absolute; inset: 0; z-index: 25;
+  background: rgb(0 0 0 / 0.20); backdrop-filter: blur(1px);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.iui-pub-backdrop.iui-pub-on { opacity: 1; }
+.iui-pub-popup {
+  position: absolute; z-index: 30; width: 18em; top: 11em; left: 6.5em;
+  border-radius: 0.5em; padding: 0.7em;
+  background: rgb(22 32 54 / 0.97);
+  border: 1px solid rgb(39 159 129 / 0.30);
+  box-shadow: 0 20px 40px -10px rgb(0 0 0 / 0.6);
+  opacity: 0; pointer-events: none; transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.iui-pub-popup.iui-pub-on { opacity: 1; transform: translateY(0); }
+.iui-pub-arrow {
+  position: absolute; top: -0.4em; left: 5em;
+  width: 0; height: 0;
+  border-left: 0.4em solid transparent; border-right: 0.4em solid transparent;
+  border-bottom: 0.4em solid rgb(39 159 129 / 0.30);
+}
+.iui-pub-head { display: flex; align-items: center; gap: 0.3em; margin-bottom: 0.4em; }
+.iui-pub-tag { font-size: 0.55em; color: #5fbf9c; font-weight: 600; }
+.iui-pub-pmid { font-size: 0.45em; color: #6b7280; }
+.iui-pub-title { font-size: 0.6em; color: #fff; font-weight: 500; line-height: 1.35; margin: 0 0 0.25em; }
+.iui-pub-meta { font-size: 0.48em; color: #8b94a3; margin: 0 0 0.3em; }
+.iui-pub-meta b { color: #d1d5db; font-weight: 500; }
+.iui-pub-abs { font-size: 0.45em; color: #6b7280; line-height: 1.5; margin: 0; }
 
 .iui-part {
   opacity: 0;
@@ -780,12 +960,17 @@ body {
 
 @media (max-width: 30rem) {
   .iui-chat { width: 100%; border-right: 0; }
-  .iui-vis { display: none; }
+  .iui-vis, .iui-pub-popup, .iui-pub-backdrop { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .iui-part { opacity: 1; transform: none; }
-  .iui-lolli-bar { transform: scaleY(1); transition: none; }
+  .iui-stem, .iui-dot, .iui-km-line, .iui-bubble, .iui-table-rows .iui-trow { animation: none !important; }
+  .iui-stem { transform: scaleY(1); }
+  .iui-dot { transform: translateX(-50%) scale(1); }
+  .iui-km-line { stroke-dashoffset: 0; }
+  .iui-bubble { transform: scale(1); }
+  .iui-table-rows .iui-trow { opacity: 1; transform: none; }
   .iui-cursor { animation: none; }
 }
 

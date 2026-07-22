@@ -136,15 +136,158 @@
               </div>
 
               <div class="iui-vis">
-                <p class="iui-vis-title">Mutation frequency by protein position</p>
-                <div class="iui-lolli">
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:90%"></div><span class="iui-lolli-label">R175H</span></div>
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:62%"></div><span class="iui-lolli-label">R273H</span></div>
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:48%"></div><span class="iui-lolli-label">H193R</span></div>
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:35%"></div><span class="iui-lolli-label">R248Q</span></div>
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:28%"></div><span class="iui-lolli-label">Y220C</span></div>
-                  <div class="iui-lolli-item"><div class="iui-lolli-bar" style="height:20%"></div><span class="iui-lolli-label">G245S</span></div>
+                <!-- Scene 0 — TP53 mutation hotspots (lollipop) -->
+                <div class="iui-scene iui-scene-active" data-scene="0">
+                  <div class="iui-card">
+                    <div class="iui-card-head">
+                      <span class="iui-card-num iui-num-brand">#1</span>
+                      <span class="iui-card-title">TP53 Mutation Hotspots in Breast Carcinoma</span>
+                    </div>
+                    <div class="iui-lolli-wrap">
+                      <div class="iui-axis-y"></div><div class="iui-axis-x"></div>
+                      <span class="iui-axis-max">100</span><span class="iui-axis-min">0</span>
+                      <div class="iui-lolli">
+                        <div class="iui-stem" style="height:95%;--ld:0.1s"><span class="iui-stem-label">R175H</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:60%;--ld:0.2s"><span class="iui-stem-label">R273H</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:45%;--ld:0.3s"><span class="iui-stem-label">H193R</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:30%;--ld:0.4s"><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:22%;--ld:0.5s"><div class="iui-dot"></div></div>
+                      </div>
+                      <div class="iui-domain"><div class="iui-domain-seg"><span>DNA-binding domain</span></div></div>
+                    </div>
+                    <div class="iui-card-foot">
+                      <span class="iui-foot-label">Details &amp; Methods</span>
+                      <span class="iui-chip iui-chip-brand">41 positions</span>
+                      <span class="iui-chip iui-chip-sky">207 mutations</span>
+                      <span class="iui-chip iui-chip-gray">18ms</span>
+                    </div>
+                  </div>
                 </div>
+
+                <!-- Scene 1 — KRAS lollipop + Kaplan-Meier survival curve -->
+                <div class="iui-scene" data-scene="1">
+                  <div class="iui-card">
+                    <div class="iui-card-head">
+                      <span class="iui-card-num iui-num-brand">#2</span>
+                      <span class="iui-card-title">KRAS Mutation Hotspots in Pancreatic Adenocarcinoma</span>
+                    </div>
+                    <div class="iui-lolli-wrap">
+                      <div class="iui-axis-y"></div><div class="iui-axis-x"></div>
+                      <span class="iui-axis-max">100</span><span class="iui-axis-min">0</span>
+                      <div class="iui-lolli">
+                        <div class="iui-stem" style="height:95%;--ld:0.1s"><span class="iui-stem-label">G12D</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:8%;--ld:0.2s"><span class="iui-stem-label">G13C</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:12%;--ld:0.3s"><span class="iui-stem-label">Q61H</span><div class="iui-dot"></div></div>
+                        <div class="iui-stem" style="height:5%;--ld:0.4s"><div class="iui-dot"></div></div>
+                      </div>
+                      <div class="iui-domain"><div class="iui-domain-seg"><span>Ras family</span></div></div>
+                    </div>
+                    <div class="iui-card-foot">
+                      <span class="iui-foot-label">Details &amp; Methods</span>
+                      <span class="iui-chip iui-chip-brand">4 hotspots</span>
+                      <span class="iui-chip iui-chip-sky">127 mutations</span>
+                      <span class="iui-chip iui-chip-gray">26ms</span>
+                    </div>
+                  </div>
+                  <div class="iui-card">
+                    <div class="iui-card-head">
+                      <span class="iui-card-num iui-num-amber">#3</span>
+                      <span class="iui-card-title">Survival by KRAS Mutation</span>
+                      <span class="iui-chip iui-chip-red" style="margin-left:0.3em">p&lt;0.001</span>
+                    </div>
+                    <div class="iui-km">
+                      <span class="iui-km-yl" style="top:0.1em">1.0</span>
+                      <span class="iui-km-yl" style="top:42%">0.5</span>
+                      <span class="iui-km-yl" style="bottom:1.5em">0.0</span>
+                      <span class="iui-km-xl" style="left:2em">0</span>
+                      <span class="iui-km-xl" style="left:35%">500</span>
+                      <span class="iui-km-xl" style="left:62%">1,000</span>
+                      <span class="iui-km-xl" style="right:0">Time (days)</span>
+                      <div class="iui-km-axisy"></div><div class="iui-km-axisx"></div>
+                      <div class="iui-km-plot">
+                        <svg viewBox="0 0 200 100" preserveAspectRatio="none">
+                          <polyline class="iui-km-line" stroke="#f59e0b" vector-effect="non-scaling-stroke" points="0,5 40,5 40,8 70,8 70,14 95,14 95,20 120,20 120,24 145,24 145,28 170,28 170,34 200,34"/>
+                          <polyline class="iui-km-line" stroke="#16b17e" vector-effect="non-scaling-stroke" points="0,5 12,5 12,24 22,24 22,45 32,45 32,62 42,62 42,74 55,74 55,82 70,82 70,88 95,88 95,92 140,92 200,95"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="iui-km-legend">
+                      <span class="iui-km-leg"><span class="iui-km-swatch" style="background:#16b17e"></span>KRAS Mutant<span class="iui-km-n" style="color:#f5b544">49</span></span>
+                      <span class="iui-km-leg"><span class="iui-km-swatch" style="background:#f59e0b"></span>KRAS Wild-type<span class="iui-km-n" style="color:#5fbf9c">32</span></span>
+                      <span class="iui-foot-ms">286ms</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Scene 2 — druggability bubble chart + drug-gene table -->
+                <div class="iui-scene" data-scene="2">
+                  <div class="iui-card">
+                    <div class="iui-card-head">
+                      <span class="iui-card-num iui-num-violet">#4</span>
+                      <span class="iui-card-title">Druggability Assessment</span>
+                      <span class="iui-card-note">11 drugs</span>
+                    </div>
+                    <div class="iui-bubbles">
+                      <div class="iui-bub-axisy"></div><div class="iui-bub-axisx"></div>
+                      <span class="iui-bub-yl" style="top:2%">Adagrasib</span>
+                      <span class="iui-bub-yl" style="top:14%">Sotorasib</span>
+                      <span class="iui-bub-yl" style="top:26%">Idasanutlin</span>
+                      <span class="iui-bub-yl" style="top:38%">APG-115</span>
+                      <span class="iui-bub-yl" style="top:50%">Navitoclax</span>
+                      <span class="iui-bub-yl" style="top:62%">Sirenadlin</span>
+                      <span class="iui-bub-yl" style="top:74%">Teprasiran</span>
+                      <span class="iui-bub-xl" style="left:22%">Phase I</span>
+                      <span class="iui-bub-xl" style="left:42%">Phase II</span>
+                      <span class="iui-bub-xl" style="left:62%">Phase III</span>
+                      <span class="iui-bub-xl" style="right:0.5em">Approved</span>
+                      <div class="iui-bubble iui-bub-sky"   style="left:70%;top:3%;width:0.9em;height:0.9em;--bbd:0.15s"></div>
+                      <div class="iui-bubble iui-bub-sky"   style="left:65%;top:15%;width:0.7em;height:0.7em;--bbd:0.25s"></div>
+                      <div class="iui-bubble iui-bub-brand" style="left:35%;top:27%;width:0.5em;height:0.5em;--bbd:0.35s"></div>
+                      <div class="iui-bubble iui-bub-brand" style="left:30%;top:39%;width:0.45em;height:0.45em;--bbd:0.4s"></div>
+                      <div class="iui-bubble iui-bub-brand" style="left:40%;top:51%;width:0.6em;height:0.6em;--bbd:0.45s"></div>
+                      <div class="iui-bubble iui-bub-brand" style="left:25%;top:63%;width:0.4em;height:0.4em;--bbd:0.5s"></div>
+                      <div class="iui-bubble iui-bub-violet" style="left:20%;top:75%;width:0.35em;height:0.35em;--bbd:0.55s"></div>
+                    </div>
+                    <div class="iui-bub-legend">
+                      <span class="iui-bub-leg"><span style="background:rgb(56 189 248 / 0.6)"></span>Small molecule</span>
+                      <span class="iui-bub-leg"><span style="background:rgb(39 159 129 / 0.6)"></span>Oligonucleotide</span>
+                      <span class="iui-bub-leg"><span style="background:rgb(139 92 246 / 0.6)"></span>Gene</span>
+                    </div>
+                  </div>
+                  <div class="iui-card">
+                    <div class="iui-card-head">
+                      <span class="iui-card-num iui-num-emerald">#5</span>
+                      <span class="iui-card-title">Drug-Gene Interactions</span>
+                      <span class="iui-card-note">581 interactions</span>
+                    </div>
+                    <div class="iui-table">
+                      <div class="iui-trow iui-trow-head"><span>Drug</span><span>Gene</span><span>Type</span><span>Approved</span><span>Sources</span></div>
+                      <div class="iui-table-rows">
+                        <div class="iui-trow" style="--rd:0s"><span>Palbociclib</span><span class="iui-td-gene">CDKN2A</span><span>unknown</span><span class="iui-td-yes">Yes</span><span class="iui-td-src">PharmGKB, CIVIC</span></div>
+                        <div class="iui-trow" style="--rd:0.1s"><span>Panitumumab</span><span class="iui-td-gene">KRAS</span><span>unknown</span><span class="iui-td-yes">Yes</span><span class="iui-td-src">CancerGenome</span></div>
+                        <div class="iui-trow" style="--rd:0.2s"><span>Adagrasib</span><span class="iui-td-gene">KRAS</span><span>inhibitor</span><span class="iui-td-yes">Yes</span><span class="iui-td-src">PharmGKB, CIVIC</span></div>
+                        <div class="iui-trow" style="--rd:0.3s"><span>Abemaciclib</span><span class="iui-td-gene">CDKN2A</span><span>unknown</span><span class="iui-td-yes">Yes</span><span class="iui-td-src">OncoKB</span></div>
+                      </div>
+                    </div>
+                    <div class="iui-card-foot">
+                      <span class="iui-foot-label">Details &amp; Methods</span>
+                      <span class="iui-table-more">Show all 581 rows ↓</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PubMed citation popup (shown by JS on scene 0) -->
+              <div class="iui-pub-backdrop"></div>
+              <div class="iui-pub-popup">
+                <div class="iui-pub-arrow"></div>
+                <div class="iui-pub-head">
+                  <span class="iui-pub-tag">PubMed</span>
+                  <span class="iui-pub-pmid">PMID: 30575850</span>
+                </div>
+                <p class="iui-pub-title">KRAS mutation subtypes and survival outcomes in pancreatic ductal adenocarcinoma</p>
+                <p class="iui-pub-meta">Steele CW, et al. · <b>Nature Medicine</b> · 2018</p>
+                <p class="iui-pub-abs">Analysis of 184 PAAD tumors reveals KRAS G12D as the dominant mutation (39%), with G12R carriers showing improved survival and reduced distant recurrence compared to other codon 12 variants…</p>
               </div>
             </div>
           </article>
@@ -256,21 +399,22 @@
     </script>
 
     <script>
-    /* Insight mockup — ported from the marketing site's animated portfolio
-       demo. Types the query, staggers in the answer, cycles three scenes.
-       Plain DOM + CSS classes; no framework. Pauses when off-screen. */
+    /* Insight mockup — faithful port of the marketing site's hero-mockup.
+       Three scenes swap in sync with the query: the chat panel types the
+       question and staggers in a cited answer, while the right panel swaps
+       between real dashboards (TP53 lollipop; KRAS lollipop + Kaplan-Meier
+       survival curve; druggability bubble chart + drug-gene table), each
+       drawing itself via CSS on activation. On scene 0 the D1 citation is
+       "clicked" to open a PubMed popup. Plain DOM + CSS; pauses off-screen. */
     (function () {
       var ui = document.querySelector('.insight-ui');
       if (!ui) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       var scenes = [
         {
           query: 'TP53 mutations in breast cancer',
           steps: 'Investigated with 5 steps',
           context: 'Brca TCGA Pan Can Atlas 2018', target: 'TP53', cohort: 'COHORT: N=1,080',
-          vis: 'Mutation frequency by protein position',
-          bars: [['R175H',90],['R273H',62],['H193R',48],['R248Q',35],['Y220C',28],['G245S',20]],
           paras: [
             'TP53 is mutated in approximately 34% of breast invasive carcinomas (368/1,080 samples), with 207 mutations across 41 distinct protein positions.',
             'The mutation landscape is dominated by hotspots in the DNA-binding domain, specifically R175H (10%), R273H/C/L, and H193R/Y.',
@@ -283,8 +427,6 @@
           query: 'How do KRAS mutations impact survival in pancreatic cancer?',
           steps: 'Investigated with 3 steps',
           context: 'Paad TCGA Pan Can Atlas 2018', target: 'KRAS', cohort: 'COHORT: N=184',
-          vis: 'Codon-12 variant frequency',
-          bars: [['G12D',88],['G12V',54],['G12R',40],['G13D',22],['Q61H',15],['A146T',10]],
           paras: [
             'KRAS mutations significantly reduce overall survival in pancreatic cancer: median 1.4 years for mutant carriers versus 3.6 years for wild-type (p=0.00029).',
             'This is driven by near-universal codon-12 mutations (86.6%), primarily G12D (39%), G12V, and G12R.',
@@ -297,8 +439,6 @@
           query: 'What about drug sensitivity?',
           steps: 'Investigated with 4 steps',
           context: 'Paad TCGA Pan Can Atlas 2018', target: 'KRAS', cohort: 'COHORT: N=184',
-          vis: 'Druggability by target',
-          bars: [['KRAS',75],['TP53',30],['CDKN2A',52],['SMAD4',38],['MYC',22],['ARID1A',44]],
           paras: [
             'Drug sensitivity in pancreatic cancer is marked by high resistance to standard therapies, though profiling reveals emerging targets.',
             'KRAS was long considered undruggable, but is now tractable via small molecules and PROTACs, with two FDA-approved G12C inhibitors.',
@@ -318,13 +458,16 @@
       var cohEl   = ui.querySelector('.iui-cohort');
       var parasEl = ui.querySelector('.iui-paras');
       var followEl= ui.querySelector('.iui-follow-list');
-      var visTtl  = ui.querySelector('.iui-vis-title');
-      var visRoot = ui.querySelector('.iui-vis');
-      var lolli   = ui.querySelector('.iui-lolli');
+      var vScenes = [].slice.call(ui.querySelectorAll('.iui-scene'));
+      var pubBackdrop = ui.querySelector('.iui-pub-backdrop');
+      var pubPopup    = ui.querySelector('.iui-pub-popup');
 
       var current = 0, INTERVAL = 8000, timers = [], typing = null, running = false;
       function addTimer(fn, d) { var t = setTimeout(fn, d); timers.push(t); return t; }
-      function clearTimers() { timers.forEach(clearTimeout); timers = []; if (typing) { clearInterval(typing); typing = null; } }
+      function clearTimers() {
+        timers.forEach(clearTimeout); timers = [];
+        if (typing) { clearInterval(typing); typing = null; }
+      }
 
       function typeQuery(text) {
         if (typing) clearInterval(typing);
@@ -336,62 +479,113 @@
         }, 30);
       }
 
-      function render(s) {
+      // Build the chat paragraphs + follow-ups. On scene 0 the first cite is
+      // tagged .iui-cite-d1 so the PubMed interaction can target it.
+      function renderChat(s, idx) {
         stepsEl.textContent = s.steps;
         cohEl.textContent = s.cohort;
         ctxEl.textContent = s.context;
         tgtEl.textContent = s.target;
-        visTtl.textContent = s.vis;
 
         parasEl.innerHTML = '';
         s.paras.forEach(function (txt, i) {
           var p = document.createElement('p');
           p.className = 'iui-part';
           p.textContent = txt;
-          if (s.cites[i]) { var c = document.createElement('span'); c.className = 'iui-cite'; c.textContent = s.cites[i]; p.appendChild(c); }
+          if (s.cites[i]) {
+            var c = document.createElement('span');
+            c.className = 'iui-cite' + (idx === 0 && i === 0 ? ' iui-cite-d1' : '');
+            c.textContent = s.cites[i];
+            p.appendChild(c);
+          }
           parasEl.appendChild(p);
         });
 
         followEl.innerHTML = '';
-        s.followups.forEach(function (txt) { var p = document.createElement('p'); p.textContent = txt; followEl.appendChild(p); });
-
-        lolli.innerHTML = '';
-        s.bars.forEach(function (b) {
-          var item = document.createElement('div'); item.className = 'iui-lolli-item';
-          var bar = document.createElement('div'); bar.className = 'iui-lolli-bar'; bar.style.height = b[1] + '%';
-          var lbl = document.createElement('span'); lbl.className = 'iui-lolli-label'; lbl.textContent = b[0];
-          item.appendChild(bar); item.appendChild(lbl); lolli.appendChild(item);
+        s.followups.forEach(function (txt) {
+          var p = document.createElement('p'); p.textContent = txt; followEl.appendChild(p);
         });
       }
 
-      function reveal(s) {
+      // Swap the active vis scene, replaying its chart animations via the
+      // reflow-reset trick (drop then re-add active so the CSS keyframes run).
+      function showScene(idx) {
+        vScenes.forEach(function (s) { s.classList.remove('iui-scene-active'); });
+        var t = vScenes[idx];
+        if (!t) return;
+        void t.offsetWidth;
+        t.classList.add('iui-scene-active');
+      }
+
+      function pubmed() {
+        // Scene 0 only: "click" the D1 citation → open the PubMed popup.
+        var d1 = ui.querySelector('.iui-cite-d1');
+        if (!d1) return;
+        addTimer(function () {
+          d1.classList.add('iui-cite-active');
+          addTimer(function () {
+            pubBackdrop.classList.add('iui-pub-on');
+            pubPopup.classList.add('iui-pub-on');
+          }, 300);
+          addTimer(function () {
+            pubBackdrop.classList.remove('iui-pub-on');
+            pubPopup.classList.remove('iui-pub-on');
+            d1.classList.remove('iui-cite-active');
+          }, 2600);
+        }, 4000);
+      }
+
+      function reveal(s, idx) {
         stepsW.style.opacity = '0'; parasEl.style.opacity = '0';
-        visRoot.classList.remove('iui-vis-active');
         typeQuery(s.query);
         var typeDone = s.query.length * 30 + 500;
         addTimer(function () { stepsW.style.opacity = '1'; }, typeDone);
         addTimer(function () {
           parasEl.style.opacity = '1';
-          [].forEach.call(parasEl.children, function (p, i) { addTimer(function () { p.classList.add('iui-part-shown'); }, i * 400); });
-          void visRoot.offsetWidth;
-          visRoot.classList.add('iui-vis-active');   // grow the bars
+          [].forEach.call(parasEl.children, function (p, i) {
+            addTimer(function () { p.classList.add('iui-part-shown'); }, i * 400);
+          });
         }, typeDone + 300);
+        if (idx === 0) pubmed();
+      }
+
+      function enter(idx) {
+        renderChat(scenes[idx], idx);
+        showScene(idx);
+        requestAnimationFrame(function () { requestAnimationFrame(function () { reveal(scenes[idx], idx); }); });
       }
 
       function advance() {
         clearTimers();
+        if (pubBackdrop) pubBackdrop.classList.remove('iui-pub-on');
+        if (pubPopup) pubPopup.classList.remove('iui-pub-on');
         ui.style.transition = 'opacity 0.4s ease'; ui.style.opacity = '0.45';
         addTimer(function () {
           current = (current + 1) % scenes.length;
-          render(scenes[current]);
           ui.style.opacity = '1';
-          requestAnimationFrame(function () { requestAnimationFrame(function () { reveal(scenes[current]); }); });
+          enter(current);
           addTimer(advance, INTERVAL);
         }, 500);
       }
 
-      function start() { if (running) return; running = true; render(scenes[0]); requestAnimationFrame(function(){ reveal(scenes[0]); }); addTimer(advance, INTERVAL); }
+      function start() {
+        if (running) return;
+        running = true;
+        current = 0;
+        enter(0);
+        addTimer(advance, INTERVAL);
+      }
       function stop() { running = false; clearTimers(); }
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Static end-state: scene 0's chat + charts fully shown, no cycling.
+        renderChat(scenes[0], 0);
+        cursor.style.display = 'none';
+        stepsW.style.opacity = '1'; parasEl.style.opacity = '1';
+        [].forEach.call(parasEl.children, function (p) { p.classList.add('iui-part-shown'); });
+        showScene(0);
+        return;
+      }
 
       // Run while visible. IntersectionObserver reports isIntersecting=false
       // for a display:none element (the artifact hides non-active routes), so
@@ -400,7 +594,7 @@
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.2 }).observe(ui);
       }
-      var poll = setInterval(function () {
+      setInterval(function () {
         var visible = ui.offsetParent !== null && ui.getBoundingClientRect().height > 0;
         if (visible && !running) start();
         else if (!visible && running) stop();
