@@ -582,6 +582,74 @@ body {
   text-wrap: pretty;
 }
 
+/* --- Product feature ---------------------------------------------------
+   The two shipping products (DrugAdopt, Insight) get a full-width feature
+   row: copy on one side, a running demo on the other. Alternating sides
+   (product-feature-reverse) keeps two stacked features from reading as a
+   template. The pipeline products below stay in the compact grid. */
+
+.product-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.product-feature-reverse { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+.product-feature-reverse .product-feature-copy { order: 2; }
+.product-feature-reverse .product-feature-shot { order: 1; }
+
+@media (max-width: 54rem) {
+  .product-feature,
+  .product-feature-reverse { grid-template-columns: 1fr; }
+  .product-feature-reverse .product-feature-copy { order: 1; }
+  .product-feature-reverse .product-feature-shot { order: 2; }
+}
+
+.product-feature .product-head { margin-bottom: 0.8rem; }
+.product-feature h2 {
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0;
+}
+.product-feature .tm { font-size: 0.5em; vertical-align: super; color: var(--ink-4); font-weight: 400; }
+
+.product-feature-copy > p {
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+.product-feature-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin: 0 !important;
+}
+
+.product-feature-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08), 0 12px 32px -10px rgb(0 0 0 / 0.22);
+}
+
+.product-tag-flagship {
+  color: var(--accent) !important;
+  background: var(--accent-wash) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  font-weight: 650;
+}
+
 /* --- Product grid ------------------------------------------------------- */
 
 /* Four items: 2x2, never 3+1. */
