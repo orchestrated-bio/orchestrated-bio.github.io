@@ -546,6 +546,17 @@ body {
   color: var(--ink-3);
 }
 
+/* Supporting-lane note under the four-section grid. Quieter than the grid:
+   these lanes are worked but are not the headline scientific readout. */
+.band-note {
+  margin: 1.1rem 0 0;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-4);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
 /* --- The deliverable ---------------------------------------------------
    A screenshot of a real rendered report from docs/cases/. Not a mockup and
    not animated: a verification report has no story in time, so staging it in
