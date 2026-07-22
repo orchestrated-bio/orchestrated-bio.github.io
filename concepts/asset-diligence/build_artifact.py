@@ -207,7 +207,7 @@ def build() -> str:
 
     doc = (
         "<meta charset=\"utf-8\" />\n"
-        "<title>Orchestrated Biosciences — Biomarker- and evidence-grounded decision support</title>\n"
+        "<title>Orchestrated Biosciences — Find the patients a drug will help</title>\n"
         f"<style>\n{styles}\n</style>\n"
         f"{body}\n"
         f"<script>\n{router}\n</script>\n"

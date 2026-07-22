@@ -1126,14 +1126,20 @@ body {
 }
 .dax-ov-target { font-size: 0.58em; color: var(--kd-muted); margin: 0 0 0.3em; }
 .dax-ov-ind { color: var(--kd-amber); font-style: italic; font-size: 0.7em; margin: 0; max-width: 30ch; }
-.dax-ov-verdict {
-  flex: none; text-align: right;
-  border: 1px solid var(--kd-amber); border-radius: 3px; background: #fdf6ec;
-  padding: 0.5em 0.7em; display: flex; flex-direction: column; gap: 0.1em;
+/* Evidence-state marker — states where the evidence stands, not a
+   recommendation. Deliberately quiet: a labelled fact, no caution styling. */
+.dax-ov-status {
+  flex: none; text-align: right; max-width: 12em;
+  padding-left: 0.9em; border-left: 2px solid var(--kd-blue);
+  display: flex; flex-direction: column; gap: 0.15em;
 }
-.dax-ov-verdict-label { font-size: 0.52em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--kd-muted); }
-.dax-ov-verdict-call { font-size: 0.78em; font-weight: 700; color: var(--kd-amber); text-transform: uppercase; letter-spacing: 0.02em; }
-.dax-ov-verdict-meta { font-size: 0.52em; color: var(--kd-muted); }
+.dax-ov-status-label { font-size: 0.52em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--kd-muted); }
+.dax-ov-status-state { font-family: var(--kd-serif); font-size: 0.78em; font-weight: 700; color: var(--kd-blue); line-height: 1.2; }
+
+.dax-ov-question {
+  font-family: var(--kd-serif); font-size: 0.82em; font-weight: 700;
+  color: var(--kd-ink); line-height: 1.35; margin: 0 0 0.7em;
+}
 
 .dax-ov-readout {
   font-family: var(--kd-serif); font-size: 0.72em; line-height: 1.55;
@@ -1207,20 +1213,6 @@ body {
 .dax-table .dax-td-gate { color: var(--kd-amber); font-style: italic; }
 .dax-conf-high { color: #157347; font-weight: 700; }
 .dax-conf-med  { color: var(--kd-amber); font-weight: 700; }
-
-/* blocking-rows chips on the recommendation page */
-.dax-block-list { display: flex; flex-wrap: wrap; gap: 0.3em; margin: 0.3em 0 0.6em; }
-.dax-block-chip {
-  font-family: var(--mono); font-size: 0.56em;
-  padding: 0.12em 0.5em; border-radius: 0.6em;
-  background: #fbeaea; color: #a13d3d; border: 1px solid #e3b9b9;
-}
-.dax-disposition {
-  display: inline-block; font-family: var(--sans); font-weight: 700;
-  font-size: 0.62em; letter-spacing: 0.03em; text-transform: uppercase;
-  color: #fff; background: var(--kd-amber); padding: 0.2em 0.6em; border-radius: 3px;
-  margin-bottom: 0.5em;
-}
 
 @media (max-width: 40rem) {
   .dax-ui { flex-direction: column; min-height: 0; }
