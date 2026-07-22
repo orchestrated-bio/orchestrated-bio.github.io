@@ -975,16 +975,21 @@ body {
 }
 
 /* --- DrugAdopt mockup --------------------------------------------------
-   Narrates the pipeline the report actually runs: an asset drops in, the
-   eight IND modules work public evidence in parallel, each resolves to a
-   graded verdict with the number behind it, and a gap map falls out. Same
-   em-off-one-clamped-root idiom as the Insight mockup; its own ground so the
-   two products read as siblings. JS drives the four beats and loops. */
+   Shows the real deliverable: a clickable section spine (left, dark app
+   chrome) that opens each part of the prexasertib report as an actual
+   K-Dense report page (right, on white paper). Serif headings, blue accents,
+   boxed callouts, data tables, inline citations — faithful to the real PDF
+   output. Auto-cycles through sections and each spine item is clickable.
+   Content is the real prexasertib view-model; sizes to content. */
 .dax-ui {
+  --kd-blue:   #1a5490;
+  --kd-blue-2: #2c6cb0;
+  --kd-amber:  #c0700f;
+  --kd-ink:    #1a1a1a;
+  --kd-muted:  #5a6472;
+  --kd-rule:   #d7dde3;
+  --kd-serif:  Georgia, "Times New Roman", "Iowan Old Style", serif;
   position: relative;
-  /* Sizes to content rather than a fixed aspect-ratio: the eight-module board
-     plus a wrapped verdict badge here and there needs the vertical room, and a
-     clipped fact line reads as a bug. Width still scales the em-based type. */
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--rule);
@@ -993,154 +998,194 @@ body {
   font-size: clamp(10px, 1.12vw, 15px);
   color: #cdd5df;
   display: flex;
-  flex-direction: column;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
+  min-height: 32em;
 }
 
-/* Header: the asset + indication being worked. */
-.dax-head {
-  display: flex;
-  align-items: center;
-  gap: 0.7em;
-  padding: 0.85em 1.1em;
-  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+/* ── Spine (left, dark app chrome) ── */
+.dax-spine {
+  flex: none; width: 12em;
   background: #0e1826;
+  border-right: 1px solid rgb(255 255 255 / 0.06);
+  display: flex; flex-direction: column;
+  padding: 0.9em 0;
 }
-.dax-head-logo {
-  width: 1.6em; height: 1.6em; flex: none;
-  border-radius: 0.35em;
-  background: rgb(39 159 129 / 0.20);
-  display: grid; place-items: center;
-}
-.dax-head-logo img { width: 1em; height: 1em; }
-.dax-asset { font-family: var(--mono); font-size: 0.82em; letter-spacing: 0.01em; }
-.dax-asset b { color: #eaf1ee; font-weight: 600; }
-.dax-asset .dax-ind { color: #8b97a6; }
-.dax-asset .dax-caret {
-  display: inline-block; width: 0.5em; height: 1em; margin-left: 0.1em;
-  background: #5fbf9c; vertical-align: -0.15em; animation: dax-blink 1s step-end infinite;
-}
-@keyframes dax-blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
-.dax-phase {
-  margin-left: auto; font-family: var(--mono); font-size: 0.66em;
-  letter-spacing: 0.08em; text-transform: uppercase; color: #6f7c8b;
+.dax-spine-brand {
   display: flex; align-items: center; gap: 0.5em;
+  padding: 0 1em 0.9em; margin-bottom: 0.4em;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
 }
-.dax-phase-dot {
+.dax-spine-logo {
+  width: 1.5em; height: 1.5em; flex: none; border-radius: 0.35em;
+  background: rgb(39 159 129 / 0.20); display: grid; place-items: center;
+}
+.dax-spine-logo img { width: 1em; height: 1em; }
+.dax-spine-title { font-size: 0.72em; font-weight: 600; color: #eaf1ee; letter-spacing: 0.02em; }
+.dax-spine-title span { display: block; font-weight: 400; color: #8b97a6; font-size: 0.85em; margin-top: 0.1em; }
+
+.dax-nav { list-style: none; margin: 0; padding: 0.4em 0; display: flex; flex-direction: column; gap: 0.1em; }
+.dax-nav-item {
+  display: flex; align-items: baseline; gap: 0.5em;
+  padding: 0.5em 1em; cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.dax-nav-item:hover { background: rgb(255 255 255 / 0.03); }
+.dax-nav-num {
+  font-family: var(--mono); font-size: 0.62em; color: #6f7c8b; flex: none; min-width: 1.1em;
+}
+.dax-nav-label { font-size: 0.68em; line-height: 1.3; color: #9aa6b4; }
+.dax-nav-item-active {
+  background: rgb(39 159 129 / 0.10);
+  border-left-color: #5fbf9c;
+}
+.dax-nav-item-active .dax-nav-label { color: #eaf1ee; }
+.dax-nav-item-active .dax-nav-num { color: #5fbf9c; }
+.dax-spine-foot {
+  margin-top: auto; padding: 0.8em 1em 0;
+  border-top: 1px solid rgb(255 255 255 / 0.06);
+  font-family: var(--mono); font-size: 0.55em; letter-spacing: 0.05em;
+  text-transform: uppercase; color: #6f7c8b;
+  display: flex; align-items: center; gap: 0.4em;
+}
+.dax-spine-foot .dax-live-dot {
   width: 0.5em; height: 0.5em; border-radius: 50%; background: #5fbf9c;
-  box-shadow: 0 0 0.5em #5fbf9c; animation: dax-pulse 1.4s ease-in-out infinite;
+  box-shadow: 0 0 0.4em #5fbf9c; animation: dax-pulse 1.6s ease-in-out infinite;
 }
 @keyframes dax-pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
 
-/* Body: the eight-module board. */
-.dax-body { flex: 1; display: flex; min-height: 0; }
-.dax-board {
-  flex: 1.35;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.55em;
-  padding: 0.95em 1.05em;
-  align-content: start;
-  min-width: 0;
-}
-
-.dax-mod {
-  position: relative;
-  border: 1px solid rgb(255 255 255 / 0.07);
-  border-radius: 0.45em;
-  padding: 0.55em 0.65em;
-  background: #0f1a2a;
+/* ── Report paper (right, white K-Dense page) ── */
+.dax-paper {
+  flex: 1; min-width: 0; position: relative;
+  background: #fdfdfc;
   overflow: hidden;
-  opacity: 0.4;
-  transform: translateY(0.35em);
-  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
 }
-.dax-mod-in { opacity: 1; transform: none; }
-/* the sweep that reads as "working" */
-.dax-mod-working::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(100deg, transparent 30%, rgb(95 191 156 / 0.14) 50%, transparent 70%);
-  transform: translateX(-100%);
-  animation: dax-sweep 1.1s linear infinite;
+.dax-page {
+  position: absolute; inset: 0;
+  padding: 1.3em 1.7em 2.4em;
+  overflow: hidden;
+  color: var(--kd-ink);
+  font-family: var(--kd-serif);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
 }
-@keyframes dax-sweep { to { transform: translateX(100%); } }
-.dax-mod-name {
-  font-size: 0.72em; font-weight: 600; color: #d7dee7; letter-spacing: 0.01em;
-  display: flex; align-items: baseline; gap: 0.4em; flex-wrap: wrap;
-}
-.dax-mod-name > span:first-child { min-width: 0; }
-.dax-mod-fact {
-  font-family: var(--mono); font-size: 0.62em; line-height: 1.35; color: #7c889a;
-  margin-top: 0.3em;
-  opacity: 0; transition: opacity 0.4s ease 0.15s;
-}
-.dax-mod-graded .dax-mod-fact { opacity: 1; }
+.dax-page-active { opacity: 1; pointer-events: auto; }
 
-/* verdict badge */
-.dax-badge {
-  font-family: var(--mono); font-size: 0.6em; letter-spacing: 0.02em;
-  padding: 0.1em 0.45em; border-radius: 0.6em; white-space: nowrap;
-  border: 1px solid transparent; flex: none;
-  opacity: 0; transform: scale(0.8); transition: opacity 0.3s ease, transform 0.3s ease;
+/* running header + footer */
+.dax-rhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.58em; color: var(--kd-muted); font-style: italic;
+  padding-bottom: 0.5em; margin-bottom: 1em;
+  border-bottom: 1px solid var(--kd-rule);
 }
-.dax-mod-graded .dax-badge { opacity: 1; transform: none; }
-.dax-badge-ok   { color: #7fd6b5; background: rgb(63 176 137 / 0.14); border-color: rgb(63 176 137 / 0.30); }
-.dax-badge-warn { color: #e6c07a; background: rgb(197 154 63 / 0.13); border-color: rgb(197 154 63 / 0.30); }
-.dax-badge-gap  { color: #e08b8b; background: rgb(198 92 92 / 0.13); border-color: rgb(198 92 92 / 0.30); }
-.dax-mod-graded.dax-mod-ok   { border-color: rgb(63 176 137 / 0.22); }
-.dax-mod-graded.dax-mod-warn { border-color: rgb(197 154 63 / 0.22); }
-.dax-mod-graded.dax-mod-gap  { border-color: rgb(198 92 92 / 0.22); }
-
-/* Right rail: sources ticking past, then the verdict + gap map. */
-.dax-rail {
-  flex: 1; min-width: 0;
-  border-left: 1px solid rgb(255 255 255 / 0.06);
-  background: #0b1420;
-  padding: 0.95em 1.05em;
-  display: flex; flex-direction: column;
-}
-.dax-rail-label {
-  font-family: var(--mono); font-size: 0.62em; letter-spacing: 0.08em;
-  text-transform: uppercase; color: #6f7c8b; margin: 0 0 0.55em;
-}
-.dax-src { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.28em; }
-.dax-src li {
-  font-family: var(--mono); font-size: 0.63em; color: #8b97a6;
-  display: flex; align-items: center; gap: 0.4em;
-  opacity: 0; transform: translateX(-0.3em);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-.dax-src li.dax-src-in { opacity: 1; transform: none; }
-.dax-src li::before { content: "✓"; color: #5fbf9c; font-size: 0.9em; }
-
-/* verdict block, revealed in the last beat */
-.dax-verdict {
-  margin-top: auto;
-  opacity: 0; transform: translateY(0.4em);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-.dax-verdict-in { opacity: 1; transform: none; }
-.dax-verdict-call {
-  font-size: 0.78em; line-height: 1.4; color: #eaf1ee; font-weight: 500;
-  padding-top: 0.7em; border-top: 1px solid rgb(255 255 255 / 0.08);
-}
-.dax-verdict-call b { color: #e08b8b; font-weight: 600; }
-.dax-verdict-gaps {
-  margin-top: 0.5em; font-family: var(--mono); font-size: 0.62em; color: #8b97a6;
-  display: flex; align-items: center; gap: 0.4em;
-}
-.dax-verdict-gaps .dax-gapcount {
-  color: #eaf1ee; background: rgb(95 191 156 / 0.16);
-  border-radius: 0.5em; padding: 0.05em 0.4em; font-weight: 600;
+.dax-rhead b { font-style: normal; font-weight: 400; color: var(--kd-muted); }
+.dax-rfoot {
+  position: absolute; left: 1.7em; right: 1.7em; bottom: 0.7em;
+  display: flex; justify-content: space-between;
+  font-size: 0.55em; color: var(--kd-muted);
+  padding-top: 0.5em; border-top: 1px solid var(--kd-rule);
+  background: #fdfdfc;
 }
 
-@media (max-width: 30rem) {
-  .dax-rail { display: none; }
-  .dax-board { flex: 1; }
+/* cover page */
+.dax-cover { text-align: center; }
+.dax-cover-rule { height: 2px; background: var(--kd-blue); margin: 0.4em auto 1.1em; width: 70%; }
+.dax-cover h2 {
+  font-family: var(--kd-serif); color: var(--kd-blue);
+  font-size: 1.4em; font-weight: 700; line-height: 1.15; margin: 0.3em 0 0.4em;
+}
+.dax-cover-sub { color: var(--kd-amber); font-style: italic; font-size: 0.78em; margin: 0 0 0.2em; }
+.dax-cover-mod { color: var(--kd-muted); font-size: 0.64em; margin: 0 0 1.2em; }
+.dax-cover-meta {
+  display: grid; grid-template-columns: auto 1fr; gap: 0.25em 0.8em;
+  max-width: 22em; margin: 0.6em auto 1.1em; text-align: left;
+  font-size: 0.64em;
+}
+.dax-cover-meta dt { text-align: right; font-weight: 700; color: var(--kd-ink); }
+.dax-cover-meta dd { margin: 0; color: #333; }
+.dax-cover-rec {
+  border: 1px solid var(--kd-blue); border-radius: 3px;
+  background: #f2f6fb; padding: 0.7em 1em; max-width: 20em; margin: 0 auto;
+}
+.dax-cover-rec-label { font-size: 0.6em; font-weight: 700; color: var(--kd-ink); }
+.dax-cover-rec-verdict {
+  font-size: 0.95em; font-weight: 700; color: var(--kd-amber);
+  letter-spacing: 0.03em; margin: 0.2em 0; text-transform: uppercase;
+}
+.dax-cover-rec-score { font-size: 0.58em; color: var(--kd-muted); }
+.dax-cover-prep { font-size: 0.58em; color: var(--kd-muted); margin-top: 1.1em; }
+
+/* section page */
+.dax-sec-num {
+  font-size: 0.6em; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--kd-blue-2);
+}
+.dax-sec-h {
+  font-family: var(--kd-serif); color: var(--kd-blue);
+  font-size: 1.05em; font-weight: 700; margin: 0.15em 0 0.7em;
+}
+.dax-body-p {
+  font-size: 0.66em; line-height: 1.55; color: #222;
+  text-align: justify; margin: 0 0 0.7em;
+}
+.dax-cite { color: var(--kd-blue-2); }
+
+/* boxed callout (blue header bar) */
+.dax-callout {
+  border: 1px solid var(--kd-blue); border-radius: 4px; overflow: hidden;
+  margin: 0.4em 0 0.8em;
+}
+.dax-callout-head {
+  background: var(--kd-blue); color: #fff;
+  font-size: 0.64em; font-weight: 700; padding: 0.3em 0.7em;
+  font-family: var(--sans); letter-spacing: 0.02em;
+}
+.dax-callout-body { padding: 0.6em 0.8em; background: #f7f9fc; }
+.dax-callout-item { font-size: 0.62em; line-height: 1.5; color: #222; margin: 0 0 0.4em; }
+.dax-callout-item:last-child { margin-bottom: 0; }
+.dax-callout-item b { color: var(--kd-ink); }
+
+/* data table */
+.dax-table { width: 100%; border-collapse: collapse; font-size: 0.6em; margin: 0.3em 0 0.6em; }
+.dax-table caption { font-style: italic; color: var(--kd-muted); font-size: 0.95em; margin-bottom: 0.3em; }
+.dax-table th {
+  text-align: left; font-weight: 700; color: var(--kd-ink);
+  border-top: 1.5px solid #333; border-bottom: 1px solid #333;
+  padding: 0.3em 0.5em 0.3em 0;
+}
+.dax-table td { padding: 0.25em 0.5em 0.25em 0; border-bottom: 1px solid var(--kd-rule); color: #333; vertical-align: top; }
+.dax-table .dax-td-gate { color: var(--kd-amber); font-style: italic; }
+.dax-conf-high { color: #157347; font-weight: 700; }
+.dax-conf-med  { color: var(--kd-amber); font-weight: 700; }
+
+/* blocking-rows chips on the recommendation page */
+.dax-block-list { display: flex; flex-wrap: wrap; gap: 0.3em; margin: 0.3em 0 0.6em; }
+.dax-block-chip {
+  font-family: var(--mono); font-size: 0.56em;
+  padding: 0.12em 0.5em; border-radius: 0.6em;
+  background: #fbeaea; color: #a13d3d; border: 1px solid #e3b9b9;
+}
+.dax-disposition {
+  display: inline-block; font-family: var(--sans); font-weight: 700;
+  font-size: 0.62em; letter-spacing: 0.03em; text-transform: uppercase;
+  color: #fff; background: var(--kd-amber); padding: 0.2em 0.6em; border-radius: 3px;
+  margin-bottom: 0.5em;
+}
+
+@media (max-width: 40rem) {
+  .dax-ui { flex-direction: column; min-height: 0; }
+  .dax-spine { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 0.6em; align-items: center; }
+  .dax-spine-brand { border-bottom: 0; padding: 0 0.5em 0 0; margin: 0 0.5em 0 0; }
+  .dax-nav { flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0.2em; }
+  .dax-nav-item { border-left: 0; border-bottom: 2px solid transparent; padding: 0.3em 0.5em; }
+  .dax-nav-item-active { border-left: 0; border-bottom-color: #5fbf9c; }
+  .dax-nav-num { display: none; }
+  .dax-spine-foot { display: none; }
+  .dax-paper { min-height: 22em; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .dax-mod, .dax-badge, .dax-mod-fact, .dax-src li, .dax-verdict { transition: none; }
-  .dax-mod-working::after, .dax-phase-dot, .dax-caret { animation: none; }
+  .dax-page, .dax-nav-item { transition: none; }
+  .dax-spine-foot .dax-live-dot { animation: none; }
 }
 
 /* --- Product feature ---------------------------------------------------
