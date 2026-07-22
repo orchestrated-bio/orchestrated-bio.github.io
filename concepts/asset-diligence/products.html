@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Orchestrated Biosciences products: DrugAdopt for IND-readiness diligence, Insight for conversational cancer genomics, and the agentic tools in development." />
+    <meta name="description" content="Orchestrated Biosciences products: DrugAdopt, a biomarker-discovery engine for patient selection; Insight for conversational cancer genomics; and the agentic tools in development." />
     <title>Products | Orchestrated Biosciences</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -31,7 +31,7 @@
       <section class="page-head">
         <div class="shell">
           <h1>Agentic tools for drug development.</h1>
-          <p class="opening-lede">DrugAdopt is the flagship: a signed IND-readiness report on one asset. The rest are narrower, and some you can use yourself today.</p>
+          <p class="opening-lede">DrugAdopt is the flagship: a biomarker-discovery engine that finds the patients an asset is most likely to help. The rest are narrower, and some you can use yourself today.</p>
         </div>
       </section>
 
@@ -44,18 +44,18 @@
                 <h2>DrugAdopt</h2>
                 <span class="product-tag product-tag-flagship">Flagship</span>
               </div>
-              <p>Give us a drug and an indication. DrugAdopt works the public evidence across the eight modules an IND has to answer and returns a report that states where the evidence is sufficient, where it falls short, and the source behind every call. A bioinformatician reviews the output and signs it.</p>
+              <p>Give us a drug and an indication. DrugAdopt's engine works the public evidence for the biomarkers that could separate the patients who respond from the patients who do not, and returns the candidate markers, the evidence for and against each, and the experiment that would close the gap. A bioinformatician reviews the output and signs it.</p>
               <p class="product-feature-links">
                 <a class="btn" href="./case.html">See a worked example <span aria-hidden="true">→</span></a>
                 <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target ↗</a>
               </p>
             </div>
-            <div class="dax-ui" role="img" aria-label="A DrugAdopt report on prexasertib in platinum-resistant BRCA-wild-type ovarian cancer: a clickable section spine — cover, clinical phenotype, mechanism and biomarker, pharmacology and exposure, toxicology, and the recommendation — opens each part as a K-Dense report page. The recommendation is HOLD for named data: the clinical activity signal is real, but no public biomarker validates patient selection, so six rows block another study until named data is obtained.">
+            <div class="dax-ui" role="img" aria-label="A DrugAdopt biomarker readout on prexasertib in platinum-resistant BRCA-wild-type ovarian cancer: a clickable section spine — overview, clinical phenotype, mechanism and biomarker, pharmacology and exposure, toxicology, and evidence and gaps — opens each part as a report page. A responder subset exists but no public biomarker yet selects those patients; each section lays out the evidence for and against a selection marker and names the experiment that would close each gap.">
 
               <nav class="dax-spine" aria-label="Report sections">
                 <div class="dax-spine-brand">
                   <span class="dax-spine-logo"><img src="../../images/logo-icon-white.svg" alt="" aria-hidden="true" /></span>
-                  <span class="dax-spine-title">DrugAdopt<span>IND-readiness report</span></span>
+                  <span class="dax-spine-title">DrugAdopt<span>Biomarker &amp; patient-selection readout</span></span>
                 </div>
                 <ul class="dax-nav">
                   <li class="dax-nav-item dax-nav-item-active" data-page="cover"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Overview</span></li>
@@ -63,7 +63,7 @@
                   <li class="dax-nav-item" data-page="mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></li>
                   <li class="dax-nav-item" data-page="pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label">Pharmacology &amp; Exposure</span></li>
                   <li class="dax-nav-item" data-page="toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></li>
-                  <li class="dax-nav-item" data-page="recommendation"><span class="dax-nav-num">★</span><span class="dax-nav-label">Recommendation</span></li>
+                  <li class="dax-nav-item" data-page="recommendation"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></li>
                 </ul>
                 <div class="dax-spine-foot"><span class="dax-live-dot"></span>Reviewer-attested</div>
               </nav>
@@ -73,26 +73,27 @@
                 <article class="dax-page dax-page-active dax-overview" data-page="cover">
                   <div class="dax-ov-top">
                     <div>
-                      <p class="dax-sec-num">Research diligence readout</p>
+                      <p class="dax-sec-num">Biomarker &amp; patient-selection readout</p>
                       <h2 class="dax-ov-asset">Prexasertib</h2>
                       <p class="dax-ov-target">Small molecule · Target CHEK1</p>
                       <p class="dax-ov-ind">Platinum-resistant BRCA-wild-type high-grade serous ovarian carcinoma</p>
                     </div>
-                    <div class="dax-ov-verdict">
-                      <span class="dax-ov-verdict-label">Recommendation</span>
-                      <span class="dax-ov-verdict-call">Hold for named data</span>
-                      <span class="dax-ov-verdict-meta">High confidence</span>
+                    <div class="dax-ov-status">
+                      <span class="dax-ov-status-label">Selection biomarker</span>
+                      <span class="dax-ov-status-state">None validated in public data</span>
                     </div>
                   </div>
 
-                  <p class="dax-ov-readout">A signal-seeking trial treated 49 patients and saw partial responses in twelve, but it stopped before its planned denominators and left the responders unexplained. The public data do not identify a validated responder biomarker, tie exposure to who responded, or establish a safety window for the POLA1-directed combination the biology points to. The activity is real; the case for another unselected study is not.</p>
+                  <p class="dax-ov-question">Which patients are most likely to respond to prexasertib &mdash; and does the public evidence support selecting them?</p>
+
+                  <p class="dax-ov-readout">Twelve of 49 treated patients had a partial response, so a responder subset exists. But no public biomarker separates them: the candidate replication-stress RNA score is not robust across score definitions in the same biopsies, exposure is not linked to who responded, and the POLA1 combination the biology points to has no established safety window. The evidence for a responder subset is real; the marker that would select it is not yet in hand.</p>
 
                   <p class="dax-ov-sechead">What each section found</p>
                   <ul class="dax-ov-sections">
-                    <li data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Signal, not clean efficacy</span></li>
+                    <li data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Responder subset, unexplained</span></li>
                     <li data-goto="mechanism"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-chip dax-chip-gap">No selection biomarker</span></li>
-                    <li data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unmet</span></li>
-                    <li data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Window unproven</span></li>
+                    <li data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unlinked</span></li>
+                    <li data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Combination window open</span></li>
                   </ul>
 
                   <div class="dax-ov-foot">
@@ -103,7 +104,7 @@
 
                 <!-- 1. Clinical -->
                 <article class="dax-page" data-page="clinical">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt IND-readiness</b></div>
+                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
                   <p class="dax-sec-num">Section 1</p>
                   <h3 class="dax-sec-h">Clinical Phenotype &amp; Endpoints</h3>
                   <figure class="dax-figure">
@@ -130,7 +131,7 @@
 
                 <!-- 2. Mechanism & Biomarker -->
                 <article class="dax-page" data-page="mechanism">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt IND-readiness</b></div>
+                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
                   <p class="dax-sec-num">Section 2</p>
                   <h3 class="dax-sec-h">Mechanism &amp; Biomarker Biology</h3>
                   <figure class="dax-figure">
@@ -157,7 +158,7 @@
 
                 <!-- 3. Pharmacology & Exposure -->
                 <article class="dax-page" data-page="pharmacology">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt IND-readiness</b></div>
+                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
                   <p class="dax-sec-num">Section 3</p>
                   <h3 class="dax-sec-h">Pharmacology &amp; Exposure</h3>
                   <figure class="dax-figure">
@@ -185,7 +186,7 @@
 
                 <!-- 4. Toxicology -->
                 <article class="dax-page" data-page="toxicology">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt IND-readiness</b></div>
+                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
                   <p class="dax-sec-num">Section 4</p>
                   <h3 class="dax-sec-h">Toxicology &amp; Therapeutic Window</h3>
                   <figure class="dax-figure">
@@ -211,28 +212,28 @@
                   <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>4</span></div>
                 </article>
 
-                <!-- Recommendation -->
+                <!-- Evidence & Gaps -->
                 <article class="dax-page" data-page="recommendation">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt IND-readiness</b></div>
-                  <p class="dax-sec-num">Decision packet</p>
-                  <h3 class="dax-sec-h">Recommendation</h3>
-                  <p class="dax-disposition">Hold for named data</p>
-                  <p class="dax-body-p">Do not launch another unselected efficacy study or a POLA1-directed combination from the public evidence. Preserve the clinical activity signal, but require independent biomarker validation, participant-linked exposure, a combination safety window, a censoring-aware design, and product-quality records.</p>
+                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+                  <p class="dax-sec-num">Evidence &amp; gaps</p>
+                  <h3 class="dax-sec-h">Candidate biomarkers and what would validate them</h3>
+                  <p class="dax-body-p">A responder subset exists, so a selection biomarker is plausible. These are the candidates the public evidence raises, where each stands today, and the experiment that would move it from hypothesis to a marker you could enrich on.</p>
+                  <table class="dax-table">
+                    <caption>Candidate selection biomarkers, evidence state, and the gap that closes each</caption>
+                    <thead><tr><th>Candidate</th><th>Evidence state</th><th>What would close the gap</th></tr></thead>
+                    <tbody>
+                      <tr><td>Replication-stress RNA score</td><td class="dax-td-gate">exploratory, not robust</td><td>Freeze one continuous score + assay/QC; test blinded in an independent cohort.</td></tr>
+                      <tr><td>POLA1 dependence</td><td class="dax-td-gate">unproven mechanism</td><td>Reproducible interaction across lineages, with genetic rescue and target engagement.</td></tr>
+                      <tr><td>Exposure–response</td><td class="dax-td-gate">not linked to outcome</td><td>Participant-linked concentration–time tied to who responded.</td></tr>
+                    </tbody>
+                  </table>
                   <div class="dax-callout">
-                    <div class="dax-callout-head">Blocking rows (6)</div>
+                    <div class="dax-callout-head">The one experiment that unlocks the rest</div>
                     <div class="dax-callout-body">
-                      <div class="dax-block-list">
-                        <span class="dax-block-chip">biomarker-01</span>
-                        <span class="dax-block-chip">mechanism-01</span>
-                        <span class="dax-block-chip">exposure-01</span>
-                        <span class="dax-block-chip">safety-01</span>
-                        <span class="dax-block-chip">protocol-01</span>
-                        <span class="dax-block-chip">cmc-01</span>
-                      </div>
-                      <p class="dax-callout-item"><b>Next test.</b> Request archived NCT03414047 baseline tissue and linked outcomes, freeze one continuous RNA score and assay/QC procedure, and test it blinded to outcomes.</p>
+                      <p class="dax-callout-item">Request archived NCT03414047 baseline tissue with linked outcomes, freeze one continuous replication-stress score and its assay/QC procedure, and test it blinded to outcomes. That single independent cohort is what separates a real selection marker from a same-cohort artifact <span class="dax-cite">[NCT03414047]</span>.</p>
                     </div>
                   </div>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>Decision</span></div>
+                  <div class="dax-rfoot"><span>Generated by DrugAdopt · evidence, not a recommendation</span><span>Gaps</span></div>
                 </article>
               </div>
             </div>
@@ -495,7 +496,7 @@
 
     <script>
     /* DrugAdopt report render — a clickable section spine (cover, the four
-       reader sections, and the recommendation) that opens each part as a
+       reader sections, and evidence & gaps) that opens each part as a
        K-Dense report page. Auto-advances through the sections and pauses when
        a reader clicks a spine item; pauses off-screen. Drives every .dax-ui on
        the page independently so the single-file artifact (one on each route)
