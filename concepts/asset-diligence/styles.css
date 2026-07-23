@@ -1035,13 +1035,20 @@ body {
 .dax-spine-title span { display: block; font-weight: 400; color: #8b97a6; font-size: 0.85em; margin-top: 0.1em; }
 
 .dax-nav { list-style: none; margin: 0; padding: 0.4em 0; display: flex; flex-direction: column; gap: 0.1em; }
+.dax-nav > li { margin: 0; padding: 0; }
 .dax-nav-item {
+  width: 100%; min-height: 2.75rem;
   display: flex; align-items: baseline; gap: 0.5em;
-  padding: 0.5em 1em; cursor: pointer;
-  border-left: 2px solid transparent;
+  padding: 0.5em 1em; cursor: pointer; appearance: none;
+  border: 0; border-left: 2px solid transparent; border-radius: 0;
+  background: transparent; color: inherit; font: inherit; text-align: left;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .dax-nav-item:hover { background: rgb(255 255 255 / 0.03); }
+.dax-nav-item:focus-visible {
+  outline: 2px solid #8ee0c2;
+  outline-offset: -3px;
+}
 .dax-nav-num {
   font-family: var(--mono); font-size: 0.62em; color: #6f7c8b; flex: none; min-width: 1.1em;
 }
@@ -1152,11 +1159,20 @@ body {
 }
 .dax-ov-sections { list-style: none; margin: 0 0 1em; padding: 0; }
 .dax-ov-sections li {
-  display: flex; align-items: center; justify-content: space-between; gap: 0.6em;
-  padding: 0.45em 0.2em; border-bottom: 1px solid var(--kd-rule);
-  cursor: pointer; transition: background 0.15s ease;
+  border-bottom: 1px solid var(--kd-rule);
 }
-.dax-ov-sections li:hover { background: #f4f7fb; }
+.dax-ov-link {
+  width: 100%; min-height: 2.75rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.6em;
+  padding: 0.45em 0.2em; border: 0; border-radius: 0;
+  background: transparent; color: inherit; font: inherit; text-align: left;
+  cursor: pointer; appearance: none; transition: background 0.15s ease;
+}
+.dax-ov-link:hover { background: #f4f7fb; }
+.dax-ov-link:focus-visible {
+  outline: 2px solid var(--kd-blue-2);
+  outline-offset: -2px;
+}
 .dax-ov-sec-name { font-family: var(--kd-serif); font-size: 0.68em; color: var(--kd-ink); }
 .dax-ov-chip {
   flex: none; font-size: 0.52em; padding: 0.15em 0.5em; border-radius: 0.7em; white-space: nowrap;
@@ -1218,8 +1234,13 @@ body {
   .dax-ui { flex-direction: column; min-height: 0; }
   .dax-spine { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 0.6em; align-items: center; }
   .dax-spine-brand { border-bottom: 0; padding: 0 0.5em 0 0; margin: 0 0.5em 0 0; }
-  .dax-nav { flex-direction: row; flex-wrap: wrap; padding: 0; gap: 0.2em; }
-  .dax-nav-item { border-left: 0; border-bottom: 2px solid transparent; padding: 0.3em 0.5em; }
+  .dax-nav {
+    flex: 1 1 100%; flex-direction: row; flex-wrap: nowrap;
+    overflow-x: auto; padding: 0.3em 0 0; gap: 0.2em;
+    scrollbar-width: thin; scrollbar-color: #526173 transparent;
+  }
+  .dax-nav > li { flex: none; }
+  .dax-nav-item { width: auto; border-left: 0; border-bottom: 2px solid transparent; padding: 0.55em 0.75em; }
   .dax-nav-item-active { border-left: 0; border-bottom-color: #5fbf9c; }
   .dax-nav-num { display: none; }
   .dax-spine-foot { display: none; }
