@@ -206,12 +206,19 @@ def build() -> str:
 """
 
     doc = (
+        "<!doctype html>\n"
+        "<html lang=\"en\">\n"
+        "<head>\n"
         "<meta charset=\"utf-8\" />\n"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n"
         "<title>Orchestrated Biosciences — Find the patients a drug will help</title>\n"
         f"<style>\n{styles}\n</style>\n"
+        "</head>\n"
+        "<body>\n"
         f"{body}\n"
         f"<script>\n{router}\n</script>\n"
         + "".join(f"<script>\n{s}\n</script>\n" for s in scripts)
+        + "</body>\n</html>\n"
     )
     # Inline all local assets last, over the whole document.
     return inline_srcs(doc)

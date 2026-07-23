@@ -41,7 +41,7 @@
           </div>
 
           <figure class="shot shot-render">
-            <div class="dax-ui" role="img" aria-label="A DrugAdopt biomarker readout on prexasertib in platinum-resistant BRCA-wild-type ovarian cancer: a clickable section spine — overview, clinical phenotype, mechanism and biomarker, pharmacology and exposure, toxicology, and evidence and gaps — opens each part as a report page. A responder subset exists but no public biomarker yet selects those patients; each section lays out the evidence for and against a selection marker and names the experiment that would close each gap.">
+            <div class="dax-ui" role="region" aria-label="Interactive DrugAdopt biomarker readout on prexasertib in platinum-resistant BRCA-wild-type ovarian cancer">
 
               <nav class="dax-spine" aria-label="Report sections">
                 <div class="dax-spine-brand">
@@ -49,12 +49,12 @@
                   <span class="dax-spine-title">DrugAdopt<span>Biomarker &amp; patient-selection readout</span></span>
                 </div>
                 <ul class="dax-nav">
-                  <li class="dax-nav-item dax-nav-item-active" data-page="cover"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Overview</span></li>
-                  <li class="dax-nav-item" data-page="clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label">Clinical Phenotype &amp; Endpoints</span></li>
-                  <li class="dax-nav-item" data-page="mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></li>
-                  <li class="dax-nav-item" data-page="pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label">Pharmacology &amp; Exposure</span></li>
-                  <li class="dax-nav-item" data-page="toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></li>
-                  <li class="dax-nav-item" data-page="recommendation"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></li>
+                  <li><button type="button" class="dax-nav-item dax-nav-item-active" data-page="cover" aria-current="page"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Overview</span></button></li>
+                  <li><button type="button" class="dax-nav-item" data-page="clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label">Clinical Phenotype &amp; Endpoints</span></button></li>
+                  <li><button type="button" class="dax-nav-item" data-page="mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></button></li>
+                  <li><button type="button" class="dax-nav-item" data-page="pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label">Pharmacology &amp; Exposure</span></button></li>
+                  <li><button type="button" class="dax-nav-item" data-page="toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></button></li>
+                  <li><button type="button" class="dax-nav-item" data-page="recommendation"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></button></li>
                 </ul>
                 <div class="dax-spine-foot"><span class="dax-live-dot"></span>Reviewer-attested</div>
               </nav>
@@ -81,10 +81,10 @@
 
                   <p class="dax-ov-sechead">What each section found</p>
                   <ul class="dax-ov-sections">
-                    <li data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Responder subset, unexplained</span></li>
-                    <li data-goto="mechanism"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-chip dax-chip-gap">No selection biomarker</span></li>
-                    <li data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unlinked</span></li>
-                    <li data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Combination window open</span></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Responder subset, unexplained</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="mechanism"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-chip dax-chip-gap">No selection biomarker</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unlinked</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Combination window open</span></button></li>
                   </ul>
 
                   <div class="dax-ov-foot">
@@ -304,7 +304,12 @@
         function show(i) {
           current = ((i % order.length) + order.length) % order.length;
           var key = order[current];
-          navItems.forEach(function (n) { n.classList.toggle('dax-nav-item-active', n.dataset.page === key); });
+          navItems.forEach(function (n) {
+            var active = n.dataset.page === key;
+            n.classList.toggle('dax-nav-item-active', active);
+            if (active) n.setAttribute('aria-current', 'page');
+            else n.removeAttribute('aria-current');
+          });
           pages.forEach(function (p) { p.classList.toggle('dax-page-active', p.dataset.page === key); });
         }
         function schedule() {
