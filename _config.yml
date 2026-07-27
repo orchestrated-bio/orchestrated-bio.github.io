@@ -1,14 +1,13 @@
 # Site settings
 title: Orchestrated Biosciences
 description: >-
-  Orchestrated Biosciences combines agentic AI with biomedical expertise to
-  accelerate precision medicine, drug discovery, and mission-critical
-  government applications.
+  Orchestrated Biosciences builds DrugAdopt, a biomarker-discovery engine for
+  patient selection, and Insight, a self-serve cancer-genomics research tool.
 url: "https://orchestrated.bio"
 baseurl: ""
 
 # Brand
-tagline: "AI-Driven Precision Medicine & Agentic AI Solutions"
+tagline: "Biomarker discovery and cancer-genomics research"
 email: support@orchestrated.bio
 github_username: orchestrated-bio
 logo: /images/logo-icon.png

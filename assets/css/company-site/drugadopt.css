@@ -1,0 +1,280 @@
+/* --- DrugAdopt mockup --------------------------------------------------
+   Shows the real deliverable: a clickable section spine (left, dark app
+   chrome) that opens each part of the prexasertib report as an actual
+   K-Dense report page (right, on white paper). Serif headings, blue accents,
+   boxed callouts, data tables, inline citations — faithful to the real PDF
+   output. Auto-cycles through sections and each spine item is clickable.
+   Content is the real prexasertib view-model; sizes to content. */
+.dax-ui {
+  --kd-blue:   #1a5490;
+  --kd-blue-2: #2c6cb0;
+  --kd-amber:  #c0700f;
+  --kd-ink:    #1a1a1a;
+  --kd-muted:  #5a6472;
+  --kd-rule:   #d7dde3;
+  --kd-serif:  Georgia, "Times New Roman", "Iowan Old Style", serif;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  background: #0c1522;
+  font-family: var(--sans);
+  font-size: clamp(10px, 1.12vw, 15px);
+  color: #cdd5df;
+  display: flex;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
+  min-height: 32em;
+}
+
+/* ── Spine (left, dark app chrome) ── */
+.dax-spine {
+  flex: none; width: 12em;
+  background: #0e1826;
+  border-right: 1px solid rgb(255 255 255 / 0.06);
+  display: flex; flex-direction: column;
+  padding: 0.9em 0;
+}
+.dax-spine-brand {
+  display: flex; align-items: center; gap: 0.5em;
+  padding: 0 1em 0.9em; margin-bottom: 0.4em;
+  border-bottom: 1px solid rgb(255 255 255 / 0.06);
+}
+.dax-spine-logo {
+  width: 1.5em; height: 1.5em; flex: none; border-radius: 0.35em;
+  background: rgb(39 159 129 / 0.20); display: grid; place-items: center;
+}
+.dax-spine-logo img { width: 1em; height: 1em; }
+.dax-spine-title { font-size: 0.72em; font-weight: 600; color: #eaf1ee; letter-spacing: 0.02em; }
+.dax-spine-title span { display: block; font-weight: 400; color: #8b97a6; font-size: 0.85em; margin-top: 0.1em; }
+
+.dax-nav { list-style: none; margin: 0; padding: 0.4em 0; display: flex; flex-direction: column; gap: 0.1em; }
+.dax-nav > li { margin: 0; padding: 0; }
+.dax-nav-item {
+  width: 100%; min-height: 2.75rem;
+  display: flex; align-items: baseline; gap: 0.5em;
+  padding: 0.5em 1em; cursor: pointer; appearance: none;
+  border: 0; border-left: 2px solid transparent; border-radius: 0;
+  background: transparent; color: inherit; font: inherit; text-align: left;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.dax-nav-item:hover { background: rgb(255 255 255 / 0.03); }
+.dax-nav-item:focus-visible {
+  outline: 2px solid #8ee0c2;
+  outline-offset: -3px;
+}
+.dax-nav-num {
+  font-family: var(--mono); font-size: 0.62em; color: #6f7c8b; flex: none; min-width: 1.1em;
+}
+.dax-nav-label { font-size: 0.68em; line-height: 1.3; color: #9aa6b4; }
+.dax-nav-item-active {
+  background: rgb(39 159 129 / 0.10);
+  border-left-color: #5fbf9c;
+}
+.dax-nav-item-active .dax-nav-label { color: #eaf1ee; }
+.dax-nav-item-active .dax-nav-num { color: #5fbf9c; }
+.dax-spine-foot {
+  margin-top: auto; padding: 0.8em 1em 0;
+  border-top: 1px solid rgb(255 255 255 / 0.06);
+  font-family: var(--mono); font-size: 0.55em; letter-spacing: 0.05em;
+  text-transform: uppercase; color: #6f7c8b;
+  display: flex; align-items: center; gap: 0.4em;
+}
+.dax-spine-foot .dax-live-dot {
+  width: 0.5em; height: 0.5em; border-radius: 50%; background: #5fbf9c;
+  box-shadow: 0 0 0.4em #5fbf9c; animation: dax-pulse 1.6s ease-in-out infinite;
+}
+@keyframes dax-pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+/* ── Report paper (right, white K-Dense page) ── */
+.dax-paper {
+  flex: 1; min-width: 0; position: relative;
+  background: #fdfdfc;
+  overflow: hidden;
+}
+.dax-page {
+  position: absolute; inset: 0;
+  padding: 1.3em 1.7em 1.1em;
+  /* Sections lead with a figure and run longer than the panel — the report
+     page scrolls, like the real PDF. Inactive pages are non-interactive. */
+  overflow-y: auto; overflow-x: hidden;
+  color: var(--kd-ink);
+  font-family: var(--kd-serif);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  scrollbar-width: thin; scrollbar-color: #cbd3db transparent;
+}
+.dax-page::-webkit-scrollbar { width: 6px; }
+.dax-page::-webkit-scrollbar-thumb { background: #cbd3db; border-radius: 3px; }
+.dax-page-active { opacity: 1; pointer-events: auto; }
+
+/* running header + footer */
+.dax-rhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 0.58em; color: var(--kd-muted); font-style: italic;
+  padding-bottom: 0.5em; margin-bottom: 1em;
+  border-bottom: 1px solid var(--kd-rule);
+}
+.dax-rhead b { font-style: normal; font-weight: 400; color: var(--kd-muted); }
+.dax-rfoot {
+  display: flex; justify-content: space-between;
+  font-size: 0.55em; color: var(--kd-muted);
+  margin-top: 1.2em; padding-top: 0.5em; border-top: 1px solid var(--kd-rule);
+}
+
+/* section-leading figure (the graphical summary) */
+.dax-figure { margin: 0.2em 0 0.7em; }
+.dax-figure img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--kd-rule); border-radius: 2px;
+  background: #fff;
+}
+.dax-figcap {
+  font-size: 0.58em; line-height: 1.45; color: #333;
+  margin-top: 0.4em; text-align: justify;
+}
+.dax-figcap b { color: var(--kd-blue-2); font-weight: 700; }
+
+/* overview page — a report dashboard, not a title page: headline finding,
+   key numbers, verdict, and a section-status strip you can click into. */
+.dax-ov-top {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 1em;
+  padding-bottom: 0.8em; border-bottom: 2px solid var(--kd-blue); margin-bottom: 0.9em;
+}
+.dax-ov-asset {
+  font-family: var(--kd-serif); color: var(--kd-blue);
+  font-size: 1.3em; font-weight: 700; line-height: 1.1; margin: 0.15em 0 0.15em;
+}
+.dax-ov-target { font-size: 0.58em; color: var(--kd-muted); margin: 0 0 0.3em; }
+.dax-ov-ind { color: var(--kd-amber); font-style: italic; font-size: 0.7em; margin: 0; max-width: 30ch; }
+/* Evidence-state marker — states where the evidence stands, not a
+   recommendation. Deliberately quiet: a labelled fact, no caution styling. */
+.dax-ov-status {
+  flex: none; text-align: right; max-width: 12em;
+  padding-left: 0.9em; border-left: 2px solid var(--kd-blue);
+  display: flex; flex-direction: column; gap: 0.15em;
+}
+.dax-ov-status-label { font-size: 0.52em; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--kd-muted); }
+.dax-ov-status-state { font-family: var(--kd-serif); font-size: 0.78em; font-weight: 700; color: var(--kd-blue); line-height: 1.2; }
+
+.dax-ov-question {
+  font-family: var(--kd-serif); font-size: 0.82em; font-weight: 700;
+  color: var(--kd-ink); line-height: 1.35; margin: 0 0 0.7em;
+}
+
+.dax-ov-readout {
+  font-family: var(--kd-serif); font-size: 0.72em; line-height: 1.55;
+  color: #1c1c1c; margin: 0 0 1em; text-align: justify;
+}
+
+.dax-ov-sechead {
+  font-size: 0.55em; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--kd-blue-2); margin: 0 0 0.4em;
+}
+.dax-ov-sections { list-style: none; margin: 0 0 1em; padding: 0; }
+.dax-ov-sections li {
+  border-bottom: 1px solid var(--kd-rule);
+}
+.dax-ov-link {
+  width: 100%; min-height: 2.75rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.6em;
+  padding: 0.45em 0.2em; border: 0; border-radius: 0;
+  background: transparent; color: inherit; font: inherit; text-align: left;
+  cursor: pointer; appearance: none; transition: background 0.15s ease;
+}
+.dax-ov-link:hover { background: #f4f7fb; }
+.dax-ov-link:focus-visible {
+  outline: 2px solid var(--kd-blue-2);
+  outline-offset: -2px;
+}
+.dax-ov-sec-name { font-family: var(--kd-serif); font-size: 0.68em; color: var(--kd-ink); }
+.dax-ov-chip {
+  flex: none; font-size: 0.52em; padding: 0.15em 0.5em; border-radius: 0.7em; white-space: nowrap;
+}
+.dax-chip-ok   { color: #157347; background: #e6f4ec; border: 1px solid #b7ddc6; }
+.dax-chip-warn { color: #97600a; background: #fbf1df; border: 1px solid #e6cfa0; }
+.dax-chip-gap  { color: #a13d3d; background: #fbeaea; border: 1px solid #e3b9b9; }
+
+.dax-ov-foot {
+  display: flex; justify-content: space-between; gap: 1em;
+  font-size: 0.55em; color: var(--kd-muted);
+  padding-top: 0.6em; border-top: 1px solid var(--kd-rule);
+}
+
+/* section page */
+.dax-sec-num {
+  font-size: 0.6em; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--kd-blue-2);
+}
+.dax-sec-h {
+  font-family: var(--kd-serif); color: var(--kd-blue);
+  font-size: 1.05em; font-weight: 700; margin: 0.15em 0 0.7em;
+}
+.dax-body-p {
+  font-size: 0.66em; line-height: 1.55; color: #222;
+  text-align: justify; margin: 0 0 0.7em;
+}
+.dax-cite {
+  color: var(--kd-blue-2);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+.dax-cite:hover,
+.dax-cite:focus-visible { color: var(--kd-blue); }
+
+/* boxed callout (blue header bar) */
+.dax-callout {
+  border: 1px solid var(--kd-blue); border-radius: 4px; overflow: hidden;
+  margin: 0.4em 0 0.8em;
+}
+.dax-callout-head {
+  background: var(--kd-blue); color: #fff;
+  font-size: 0.64em; font-weight: 700; padding: 0.3em 0.7em;
+  font-family: var(--sans); letter-spacing: 0.02em;
+}
+.dax-callout-body { padding: 0.6em 0.8em; background: #f7f9fc; }
+.dax-callout-item { font-size: 0.62em; line-height: 1.5; color: #222; margin: 0 0 0.4em; }
+.dax-callout-item:last-child { margin-bottom: 0; }
+.dax-callout-item b { color: var(--kd-ink); }
+
+/* data table */
+.dax-table { width: 100%; border-collapse: collapse; font-size: 0.6em; margin: 0.3em 0 0.6em; }
+.dax-table caption { font-style: italic; color: var(--kd-muted); font-size: 0.95em; margin-bottom: 0.3em; }
+.dax-table th {
+  text-align: left; font-weight: 700; color: var(--kd-ink);
+  border-top: 1.5px solid #333; border-bottom: 1px solid #333;
+  padding: 0.3em 0.5em 0.3em 0;
+}
+.dax-table td { padding: 0.25em 0.5em 0.25em 0; border-bottom: 1px solid var(--kd-rule); color: #333; vertical-align: top; }
+.dax-table .dax-td-gate { color: var(--kd-amber); font-style: italic; }
+.dax-conf-high { color: #157347; font-weight: 700; }
+.dax-conf-med  { color: var(--kd-amber); font-weight: 700; }
+
+@media (max-width: 40rem) {
+  .dax-ui { flex-direction: column; min-height: 0; }
+  .dax-spine { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 0.6em; align-items: center; }
+  .dax-spine-brand { border-bottom: 0; padding: 0 0.5em 0 0; margin: 0 0.5em 0 0; }
+  .dax-nav {
+    flex: 1 1 100%; flex-direction: row; flex-wrap: nowrap;
+    overflow-x: auto; padding: 0.3em 0 0; gap: 0.2em;
+    scrollbar-width: thin; scrollbar-color: #526173 transparent;
+  }
+  .dax-nav > li { flex: none; }
+  .dax-nav-item { width: auto; border-left: 0; border-bottom: 2px solid transparent; padding: 0.55em 0.75em; }
+  .dax-nav-item-active { border-left: 0; border-bottom-color: #5fbf9c; }
+  .dax-nav-num { display: none; }
+  .dax-spine-foot { display: none; }
+  .dax-paper { min-height: 22em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dax-page, .dax-nav-item { transition: none; }
+  .dax-spine-foot .dax-live-dot { animation: none; }
+}
+
+.insight-head .band-label { margin-bottom: 0.65rem; }
+
+.insight-head .tm {
+  font-size: 0.5em;
+  vertical-align: super;
+  color: var(--ink-4);
+  font-weight: 400;
+}

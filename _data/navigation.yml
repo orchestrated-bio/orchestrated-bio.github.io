@@ -1,9 +1,13 @@
 # Header navigation
 header:
-  - title: Portfolio
-    url: "/portfolio/"
-  - title: Team
-    url: "/team/"
+  - title: DrugAdopt
+    url: "/"
+  - title: Insight
+    url: "/insight.html"
+  - title: Report
+    url: "/report.html"
+  - title: Company
+    url: "/company.html"
   - title: Blog
     url: "/blog/"
 
@@ -12,17 +16,13 @@ footer:
   products:
     title: Products
     links:
+      - title: DrugAdopt
+        url: "/"
       - title: "Insight&trade;"
         url: "https://insight.orchestrated.bio"
         external: true
-      - title: Mouse Selector
-        url: /products/mouse-selector/
-      - title: Spatial Advisor
-        url: /products/spatial-advisor/
-      - title: AI Radar
-        url: /products/ai-radar/
-      - title: BioVenture
-        url: /products/bioventure/
+      - title: Example report
+        url: /report.html
 
   resources:
     title: Resources
@@ -39,8 +39,8 @@ footer:
   company:
     title: Company
     links:
-      - title: Team
-        url: "/team/"
+      - title: About
+        url: "/company.html"
       - title: Privacy Policy
         url: /privacy-policy.html
       - title: Terms of Service
