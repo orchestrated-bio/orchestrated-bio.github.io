@@ -3,8 +3,9 @@
   photo: images/alex-nesta.jpg
   bio:
     - A decade of experience in Cancer Genomics and RNA Biology at UConn and The Jackson Laboratory.
-    - Utilizing Bioinformatics and Data Science skills to build agentic AI solutions.
-    - Making complex Genomic Data Analysis accessible to every researcher.
+    - Four years at Vindhya Data Science Consulting, working across pharma, academia, and research hospitals.
+    - Built the sample-processing pipeline and patient-data infrastructure for OPTIC RCC, a prospective Phase II trial using RNA-seq biomarkers to assign kidney cancer patients to treatment arms.
+    - Building DrugAdopt around that same patient-selection problem.
   skills:
     - Agentic AI
     - Cancer Genomics
@@ -109,3 +110,17 @@
     - title: "Google — Project Management Professional Certificate"
       description: "Completed six courses in the Google Project Management Certificate program, covering Agile, Scrum, project planning, execution, and stakeholder management."
       image: images/team/proj-pmp.png
+
+- name: "Prakash Narayan, PhD"
+  role: "Strategic Advisor"
+  photo: images/prakash-narayan.jpg
+  bio:
+    - Former Vice President of R&D at Angion and ProKidney.
+    - More than a decade of industry drug-development leadership.
+    - Advises Orchestrated Biosciences on translational strategy, development risk, and the evidence an industry team needs before the next experiment or trial.
+  skills:
+    - Translational Strategy
+    - Drug Development
+    - R&D Leadership
+    - Industry Mentorship
+  links: []

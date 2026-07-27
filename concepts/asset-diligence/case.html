@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A worked DrugAdopt biomarker readout: prexasertib in platinum-resistant BRCA-wild-type HGSOC. Candidate markers, supporting and challenging evidence, and the experiments that would close the gaps." />
-    <title>Case — prexasertib, platinum-resistant HGSOC | Orchestrated Biosciences</title>
+    <meta name="description" content="Read a source-linked excerpt from the DrugAdopt prexasertib research diligence report." />
+    <title>Example report | Orchestrated Biosciences</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -19,86 +19,238 @@
         </a>
         <nav class="site-nav" aria-label="Primary">
           <a href="./">DrugAdopt</a>
-          <a href="./products.html">Products</a>
-          <a href="./case.html" aria-current="page">Case</a>
+          <a href="./insight.html">Insight</a>
+          <a href="./case.html" aria-current="page">Report</a>
           <a href="./company.html">Company</a>
-          <a class="nav-cta" href="mailto:support@orchestrated.bio?subject=Asset%20diligence%20inquiry">Send us your target</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
         </nav>
       </div>
     </header>
 
-    <main id="main">
-      <section class="page-head">
-        <div class="shell">
-          <h1>A worked example: prexasertib.</h1>
-          <p class="opening-lede">We ran DrugAdopt on prexasertib, a CHK1 inhibitor in platinum-resistant BRCA-wild-type ovarian cancer, using only public data. The engine produced a biomarker and patient-selection readout spanning the clinical phenotype, mechanism and biomarker biology, pharmacology and exposure, toxicology, and the evidence gaps.</p>
-          <p class="opening-lede opening-lede-tight">It found a real responder subset, but no public biomarker that yet separates those patients. The mechanism is plausible and the early response rates looked strong; the figures below show both the supporting evidence and where the biomarker case breaks.</p>
-        </div>
-      </section>
+    <main id="main" class="report-reader-stage">
+      <div class="report-reader">
+        <nav class="report-contents" aria-label="Report contents">
+          <p class="report-contents-title">Contents</p>
+          <a href="#report-overview">Overview</a>
+          <a href="#systematic-review" aria-current="location">Systematic evidence review</a>
+          <a href="#clinical-result">Clinical activity</a>
+          <a href="#biomarker-result">Biomarker result</a>
+          <a href="#safety-result">Safety and treatment delivery</a>
+          <a href="#change-readout">Evidence gaps</a>
+          <a href="#source-record">Source record</a>
+          <p class="report-contents-note">Excerpt from the generated DrugAdopt case. Public evidence only.</p>
+        </nav>
 
+        <article class="report-paper">
+          <header class="report-cover" id="report-overview">
+            <p class="report-kicker">DrugAdopt · IND-readiness diligence report</p>
+            <h1>Prexasertib <span>(LY2606368 / ACR-368)</span></h1>
+            <p class="report-indication">Platinum-resistant BRCA-wild-type high-grade serous ovarian cancer</p>
+            <dl class="report-document-meta">
+              <div><dt>Prepared</dt><dd>17 July 2026</dd></div>
+              <div><dt>Modality</dt><dd>Small molecule</dd></div>
+              <div><dt>Framework</dt><dd>21 CFR 312.23 · ICH M3(R2)</dd></div>
+            </dl>
+          </header>
 
-      <section class="band band-first">
-        <div class="shell">
-          <div class="band-head">
-            <h2>Five figures from the report.</h2>
-          </div>
+          <section class="report-readout" aria-labelledby="readout-title">
+            <h2 id="readout-title">Research diligence readout</h2>
+            <div class="report-readout-grid">
+              <div>
+                <p class="report-readout-lead">Prexasertib’s target CHK1 is a candidate, mechanistically plausible vulnerability in platinum-resistant BRCA-wild-type HGSOC, but public evidence does not establish a measurable, load-bearing tumor CHK1-dependence mechanism.</p>
+                <p class="report-question"><strong>Question:</strong> Does prexasertib have a biomarker-enrichable, clinically separable development path in platinum-resistant BRCA-wild-type HGSOC?</p>
+              </div>
+              <dl class="report-readout-facts">
+                <div>
+                  <dt>Primary uncertainty</dt>
+                  <dd>Exposure-timed tumor drug concentration and validated pathway PD (pCHK1 / pCDC25C) in responders versus non-responders.</dd>
+                </div>
+                <div>
+                  <dt>Biomarker readiness</dt>
+                  <dd>Tumor FISH/NGS and cyclin-E1 IHC are feasible but not qualified for selection. Tumor pathway PD and OncoSignature are not publicly qualified.</dd>
+                </div>
+              </dl>
+            </div>
+          </section>
 
-          <div class="exhibits">
-            <figure class="exhibit">
-              <img src="./img/shots/orr.png" alt="Grouped bar chart of prexasertib objective response rate across the 2018 pilot, cohorts 5 and 6, and the independent multicenter study, with an 11 to 13 percent independent benchmark band highlighted." loading="lazy" decoding="async" />
-              <figcaption>
-                <b>Response rates that cannot be pooled.</b>
-                <span>Three studies, each with its NCT number and median PFS. The single-center 30&ndash;33% results sit above the independent 11&ndash;13% benchmark and carry a <em>non-portable</em> label, so the two cannot be averaged into one number.</span>
-              </figcaption>
-            </figure>
+          <figure class="report-primary-figure">
+            <img src="./img/shots/orr.png" alt="Three-cohort reconciliation of prexasertib objective response rates, with higher single-center estimates and an independent multicenter benchmark of 11 to 13 percent." />
+          </figure>
 
-            <figure class="exhibit">
-              <img src="./img/shots/biomarker.png" alt="Biomarker context-of-use matrix listing candidate biomarkers, their context of use, and the state of public evidence for each." loading="lazy" decoding="async" />
-              <figcaption>
-                <b>Every biomarker graded for what it can actually do.</b>
-                <span>Every candidate marker is bound to what it could actually be used for and what the public evidence currently supports. CCNE1 is graded unsupported and imprecise; OncoSignature, unvalidated in public. No marker supports patient selection today.</span>
-              </figcaption>
-            </figure>
+          <section class="report-section" id="systematic-review" aria-labelledby="systematic-review-title">
+            <p class="report-section-number">Systematic evidence review</p>
+            <h2 id="systematic-review-title">The public monotherapy phenotype is heterogeneous across three directly on-scope datasets.</h2>
+            <p>The datasets should be reconciled, not collapsed into one “definitive” response rate. The two single-center signals are real, but they do not establish a portable 30% monotherapy expectation. The independent multicenter result materially lowers that expectation without making the earlier observations disappear.</p>
 
-            <figure class="exhibit">
-              <img src="./img/shots/modelability.png" alt="Horizontal status chart classifying each prexasertib exposure question as modelable, planning-only, predicted-only, or not modelable." loading="lazy" decoding="async" />
-              <figcaption>
-                <b>Every prediction carries its limit.</b>
-                <span>PBPK scaffolds, ADMET prediction and a Friberg myelosuppression model all run against this asset. Each exposure question is then classified <em>modelable</em>, <em>planning-only</em>, <em>predicted-only</em>, or <em>not modelable</em>. The red bars are the four questions no model can answer from public data: tumor concentration, direct occupancy, exposure-response, and renal/hepatic dose adjustment.</span>
-              </figcaption>
-            </figure>
+            <dl class="report-ledger" aria-label="Evidence ledger coverage">
+              <div><dt>23</dt><dd>records inventoried</dd></div>
+              <div><dt>8</dt><dd>included records</dd></div>
+              <div><dt>1</dt><dd>excluded record</dd></div>
+              <div><dt>13</dt><dd>background records</dd></div>
+            </dl>
+            <p class="report-boundary">Evidence cutoff: 17 July 2026. Registry and publication records from the same trial are treated as non-independent.</p>
+          </section>
 
-            <figure class="exhibit">
-              <img src="./img/shots/neutropenia.png" alt="Bar chart of grade 3 to 4 neutropenia rates across three prexasertib datasets, 93 percent, 85.7 percent and 37.9 percent, with grade 4 and febrile neutropenia annotations." loading="lazy" decoding="async" />
-              <figcaption>
-                <b>The safety signal confirmed three ways.</b>
-                <span>DepMap target essentiality predicted marrow risk, a Friberg model quantified it, and observed dose-limiting toxicity confirmed it at 93%, 85.7% and 37.9% across three datasets. Every finding also records how independent its evidence is; on this asset the strongest available class was same-cohort, and the readout states that.</span>
-              </figcaption>
-            </figure>
+          <section class="report-section" id="clinical-result" aria-labelledby="clinical-result-title">
+            <p class="report-section-number">Clinical result</p>
+            <h2 id="clinical-result-title">The multicenter result sets the more defensible unselected benchmark.</h2>
+            <div class="report-table-wrap">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Dataset</th>
+                    <th>Population</th>
+                    <th>Objective response</th>
+                    <th>Other reported outcomes</th>
+                    <th>Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Original pilot</td>
+                    <td>Single center; mixed platinum sensitivity</td>
+                    <td>8/28 ITT (29%); 8/24 evaluable (33%)</td>
+                    <td>Median PFS 7.4 months</td>
+                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/29361470/" target="_blank" rel="noreferrer">PMID 29361470</a></td>
+                  </tr>
+                  <tr>
+                    <td>NCT02203513 cohorts 5/6</td>
+                    <td>Platinum-resistant BRCA-wild-type HGSOC</td>
+                    <td>12/49 ITT (24.5%); 12/39 evaluable (30.8%)</td>
+                    <td>Median PFS 5.0 months; median DoR 5.0 months</td>
+                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a></td>
+                  </tr>
+                  <tr>
+                    <td>NCT03414047</td>
+                    <td>Independent multicenter platinum-resistant cohorts</td>
+                    <td>17/140 (12.1%)</td>
+                    <td>Median PFS 3.7 months overall; median DoR 5.6 months</td>
+                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="report-note"><strong>Comparability note.</strong> Disease-control definitions differed across studies. The cohorts 5/6 result used PR + stable disease for at least six months; the multicenter study used stable disease for at least four months.</p>
+          </section>
 
-            <figure class="exhibit exhibit-wide">
-              <img src="./img/shots/citation.png" alt="An expanded claim record showing the reviewed proposition, a supported disposition, the cited PMID, and a resolution line quoting the exact table, cohort response rates and confidence intervals from the source paper." loading="lazy" decoding="async" />
-              <figcaption>
-                <b>Every claim opens to the paper it came from.</b>
-                <span>The proposition, whether it was supported, and the citation. The resolution line quotes the source directly: PMC10673677, Table 2, Cohort 1 ORR 11.3% (95% CI 4.3&ndash;23.0), Cohort 2 ORR 13.0% (4.9&ndash;26.3). You can check the number against the paper without leaving the report.</span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+          <section class="report-section" id="biomarker-result" aria-labelledby="biomarker-result-title">
+            <p class="report-section-number">Biomarker result</p>
+            <h2 id="biomarker-result-title">No public baseline marker is ready to select patients.</h2>
+            <p>CCNE1 amplification produced a numerical response difference, 19.2% versus 7.4%, but the difference was not significant (<em>p</em> = 0.13). Median PFS was 3.7 months regardless of CCNE1 amplification, and cyclin E1 protein expression did not separate partial responders from patients with stable or progressive disease.</p>
+            <p>The later NCT02203513 biopsy subset did not rescue the marker. No individual transcript remained differentially expressed after multiplicity correction. DNA-replication pathway enrichment and raw POLA1, POLE and GINS3 associations came from 15 pretreatment RNA-seq samples and remain mechanism-informed resistance hypotheses, not patient-selection markers.</p>
 
-      <section class="band">
-        <div class="shell">
-          <div class="band-head">
-            <p class="band-label">Evidence state</p>
-            <h2>What the public evidence supports.</h2>
-          </div>
-          <div class="prose">
-            <p>CHK1 is a candidate vulnerability in this population and the biology is coherent, but public evidence does not establish a measurable, load-bearing tumor CHK1-dependence mechanism, and no public biomarker supports patient selection today.</p>
-            <p>The remaining gaps are explicit: tumor PK paired with a validated pathway-PD readout for the exposure question; a frozen replication-stress score tested in an independent cohort for the biomarker question; and a prospective test of whether biomarker enrichment separates responders. These are the measurements that would strengthen or challenge the patient-selection case, not a go/no-go verdict from DrugAdopt.</p>
-          </div>
-        </div>
-      </section>
+            <div class="report-table-wrap">
+              <table class="report-table report-biomarker-table">
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Current evidence</th>
+                    <th>Permitted use</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CCNE1 amplification / cyclin E1</td>
+                    <td>Statistically unsupported treatment-response association</td>
+                    <td>Prespecified stratification factor only</td>
+                  </tr>
+                  <tr>
+                    <td>POLA1 / POLE / GINS3 replication signature</td>
+                    <td>Same-cohort, underpowered and FDR-null</td>
+                    <td>Hypothesis-generating continuous score</td>
+                  </tr>
+                  <tr>
+                    <td>PBMC γ-H2AX</td>
+                    <td>Observed downstream systemic PD; not associated with response or PFS</td>
+                    <td>Peripheral PD only, not tumor engagement</td>
+                  </tr>
+                  <tr>
+                    <td>Tumor pCHK1 / pCDC25C</td>
+                    <td>Not measured publicly</td>
+                    <td>Critical new-data gap</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="report-source-line">Sources: <a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/32709712/" target="_blank" rel="noreferrer">PMID 32709712</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a>.</p>
+          </section>
+
+          <section class="report-section" id="safety-result" aria-labelledby="safety-result-title">
+            <p class="report-section-number">Safety and treatment delivery</p>
+            <h2 id="safety-result-title">Marrow toxicity is manageable, but it is part of the product profile.</h2>
+            <p>Across the 169-patient multicenter study, 72.8% had grade 3 or higher treatment-emergent adverse events and 58.0% had grade 3 or higher treatment-related events. Grade 3–4 neutropenia occurred in 37.9%.</p>
+            <dl class="report-ledger report-ledger-safety" aria-label="Treatment delivery results">
+              <div><dt>70.4%</dt><dd>received G-CSF</dd></div>
+              <div><dt>30.8%</dt><dd>required dose reduction</dd></div>
+              <div><dt>39.6%</dt><dd>had a dose delay</dd></div>
+              <div><dt>2.9%</dt><dd>discontinued for an adverse event</dd></div>
+            </dl>
+            <p class="report-note">These operational endpoints are more useful for program planning than the pilot’s 93% grade 3–4 neutropenia rate alone because monitoring and prophylactic G-CSF differed materially.</p>
+          </section>
+
+          <section class="report-section" id="change-readout" aria-labelledby="change-readout-title">
+            <p class="report-section-number">Evidence gaps</p>
+            <h2 id="change-readout-title">Evidence that would change the readout</h2>
+            <div class="report-table-wrap">
+              <table class="report-table">
+                <thead>
+                  <tr>
+                    <th>Missing evidence</th>
+                    <th>Would change the readout if</th>
+                    <th>Where it would come from</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Exposure-timed tumor drug concentration and validated pCHK1 / pCDC25C PD</td>
+                    <td>Tumor target engagement is demonstrated and tracks response.</td>
+                    <td>Biopsy-timed tumor PK and pathway PD in a dose-optimized study.</td>
+                  </tr>
+                  <tr>
+                    <td>A prospectively validated enrichment marker at a locked threshold</td>
+                    <td>The 11–13% unselected asset becomes biomarker-enrichable.</td>
+                    <td>A treatment-by-marker interaction tested in a controlled cohort.</td>
+                  </tr>
+                  <tr>
+                    <td>Dose-comparison PD with lower marrow toxicity</td>
+                    <td>Tumor engagement is preserved at a more tolerable dose or schedule.</td>
+                    <td>A dose/schedule-ranging, biopsy-mandated PD study.</td>
+                  </tr>
+                  <tr>
+                    <td>Patient-level outcomes paired to genomics and exposure</td>
+                    <td>Responder rescue and exposure-response modeling become possible.</td>
+                    <td>Sponsor data room and archived NCT03414047 material.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="report-section report-sources" id="source-record" aria-labelledby="source-record-title">
+            <p class="report-section-number">Source record</p>
+            <h2 id="source-record-title">Primary records used on this page</h2>
+            <ol>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/29361470/" target="_blank" rel="noreferrer">PMID 29361470</a> · original single-center prexasertib pilot.</li>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/32709712/" target="_blank" rel="noreferrer">PMID 32709712</a> · translational analysis of the original pilot cohort.</li>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a> · later NCT02203513 cohorts 5/6 and biopsy analysis.</li>
+              <li><a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a> · independent multicenter phase 2 study.</li>
+              <li><a href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a> · trial record for the pilot and expansion cohorts.</li>
+              <li><a href="https://clinicaltrials.gov/study/NCT03414047" target="_blank" rel="noreferrer">NCT03414047</a> · multicenter trial and data-sharing record.</li>
+              <li><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a> · public pretreatment tumor RNA-seq dataset.</li>
+            </ol>
+            <details class="report-method">
+              <summary>Methods and verification boundary</summary>
+              <p>The underlying case preserves its review protocol, screening ledger, evidence matrix, source files, figures and claim/source traceability. This excerpt uses primary publications, registries and public repositories. It does not establish comparative efficacy, a validated predictive biomarker, direct human-tumor CHK1 target engagement, causal immune mediation, a qualified clinical hERG margin or current ovarian OncoSignature performance.</p>
+              <p>Reviewer-attestation and authentication state are maintained in the current verification report. This rendered excerpt makes no signature claim.</p>
+            </details>
+          </section>
+
+          <footer class="report-page-footer">
+            <span>DrugAdopt · public-evidence report excerpt</span>
+            <span>Prexasertib · 17 July 2026</span>
+          </footer>
+        </article>
+      </div>
     </main>
 
     <footer class="foot">
@@ -106,5 +258,23 @@
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
       </div>
     </footer>
+    <script>
+    (function () {
+      var links = [].slice.call(document.querySelectorAll('.report-contents a[href^="#"]'));
+      function mark(link) {
+        links.forEach(function (item) {
+          if (item === link) item.setAttribute('aria-current', 'location');
+          else item.removeAttribute('aria-current');
+        });
+      }
+      links.forEach(function (link) {
+        link.addEventListener('click', function () { mark(link); });
+      });
+      var current = links.find(function (link) {
+        return link.getAttribute('href') === window.location.hash;
+      });
+      if (current) mark(current);
+    })();
+    </script>
   </body>
 </html>
