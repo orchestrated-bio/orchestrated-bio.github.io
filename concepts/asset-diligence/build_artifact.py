@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Build the single-file, hash-routed Artifact from the multi-page source.
 
-The concept site is four hand-written HTML pages (index/products/case/company)
+The concept site is four hand-written HTML pages
+(index/insight/case/company)
 sharing styles.css and assets under ./img and ../../images. A Claude Artifact
 must be ONE self-contained file with no external requests, so this script:
 
@@ -10,7 +11,7 @@ must be ONE self-contained file with no external requests, so this script:
      heaviest GIFs so the artifact stays a reasonable size);
   3. pulls the inner <main> of each page into a <main class="route"
      data-route="..."> section, rewriting the shared masthead/footer once;
-  4. rewrites nav hrefs (./ , ./products.html , …) to hash routes (#home …);
+  4. rewrites nav hrefs (./ , ./insight.html , …) to hash routes (#home …);
   5. appends a tiny hashchange router plus the Insight animation script.
 
 Re-run after editing any source page:  python3 build_artifact.py
@@ -25,8 +26,8 @@ OUT = HERE / "asset-diligence.artifact.html"
 # route key -> source file. Order defines nav + section order.
 PAGES = [
     ("home",     "index.html"),
-    ("products", "products.html"),
-    ("case",     "case.html"),
+    ("insight",  "insight.html"),
+    ("report",   "case.html"),
     ("company",  "company.html"),
 ]
 
@@ -141,7 +142,7 @@ def inline_srcs(html: str) -> str:
 def read(name): return (HERE / name).read_text()
 
 def extract_main(html: str) -> str:
-    m = re.search(r"<main id=\"main\">(.*)</main>", html, re.S)
+    m = re.search(r"<main id=\"main\"[^>]*>(.*)</main>", html, re.S)
     return m.group(1).strip()
 
 def extract_scripts(html: str) -> str:
@@ -149,8 +150,8 @@ def extract_scripts(html: str) -> str:
 
 def rewrite_nav(html: str) -> str:
     for a, b in (('href="./"', 'href="#home"'),
-                 ('href="./products.html"', 'href="#products"'),
-                 ('href="./case.html"', 'href="#case"'),
+                 ('href="./insight.html"', 'href="#insight"'),
+                 ('href="./case.html"', 'href="#report"'),
                  ('href="./company.html"', 'href="#company"')):
         html = html.replace(a, b)
     return html
@@ -190,6 +191,22 @@ def build() -> str:
     router = """
   function show(r){
     if(!r) r='home';
+    if(r==='case') r='report';
+    var titles={
+      home:'DrugAdopt | Orchestrated Biosciences',
+      insight:'Insight | Orchestrated Biosciences',
+      report:'Example report | Orchestrated Biosciences',
+      company:'Company | Orchestrated Biosciences'
+    };
+    var target=null;
+    if(!titles[r]){
+      var fragment=document.getElementById(r);
+      var owner=fragment && fragment.closest('.route');
+      if(owner){
+        target=fragment;
+        r=owner.dataset.route;
+      }
+    }
     var found=false;
     document.querySelectorAll('.route').forEach(function(m){
       var on = m.dataset.route===r; m.hidden=!on; if(on) found=true;
@@ -199,7 +216,9 @@ def build() -> str:
       if(a.getAttribute('href')==='#'+r) a.setAttribute('aria-current','page');
       else a.removeAttribute('aria-current');
     });
-    window.scrollTo(0,0);
+    document.title=titles[r] || titles.home;
+    if(target) requestAnimationFrame(function(){ target.scrollIntoView(); });
+    else window.scrollTo(0,0);
   }
   show(location.hash.slice(1));
   window.addEventListener('hashchange', function(){ show(location.hash.slice(1)); });
