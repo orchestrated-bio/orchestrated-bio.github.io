@@ -1,0 +1,728 @@
+/* ==========================================================================
+   Orchestrated Biosciences — asset diligence concept
+
+   Type: one sans across the page. Weight, size and letter-spacing carry the
+   hierarchy — not a second typeface. Mono appears only where the content IS
+   data (source identifiers, gene symbols, the asset id, inline code), so it
+   reads as a signal rather than as decoration.
+
+   Ground: cool green-grey neutrals biased toward the logo accent. No display
+   serif. Both themes are token-level, so the viewer's toggle wins either way.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Ground — cool green-grey paper, deliberately not warm cream */
+  --paper:        #f2f3f1;
+  --paper-raised: #fbfcfb;
+  --paper-sunk:   #e7e9e6;
+
+  /* Ink */
+  --ink:      #131815;
+  --ink-2:    #414a44;
+  --ink-3:    #5b635d;  /* AA on --paper for small text (4.5:1 floor) */
+  --ink-4:    #666f68;  /* lightest ink that still clears AA */
+
+  --rule:       #d6dad6;
+  --rule-firm:  #b9bfba;
+
+  /* Accent — from the logo mark */
+  --accent:      #155e4a;
+  --accent-deep: #0d4436;
+  --accent-wash: #e2ece8;
+
+  /* Status — semantic, kept distinct from accent */
+  --unresolved:      #9c3a24;
+  --unresolved-wash: #f3e3de;
+  --partial:         #7a6410;
+  --partial-wash:    #f1ebd8;
+  --resolved:        #155e4a;
+  --resolved-wash:   #e2ece8;
+
+  /* -apple-system first so Apple platforms get SF Pro, whose optical sizing
+     is what makes the tight display tracking below hold together. */
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, "Segoe UI", Roboto, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --measure: 34rem;
+  --shell: 68rem;
+
+  --step--1: clamp(0.78rem, 0.76rem + 0.1vw, 0.83rem);
+  --step-0:  clamp(0.95rem, 0.92rem + 0.15vw, 1.02rem);
+  --step-1:  clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem);
+  --step-2:  clamp(1.4rem, 1.2rem + 0.9vw, 1.9rem);
+  --step-3:  clamp(1.8rem, 1.4rem + 1.9vw, 2.9rem);
+  --step-4:  clamp(2.2rem, 1.5rem + 3.2vw, 4rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper:        #101412;
+    --paper-raised: #171d1a;
+    --paper-sunk:   #0b0e0d;
+    --ink:      #e8ece9;
+    --ink-2:    #b0b9b3;
+    --ink-3:    #8b958e;
+    --ink-4:    #79837c;
+    --rule:       #262e2a;
+    --rule-firm:  #3a443f;
+    --accent:      #5fbf9c;
+    --accent-deep: #8ed6ba;
+    --accent-wash: #16261f;
+    --unresolved:      #e08a6e;
+    --unresolved-wash: #2a1a15;
+    --partial:         #d2b04c;
+    --partial-wash:    #26200e;
+    --resolved:        #5fbf9c;
+    --resolved-wash:   #16261f;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:        #101412;
+  --paper-raised: #171d1a;
+  --paper-sunk:   #0b0e0d;
+  --ink:      #e8ece9;
+  --ink-2:    #b0b9b3;
+  --ink-3:    #8b958e;
+  --ink-4:    #79837c;
+  --rule:       #262e2a;
+  --rule-firm:  #3a443f;
+  --accent:      #5fbf9c;
+  --accent-deep: #8ed6ba;
+  --accent-wash: #16261f;
+  --unresolved:      #e08a6e;
+  --unresolved-wash: #2a1a15;
+  --partial:         #d2b04c;
+  --partial-wash:    #26200e;
+  --resolved:        #5fbf9c;
+  --resolved-wash:   #16261f;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper:        #f2f3f1;
+  --paper-raised: #fbfcfb;
+  --paper-sunk:   #e7e9e6;
+  --ink:      #131815;
+  --ink-2:    #414a44;
+  --ink-3:    #5b635d;
+  --ink-4:    #666f68;
+  --rule:       #d6dad6;
+  --rule-firm:  #b9bfba;
+  --accent:      #155e4a;
+  --accent-deep: #0d4436;
+  --accent-wash: #e2ece8;
+  --unresolved:      #9c3a24;
+  --unresolved-wash: #f3e3de;
+  --partial:         #7a6410;
+  --partial-wash:    #f1ebd8;
+  --resolved:        #155e4a;
+  --resolved-wash:   #e2ece8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+:where(a):focus-visible,
+:where(button):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* --- Shell ------------------------------------------------------------- */
+
+.shell {
+  width: min(100% - 2.5rem, var(--shell));
+  margin-inline: auto;
+}
+
+/* --- Header ------------------------------------------------------------ */
+
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+}
+
+.masthead .shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 0.85rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+/* Two logo files: the black-ringed PNG for light grounds, the white-ringed
+   SVG for dark. The near-black O disappears on the dark masthead, so swap by
+   theme rather than tint one file. Light shown by default; dark theme (via
+   media query or the toggle's data-theme) swaps them. */
+.brand-logo { width: 25px; height: 25px; }
+.brand-logo-light { display: block; }
+.brand-logo-dark  { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand-logo-light { display: none; }
+  :root:not([data-theme="light"]) .brand-logo-dark  { display: block; }
+}
+:root[data-theme="dark"]  .brand-logo-light { display: none; }
+:root[data-theme="dark"]  .brand-logo-dark  { display: block; }
+:root[data-theme="light"] .brand-logo-light { display: block; }
+:root[data-theme="light"] .brand-logo-dark  { display: none; }
+
+.brand-word {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.brand-word span { color: var(--accent); }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.site-nav a {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  text-decoration: none;
+  padding-block: 0.2rem;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--accent);
+}
+
+.nav-cta {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  text-decoration: none;
+  padding: 0.42rem 0.75rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
+
+@media (max-width: 40rem) {
+  .masthead .shell { flex-wrap: wrap; gap: 0.5rem 1rem; padding-block: 0.7rem; }
+  .site-nav {
+    gap: 0.9rem;
+    margin-left: 0;
+    order: 3;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  /* The CTA is nowrap and won't fit a 375px row beside four nav items —
+     it pushed the whole page sideways. Let it take its own line. */
+  .nav-cta {
+    padding: 0.35rem 0.6rem;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 26rem) {
+  .nav-cta { width: 100%; text-align: center; margin-left: 0; }
+}
+
+/* --- Hero: the register itself ----------------------------------------- */
+
+.opening {
+  padding-block: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+}
+
+/* Hero: copy left, the deliverable right. The report is the evidence the
+   copy's claims depend on, so it sits at equal weight, not below. */
+.opening .shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (max-width: 60rem) {
+  .opening .shell { grid-template-columns: 1fr; }
+}
+
+
+.opening h1 {
+  font-size: var(--step-3);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 1.1rem;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.opening-lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: var(--measure);
+  margin: 0 0 2rem;
+  text-wrap: pretty;
+}
+
+.opening-lede strong { color: var(--ink); font-weight: 600; }
+
+/* The follow-on lede sits closer to the one above it. Set via the previous
+   sibling's margin, not a negative margin here — a negative top margin is
+   tuned to one font-size and collides the moment the type scale changes
+   (it overlapped the line above on .page-head, where type is larger). */
+.opening-lede + .opening-lede-tight { font-size: var(--step-0); }
+.opening-lede:has(+ .opening-lede-tight) { margin-bottom: 0.9rem; }
+
+/* Method note: how the register gets built. Sits under the worked example
+   so the claim about the engine lands next to the engine's output. */
+.method {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1.1rem;
+  align-items: start;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+  max-width: 46rem;
+}
+
+.method p {
+  margin: 0 0 0.9rem;
+  font-size: var(--step--1);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.method p:last-child { margin-bottom: 0; }
+
+/* After .method p so the color lands — same specificity, later wins. */
+.method p.method-step {
+  font-family: var(--sans);
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  padding-top: 0.05rem;
+  margin-bottom: 0.9rem;
+}
+.method p strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 40rem) {
+  .method { grid-template-columns: 1fr; gap: 0.3rem; }
+  .method-step { padding-top: 0.6rem; }
+}
+
+.opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid var(--ink);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { background: var(--accent-deep); border-color: var(--accent-deep); color: var(--paper); }
+
+.link-quiet {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-firm);
+  padding-bottom: 2px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.link-quiet:hover { color: var(--accent); border-color: var(--accent); }
+
+/* --- Sub-page head ------------------------------------------------------
+   Sub-pages open with a stated job, not a hero. Shorter than .opening so
+   the page's actual content starts above the fold. */
+
+.page-head {
+  padding-block: clamp(2.25rem, 5vw, 3.5rem) clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.page-head h1 {
+  font-size: var(--step-3);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
+/* Only the LAST lede loses its bottom margin. Zeroing every .opening-lede
+   here outranked the :has() rule above (0,2,0 beats 0,1,0) and collapsed the
+   gap between stacked ledes on sub-pages. */
+.page-head .opening-lede:last-of-type { margin-bottom: 0; }
+
+/* --- Section scaffolding ----------------------------------------------- */
+
+.band { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.band + .band { border-top: 1px solid var(--rule); }
+
+/* First band after a page head: no rule, tighter top — the head already
+   separated it, and a rule here reads as a false section break. */
+.band-first { padding-top: 0; }
+
+.band-head { margin-bottom: 2rem; max-width: var(--measure); }
+
+.band-label {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  letter-spacing: 0.055em;
+  font-weight: 590;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 0.8rem;
+}
+
+.band-head h2 {
+  font-size: var(--step-2);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 0.7rem;
+  text-wrap: balance;
+}
+
+.band-head p {
+  margin: 0;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* --- The register (hero artifact) -------------------------------------- */
+
+/* nowrap keeps short identifiers like "PMID 38555285" from breaking across
+   lines, but a full citation is a sentence and must be allowed to wrap —
+   it blew a 398px link through a 375px viewport. */
+/* --- Biomarker rows ----------------------------------------------------- */
+
+/* Biomarker names need more room than the 8.5rem axis column allows. */
+/* Verdict chips. Semantic colors, deliberately not the accent. */
+/* --- Headshots ---------------------------------------------------------- */
+
+.person-photo {
+  display: block;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  margin-bottom: 0.9rem;
+  background: var(--paper-sunk);
+}
+
+.person-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 0.7rem 0 0 !important;
+}
+.person-links a {
+  font-size: var(--step--1);
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.person-links a:hover { border-bottom-color: var(--accent); }
+
+.tag {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  padding: 0.2em 0.45em;
+  border: 1px solid currentColor;
+  display: inline-block;
+  white-space: nowrap;
+}
+.tag-unresolved { color: var(--unresolved); background: var(--unresolved-wash); }
+.tag-partial    { color: var(--partial);    background: var(--partial-wash); }
+.tag-resolved   { color: var(--resolved);   background: var(--resolved-wash); }
+
+/* --- Axis sweep list ---------------------------------------------------- */
+
+/* Eight items: pin to 4 / 2 / 1 so the grid always divides evenly and the
+   bottom edge stays straight. auto-fit picks whatever fits the viewport,
+   which at ~1280px gave 5+3 — three empty cells and a ragged edge. */
+.axes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+}
+
+@media (max-width: 60rem) {
+  .axes { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 30rem) {
+  .axes { grid-template-columns: 1fr; }
+}
+
+.axis {
+  padding: 1.1rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-raised);
+}
+
+.axis h3 {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 0.45rem;
+  letter-spacing: 0.01em;
+}
+
+.axis p {
+  margin: 0;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+
+/* Supporting-lane note under the four-section grid. Quieter than the grid:
+   these lanes are worked but are not the headline scientific readout. */
+.band-note {
+  margin: 1.1rem 0 0;
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: var(--ink-4);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+/* The pitch-sized contract for a DrugAdopt pilot. It precedes the deeper
+   evidence lanes so a buyer can understand the input, work, and output first. */
+.pilot-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.6fr) auto minmax(0, 1fr);
+  gap: clamp(0.8rem, 2vw, 1.5rem);
+  align-items: center;
+  padding-block: 1.15rem;
+  margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--rule-firm);
+  border-bottom: 1px solid var(--rule-firm);
+}
+
+.pilot-flow-step p { margin: 0; }
+
+.pilot-flow-step > p:last-child {
+  font-size: var(--step--1);
+  line-height: 1.5;
+  font-weight: 560;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.pilot-flow-label {
+  margin-bottom: 0.25rem !important;
+  font-size: 0.68rem;
+  line-height: 1.2;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.pilot-flow-arrow {
+  color: var(--ink-4);
+  font-size: var(--step-1);
+}
+
+@media (max-width: 42rem) {
+  .pilot-flow { grid-template-columns: 1fr; gap: 0; }
+  .pilot-flow-arrow { display: none; }
+  .pilot-flow-step { padding-block: 0.9rem; }
+  .pilot-flow-step:not(:first-child) { border-top: 1px solid var(--rule); }
+}
+
+/* --- The deliverable ---------------------------------------------------
+   A screenshot of a real rendered report from docs/cases/. Not a mockup and
+   not animated: a verification report has no story in time, so staging it in
+   was motion applied to a still object. It's framed as paper on the page.
+   ---------------------------------------------------------------------- */
+
+.shot {
+  margin: 0;
+  position: relative;
+}
+
+.demo-cue {
+  margin: 0 0 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 620;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Reserve the box before the GIF decodes so the hero never reflows. */
+  aspect-ratio: 760 / 475;
+  border: 1px solid var(--rule-firm);
+  border-radius: 4px;
+  /* The report renders on white. Keep it white in both themes — it's paper,
+     and dimming it would misrepresent the artifact. */
+  background: #fff;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.10),
+    0 12px 32px -8px rgb(0 0 0 / 0.22);
+}
+
+.shot figcaption {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--ink-3);
+  margin-top: 0.85rem;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+/* --- Affiliations banner ------------------------------------------------
+   A horizontal band of names, not a list. No logos: we hold no logo files
+   and no permission to use third-party marks, and a CSS-faked wordmark
+   reads as official while being wrong in typeface and colour. Names are
+   honest at any size.
+
+   Grayscale-at-rest / colour-on-hover is the logo-band idiom; the type
+   equivalent is muted ink that resolves to full ink on hover.
+   ---------------------------------------------------------------------- */
+
+.orgs-band {
+  /* Defined by rules, not fill. Both --paper-sunk and --paper-raised sit
+     ~1.05:1 from the page background — they are hairline shades for small
+     surfaces, and neither reads as a band at full width. Rules are what
+     separates every other section here anyway. */
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.orgs-title {
+  font-size: var(--step--1) !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase;
+  color: var(--accent) !important;
+  margin: 0 0 1.4rem !important;
+  text-align: center;
+}
+
+.orgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.1rem 2.6rem;
+}
+
+.org {
+  font-size: var(--step-2);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.org:hover { color: var(--accent); }
+
+@media (max-width: 46rem) {
+  .orgs { gap: 0.9rem 1.9rem; }
+  .org { font-size: var(--step-1); }
+}
+
+/* --- Footer ------------------------------------------------------------- */
+
+.foot {
+  border-top: 1px solid var(--rule);
+  padding-block: 2rem;
+}
+
+.foot .shell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.foot p {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  color: var(--ink-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

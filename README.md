@@ -1,140 +1,66 @@
-# Orchestrated Biosciences — Company Website
+# Orchestrated Biosciences company website
 
-Marketing website for [Orchestrated Biosciences](https://orchestrated.bio), serving product pages, blog, team bios, and company information.
+The public site for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, Insight, an inspectable DrugAdopt report, and the company.
 
-## Tech Stack
+## Architecture
 
-| Layer       | Technology                                                  |
-| ----------- | ----------------------------------------------------------- |
-| Framework   | [Jekyll](https://jekyllrb.com/) via the `github-pages` gem |
-| Styling     | [Tailwind CSS](https://tailwindcss.com/) (CDN, no build)   |
-| JavaScript  | Vanilla JS (no framework)                                  |
-| Hosting     | GitHub Pages                                                |
-| Domain      | `orchestrated.bio` (DNS via Porkbun)                        |
-| Plugins     | jekyll-seo-tag, jekyll-sitemap, jekyll-feed, jekyll-paginate, jekyll-redirect-from |
+The primary product site is a small static HTML/CSS/JavaScript application. Jekyll remains in the repository for the blog and legal pages and is built by GitHub Pages.
 
-There is **no Node.js, npm, or Webpack/Vite build step**. Tailwind is loaded from the CDN with a custom config defined in `_includes/tailwind-config.html`.
+| Surface | Source |
+| --- | --- |
+| DrugAdopt | `index.html` |
+| Insight | `insight.html` |
+| Example report | `report.html` |
+| Company | `company.html` |
+| Shared product-site styles | `assets/css/company-site/base.css` |
+| Page styles | `assets/css/company-site/{drugadopt,insight,report,company}.css` |
+| Interactive demos | `assets/js/company-site/` |
+| Blog and legal pages | Jekyll layouts, includes, and Markdown |
+| Portable review artifact | `concepts/asset-diligence/asset-diligence.artifact.html` |
 
-## File Structure
+The root product pages deliberately have no framework or bundler. They can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
 
-```
-.
-├── _config.yml              # Jekyll site configuration
-├── _data/
-│   ├── navigation.yml       # Navbar & footer links
-│   ├── products.yml         # Product catalog (drives product cards)
-│   └── team.yml             # Team member bios
-├── _includes/
-│   ├── head.html            # <head> tag (meta, Tailwind CDN, fonts)
-│   ├── header.html          # Navbar
-│   ├── footer.html          # Footer
-│   ├── tailwind-config.html # Tailwind theme (brand colors, fonts)
-│   ├── blog-card.html       # Blog post card partial
-│   ├── product-card.html    # Product card partial
-│   ├── team-card.html       # Team member card partial
-│   ├── cta-section.html     # Call-to-action banner
-│   ├── cookie-consent.html  # Cookie consent banner
-│   └── seo-schema.html      # JSON-LD structured data
-├── _layouts/
-│   ├── default.html         # Base layout (head + header + footer)
-│   ├── home.html            # Homepage
-│   ├── product.html         # Individual product page
-│   ├── post.html            # Blog post
-│   ├── blog.html            # Blog index (paginated)
-│   └── page.html            # Generic page (privacy, terms, etc.)
-├── _posts/                  # Blog posts (Markdown, YYYY-MM-DD-title.md)
-├── products/                # Product pages (HTML, one per product)
-│   ├── ai-radar.html
-│   ├── bioventure.html
-│   ├── mouse-selector.html
-│   └── spatial-advisor.html
-├── assets/
-│   ├── css/custom.css       # Custom styles beyond Tailwind
-│   └── js/
-│       ├── main.js          # Site-wide JS (nav toggle, animations)
-│       └── cookie-consent.js
-├── images/                  # All images (logos, demos, team photos, OG)
-├── blog/                    # Blog index page
-├── index.html               # Homepage
-├── privacy-policy.md        # Privacy policy
-├── terms.md                 # Terms of service
-├── CNAME                    # Custom domain for GitHub Pages
-├── robots.txt               # Search engine crawl rules
-├── Gemfile                  # Ruby dependencies (just github-pages)
-└── scripts/
-    └── deploy.sh            # Deployment helper script
-```
+Legacy product, portfolio, team, and concept URLs contain lightweight redirects to the current pages.
 
-## Quick Start
+## Local preview
+
+For the product pages only:
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/orchestrated-bio/orchestrated-bio.github.io.git
-cd orchestrated-bio.github.io
+python3 -m http.server 8767
+```
 
-# 2. Install Ruby (macOS system Ruby 2.6 is too old — you need 3.x)
-brew install ruby
+Open <http://localhost:8767/>.
 
-# 3. Add Homebrew Ruby to your PATH (add these to ~/.zshrc or ~/.bashrc, then restart your terminal)
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
+For the complete GitHub Pages site, including the blog:
 
-# 4. Verify Ruby (should show 3.x, NOT 2.6)
-ruby --version
-
-# 5. Install Bundler and project dependencies
-gem install bundler
+```bash
 bundle install
-
-# 6. Start the dev server
 bundle exec jekyll serve --livereload
 ```
 
-Open **http://localhost:4000**. Changes auto-rebuild on save (except `_config.yml` — restart the server for that).
+Open <http://localhost:4000/>.
 
-### Troubleshooting
+## Build the portable artifact
 
-| Problem | Fix |
+```bash
+python3 concepts/asset-diligence/build_artifact.py
+```
+
+The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. That generated file is intentionally ignored by Git.
+
+## Common edits
+
+| Task | File or directory |
 | --- | --- |
-| `ruby --version` still shows 2.6 | You're using macOS system Ruby. Make sure the `export PATH` lines are in your shell profile and you restarted your terminal. |
-| `bundle install` permission errors | Don't use `sudo`. Ensure Homebrew Ruby is first in your PATH (see step 3). |
-| `jekyll: command not found` | Run `bundle exec jekyll serve`, not just `jekyll serve`. |
-| Port 4000 already in use | Use `bundle exec jekyll serve --port 4001` or kill the other process. |
-
-### Common Tasks
-
-| Task | How |
-| --- | --- |
-| Add a blog post | Create `_posts/YYYY-MM-DD-title.md` with front matter |
-| Add a product | Add entry to `_data/products.yml`, create `products/slug.html` |
-| Edit navigation | Edit `_data/navigation.yml` |
-| Update team bios | Edit `_data/team.yml` |
-| Change brand colors/fonts | Edit `_includes/tailwind-config.html` |
-| Add custom CSS | Edit `assets/css/custom.css` |
+| Change product positioning or page content | Root HTML pages |
+| Change shared product-site layout or typography | `assets/css/company-site/base.css` |
+| Change one product page | Its page-specific CSS and JavaScript |
+| Change blog navigation or footer links | `_data/navigation.yml` |
+| Add a blog post | `_posts/YYYY-MM-DD-title.md` |
+| Change blog/Jekyll styling | `assets/css/custom.css` |
+| Rebuild the portable review artifact | `concepts/asset-diligence/build_artifact.py` |
 
 ## Deployment
 
-Push to `main` and GitHub Pages builds and deploys automatically — no Actions workflow needed.
-
-```bash
-git add -A
-git commit -m "Your commit message"
-git push origin main
-```
-
-The site typically goes live within 1–2 minutes. You can check build status in the repo's **Actions** tab on GitHub.
-
-> **Note:** The custom domain (`orchestrated.bio`) is configured via the `CNAME` file in the repo root and DNS A records at Porkbun. You should not need to touch either unless changing domains.
-
-## Brand Reference
-
-| Token | Value |
-| --- | --- |
-| Primary green | `#16b17e` (brand-500) |
-| Dark navy | `#0d1020` (navy-950) |
-| Domain | orchestrated.bio |
-| Tagline | AI-Driven Precision Medicine & Agentic AI Solutions |
-
-## License
-
-Proprietary. All rights reserved by Orchestrated Biosciences.
+Pushes to the publishing branch are built and deployed by GitHub Pages. There is no Node.js or frontend bundling step.

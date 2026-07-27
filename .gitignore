@@ -22,6 +22,7 @@ tmp/
 
 # Dev recording scripts
 scripts/record-*.js
+test-results/
 
 # Node (if added later)
 node_modules/
