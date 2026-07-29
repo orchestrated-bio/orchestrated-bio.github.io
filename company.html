@@ -26,8 +26,8 @@
     <header class="masthead">
       <div class="shell">
         <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
-          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
-          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-light" src="./images/favicon.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/favicon-dark.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
         <nav class="site-nav" aria-label="Primary">
@@ -44,7 +44,7 @@
       <section class="page-head">
         <div class="shell">
           <h1>An engine for finding the right patients.</h1>
-          <p class="opening-lede">Orchestrated Biosciences builds DrugAdopt, a biomarker-discovery engine for patient selection, and Insight, a self-serve cancer-genomics research tool.</p>
+          <p class="opening-lede">Orchestrated Biosciences builds DrugAdopt, a biomarker-discovery engine for patient selection. It grew out of <a href="./insight.html">Insight</a>, our self-serve cancer-genomics tool, which is still live and still under active development — the cohort handling, analysis, and provenance work we built there is what DrugAdopt runs on today.</p>
           <p class="opening-lede opening-lede-tight">For a given drug and disease, DrugAdopt searches the public biomedical record, runs custom analyses, and surfaces candidate biomarkers. It then assembles the evidence supporting and challenging each one, and shows what questions remain before a marker could guide patient selection in a trial. Our focus is small pharma teams with promising candidates and limited capacity to do this work in house.</p>
           <p class="opening-lede opening-lede-tight">The report is the visible artifact. The product is the engine underneath it: a reusable set of expert-designed biomarker and bioinformatics workflows that can be adapted from one asset to the next.</p>
         </div>
@@ -74,7 +74,7 @@
               <p class="person-role">Co-Founder &amp; Chief Operating Officer</p>
               <p>U.S. Coast Guard veteran and former intelligence officer. Software engineering, cloud applications, and machine learning, with mission-critical program delivery from the defense side.</p>
               <p class="person-links">
-                <a href="https://www.linkedin.com/company/orchestrated-biosciences" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://www.linkedin.com/in/noeljcruz/" target="_blank" rel="noreferrer">LinkedIn</a>
               </p>
             </div>
             <div class="person person-advisor">
@@ -82,6 +82,9 @@
               <h3>Prakash Narayan, PhD</h3>
               <p class="person-role">Strategic Advisor</p>
               <p>Former Vice President of R&amp;D at Angion and ProKidney, with more than a decade of industry drug-development leadership. Advises Orchestrated Biosciences on translational strategy, development risk, and the evidence an industry team needs before committing to the next experiment or trial.</p>
+              <p class="person-links">
+                <a href="https://www.linkedin.com/in/prakash-narayan-phd-8b768610/" target="_blank" rel="noreferrer">LinkedIn</a>
+              </p>
             </div>
           </div>
           <div class="pubs">
@@ -125,14 +128,32 @@
         </div>
       </section>
 
+      <section class="band" id="data-handling" aria-labelledby="data-title">
+        <div class="shell">
+          <p class="band-label">Working with your data</p>
+          <h2 id="data-title">Your data does not go to a public model API.</h2>
+          <p class="band-lede">Language models run on private cloud infrastructure we control, not on consumer or third-party model endpoints. Nothing you share is sent to a public API, and nothing is used to train a model.</p>
+          <ul class="data-points">
+            <li><b>Per-engagement isolation.</b> Each asset is worked in its own environment. Your material is not pooled with another client's, and it is not reused to build anything outside your engagement.</li>
+            <li><b>You set the boundary.</b> Most of what DrugAdopt does runs on public evidence alone — the example report uses no sponsor data at all. Internal data is optional, and you decide what crosses the line and when.</li>
+            <li><b>Contracts before data.</b> We sign an NDA before you send anything, and we will work to your MSA, DPA, or security review rather than asking you to accept ours.</li>
+          </ul>
+          <p class="band-note">Have a specific security requirement? Ask, and we will tell you plainly whether we can meet it.</p>
+          <p class="pilot-terms-cta">
+            <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call <span aria-hidden="true">→</span></a>
+            <a class="link-quiet" href="mailto:support@orchestrated.bio">Or email us ↗</a>
+          </p>
+        </div>
+      </section>
+
       <section class="orgs-band" aria-labelledby="orgs-title">
         <div class="shell">
-          <h2 class="orgs-title" id="orgs-title">Who we work with</h2>
+          <h2 class="orgs-title" id="orgs-title">Where we've worked</h2>
+          <p class="orgs-note">Institutions and companies our work has come through, as employers, collaborators, or clients. Named references available on request.</p>
           <div class="orgs">
             <a class="org" href="https://praesage.bio/" target="_blank" rel="noreferrer">Praesage Bio</a>
             <a class="org" href="https://nodesnedges.com/" target="_blank" rel="noreferrer">Nodes + Edges</a>
             <a class="org" href="https://www.utep.edu/" target="_blank" rel="noreferrer">UTEP</a>
-            <a class="org" href="https://www.jax.org/" target="_blank" rel="noreferrer">The Jackson Laboratory</a>
             <a class="org" href="https://health.uconn.edu/" target="_blank" rel="noreferrer">UConn Health</a>
           </div>
         </div>
@@ -142,6 +163,11 @@
     <footer class="foot">
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="https://orchestrated.bio/blog/">Blog</a>
+          <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
+          <a href="https://orchestrated.bio/terms.html">Terms</a>
+        </nav>
       </div>
     </footer>
   </body>

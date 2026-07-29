@@ -1,5 +1,0 @@
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #111826; }
-::-webkit-scrollbar-thumb { background: #152040; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #1B7760; }

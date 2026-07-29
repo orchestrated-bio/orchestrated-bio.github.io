@@ -26,8 +26,8 @@
     <header class="masthead">
       <div class="shell">
         <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
-          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
-          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-light" src="./images/favicon.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/favicon-dark.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
         <nav class="site-nav" aria-label="Primary">
@@ -46,10 +46,10 @@
           <div class="opening-copy">
             <h1>Find the patients most likely to respond before your trial&nbsp;starts.</h1>
             <p class="opening-lede">DrugAdopt is a biomarker-discovery engine. Give it a drug and an indication, and it works the public evidence for the biomarkers that could separate the patients who respond from the patients who do not.</p>
-            <p class="opening-lede opening-lede-tight">You get the candidate biomarkers, the evidence for and against each, and <strong>the experiment that would close the gap</strong>. Every conclusion links to a source or analysis and is reviewed by a bioinformatician.</p>
+            <p class="opening-lede opening-lede-tight">You get the candidate biomarkers, the evidence for and against each, and <strong>the experiment that would close the gap</strong>. Every conclusion links to the source or analysis it came from, so you can check it yourself.</p>
             <div class="opening-actions">
               <a class="btn" href="./report.html">Explore an example report <span aria-hidden="true">→</span></a>
-              <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Scope a DrugAdopt pilot ↗</a>
+              <a class="link-quiet" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot ↗</a>
             </div>
           </div>
 
@@ -70,7 +70,6 @@
                   <li><button type="button" class="dax-nav-item" data-page="toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></button></li>
                   <li><button type="button" class="dax-nav-item" data-page="recommendation"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></button></li>
                 </ul>
-                <div class="dax-spine-foot"><span class="dax-live-dot"></span>Reviewer-attested</div>
               </nav>
 
               <div class="dax-paper">
@@ -83,27 +82,23 @@
                       <p class="dax-ov-target">Small molecule · Target CHEK1</p>
                       <p class="dax-ov-ind">Platinum-resistant BRCA-wild-type high-grade serous ovarian carcinoma</p>
                     </div>
-                    <div class="dax-ov-status">
-                      <span class="dax-ov-status-label">Selection biomarker</span>
-                      <span class="dax-ov-status-state">None validated in public data</span>
-                    </div>
                   </div>
 
                   <p class="dax-ov-question">Which patients are most likely to respond to prexasertib? Does the public evidence support selecting them?</p>
 
-                  <p class="dax-ov-readout">Twelve of 49 treated patients had a partial response, so a responder subset exists. But no public biomarker separates them: the candidate replication-stress RNA score is not robust across score definitions in the same biopsies, exposure is not linked to who responded, and the POLA1 combination the biology points to has no established safety window. The evidence for a responder subset is real; the marker that would select it is not yet in hand.</p>
+                  <p class="dax-ov-readout"><strong>Twelve of 39 evaluable patients responded. This report works the public evidence for what separates them.</strong> Five candidate markers were assessed and graded: a replication-stress RNA score and POLA1 survive as candidates, CCNE1 is ruled out for selection, and two on-treatment readouts are monitoring-only. None is trial-ready yet, and the report names the one experiment that would settle it.</p>
 
                   <p class="dax-ov-sechead">What each section found</p>
                   <ul class="dax-ov-sections">
-                    <li><button type="button" class="dax-ov-link" data-goto="clinical"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-chip dax-chip-warn">Responder subset, unexplained</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="mechanism"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-chip dax-chip-gap">No selection biomarker</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="pharmacology"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-chip dax-chip-warn">Exposure–response unlinked</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="toxicology"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-chip dax-chip-warn">Combination window open</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="clinical"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-sec-gist">12 of 39 evaluable patients responded — a real subset to select for.</span></span><span class="dax-ov-chip dax-chip-ok">Responder subset observed</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="mechanism"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-sec-gist">The replication score and POLA1 both survive as candidates; neither is trial-ready yet.</span></span><span class="dax-ov-chip dax-chip-warn">2 candidates, neither validated</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="pharmacology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-sec-gist">Aggregate PK makes regimen-level underexposure unlikely; individual exposure is still unresolved.</span></span><span class="dax-ov-chip dax-chip-warn">Regimen exposure adequate</span></button></li>
+                    <li><button type="button" class="dax-ov-link" data-goto="toxicology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-sec-gist">Marrow toxicity is characterized; the combination margin still has to be measured.</span></span><span class="dax-ov-chip dax-chip-warn">Marrow toxicity quantified</span></button></li>
                   </ul>
 
                   <div class="dax-ov-foot">
                     <span>Prepared 2026-07-16 · from public evidence</span>
-                    <span>Reviewed &amp; signed by a bioinformatician</span>
+                    <span>Every claim hash-bound to its source</span>
                   </div>
                 </article>
 
@@ -118,7 +113,7 @@
                   </figure>
                   <p class="dax-body-p">Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response. The signal-seeking study ended before its planned evaluable denominators were reached <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">[NCT02203513]</a>. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">[PMID 38555285]</a>.</p>
                   <div class="dax-callout">
-                    <div class="dax-callout-head">Estimand finding</div>
+                    <div class="dax-callout-head">Endpoint and denominator finding</div>
                     <div class="dax-callout-body">
                       <p class="dax-callout-item"><b>clinical-01 · high.</b> A real activity signal exists, but early-stopped cohorts and mixed analysis denominators do not establish a clean efficacy result; the larger NCT03414047 provides lower external single-arm context and no significant genomic-response biomarker.</p>
                     </div>
@@ -143,7 +138,7 @@
                     <img src="./images/drugadopt/report/mechanism.png" alt="Mechanism-evidence chain for prexasertib: the CHK1 target hypothesis linked through public datasets to the replication-stress biomarker, showing where each link is supported and where it breaks." loading="lazy" decoding="async" />
                     <figcaption class="dax-figcap"><b>Figure 2.</b> The mechanism-evidence chain from CHK1 target to a patient-selection biomarker, annotated for where public evidence holds and where it does not <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">[GSE249587]</a>.</figcaption>
                   </figure>
-                  <p class="dax-body-p">No public biomarker is ready to select patients for prexasertib. The published KEGG DNA-replication enrichment can be reproduced, but the patient-level replication signal is not robust across prespecified score definitions in the same 15 biopsies <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">[GSE249587]</a>. POLA1 remains a testable mechanism hypothesis, but the ST1926 source-data experiments do not prove POLA1-mediated combination benefit <a class="dax-cite" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10981752/" target="_blank" rel="noreferrer">[PMC10981752]</a>.</p>
+                  <p class="dax-body-p">Two candidates come out of the mechanism, and neither is ready to select patients yet. The published KEGG DNA-replication enrichment can be reproduced, but the patient-level replication signal is not robust across prespecified score definitions in the same 15 biopsies <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">[GSE249587]</a>. POLA1 remains a testable mechanism hypothesis, but the ST1926 source-data experiments do not prove POLA1-mediated combination benefit <a class="dax-cite" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10981752/" target="_blank" rel="noreferrer">[PMC10981752]</a>.</p>
                   <div class="dax-callout">
                     <div class="dax-callout-head">Biomarker readiness</div>
                     <div class="dax-callout-body">
@@ -152,7 +147,7 @@
                   </div>
                   <table class="dax-table">
                     <caption>Table 2. Candidate biomarkers, by role and evidence state</caption>
-                    <thead><tr><th>Marker</th><th>Role</th><th>Evidence state</th></tr></thead>
+                    <thead><tr><th>Marker</th><th>Role</th><th>Our call</th></tr></thead>
                     <tbody>
                       <tr><td>DNA-replication RNA score</td><td>Baseline association</td><td class="dax-td-gate">exploratory, not robust</td></tr>
                       <tr><td>POLA1 dependence</td><td>Combination hypothesis</td><td class="dax-td-gate">unproven</td></tr>
@@ -179,7 +174,7 @@
                   </div>
                   <table class="dax-table">
                     <caption>Table 3. Exposure questions, by modelability</caption>
-                    <thead><tr><th>Question</th><th>From public data</th></tr></thead>
+                    <thead><tr><th>Question</th><th>What public data can settle</th></tr></thead>
                     <tbody>
                       <tr><td>Gross regimen underexposure</td><td>testable (unlikely)</td></tr>
                       <tr><td>Individual nonresponder exposure</td><td class="dax-td-gate">not modelable</td></tr>
@@ -206,12 +201,12 @@
                     </div>
                   </div>
                   <table class="dax-table">
-                    <caption>Table 4. Hematologic toxicity across datasets</caption>
-                    <thead><tr><th>Dataset</th><th>Grade 3–4 neutropenia</th></tr></thead>
+                    <caption>Table 4. Grade 3–4 treatment-related events, 49 treated participants</caption>
+                    <thead><tr><th scope="col">Event</th><th scope="col">n (%)</th><th scope="col">Source</th></tr></thead>
                     <tbody>
-                      <tr><td>Dataset A</td><td>93%</td></tr>
-                      <tr><td>Dataset B</td><td>85.7%</td></tr>
-                      <tr><td>Dataset C</td><td>37.9%</td></tr>
+                      <tr><th scope="row">Neutropenia</th><td>42 (85.7%)</td><td rowspan="3"><a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a> Supp. Data 2</td></tr>
+                      <tr><th scope="row">Leukocytopenia</th><td>38 (77.6%)</td></tr>
+                      <tr><th scope="row">Thrombocytopenia</th><td>20 (40.8%)</td></tr>
                     </tbody>
                   </table>
                   <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>4</span></div>
@@ -225,7 +220,7 @@
                   <p class="dax-body-p">A responder subset exists, so a selection biomarker is plausible. These are the candidates the public evidence raises, where each stands today, and the experiment that would move it from hypothesis to a marker you could enrich on.</p>
                   <table class="dax-table">
                     <caption>Candidate selection biomarkers, evidence state, and the gap that closes each</caption>
-                    <thead><tr><th>Candidate</th><th>Evidence state</th><th>What would close the gap</th></tr></thead>
+                    <thead><tr><th>Candidate</th><th>Our call</th><th>The experiment that settles it</th></tr></thead>
                     <tbody>
                       <tr><td>Replication-stress RNA score</td><td class="dax-td-gate">exploratory, not robust</td><td>Freeze one continuous score + assay/QC; test blinded in an independent cohort.</td></tr>
                       <tr><td>POLA1 dependence</td><td class="dax-td-gate">unproven mechanism</td><td>Reproducible interaction across lineages, with genetic rescue and target engagement.</td></tr>
@@ -238,7 +233,7 @@
                       <p class="dax-callout-item">Request archived NCT03414047 baseline tissue with linked outcomes, freeze one continuous replication-stress score and its assay/QC procedure, and test it blinded to outcomes. That single independent cohort is what separates a real selection marker from a same-cohort artifact <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT03414047" target="_blank" rel="noreferrer">[NCT03414047]</a>.</p>
                     </div>
                   </div>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt · evidence, not a recommendation</span><span>Gaps</span></div>
+                  <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Gaps</span></div>
                 </article>
               </div>
             </div>
@@ -257,7 +252,7 @@
             <span class="pilot-flow-arrow" aria-hidden="true">→</span>
             <div class="pilot-flow-step">
               <p class="pilot-flow-label">Work</p>
-              <p>Public evidence + custom analyses + bioinformatician review</p>
+              <p>Public evidence + custom analyses + expert review</p>
             </div>
             <span class="pilot-flow-arrow" aria-hidden="true">→</span>
             <div class="pilot-flow-step">
@@ -265,6 +260,11 @@
               <p>Evidence + analyses + gaps</p>
             </div>
           </div>
+          <p class="pilot-terms"><b>We are taking on a small number of pilot assets.</b> We are early and looking for case studies we can point to, so early partners get engagement terms that reflect that. Most of the work runs on public evidence alone — anything you share stays on private cloud infrastructure and never reaches a public model API. <a href="./company.html#data-handling">How your data is handled</a>.</p>
+          <p class="pilot-terms-cta">
+            <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call <span aria-hidden="true">→</span></a>
+            <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Or email us ↗</a>
+          </p>
           <div class="band-head">
             <p class="band-label">How the engine builds the case</p>
             <h2>The report tests four parts of the biomarker case.</h2>
@@ -294,12 +294,12 @@
 
       <section class="orgs-band" aria-labelledby="home-orgs-title">
         <div class="shell">
-          <h2 class="orgs-title" id="home-orgs-title">Who we work with</h2>
+          <h2 class="orgs-title" id="home-orgs-title">Where we've worked</h2>
+          <p class="orgs-note">Institutions and companies our work has come through, as employers, collaborators, or clients. Named references available on request.</p>
           <div class="orgs">
             <a class="org" href="https://praesage.bio/" target="_blank" rel="noreferrer">Praesage Bio</a>
             <a class="org" href="https://nodesnedges.com/" target="_blank" rel="noreferrer">Nodes + Edges</a>
             <a class="org" href="https://www.utep.edu/" target="_blank" rel="noreferrer">UTEP</a>
-            <a class="org" href="https://www.jax.org/" target="_blank" rel="noreferrer">The Jackson Laboratory</a>
             <a class="org" href="https://health.uconn.edu/" target="_blank" rel="noreferrer">UConn Health</a>
           </div>
         </div>
@@ -310,6 +310,11 @@
     <footer class="foot">
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="https://orchestrated.bio/blog/">Blog</a>
+          <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
+          <a href="https://orchestrated.bio/terms.html">Terms</a>
+        </nav>
       </div>
     </footer>
     <script src="./assets/js/company-site/drugadopt-demo.js"></script>

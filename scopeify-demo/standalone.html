@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scopeify Demo</title>
+    <meta name="description" content="Scopeify demo: AI-assisted public-data scoping for prospective bioinformatics consulting projects.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/css/scopeify-demo.css">
+    <style>
+        body {
+            margin: 0;
+            background: #0d1020;
+            color: #e5eefb;
+            font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<section class="scopeify-demo-shell" aria-labelledby="scopeify-title">
+    <div class="scopeify-shell">
+        <header class="scopeify-topline">
+            <div>
+                <p class="scopeify-kicker">Scopeify</p>
+                <h1 id="scopeify-title">Public-data feasibility brief</h1>
+                <p class="scopeify-subtitle">A natural-language scoping demo for prospective bioinformatics projects: evidence search, dataset triage, reuse risks, and a draft statement of work.</p>
+            </div>
+            <dl class="scopeify-output-markers" aria-label="Scopeify output summary">
+                <div><dt>Output</dt><dd>Inventory + SOW</dd></div>
+                <div><dt>Sources</dt><dd>PubMed, GEO, SRA, bioRxiv</dd></div>
+                <div><dt>Review</dt><dd>LLM-assisted, audit logged</dd></div>
+            </dl>
+        </header>
+
+        <div class="scopeify-layout">
+            <form class="scopeify-intake" id="scopeify-form">
+                <div class="scopeify-intake-head">
+                    <p class="scopeify-panel-label">Client intake</p>
+                    <h2>Project question</h2>
+                </div>
+
+                <label for="scopeify-hypothesis">Plain-language hypothesis</label>
+                <textarea id="scopeify-hypothesis" name="hypothesis" rows="9">Can public transcriptomics data test whether GLP-1 receptor agonists alter reward circuitry after cocaine exposure in mouse brain?</textarea>
+
+                <div class="scopeify-actions">
+                    <button type="submit" class="scopeify-primary">Generate brief</button>
+                    <button type="button" class="scopeify-text-button" id="scopeify-example">Try oncology example</button>
+                </div>
+
+                <section class="scopeify-method" aria-label="Production method">
+                    <p class="scopeify-panel-label">Production method</p>
+                    <ul>
+                        <li>Pydantic AI plans the search and validates the final brief against typed schemas.</li>
+                        <li>NCBI, PubMed, GEO, SRA, and bioRxiv calls run server-side; API keys never ship to the browser.</li>
+                        <li>Every delivered workbook includes query logs, screened records, selection rationale, and excluded evidence.</li>
+                    </ul>
+                </section>
+            </form>
+
+            <article class="scopeify-report" aria-live="polite">
+                <header class="scopeify-report-header">
+                    <div>
+                        <p class="scopeify-panel-label">Preliminary client brief</p>
+                        <h2 id="scopeify-brief-title">GLP-1 / cocaine reward-circuit scope</h2>
+                    </div>
+                    <span class="scopeify-status-pill" id="scopeify-status-pill">Example brief</span>
+                </header>
+
+                <section class="scopeify-verdict" aria-labelledby="scopeify-verdict-heading">
+                    <div>
+                        <p class="scopeify-section-label" id="scopeify-verdict-heading">Feasibility decision</p>
+                        <strong id="scopeify-decision">Conditional public-data path</strong>
+                        <p id="scopeify-summary">Scopeify will summarize whether public data can answer the hypothesis, what was searched, which records were selected, and what Orchestrated.bio would do next.</p>
+                    </div>
+                    <dl class="scopeify-metrics" id="scopeify-metrics">
+                        <div><dt>Found</dt><dd>0</dd></div>
+                        <div><dt>Screened</dt><dd>0</dd></div>
+                        <div><dt>Selected</dt><dd>0</dd></div>
+                        <div><dt>Confidence</dt><dd>Pending</dd></div>
+                    </dl>
+                </section>
+
+                <section class="scopeify-report-section scopeify-sow" aria-labelledby="scopeify-sow-heading">
+                    <div class="scopeify-section-heading">
+                        <div>
+                            <p class="scopeify-section-label" id="scopeify-sow-heading">Draft statement of work</p>
+                            <h3 id="scopeify-sow-title">Feasibility package</h3>
+                        </div>
+                        <span id="scopeify-sow-window">Generated from search screen</span>
+                    </div>
+                    <div class="scopeify-sow-grid" id="scopeify-sow-grid"></div>
+                </section>
+
+                <section class="scopeify-report-section" aria-labelledby="scopeify-audit-heading">
+                    <div class="scopeify-section-heading">
+                        <div>
+                            <p class="scopeify-section-label" id="scopeify-audit-heading">Search audit</p>
+                            <h3>What was searched and why</h3>
+                        </div>
+                        <span id="scopeify-last-checked">Demo search</span>
+                    </div>
+                    <div class="scopeify-audit-table" id="scopeify-audit-table" role="table" aria-label="Source coverage"></div>
+                    <ul class="scopeify-criteria" id="scopeify-criteria-list"></ul>
+                </section>
+
+                <section class="scopeify-report-section" aria-labelledby="scopeify-selected-heading">
+                    <div class="scopeify-section-heading">
+                        <div>
+                            <p class="scopeify-section-label" id="scopeify-selected-heading">Selected evidence</p>
+                            <h3>Dataset and paper shortlist</h3>
+                        </div>
+                        <span id="scopeify-shortlist-count">0 records selected</span>
+                    </div>
+                    <div class="scopeify-evidence-list" id="scopeify-evidence-list"></div>
+                </section>
+
+                <section class="scopeify-report-section" aria-labelledby="scopeify-boundary-heading">
+                    <div class="scopeify-section-heading">
+                        <div>
+                            <p class="scopeify-section-label" id="scopeify-boundary-heading">Evidence boundary</p>
+                            <h3>Considered but not selected</h3>
+                        </div>
+                    </div>
+                    <div class="scopeify-boundary-list" id="scopeify-boundary-list"></div>
+                </section>
+
+                <footer class="scopeify-report-actions">
+                    <button type="button" class="scopeify-download" id="scopeify-download">Download Excel-ready CSV</button>
+                    <a class="scopeify-consult-link" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Discuss this scope</a>
+                    <span id="scopeify-download-note">Example inventory is ready.</span>
+                </footer>
+            </article>
+        </div>
+    </div>
+</section>
+
+<script src="../assets/js/scopeify-demo.js"></script>
+</body>
+</html>
