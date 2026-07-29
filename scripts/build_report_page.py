@@ -606,8 +606,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <header class="masthead">
       <div class="shell">
         <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
-          <img class="brand-logo brand-logo-light" src="./images/favicon.svg" alt="" aria-hidden="true" />
-          <img class="brand-logo brand-logo-dark" src="./images/favicon-dark.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
         <nav class="site-nav" aria-label="Primary">
