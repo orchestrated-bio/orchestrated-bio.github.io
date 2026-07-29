@@ -278,3 +278,12 @@
   color: var(--ink-4);
   font-weight: 400;
 }
+
+/* Overview rows carry the chapter name plus a one-line finding, so the reader
+   sees what each chapter concluded without opening it. Shared by the homepage
+   demo and the full report page. */
+.dax-ov-sec-block { display: flex; flex-direction: column; gap: 0.15em; min-width: 0; }
+.dax-ov-link { align-items: flex-start; }
+.dax-ov-sec-gist {
+  font-family: var(--kd-serif); font-size: 0.62em; line-height: 1.45; color: var(--kd-muted);
+}

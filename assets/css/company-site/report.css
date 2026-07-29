@@ -1,498 +1,803 @@
-/* --- Generated report reader ------------------------------------------ */
+/* --- Generated report page ---------------------------------------------
+   report.html renders the DrugAdopt deliverable in the same visual language
+   as the homepage `.dax-*` mockup, but at full-page scale: the spine becomes
+   a sticky sidebar and the paper scrolls as one continuous document rather
+   than swapping between absolutely-positioned pages.
 
-.report-reader-stage {
-  padding: clamp(1rem, 3vw, 2.5rem) 0 clamp(2rem, 5vw, 4rem);
+   Everything inside `.dax-ui` is sized in `em` off its root font-size, so
+   `.dax-full` mostly just raises that root and undoes the mockup's
+   page-swapping. Shared component styles live in drugadopt.css. */
+
+/* This page simulates a printed report, so the paper stays white in both
+   themes the way a PDF does in a dark-mode reader. Only the chrome around
+   the document follows the site theme. The document's own colours are pinned
+   here rather than inherited, so a dark --ink can never bleed onto white
+   paper (which rendered as blank pages before). */
+
+.rpt-stage {
+  padding: clamp(1rem, 2.5vw, 2.25rem) 0 clamp(2rem, 5vw, 3.5rem);
   background: #e9ece9;
 }
 
-.report-reader {
-  display: grid;
-  grid-template-columns: 14rem minmax(0, 1fr);
-  width: min(100% - 2.5rem, 86rem);
-  margin-inline: auto;
-  border: 1px solid #cfd6d3;
-  background: #fff;
-  box-shadow: 0 18px 48px -38px rgb(14 31 25 / 0.55);
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .rpt-stage {
+    background: var(--paper-sunk, #0b0e0d);
+  }
 }
 
-.report-contents {
-  position: sticky;
-  top: 5.8rem;
-  align-self: start;
-  min-height: calc(100vh - 8rem);
-  padding: 1.8rem 1rem 2rem 1.25rem;
-  border-right: 1px solid #dfe5e2;
-  background: #f6f8f7;
-  font-size: 0.78rem;
+:root[data-theme="dark"] .rpt-stage {
+  background: var(--paper-sunk, #0b0e0d);
 }
 
-.report-contents-title {
-  margin: 0 0 0.8rem;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #68756f;
+.rpt-caption {
+  width: min(100% - 2.5rem, 78rem);
+  margin: 1.1rem auto 0;
+  color: var(--ink-3, #55625c);
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
 
-.report-contents a {
-  display: block;
-  margin-left: -0.7rem;
-  padding: 0.42rem 0.6rem 0.42rem 0.7rem;
-  border-left: 2px solid transparent;
-  color: #27332f;
-  line-height: 1.35;
-  text-decoration: none;
+/* Closing panel: says what the reader just looked at and what changes on
+   their own asset. Sits outside the paper so it reads as us, not the report. */
+/* The outro sits outside the paper, so it is site chrome and follows the
+   theme rather than staying white. */
+.rpt-outro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem 2.5rem;
+  width: min(100% - 2.5rem, 78rem);
+  margin: 1.5rem auto 0;
+  padding: 1.6rem 1.8rem;
+  border: 1px solid var(--rule, #cfd6d3);
+  border-left: 3px solid var(--accent, #16b17e);
+  border-radius: 6px;
+  background: var(--paper-raised, #fff);
 }
 
-.report-contents a:hover {
-  border-left-color: #155e4a;
-  color: #155e4a;
-}
-
-.report-contents a[aria-current="location"] {
-  border-left-color: #155e4a;
-  background: #e7efec;
-  color: #155e4a;
-  font-weight: 650;
-}
-
-.report-contents-note {
-  margin: 1.5rem 0 0;
-  padding-top: 1rem;
-  border-top: 1px solid #dfe5e2;
-  color: #68756f;
-  font-size: 0.7rem;
-  line-height: 1.5;
-}
-
-.report-paper {
+.rpt-outro-body {
+  flex: 1 1 44rem;
   min-width: 0;
-  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4.25rem) 2rem;
-  background: #fff;
-  color: #1a2422;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  font-size: 0.94rem;
+}
+
+.rpt-outro h2 {
+  margin: 0 0 0.6rem;
+  color: var(--ink, #17211e);
+  font-size: 1.12rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.rpt-outro p {
+  max-width: 58ch;
+  margin: 0 0 0.6rem;
+  color: var(--ink-2, #33403b);
+  font-size: 0.88rem;
   line-height: 1.62;
 }
 
-.report-paper a {
-  color: #14524f;
-  text-underline-offset: 2px;
+.rpt-outro p:last-child {
+  margin-bottom: 0;
 }
 
-.report-cover {
-  padding-bottom: 1.7rem;
-  border-bottom: 3px solid #14524f;
-}
-
-.report-kicker,
-.report-section-number {
-  margin: 0 0 0.45rem;
-  color: #14524f;
-  font-size: 0.68rem;
-  line-height: 1.35;
-  font-weight: 750;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.report-cover h1 {
-  margin: 0;
-  color: #17211e;
-  font-size: clamp(2rem, 4vw, 3.25rem);
-  line-height: 1.06;
-  font-weight: 680;
-  letter-spacing: -0.04em;
-}
-
-.report-cover h1 span {
-  color: #5c6b66;
-  font-weight: 450;
-}
-
-.report-indication {
-  margin: 0.75rem 0 0;
-  color: #5c6b66;
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
-}
-
-.report-document-meta {
+.rpt-outro-actions {
+  flex: 0 1 auto;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem 1.6rem;
-  margin: 1.25rem 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding-top: 0.2rem;
 }
 
-.report-document-meta > div {
-  display: flex;
-  gap: 0.35rem;
+/* ── full-page variant of the mockup shell ── */
+
+.dax-full {
+  width: min(100% - 2.5rem, 78rem);
+  margin-inline: auto;
+  /* The mockup shrinks to fit a hero figure; a real page wants reading size. */
+  font-size: clamp(13px, 0.95vw, 17px);
+  min-height: 0;
+  border-radius: 8px;
+  align-items: stretch;
+  /* The mockup uses overflow:hidden to clip its corners, but that silently
+     disables position:sticky on the spine. `clip` clips without creating a
+     scroll container, so the sticky sidebar keeps working. */
+  overflow: clip;
 }
 
-.report-document-meta dt {
-  color: #27332f;
-  font-size: 0.77rem;
-  font-weight: 700;
+.dax-full .dax-spine {
+  position: sticky;
+  top: 4.6rem;
+  align-self: flex-start;
+  width: 15em;
+  max-height: calc(100vh - 5.5rem);
+  overflow-y: auto;
 }
 
-.report-document-meta dd {
-  margin: 0;
-  color: #68756f;
-  font-size: 0.77rem;
+/* Spine entries and the overview section list are links here, not the
+   mockup's tab buttons; base.css underlines links by default. */
+.dax-full .dax-nav-item,
+.dax-full .dax-ov-link {
+  text-decoration: none;
+  color: #cdd5df;
 }
 
-.report-readout {
-  padding: 2rem 0 1.7rem;
-  border-bottom: 1px solid #dfe5e2;
+.dax-full .dax-ov-link {
+  color: inherit;
 }
 
-.report-readout > h2,
-.report-section > h2 {
-  margin: 0;
-  color: #17211e;
-  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
-  line-height: 1.2;
-  letter-spacing: -0.022em;
-  font-weight: 680;
+.dax-full .dax-ov-link .dax-ov-sec-name {
+  text-decoration: none;
 }
 
-.report-readout > h2 {
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #dfe5e2;
+.dax-full .dax-ov-link:hover .dax-ov-sec-name {
+  color: var(--kd-blue);
 }
 
-.report-readout-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(15rem, 0.8fr);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
+.dax-full .dax-ov-chip {
+  text-decoration: none;
 }
 
-.report-readout-lead {
-  max-width: 44rem;
-  margin: 0 0 0.75rem;
-  color: #1b2421;
-  font-size: clamp(1.12rem, 2vw, 1.42rem);
-  line-height: 1.45;
-  font-weight: 650;
+.dax-full .dax-spine-brand {
+  padding: 0.2em 1em 1em;
+  margin-bottom: 0.6em;
 }
 
-.report-question {
-  margin: 0;
-  color: #61706a;
-  font-size: 0.86rem;
-}
-
-.report-readout-facts {
-  margin: 0;
-  padding-left: 1.25rem;
-  border-left: 1px solid #cfd8d4;
-}
-
-.report-readout-facts > div + div {
-  margin-top: 1rem;
-}
-
-.report-readout-facts dt {
-  color: #68756f;
-  font-size: 0.65rem;
+.dax-full .dax-spine-title {
+  font-size: 0.86em;
   line-height: 1.3;
-  font-weight: 750;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
 }
 
-.report-readout-facts dd {
-  margin: 0.2rem 0 0;
-  color: #27332f;
-  font-size: 0.8rem;
-  line-height: 1.48;
+.dax-full .dax-nav-item:hover,
+.dax-full .dax-nav-item:focus-visible {
+  background: rgb(255 255 255 / 0.05);
+  border-left-color: var(--brand-500, #16b17e);
+  color: #fff;
 }
 
-.report-primary-figure {
-  margin: 1.5rem 0 0;
-  padding: 0;
+/* ── paper: one continuous scroll, not stacked absolute pages ── */
+
+.dax-paper-scroll {
+  position: static;
+  flex: 1 1 auto;
+  min-width: 0;
+  background: #fdfdfc;
+  /* Force a light rendering context for the paper regardless of site theme,
+     so form controls, scrollbars and any UA defaults stay light-on-white. */
+  color-scheme: light;
+  color: var(--kd-ink);
 }
 
-.report-primary-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
+.dax-paper-scroll .dax-page {
+  position: static;
+  inset: auto;
+  opacity: 1;
+  pointer-events: auto;
+  overflow: visible;
+  padding: 2.4em 2.6em 2em;
+  scroll-margin-top: 5.5rem;
+  border-bottom: 1px solid var(--kd-rule);
+  color: var(--kd-ink);
 }
 
-.report-section {
-  padding: 2.5rem 0 0;
-  scroll-margin-top: 6rem;
+/* Body copy inside the paper must not pick up the site's --ink, which is
+   near-white in dark theme. */
+.dax-paper-scroll p,
+.dax-paper-scroll li,
+.dax-paper-scroll dd,
+.dax-paper-scroll dt,
+.dax-paper-scroll td,
+.dax-paper-scroll th,
+.dax-paper-scroll caption,
+.dax-paper-scroll code {
+  color: inherit;
 }
 
-.report-section > h2 {
-  max-width: 32ch;
-  margin-bottom: 0.9rem;
+.dax-paper-scroll .dax-body-p,
+.dax-paper-scroll .dax-ov-readout,
+.dax-paper-scroll .dax-claim-text {
+  color: #222;
 }
 
-.report-section > p:not(.report-section-number):not(.report-boundary):not(.report-note):not(.report-source-line) {
-  max-width: 51rem;
-  margin: 0 0 0.85rem;
-  color: #33403b;
+.dax-paper-scroll .dax-sec-h,
+.dax-paper-scroll .dax-sub-h,
+.dax-paper-scroll .dax-ov-asset,
+.dax-paper-scroll .dax-stats dt {
+  color: var(--kd-blue);
 }
 
-.report-ledger {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 1.3rem 0 0;
-  border-top: 1px solid #bdc9c4;
-  border-bottom: 1px solid #dfe5e2;
+.dax-paper-scroll .dax-rhead,
+.dax-paper-scroll .dax-rfoot,
+.dax-paper-scroll .dax-scope-line,
+.dax-paper-scroll .dax-figmeta,
+.dax-paper-scroll .dax-claim-meta,
+.dax-paper-scroll .dax-ov-sec-gist,
+.dax-paper-scroll .dax-stats dd,
+.dax-paper-scroll .dax-gate-owner {
+  color: var(--kd-muted);
 }
 
-.report-ledger > div {
-  padding: 0.9rem 1rem 0.9rem 0;
+.dax-paper-scroll .dax-cite {
+  color: var(--kd-blue-2);
 }
 
-.report-ledger > div + div {
-  padding-left: 1rem;
-  border-left: 1px solid #dfe5e2;
+/* The citation focus ring inherits base.css's --accent, which flips to a pale
+   green in dark theme -- on paper that stays white, dropping it to 2.19:1.
+   Pin it to the document's own blue. */
+.dax-paper-scroll a:focus-visible {
+  outline: 2px solid var(--kd-blue);
+  outline-offset: 2px;
 }
 
-.report-ledger dt {
-  color: #17211e;
-  font-size: 1.35rem;
-  line-height: 1;
-  font-weight: 680;
-}
-
-.report-ledger dd {
-  margin: 0.35rem 0 0;
-  color: #68756f;
-  font-size: 0.72rem;
-  line-height: 1.35;
-}
-
-.report-boundary,
-.report-note,
-.report-source-line {
-  margin: 0.75rem 0 0;
-  color: #68756f;
-  font-size: 0.76rem;
-  line-height: 1.55;
-}
-
-.report-table-wrap {
-  width: 100%;
+/* Tables scroll horizontally on narrow screens; the wrapper is focusable so
+   keyboard-only users can reach the off-screen columns. */
+.dax-table-scroll {
   overflow-x: auto;
-  margin-top: 1.25rem;
   -webkit-overflow-scrolling: touch;
 }
 
-.report-table {
-  width: 100%;
-  min-width: 46rem;
-  border-collapse: collapse;
-  color: #27332f;
-  font-size: 0.78rem;
+.dax-table-scroll:focus-visible {
+  outline: 2px solid var(--kd-blue);
+  outline-offset: 2px;
+}
+
+.dax-paper-scroll .dax-overview:focus {
+  outline: none;
+}
+
+/* Accents the blanket inherit rule flattens but the restore block missed. */
+.dax-paper-scroll .dax-sec-num,
+.dax-paper-scroll .dax-ov-sechead {
+  color: var(--kd-blue-2);
+}
+
+.dax-paper-scroll .dax-ov-target,
+.dax-paper-scroll .dax-table caption {
+  color: var(--kd-muted);
+}
+
+/* #c0700f on white is 3.71:1 at this size; darkened to clear 4.5:1. Scoped so
+   the shared --kd-amber token still serves the homepage unchanged. */
+.dax-paper-scroll .dax-ov-ind {
+  color: #96570b;
+}
+
+/* Restore the accents the blanket inherit rule above would flatten. */
+.dax-paper-scroll .dax-ov-ind {
+  color: var(--kd-amber);
+}
+
+.dax-paper-scroll .dax-callout-item,
+.dax-paper-scroll .dax-gate-claim,
+.dax-paper-scroll .dax-gate-field,
+.dax-paper-scroll .dax-table th,
+.dax-paper-scroll .dax-table td,
+.dax-paper-scroll .dax-gate-req {
+  color: #222;
+}
+
+.dax-paper-scroll .dax-callout-head {
+  color: #fff;
+}
+
+.dax-paper-scroll .dax-gate-field b {
+  color: var(--kd-blue);
+}
+
+.dax-paper-scroll .dax-gate-blocking {
+  color: #a13d3d;
+}
+
+.dax-paper-scroll .dax-figcap {
+  color: #333;
+}
+
+.dax-paper-scroll .dax-page:last-child {
+  border-bottom: 0;
+}
+
+.dax-paper-scroll .dax-overview {
+  padding-top: 2.1em;
+}
+
+.dax-full .dax-ov-asset {
+  font-size: 2em;
+  margin-top: 0.1em;
+}
+
+.dax-full .dax-sec-h {
+  font-size: 1.5em;
+  margin-bottom: 0.6em;
+}
+
+/* Body copy sits a little larger than the mockup: this is read, not glanced. */
+.dax-full .dax-body-p,
+.dax-full .dax-ov-readout {
+  font-size: 0.82em;
+  line-height: 1.62;
+}
+
+.dax-full .dax-ov-question {
+  font-size: 1em;
+}
+
+.dax-full .dax-figcap {
+  font-size: 0.72em;
+}
+
+.dax-full .dax-callout-item {
+  font-size: 0.78em;
+  line-height: 1.6;
+}
+
+.dax-full .dax-table {
+  font-size: 0.74em;
+}
+
+.dax-full .dax-ov-sec-name {
+  font-size: 0.84em;
+}
+
+.dax-full .dax-ov-chip,
+.dax-full .dax-sec-num,
+.dax-full .dax-ov-sechead {
+  font-size: 0.64em;
+}
+
+
+.dax-full .dax-rhead {
+  font-size: 0.7em;
+}
+
+.dax-full .dax-rfoot {
+  font-size: 0.68em;
+}
+
+/* ── elements specific to the generated page ── */
+
+/* The module's own question, set as a standfirst above the evidence. */
+.dax-question-line {
+  font-family: var(--kd-serif);
+  font-size: 0.95em;
+  font-weight: 700;
   line-height: 1.45;
+  color: var(--kd-ink);
+  margin: 0 0 1em;
+  padding-left: 0.75em;
+  border-left: 3px solid var(--kd-blue);
 }
 
-.report-table th,
-.report-table td {
-  padding: 0.72rem 0.8rem;
-  text-align: left;
-  vertical-align: top;
-  border-bottom: 1px solid #dfe5e2;
+.dax-figmeta {
+  display: block;
+  margin-top: 0.35em;
+  color: var(--kd-muted);
+  font-size: 0.92em;
 }
 
-.report-table thead th {
-  border-bottom: 2px solid #aebdb7;
-  color: #68756f;
-  font-size: 0.63rem;
-  line-height: 1.3;
-  font-weight: 750;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+.dax-scope-line {
+  font-size: 0.72em;
+  line-height: 1.55;
+  color: var(--kd-muted);
+  margin: 0.6em 0 1.4em;
 }
 
-.report-table tbody td:first-child {
-  color: #17211e;
-  font-weight: 650;
+.dax-sub-h {
+  font-family: var(--kd-serif);
+  color: var(--kd-blue);
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 1.6em 0 0.6em;
 }
 
-.report-biomarker-table td:first-child {
-  color: #14524f;
+.dax-callout-verdict {
+  border-width: 2px;
 }
 
-.report-ledger-safety dt {
-  font-size: 1.2rem;
+.dax-ref-part {
+  color: var(--kd-muted);
 }
 
-.report-sources {
-  padding-bottom: 2.5rem;
+/* ── decision gates ── */
+
+.dax-gate {
+  border: 1px solid var(--kd-rule);
+  border-left: 3px solid var(--kd-blue-2);
+  border-radius: 3px;
+  padding: 0.9em 1.1em;
+  margin: 0 0 0.9em;
+  background: #fcfdfe;
 }
 
-.report-sources ol {
-  max-width: 51rem;
-  margin: 1.15rem 0 0;
-  padding-left: 1.4rem;
-  color: #4f5d57;
-  font-size: 0.8rem;
-}
-
-.report-sources li {
-  margin: 0.45rem 0;
-  padding-left: 0.2rem;
-}
-
-.report-method {
-  max-width: 51rem;
-  margin-top: 1.5rem;
-  border: 1px solid #dfe5e2;
-  border-radius: 4px;
-  background: #f6f8f7;
-}
-
-.report-method summary {
-  padding: 0.7rem 0.9rem;
-  color: #27332f;
-  font-size: 0.8rem;
-  font-weight: 650;
-  cursor: pointer;
-}
-
-.report-method[open] summary {
-  border-bottom: 1px solid #dfe5e2;
-}
-
-.report-method p {
-  margin: 0;
-  padding: 0.85rem 0.9rem 0;
-  color: #5c6b66;
-  font-size: 0.76rem;
-  line-height: 1.58;
-}
-
-.report-method p:last-child {
-  padding-bottom: 0.9rem;
-}
-
-.report-page-footer {
+.dax-gate-head {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid #bdc9c4;
-  color: #68756f;
-  font-size: 0.68rem;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0 0 0.45em;
 }
+
+.dax-gate-head code {
+  font-family: var(--mono);
+  font-size: 0.66em;
+  color: var(--kd-muted);
+}
+
+.dax-gate-blocking {
+  font-family: var(--sans);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #a13d3d;
+}
+
+.dax-gate-claim {
+  font-family: var(--kd-serif);
+  font-size: 0.84em;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--kd-ink);
+  margin: 0 0 0.3em;
+}
+
+.dax-gate-owner {
+  font-family: var(--sans);
+  font-size: 0.64em;
+  color: var(--kd-muted);
+  margin: 0 0 0.7em;
+}
+
+.dax-gate-field {
+  font-size: 0.74em;
+  line-height: 1.55;
+  color: #222;
+  margin: 0 0 0.45em;
+}
+
+.dax-gate-field b {
+  color: var(--kd-blue);
+}
+
+.dax-gate-reqhead {
+  font-family: var(--sans);
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--kd-muted);
+  margin: 0.7em 0 0.3em;
+}
+
+.dax-gate-req {
+  margin: 0;
+  padding-left: 1.2em;
+  font-size: 0.74em;
+  line-height: 1.55;
+  color: #333;
+}
+
+/* ── traceability ── */
+
+.dax-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 0.6em 0 1.4em;
+  border-top: 1px solid var(--kd-blue);
+  border-bottom: 1px solid var(--kd-rule);
+}
+
+.dax-stats > div {
+  padding: 0.8em 1em 0.8em 0;
+}
+
+.dax-stats > div + div {
+  padding-left: 1em;
+  border-left: 1px solid var(--kd-rule);
+}
+
+.dax-stats dt {
+  font-family: var(--kd-serif);
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--kd-blue);
+}
+
+.dax-stats dd {
+  margin: 0.35em 0 0;
+  font-family: var(--sans);
+  font-size: 0.62em;
+  line-height: 1.4;
+  color: var(--kd-muted);
+}
+
+.dax-claims {
+  margin: 0 0 1em;
+  padding-left: 1.3em;
+}
+
+.dax-claims li {
+  margin-bottom: 0.8em;
+}
+
+.dax-claim-text {
+  display: block;
+  font-size: 0.78em;
+  line-height: 1.55;
+  color: #222;
+}
+
+.dax-claim-meta {
+  display: block;
+  margin-top: 0.3em;
+  font-family: var(--sans);
+  font-size: 0.62em;
+  color: var(--kd-muted);
+}
+
+.dax-claim-meta code {
+  font-family: var(--mono);
+  color: #47554f;
+}
+
+/* Analysis identifiers are filesystem paths from the case; their length is
+   not under this stylesheet's control, so they must be able to break. */
+.dax-claim-meta,
+.dax-scope-line,
+.dax-figcap {
+  overflow-wrap: anywhere;
+}
+
+/* ── responsive ── */
 
 @media (max-width: 62rem) {
-  .report-reader {
-    grid-template-columns: 1fr;
-  }
-
-  .report-contents {
-    position: sticky;
-    top: 4.1rem;
-    z-index: 5;
-    display: flex;
-    min-height: 0;
-    gap: 0.25rem;
-    overflow-x: auto;
-    padding: 0.65rem 1rem;
-    border-right: 0;
-    border-bottom: 1px solid #dfe5e2;
-    white-space: nowrap;
-  }
-
-  .report-contents-title,
-  .report-contents-note {
-    display: none;
-  }
-
-  .report-contents a {
-    flex: none;
-    margin: 0;
-    padding: 0.4rem 0.65rem;
-    border: 1px solid #d3dcd8;
-    border-radius: 999px;
-  }
-
-  .report-contents a[aria-current="location"] {
-    border-color: #14524f;
-  }
-
-  .report-readout-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .report-readout-facts {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 1rem 0 0;
-    border-top: 1px solid #dfe5e2;
-    border-left: 0;
-  }
-
-  .report-readout-facts > div + div {
-    margin: 0;
-    padding-left: 1rem;
-    border-left: 1px solid #dfe5e2;
-  }
-}
-
-@media (max-width: 40rem) {
-  .report-reader-stage {
-    padding-top: 0;
-  }
-
-  .report-reader {
+  .dax-full {
+    flex-direction: column;
     width: 100%;
+    border-radius: 0;
     border-inline: 0;
   }
 
-  .report-contents {
-    top: 6.5rem;
+  .dax-full .dax-spine {
+    position: sticky;
+    top: 4.1rem;
+    z-index: 5;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    width: auto;
+    /* A flex item defaults to min-width:auto, so the spine sized itself to its
+       891px of nav content and overflow-x:auto had nothing to overflow --
+       the row was clipped by .dax-full instead, making later sections
+       unreachable. Constrain it to the column so it actually scrolls. */
+    min-width: 0;
+    max-width: 100%;
+    max-height: none;
+    padding: 0.5em 0.9em;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 0.08);
   }
 
-  .report-paper {
-    padding-inline: 1.15rem;
+  .dax-full .dax-spine-brand,
+  .dax-full .dax-spine-foot {
+    display: none;
   }
 
-  .report-cover h1 span {
-    display: block;
-    margin-top: 0.3rem;
-    font-size: 0.52em;
-    letter-spacing: -0.015em;
+  .dax-full .dax-nav {
+    flex-direction: row;
+    gap: 0.35em;
+    padding: 0;
+    white-space: nowrap;
+    /* The nav is itself a flex child of the spine; without this it shrinks to
+       the spine's width instead of overflowing it, so the spine's
+       overflow-x:auto never engages and later sections stay unreachable. */
+    flex: 0 0 auto;
   }
 
-  .report-document-meta {
-    display: block;
+  .dax-full .dax-nav-item {
+    min-height: 2.4rem;
+    padding: 0.35em 0.7em;
+    border-left: 0;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 999px;
   }
 
-  .report-document-meta > div + div {
-    margin-top: 0.25rem;
+  .dax-full .dax-nav-item .dax-nav-num {
+    display: none;
   }
 
-  .report-readout-facts,
-  .report-ledger {
+  .dax-paper-scroll .dax-page {
+    padding: 1.8em 1.3em 1.5em;
+  }
+
+  .dax-stats {
     grid-template-columns: 1fr 1fr;
   }
 
-  .report-readout-facts > div + div {
-    padding-left: 0.8rem;
-  }
-
-  .report-ledger > div:nth-child(3) {
+  .dax-stats > div:nth-child(3) {
     padding-left: 0;
     border-left: 0;
   }
 
-  .report-ledger > div:nth-child(n + 3) {
-    border-top: 1px solid #dfe5e2;
+  .dax-stats > div:nth-child(n + 3) {
+    border-top: 1px solid var(--kd-rule);
   }
 
-  .report-page-footer {
-    display: block;
+  .rpt-caption {
+    width: min(100% - 2.5rem, 78rem);
+  }
+}
+
+@media (max-width: 40rem) {
+  .rpt-stage {
+    padding-top: 0;
   }
 
-  .report-page-footer span {
-    display: block;
+  /* The masthead wraps to two rows below this width, so the sticky spine has
+     to clear a taller header than the tablet breakpoint assumes. */
+  .dax-full .dax-spine {
+    top: 8rem;
   }
+
+  .dax-paper-scroll .dax-page {
+    scroll-margin-top: 11rem;
+  }
+
+  .dax-full .dax-ov-top {
+    flex-direction: column;
+  }
+
+  .dax-full .dax-ov-asset {
+    font-size: 1.6em;
+  }
+
+  .dax-full .dax-sec-h {
+    font-size: 1.25em;
+  }
+
+  /* Wide tables scroll inside their own box rather than the page. */
+  .dax-full .dax-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* --- print ---------------------------------------------------------------
+   This page simulates a printed report, so printing it should produce the
+   document and nothing else: no site chrome, no spine, no CTA. */
+
+@media print {
+  .masthead,
+  .foot,
+  .skip-link,
+  .rpt-outro,
+  .rpt-caption,
+  .dax-full .dax-spine {
+    display: none !important;
+  }
+
+  .rpt-stage {
+    padding: 0;
+    background: #fff;
+  }
+
+  .dax-full {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+    font-size: 11pt;
+  }
+
+  .dax-paper-scroll .dax-page {
+    padding: 0 0 1.5em;
+    border-bottom: 0;
+    break-after: page;
+  }
+
+  .dax-paper-scroll .dax-page:last-child {
+    break-after: auto;
+  }
+
+  /* Never split a figure, a gate, or a callout across a page boundary. */
+  .dax-figure,
+  .dax-gate,
+  .dax-callout,
+  .dax-table,
+  .dax-stats {
+    break-inside: avoid;
+  }
+
+  .dax-table-scroll {
+    overflow: visible;
+  }
+
+  /* Citations are links on screen and unresolvable on paper, so print the
+     accession they point to. */
+  .dax-cite::after {
+    content: "";
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/* Long enumerations lifted out of prose. Same words, set as the list they
+   already are, so the repeated "does not establish A, B, C, or D" frame does
+   not read as a cadence across six chapters. */
+.dax-body-lead {
+  margin-bottom: 0.35em !important;
+}
+
+.dax-negation-list {
+  margin: 0 0 0.9em;
+  padding-left: 1.35em;
+  font-size: 0.82em;
+  line-height: 1.62;
+  color: #222;
+}
+
+.dax-negation-list li {
+  margin-bottom: 0.2em;
+}
+
+/* Pilot terms in the closing panel: stated plainly rather than implied. */
+.rpt-outro-terms {
+  margin-top: 0.9rem !important;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule, #cfd6d3);
+}
+
+.rpt-outro-terms b {
+  color: var(--ink, #17211e);
+}
+
+/* Full-page scale for the overview row gist. */
+.dax-full .dax-ov-link {
+  padding: 0.7em 0.2em;
+}
+
+.dax-full .dax-ov-sec-gist {
+  font-size: 0.72em;
+}
+
+/* Framing band above the document. report.html is the URL people share, and
+   without this a cold visitor reads a negative diligence memo with no idea a
+   vendor produced it from public data. */
+.rpt-intro {
+  width: min(100% - 2.5rem, 78rem);
+  margin: 0 auto 1.2rem;
+}
+
+.rpt-intro-kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rpt-intro-title {
+  margin: 0.4rem 0 0;
+  max-width: 30ch;
+  color: var(--ink);
+  font-size: clamp(1.3rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.rpt-intro-lede {
+  max-width: 68ch;
+  margin: 0.6rem 0 0;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.6;
 }

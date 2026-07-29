@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Read a source-linked excerpt from the DrugAdopt prexasertib research diligence report." />
-    <meta name="theme-color" content="#111826" />
+    <meta name="description" content="A DrugAdopt biomarker and patient-selection readout on Prexasertib in Platinum-resistant HGSOC, generated from public evidence with source-linked figures and named evidence gaps." />
+    <meta name="theme-color" content="#0c1522" />
     <title>Example report | Orchestrated Biosciences</title>
     <link rel="canonical" href="https://orchestrated.bio/report.html" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
@@ -13,21 +13,22 @@
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="DrugAdopt example report | Orchestrated Biosciences" />
-    <meta property="og:description" content="A source-linked excerpt from DrugAdopt's prexasertib biomarker and patient-selection diligence." />
+    <meta property="og:description" content="Prexasertib in Platinum-resistant HGSOC: what the public evidence supports, what it does not, and the experiment that would close the gap." />
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css" />
     <link rel="stylesheet" href="./assets/css/company-site/report.css" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#overview">Skip to content</a>
 
     <header class="masthead">
       <div class="shell">
         <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
-          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
-          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-light" src="./images/favicon.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/favicon-dark.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
         <nav class="site-nav" aria-label="Primary">
@@ -40,237 +41,295 @@
       </div>
     </header>
 
-    <main id="main" class="report-reader-stage">
-      <div class="report-reader">
-        <nav class="report-contents" aria-label="Report contents">
-          <p class="report-contents-title">Contents</p>
-          <a href="#report-overview" aria-current="location">Overview</a>
-          <a href="#systematic-review">Systematic evidence review</a>
-          <a href="#clinical-result">Clinical activity</a>
-          <a href="#biomarker-result">Biomarker result</a>
-          <a href="#safety-result">Safety and treatment delivery</a>
-          <a href="#change-readout">Evidence gaps</a>
-          <a href="#source-record">Source record</a>
-          <p class="report-contents-note">Excerpt from the generated DrugAdopt case. Public evidence only.</p>
+    <main class="rpt-stage">
+      <div class="rpt-intro">
+        <p class="rpt-intro-kicker">Example DrugAdopt report</p>
+        <h1 class="rpt-intro-title">Built from public data alone — no sponsor data, no data room.</h1>
+        <p class="rpt-intro-lede">Every figure below was computed from published papers, trial registries and public repositories. DrugAdopt assessed and graded five candidate selection markers for Prexasertib, and named the experiment that would settle the leading one. <a href="./">What DrugAdopt does</a>.</p>
+      </div>
+
+      <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on Prexasertib in Platinum-resistant HGSOC">
+
+        <nav class="dax-spine" aria-label="Report sections">
+          <div class="dax-spine-brand">
+            <span class="dax-spine-logo"><img src="./images/logo-icon-white.svg" alt="" aria-hidden="true" /></span>
+            <span class="dax-spine-title">DrugAdopt<span>Biomarker &amp; patient-selection readout</span></span>
+          </div>
+          <ul class="dax-nav"><li><a class="dax-nav-item" href="#overview"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Overview</span></a></li><li><a class="dax-nav-item" href="#clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label">Clinical Phenotype &amp; Endpoints</span></a></li><li><a class="dax-nav-item" href="#mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></a></li><li><a class="dax-nav-item" href="#pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label">Pharmacology &amp; Exposure</span></a></li><li><a class="dax-nav-item" href="#toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></a></li><li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></a></li><li><a class="dax-nav-item" href="#traceability"><span class="dax-nav-num">◆</span><span class="dax-nav-label">Traceability</span></a></li></ul>
         </nav>
 
-        <article class="report-paper">
-          <header class="report-cover" id="report-overview">
-            <p class="report-kicker">DrugAdopt · biomarker and patient-selection diligence</p>
-            <h1>Prexasertib <span>(LY2606368 / ACR-368)</span></h1>
-            <p class="report-indication">Platinum-resistant BRCA-wild-type high-grade serous ovarian cancer</p>
-            <dl class="report-document-meta">
-              <div><dt>Prepared</dt><dd>17 July 2026</dd></div>
-              <div><dt>Modality</dt><dd>Small molecule</dd></div>
-              <div><dt>Scope</dt><dd>Public evidence · patient selection</dd></div>
-            </dl>
-          </header>
+        <div class="dax-paper dax-paper-scroll">
 
-          <section class="report-readout" aria-labelledby="readout-title">
-            <h2 id="readout-title">Research diligence readout</h2>
-            <div class="report-readout-grid">
+          <section class="dax-page dax-overview" id="overview" tabindex="-1">
+            <div class="dax-ov-top">
               <div>
-                <p class="report-readout-lead">Prexasertib’s target CHK1 is a candidate, mechanistically plausible vulnerability in platinum-resistant BRCA-wild-type HGSOC, but public evidence does not establish a measurable, load-bearing tumor CHK1-dependence mechanism.</p>
-                <p class="report-question"><strong>Question:</strong> Does prexasertib have a biomarker-enrichable, clinically separable development path in platinum-resistant BRCA-wild-type HGSOC?</p>
+                <p class="dax-sec-num">Biomarker &amp; patient-selection readout</p>
+                <p class="dax-ov-asset">Prexasertib</p>
+                <p class="dax-ov-target">Small molecule · Target CHEK1</p>
+                <p class="dax-ov-ind">BRCA-wild-type platinum-resistant recurrent high-grade serous ovarian carcinoma</p>
               </div>
-              <dl class="report-readout-facts">
-                <div>
-                  <dt>Primary uncertainty</dt>
-                  <dd>Exposure-timed tumor drug concentration and validated pathway PD (pCHK1 / pCDC25C) in responders versus non-responders.</dd>
-                </div>
-                <div>
-                  <dt>Biomarker readiness</dt>
-                  <dd>Tumor FISH/NGS and cyclin-E1 IHC are feasible but not qualified for selection. Tumor pathway PD and OncoSignature are not publicly qualified.</dd>
-                </div>
-              </dl>
+            </div>
+
+            <p class="dax-ov-question">What do the clinical phenotype, biomarker biology, exposure, and safety data say about another prexasertib study in platinum-resistant HGSOC?</p>
+            <p class="dax-ov-readout">Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response. The signal-seeking study ended before its planned evaluable denominators were reached. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis.</p>
+            <p class="dax-ov-readout">The clinical activity signal is real, but the public data do not identify a validated responder biomarker, participant-linked exposure explanation, or therapeutic window for a POLA1-directed combination. Another unselected efficacy study should remain on hold.</p>
+
+            <div class="dax-callout dax-callout-verdict">
+              <div class="dax-callout-head">Recommendation · Hold for named data · confidence high</div>
+              <div class="dax-callout-body">
+                <p class="dax-callout-item">Do not launch another unselected efficacy study or a POLA1-directed combination from the public evidence. Preserve the clinical activity signal, but require independent biomarker validation, participant-linked exposure, a combination safety window, a censoring-aware design, and product-quality records.</p>
+                <p class="dax-callout-item"><b>Question asked.</b> What would have to be true before another prexasertib study in platinum-resistant HGSOC is scientifically justified?</p>
+              </div>
+            </div>
+
+            <p class="dax-ov-sechead">What each section found</p>
+            <ul class="dax-ov-sections"><li><a class="dax-ov-link" href="#clinical"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-sec-gist">12 of 39 evaluable patients responded — a real subset to select for.</span></span><span class="dax-ov-chip dax-chip-ok">Responder subset observed</span></a></li><li><a class="dax-ov-link" href="#mechanism"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-sec-gist">The replication score and POLA1 both survive as candidates; neither is trial-ready yet.</span></span><span class="dax-ov-chip dax-chip-warn">2 candidates, neither validated</span></a></li><li><a class="dax-ov-link" href="#pharmacology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-sec-gist">Aggregate PK makes regimen-level underexposure unlikely; individual exposure is still unresolved.</span></span><span class="dax-ov-chip dax-chip-warn">Regimen exposure adequate</span></a></li><li><a class="dax-ov-link" href="#toxicology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-sec-gist">Marrow toxicity is characterized; the combination margin still has to be measured.</span></span><span class="dax-ov-chip dax-chip-warn">Marrow toxicity quantified</span></a></li></ul>
+
+            <div class="dax-ov-foot">
+              <span>Prepared 2026-07-17 · sources as of 2026-07-16 · from public evidence</span>
+              <span>Every claim hash-bound to its source and verification verdict</span>
             </div>
           </section>
 
-          <figure class="report-primary-figure">
-            <img src="./images/drugadopt/orr.png" alt="Three-cohort reconciliation of prexasertib objective response rates, with higher single-center estimates and an independent multicenter benchmark of 11 to 13 percent." />
-          </figure>
+          
+            <section class="dax-page" id="clinical">
+              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+              <p class="dax-sec-num">Section 1</p>
+              <h2 class="dax-sec-h">Clinical Phenotype &amp; Endpoints</h2>
 
-          <section class="report-section" id="systematic-review" aria-labelledby="systematic-review-title">
-            <p class="report-section-number">Systematic evidence review</p>
-            <h2 id="systematic-review-title">The public monotherapy phenotype is heterogeneous across three directly on-scope datasets.</h2>
-            <p>The datasets should be reconciled, not collapsed into one “definitive” response rate. The two single-center signals are real, but they do not establish a portable 30% monotherapy expectation. The independent multicenter result materially lowers that expectation without making the earlier observations disappear.</p>
+              <p class="dax-question-line">What do the public trial record and primary report actually show, and which patient and biopsy denominators can support a clinical or translational claim?</p>
 
-            <dl class="report-ledger" aria-label="Evidence ledger coverage">
-              <div><dt>23</dt><dd>records inventoried</dd></div>
-              <div><dt>8</dt><dd>included records</dd></div>
-              <div><dt>1</dt><dd>excluded record</dd></div>
-              <div><dt>13</dt><dd>background records</dd></div>
+              
+              <figure class="dax-figure">
+                <img src="./images/drugadopt/report/clinical_cohort_flow.png" alt="Two-panel cohort diagram. Panel A, the clinical analysis population: 49 enrolled and treated across cohorts 5 and 6, splitting into cohort 5 with biopsiable disease (n=24) and cohort 6 without (n=25); these yield 18 of 36 planned and 21 of 35 planned RECIST-evaluable participants, with 6 partial responses each, combining to a response denominator of 39 of 49 and 12 partial responses. A note records that registry &#x27;completed&#x27; n=43 is a disposition milestone, not the RECIST-evaluable n=39. Panel B, the pretreatment biopsy population: 24 baseline biopsies, of which 18 are tissue-quality eligible after 6 fail for high necrotic content; from these, 18 are DNA sequenced and 17 RNA sequenced, and 15 enter the post-hoc transcriptomic analysis after 2 exclusions, splitting into 6 participants with PFS at or beyond 6 months and 9 below." loading="lazy" decoding="async" />
+                <figcaption class="dax-figcap">
+                  <b>Figure 1.</b> Public clinical and biopsy denominators are distinct.
+                  
+                  <span class="dax-figmeta">Evidence type: computed. Claim scope: Aggregate public cohort and specimen counts, patient-level public assay-availability reconciliation, and a reviewed source-column linkage for the same 15 post-hoc PFS-labeled biopsies; not independent validation, predictive utility, or overall-survival evidence. Sources: <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a>, <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>, <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a>.</span>
+                </figcaption>
+              </figure>
+
+              <p class="dax-body-p">This was an early-terminated signal-seeking study, not a clean efficacy failure or a validated resistance-biomarker study. Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response: ORR was 30.8% (12/39; 95% CI 17.0–47.6) among evaluable participants and 24.5% (12/49; exact 95% CI 13.3–38.9) by intention to treat.</p><p class="dax-body-p">The planned evaluable denominators were not reached. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis, so the clinical response and biomarker claims arise from different populations [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>; <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a>].</p>
+              
+
+              <div class="dax-callout">
+                <div class="dax-callout-head">Interpretation</div>
+                <div class="dax-callout-body"><p class="dax-body-p">The clinical record supports a bounded activity signal in heavily pretreated platinum-resistant HGSOC. It does not support calling prexasertib inactive: 12 objective responses were observed. It also does not support calling the regimen effective under the planned phase-2 decision rule, because both cohorts stopped short of their target sample sizes.</p><p class="dax-body-p">The translational result is exploratory. The audited source-column linkage permits a bounded same-cohort PFS reanalysis, but a 15-biopsy, post-hoc split cannot validate a selection biomarker. This is a post-publication reanalysis of the same 15 patients used to generate the published hypothesis. It may test a within-cohort association with published PFS, but it is not independent replication or prospective biomarker validation and does not establish resistance mechanism, predictive utility, or treatment interaction.</p><p class="dax-body-p">The larger multicenter study makes that limit more important [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a>]: its lower platinum-resistant ORR and negative genomic screen argue against treating the small trial&#x27;s 30.8% evaluable ORR or any single baseline alteration as transportable. The CA125 paper does not fill the mechanism gap [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/39075200/" target="_blank" rel="noreferrer">PMID 39075200</a>] because it measures response after treatment has started.</p><p class="dax-body-p">Its useful question is narrower—whether lack of a confirmed CA125 decline can prospectively flag low probability of RECIST response without making a treatment decision.</p></div>
+              </div>
+
+              <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>1</span></div>
+            </section>
+
+            <section class="dax-page" id="mechanism">
+              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+              <p class="dax-sec-num">Section 2</p>
+              <h2 class="dax-sec-h">Mechanism &amp; Biomarker Biology</h2>
+
+              <p class="dax-question-line">Why did some patients benefit from prexasertib while others did not, and does the public evidence support a clinically usable DNA-replication biomarker or a causal POLA1 resistance mechanism?</p>
+
+              
+              <figure class="dax-figure">
+                <img src="./images/drugadopt/report/replication_signal_robustness.png" alt="Forest plot of seven DNA-replication score definitions, each showing a Hedges g effect estimate with a 95 percent stratified percentile-bootstrap confidence interval, plotted against a vertical line at zero effect. KEGG DNA replication mean z, p=0.234; Reactome HGNC-reconciled mean z, p=0.586; Reactome reconciled median z, p=0.608; Reactome reconciled ranks, p=0.583; Reactome DNA strand elongation, p=0.27; Reactome pre-replicative complex, p=0.199; Reactome exact-symbol only, p=0.591. Every one of the seven confidence intervals crosses zero." loading="lazy" decoding="async" />
+                <figcaption class="dax-figcap">
+                  <b>Figure 2.</b> The same-cohort replication signal is not robust to score definition.
+                  Hedges g estimates and pointwise, unadjusted 95% stratified percentile-bootstrap intervals for seven score definitions anchored by KEGG hsa03030 and Reactome R-HSA-69306. Every interval includes no effect; p values are exact two-sided allocation tests.
+                  <span class="dax-figmeta">Evidence type: computed. Claim scope: score-definition sensitivity within the same 15 patients. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587_PROCESSED</a>, <code>MSIGDB_C2_CP_KEGG_V2023_1_HS</code>, <code>REACTOME_CURRENT_2026_06_21</code>, <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
+                </figcaption>
+              </figure>
+
+              <p class="dax-body-p">The public data do not explain the patient split. The paper&#x27;s KEGG DNA-replication enrichment is real as a computation: its gene ranks and weighted enrichment score can be reconstructed from the same 15 biopsies to floating-point precision. But it was discovered with a post-hoc PFS endpoint in those same 15 patients. When the fixed KEGG set is tested across all 5,005 possible 9-versus-6 patient allocations, the result is not unusual (p=0.105).</p><p class="dax-body-p">A separate, HGNC-reconciled Reactome patient score is also small and imprecise (Hedges g=0.28, 95% bootstrap CI -0.62 to 1.37, exact allocation p=0.586). This is a reproducible hypothesis, not a validated resistance biomarker. POLA1 perturbation is the strongest orthogonal support. In two parental HGSOC lineages and their acquired prexasertib-resistant derivatives, siPOLA1 plus prexasertib suppressed relative growth more than a descriptive Bliss-independence reference.</p><p class="dax-body-p dax-body-lead">That supports a controlled causal experiment. It does not establish:</p><ul class="dax-negation-list"><li>four independent models</li><li>tumor selectivity</li><li>direct ST1926–POLA1 engagement</li><li>an exposure-feasible drug combination</li><li>a therapeutic window</li></ul><p class="dax-body-p">The full ST1926 response surfaces are reported in Pharmacology &amp; Exposure; they are not biomarker-validation evidence.</p>
+              
+              <figure class="dax-figure">
+                <img src="./images/drugadopt/report/mechanism_evidence_chain.png" alt="Four bar panels of relative growth, each comparing control, siPOLA1, prexasertib, and the combination, with three replicate points per bar and an open diamond marking the descriptive Bliss-independence expectation. Panels cover two parental HGSOC lineages, OVCAR3 and OVCAR5, and their acquired prexasertib-resistant derivatives, OVCAR3-PrexR and OVCAR5-PrexR. In every panel the combination bar falls below the Bliss reference diamond. Footnotes record an unresolved dose-label conflict between the article prose, the figure caption, and the source-sheet title." loading="lazy" decoding="async" />
+                <figcaption class="dax-figcap">
+                  <b>Figure 3.</b> POLA1 perturbation supports an experiment, not a clinical combination.
+                  Triplicate relative-growth measurements compare siPOLA1, prexasertib, and the combination in two parental HGSOC lineages and their acquired-resistant derivatives; the open diamond is a descriptive Bliss reference, not formal synergy.
+                  <span class="dax-figmeta">Evidence type: measured. Claim scope: preclinical hypothesis support only; ST1926 mediation, synergy, exposure feasibility, tumor selectivity, and clinical benefit are not established. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752</a> <span class="dax-ref-part">source data</span>, <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
+                </figcaption>
+              </figure>
+
+
+              <div class="dax-callout">
+                <div class="dax-callout-head">Interpretation</div>
+                <div class="dax-callout-body"><p class="dax-body-p dax-body-lead">The strongest statement is narrow: the paper&#x27;s KEGG enrichment statistic is reproducible, and the POLA1 genetic-perturbation result makes the biology worth testing. The public evidence does not show that baseline DNA-replication expression predicts which patients benefit from prexasertib. It cannot separate:</p><ul class="dax-negation-list"><li>treatment resistance from prognosis</li><li>tumor composition</li><li>exposure</li><li>dose intensity</li><li>other unmeasured patient factors</li></ul><p class="dax-body-p">It also cannot show that inhibiting POLA1 would be tolerable in normal proliferative tissues. Do not select patients or propose a clinical POLA1 combination from this dataset. Freeze one continuous assay, score orientation, QC procedure, endpoint, and pass criterion prospectively—without deriving a clinical cutoff in this cohort—then test the association in an independent prexasertib cohort.</p><p class="dax-body-p">A treatment-selection claim would still require a randomized treatment-by-biomarker interaction. Run a therapeutic-index experiment before advancing the combination hypothesis.</p></div>
+              </div>
+
+              <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>2</span></div>
+            </section>
+
+            <section class="dax-page" id="pharmacology">
+              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+              <p class="dax-sec-num">Section 3</p>
+              <h2 class="dax-sec-h">Pharmacology &amp; Exposure</h2>
+
+              <p class="dax-question-line">Is prexasertib pharmacologically active at plausible human exposure, could heterogeneous exposure explain apparent non-response, and what does the ST1926 combination evidence actually establish?</p>
+
+              
+              <figure class="dax-figure">
+                <img src="./images/drugadopt/report/prexasertib_exposure_boundary.png" alt="Scatter plot of geometric mean AUC from 0 to 72 hours, in nanogram-hours per millilitre, at four dose-by-cycle points from an external phase-1 study: 80 mg/m squared cycle 1 day 1 at 1,670 (n=6; CV 22 percent) and cycle 2 day 1 at 1,780 (n=4; CV 16 percent), then 105 mg/m squared cycle 1 day 1 at 2,160 (n=6; CV 13 percent) and cycle 2 day 1 at 2,270 (n=3; CV 22 percent). A dashed horizontal line marks a Calu-6 xenograft model target of 1,896. Both 105 mg/m squared points sit above that line and both 80 mg/m squared points below it. A side panel lists what the data can answer — regimen and external aggregate PK, and group dispersion as reported CV percent — and what it cannot: ovarian-trial participant PK, PK linked to response or PFS, and tumour exposure or target engagement." loading="lazy" decoding="async" />
+                <figcaption class="dax-figcap">
+                  <b>Figure 4.</b> Public PK supports regimen-level exposure, not patient-level underexposure.
+                  External phase-1 geometric mean AUC(0-72) with reported CV and PK n; the horizontal line is a xenograft-derived target, not a clinical efficacy threshold.
+                  <span class="dax-figmeta">Evidence type: measured. Claim scope: Regimen-level exposure plausibility only; no participant-level underexposure or exposure-response inference. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>, <code>Prexasertib</code>, <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
+                </figcaption>
+              </figure>
+
+              <p class="dax-body-p">Prexasertib is a potent CHK1 inhibitor with an explicit selectivity boundary: the FDA briefing reports CHK1 enzyme IC50 &lt;1 nM, binding Ki 0.9 nM, and CHK2 and p90S6 kinase inhibition below 10 nM in a 224-kinase panel [Prexasertib]. The public evidence makes regimen-level underexposure less likely, but it cannot test whether an individual nonresponder was underexposed.</p><p class="dax-body-p">In an external 12-patient phase-1 study, geometric mean AUC(0–72) at 105 mg/m² was 2,160 ng·h/mL at cycle 1 (n=6; CV 13%) and 2,270 ng·h/mL at cycle 2 (n=3; CV 22%), both above the 1,896 ng·h/mL exposure predicted from a Calu-6 xenograft model. Eight of nine reported 105-mg/m² AUC observations across the two cycles exceeded that target [<a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>].</p><p class="dax-body-p">That is not exposure–response evidence for NCT02203513. The ovarian trial used the same starting regimen, 105 mg/m² intravenously every two weeks, but exposes no participant-linked concentrations, individual PK estimates, dose intensity, target engagement, or PK-to-response record. A public exposure–response model would therefore manufacture an answer from the wrong population and was not fit [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>].</p><p class="dax-body-p">The complete public ST1926-by-prexasertib tumor-cell surfaces support a preclinical interaction hypothesis, not formal synergy or a therapeutic window. The source has unresolved replicate independence and dose-label conflicts, and it contains no matched normal-cell, in-vivo, or combination-exposure data [<a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752_SOURCE_DATA</a>].</p>
+              
+
+              <div class="dax-callout">
+                <div class="dax-callout-head">Interpretation</div>
+                <div class="dax-callout-body"><p class="dax-body-p">The measured potency, full tumor-cell response surfaces, and external PK make the mechanism and regimen experimentally plausible. They do not establish that ST1926 engages POLA1, that the combination is exposure-feasible, or that it has a normal-tissue margin. The external PK data argue against a simple claim that the 105-mg/m² regimen was generally too low to reach the sponsor&#x27;s nonclinical systemic-exposure target.</p><p class="dax-body-p dax-body-lead">They do not exclude:</p><ul class="dax-negation-list"><li>clinically meaningful interpatient variability</li><li>dose-intensity loss</li><li>tissue-exposure differences</li><li>exposure-independent resistance in the ovarian cohort</li></ul><p class="dax-body-p">The development consequence is narrow: retain exposure as an unresolved alternative explanation, but do not use it to explain the responder split until the sponsor-linked PK package is available. The next analysis should estimate exposure–efficacy and exposure–toxicity jointly; fitting only the response side would ignore the hematologic constraint that shaped actual dosing.</p></div>
+              </div>
+
+              <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>3</span></div>
+            </section>
+
+            <section class="dax-page" id="toxicology">
+              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+              <p class="dax-sec-num">Section 4</p>
+              <h2 class="dax-sec-h">Toxicology &amp; Therapeutic Window</h2>
+
+              <p class="dax-question-line">What limited prexasertib dosing, and does the public evidence establish a therapeutic window for adding a second replication-stress agent?</p>
+
+              
+              <figure class="dax-figure">
+                <img src="./images/drugadopt/report/clinical_safety_burden.png" alt="Bar chart of grade 3 or 4 treatment-related adverse events among 49 treated participants, each bar carrying a computed Wilson 95 percent confidence interval: neutropenia 42 participants (85.7 percent), leukocytopenia 38 (77.6 percent), thrombocytopenia 20 (40.8 percent), anemia 15 (30.6 percent), and febrile neutropenia 6 (12.2 percent). Accompanying counts record 11 participants (22.4 percent) with a toxicity-related dose reduction, 3 (6.1 percent) discontinuing for toxicity, and no on-treatment deaths." loading="lazy" decoding="async" />
+                <figcaption class="dax-figcap">
+                  <b>Figure 5.</b> Severe prexasertib toxicity is predominantly hematologic.
+                  Grade 3/4 treatment-related adverse events among 49 treated participants, with computed Wilson 95% intervals and reported dose-reduction, discontinuation, and on-treatment-death counts.
+                  <span class="dax-figmeta">Evidence type: measured. Claim scope: Observed prexasertib monotherapy safety only; no exposure-toxicity, combination-safety, or therapeutic-index claim. Sources: <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
+                </figcaption>
+              </figure>
+
+              <p class="dax-body-p">Prexasertib dosing was constrained by acute hematologic toxicity. Among 49 treated participants, grade 3 or 4 treatment-related neutropenia occurred in 42 (85.7%), leukocytopenia in 38 (77.6%), thrombocytopenia in 20 (40.8%), anemia in 15 (30.6%), and febrile neutropenia in 6 (12.2%). Eleven participants (22.4%) had a toxicity-related dose reduction and three (6.1%) discontinued for toxicity; no on-treatment deaths were reported [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285 Supplementary Data 2</a>].</p><p class="dax-body-p">The public evidence does not establish a numeric combination window. The pharmacology chapter shows real tumor-cell interaction data for ST1926 plus prexasertib, but there are no matched hematopoietic-progenitor or GI-organoid surfaces, participant-linked exposure–toxicity data, in-vivo combination toxicology, or combination-treated patients.</p><p class="dax-body-p">Tumor-cell growth inhibition is therefore not treated as toxicology evidence.</p>
+              
+
+              <div class="dax-callout">
+                <div class="dax-callout-head">Interpretation</div>
+                <div class="dax-callout-body"><p class="dax-body-p">The principal known clinical constraint is predictable, often severe, and monitorable marrow toxicity. Its transient nature and use of G-CSF made monotherapy delivery possible, but that does not create unused safety margin for a second replication inhibitor. The public data cannot supply a defensible numeric combination margin. That number must be frozen before CRO execution—on an exposure-normalized tumor-versus-marrow/GI scale—so an unfavorable result cannot be rescued by moving the goalpost after the assays are read.</p><p class="dax-body-p">The POLA1 result in the pharmacology chapter merits a preclinical falsification program, not a clinical combination proposal. The decisive toxicology weakness is that the same biological strategy that can deepen tumor replication stress can also injure proliferating marrow and GI tissues. Until a clinically qualified POLA1-directed agent demonstrates adequate exposure, target engagement, and a measured normal-tissue window, the public evidence does not support a clinical combination.</p></div>
+              </div>
+
+              <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>4</span></div>
+            </section>
+
+
+          <section class="dax-page" id="gaps">
+            <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+            <p class="dax-sec-num">Evidence &amp; Gaps</p>
+            <h2 class="dax-sec-h">Candidate biomarkers and what would validate them</h2>
+
+            <p class="dax-body-p"><b>A responder subset exists, so a selection biomarker is plausible.</b> These are the 5 candidates the public evidence raises, where each stands today, and the experiment that would move it from hypothesis to a marker you could enrich on.</p>
+            <p class="dax-body-p">No public biomarker is ready for prexasertib patient selection. The DNA-replication RNA score and POLA1 are exploratory external-validation candidates; CCNE1 should not gate enrollment; C1D15 CTC and on-treatment CA125 changes are unvalidated downstream response-monitoring readouts.</p>
+
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 1. Candidate biomarkers, evidence strength, and readiness">
+            <table class="dax-table">
+              <caption>Table 1. Every candidate we assessed, the evidence behind it, and our call</caption>
+              <thead><tr><th scope="col">Candidate</th><th scope="col">Evidence strength</th><th scope="col">Our call</th></tr></thead>
+              <tbody><tr><th scope="row">Frozen pretreatment DNA-replication RNA score</th><td>Conflicting same-cohort exploratory evidence; no independent clinical validity.</td><td>Blocker for selection; conditionally ready only as a frozen external-validation assay.</td></tr><tr><th scope="row">Pretreatment tumor POLA1 mRNA</th><td>Thin same-cohort nominal association plus orthogonal single-study genetic perturbation.</td><td>Gap; not ready for patient selection or a clinical combination.</td></tr><tr><th scope="row">CCNE1 amplification or overexpression</th><td>Not supportive: two amplified cases split across benefit groups in the small study, and no significant CCNE1-response association emerged in the larger NCT03414047 genomic analysis.</td><td>Stop for selection in the current program.</td></tr><tr><th scope="row">Cycle-1-day-15 change in EpCAM-positive MUC1-positive circulating tumor cells</th><td>Thin single-study exploratory association without prospective validation.</td><td>Watch; assay and clinical validity are incomplete.</td></tr><tr><th scope="row">On-treatment GCIG CA125 response</th><td>Thin post-hoc pooled single-arm evidence; high NPV but modest PPV, with guarantee-time and endpoint-definition limitations.</td><td>Watch; operationally feasible, clinically unvalidated for decisions.</td></tr></tbody>
+            </table>
+            </div>
+            <p class="dax-scope-line">Use these rows as report-level translational decision support. They do not establish clinical utility, assay qualification, regulatory biomarker qualification, or companion diagnostic readiness without the stated validation evidence.</p>
+
+            <h3 class="dax-sub-h">The gates behind the recommendation</h3>
+            <p class="dax-body-p">What do the clinical phenotype, biomarker biology, exposure, and safety data say about another prexasertib study in platinum-resistant HGSOC? Each gate names who owns it, what would let it pass, and the rule that stops it. One is shown in full below; the rest follow in Table 2.</p>
+            
+              <article class="dax-gate">
+                <p class="dax-gate-head">
+                  <code>biomarker-01</code>
+                  <span class="dax-ov-chip dax-chip-warn">Gap</span>
+                  <span class="dax-gate-blocking">Blocks the decision</span>
+                </p>
+                <p class="dax-gate-claim">No public biomarker is ready to select patients for prexasertib.</p>
+                <p class="dax-gate-owner">Translational biomarker lead · Step 2</p>
+                <p class="dax-gate-field"><b>Pass / fail criteria.</b> For association use, orient the score before outcomes, define the effect per prespecified score unit, choose a clinically useful effect threshold before sizing, and pass only if the relevant 95% confidence-interval bound exceeds that threshold; excluding no association alone is insufficient. Pass for treatment selection only after a randomized interaction and clinical utility are demonstrated.</p><p class="dax-gate-field"><b>Failure rule.</b> Stop biomarker-based selection if the frozen external association is absent, directionally unstable, or lacks a randomized treatment interaction.</p><p class="dax-gate-field"><b>Next action.</b> Freeze one continuous baseline assay and first request archived NCT03414047 baseline FFPE tissue and linked outcomes for outcome-blind external validation; require a randomized treatment-by-biomarker interaction before predictive use.</p>
+                <p class="dax-gate-reqhead">Data requested to close this gate</p><ul class="dax-gate-req"><li>Archived NCT03414047 pretreatment FFPE with complete outcomes and consented reuse</li><li>Locked assay, preprocessing, QC, and missingness rules</li><li>Dated CA125/scans and discontinuation reasons for monitoring analysis</li><li>Comparator-bearing data for predictive interaction</li></ul>
+              </article>
+
+
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining decision gates">
+            <table class="dax-table">
+              <caption>Table 2. The remaining gates, with the owner and next action for each</caption>
+              <thead><tr><th scope="col">Gate</th><th scope="col">State</th><th scope="col">Finding</th><th scope="col">Owner</th><th scope="col">Next action</th></tr></thead>
+              <tbody><tr><th scope="row"><code>replication-01</code></th><td><span class="dax-ov-chip dax-chip-gap">Not supported</span></td><td>The published KEGG DNA-replication enrichment can be reproduced, but the patient-level replication signal is not robust across prespecified score definitions in the same 15 biopsies.</td><td>Bioinformatics lead</td><td>Test one frozen score once in archived NCT03414047 tissue/outcomes if the access and assay gates pass; enroll anew only if that route fails, and do not iterate new pathway definitions on the 15 discovery patients.</td></tr><tr><th scope="row"><code>mechanism-01</code></th><td><span class="dax-ov-chip dax-chip-gap">Blocker</span> <span class="dax-gate-blocking">Blocks</span></td><td>POLA1 remains a testable mechanism hypothesis, but the ST1926 source-data experiments do not prove POLA1-mediated combination benefit or a therapeutic window.</td><td>Translational pharmacology lead</td><td>Run independent concentration matrices, genetic rescue, target-engagement, and normal-proliferative-cell experiments before any in-vivo or clinical combination commitment.</td></tr><tr><th scope="row"><code>exposure-01</code></th><td><span class="dax-ov-chip dax-chip-warn">Gap</span> <span class="dax-gate-blocking">Blocks</span></td><td>Public aggregate PK makes gross regimen underexposure less likely, but it cannot test whether individual nonresponders had lower exposure.</td><td>Clinical pharmacology lead</td><td>Recover participant-linked concentration-time, dose-intensity, growth-factor, and outcome data and fit a censoring-aware exposure-response analysis.</td></tr><tr><th scope="row"><code>safety-01</code></th><td><span class="dax-ov-chip dax-chip-gap">Blocker</span> <span class="dax-gate-blocking">Blocks</span></td><td>Prexasertib has a prominent, monitorable hematologic toxicity burden, while the safety window for a POLA1-directed combination is unknown.</td><td>Nonclinical safety lead</td><td>Define the combination therapeutic index in marrow-relevant and other proliferative normal-cell systems before animal or clinical escalation.</td></tr></tbody>
+            </table>
+            </div>
+            <p class="dax-scope-line">5 of 9 decision rows shown. The full case carries every row across all 8 diligence lanes DrugAdopt covers.</p>
+
+            <h3 class="dax-sub-h">What would change the decision</h3>
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 3. Missing evidence and the next step for each">
+            <table class="dax-table">
+              <caption>Table 3. Missing evidence, the result that would change the decision, and the next step</caption>
+              <thead><tr><th scope="col">Missing evidence</th><th scope="col">Would change the decision if</th><th scope="col">Next step</th></tr></thead>
+              <tbody><tr><th scope="row">Independent biomarker cohort</th><td>A frozen continuous baseline score replicates outcome-blind and later demonstrates a randomized treatment interaction.</td><td>First request archived NCT03414047 baseline FFPE and linked outcomes; confirm consent, inventory, RNA feasibility, and endpoint completeness before new enrollment or outcome access.</td></tr><tr><th scope="row">Participant-linked exposure</th><td>Measured PK explains a material part of nonresponse or supports a feasible exposure-adjusted regimen.</td><td>Recover concentration-time, dose-intensity, supportive-care, and outcome records.</td></tr><tr><th scope="row">POLA1-combination therapeutic index</th><td>Orthogonal POLA1 dependence and a reproducible tumor-versus-normal exposure margin are demonstrated.</td><td>Run dose matrices, rescue, target engagement, and normal-cell experiments.</td></tr><tr><th scope="row">Censoring-aware design inputs</th><td>A source-backed external-association or randomized-interaction design is estimable with acceptable feasibility.</td><td>Specify event, censoring, score, effect, comparator, and attrition inputs.</td></tr><tr><th scope="row">Product-quality and rights package</th><td>CMC and counsel records establish a usable, stable clinical product and rights path.</td><td>Open the CMC and legal data rooms before development commitment.</td></tr></tbody>
+            </table>
+            </div>
+
+            <div class="dax-callout">
+              <div class="dax-callout-head">The one experiment that unlocks the rest</div>
+              <div class="dax-callout-body">
+                <p class="dax-callout-item">First request archived NCT03414047 baseline tissue and linked outcomes, freeze one continuous RNA score and assay/QC procedure, and test it blinded to outcomes; stop the biomarker branch if the prespecified effect and assay gates fail.</p>
+              </div>
+            </div>
+
+            <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Gaps</span></div>
+          </section>
+
+          <section class="dax-page" id="traceability">
+            <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
+            <p class="dax-sec-num">Traceability</p>
+            <h2 class="dax-sec-h">Every claim resolves to a source</h2>
+
+            <p class="dax-body-p">Each sentence in this report is bound to the source it came from and to the reviewer verdict that checked it. Sources are downloaded and hashed at retrieval, so the exact bytes behind a number are preserved even if the page it came from later changes. You can check any claim without taking our word for it.</p>
+
+            <dl class="dax-stats">
+              <div><dt>89</dt><dd>claims carried in the table</dd></div>
+              <div><dt>44</dt><dd>sources, all hashed and preserved</dd></div>
+              <div><dt>64/89</dt><dd>claims semantically reviewed, all bound to a current verdict</dd></div>
+              <div><dt>23/44</dt><dd>sources you can open yourself</dd></div>
             </dl>
-            <p class="report-boundary">Evidence cutoff: 17 July 2026. Registry and publication records from the same trial are treated as non-independent.</p>
+            <p class="dax-scope-line">The remaining 25 claims are figure, decision-packet and biomarker entries bound by manifest rather than by semantic review. The remaining 21 sources are this case's own analysis outputs — hashed and preserved, but internal rather than public.</p>
+
+            <p class="dax-scope-line">One claim per chapter, showing the binding runs across the whole report:</p>
+            <ol class="dax-claims"><li><span class="dax-claim-text">All 49 participants in cohorts 5 and 6 received prexasertib, but only 39 were RECIST-evaluable</span><span class="dax-claim-meta"><code>SEM-clinical-001</code> · module <code>clinical</code> @ <code>26dcd59142a1</code></span></li><li><span class="dax-claim-text">Published KEGG result reproduced: source-oriented weighted ES was −0.55321745 versus −0.5532175 in the source (absolute error 4.7×10⁻⁸). The source reported NES −1.81, nominal p=0.00101, and FDR q=0.0253</span><span class="dax-claim-meta"><code>SEM-pharmacology-001</code> · module <code>pharmacology</code> @ <code>414056576a09</code></span></li><li><span class="dax-claim-text">CHK1 enzyme <code>IC50 &lt;1 nM</code> and binding <code>Ki 0.9 nM</code> establish potent target pharmacology, while CHK2 and p90S6 kinase inhibition below 10 nM in the cited 224-kinase panel prevent a CHK1-exclusive claim</span><span class="dax-claim-meta"><code>SEM-adme-001</code> · module <code>adme</code> @ <code>c334c52857aa</code></span></li><li><span class="dax-claim-text">Grade 3 or 4 treatment-related neutropenia occurred in 42 (85.7%), leukocytopenia in 38 (77.6%), thrombocytopenia in 20 (40.8%), anemia in 15 (30.6%), and febrile neutropenia in 6 (12.2%).</span><span class="dax-claim-meta"><code>SEM-toxicology-001</code> · module <code>toxicology</code> @ <code>2b1e9b9355d5</code></span></li></ol>
+
+            <p class="dax-body-p">The identifier is the claim, the module is the chapter it lives in, and the hash fixes the reviewed text. If a chapter is edited, its hash changes and the claim is flagged for re-review rather than silently inheriting an old verdict.</p>
+
+            <p class="dax-scope-line">This reader surface projects existing semantic-review, search-log, public-source, and evidence-state bindings. A matching content hash detects case-local drift; it does not authenticate publisher origin or establish scientific truth. Existing case artifacts present only in the case manifest are labeled internally hash-bound, not independently scientifically reviewed; artifacts absent from every binding surface remain unreviewed.</p>
+
+            <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Trace</span></div>
           </section>
 
-          <section class="report-section" id="clinical-result" aria-labelledby="clinical-result-title">
-            <p class="report-section-number">Clinical result</p>
-            <h2 id="clinical-result-title">The multicenter result sets the more defensible unselected benchmark.</h2>
-            <div class="report-table-wrap">
-              <table class="report-table">
-                <thead>
-                  <tr>
-                    <th>Dataset</th>
-                    <th>Population</th>
-                    <th>Objective response</th>
-                    <th>Other reported outcomes</th>
-                    <th>Source</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Original pilot</td>
-                    <td>Single center; mixed platinum sensitivity</td>
-                    <td>8/28 ITT (29%); 8/24 evaluable (33%)</td>
-                    <td>Median PFS 7.4 months</td>
-                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/29361470/" target="_blank" rel="noreferrer">PMID 29361470</a></td>
-                  </tr>
-                  <tr>
-                    <td>NCT02203513 cohorts 5/6</td>
-                    <td>Platinum-resistant BRCA-wild-type HGSOC</td>
-                    <td>12/49 ITT (24.5%); 12/39 evaluable (30.8%)</td>
-                    <td>Median PFS 5.0 months; median DoR 5.0 months</td>
-                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a></td>
-                  </tr>
-                  <tr>
-                    <td>NCT03414047</td>
-                    <td>Independent multicenter platinum-resistant cohorts</td>
-                    <td>17/140 (12.1%)</td>
-                    <td>Median PFS 3.7 months overall; median DoR 5.6 months</td>
-                    <td><a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="report-note"><strong>Comparability note.</strong> Disease-control definitions differed across studies. The cohorts 5/6 result used PR + stable disease for at least six months; the multicenter study used stable disease for at least four months.</p>
-          </section>
-
-          <section class="report-section" id="biomarker-result" aria-labelledby="biomarker-result-title">
-            <p class="report-section-number">Biomarker result</p>
-            <h2 id="biomarker-result-title">No public baseline marker is ready to select patients.</h2>
-            <p>CCNE1 amplification produced a numerical response difference, 19.2% versus 7.4%, but the difference was not significant (<em>p</em> = 0.13). Median PFS was 3.7 months regardless of CCNE1 amplification, and cyclin E1 protein expression did not separate partial responders from patients with stable or progressive disease.</p>
-            <p>The later NCT02203513 biopsy subset did not rescue the marker. No individual transcript remained differentially expressed after multiplicity correction. DNA-replication pathway enrichment and raw POLA1, POLE and GINS3 associations came from 15 pretreatment RNA-seq samples and remain mechanism-informed resistance hypotheses, not patient-selection markers.</p>
-
-            <div class="report-table-wrap">
-              <table class="report-table report-biomarker-table">
-                <thead>
-                  <tr>
-                    <th>Candidate</th>
-                    <th>Current evidence</th>
-                    <th>Permitted use</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>CCNE1 amplification / cyclin E1</td>
-                    <td>Statistically unsupported treatment-response association</td>
-                    <td>Prespecified stratification factor only</td>
-                  </tr>
-                  <tr>
-                    <td>POLA1 / POLE / GINS3 replication signature</td>
-                    <td>Same-cohort, underpowered and FDR-null</td>
-                    <td>Hypothesis-generating continuous score</td>
-                  </tr>
-                  <tr>
-                    <td>PBMC γ-H2AX</td>
-                    <td>Observed downstream systemic PD; not associated with response or PFS</td>
-                    <td>Peripheral PD only, not tumor engagement</td>
-                  </tr>
-                  <tr>
-                    <td>Tumor pCHK1 / pCDC25C</td>
-                    <td>Not measured publicly</td>
-                    <td>Critical new-data gap</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="report-source-line">Sources: <a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/32709712/" target="_blank" rel="noreferrer">PMID 32709712</a>, <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a>.</p>
-          </section>
-
-          <section class="report-section" id="safety-result" aria-labelledby="safety-result-title">
-            <p class="report-section-number">Safety and treatment delivery</p>
-            <h2 id="safety-result-title">Marrow toxicity is manageable, but it is part of the product profile.</h2>
-            <p>Across the 169-patient multicenter study, 72.8% had grade 3 or higher treatment-emergent adverse events and 58.0% had grade 3 or higher treatment-related events. Grade 3–4 neutropenia occurred in 37.9%.</p>
-            <dl class="report-ledger report-ledger-safety" aria-label="Treatment delivery results">
-              <div><dt>70.4%</dt><dd>received G-CSF</dd></div>
-              <div><dt>30.8%</dt><dd>required dose reduction</dd></div>
-              <div><dt>39.6%</dt><dd>had a dose delay</dd></div>
-              <div><dt>2.9%</dt><dd>discontinued for an adverse event</dd></div>
-            </dl>
-            <p class="report-note">These operational endpoints are more useful for program planning than the pilot’s 93% grade 3–4 neutropenia rate alone because monitoring and prophylactic G-CSF differed materially.</p>
-          </section>
-
-          <section class="report-section" id="change-readout" aria-labelledby="change-readout-title">
-            <p class="report-section-number">Evidence gaps</p>
-            <h2 id="change-readout-title">Evidence that would change the readout</h2>
-            <div class="report-table-wrap">
-              <table class="report-table">
-                <thead>
-                  <tr>
-                    <th>Missing evidence</th>
-                    <th>Would change the readout if</th>
-                    <th>Where it would come from</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Exposure-timed tumor drug concentration and validated pCHK1 / pCDC25C PD</td>
-                    <td>Tumor target engagement is demonstrated and tracks response.</td>
-                    <td>Biopsy-timed tumor PK and pathway PD in a dose-optimized study.</td>
-                  </tr>
-                  <tr>
-                    <td>A prospectively validated enrichment marker at a locked threshold</td>
-                    <td>The 11–13% unselected asset becomes biomarker-enrichable.</td>
-                    <td>A treatment-by-marker interaction tested in a controlled cohort.</td>
-                  </tr>
-                  <tr>
-                    <td>Dose-comparison PD with lower marrow toxicity</td>
-                    <td>Tumor engagement is preserved at a more tolerable dose or schedule.</td>
-                    <td>A dose/schedule-ranging, biopsy-mandated PD study.</td>
-                  </tr>
-                  <tr>
-                    <td>Patient-level outcomes paired to genomics and exposure</td>
-                    <td>Responder rescue and exposure-response modeling become possible.</td>
-                    <td>Sponsor data room and archived NCT03414047 material.</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <section class="report-section report-sources" id="source-record" aria-labelledby="source-record-title">
-            <p class="report-section-number">Source record</p>
-            <h2 id="source-record-title">Primary records used on this page</h2>
-            <ol>
-              <li><a href="https://pubmed.ncbi.nlm.nih.gov/29361470/" target="_blank" rel="noreferrer">PMID 29361470</a> · original single-center prexasertib pilot.</li>
-              <li><a href="https://pubmed.ncbi.nlm.nih.gov/32709712/" target="_blank" rel="noreferrer">PMID 32709712</a> · translational analysis of the original pilot cohort.</li>
-              <li><a href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a> · later NCT02203513 cohorts 5/6 and biopsy analysis.</li>
-              <li><a href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a> · independent multicenter phase 2 study.</li>
-              <li><a href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a> · trial record for the pilot and expansion cohorts.</li>
-              <li><a href="https://clinicaltrials.gov/study/NCT03414047" target="_blank" rel="noreferrer">NCT03414047</a> · multicenter trial and data-sharing record.</li>
-              <li><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a> · public pretreatment tumor RNA-seq dataset.</li>
-            </ol>
-            <details class="report-method">
-              <summary>Methods and verification boundary</summary>
-              <p>The underlying case preserves its review protocol, screening ledger, evidence matrix, source files, figures and claim/source traceability. This excerpt uses primary publications, registries and public repositories. It does not establish comparative efficacy, a validated predictive biomarker, direct human-tumor CHK1 target engagement, causal immune mediation, a qualified clinical hERG margin or current ovarian OncoSignature performance.</p>
-              <p>Reviewer-attestation and authentication state are maintained in the current verification report. This rendered excerpt makes no signature claim.</p>
-            </details>
-          </section>
-
-          <footer class="report-page-footer">
-            <span>DrugAdopt · public-evidence report excerpt</span>
-            <span>Prexasertib · 17 July 2026</span>
-          </footer>
-        </article>
+        </div>
       </div>
+
+      <aside class="rpt-outro">
+        <div class="rpt-outro-body">
+          <h2>This report was generated from public data alone.</h2>
+          <p>Every figure above was computed from published papers, trial registries and public repositories — no sponsor data, no data room, no privileged access. Each chapter is hash-bound to its sources and to the verification verdict that checked it, so any claim here can be traced back to the bytes it came from.</p>
+          <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. Several gates this report leaves open — participant-linked exposure, dose-modification records, archived tissue — are ones a sponsor's own data room can close directly.</p>
+          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> We are early, and we are looking for case studies we can point to, so early partners get engagement terms that reflect that. Tell us the drug and the indication and we will tell you what the public evidence can and cannot settle before you commit anything.</p>
+        </div>
+        <div class="rpt-outro-actions">
+          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot <span aria-hidden="true">→</span></a>
+          <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Or email us</a>
+          <a class="link-quiet" href="./company.html#data-handling">How your data is handled</a>
+        </div>
+      </aside>
+
+      <p class="rpt-caption">A DrugAdopt biomarker readout on prexasertib in platinum-resistant hgsoc, from public data. Each section opens the evidence for and against a selection marker, and names the experiment that would close each gap.</p>
     </main>
 
     <footer class="foot">
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="https://orchestrated.bio/blog/">Blog</a>
+          <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
+          <a href="https://orchestrated.bio/terms.html">Terms</a>
+        </nav>
       </div>
     </footer>
-    <script src="./assets/js/company-site/report-contents.js"></script>
+    <script src="./assets/js/company-site/report-spine.js"></script>
   </body>
 </html>

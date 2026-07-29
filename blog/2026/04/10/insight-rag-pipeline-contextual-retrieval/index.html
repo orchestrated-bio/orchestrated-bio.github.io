@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Why standard vector search loses biological context, and how contextual retrieval, query fan-out, and citation survival improve biomedical research." />
+    <meta name="theme-color" content="#111826" />
+    <title>The Retrieval Gap | Orchestrated Biosciences</title>
+    <link rel="canonical" href="https://orchestrated.bio/blog/2026/04/10/insight-rag-pipeline-contextual-retrieval/" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/atom+xml" title="Orchestrated Biosciences Blog" href="/blog/feed.xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="The Retrieval Gap: Why Vector Search Fails Biomedical Research" />
+    <meta property="og:description" content="Notes on rebuilding Insight’s retrieval pipeline around citation survival." />
+    <meta property="og:url" content="https://orchestrated.bio/blog/2026/04/10/insight-rag-pipeline-contextual-retrieval/" />
+    <meta property="og:image" content="https://orchestrated.bio/images/blog/building-insight.png" />
+    <meta property="article:published_time" content="2026-04-10T00:00:00-04:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/assets/css/company-site/base.css" />
+    <link rel="stylesheet" href="/assets/css/company-site/editorial.css" />
+    <script src="/assets/js/cookie-consent.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The Retrieval Gap: Why Vector Search Fails Biomedical Research",
+        "description": "Notes on rebuilding Insight's retrieval pipeline around citation survival.",
+        "datePublished": "2026-04-10",
+        "dateModified": "2026-04-10",
+        "url": "https://orchestrated.bio/blog/2026/04/10/insight-rag-pipeline-contextual-retrieval/",
+        "image": "https://orchestrated.bio/images/blog/building-insight.png",
+        "author": {
+          "@type": "Person",
+          "name": "Alex Nesta, PhD",
+          "url": "https://www.linkedin.com/in/alex-v-nesta-phd-847547a5/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Orchestrated Biosciences",
+          "url": "https://orchestrated.bio",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://orchestrated.bio/images/logo-icon.png"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="/" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="/images/favicon.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="/images/favicon-dark.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">DrugAdopt</a>
+          <a href="/insight.html">Insight</a>
+          <a href="/report.html">Report</a>
+          <a href="/company.html">Company</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="editorial-main">
+      <article class="post-page">
+        <div class="post-shell">
+          <header class="post-header">
+            <p class="post-kicker">Insight · Evidence retrieval</p>
+            <div class="post-meta">
+              <time datetime="2026-04-10">April 10, 2026</time>
+              <div class="post-tags" aria-label="Topics">
+                <span class="post-tag">Engineering</span>
+                <span class="post-tag">Retrieval</span>
+                <span class="post-tag">Bioinformatics</span>
+              </div>
+            </div>
+            <h1>The Retrieval Gap: Why Vector Search Fails Biomedical Research</h1>
+            <p class="post-subtitle">Notes on rebuilding Insight’s retrieval pipeline around citation survival.</p>
+            <div class="byline">
+              <span class="byline-mark" aria-hidden="true">AN</span>
+              <p>Alex Nesta, PhD<span>Founder and Chief Technology Officer</span></p>
+            </div>
+          </header>
+
+          <img class="post-image" src="/images/blog/building-insight.png" alt="Insight cancer-genomics analysis interface" />
+
+          <div class="prose">
+            <p>I asked Insight about PDAC mutation hotspots last month. The answer read beautifully. The citation was about a completely unrelated cancer.</p>
+
+            <p>I burned an hour looking for a bug in my orchestration code before I realized the code was fine. Vector search had matched on “hotspots” and “mutations” and quietly thrown out the biology. That’s the Retrieval Gap, and it’s why most biomedical RAG demos fall apart the moment you actually check the sources.</p>
+
+            <p>Closing it took a month. The trigger was watching how rarely Google’s AI Overviews hallucinate citations now. They are a search engine company; that is the whole job. I also read <a href="https://github.com/danishashko/grounding-citation-analysis/blob/main/article/article.md">Dani Shashko’s reverse-engineering of how they pull it off</a>. The same ideas, adapted to the quirks of cancer literature, are what made Insight start telling the truth.</p>
+
+            <p>The core fix is contextual chunking. Standard RAG slices documents into arbitrary pieces and embeds each one in isolation, which works fine for product manuals and falls apart for science. “The results showed 90% survival” is a meaningless string without the study attached to it. We now embed every chunk together with a short header summarizing the paper it came from, so the vector itself carries the biological context. A BRCA query stops grabbing PDAC results not because we filter them out, but because they no longer look similar in the first place.</p>
+
+            <p>The second piece is query fan-out, an idea borrowed from the same Google work. A user’s question rarely matches the language of the underlying papers, so before retrieval we reformulate it along separate axes: one targeting the genes involved and one the disease context. We then run the searches in parallel. It costs a little latency. It catches the papers that a single embedding would have missed.</p>
+
+            <p>We measure all of this with what we call citation survival. For every answer, the cited paper is checked against the claim it supports, and if the verification fails the citation dies. It is the metric that finally let us tell whether a change to the pipeline was real or just vibes. The hover-over UI in Insight surfaces it on every answer, so users see the same signal we do.</p>
+
+            <p>None of this is novel research. It is <a href="https://www.anthropic.com/news/contextual-retrieval">Anthropic’s contextual retrieval</a> and Google’s grounding work, applied carefully to a domain where the cost of a confident wrong answer is somebody’s grant. The lesson, if there is one, is that in biotech you cannot trust the vector store alone. You have to measure whether the citations hold up. Everything else follows from that.</p>
+          </div>
+
+          <footer class="post-footer">
+            <a href="/blog/">← Back to the blog</a>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="editorial-foot-links" aria-label="Footer">
+          <a href="/privacy-policy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

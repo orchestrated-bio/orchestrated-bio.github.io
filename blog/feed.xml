@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Orchestrated Biosciences Blog</title>
+  <subtitle>Notes on building reliable bioinformatics and evidence systems.</subtitle>
+  <link href="https://orchestrated.bio/blog/" />
+  <link href="https://orchestrated.bio/blog/feed.xml" rel="self" />
+  <id>https://orchestrated.bio/blog/</id>
+  <updated>2026-04-10T00:00:00-04:00</updated>
+  <author>
+    <name>Orchestrated Biosciences</name>
+  </author>
+
+  <entry>
+    <title>The Retrieval Gap: Why Vector Search Fails Biomedical Research</title>
+    <link href="https://orchestrated.bio/blog/2026/04/10/insight-rag-pipeline-contextual-retrieval/" />
+    <id>https://orchestrated.bio/blog/2026/04/10/insight-rag-pipeline-contextual-retrieval/</id>
+    <published>2026-04-10T00:00:00-04:00</published>
+    <updated>2026-04-10T00:00:00-04:00</updated>
+    <summary>Why standard vector search loses biological context, and how contextual retrieval, query fan-out, and citation survival improve biomedical research.</summary>
+  </entry>
+
+  <entry>
+    <title>Building Insight: From PhD Thesis to Cancer Genomics Platform</title>
+    <link href="https://orchestrated.bio/blog/2026/03/02/building-insight-platform/" />
+    <id>https://orchestrated.bio/blog/2026/03/02/building-insight-platform/</id>
+    <published>2026-03-02T00:00:00-05:00</published>
+    <updated>2026-03-02T00:00:00-05:00</updated>
+    <summary>How repeated cancer-genomics analysis work became a conversational system for cohort-backed analyses with methods and figures attached.</summary>
+  </entry>
+</feed>

@@ -1,10 +1,10 @@
 # Orchestrated Biosciences company website
 
-The public site for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, Insight, an inspectable DrugAdopt report, and the company.
+The static website for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, Insight, an inspectable DrugAdopt report, and the company.
 
 ## Architecture
 
-The primary product site is a small static HTML/CSS/JavaScript application. Jekyll remains in the repository for the blog and legal pages and is built by GitHub Pages.
+The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no application framework, package manager, template engine, Ruby environment, or deployment build.
 
 | Surface | Source |
 | --- | --- |
@@ -12,34 +12,27 @@ The primary product site is a small static HTML/CSS/JavaScript application. Jeky
 | Insight | `insight.html` |
 | Example report | `report.html` |
 | Company | `company.html` |
-| Shared product-site styles | `assets/css/company-site/base.css` |
-| Page styles | `assets/css/company-site/{drugadopt,insight,report,company}.css` |
+| Blog index | `blog/index.html` |
+| Blog articles | `blog/YYYY/MM/DD/slug/index.html` |
+| Privacy and terms | `privacy-policy.html`, `terms.html` |
+| Shared styles | `assets/css/company-site/base.css` |
+| Page styles | `assets/css/company-site/` |
 | Interactive demos | `assets/js/company-site/` |
-| Blog and legal pages | Jekyll layouts, includes, and Markdown |
 | Portable review artifact | `concepts/asset-diligence/asset-diligence.artifact.html` |
 
-The root product pages deliberately have no framework or bundler. They can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
+The `.nojekyll` marker tells GitHub Pages to publish these files directly. `sitemap.xml` and `blog/feed.xml` are maintained as static files.
 
-Legacy product, portfolio, team, and concept URLs contain lightweight redirects to the current pages.
+The root product pages can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
+
+Legacy product, portfolio, team, case, and concept URLs contain lightweight redirects to the current pages.
 
 ## Local preview
-
-For the product pages only:
 
 ```bash
 python3 -m http.server 8767
 ```
 
 Open <http://localhost:8767/>.
-
-For the complete GitHub Pages site, including the blog:
-
-```bash
-bundle install
-bundle exec jekyll serve --livereload
-```
-
-Open <http://localhost:4000/>.
 
 ## Build the portable artifact
 
@@ -54,13 +47,12 @@ The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. Tha
 | Task | File or directory |
 | --- | --- |
 | Change product positioning or page content | Root HTML pages |
-| Change shared product-site layout or typography | `assets/css/company-site/base.css` |
+| Change shared layout or typography | `assets/css/company-site/base.css` |
 | Change one product page | Its page-specific CSS and JavaScript |
-| Change blog navigation or footer links | `_data/navigation.yml` |
-| Add a blog post | `_posts/YYYY-MM-DD-title.md` |
-| Change blog/Jekyll styling | `assets/css/custom.css` |
+| Add a blog article | Add a static `index.html` under its dated URL and update `blog/index.html`, `blog/feed.xml`, and `sitemap.xml` |
+| Change blog or policy styling | `assets/css/company-site/editorial.css` |
 | Rebuild the portable review artifact | `concepts/asset-diligence/build_artifact.py` |
 
 ## Deployment
 
-Pushes to the publishing branch are built and deployed by GitHub Pages. There is no Node.js or frontend bundling step.
+Pushes to the publishing branch are served directly by GitHub Pages. Because the repository is fully static, deployment does not install dependencies or run a site generator.

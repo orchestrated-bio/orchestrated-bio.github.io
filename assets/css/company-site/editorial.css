@@ -1,0 +1,353 @@
+/* Static blog and policy pages. These pages share the product site's tokens,
+   masthead, and typography without requiring a template engine. */
+
+.editorial-main {
+  min-height: calc(100vh - 10rem);
+}
+
+.editorial-head {
+  padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.editorial-head-copy {
+  max-width: 46rem;
+}
+
+.editorial-eyebrow,
+.post-kicker {
+  margin: 0 0 0.8rem;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+.editorial-head h1,
+.post-header h1,
+.legal-header h1 {
+  margin: 0;
+  color: var(--ink);
+  font-weight: 620;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.editorial-head h1 {
+  max-width: 18ch;
+  font-size: var(--step-3);
+  line-height: 1.08;
+}
+
+.editorial-deck {
+  max-width: 42rem;
+  margin: 1rem 0 0;
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.post-list {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--rule);
+  background: var(--rule);
+}
+
+.post-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  background: var(--paper-raised);
+}
+
+.post-card-media {
+  display: block;
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+  background: #101412;
+}
+
+.post-card-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.post-card:hover .post-card-media img {
+  transform: scale(1.015);
+}
+
+.post-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.post-card-meta,
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.9rem;
+  color: var(--ink-4);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.025em;
+}
+
+.post-tag {
+  display: inline-block;
+  padding: 0.16rem 0.42rem;
+  border: 1px solid var(--rule-firm);
+  color: var(--accent);
+  font-family: var(--sans);
+  font-weight: 620;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.post-card h2 {
+  margin: 1rem 0 0.7rem;
+  color: var(--ink);
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.post-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-card h2 a:hover {
+  color: var(--accent);
+}
+
+.post-card p {
+  margin: 0 0 1.5rem;
+  color: var(--ink-3);
+  font-size: var(--step--1);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.post-card-link {
+  width: fit-content;
+  margin-top: auto;
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 620;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+.post-card-link:hover {
+  border-bottom-color: var(--accent);
+}
+
+.post-page,
+.legal-page {
+  padding-block: clamp(2.75rem, 7vw, 5.5rem);
+}
+
+.post-shell {
+  width: min(100% - 2.5rem, 46rem);
+  margin-inline: auto;
+}
+
+.post-header {
+  margin-bottom: 2.25rem;
+}
+
+.post-header h1 {
+  margin-top: 1rem;
+  font-size: var(--step-3);
+  line-height: 1.1;
+}
+
+.post-subtitle {
+  margin: 1rem 0 0;
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.byline {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.byline-mark {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--rule-firm);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.byline p {
+  margin: 0;
+  color: var(--ink);
+  font-size: var(--step--1);
+  font-weight: 620;
+}
+
+.byline span {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--ink-4);
+  font-size: 0.72rem;
+  font-weight: 450;
+}
+
+.post-image {
+  display: block;
+  width: 100%;
+  margin: 0 0 2.5rem;
+  border: 1px solid var(--rule);
+}
+
+.prose {
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.78;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose h2,
+.prose h3 {
+  color: var(--ink);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.prose h2 {
+  margin: 2.7rem 0 0.8rem;
+  font-size: var(--step-2);
+  line-height: 1.25;
+}
+
+.prose h3 {
+  margin: 2rem 0 0.6rem;
+  font-size: var(--step-1);
+}
+
+.prose p {
+  margin: 0 0 1.25rem;
+  text-wrap: pretty;
+}
+
+.prose ul,
+.prose ol {
+  margin: 0 0 1.4rem;
+  padding-left: 1.3rem;
+}
+
+.prose li {
+  margin-bottom: 0.55rem;
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.prose a {
+  color: var(--accent);
+  text-underline-offset: 0.16em;
+}
+
+.prose a:hover {
+  color: var(--accent-deep);
+}
+
+.post-footer {
+  margin-top: 3.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+.post-footer a {
+  color: var(--accent);
+  font-size: var(--step--1);
+  font-weight: 620;
+  text-decoration: none;
+}
+
+.legal-shell {
+  width: min(100% - 2.5rem, 52rem);
+  margin-inline: auto;
+}
+
+.legal-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.legal-header h1 {
+  font-size: var(--step-3);
+  line-height: 1.1;
+}
+
+.legal-updated {
+  margin: 0.8rem 0 0;
+  color: var(--ink-4);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+}
+
+.editorial-foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+}
+
+.editorial-foot-links a {
+  color: var(--ink-4);
+  font-size: var(--step--1);
+  text-decoration: none;
+}
+
+.editorial-foot-links a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 44rem) {
+  .post-grid {
+    grid-template-columns: 1fr;
+  }
+}

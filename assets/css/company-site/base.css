@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Orchestrated Biosciences — asset diligence concept
+   Orchestrated Biosciences — shared company-site foundation
 
    Type: one sans across the page. Weight, size and letter-spacing carry the
    hierarchy — not a second typeface. Mono appears only where the content IS
@@ -147,6 +147,19 @@ body {
   z-index: 100;
 }
 .skip-link:focus { left: 0; }
+
+/* Prose links had no colour rule, so any inline <a> in body copy fell back to
+   the UA default -- blue unvisited, purple visited. Component classes (.btn,
+   .link-quiet, .site-nav a) set their own colour and are unaffected. */
+:where(p, li, dd, figcaption) > a:not([class]) {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+
+:where(p, li, dd, figcaption) > a:not([class]):hover {
+  color: var(--accent-deep);
+}
 
 :where(a):focus-visible,
 :where(button):focus-visible {
@@ -673,7 +686,18 @@ body {
   letter-spacing: 0.08em !important;
   text-transform: uppercase;
   color: var(--accent) !important;
-  margin: 0 0 1.4rem !important;
+  margin: 0 0 0.5rem !important;
+  text-align: center;
+}
+
+/* Says what the relationship actually is: the row mixes employers,
+   collaborators and clients, and an unqualified heading reads as customers. */
+.orgs-note {
+  max-width: 46ch;
+  margin: 0 auto 1.4rem;
+  color: var(--ink-3);
+  font-size: var(--step--1);
+  line-height: 1.55;
   text-align: center;
 }
 
@@ -723,6 +747,114 @@ body {
   color: var(--ink-4);
 }
 
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.2rem;
+}
+
+.foot-links a {
+  color: var(--ink-4);
+  font-size: var(--step--1);
+  text-decoration: none;
+}
+
+.foot-links a:hover { color: var(--accent); }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
+}
+
+/* --- data-handling section (company page) ------------------------------- */
+
+.band-lede {
+  max-width: 66ch;
+  margin: 0.9rem 0 0;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.data-points {
+  max-width: 66ch;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.data-points li {
+  position: relative;
+  margin: 0 0 0.9rem;
+  padding-left: 1.1rem;
+  font-size: var(--step--1);
+  line-height: 1.65;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.data-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.data-points b {
+  color: var(--ink);
+  font-weight: 620;
+}
+
+/* Pilot terms under the input/work/readout flow: states the engagement stage
+   plainly rather than leaving a price-shaped silence. */
+.pilot-terms {
+  max-width: 72ch;
+  margin: 1.6rem auto 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  font-size: var(--step--1);
+  line-height: 1.65;
+  color: var(--ink-3);
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.pilot-terms b {
+  color: var(--ink);
+  font-weight: 620;
+}
+
+/* The masthead is sticky, so an anchored section otherwise lands underneath
+   it. Applies to every in-page target on the site, not just one link. */
+:target,
+section[id],
+[id]:is(h2, h3) {
+  scroll-margin-top: 5.5rem;
+}
+
+@media (max-width: 40rem) {
+  :target,
+  section[id],
+  [id]:is(h2, h3) {
+    scroll-margin-top: 9rem;
+  }
+}
+
+/* Booking is the primary path for a pilot conversation; email stays beside it
+   so a quick question does not require scheduling a meeting. */
+.pilot-terms-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1.4rem;
+  /* Match .pilot-terms' rendered width so the buttons sit under the text they
+     belong to. Its 72ch resolves against a smaller font size, so the same
+     ch value here would overshoot. */
+  max-width: 38rem;
+  margin: 1.3rem auto 0;
 }

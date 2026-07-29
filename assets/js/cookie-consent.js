@@ -81,7 +81,8 @@
         var link = e.target.closest('a');
         if (!link) return;
         var href = link.getAttribute('href') || '';
-        if (href.indexOf('calendar.google.com/calendar/appointments') !== -1) {
+        if (href.indexOf('calendar.google.com/calendar/appointments') !== -1 ||
+            href.indexOf('calendar.app.google') !== -1) {
             window.gtag('event', 'book_demo_click', {
                 button_text: link.textContent.trim(),
                 page_location: window.location.pathname

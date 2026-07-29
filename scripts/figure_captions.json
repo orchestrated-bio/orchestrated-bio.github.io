@@ -1,0 +1,55 @@
+{
+  "clinical_cohort_flow.png": {
+    "title": "Public clinical and biopsy denominators are distinct.",
+    "evidence_type": "computed",
+    "caption": "",
+    "claim_scope": "Aggregate public cohort and specimen counts, patient-level public assay-availability reconciliation, and a reviewed source-column linkage for the same 15 post-hoc PFS-labeled biopsies; not independent validation, predictive utility, or overall-survival evidence.",
+    "sources": [
+      "NCT02203513",
+      "PMID 38555285",
+      "GSE249587"
+    ]
+  },
+  "replication_signal_robustness.png": {
+    "title": "The same-cohort replication signal is not robust to score definition.",
+    "evidence_type": "computed",
+    "caption": "Hedges g estimates and pointwise, unadjusted 95% stratified percentile-bootstrap intervals for seven score definitions anchored by KEGG hsa03030 and Reactome R-HSA-69306. Every interval includes no effect; p values are exact two-sided allocation tests.",
+    "claim_scope": "score-definition sensitivity within the same 15 patients",
+    "sources": [
+      "GSE249587_PROCESSED",
+      "MSIGDB_C2_CP_KEGG_V2023_1_HS",
+      "REACTOME_CURRENT_2026_06_21",
+      "PMID 38555285"
+    ]
+  },
+  "mechanism_evidence_chain.png": {
+    "title": "POLA1 perturbation supports an experiment, not a clinical combination.",
+    "evidence_type": "measured",
+    "caption": "Triplicate relative-growth measurements compare siPOLA1, prexasertib, and the combination in two parental HGSOC lineages and their acquired-resistant derivatives; the open diamond is a descriptive Bliss reference, not formal synergy.",
+    "claim_scope": "preclinical hypothesis support only; ST1926 mediation, synergy, exposure feasibility, tumor selectivity, and clinical benefit are not established",
+    "sources": [
+      "PMC10981752_SOURCE_DATA",
+      "PMID 38555285"
+    ]
+  },
+  "prexasertib_exposure_boundary.png": {
+    "title": "Public PK supports regimen-level exposure, not patient-level underexposure.",
+    "evidence_type": "measured",
+    "caption": "External phase-1 geometric mean AUC(0-72) with reported CV and PK n; the horizontal line is a xenograft-derived target, not a clinical efficacy threshold.",
+    "claim_scope": "Regimen-level exposure plausibility only; no participant-level underexposure or exposure-response inference.",
+    "sources": [
+      "PMC6247064",
+      "Prexasertib",
+      "PMID 38555285"
+    ]
+  },
+  "clinical_safety_burden.png": {
+    "title": "Severe prexasertib toxicity is predominantly hematologic.",
+    "evidence_type": "measured",
+    "caption": "Grade 3/4 treatment-related adverse events among 49 treated participants, with computed Wilson 95% intervals and reported dose-reduction, discontinuation, and on-treatment-death counts.",
+    "claim_scope": "Observed prexasertib monotherapy safety only; no exposure-toxicity, combination-safety, or therapeutic-index claim.",
+    "sources": [
+      "PMID 38555285"
+    ]
+  }
+}

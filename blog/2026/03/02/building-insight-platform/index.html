@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The story of building Insight, a conversational cancer-genomics platform that makes TCGA data accessible through plain-language questions." />
+    <meta name="theme-color" content="#111826" />
+    <title>Building Insight | Orchestrated Biosciences</title>
+    <link rel="canonical" href="https://orchestrated.bio/blog/2026/03/02/building-insight-platform/" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/atom+xml" title="Orchestrated Biosciences Blog" href="/blog/feed.xml" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="Building Insight: From PhD Thesis to Cancer Genomics Platform" />
+    <meta property="og:description" content="How a frustrated researcher's side project became a conversational platform for TCGA cancer data." />
+    <meta property="og:url" content="https://orchestrated.bio/blog/2026/03/02/building-insight-platform/" />
+    <meta property="og:image" content="https://orchestrated.bio/images/blog/building-insight.png" />
+    <meta property="article:published_time" content="2026-03-02T00:00:00-05:00" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/assets/css/company-site/base.css" />
+    <link rel="stylesheet" href="/assets/css/company-site/editorial.css" />
+    <script src="/assets/js/cookie-consent.js"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Building Insight: From PhD Thesis to Cancer Genomics Platform",
+        "description": "How a frustrated researcher's side project became a conversational platform for TCGA cancer data.",
+        "datePublished": "2026-03-02",
+        "dateModified": "2026-03-02",
+        "url": "https://orchestrated.bio/blog/2026/03/02/building-insight-platform/",
+        "image": "https://orchestrated.bio/images/blog/building-insight.png",
+        "author": {
+          "@type": "Person",
+          "name": "Alex Nesta, PhD",
+          "url": "https://www.linkedin.com/in/alex-v-nesta-phd-847547a5/"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Orchestrated Biosciences",
+          "url": "https://orchestrated.bio",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://orchestrated.bio/images/logo-icon.png"
+          }
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="/" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="/images/favicon.svg" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="/images/favicon-dark.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/">DrugAdopt</a>
+          <a href="/insight.html">Insight</a>
+          <a href="/report.html">Report</a>
+          <a href="/company.html">Company</a>
+          <a href="/blog/" aria-current="page">Blog</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="editorial-main">
+      <article class="post-page">
+        <div class="post-shell">
+          <header class="post-header">
+            <p class="post-kicker">Insight · Cancer genomics</p>
+            <div class="post-meta">
+              <time datetime="2026-03-02">March 2, 2026</time>
+              <div class="post-tags" aria-label="Topics">
+                <span class="post-tag">Engineering</span>
+                <span class="post-tag">Insight</span>
+                <span class="post-tag">Cancer genomics</span>
+              </div>
+            </div>
+            <h1>Building Insight: From PhD Thesis to Cancer Genomics Platform</h1>
+            <p class="post-subtitle">How a frustrated researcher’s side project became a conversational platform for TCGA cancer data.</p>
+            <div class="byline">
+              <span class="byline-mark" aria-hidden="true">AN</span>
+              <p>Alex Nesta, PhD<span>Founder and Chief Technology Officer</span></p>
+            </div>
+          </header>
+
+          <img class="post-image" src="/images/blog/building-insight.png" alt="Insight cancer-genomics analysis interface" />
+
+          <div class="prose">
+            <p>During my PhD, I spent countless hours writing custom R scripts just to answer basic questions about TCGA cancer data. “What’s the survival difference between TP53 mutant and wild-type patients in BRCA?” should have been a quick lookup. Instead, it was a multi-hour scripting exercise involving data download, parsing, filtering, survival analysis, and visualization.</p>
+
+            <p>That frustration planted the seed for what would become <strong>Insight</strong>, a platform where you type a question in plain English and get an answer with publication-quality figures in seconds.</p>
+
+            <h2>The problem</h2>
+
+            <p>TCGA is one of the most valuable public datasets in cancer research: multi-omic data for 33 cancer types across more than 11,000 patients. But accessing it programmatically means understanding the data model, writing API calls, merging disparate tables on patient barcodes, applying the right statistical methods, and generating interpretable visualizations.</p>
+
+            <p>In my own work the wrangling reliably took longer than the analysis: pulling the data, reconciling barcodes across assays, and getting to a matched cohort before a single statistical question could be asked. Insight exists to collapse that first part.</p>
+
+            <h2>What we built</h2>
+
+            <p>Insight is not a chatbot with a database connection. You ask a question in natural language; the system selects the cohort, runs the analysis in a separate computation layer, and returns the result with its methods, denominators, and limits attached.</p>
+
+            <p>The split matters: the model reads the question and writes the explanation, but every number comes out of the computation layer. The model does not produce figures from memory, so a wrong answer looks like a wrong query rather than a plausible fabrication.</p>
+
+            <h2>What’s coming on this blog</h2>
+
+            <p>This post is the first in a series where I’ll break down how we built Insight and the decisions behind it. Upcoming topics include:</p>
+
+            <ul>
+              <li><strong>Context engineering for scientific AI:</strong> how we keep a multi-tool agent focused and accurate using semantic routing, hard tool pruning, and phase-aware guidance.</li>
+              <li><strong>Making ClickHouse work for cancer genomics:</strong> why we chose a columnar database over traditional approaches, and how Arrow and Polars give us high-performance analysis across hundreds of studies.</li>
+              <li><strong>Scientific validation in agentic systems:</strong> gene grounding, statistical evidence checking, and why your AI should never report a p-value it did not compute.</li>
+              <li><strong>Model-agnostic architecture:</strong> using the best model for each task without binding the system to one provider.</li>
+              <li><strong>Building a scientific reviewer agent:</strong> an async critic that catches errors, suggests follow-ups, and builds persistent research memory across sessions.</li>
+            </ul>
+
+            <p>If you’re a researcher tired of writing boilerplate code to ask basic questions about cancer data, <a href="https://insight.orchestrated.bio">try Insight</a>. If you’re an engineer building AI for science, I hope this series gives you some useful patterns to steal.</p>
+
+            <p>Follow us on <a href="https://www.linkedin.com/company/orchestrated-biosciences">LinkedIn</a> for updates.</p>
+          </div>
+
+          <footer class="post-footer">
+            <a href="/blog/">← Back to the blog</a>
+          </footer>
+        </div>
+      </article>
+    </main>
+
+    <footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="editorial-foot-links" aria-label="Footer">
+          <a href="/privacy-policy.html">Privacy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
