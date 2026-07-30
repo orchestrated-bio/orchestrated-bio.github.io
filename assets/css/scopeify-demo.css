@@ -475,51 +475,65 @@
     color: #ee9a8e;
 }
 
-@media (min-width: 900px) {
-    .scopeify-is-submitted .scopeify-feedback-panel {
-        padding-bottom: 0.78rem;
-        padding-top: 0.78rem;
-    }
+.scopeify-is-submitted .scopeify-feedback-panel {
+    padding-bottom: 0.78rem;
+    padding-top: 0.78rem;
+}
 
+.scopeify-is-submitted .scopeify-feedback-list {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 0.08rem;
+}
+
+.scopeify-is-submitted .scopeify-feedback-item {
+    border-left: 1px solid var(--scope-rule);
+    border-top: 0;
+    display: block;
+    flex: 0 0 min(72vw, 13.5rem);
+    padding: 0.05rem 0.72rem;
+}
+
+.scopeify-is-submitted .scopeify-feedback-item:first-child {
+    border-left: 0;
+    padding-top: 0.05rem;
+}
+
+.scopeify-is-submitted .scopeify-feedback-name {
+    display: block;
+    font-size: 0.76rem;
+}
+
+.scopeify-is-submitted .scopeify-feedback-state {
+    font-size: 0.56rem;
+    margin-top: 0.22rem;
+}
+
+.scopeify-is-submitted .scopeify-feedback-message {
+    display: -webkit-box;
+    font-size: 0.74rem;
+    line-height: 1.35;
+    margin-top: 0.35rem;
+    max-height: 2.05rem;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.scopeify-is-submitted .scopeify-feedback-detail {
+    display: none;
+}
+
+@media (min-width: 780px) {
     .scopeify-is-submitted .scopeify-feedback-list {
+        display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 
     .scopeify-is-submitted .scopeify-feedback-item {
-        border-left: 1px solid var(--scope-rule);
-        border-top: 0;
-        display: block;
-        padding: 0.05rem 0.72rem;
-    }
-
-    .scopeify-is-submitted .scopeify-feedback-item:first-child {
-        border-left: 0;
-        padding-top: 0.05rem;
-    }
-
-    .scopeify-is-submitted .scopeify-feedback-name {
-        display: block;
-        font-size: 0.76rem;
-    }
-
-    .scopeify-is-submitted .scopeify-feedback-state {
-        font-size: 0.56rem;
-        margin-top: 0.22rem;
-    }
-
-    .scopeify-is-submitted .scopeify-feedback-message {
-        display: -webkit-box;
-        font-size: 0.74rem;
-        line-height: 1.35;
-        margin-top: 0.35rem;
-        max-height: 2.05rem;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-    }
-
-    .scopeify-is-submitted .scopeify-feedback-detail {
-        display: none;
+        flex: initial;
     }
 }
 
