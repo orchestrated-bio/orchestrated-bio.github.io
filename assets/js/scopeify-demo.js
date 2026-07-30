@@ -35,6 +35,8 @@
     const documentPanels = Array.from(document.querySelectorAll('.scopeify-document-panel'));
     const DEFAULT_SCOPEIFY_API_BASE = 'https://scopeify-api.orchestrated.bio';
     const LIVE_API_HOSTS = new Set(['orchestrated.bio', 'www.orchestrated.bio', 'orchestrated-bio.github.io']);
+    const SCOPEIFY_API_TIMEOUT_MS = 12000;
+    const SCOPEIFY_API_MAX_ATTEMPTS = 2;
     const scopeifyApiBase = getScopeifyApiBase();
 
     const reports = {
@@ -291,6 +293,10 @@
 
     function formatGeneratedDate(date) {
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+    }
+
+    function wait(ms) {
+        return new Promise(resolve => window.setTimeout(resolve, ms));
     }
 
     function createEmptyDataPreview() {
@@ -907,18 +913,54 @@
         downloadButton.disabled = false;
     }
 
+    async function fetchScopeifyJson(url, payload, timeoutMs) {
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                credentials: 'omit',
+                signal: controller.signal,
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) {
+                const error = new Error(`Scopeify API returned ${response.status}`);
+                error.status = response.status;
+                throw error;
+            }
+            return response.json();
+        } catch (error) {
+            if (error && error.name === 'AbortError') {
+                throw new Error(`Scopeify API timed out after ${Math.round(timeoutMs / 1000)} seconds`);
+            }
+            throw error;
+        } finally {
+            window.clearTimeout(timeoutId);
+        }
+    }
+
+    function shouldRetryScopeify(error) {
+        if (!error || !error.status) return true;
+        return error.status === 408 || error.status === 429 || error.status >= 500;
+    }
+
     async function postScopeify(endpoint, payload) {
         if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
-        const response = await fetch(`${scopeifyApiBase}${endpoint}`, {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            credentials: 'omit',
-            body: JSON.stringify(payload)
-        });
-        if (!response.ok) {
-            throw new Error(`Scopeify API returned ${response.status}`);
+
+        const url = `${scopeifyApiBase}${endpoint}`;
+        let lastError = null;
+        for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
+            try {
+                return await fetchScopeifyJson(url, payload, SCOPEIFY_API_TIMEOUT_MS);
+            } catch (error) {
+                lastError = error;
+                if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
+                await wait(450 * attempt);
+            }
         }
-        return response.json();
+
+        throw lastError || new Error('Scopeify API did not return a response');
     }
 
     function liveArchiveSources() {
@@ -1014,9 +1056,10 @@
         return {
             ...report,
             searchLabel: 'Demo search; live backend unavailable',
+            shortlistLabel: 'Static example shown after live-search recovery',
             criteria: [
-                'This local or fallback view is using the static demo inventory.',
-                message || 'The public backend did not return a live archive-search response.',
+                'Scopeify switched to the static example so the draft SOW remains usable.',
+                message || 'The public backend did not return a live archive-search response after retry.',
                 ...report.criteria
             ]
         };
