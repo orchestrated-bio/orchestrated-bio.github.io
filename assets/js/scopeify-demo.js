@@ -323,7 +323,9 @@
 
     function moveShellToTop() {
         if (!shell) return;
-        const top = Math.max(0, shell.getBoundingClientRect().top + window.pageYOffset - 16);
+        const masthead = document.querySelector('.masthead');
+        const mastheadOffset = masthead ? masthead.getBoundingClientRect().height : 0;
+        const top = Math.max(0, shell.getBoundingClientRect().top + window.pageYOffset - mastheadOffset - 16);
         window.scrollTo({ top, behavior: 'smooth' });
     }
 
