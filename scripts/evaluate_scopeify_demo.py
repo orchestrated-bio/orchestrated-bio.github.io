@@ -226,6 +226,8 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "scopeify-data-files",
             "scopeify-report",
             "scopeify-document-tabs",
+            "scopeify-feedback-progress",
+            "scopeify-feedback-list",
             "scopeify-panel-sow",
             "scopeify-panel-inventory",
             "scopeify-pdf-canvas",
@@ -303,6 +305,30 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "Download dataset inventory + estimate CSV"
         ],
         ["include", "script"]
+    )
+
+    require_terms(
+        checks,
+        sources,
+        "client_confidence_agent",
+        "scoping_feedback_workflow",
+        "Submit starts a scoping workflow with progress feedback before the SOW is treated as ready.",
+        [
+            "Scoping feedback",
+            "scopeify-feedback-progress",
+            "scopeify-feedback-list",
+            "draft-jobs",
+            "runDraftJob",
+            "renderJobProgress",
+            "Project route",
+            "Browser data preview",
+            "Public archive screen",
+            "Statement of Work",
+            "Human review",
+            "queued",
+            "Checking scope"
+        ],
+        ["include", "script", "styles"]
     )
 
     include = sources.get("include", "")
