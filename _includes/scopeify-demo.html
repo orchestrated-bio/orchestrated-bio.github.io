@@ -7,9 +7,9 @@
                 <p class="scopeify-subtitle">A natural-language scoping demo for prospective bioinformatics projects: evidence search, dataset triage, reuse risks, and a draft statement of work.</p>
             </div>
             <dl class="scopeify-output-markers" aria-label="Scopeify output summary">
-                <div><dt>Output</dt><dd>Inventory + SOW</dd></div>
-                <div><dt>Sources</dt><dd>PubMed, GEO, SRA, bioRxiv</dd></div>
-                <div><dt>Review</dt><dd>LLM-assisted, audit logged</dd></div>
+                <div><dt>Output</dt><dd>SOW + estimate</dd></div>
+                <div><dt>Sources</dt><dd>PubMed, GEO, SRA, ENA, GSA/CNSA</dd></div>
+                <div><dt>Review</dt><dd>Human-ready brief</dd></div>
             </dl>
         </header>
 
@@ -23,6 +23,13 @@
                 <label for="scopeify-hypothesis">Plain-language hypothesis</label>
                 <textarea id="scopeify-hypothesis" name="hypothesis" rows="9">Can public transcriptomics data test whether GLP-1 receptor agonists alter reward circuitry after cocaine exposure in mouse brain?</textarea>
 
+                <label for="scopeify-notes">Comments, constraints, or desired outputs</label>
+                <textarea id="scopeify-notes" name="notes" rows="5" placeholder="Example: We want a quick feasibility read before grant submission. Please flag whether raw reprocessing is worth the extra cost."></textarea>
+
+                <label for="scopeify-data-files">Optional browser-side data scan</label>
+                <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.xlsx,.xls,.h5ad,.rds" multiple>
+                <p class="scopeify-file-note">Demo scans small CSV, TSV, TXT, and JSON files in your browser for filenames, formats, headings, primitive types, missingness, candidate design fields, and preview-level risks. Production Scopeify would validate that structured DataPreview before sending approved summaries to a small backend LLM for scoping review.</p>
+
                 <div class="scopeify-actions">
                     <button type="submit" class="scopeify-primary">Generate brief</button>
                     <button type="button" class="scopeify-text-button" id="scopeify-example">Try oncology example</button>
@@ -31,9 +38,9 @@
                 <section class="scopeify-method" aria-label="Production method">
                     <p class="scopeify-panel-label">Production method</p>
                     <ul>
-                        <li>Pydantic AI plans the search and validates the final brief against typed schemas.</li>
-                        <li>NCBI, PubMed, GEO, SRA, and bioRxiv calls run server-side; API keys never ship to the browser.</li>
-                        <li>Every delivered workbook includes query logs, screened records, selection rationale, and excluded evidence.</li>
+                        <li>Pydantic AI plans the search and validates the table preview, source plan, SOW draft, and workbook rows against typed schemas.</li>
+                        <li>NCBI, PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv calls run server-side; API keys never ship to the browser.</li>
+                        <li>Every delivered workbook includes query logs, screened records, selection rationale, excluded evidence, estimated hours, and expected outputs.</li>
                     </ul>
                 </section>
             </form>
@@ -47,68 +54,113 @@
                     <span class="scopeify-status-pill" id="scopeify-status-pill">Example brief</span>
                 </header>
 
-                <section class="scopeify-verdict" aria-labelledby="scopeify-verdict-heading">
-                    <div>
-                        <p class="scopeify-section-label" id="scopeify-verdict-heading">Feasibility decision</p>
-                        <strong id="scopeify-decision">Conditional public-data path</strong>
-                        <p id="scopeify-summary">Scopeify will summarize whether public data can answer the hypothesis, what was searched, which records were selected, and what Orchestrated.bio would do next.</p>
-                    </div>
-                    <dl class="scopeify-metrics" id="scopeify-metrics">
-                        <div><dt>Found</dt><dd>0</dd></div>
-                        <div><dt>Screened</dt><dd>0</dd></div>
-                        <div><dt>Selected</dt><dd>0</dd></div>
-                        <div><dt>Confidence</dt><dd>Pending</dd></div>
-                    </dl>
-                </section>
+                <div class="scopeify-document-tabs" role="tablist" aria-label="Scopeify generated documents">
+                    <button type="button" class="scopeify-document-tab is-active" id="scopeify-tab-sow" data-scopeify-tab="sow" role="tab" aria-selected="true" aria-controls="scopeify-panel-sow">Statement of Work</button>
+                    <button type="button" class="scopeify-document-tab" id="scopeify-tab-inventory" data-scopeify-tab="inventory" role="tab" aria-selected="false" aria-controls="scopeify-panel-inventory">Dataset Inventory</button>
+                </div>
 
-                <section class="scopeify-report-section scopeify-sow" aria-labelledby="scopeify-sow-heading">
-                    <div class="scopeify-section-heading">
-                        <div>
-                            <p class="scopeify-section-label" id="scopeify-sow-heading">Draft statement of work</p>
-                            <h3 id="scopeify-sow-title">Feasibility package</h3>
+                <div class="scopeify-pdf-canvas">
+                    <div class="scopeify-document-panel is-active" id="scopeify-panel-sow" role="tabpanel" aria-labelledby="scopeify-tab-sow">
+                        <div class="scopeify-pdf-page scopeify-sow-page">
+                            <section class="scopeify-report-section scopeify-sow" aria-labelledby="scopeify-sow-heading">
+                                <div class="scopeify-section-heading">
+                                    <div>
+                                        <p class="scopeify-section-label" id="scopeify-sow-heading">Draft statement of work</p>
+                                        <h3 id="scopeify-sow-title">Statement of Work: Feasibility package</h3>
+                                    </div>
+                                    <span id="scopeify-sow-window">Generated from search screen</span>
+                                </div>
+                                <div class="scopeify-sow-document">
+                                    <div class="scopeify-sow-meta" id="scopeify-sow-meta" aria-label="SOW metadata"></div>
+                                    <div class="scopeify-sow-summary">
+                                        <div>
+                                            <strong>Objective</strong>
+                                            <p id="scopeify-sow-objective">Define the consulting question, available evidence, expected work products, and limits of the preliminary scope.</p>
+                                        </div>
+                                        <div>
+                                            <strong>Scope decision</strong>
+                                            <p id="scopeify-sow-decision">Pending generated scope recommendation.</p>
+                                        </div>
+                                    </div>
+                                    <div class="scopeify-sow-estimate">
+                                        <div>
+                                            <span>Estimated effort</span>
+                                            <strong id="scopeify-estimate-hours">Pending</strong>
+                                            <p id="scopeify-estimate-rationale">Scopeify estimates hours from search coverage, candidate datasets, metadata completeness, and likely analysis path.</p>
+                                        </div>
+                                        <div>
+                                            <strong>Expected deliverables</strong>
+                                            <ul id="scopeify-outputs-list"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="scopeify-sow-grid" id="scopeify-sow-grid" role="table" aria-label="Statement of work phases"></div>
+                                    <div class="scopeify-sow-inputs">
+                                        <div>
+                                            <strong>Client comments reflected</strong>
+                                            <p id="scopeify-client-notes">No additional notes entered yet.</p>
+                                        </div>
+                                        <div>
+                                            <strong>Browser-side data scan</strong>
+                                            <p id="scopeify-data-review">No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.</p>
+                                        </div>
+                                    </div>
+                                    <div class="scopeify-sow-terms">
+                                        <div>
+                                            <strong>Assumptions and client inputs</strong>
+                                            <ul id="scopeify-sow-assumptions"></ul>
+                                        </div>
+                                        <div>
+                                            <strong>Exclusions and change controls</strong>
+                                            <ul id="scopeify-sow-exclusions"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
-                        <span id="scopeify-sow-window">Generated from search screen</span>
                     </div>
-                    <div class="scopeify-sow-grid" id="scopeify-sow-grid"></div>
-                </section>
 
-                <section class="scopeify-report-section" aria-labelledby="scopeify-audit-heading">
-                    <div class="scopeify-section-heading">
-                        <div>
-                            <p class="scopeify-section-label" id="scopeify-audit-heading">Search audit</p>
-                            <h3>What was searched and why</h3>
-                        </div>
-                        <span id="scopeify-last-checked">Demo search</span>
-                    </div>
-                    <div class="scopeify-audit-table" id="scopeify-audit-table" role="table" aria-label="Source coverage"></div>
-                    <ul class="scopeify-criteria" id="scopeify-criteria-list"></ul>
-                </section>
+                    <div class="scopeify-document-panel" id="scopeify-panel-inventory" role="tabpanel" aria-labelledby="scopeify-tab-inventory" hidden>
+                        <div class="scopeify-pdf-page scopeify-inventory-page">
+                            <section class="scopeify-report-section scopeify-inventory-intro" aria-labelledby="scopeify-inventory-heading">
+                                <div class="scopeify-section-heading">
+                                    <div>
+                                        <p class="scopeify-section-label" id="scopeify-inventory-heading">Dataset inventory</p>
+                                        <h3>Search appendix and project estimate</h3>
+                                    </div>
+                                    <span id="scopeify-last-checked">Demo search</span>
+                                </div>
+                                <p class="scopeify-inventory-note">This appendix is separate from the SOW draft. Production Scopeify would export the full screened inventory, excluded evidence, metadata checks, and estimate assumptions as workbook tabs.</p>
+                            </section>
 
-                <section class="scopeify-report-section" aria-labelledby="scopeify-selected-heading">
-                    <div class="scopeify-section-heading">
-                        <div>
-                            <p class="scopeify-section-label" id="scopeify-selected-heading">Selected evidence</p>
-                            <h3>Dataset and paper shortlist</h3>
-                        </div>
-                        <span id="scopeify-shortlist-count">0 records selected</span>
-                    </div>
-                    <div class="scopeify-evidence-list" id="scopeify-evidence-list"></div>
-                </section>
+                            <section class="scopeify-report-section" aria-labelledby="scopeify-audit-heading">
+                                <div class="scopeify-section-heading">
+                                    <div>
+                                        <p class="scopeify-section-label" id="scopeify-audit-heading">Search appendix</p>
+                                        <h3>Sources screened</h3>
+                                    </div>
+                                </div>
+                                <div class="scopeify-audit-table" id="scopeify-audit-table" role="table" aria-label="Source coverage"></div>
+                                <ul class="scopeify-criteria" id="scopeify-criteria-list"></ul>
+                            </section>
 
-                <section class="scopeify-report-section" aria-labelledby="scopeify-boundary-heading">
-                    <div class="scopeify-section-heading">
-                        <div>
-                            <p class="scopeify-section-label" id="scopeify-boundary-heading">Evidence boundary</p>
-                            <h3>Considered but not selected</h3>
+                            <section class="scopeify-report-section" aria-labelledby="scopeify-selected-heading">
+                                <div class="scopeify-section-heading">
+                                    <div>
+                                        <p class="scopeify-section-label" id="scopeify-selected-heading">Workbook preview</p>
+                                        <h3>Dataset inventory and project estimates</h3>
+                                    </div>
+                                    <span id="scopeify-shortlist-count">0 records selected</span>
+                                </div>
+                                <div class="scopeify-evidence-list" id="scopeify-evidence-list"></div>
+                            </section>
                         </div>
                     </div>
-                    <div class="scopeify-boundary-list" id="scopeify-boundary-list"></div>
-                </section>
+                </div>
 
                 <footer class="scopeify-report-actions">
-                    <button type="button" class="scopeify-download" id="scopeify-download">Download Excel-ready CSV</button>
-                    <a class="scopeify-consult-link" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Discuss this scope</a>
-                    <span id="scopeify-download-note">Example inventory is ready.</span>
+                    <a class="scopeify-consult-link scopeify-consult-primary" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Schedule consultation</a>
+                    <button type="button" class="scopeify-download" id="scopeify-download">Download dataset inventory + estimate CSV</button>
+                    <button type="button" class="scopeify-text-button scopeify-edit-scope" id="scopeify-edit">Edit intake</button>
                 </footer>
             </article>
         </div>
