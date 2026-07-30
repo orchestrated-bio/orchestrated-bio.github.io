@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "purpose": "Rendered browser scenarios for the Scopeify demo. These are used to exercise actual form submission, report/tab rendering, and browser-side file scanning across realistic project questions and edge cases.",
+  "scenario_sources": [
+    {
+      "id": "ncbi_geo_datasets",
+      "name": "NCBI GEO DataSets",
+      "url": "https://www.ncbi.nlm.nih.gov/gds",
+      "basis": "GEO DataSets is searchable by keywords, organism, dataset type, authors, Series, and Platform records. It is the main source for expression-reuse scenarios."
+    },
+    {
+      "id": "ncbi_geo",
+      "name": "NCBI Gene Expression Omnibus",
+      "url": "https://www.ncbi.nlm.nih.gov/geo/",
+      "basis": "GEO accepts array- and sequence-based functional genomics data and supports query/download workflows."
+    },
+    {
+      "id": "ncbi_sra",
+      "name": "NCBI Sequence Read Archive",
+      "url": "https://www.ncbi.nlm.nih.gov/sra",
+      "basis": "SRA is the raw high-throughput sequencing archive used for reprocessing, reproducibility, and accession/run metadata scenarios."
+    },
+    {
+      "id": "ena_browser",
+      "name": "European Nucleotide Archive",
+      "url": "https://www.ebi.ac.uk/ena/browser/",
+      "basis": "ENA provides cross-archive nucleotide sequencing records and raw read metadata, useful for accession mirror checks."
+    },
+    {
+      "id": "ena_advanced_search",
+      "name": "ENA Advanced Search documentation",
+      "url": "https://ena-docs.readthedocs.io/en/latest/retrieval/programmatic-access/advanced-search.html",
+      "basis": "ENA documents programmatic examples that can seed future automated search tests."
+    },
+    {
+      "id": "biorxiv_api",
+      "name": "bioRxiv API",
+      "url": "https://api.biorxiv.org/",
+      "basis": "bioRxiv exposes preprint metadata and publication linkage, useful for preprint and recent-evidence scenarios."
+    },
+    {
+      "id": "ngdc_gsa",
+      "name": "NGDC Genome Sequence Archive",
+      "url": "https://ngdc.cncb.ac.cn/databasecommons/database/id/1790",
+      "basis": "GSA archives raw sequence reads and public metadata, useful for China-archive search and negative-search logging scenarios."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "default_neuro_glp1_sow",
+      "category": "public transcriptomics",
+      "edge_case": false,
+      "viewport": "desktop",
+      "hypothesis": "Can public transcriptomics data test whether GLP-1 receptor agonists alter reward circuitry after cocaine exposure in mouse brain?",
+      "notes": "",
+      "expected_route": "neuro",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: GLP-1 / cocaine public-data feasibility",
+        "18-28 hours",
+        "Generation date",
+        "Project window",
+        "Expected deliverables"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850",
+        "PRJNA867708",
+        "PMID 26072178",
+        "PMID 40009667"
+      ],
+      "must_not_find_terms": [
+        "FEASIBILITY DECISION",
+        "FOUND 127",
+        "SCREENED 39",
+        "SELECTED 4",
+        "BALLPARK ESTIMATE",
+        "Medium confidence estimate",
+        "Download Excel-ready CSV",
+        "Excel-ready inventory is ready.",
+        "Primary dataset",
+        "Mechanistic support"
+      ]
+    },
+    {
+      "id": "oncology_melanoma_checkpoint",
+      "category": "public oncology transcriptomics",
+      "edge_case": false,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "notes": "Need a practical preliminary estimate before deciding whether to fund a larger analysis.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: melanoma anti-PD-1 biomarker feasibility",
+        "24-40 hours",
+        "response labels",
+        "Generation date"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061",
+        "GSE78220",
+        "GSE168204",
+        "SRP094781",
+        "SRP070710"
+      ],
+      "must_not_find_terms": [
+        "Download Excel-ready CSV",
+        "Primary dataset",
+        "Mechanistic support"
+      ]
+    },
+    {
+      "id": "oncology_british_spelling_tumour",
+      "category": "routing variation",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumour RNA-seq data support a checkpoint inhibitor response signature in metastatic melanoma?",
+      "notes": "Please keep this as a SOW-style feasibility brief.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: melanoma anti-PD-1 biomarker feasibility",
+        "24-40 hours"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061",
+        "GSE78220"
+      ]
+    },
+    {
+      "id": "oncology_uppercase_pd1",
+      "category": "routing variation",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "MELANOMA PD1 RESPONSE: can public RNA-seq cohorts support an immune biomarker scope?",
+      "notes": "",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: melanoma anti-PD-1 biomarker feasibility",
+        "24-40 hours"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061",
+        "SRP094781"
+      ]
+    },
+    {
+      "id": "empty_hypothesis",
+      "category": "empty input",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "",
+      "notes": "",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "Blank intake currently falls back to the GLP-1 example instead of asking for a project question.",
+      "must_find_sow_terms": [
+        "Statement of Work: GLP-1 / cocaine public-data feasibility",
+        "18-28 hours"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850"
+      ]
+    },
+    {
+      "id": "long_unbroken_hypothesis",
+      "category": "layout stress",
+      "edge_case": true,
+      "viewport": "mobile",
+      "hypothesis": "Can public transcriptomics data answer whether GLP1RA_EXENDIN4_COCONDITIONED_NUCLEUS_ACCUMBENS_REWARD_CIRCUIT_TRANSCRIPTOMIC_STATE_WITH_SUPER_LONG_ACCESSION_STYLE_TOKEN_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 shifts after cocaine exposure in mouse brain?",
+      "notes": "Keep the SOW concise and do not let long tokens break the PDF-style window.",
+      "expected_route": "neuro",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: GLP-1 / cocaine public-data feasibility",
+        "Client comments reflected"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850"
+      ]
+    },
+    {
+      "id": "long_client_notes",
+      "category": "layout stress",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "notes": "We need a concise SOW for a prospective sponsor. Please assume a grant deadline, a fixed budget ceiling, matrix-first analysis, no regulatory claims, an optional raw-data checkpoint, and a final client review meeting with exported tables and a short slide deck.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "must_find_sow_terms": [
+        "Statement of Work: melanoma anti-PD-1 biomarker feasibility",
+        "Client comments reflected",
+        "grant deadline",
+        "fixed budget ceiling"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061"
+      ]
+    },
+    {
+      "id": "low_n_csv_with_response_and_batch",
+      "category": "browser-side data scan",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "notes": "Also scan the local metadata headings before drafting the SOW.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "files": [
+        {
+          "name": "pilot_response_metadata.csv",
+          "kind": "text",
+          "content": "sample_id,response,batch,condition\nS1,R,B1,treatment\nS2,NR,B1,treatment\nS3,R,B2,control\nS4,NR,B2,control\n",
+          "must_find_scan_terms": [
+            "low n signal in preview (4 rows)",
+            "candidate outcome fields",
+            "batch-effect fields to review",
+            "sample identifiers appear present"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "Browser-side data scan",
+        "low n signal in preview (4 rows)",
+        "candidate outcome fields",
+        "batch-effect fields to review"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061"
+      ]
+    },
+    {
+      "id": "missing_outcome_tsv",
+      "category": "browser-side data scan",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public transcriptomics data scope a small pilot RNA-seq experiment?",
+      "notes": "Check whether the local metadata looks analyzable.",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "The file scan correctly flags metadata issues, but the SOW content still falls back to the GLP-1 example for a generic RNA-seq project.",
+      "files": [
+        {
+          "name": "metadata_without_outcome.tsv",
+          "kind": "text",
+          "content": "sample_id\trun_id\tlibrary_lane\nS1\tSRR000001\tL001\nS2\tSRR000002\tL001\nS3\tSRR000003\tL002\n",
+          "must_find_scan_terms": [
+            "no obvious response or outcome field",
+            "batch-effect fields to review",
+            "sample identifiers appear present"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "no obvious response or outcome field",
+        "batch-effect fields to review"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850"
+      ]
+    },
+    {
+      "id": "invalid_json_metadata",
+      "category": "browser-side data scan",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "notes": "The client has a malformed metadata export.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "files": [
+        {
+          "name": "broken_metadata.json",
+          "kind": "text",
+          "content": "{\"sample_id\":\"S1\",\"response\":",
+          "must_find_scan_terms": [
+            "JSON selected, but the preview could not parse it cleanly"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "JSON selected, but the preview could not parse it cleanly",
+        "Statement of Work: melanoma anti-PD-1 biomarker feasibility"
+      ],
+      "must_find_inventory_terms": [
+        "GSE78220"
+      ]
+    },
+    {
+      "id": "binary_h5ad_metadata_only",
+      "category": "browser-side data scan",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public single-cell RNA-seq data help benchmark a patient cohort?",
+      "notes": "The local file is an h5ad object; inspect only browser-safe metadata.",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "The browser-side binary-file message is correct, but the SOW content still falls back to the GLP-1 example for a single-cell project.",
+      "files": [
+        {
+          "name": "client_matrix.h5ad",
+          "kind": "binary",
+          "bytes": 2048,
+          "must_find_scan_terms": [
+            "client_matrix.h5ad",
+            "selected. Demo scans file name, format, and size only"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "client_matrix.h5ad",
+        "selected. Demo scans file name, format, and size only"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850"
+      ]
+    },
+    {
+      "id": "messy_header_semantic_mapping",
+      "category": "arbitrary header mapping",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "notes": "The client metadata has lab shorthand and arbitrary headings. Infer likely roles before scoping.",
+      "expected_route": "oncology",
+      "expected_product_state": "pass_current_demo",
+      "files": [
+        {
+          "name": "messy_client_metadata.csv",
+          "kind": "text",
+          "content": "pt_id,tx_arm,seqrun,lib_lane,best_resp,disease_dx\nP001,pembro,RUN_A,L001,CR,melanoma\nP002,pembro,RUN_A,L001,PD,melanoma\nP003,nivo,RUN_B,L002,PR,melanoma\nP004,nivo,RUN_B,L002,SD,melanoma\nP005,ipi_nivo,RUN_C,L003,PD,melanoma\nP006,ipi_nivo,RUN_C,L003,CR,melanoma\n",
+          "must_find_scan_terms": [
+            "sample identifiers appear present (pt_id)",
+            "candidate outcome fields: best_resp, disease_dx",
+            "candidate group/treatment fields: tx_arm",
+            "batch-effect fields to review: seqrun, lib_lane",
+            "LLM-ready table preview validated"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "sample identifiers appear present (pt_id)",
+        "candidate outcome fields: best_resp, disease_dx",
+        "candidate group/treatment fields: tx_arm",
+        "batch-effect fields to review: seqrun, lib_lane",
+        "Structured DataPreview"
+      ],
+      "must_find_inventory_terms": [
+        "GSE91061"
+      ]
+    },
+    {
+      "id": "duplicate_ids_single_group_design",
+      "category": "table validation",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public transcriptomics data scope a small pilot RNA-seq experiment?",
+      "notes": "Check whether the selected metadata has enough design information for a real comparison.",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "Table validation flags duplicate IDs and a single-group design, but the current SOW route still falls back to the GLP-1 example for a generic RNA-seq project.",
+      "files": [
+        {
+          "name": "dirty_design_metadata.csv",
+          "kind": "text",
+          "content": "sample_id,tx_arm,batch\nS1,drug,A\nS1,drug,A\nS2,drug,B\n",
+          "must_find_scan_terms": [
+            "duplicate sample identifiers detected in sample_id",
+            "single group design detected in tx_arm",
+            "batch-effect fields to review: batch"
+          ]
+        }
+      ],
+      "must_find_sow_terms": [
+        "duplicate sample identifiers detected in sample_id",
+        "single group design detected in tx_arm",
+        "batch-effect fields to review: batch"
+      ],
+      "must_find_inventory_terms": [
+        "GSE210850"
+      ]
+    },
+    {
+      "id": "bulk_rnaseq_de_fallback_gap",
+      "category": "unsupported canned analysis",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public bulk RNA-seq data support a treatment versus control differential expression and pathway enrichment scope?",
+      "notes": "Expected deliverables should include QC, DE analysis, enrichment, Quarto, xlsx tables, and review meeting.",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "Bulk RNA-seq differential expression should route to its own canned SOW, but the current static demo falls back to the GLP-1 example.",
+      "must_find_sow_terms": [
+        "Statement of Work: GLP-1 / cocaine public-data feasibility",
+        "18-28 hours"
+      ],
+      "should_eventually_find_terms": [
+        "FastQC",
+        "MultiQC",
+        "DESeq2",
+        "pathway enrichment"
+      ]
+    },
+    {
+      "id": "gwas_controlled_access_gap",
+      "category": "unsupported canned analysis",
+      "edge_case": true,
+      "viewport": "desktop",
+      "hypothesis": "Can public GWAS summary statistics and controlled-access genotype data support a risk equation for MASLD progression?",
+      "notes": "Flag ancestry, phenotype definition, data-use agreements, and controlled-access constraints.",
+      "expected_route": "neuro",
+      "expected_product_state": "known_gap",
+      "known_gap": "GWAS/risk-equation scoping needs a distinct controlled-access SOW; the current static demo falls back to the GLP-1 example.",
+      "must_find_sow_terms": [
+        "Statement of Work: GLP-1 / cocaine public-data feasibility"
+      ],
+      "should_eventually_find_terms": [
+        "genotype QC",
+        "population structure",
+        "controlled-access",
+        "risk equation"
+      ]
+    }
+  ]
+}

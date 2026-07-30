@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "purpose": "Agentic QA fixtures for the Scopeify static demo. Implemented cases must be visible in the current frontend. Planned cases define next workflow coverage without pretending those capabilities exist yet.",
+  "agents": [
+    {
+      "id": "source_discovery_agent",
+      "role": "Checks whether the brief shows which public archives were searched, how many records were found/screened/selected, and why records were selected or excluded."
+    },
+    {
+      "id": "sow_quote_agent",
+      "role": "Checks whether the generated output looks like a client-facing statement of work with effort, expected outputs, timeline/window, and quote-like deliverables."
+    },
+    {
+      "id": "browser_data_review_agent",
+      "role": "Checks whether selected local files are described as browser-side metadata scans and whether preview-level risks are surfaced."
+    },
+    {
+      "id": "visual_formatting_agent",
+      "role": "Checks whether the page keeps the dark site theme while rendering the submitted scope as a light PDF-style document window."
+    },
+    {
+      "id": "client_confidence_agent",
+      "role": "Checks whether the user can understand comprehensiveness, selected evidence, excluded evidence, data availability, and the next consultation step."
+    },
+    {
+      "id": "roadmap_agent",
+      "role": "Tracks planned Scopeify workflows that should become implemented fixtures once the backend/search skills exist."
+    }
+  ],
+  "cases": [
+    {
+      "id": "neuro_glp1_indirect",
+      "agent": "source_discovery_agent",
+      "implemented": true,
+      "query": "Can public transcriptomics data test whether GLP-1 receptor agonists alter reward circuitry after cocaine exposure in mouse brain?",
+      "expected_decision": "Promising, but indirect",
+      "expected_hours": "18-28 hours",
+      "must_find_terms": [
+        "Promising, but indirect",
+        "18-28 hours",
+        "GSE210850",
+        "PRJNA867708",
+        "PMID 26072178",
+        "PMID 40009667",
+        "direct-match absence",
+        "No claim that GLP-1 agonist exposure and cocaine exposure are directly represented in the same public transcriptomic cohort"
+      ]
+    },
+    {
+      "id": "oncology_checkpoint_public_data",
+      "agent": "source_discovery_agent",
+      "implemented": true,
+      "query": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
+      "expected_decision": "Strong public-data path",
+      "expected_hours": "24-40 hours",
+      "must_find_terms": [
+        "Strong public-data path",
+        "24-40 hours",
+        "GSE91061",
+        "GSE78220",
+        "GSE168204",
+        "SRP094781",
+        "SRP070710",
+        "response labels"
+      ]
+    },
+    {
+      "id": "standard_sow_deliverables",
+      "agent": "sow_quote_agent",
+      "implemented": true,
+      "query": "Any generated Scopeify brief should include the standard consulting deliverables.",
+      "expected_decision": "SOW includes practical consulting outputs.",
+      "expected_hours": "Scenario dependent",
+      "must_find_terms": [
+        "Draft statement of work",
+        "Statement of Work:",
+        "Prepared for",
+        "Prepared by",
+        "Preliminary Statement of Work",
+        "Generation date",
+        "Project window",
+        "Phase",
+        "Workstream",
+        "Expected output",
+        "Assumptions and client inputs",
+        "Exclusions and change controls",
+        "Estimated effort",
+        "Nextflow pipeline",
+        "Quarto HTML",
+        "Slide deck plus review meeting",
+        "Exported XLSX",
+        "Dataset Inventory",
+        "Download dataset inventory + estimate CSV",
+        "estimated_hours",
+        "expected_outputs"
+      ]
+    },
+    {
+      "id": "browser_side_metadata_scan",
+      "agent": "browser_data_review_agent",
+      "implemented": true,
+      "query": "Selected local metadata should be inspected without treating the files as uploaded data.",
+      "expected_decision": "Preview-level risks are described in the scope.",
+      "expected_hours": "Not applicable",
+      "must_find_terms": [
+        "Optional browser-side data scan",
+        "browser_side_data_scan",
+        "low n signal",
+        "candidate outcome fields",
+        "no obvious response or outcome field",
+        "batch-effect fields to review",
+        "sample identifiers appear present"
+      ]
+    },
+    {
+      "id": "typed_data_preview_bridge",
+      "agent": "browser_data_review_agent",
+      "implemented": true,
+      "query": "Browser-scanned table structure should be converted into a compact typed object before any backend LLM scoping review.",
+      "expected_decision": "The demo exposes a DataPreview bridge that the private backend can validate before Pydantic AI uses it.",
+      "expected_hours": "Not applicable",
+      "must_find_terms": [
+        "scopeify.client_data_preview.v1",
+        "scopeifyLatestDataPreview",
+        "dataset.previewJson",
+        "LLM-ready table preview validated",
+        "inferred_type",
+        "inferred_role",
+        "role_confidence",
+        "missing_rate",
+        "unique_values_preview",
+        "llm_ready_data_preview_json"
+      ]
+    },
+    {
+      "id": "submitted_pdf_window",
+      "agent": "visual_formatting_agent",
+      "implemented": true,
+      "query": "After submit, hide the intake and render the SOW in a PDF-style window without losing the dark site theme.",
+      "expected_decision": "Submitted state is document-first.",
+      "expected_hours": "Not applicable",
+      "must_find_terms": [
+        "scopeify-is-submitted",
+        "scopeify-document-tabs",
+        "scopeify-panel-sow",
+        "scopeify-panel-inventory",
+        "scopeify-pdf-canvas",
+        "scopeify-pdf-page",
+        "color-scheme: light",
+        "max-width: 8.5in",
+        "overflow: auto"
+      ]
+    },
+    {
+      "id": "consultation_next_step",
+      "agent": "client_confidence_agent",
+      "implemented": true,
+      "query": "The generated output should make the next business action obvious.",
+      "expected_decision": "Consultation and spreadsheet export are visible.",
+      "expected_hours": "Not applicable",
+      "must_find_terms": [
+        "Schedule consultation",
+        "Download dataset inventory + estimate CSV",
+        "Dataset Inventory",
+        "Search appendix",
+        "Dataset inventory and project estimates",
+        "scopeify-inventory-table"
+      ]
+    },
+    {
+      "id": "quote_c_elegans_pfas_bulk_rnaseq",
+      "agent": "roadmap_agent",
+      "implemented": false,
+      "query": "Scope a PFAS-related whole-worm C. elegans RNA-seq project with optional extra comparisons.",
+      "expected_decision": "Future fixture should mirror the UTEP quote structure.",
+      "expected_hours": "Expected to include line items and optional comparisons.",
+      "must_find_terms": [
+        "PFAS-related whole-worm C. elegans",
+        "optional extra comparison",
+        "Experimental design and scoping",
+        "Data report assembly"
+      ]
+    },
+    {
+      "id": "bulk_rna_seq_de_canned_analysis",
+      "agent": "roadmap_agent",
+      "implemented": false,
+      "query": "Scope a bulk RNA-seq differential expression feasibility package.",
+      "expected_decision": "Future fixture should include canned bulk RNA-seq differential expression modules.",
+      "expected_hours": "Expected to include QC, alignment/quantification, EDA, differential expression, enrichment, and review meeting assumptions.",
+      "must_find_terms": [
+        "bulk RNA-seq canned analysis",
+        "FastQC",
+        "MultiQC",
+        "DESeq2",
+        "edgeR",
+        "differential expression",
+        "pathway enrichment"
+      ]
+    },
+    {
+      "id": "single_cell_canned_analysis",
+      "agent": "roadmap_agent",
+      "implemented": false,
+      "query": "Scope a single-cell RNA-seq feasibility project from public data.",
+      "expected_decision": "Future fixture should include canned scRNA-seq analysis modules.",
+      "expected_hours": "Expected to include matrix-first and raw reprocessing options.",
+      "must_find_terms": [
+        "single-cell RNA-seq canned analysis",
+        "cell type annotation",
+        "doublet detection",
+        "integration and batch correction"
+      ]
+    },
+    {
+      "id": "gwas_canned_analysis",
+      "agent": "roadmap_agent",
+      "implemented": false,
+      "query": "Scope a GWAS or polygenic risk analysis feasibility project.",
+      "expected_decision": "Future fixture should include cohort access, phenotype, ancestry, and QC constraints.",
+      "expected_hours": "Expected to include controlled-access risk and data-transfer assumptions.",
+      "must_find_terms": [
+        "GWAS canned analysis",
+        "genotype QC",
+        "population structure",
+        "controlled-access"
+      ]
+    },
+    {
+      "id": "negative_public_data_feasibility",
+      "agent": "roadmap_agent",
+      "implemented": false,
+      "query": "Scope a project where no suitable public data exists.",
+      "expected_decision": "Future fixture should return a confident no-go recommendation with transparent negative search evidence.",
+      "expected_hours": "Expected to be a short feasibility screen.",
+      "must_find_terms": [
+        "no-go recommendation",
+        "negative search log",
+        "do not fund full analysis",
+        "custom data generation"
+      ]
+    }
+  ]
+}
