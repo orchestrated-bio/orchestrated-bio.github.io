@@ -33,6 +33,9 @@
     const editButton = document.getElementById('scopeify-edit');
     const documentTabs = Array.from(document.querySelectorAll('[data-scopeify-tab]'));
     const documentPanels = Array.from(document.querySelectorAll('.scopeify-document-panel'));
+    const DEFAULT_SCOPEIFY_API_BASE = 'https://scopeify-api.orchestrated.bio';
+    const LIVE_API_HOSTS = new Set(['orchestrated.bio', 'www.orchestrated.bio', 'orchestrated-bio.github.io']);
+    const scopeifyApiBase = getScopeifyApiBase();
 
     const reports = {
         neuro: {
@@ -272,6 +275,18 @@
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;');
+    }
+
+    function getScopeifyApiBase() {
+        const explicit = typeof window.SCOPEIFY_API_BASE === 'string' ? window.SCOPEIFY_API_BASE.trim() : '';
+        if (explicit) return explicit.replace(/\/+$/, '');
+
+        const params = new URLSearchParams(window.location.search);
+        const configured = params.get('scopeify_api');
+        if (configured) return configured.replace(/\/+$/, '');
+
+        if (LIVE_API_HOSTS.has(window.location.hostname)) return DEFAULT_SCOPEIFY_API_BASE;
+        return '';
     }
 
     function formatGeneratedDate(date) {
@@ -884,12 +899,127 @@
         sowTitle.textContent = report.sowTitle;
         if (sowWindow) sowWindow.textContent = report.sowWindow;
         if (lastChecked) lastChecked.textContent = report.searchLabel;
-        shortlistCount.textContent = `${report.selected} selected from ${report.screened} screened`;
+        shortlistCount.textContent = report.shortlistLabel || `${report.selected} selected from ${report.screened} screened`;
         renderEstimate(report);
         renderSow(report);
         renderAudit(report);
         renderEvidence(report);
         downloadButton.disabled = false;
+    }
+
+    async function postScopeify(endpoint, payload) {
+        if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
+        const response = await fetch(`${scopeifyApiBase}${endpoint}`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            credentials: 'omit',
+            body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+            throw new Error(`Scopeify API returned ${response.status}`);
+        }
+        return response.json();
+    }
+
+    function liveArchiveSources() {
+        return ['PubMed', 'GEO', 'SRA'];
+    }
+
+    function buildArchiveSearchPayload() {
+        return {
+            project: {
+                hypothesis: hypothesis.value.trim(),
+                notes: notes ? notes.value.trim() : '',
+                requested_outputs: [
+                    'Preliminary Statement of Work',
+                    'Dataset inventory',
+                    'Project estimate'
+                ]
+            },
+            allowed_archive_sources: liveArchiveSources(),
+            max_results_per_source: 3,
+            expected_response_schema: 'scopeify.archive_search.v1'
+        };
+    }
+
+    function sourceResultToAudit(result) {
+        const returned = Number(result.returned_count || 0);
+        const warnings = Array.isArray(result.warnings) ? result.warnings.filter(Boolean) : [];
+        const note = result.status === 'searched'
+            ? 'Live backend returned candidate records for manual review'
+            : warnings[0] || 'Source not searched by the current backend adapter';
+        return {
+            source: result.source || 'Unknown',
+            query: result.query || 'Query unavailable',
+            found: Number(result.found_count || 0),
+            screened: returned,
+            selected: returned,
+            note
+        };
+    }
+
+    function recordToEvidence(record) {
+        const source = record.source || 'PubMed';
+        const isData = ['GEO', 'SRA', 'ENA', 'GSA/CNSA'].includes(source);
+        return {
+            fit: isData ? 'Candidate dataset' : 'Candidate literature',
+            source,
+            id: record.identifier || 'Record',
+            title: record.title || 'Untitled record',
+            year: record.year || record.citation || 'Year pending',
+            cohort: record.cohort || 'Needs manual cohort review',
+            technology: record.technology || 'Needs manual technology review',
+            availability: record.data_availability || 'Availability requires manual verification',
+            rationale: `Returned by live ${source} search for review before inclusion in the final scope.`,
+            risk: record.credibility || 'Candidate record only; inclusion requires human review of metadata, fit, and reuse terms.'
+        };
+    }
+
+    function mergeLiveArchiveResponse(report, response) {
+        const sourceResults = Array.isArray(response.source_results) ? response.source_results : [];
+        const liveEvidence = sourceResults.flatMap(result => (result.records || []).map(recordToEvidence));
+        const found = sourceResults.reduce((total, result) => total + Number(result.found_count || 0), 0);
+        const returned = sourceResults.reduce((total, result) => total + Number(result.returned_count || 0), 0);
+        const searchedSources = sourceResults.filter(result => result.status === 'searched').map(result => result.source).join(', ');
+        const timestamp = new Date().toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: '2-digit'
+        });
+
+        return {
+            ...report,
+            found,
+            screened: returned,
+            selected: liveEvidence.length,
+            searchLabel: searchedSources
+                ? `Live backend search: ${searchedSources}; ${timestamp}`
+                : `Live backend search completed; ${timestamp}`,
+            shortlistLabel: liveEvidence.length
+                ? `${liveEvidence.length} live records returned for review`
+                : 'No live records returned for review',
+            sources: sourceResults.map(sourceResultToAudit),
+            criteria: [
+                'Live records are candidate inventory rows and still require manual inclusion review.',
+                'The SOW remains a preliminary template until the Pydantic AI drafting contract and human review are complete.',
+                'Dataset records should be checked for cohort labels, technology, accessions, supplement availability, and reuse risk.'
+            ],
+            evidence: liveEvidence
+        };
+    }
+
+    function markLiveSearchUnavailable(report, message) {
+        return {
+            ...report,
+            searchLabel: 'Demo search; live backend unavailable',
+            criteria: [
+                'This local or fallback view is using the static demo inventory.',
+                message || 'The public backend did not return a live archive-search response.',
+                ...report.criteria
+            ]
+        };
     }
 
     function toCsv(report) {
@@ -951,14 +1081,25 @@
         URL.revokeObjectURL(url);
     }
 
-    function runDemo() {
+    async function runDemo() {
         const report = chooseReport();
         enterSubmittedState();
-        statusPill.textContent = 'Generating';
+        statusPill.textContent = scopeifyApiBase ? 'Searching live inventory' : 'Generating';
         if (decision) decision.textContent = 'Building brief';
         if (summary) summary.textContent = 'Planning source-specific searches, screening records, and drafting a feasibility package.';
         downloadButton.disabled = true;
-        window.setTimeout(() => renderReport(report, 'Draft SOW'), 620);
+
+        if (!scopeifyApiBase) {
+            window.setTimeout(() => renderReport(report, 'Draft SOW'), 620);
+            return;
+        }
+
+        try {
+            const response = await postScopeify('/v1/scopeify/archive-search', buildArchiveSearchPayload());
+            renderReport(mergeLiveArchiveResponse(report, response), 'Live inventory');
+        } catch (error) {
+            renderReport(markLiveSearchUnavailable(report, error.message), 'Draft SOW');
+        }
     }
 
     function applyInitialParams() {
