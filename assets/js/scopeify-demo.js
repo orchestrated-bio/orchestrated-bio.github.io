@@ -309,6 +309,15 @@
         return `${lower}-${upper}`;
     }
 
+    function compactSowTitle(baseReport, sowTitleText) {
+        const titleText = String(sowTitleText || '').trim();
+        if (!titleText) return baseReport.sowTitle || 'Statement of Work: public-data feasibility review';
+        if (titleText.length > 86 || /\s-\s/.test(titleText)) {
+            return baseReport.sowTitle || 'Statement of Work: public-data feasibility review';
+        }
+        return titleText;
+    }
+
     function wait(ms) {
         return new Promise(resolve => window.setTimeout(resolve, ms));
     }
@@ -1141,6 +1150,7 @@
 
         const sow = response.sow;
         const hours = `${formatHourRange(sow.estimated_hours_min, sow.estimated_hours_max)} hours`;
+        const displayTitle = compactSowTitle(baseReport, sow.title);
         const phaseRows = (sow.phases || []).map(phase => ({
             phase: String(phase.phase || ''),
             workstream: phase.workstream || 'Workstream',
@@ -1150,7 +1160,7 @@
         }));
         const report = {
             ...baseReport,
-            title: sow.title || baseReport.title,
+            title: displayTitle.replace(/^Statement of Work:\s*/i, ''),
             status: response.status || 'validated',
             decision: 'Draft SOW generated',
             summary: sow.objective || baseReport.summary,
@@ -1160,7 +1170,7 @@
                 rationale: [sow.expected_timeline, sow.public_data_summary].filter(Boolean).join(' '),
                 outputs: Array.isArray(sow.deliverables) ? sow.deliverables : baseReport.estimate.outputs
             },
-            sowTitle: sow.title || baseReport.sowTitle,
+            sowTitle: displayTitle,
             sowWindow: sow.expected_timeline || baseReport.sowWindow,
             generatedDate: sow.generated_date || '',
             sowMeta: [
