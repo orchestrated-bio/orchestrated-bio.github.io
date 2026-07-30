@@ -692,6 +692,17 @@
     overflow-x: auto;
 }
 
+.scopeify-empty-inventory {
+    border: 1px solid var(--scope-rule);
+    border-left: 3px solid var(--scope-accent);
+    border-radius: 4px;
+    color: var(--scope-ink-2);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0.75rem 0.85rem;
+}
+
 .scopeify-inventory-table {
     border: 1px solid var(--scope-rule);
     border-radius: 4px;

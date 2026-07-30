@@ -18,7 +18,7 @@
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
-    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=1785429952" />
+    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=1785437451" />
     <script src="./assets/js/cookie-consent.js"></script>
   </head>
   <body class="scopeify-page">
@@ -83,9 +83,9 @@
                 <section class="scopeify-method" aria-label="Production method">
                     <p class="scopeify-panel-label">Production method</p>
                     <ul>
-                        <li>Pydantic AI plans the search and validates the table preview, source plan, SOW draft, and workbook rows against typed schemas.</li>
-                        <li>NCBI, PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv calls run server-side; API keys never ship to the browser.</li>
-                        <li>Every delivered workbook includes query logs, screened records, selection rationale, excluded evidence, estimated hours, and expected outputs.</li>
+                        <li>The private backend validates the table preview, source plan, SOW draft, and workbook rows against typed schemas before anything client-facing is rendered.</li>
+                        <li>PubMed, GEO, and SRA calls run server-side first; ENA, GSA/CNSA, and bioRxiv remain planned adapters until their metadata paths are validated.</li>
+                        <li>Pydantic AI can revise the typed SOW when enabled, but the public page keeps a cost-safe validated SOW path available.</li>
                     </ul>
                 </section>
             </form>
@@ -224,6 +224,6 @@
         </nav>
       </div>
     </footer>
-    <script src="./assets/js/scopeify-demo.js?v=1785434868"></script>
+    <script src="./assets/js/scopeify-demo.js?v=1785437440"></script>
   </body>
 </html>
