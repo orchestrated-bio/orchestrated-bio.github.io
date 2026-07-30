@@ -33,10 +33,14 @@
     const editButton = document.getElementById('scopeify-edit');
     const documentTabs = Array.from(document.querySelectorAll('[data-scopeify-tab]'));
     const documentPanels = Array.from(document.querySelectorAll('.scopeify-document-panel'));
+    const feedbackProgress = document.getElementById('scopeify-feedback-progress');
+    const feedbackList = document.getElementById('scopeify-feedback-list');
     const DEFAULT_SCOPEIFY_API_BASE = 'https://scopeify-api.orchestrated.bio';
     const LIVE_API_HOSTS = new Set(['orchestrated.bio', 'www.orchestrated.bio', 'orchestrated-bio.github.io']);
     const SCOPEIFY_API_TIMEOUT_MS = 12000;
     const SCOPEIFY_API_MAX_ATTEMPTS = 2;
+    const SCOPEIFY_JOB_POLL_MS = 900;
+    const SCOPEIFY_JOB_MAX_POLLS = 90;
     const scopeifyApiBase = getScopeifyApiBase();
 
     const reports = {
@@ -358,6 +362,157 @@
             panel.classList.toggle('is-active', isActive);
             panel.hidden = !isActive;
         });
+    }
+
+    function formatFeedbackStatus(status) {
+        return String(status || 'pending').replace(/_/g, ' ');
+    }
+
+    function makeFeedbackItem(label, status, severity, message, detail) {
+        return {
+            label,
+            status,
+            severity,
+            message,
+            detail: detail || ''
+        };
+    }
+
+    function staticFeedbackForReport(report) {
+        return [
+            makeFeedbackItem(
+                'Project route',
+                'complete',
+                'info',
+                'Example intake is routed to a preliminary bioinformatics scope.',
+                report.sowWindow || ''
+            ),
+            makeFeedbackItem(
+                'Browser data preview',
+                latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review',
+                latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review',
+                latestDataPreview.validation.status === 'no_files'
+                    ? 'No local files selected; Scopeify can still scope against public data.'
+                    : dataScanReview,
+                latestDataPreview.aggregate.risk_flags.join(', ')
+            ),
+            makeFeedbackItem(
+                'Public archive screen',
+                'complete',
+                'info',
+                `Example inventory includes ${report.selected || 0} selected rows; live records appear after submission.`,
+                'Dataset inventory stays separate from the Statement of Work.'
+            ),
+            makeFeedbackItem(
+                'Statement of Work',
+                'complete',
+                'info',
+                'Draft SOW preview is available with phases, hours, deliverables, assumptions, and exclusions.',
+                'Submit the form to run the backend scoping workflow.'
+            ),
+            makeFeedbackItem(
+                'Human review',
+                'needs_review',
+                'review',
+                'Preliminary output requires Orchestrated Biosciences review before it becomes a formal quote.',
+                'Use the consultation link after reviewing the draft.'
+            )
+        ];
+    }
+
+    function fallbackFeedback(message) {
+        return [
+            makeFeedbackItem(
+                'Recovery',
+                'needs_review',
+                'review',
+                'Live scoping feedback was unavailable, so Scopeify kept the static draft visible.',
+                message || 'Retry the live backend or schedule a consultation.'
+            ),
+            makeFeedbackItem(
+                'Statement of Work',
+                'complete',
+                'info',
+                'The recovered draft still includes the SOW structure and dataset inventory appendix.',
+                'Treat it as a demo example until live search returns.'
+            ),
+            makeFeedbackItem(
+                'Human review',
+                'needs_review',
+                'review',
+                'A human review is still required before quoting.',
+                'Schedule a consultation to confirm scope, data access, and assumptions.'
+            )
+        ];
+    }
+
+    function feedbackFromDraftResponse(response) {
+        const hasSow = Boolean(response && response.sow);
+        const archive = response && response.archive_search;
+        const sourceResults = archive && Array.isArray(archive.source_results) ? archive.source_results : [];
+        const returned = sourceResults.reduce((total, source) => total + Number(source.returned_count || 0), 0);
+        const searched = sourceResults.filter(source => source.status === 'searched').map(source => source.source).join(', ');
+        const dataStatus = response && response.data_preview_status ? response.data_preview_status : latestDataPreview.validation.status;
+        const riskFlags = response && Array.isArray(response.data_preview_risk_flags) ? response.data_preview_risk_flags : latestDataPreview.aggregate.risk_flags;
+        return [
+            makeFeedbackItem(
+                'Project route',
+                hasSow ? 'complete' : 'needs_review',
+                hasSow ? 'info' : 'blocker',
+                hasSow ? `Routed to ${response.project_type || 'a Scopeify SOW template'}.` : 'More project detail is needed before a useful SOW can be drafted.',
+                response && response.message ? response.message : ''
+            ),
+            makeFeedbackItem(
+                'Browser data preview',
+                dataStatus === 'invalid' ? 'blocked' : riskFlags.length ? 'needs_review' : 'complete',
+                dataStatus === 'invalid' ? 'blocker' : riskFlags.length ? 'review' : 'info',
+                riskFlags.length ? `Data preview passed with review flags: ${riskFlags.join(', ')}.` : `Data preview status: ${dataStatus}.`,
+                dataScanReview
+            ),
+            makeFeedbackItem(
+                'Public archive screen',
+                archive ? (archive.status === 'searched' ? 'complete' : 'needs_review') : 'complete',
+                archive && archive.status === 'searched' ? 'info' : 'review',
+                archive
+                    ? `Screened ${searched || 'configured sources'} and returned ${returned} candidate records for the inventory appendix.`
+                    : 'No live archive search was included in this draft response.',
+                archive && Array.isArray(archive.warnings) ? archive.warnings.slice(0, 3).join(' ') : ''
+            ),
+            makeFeedbackItem(
+                'Statement of Work',
+                hasSow ? 'complete' : 'needs_review',
+                hasSow ? 'info' : 'blocker',
+                hasSow ? `Validated SOW generated with ${response.sow.estimated_hours_min}-${response.sow.estimated_hours_max} estimated hours.` : 'Clarification response returned instead of a SOW.',
+                hasSow ? `Generation mode: ${response.sow.generation_mode}.` : response && response.next_step ? response.next_step : ''
+            ),
+            makeFeedbackItem(
+                'Human review',
+                'needs_review',
+                'review',
+                'Preliminary output requires human review before quoting.',
+                response && response.next_step ? response.next_step : 'Schedule a consultation to confirm assumptions.'
+            )
+        ];
+    }
+
+    function renderFeedback(items, progressText) {
+        if (feedbackProgress) feedbackProgress.textContent = progressText || 'Ready for review';
+        if (!feedbackList) return;
+        const safeItems = Array.isArray(items) && items.length
+            ? items
+            : staticFeedbackForReport(currentReport || reports.neuro);
+        feedbackList.innerHTML = safeItems.map(item => `
+            <li class="scopeify-feedback-item" data-severity="${escapeHtml(item.severity || 'info')}">
+                <div>
+                    <strong class="scopeify-feedback-name">${escapeHtml(item.label || 'Scope check')}</strong>
+                    <span class="scopeify-feedback-state">${escapeHtml(formatFeedbackStatus(item.status))}</span>
+                </div>
+                <p class="scopeify-feedback-message">
+                    ${escapeHtml(item.message || '')}
+                    ${item.detail ? `<span class="scopeify-feedback-detail">${escapeHtml(item.detail)}</span>` : ''}
+                </p>
+            </li>
+        `).join('');
     }
 
     function chooseReport() {
@@ -944,20 +1099,25 @@
         renderSow(report);
         renderAudit(report);
         renderEvidence(report);
+        renderFeedback(report.feedback, statusText || 'Ready for review');
         downloadButton.disabled = false;
     }
 
-    async function fetchScopeifyJson(url, payload, timeoutMs) {
+    async function fetchScopeifyJson(url, payload, timeoutMs, method) {
         const controller = new AbortController();
         const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+        const requestMethod = method || 'POST';
+        const options = {
+            method: requestMethod,
+            credentials: 'omit',
+            signal: controller.signal
+        };
+        if (requestMethod !== 'GET') {
+            options.headers = { 'content-type': 'application/json' };
+            options.body = JSON.stringify(payload);
+        }
         try {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'content-type': 'application/json' },
-                credentials: 'omit',
-                signal: controller.signal,
-                body: JSON.stringify(payload)
-            });
+            const response = await fetch(url, options);
             if (!response.ok) {
                 const error = new Error(`Scopeify API returned ${response.status}`);
                 error.status = response.status;
@@ -987,6 +1147,24 @@
         for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
             try {
                 return await fetchScopeifyJson(url, payload, SCOPEIFY_API_TIMEOUT_MS);
+            } catch (error) {
+                lastError = error;
+                if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
+                await wait(450 * attempt);
+            }
+        }
+
+        throw lastError || new Error('Scopeify API did not return a response');
+    }
+
+    async function getScopeify(endpoint) {
+        if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
+
+        const url = `${scopeifyApiBase}${endpoint}`;
+        let lastError = null;
+        for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
+            try {
+                return await fetchScopeifyJson(url, null, SCOPEIFY_API_TIMEOUT_MS, 'GET');
             } catch (error) {
                 lastError = error;
                 if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
@@ -1197,6 +1375,7 @@
     function markLiveSearchUnavailable(report, message) {
         return {
             ...report,
+            feedback: fallbackFeedback(message),
             searchLabel: 'Demo search; live backend unavailable',
             shortlistLabel: 'Static example shown after live-search recovery',
             criteria: [
@@ -1205,6 +1384,66 @@
                 ...report.criteria
             ]
         };
+    }
+
+    function progressTextForJob(job) {
+        const progress = Number(job && job.progress || 0);
+        const status = job && job.status ? formatFeedbackStatus(job.status) : 'running';
+        return `${status} · ${progress}%`;
+    }
+
+    function statusTextForJob(job) {
+        if (!job) return 'Checking scope';
+        if (job.status === 'failed') return 'Recovered';
+        if (job.status === 'completed') {
+            return job.draft && job.draft.status === 'needs_clarification' ? 'Needs details' : 'Live SOW';
+        }
+        if (job.status === 'queued') return 'Queued';
+        return 'Checking scope';
+    }
+
+    function renderJobProgress(job) {
+        if (statusPill) statusPill.textContent = statusTextForJob(job);
+        if (summary && job && job.message) summary.textContent = job.message;
+        renderFeedback(job && job.feedback ? job.feedback : [], progressTextForJob(job));
+    }
+
+    async function runDraftJob(payload) {
+        let job = await postScopeify('/v1/scopeify/draft-jobs', payload);
+        renderJobProgress(job);
+
+        for (let poll = 0; poll < SCOPEIFY_JOB_MAX_POLLS; poll += 1) {
+            if (job.status === 'completed' || job.status === 'failed') return job;
+            await wait(SCOPEIFY_JOB_POLL_MS);
+            job = await getScopeify(`/v1/scopeify/draft-jobs/${encodeURIComponent(job.job_id)}`);
+            renderJobProgress(job);
+        }
+
+        throw new Error('Scopeify scoping job did not finish before the browser timeout.');
+    }
+
+    async function requestScopeifyDraft(payload) {
+        try {
+            const job = await runDraftJob(payload);
+            if (job.status === 'completed' && job.draft) {
+                return {
+                    response: job.draft,
+                    feedback: job.feedback || feedbackFromDraftResponse(job.draft),
+                    statusText: statusTextForJob(job)
+                };
+            }
+            throw new Error(job.error || job.message || 'Scopeify scoping job failed.');
+        } catch (error) {
+            if (error && (error.status === 404 || error.status === 405)) {
+                const response = await postScopeify('/v1/scopeify/draft', payload);
+                return {
+                    response,
+                    feedback: feedbackFromDraftResponse(response),
+                    statusText: response.status === 'needs_clarification' ? 'Needs details' : 'Live SOW'
+                };
+            }
+            throw error;
+        }
     }
 
     function toCsv(report) {
@@ -1281,9 +1520,16 @@
     async function runDemo() {
         const report = chooseReport();
         enterSubmittedState();
-        statusPill.textContent = scopeifyApiBase ? 'Drafting SOW' : 'Generating';
-        if (decision) decision.textContent = 'Building brief';
-        if (summary) summary.textContent = 'Validating the intake, drafting the SOW, and preparing a separate dataset inventory appendix.';
+        renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
+        renderFeedback([
+            makeFeedbackItem('Intake received', 'complete', 'info', 'Client question accepted for preliminary scoping.', hypothesis.value.trim()),
+            makeFeedbackItem('Browser data preview', latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review', latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review', dataScanReview),
+            makeFeedbackItem('Public archive screen', scopeifyApiBase ? 'pending' : 'complete', 'info', scopeifyApiBase ? 'Queued for backend archive screening.' : 'Static demo inventory is shown because no API is configured.'),
+            makeFeedbackItem('Statement of Work', scopeifyApiBase ? 'pending' : 'complete', 'info', scopeifyApiBase ? 'Waiting for the scoped SOW response.' : 'Static SOW preview is visible.'),
+            makeFeedbackItem('Human review', 'needs_review', 'review', 'Preliminary output requires review before quote.')
+        ], scopeifyApiBase ? 'queued · 0%' : 'Local demo');
+        if (decision) decision.textContent = 'Scoping in progress';
+        if (summary) summary.textContent = 'Validating the intake, preparing feedback, drafting the SOW, and keeping the dataset inventory appendix separate.';
         downloadButton.disabled = true;
 
         if (!scopeifyApiBase) {
@@ -1292,9 +1538,10 @@
         }
 
         try {
-            const response = await postScopeify('/v1/scopeify/draft', buildDraftPayload());
+            const { response, feedback, statusText } = await requestScopeifyDraft(buildDraftPayload());
             const liveReport = reportFromDraftResponse(report, response);
-            renderReport(liveReport, response.status === 'needs_clarification' ? 'Needs details' : 'Live SOW');
+            liveReport.feedback = feedback;
+            renderReport(liveReport, statusText);
         } catch (error) {
             renderReport(markLiveSearchUnavailable(report, error.message), 'Draft SOW');
         }
