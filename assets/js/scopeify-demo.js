@@ -295,6 +295,20 @@
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
     }
 
+    function formatIsoGeneratedDate(value) {
+        if (!value) return formatGeneratedDate(new Date());
+        const date = new Date(`${value}T00:00:00Z`);
+        return Number.isNaN(date.getTime()) ? value : formatGeneratedDate(date);
+    }
+
+    function formatHourRange(min, max) {
+        const lower = Number(min || 0);
+        const upper = Number(max || 0);
+        if (!lower && !upper) return 'Pending';
+        if (lower === upper) return `${lower}`;
+        return `${lower}-${upper}`;
+    }
+
     function wait(ms) {
         return new Promise(resolve => window.setTimeout(resolve, ms));
     }
@@ -795,9 +809,9 @@
         return `${summaries.join(' ')} ${validationText}`;
     }
 
-    function renderDataReview() {
+    function renderDataReview(textOverride) {
         if (dataReview) {
-            dataReview.textContent = dataScanReview;
+            dataReview.textContent = textOverride || dataScanReview;
             dataReview.dataset.previewSchema = latestDataPreview.schema_version;
             dataReview.dataset.previewStatus = latestDataPreview.validation.status;
             dataReview.dataset.previewJson = JSON.stringify(latestDataPreview);
@@ -809,13 +823,18 @@
         if (estimateHours) estimateHours.textContent = report.estimate.hours;
         if (estimateRationale) estimateRationale.textContent = report.estimate.rationale;
         if (outputsList) outputsList.innerHTML = report.estimate.outputs.map(item => `<li>${escapeHtml(item)}</li>`).join('');
-        if (clientNotes) clientNotes.textContent = getClientNotes();
-        renderDataReview();
+        if (clientNotes) clientNotes.textContent = report.clientNotesReflected || getClientNotes();
+        const dataConsiderations = Array.isArray(report.dataPreviewConsiderations) && report.dataPreviewConsiderations.length
+            ? report.dataPreviewConsiderations.join(' ')
+            : '';
+        renderDataReview(dataConsiderations);
     }
 
     function renderSow(report) {
         if (sowMeta) {
-            const generatedDate = formatGeneratedDate(new Date());
+            const generatedDate = report.generatedDate
+                ? formatIsoGeneratedDate(report.generatedDate)
+                : formatGeneratedDate(new Date());
             const meta = [
                 ...report.sowMeta,
                 { label: 'Generation date', value: generatedDate },
@@ -876,6 +895,12 @@
 
     function renderEvidence(report) {
         if (!evidenceList) return;
+        if (!report.evidence.length) {
+            evidenceList.innerHTML = `
+                <p class="scopeify-empty-inventory">No selected inventory rows were returned. Review source warnings, refine the hypothesis, or use the consultation step before treating public data as available.</p>
+            `;
+            return;
+        }
         evidenceList.innerHTML = `
             <div class="scopeify-inventory-table" role="table" aria-label="Dataset inventory preview">
                 <div class="scopeify-inventory-row scopeify-inventory-head" role="row">
@@ -984,17 +1009,42 @@
         };
     }
 
+    function buildDraftPayload() {
+        return {
+            project: {
+                hypothesis: hypothesis.value.trim(),
+                notes: notes ? notes.value.trim() : '',
+                requested_outputs: [
+                    'Preliminary Statement of Work',
+                    'Dataset inventory',
+                    'Project estimate'
+                ]
+            },
+            client_data_preview: latestDataPreview,
+            allowed_archive_sources: liveArchiveSources(),
+            expected_response_schema: 'scopeify.sow_draft.v1'
+        };
+    }
+
+    function screenedOutCount(warnings) {
+        return (warnings || []).reduce((total, warning) => {
+            const match = String(warning || '').match(/screened out\s+(\d+)/i);
+            return total + (match ? Number(match[1]) : 0);
+        }, 0);
+    }
+
     function sourceResultToAudit(result) {
         const returned = Number(result.returned_count || 0);
         const warnings = Array.isArray(result.warnings) ? result.warnings.filter(Boolean) : [];
+        const screenedOut = screenedOutCount(warnings);
         const note = result.status === 'searched'
-            ? 'Live backend returned candidate records for manual review'
+            ? ['Live backend returned candidate records for inventory review', ...warnings].join(' ')
             : warnings[0] || 'Source not searched by the current backend adapter';
         return {
             source: result.source || 'Unknown',
             query: result.query || 'Query unavailable',
             found: Number(result.found_count || 0),
-            screened: returned,
+            screened: returned + screenedOut,
             selected: returned,
             note
         };
@@ -1022,6 +1072,7 @@
         const liveEvidence = sourceResults.flatMap(result => (result.records || []).map(recordToEvidence));
         const found = sourceResults.reduce((total, result) => total + Number(result.found_count || 0), 0);
         const returned = sourceResults.reduce((total, result) => total + Number(result.returned_count || 0), 0);
+        const screened = sourceResults.reduce((total, result) => total + Number(result.returned_count || 0) + screenedOutCount(result.warnings || []), 0);
         const searchedSources = sourceResults.filter(result => result.status === 'searched').map(result => result.source).join(', ');
         const timestamp = new Date().toLocaleString('en-US', {
             year: 'numeric',
@@ -1034,7 +1085,7 @@
         return {
             ...report,
             found,
-            screened: returned,
+            screened,
             selected: liveEvidence.length,
             searchLabel: searchedSources
                 ? `Live backend search: ${searchedSources}; ${timestamp}`
@@ -1044,12 +1095,93 @@
                 : 'No live records returned for review',
             sources: sourceResults.map(sourceResultToAudit),
             criteria: [
-                'Live records are candidate inventory rows and still require manual inclusion review.',
-                'The SOW remains a preliminary template until the Pydantic AI drafting contract and human review are complete.',
-                'Dataset records should be checked for cohort labels, technology, accessions, supplement availability, and reuse risk.'
+                'Dataset inventory rows are separate from the Statement of Work and still require manual inclusion review.',
+                'Source warnings record records screened out for weak visible metadata, false-positive terms, or missing query concepts.',
+                'Public-data search informs scope assumptions, but the consulting quote still requires human review.'
             ],
             evidence: liveEvidence
         };
+    }
+
+    function reportFromDraftResponse(baseReport, response) {
+        if (!response || !response.sow) {
+            const questions = Array.isArray(response && response.warnings) ? response.warnings : [];
+            return {
+                ...baseReport,
+                title: 'Scope clarification needed',
+                decision: 'More project detail needed',
+                summary: response && response.message ? response.message : 'Scopeify needs a more specific research question before drafting a useful SOW.',
+                estimate: {
+                    title: 'Clarification-first scoping',
+                    hours: 'Pending',
+                    rationale: 'A defensible estimate needs the study system, modality, comparison, and intended decision.',
+                    outputs: ['Clarified intake', 'Recommended next scoping path', 'Consultation agenda']
+                },
+                sowTitle: 'Statement of Work: clarification needed',
+                sowWindow: 'Pending',
+                generatedDate: '',
+                sowMeta: [
+                    { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
+                    { label: 'Prepared by', value: 'Orchestrated Biosciences' },
+                    { label: 'Document type', value: 'Preliminary Statement of Work' },
+                    { label: 'Estimate status', value: 'Needs clarification before quote' }
+                ],
+                sowObjective: 'Clarify the project question before preparing a consulting scope.',
+                sowDecision: response && response.next_step ? response.next_step : 'Schedule a consultation or revise the intake with organism, modality, comparison, and intended output.',
+                sow: [
+                    { phase: '1', workstream: 'Clarify intake', detail: questions.join(' ') || 'Confirm organism, data type, comparison groups, and desired decision.', output: 'Scoped project question', hours: 'Pending' }
+                ],
+                sowAssumptions: ['No final estimate should be issued until the intake is clarified.'],
+                sowExclusions: ['Technical analysis, archive screening, and formal quoting are excluded from this clarification response.'],
+                clientNotesReflected: getClientNotes(),
+                dataPreviewConsiderations: [],
+                evidence: []
+            };
+        }
+
+        const sow = response.sow;
+        const hours = `${formatHourRange(sow.estimated_hours_min, sow.estimated_hours_max)} hours`;
+        const phaseRows = (sow.phases || []).map(phase => ({
+            phase: String(phase.phase || ''),
+            workstream: phase.workstream || 'Workstream',
+            detail: Array.isArray(phase.activities) ? phase.activities.join('; ') : '',
+            output: phase.expected_output || '',
+            hours: formatHourRange(phase.hours_min, phase.hours_max)
+        }));
+        const report = {
+            ...baseReport,
+            title: sow.title || baseReport.title,
+            status: response.status || 'validated',
+            decision: 'Draft SOW generated',
+            summary: sow.objective || baseReport.summary,
+            estimate: {
+                title: sow.estimate_status || 'Preliminary project estimate',
+                hours,
+                rationale: [sow.expected_timeline, sow.public_data_summary].filter(Boolean).join(' '),
+                outputs: Array.isArray(sow.deliverables) ? sow.deliverables : baseReport.estimate.outputs
+            },
+            sowTitle: sow.title || baseReport.sowTitle,
+            sowWindow: sow.expected_timeline || baseReport.sowWindow,
+            generatedDate: sow.generated_date || '',
+            sowMeta: [
+                { label: 'Prepared for', value: sow.prepared_for || 'Prospective Orchestrated.bio client' },
+                { label: 'Prepared by', value: sow.prepared_by || 'Orchestrated Biosciences' },
+                { label: 'Document type', value: sow.document_type || 'Preliminary Statement of Work' },
+                { label: 'Estimate status', value: sow.estimate_status || 'Ballpark; human review before quote' }
+            ],
+            sowObjective: sow.objective || baseReport.sowObjective,
+            sowDecision: sow.scope_decision || baseReport.sowDecision,
+            sow: phaseRows.length ? phaseRows : baseReport.sow,
+            sowAssumptions: Array.isArray(sow.assumptions) ? sow.assumptions : baseReport.sowAssumptions,
+            sowExclusions: Array.isArray(sow.exclusions) ? sow.exclusions : baseReport.sowExclusions,
+            clientNotesReflected: sow.client_notes_reflected || getClientNotes(),
+            dataPreviewConsiderations: Array.isArray(sow.data_preview_considerations) ? sow.data_preview_considerations : [],
+            evidence: []
+        };
+
+        return response.archive_search
+            ? mergeLiveArchiveResponse(report, response.archive_search)
+            : report;
     }
 
     function markLiveSearchUnavailable(report, message) {
@@ -1089,7 +1221,19 @@
         const clientHypothesis = hypothesis.value.trim() || 'No hypothesis entered';
         const clientNoteText = notes && notes.value.trim() ? notes.value.trim() : 'No client notes entered';
         const expectedOutputs = report.estimate.outputs.join('; ');
-        const rows = report.evidence.map(item => [
+        const inventory = report.evidence.length ? report.evidence : [{
+            source: 'Scopeify',
+            id: 'Project estimate',
+            fit: 'Project estimate',
+            title: report.sowTitle,
+            year: report.generatedDate || '',
+            cohort: 'Not applicable',
+            technology: 'Not applicable',
+            availability: report.estimate.hours,
+            rationale: report.sowDecision,
+            risk: report.estimate.rationale
+        }];
+        const rows = inventory.map(item => [
             item.source,
             item.id,
             item.fit,
@@ -1127,9 +1271,9 @@
     async function runDemo() {
         const report = chooseReport();
         enterSubmittedState();
-        statusPill.textContent = scopeifyApiBase ? 'Searching live inventory' : 'Generating';
+        statusPill.textContent = scopeifyApiBase ? 'Drafting SOW' : 'Generating';
         if (decision) decision.textContent = 'Building brief';
-        if (summary) summary.textContent = 'Planning source-specific searches, screening records, and drafting a feasibility package.';
+        if (summary) summary.textContent = 'Validating the intake, drafting the SOW, and preparing a separate dataset inventory appendix.';
         downloadButton.disabled = true;
 
         if (!scopeifyApiBase) {
@@ -1138,8 +1282,9 @@
         }
 
         try {
-            const response = await postScopeify('/v1/scopeify/archive-search', buildArchiveSearchPayload());
-            renderReport(mergeLiveArchiveResponse(report, response), 'Live inventory');
+            const response = await postScopeify('/v1/scopeify/draft', buildDraftPayload());
+            const liveReport = reportFromDraftResponse(report, response);
+            renderReport(liveReport, response.status === 'needs_clarification' ? 'Needs details' : 'Live SOW');
         } catch (error) {
             renderReport(markLiveSearchUnavailable(report, error.message), 'Draft SOW');
         }

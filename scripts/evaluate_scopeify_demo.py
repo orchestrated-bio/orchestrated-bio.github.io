@@ -377,15 +377,15 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "source_discovery_agent",
         "archive_coverage",
-        "Archive coverage includes literature, GEO/SRA, European archive, China archive, and preprint checks.",
+        "Archive coverage distinguishes live PubMed/GEO/SRA calls from planned ENA, China archive, and preprint adapters.",
         [
-            "NCBI",
             "PubMed",
             "GEO",
             "SRA",
             "ENA",
             "GSA/CNSA",
-            "bioRxiv"
+            "bioRxiv",
+            "planned adapters"
         ],
         ["include", "script"]
     )
@@ -403,8 +403,8 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "found",
             "screened",
             "selected",
-            "selection rationale",
-            "excluded evidence",
+            "rationale",
+            "source warnings",
             "Dataset inventory",
             "Search appendix"
         ],
@@ -484,8 +484,8 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         [
             "Demo screen",
             "Production Scopeify would validate that structured DataPreview before sending approved summaries",
-            "Pydantic AI plans the search",
-            "API keys never ship to the browser",
+            "Pydantic AI can revise the typed SOW when enabled",
+            "server-side first",
             "server-side"
         ],
         ["include", "script"]
