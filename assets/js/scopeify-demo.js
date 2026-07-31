@@ -1218,17 +1218,18 @@
         return error.status === 408 || error.status === 429 || error.status >= 500;
     }
 
-    async function postScopeify(endpoint, payload, requestHeaders) {
+    async function postScopeify(endpoint, payload, requestHeaders, maxAttempts) {
         if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
 
         const url = `${scopeifyApiBase}${endpoint}`;
+        const attemptLimit = Number.isInteger(maxAttempts) ? Math.max(1, maxAttempts) : SCOPEIFY_API_MAX_ATTEMPTS;
         let lastError = null;
-        for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
+        for (let attempt = 1; attempt <= attemptLimit; attempt += 1) {
             try {
                 return await fetchScopeifyJson(url, payload, SCOPEIFY_API_TIMEOUT_MS, 'POST', requestHeaders);
             } catch (error) {
                 lastError = error;
-                if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
+                if (attempt >= attemptLimit || !shouldRetryScopeify(error)) break;
                 await wait(error.retryAfterMs || 450 * attempt);
             }
         }
@@ -1479,9 +1480,14 @@
     }
 
     async function runDraftJob(payload, idempotencyKey) {
+        const submissionTicket = await getScopeify('/v1/scopeify/submission-ticket');
+        if (!submissionTicket || typeof submissionTicket.token !== 'string') {
+            throw new Error('Scopeify did not issue a valid submission ticket.');
+        }
         let job = await postScopeify('/v1/scopeify/draft-jobs', payload, {
-            'x-idempotency-key': idempotencyKey
-        });
+            'x-idempotency-key': idempotencyKey,
+            'x-scopeify-submission-token': submissionTicket.token
+        }, 1);
         renderJobProgress(job);
 
         for (let poll = 0; poll < SCOPEIFY_JOB_MAX_POLLS; poll += 1) {
@@ -1496,9 +1502,10 @@
 
     async function requestScopeifyDraft(payload) {
         let lastError = null;
+        const idempotencyKey = newIdempotencyKey();
         for (let recoveryAttempt = 0; recoveryAttempt < 2; recoveryAttempt += 1) {
             try {
-                const job = await runDraftJob(payload, newIdempotencyKey());
+                const job = await runDraftJob(payload, idempotencyKey);
                 if (job.status === 'completed' && job.draft) {
                     return {
                         response: job.draft,
