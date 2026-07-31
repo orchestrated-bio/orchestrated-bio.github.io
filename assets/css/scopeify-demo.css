@@ -341,12 +341,18 @@
     padding: 1.05rem 1.1rem;
 }
 
+.scopeify-report-header > div,
+.scopeify-section-heading > div {
+    min-width: 0;
+}
+
 .scopeify-report h2 {
     color: var(--scope-ink);
     font-size: 1.28rem;
     font-weight: 620;
     line-height: 1.25;
     margin: 0.35rem 0 0;
+    overflow-wrap: anywhere;
 }
 
 .scopeify-status-pill {
@@ -595,6 +601,7 @@
     font-weight: 800;
     line-height: 1.3;
     margin: 0.28rem 0 0;
+    overflow-wrap: anywhere;
 }
 
 .scopeify-section-heading > span {
@@ -967,6 +974,46 @@
 
     .scopeify-feedback-item {
         grid-template-columns: 1fr;
+    }
+
+    .scopeify-is-submitted .scopeify-report {
+        display: flex !important;
+        flex-direction: column;
+    }
+
+    .scopeify-is-submitted .scopeify-report-header {
+        order: 1;
+    }
+
+    .scopeify-is-submitted .scopeify-document-tabs {
+        order: 2;
+    }
+
+    .scopeify-is-submitted .scopeify-pdf-canvas {
+        order: 3;
+    }
+
+    .scopeify-is-submitted .scopeify-feedback-panel {
+        order: 4;
+    }
+
+    .scopeify-is-submitted .scopeify-report-actions {
+        order: 5;
+    }
+
+    .scopeify-is-submitted .scopeify-feedback-list {
+        display: grid;
+        overflow-x: visible;
+    }
+
+    .scopeify-is-submitted .scopeify-feedback-item {
+        border-left: 0;
+        border-top: 1px solid var(--scope-rule);
+        width: auto;
+    }
+
+    .scopeify-is-submitted .scopeify-feedback-item:first-child {
+        border-top: 0;
     }
 
     .scopeify-primary,

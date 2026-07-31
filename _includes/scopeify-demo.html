@@ -27,8 +27,8 @@
                 <textarea id="scopeify-notes" name="notes" rows="5" placeholder="Example: We want a quick feasibility read before grant submission. Please flag whether raw reprocessing is worth the extra cost."></textarea>
 
                 <label for="scopeify-data-files">Optional browser-side data scan</label>
-                <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.xlsx,.xls,.h5ad,.rds" multiple>
-                <p class="scopeify-file-note">Demo scans small CSV, TSV, TXT, and JSON files in your browser for filenames, formats, headings, primitive types, missingness, candidate design fields, and preview-level risks. Production Scopeify would validate that structured DataPreview before sending approved summaries to a small backend LLM for scoping review.</p>
+                <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
+                <p class="scopeify-file-note">Scopeify inspects bounded CSV, TSV, text, JSON, JSON Lines, and spreadsheet structure in this browser. Cell values stay local. Only filenames, sheet and field names, inferred types and roles, derived counts, and review flags are sent for scoping. H5AD, RDS, Parquet, and Feather files are identified but require format-specific review.</p>
 
                 <div class="scopeify-actions">
                     <button type="submit" class="scopeify-primary">Generate brief</button>
@@ -39,19 +39,19 @@
                     <p class="scopeify-panel-label">Production method</p>
                     <ul>
                         <li>The private backend validates the table preview, source plan, SOW draft, and workbook rows against typed schemas before anything client-facing is rendered.</li>
-                        <li>PubMed, GEO, and SRA calls run server-side first; ENA, GSA/CNSA, and bioRxiv remain planned adapters until their metadata paths are validated.</li>
+                        <li>PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv discovery calls run server-side with source-specific queries, bounded results, and provenance.</li>
                         <li>Pydantic AI can revise the typed SOW when enabled, but the public page keeps a cost-safe validated SOW path available.</li>
                     </ul>
                 </section>
             </form>
 
-            <article class="scopeify-report" aria-live="polite">
+            <article class="scopeify-report" aria-live="polite" aria-busy="false" tabindex="-1">
                 <header class="scopeify-report-header">
                     <div>
                         <p class="scopeify-panel-label">Preliminary client brief</p>
-                        <h2 id="scopeify-brief-title">GLP-1 / cocaine reward-circuit scope</h2>
+                        <h2 id="scopeify-brief-title">Preparing project scope</h2>
                     </div>
-                    <span class="scopeify-status-pill" id="scopeify-status-pill">Example brief</span>
+                    <span class="scopeify-status-pill" id="scopeify-status-pill">Ready to scope</span>
                 </header>
 
                 <div class="scopeify-document-tabs" role="tablist" aria-label="Scopeify generated documents">
@@ -62,7 +62,7 @@
                 <section class="scopeify-feedback-panel" aria-label="Scopeify scoping feedback">
                     <div class="scopeify-feedback-head">
                         <p class="scopeify-panel-label">Scoping feedback</p>
-                        <span id="scopeify-feedback-progress">Ready for review</span>
+                        <span id="scopeify-feedback-progress" aria-live="polite">Ready for review</span>
                     </div>
                     <ol class="scopeify-feedback-list" id="scopeify-feedback-list"></ol>
                 </section>
@@ -74,9 +74,9 @@
                                 <div class="scopeify-section-heading">
                                     <div>
                                         <p class="scopeify-section-label" id="scopeify-sow-heading">Draft statement of work</p>
-                                        <h3 id="scopeify-sow-title">Statement of Work: Feasibility package</h3>
+                                        <h3 id="scopeify-sow-title">Statement of Work: preliminary project scope</h3>
                                     </div>
-                                    <span id="scopeify-sow-window">Generated from search screen</span>
+                                    <span id="scopeify-sow-window">Pending submission</span>
                                 </div>
                                 <div class="scopeify-sow-document">
                                     <div class="scopeify-sow-meta" id="scopeify-sow-meta" aria-label="SOW metadata"></div>
@@ -135,7 +135,7 @@
                                         <p class="scopeify-section-label" id="scopeify-inventory-heading">Dataset inventory</p>
                                         <h3>Search appendix and project estimate</h3>
                                     </div>
-                                    <span id="scopeify-last-checked">Demo search</span>
+                                    <span id="scopeify-last-checked">Search pending</span>
                                 </div>
                                 <p class="scopeify-inventory-note">This appendix is separate from the SOW draft. Production Scopeify would export the full screened inventory, excluded evidence, metadata checks, and estimate assumptions as workbook tabs.</p>
                             </section>
@@ -167,7 +167,7 @@
 
                 <footer class="scopeify-report-actions">
                     <a class="scopeify-consult-link scopeify-consult-primary" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Schedule consultation</a>
-                    <button type="button" class="scopeify-download" id="scopeify-download">Download dataset inventory + estimate CSV</button>
+                    <button type="button" class="scopeify-download" id="scopeify-download">Download project workbook (.xlsx)</button>
                     <button type="button" class="scopeify-text-button scopeify-edit-scope" id="scopeify-edit">Edit intake</button>
                 </footer>
             </article>

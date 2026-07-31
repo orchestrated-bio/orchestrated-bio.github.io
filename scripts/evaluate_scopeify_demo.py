@@ -23,6 +23,7 @@ OUT_DIR = ROOT / "tmp" / "scopeify-evals"
 SOURCE_FILES = {
     "include": ROOT / "_includes" / "scopeify-demo.html",
     "script": ROOT / "assets" / "js" / "scopeify-demo.js",
+    "https_upgrade": ROOT / "assets" / "js" / "scopeify-https-upgrade.js",
     "styles": ROOT / "assets" / "css" / "scopeify-demo.css",
     "builder": ROOT / "scripts" / "build_scopeify_standalone.py",
     "standalone": ROOT / "scopeify-demo" / "standalone.html",
@@ -178,22 +179,26 @@ def syntax_checks(checks: list[Check], sources: dict[str, str]) -> None:
         add_check(checks, "FAIL", "visual_formatting_agent", "python_syntax", str(error), [])
 
     try:
-        result = subprocess.run(
-            ["node", "--check", str(SOURCE_FILES["script"])],
-            cwd=ROOT,
-            text=True,
-            capture_output=True,
-            timeout=10,
-            check=False
-        )
+        results = [
+            subprocess.run(
+                ["node", "--check", str(SOURCE_FILES[name])],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+                timeout=10,
+                check=False
+            )
+            for name in ("script", "https_upgrade")
+        ]
     except (FileNotFoundError, subprocess.TimeoutExpired) as error:
         add_check(checks, "WARN", "visual_formatting_agent", "javascript_syntax", f"Could not run node --check: {error}", [])
         return
 
-    if result.returncode == 0:
-        add_check(checks, "PASS", "visual_formatting_agent", "javascript_syntax", "Scopeify JavaScript syntax passes node --check.", [])
+    failures = [result for result in results if result.returncode != 0]
+    if not failures:
+        add_check(checks, "PASS", "visual_formatting_agent", "javascript_syntax", "Scopeify JavaScript files pass node --check.", [])
     else:
-        output = (result.stderr or result.stdout).strip()
+        output = "\n".join((result.stderr or result.stdout).strip() for result in failures)
         add_check(checks, "FAIL", "visual_formatting_agent", "javascript_syntax", output[:1000], [])
 
     html_errors: list[str] = []
@@ -213,6 +218,21 @@ def syntax_checks(checks: list[Check], sources: dict[str, str]) -> None:
 
 
 def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None:
+    require_terms(
+        checks,
+        sources,
+        "privacy_security_agent",
+        "production_https_upgrade",
+        "Scopeify upgrades production page loads from HTTP to HTTPS before the application starts.",
+        [
+            "window.location.protocol === \"http:\"",
+            "orchestrated\\.bio",
+            "window.location.replace",
+            "scopeify-https-upgrade.js"
+        ],
+        ["https_upgrade", "builder", "standalone", "page"]
+    )
+
     require_terms(
         checks,
         sources,
@@ -302,7 +322,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "Search appendix",
             "Dataset inventory and project estimates",
             "Schedule consultation",
-            "Download dataset inventory + estimate CSV"
+            "Download project workbook (.xlsx)"
         ],
         ["include", "script"]
     )
@@ -381,19 +401,53 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             []
         )
 
+    script = sources.get("script", "")
+    include = sources.get("include", "")
+    stale_markup = {
+        "GLP-1 / cocaine reward-circuit scope",
+        "Example brief",
+        "Generated from search screen",
+        "Demo search",
+    }
+    if (
+        "renderReport(neutralProjectReport('pending'), 'Ready to scope')" in script
+        and "renderReport(chooseReport()" not in script
+        and not any(term in include for term in stale_markup)
+    ):
+        add_check(
+            checks,
+            "PASS",
+            "client_confidence_agent",
+            "no_initial_stale_example",
+            "Initial and query-parameter page state use a neutral report instead of a GLP-1 or melanoma example.",
+            [
+                str(SOURCE_FILES["script"].relative_to(ROOT)),
+                str(SOURCE_FILES["include"].relative_to(ROOT)),
+            ]
+        )
+    else:
+        add_check(
+            checks,
+            "FAIL",
+            "client_confidence_agent",
+            "no_initial_stale_example",
+            "Initial page state can still render a canned example before live submission.",
+            []
+        )
+
     require_terms(
         checks,
         sources,
         "sow_quote_agent",
         "standard_deliverables",
-        "Expected consulting deliverables are represented in the report and CSV export.",
+        "Expected consulting deliverables are represented in the report and workbook export.",
         [
             "Nextflow pipeline",
             "Quarto HTML",
             "Slide deck plus review meeting",
             "Exported XLSX",
             "estimated_hours",
-            "expected_outputs"
+            "report.estimate.outputs"
         ],
         ["script"]
     )
@@ -403,7 +457,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "source_discovery_agent",
         "archive_coverage",
-        "Archive coverage distinguishes live PubMed/GEO/SRA calls from planned ENA, China archive, and preprint adapters.",
+        "Archive coverage includes all six live source adapters.",
         [
             "PubMed",
             "GEO",
@@ -411,7 +465,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "ENA",
             "GSA/CNSA",
             "bioRxiv",
-            "planned adapters"
+            "liveArchiveSources"
         ],
         ["include", "script"]
     )
@@ -445,9 +499,10 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         "Local data handling is framed as a browser-side scan and includes preview-level risk flags.",
         [
             "Optional browser-side data scan",
-            "Demo scans",
+            "Cell values stay local",
             "selected file metadata in browser",
-            "small CSV, TSV, TXT, and JSON files",
+            "JSON Lines",
+            "profileSpreadsheetFile",
             "low n signal",
             "no obvious response or outcome field",
             "batch-effect fields to review"
@@ -460,20 +515,67 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "browser_data_review_agent",
         "llm_ready_data_preview",
-        "The file scanner produces a compact structured DataPreview bridge for backend LLM/Pydantic review instead of raw table text.",
+        "The file scanner produces a value-redacted structured DataPreview for backend validation instead of raw table text.",
         [
             "scopeify.client_data_preview.v1",
-            "scopeifyLatestDataPreview",
-            "dataset.previewJson",
-            "LLM-ready table preview validated",
+            "value_examples_redacted",
+            "schema summary validated",
             "inferred_type",
             "inferred_role",
             "role_confidence",
             "missing_rate",
-            "unique_values_preview",
+            "unique_count_preview",
             "candidate_roles",
             "risk_flags",
-            "llm_ready_data_preview_json"
+            "Cell values remain in this browser"
+        ],
+        ["include", "script"]
+    )
+
+    privacy_forbidden = [
+        "scopeifyLatestDataPreview",
+        "dataset.previewJson",
+        "unique_values_preview",
+        "llm_ready_data_preview_json",
+        "JSON.stringify(latestDataPreview)"
+    ]
+    privacy_leaks = [
+        term for term in privacy_forbidden
+        if lower_contains("\n".join(sources.get(name, "") for name in ("include", "script")), term)
+    ]
+    if privacy_leaks:
+        add_check(
+            checks,
+            "FAIL",
+            "browser_data_review_agent",
+            "no_literal_value_preview_exposure",
+            f"Legacy preview exposure paths remain: {', '.join(privacy_leaks)}",
+            privacy_leaks
+        )
+    else:
+        add_check(
+            checks,
+            "PASS",
+            "browser_data_review_agent",
+            "no_literal_value_preview_exposure",
+            "No legacy global, DOM, or export path exposes the structured preview or literal value examples.",
+            []
+        )
+
+    require_terms(
+        checks,
+        sources,
+        "browser_data_review_agent",
+        "xlsx_export_safety",
+        "Project export is a multi-sheet workbook and neutralizes spreadsheet formulas.",
+        [
+            "Project Estimate",
+            "Dataset Inventory",
+            "Search Audit",
+            "Data Schema",
+            "neutralizeSpreadsheetText",
+            "aoa_to_sheet",
+            "writeFile"
         ],
         ["include", "script"]
     )
@@ -506,13 +608,12 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "client_confidence_agent",
         "demo_truthfulness",
-        "The static page distinguishes demo behavior from production backend search/review.",
+        "The page describes the validated backend and typed LLM revision path without claiming unverified records.",
         [
-            "Demo screen",
-            "Production Scopeify would validate that structured DataPreview before sending approved summaries",
+            "private backend validates",
             "Pydantic AI can revise the typed SOW when enabled",
-            "server-side first",
-            "server-side"
+            "run server-side",
+            "human review"
         ],
         ["include", "script"]
     )
