@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build Scopeify demo pages from the embeddable include."""
 
+from hashlib import sha256
 from pathlib import Path
 
 
@@ -14,12 +15,16 @@ HTTPS_UPGRADE_JS = ROOT / "assets" / "js" / "scopeify-https-upgrade.js"
 SHEETJS = ROOT / "assets" / "vendor" / "sheetjs" / "xlsx.full.min.js"
 
 
+def content_version(path: Path) -> str:
+    return sha256(path.read_bytes()).hexdigest()[:12]
+
+
 def main() -> None:
     body = INCLUDE.read_text(encoding="utf-8")
-    css_version = int(SCOPEIFY_CSS.stat().st_mtime)
-    js_version = int(SCOPEIFY_JS.stat().st_mtime)
-    https_upgrade_version = int(HTTPS_UPGRADE_JS.stat().st_mtime)
-    sheetjs_version = int(SHEETJS.stat().st_mtime)
+    css_version = content_version(SCOPEIFY_CSS)
+    js_version = content_version(SCOPEIFY_JS)
+    https_upgrade_version = content_version(HTTPS_UPGRADE_JS)
+    sheetjs_version = content_version(SHEETJS)
     content_security_policy = (
         "default-src 'self'; "
         "base-uri 'self'; "
