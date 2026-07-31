@@ -351,6 +351,22 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         ["include", "script", "styles"]
     )
 
+    require_terms(
+        checks,
+        sources,
+        "privacy_security_agent",
+        "single_use_submission_ticket",
+        "Paid draft jobs require a fresh one-use server ticket, while recovery reuses one payload-stable idempotency key.",
+        [
+            "/v1/scopeify/submission-ticket",
+            "x-scopeify-submission-token",
+            "submissionTicket.token",
+            "const idempotencyKey = newIdempotencyKey();",
+            "runDraftJob(payload, idempotencyKey)"
+        ],
+        ["script"]
+    )
+
     include = sources.get("include", "")
     sow_position = include.find("scopeify-panel-sow")
     inventory_position = include.find("scopeify-panel-inventory")
