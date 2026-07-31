@@ -1,0 +1,48 @@
+name: Scopeify QA
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/scopeify-qa.yml"
+      - "_includes/scopeify-demo.html"
+      - "assets/css/scopeify-demo.css"
+      - "assets/js/scopeify-https-upgrade.js"
+      - "assets/js/scopeify-demo.js"
+      - "assets/vendor/sheetjs/**"
+      - "scopeify-demo/**"
+      - "scopeify.html"
+      - "scripts/build_scopeify_standalone.py"
+      - "scripts/evaluate_scopeify_demo.py"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/scopeify-qa.yml"
+      - "_includes/scopeify-demo.html"
+      - "assets/css/scopeify-demo.css"
+      - "assets/js/scopeify-https-upgrade.js"
+      - "assets/js/scopeify-demo.js"
+      - "assets/vendor/sheetjs/**"
+      - "scopeify-demo/**"
+      - "scopeify.html"
+      - "scripts/build_scopeify_standalone.py"
+      - "scripts/evaluate_scopeify_demo.py"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify vendored SheetJS
+        run: echo "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41  assets/vendor/sheetjs/xlsx.full.min.js" | sha256sum --check -
+      - name: Build Scopeify pages
+        run: python3 scripts/build_scopeify_standalone.py
+      - name: Reject stale generated pages
+        run: git diff --exit-code -- scopeify.html scopeify-demo/standalone.html
+      - name: Run Scopeify quality evaluation
+        run: python3 scripts/evaluate_scopeify_demo.py

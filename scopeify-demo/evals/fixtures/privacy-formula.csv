@@ -1,0 +1,5 @@
+sample_id,response,batch,condition,patient_note
+PATIENT_SECRET_001,R,B1,treatment,PRIVATE_DIAGNOSIS_ALPHA
+PATIENT_SECRET_002,NR,B1,treatment,PRIVATE_DIAGNOSIS_BETA
+PATIENT_SECRET_003,R,B2,control,=HYPERLINK("https://attacker.invalid","click")
+PATIENT_SECRET_004,NR,B2,control,+CMD|test

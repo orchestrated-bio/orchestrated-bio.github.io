@@ -10,19 +10,37 @@ OUTPUT = ROOT / "scopeify-demo" / "standalone.html"
 PAGE = ROOT / "scopeify.html"
 SCOPEIFY_CSS = ROOT / "assets" / "css" / "scopeify-demo.css"
 SCOPEIFY_JS = ROOT / "assets" / "js" / "scopeify-demo.js"
+HTTPS_UPGRADE_JS = ROOT / "assets" / "js" / "scopeify-https-upgrade.js"
+SHEETJS = ROOT / "assets" / "vendor" / "sheetjs" / "xlsx.full.min.js"
 
 
 def main() -> None:
     body = INCLUDE.read_text(encoding="utf-8")
     css_version = int(SCOPEIFY_CSS.stat().st_mtime)
     js_version = int(SCOPEIFY_JS.stat().st_mtime)
+    https_upgrade_version = int(HTTPS_UPGRADE_JS.stat().st_mtime)
+    sheetjs_version = int(SHEETJS.stat().st_mtime)
+    content_security_policy = (
+        "default-src 'self'; "
+        "base-uri 'self'; "
+        "connect-src 'self' https://scopeify-api.orchestrated.bio http://localhost:* http://127.0.0.1:*; "
+        "font-src 'self' data:; "
+        "form-action 'self'; "
+        "img-src 'self' data:; "
+        "object-src 'none'; "
+        "script-src 'self'; "
+        "style-src 'self' 'unsafe-inline'"
+    )
     standalone_html = f"""<!doctype html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="{content_security_policy}">
+    <meta name="referrer" content="no-referrer">
     <title>Scopeify Demo</title>
     <meta name="description" content="Scopeify demo: AI-assisted public-data scoping for prospective bioinformatics consulting projects.">
+    <script src="../assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
     <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
     <link rel="stylesheet" href="../assets/css/company-site/base.css">
@@ -30,6 +48,7 @@ def main() -> None:
 </head>
 <body>
 {body}
+<script src="../assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
 <script src="../assets/js/scopeify-demo.js?v={js_version}"></script>
 </body>
 </html>
@@ -40,6 +59,8 @@ def main() -> None:
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="{content_security_policy}" />
+    <meta name="referrer" content="no-referrer" />
     <meta name="description" content="Scopeify turns a prospective bioinformatics project question into a public-data feasibility brief, ballpark estimate, and draft statement of work." />
     <meta name="theme-color" content="#111826" />
     <title>Scopeify | Orchestrated Biosciences</title>
@@ -54,6 +75,7 @@ def main() -> None:
     <meta property="og:url" content="https://orchestrated.bio/scopeify.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script src="./assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
     <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v={css_version}" />
     <script src="./assets/js/cookie-consent.js"></script>
@@ -93,6 +115,7 @@ def main() -> None:
         </nav>
       </div>
     </footer>
+    <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
     <script src="./assets/js/scopeify-demo.js?v={js_version}"></script>
   </body>
 </html>

@@ -35,245 +35,25 @@
     const documentPanels = Array.from(document.querySelectorAll('.scopeify-document-panel'));
     const feedbackProgress = document.getElementById('scopeify-feedback-progress');
     const feedbackList = document.getElementById('scopeify-feedback-list');
+    const reportArticle = document.querySelector('.scopeify-report');
     const DEFAULT_SCOPEIFY_API_BASE = 'https://scopeify-api.orchestrated.bio';
     const LIVE_API_HOSTS = new Set(['orchestrated.bio', 'www.orchestrated.bio', 'orchestrated-bio.github.io']);
     const SCOPEIFY_API_TIMEOUT_MS = 12000;
     const SCOPEIFY_API_MAX_ATTEMPTS = 2;
     const SCOPEIFY_JOB_POLL_MS = 900;
-    const SCOPEIFY_JOB_MAX_POLLS = 90;
+    const SCOPEIFY_JOB_MAX_POLLS = 180;
+    const MAX_SCHEMA_FILES = 8;
+    const MAX_PROFILE_COLUMNS = 256;
+    const MAX_SPREADSHEET_BYTES = 16 * 1024 * 1024;
     const scopeifyApiBase = getScopeifyApiBase();
-
-    const reports = {
-        neuro: {
-            title: 'GLP-1 / cocaine reward-circuit scope',
-            status: 'Conditional',
-            decision: 'Promising, but indirect',
-            confidence: 'Medium',
-            found: 127,
-            screened: 39,
-            selected: 4,
-            summary: 'A direct public dataset matching GLP-1 agonist treatment, cocaine exposure, and mouse brain transcriptomics is not the likely starting point. The stronger path is a feasibility package that triangulates cocaine-conditioned nucleus accumbens transcriptomics with GLP-1 cocaine-seeking mechanism papers, then decides whether the signal is strong enough for custom analysis.',
-            searchLabel: 'Demo screen across PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv',
-            estimate: {
-                title: 'Feasibility sprint with raw-data checkpoint',
-                hours: '18-28 hours',
-                rationale: 'Matrix-first review is efficient, but the indirect hypothesis adds manual screening time. Raw SRA reprocessing would be quoted as an optional 18-36 hour add-on after metadata review.',
-                outputs: [
-                    'Nextflow pipeline when raw-data reprocessing is included or technically justified',
-                    'Quarto HTML analysis report with evidence review, QC notes, and recommended analysis path',
-                    'Slide deck plus review meeting to walk through feasibility, risks, and next-step options',
-                    'Exported XLSX tables with search logs, dataset inventory, accession map, and exclusions'
-                ]
-            },
-            sowTitle: 'Statement of Work: GLP-1 / cocaine public-data feasibility',
-            sowWindow: '10 business days, matrix-first; raw SRA reprocessing scoped separately',
-            sowMeta: [
-                { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
-                { label: 'Prepared by', value: 'Orchestrated Biosciences' },
-                { label: 'Document type', value: 'Preliminary Statement of Work' },
-                { label: 'Estimate status', value: 'Preliminary; consultation required before quote' }
-            ],
-            sowObjective: 'Determine whether public mouse reward-circuit transcriptomics and GLP-1/cocaine mechanism literature provide a defensible basis for a scoped consulting analysis.',
-            sowDecision: 'Conditional go: proceed with a short feasibility sprint first. Do not quote a full custom analysis until direct-match absence, metadata power, and raw reprocessing value are confirmed.',
-            sow: [
-                { phase: '1', workstream: 'Public evidence search', detail: 'Run source-specific searches across PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv; record queries, counts, and exclusions.', output: 'Search log and screened evidence ledger', hours: '4-6' },
-                { phase: '2', workstream: 'Dataset feasibility review', detail: 'Inspect selected GEO/SRA records for cohort, tissue, technology, metadata, supplement availability, and reuse risk.', output: 'Dataset inventory and accession map', hours: '5-8' },
-                { phase: '3', workstream: 'Analysis recommendation', detail: 'Assess whether matrix-level analysis is sufficient or whether raw SRA reprocessing is justified before a larger scope.', output: 'Go/no-go rationale and raw-data checkpoint', hours: '5-8' },
-                { phase: '4', workstream: 'Client-ready package', detail: 'Assemble the feasibility brief, XLSX tables, and consultation materials for review with the prospective client.', output: 'Quarto HTML brief, XLSX workbook, slide deck, review meeting', hours: '4-6' }
-            ],
-            sowAssumptions: [
-                'The client is using this as a pre-consultation feasibility estimate, not a final quote.',
-                'Initial scope prioritizes public processed matrices and accession metadata before raw-data reprocessing.',
-                'Any proprietary client data review is limited to browser-side filename, format, heading, and preview-level summaries unless separately approved.'
-            ],
-            sowExclusions: [
-                'No claim that GLP-1 agonist exposure and cocaine exposure are directly represented in the same public transcriptomic cohort until live search verifies it.',
-                'Raw FASTQ reprocessing, cloud compute, and custom Nextflow productionization are optional add-ons after metadata review.',
-                'Wet-lab design, regulatory claims, and causal therapeutic conclusions are outside this feasibility SOW.'
-            ],
-            sources: [
-                { source: 'PubMed', query: 'GLP-1 receptor agonist, exendin-4, cocaine seeking, reward circuitry', found: 58, screened: 16, selected: 2, note: 'Mechanism papers and citation trail' },
-                { source: 'GEO', query: 'mouse cocaine nucleus accumbens VTA RNA-seq snRNA-seq transcriptomics', found: 21, screened: 8, selected: 1, note: 'Reusable expression matrices' },
-                { source: 'SRA', query: 'linked runs for selected GEO cocaine brain studies', found: 27, screened: 8, selected: 1, note: 'Raw-data feasibility and run metadata' },
-                { source: 'ENA', query: 'INSDC cross-check for selected SRA/BioProject accessions', found: 14, screened: 4, selected: 0, note: 'Archive mirror and metadata consistency check' },
-                { source: 'GSA/CNSA', query: 'GLP-1 cocaine reward circuitry mouse transcriptomics', found: 0, screened: 0, selected: 0, note: 'China-archive negative search logged' },
-                { source: 'bioRxiv', query: 'GLP-1 VTA GABA cocaine seeking preprint transcriptomics', found: 7, screened: 3, selected: 0, note: 'Recent evidence, publication-status check' }
-            ],
-            criteria: [
-                'Selected records must connect to reward circuitry, cocaine exposure, public accessions, or GLP-1 mechanism evidence.',
-                'Dataset records were favored over narrative papers when expression matrices, raw reads, sample metadata, or BioProject links were visible.',
-                'The brief separates directly analyzable datasets from interpretation-only papers so the client can see what can actually be computed.'
-            ],
-            evidence: [
-                {
-                    fit: 'Dataset',
-                    source: 'GEO',
-                    id: 'GSE210850',
-                    title: 'NPAS4 controls cell type-specific circuit adaptations underlying drug-seeking behavior',
-                    year: 'Public 2023; citation PMID 39117647',
-                    cohort: 'Mouse nucleus accumbens after cocaine or saline conditioning',
-                    technology: 'Single-nucleus RNA-seq, Illumina NovaSeq 6000',
-                    availability: 'Processed H5 supplement; raw data linked through BioProject PRJNA867708',
-                    rationale: 'Best molecular anchor for a cocaine-conditioned reward-circuit analysis. It does not test GLP-1 directly, so it should anchor feasibility rather than overclaim causality.',
-                    risk: 'Only four GEO samples are visible on the series record; downstream value depends on cell-state metadata and statistical power.'
-                },
-                {
-                    fit: 'Raw data',
-                    source: 'SRA',
-                    id: 'PRJNA867708',
-                    title: 'Raw sequencing path for the GSE210850 nucleus accumbens study',
-                    year: 'Linked to GSE210850',
-                    cohort: 'Same mouse nucleus accumbens conditioning experiment',
-                    technology: 'Raw sequencing files for reprocessing',
-                    availability: 'SRA access available from the GEO series',
-                    rationale: 'Keeps a deeper reproducibility path open if the matrix is insufficient or if the client wants custom reprocessing.',
-                    risk: 'Reprocessing cost depends on run count, cell-level metadata, and whether the raw files match the desired comparison.'
-                },
-                {
-                    fit: 'Literature',
-                    source: 'PubMed',
-                    id: 'PMID 26072178',
-                    title: 'GLP-1 receptor agonist exendin-4 reduces cocaine self-administration',
-                    year: '2015',
-                    cohort: 'Rodent cocaine self-administration model',
-                    technology: 'Behavioral pharmacology, not omics',
-                    availability: 'Paper evidence; no reusable transcriptomic matrix',
-                    rationale: 'Supports the biological plausibility of GLP-1 receptor agonism in cocaine-related behavior.',
-                    risk: 'Useful for hypothesis framing, not for computing a transcriptomic effect.'
-                },
-                {
-                    fit: 'Literature',
-                    source: 'PubMed / bioRxiv',
-                    id: 'PMID 40009667',
-                    title: 'Endogenous GLP-1 circuit engages VTA GABA neurons to attenuate cocaine seeking',
-                    year: '2025',
-                    cohort: 'Rodent mesolimbic circuit study',
-                    technology: 'Circuit physiology and behavioral evidence',
-                    availability: 'Publication and preprint trail; omics reuse requires manual supplement check',
-                    rationale: 'Gives the review a current mechanistic bridge between GLP-1 signaling, VTA circuitry, and cocaine seeking.',
-                    risk: 'May not provide a direct expression matrix for Scopeify to reuse.'
-                }
-            ],
-        },
-        oncology: {
-            title: 'Melanoma anti-PD-1 biomarker scope',
-            status: 'Strong path',
-            decision: 'Strong public-data path',
-            confidence: 'High',
-            found: 168,
-            screened: 50,
-            selected: 4,
-            summary: 'This is a better public-data consulting target. Multiple melanoma immunotherapy cohorts expose transcriptomic matrices, response labels, linked publications, and SRA paths. The main work is cohort selection, endpoint harmonization, and avoiding leakage across overlapping studies.',
-            searchLabel: 'Demo screen across PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv',
-            estimate: {
-                title: 'Matrix-first biomarker feasibility package',
-                hours: '24-40 hours',
-                rationale: 'Multiple matrix-ready cohorts reduce retrieval risk. Raw-data reprocessing, if requested, would add an estimated 24-45 hours depending on run count and endpoint harmonization.',
-                outputs: [
-                    'Nextflow pipeline when raw FASTQ/BAM reprocessing is included or needed for comparability',
-                    'Quarto HTML analysis report with cohort review, QC checks, endpoint map, and scope recommendation',
-                    'Slide deck plus review meeting to discuss analysis tradeoffs and follow-on scope',
-                    'Exported XLSX tables for cohort inventory, response labels, search logs, exclusions, and selected evidence'
-                ]
-            },
-            sowTitle: 'Statement of Work: melanoma anti-PD-1 biomarker feasibility',
-            sowWindow: '10 business days matrix-first; 15-20 with raw-data reprocessing',
-            sowMeta: [
-                { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
-                { label: 'Prepared by', value: 'Orchestrated Biosciences' },
-                { label: 'Document type', value: 'Preliminary Statement of Work' },
-                { label: 'Estimate status', value: 'Preliminary; consultation required before quote' }
-            ],
-            sowObjective: 'Assess whether public melanoma transcriptomics can support a practical anti-PD-1 response biomarker feasibility analysis with transparent cohort selection and endpoint harmonization.',
-            sowDecision: 'Strong go for a matrix-first feasibility package. A larger raw-data or model-development scope should follow only after cohort overlap, endpoint labels, and batch structure are reviewed.',
-            sow: [
-                { phase: '1', workstream: 'Public evidence search', detail: 'Search PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv for melanoma immunotherapy cohorts with expression data and response labels.', output: 'Search log, screened records, and exclusion notes', hours: '5-8' },
-                { phase: '2', workstream: 'Cohort and endpoint review', detail: 'Compare candidate cohorts for sample count, treatment timing, clinical-benefit labels, technology, supplements, and linked raw data.', output: 'Cohort inventory, endpoint map, and reuse-risk table', hours: '7-12' },
-                { phase: '3', workstream: 'Analysis design', detail: 'Recommend matrix-level analyses, validation strategy, leakage controls, and whether raw SRA reprocessing is worth the additional cost.', output: 'Analysis plan and optional reprocessing checkpoint', hours: '8-14' },
-                { phase: '4', workstream: 'Client-ready package', detail: 'Prepare the SOW-style feasibility brief, exported tables, and review materials for a decision meeting.', output: 'Quarto HTML brief, XLSX workbook, slide deck, review meeting', hours: '4-6' }
-            ],
-            sowAssumptions: [
-                'The first scope uses public processed matrices where possible to keep the estimate efficient.',
-                'Response labels, treatment timing, and patient overlap must be harmonized before any biomarker model is treated as interpretable.',
-                'The client will confirm whether the goal is feasibility review, signature benchmarking, or follow-on model development.'
-            ],
-            sowExclusions: [
-                'No clinical-grade biomarker claim, regulatory claim, or therapeutic efficacy claim is included in this feasibility SOW.',
-                'Controlled-access datasets, cloud compute, and raw reprocessing are treated as optional follow-on work unless explicitly approved.',
-                'Prospective validation, wet-lab assay design, and companion diagnostic development are outside this preliminary estimate.'
-            ],
-            sources: [
-                { source: 'PubMed', query: 'melanoma anti-PD-1 response RNA-seq biomarker GEO', found: 72, screened: 19, selected: 2, note: 'Clinical context and endpoint definitions' },
-                { source: 'GEO', query: 'melanoma anti-PD-1 response expression profiling high throughput sequencing', found: 31, screened: 10, selected: 2, note: 'Matrix-ready public cohorts' },
-                { source: 'SRA', query: 'GSE91061 GSE78220 linked SRA raw reads', found: 33, screened: 10, selected: 2, note: 'Reprocessing and run metadata' },
-                { source: 'ENA', query: 'INSDC cross-check for melanoma immunotherapy BioProjects', found: 22, screened: 7, selected: 0, note: 'Archive mirror and metadata consistency check' },
-                { source: 'GSA/CNSA', query: 'melanoma anti-PD-1 response transcriptomics', found: 1, screened: 0, selected: 0, note: 'China-archive check; no rapid-scope fit selected' },
-                { source: 'bioRxiv', query: 'melanoma immunotherapy transcriptomic response preprint spatial single-cell', found: 9, screened: 4, selected: 0, note: 'Recent methods and exclusion check' }
-            ],
-            criteria: [
-                'Selected records must include melanoma, immunotherapy exposure, response or clinical-benefit labels, and public expression data.',
-                'Matrix-ready cohorts are favored for rapid feasibility; SRA-linked cohorts are flagged for optional reprocessing.',
-                'Controlled-access or label-poor cohorts are excluded from the rapid public-data package even when biologically relevant.'
-            ],
-            evidence: [
-                {
-                    fit: 'Dataset',
-                    source: 'GEO',
-                    id: 'GSE91061 / SRP094781',
-                    title: 'Molecular portraits of tumor mutational and micro-environmental sculpting by immune checkpoint blockade therapy',
-                    year: 'Public 2018; PMID 29033130',
-                    cohort: '65 patients; 109 RNA-seq samples with pre-treatment and on-treatment tumors',
-                    technology: 'Bulk RNA-seq; Illumina Genome Analyzer',
-                    availability: 'Processed CSV files and raw data in SRA',
-                    rationale: 'Best anchor cohort because it has paired treatment timing, patient-level samples, processed matrices, and a linked SRA path.',
-                    risk: 'Endpoint and treatment labels need harmonization before any model or signature comparison.'
-                },
-                {
-                    fit: 'Dataset',
-                    source: 'GEO',
-                    id: 'GSE78220 / SRP070710',
-                    title: 'mRNA expressions in pre-treatment melanomas undergoing anti-PD-1 checkpoint inhibition therapy',
-                    year: 'Public 2016; PMID 26997480',
-                    cohort: '28 pretreatment melanoma biopsies',
-                    technology: 'Paired-end RNA-seq, Illumina HiSeq 2000',
-                    availability: 'Processed XLSX matrix; raw data available in SRA',
-                    rationale: 'Clean pretreatment response setting that can validate or benchmark signatures discovered in GSE91061.',
-                    risk: 'Small cohort; clinical endpoint labels must be extracted and standardized carefully.'
-                },
-                {
-                    fit: 'Dataset',
-                    source: 'GEO',
-                    id: 'GSE168204',
-                    title: 'Pathway signatures derived from on-treatment tumor specimens predict anti-PD-1 response',
-                    year: 'Public 2021',
-                    cohort: 'Metastatic melanoma cohorts with pre-treatment and on-treatment RNA-seq',
-                    technology: 'RNA-seq and clinical response annotations',
-                    availability: 'GEO series record with reusable expression data',
-                    rationale: 'Useful as a secondary cohort and methods reference for pathway-level response scoring.',
-                    risk: 'May overlap conceptually with prior cohorts; de-duplication and provenance checks are required.'
-                },
-                {
-                    fit: 'Raw data',
-                    source: 'SRA',
-                    id: 'SRP094781 and SRP070710',
-                    title: 'Raw sequencing runs for selected melanoma GEO cohorts',
-                    year: 'Linked to GEO records',
-                    cohort: 'Selected melanoma tumor RNA-seq samples',
-                    technology: 'Raw sequencing files',
-                    availability: 'SRA run selector links from GEO',
-                    rationale: 'Provides a reproducibility option if matrix-level analysis is insufficient or if batch handling needs stricter control.',
-                    risk: 'Raw reprocessing increases cost and timeline; labels may remain in publication supplements.'
-                }
-            ],
-        }
-    };
 
     const MAX_TEXT_PREVIEW_BYTES = 160000;
     const DATA_PREVIEW_SCHEMA_VERSION = 'scopeify.client_data_preview.v1';
 
-    let currentReport = reports.neuro;
+    let currentReport = null;
     let dataScanReview = 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
     let latestDataPreview = createEmptyDataPreview();
+    let dataScanPromise = Promise.resolve();
 
     function escapeHtml(value) {
         return String(value)
@@ -285,14 +65,27 @@
 
     function getScopeifyApiBase() {
         const explicit = typeof window.SCOPEIFY_API_BASE === 'string' ? window.SCOPEIFY_API_BASE.trim() : '';
-        if (explicit) return explicit.replace(/\/+$/, '');
-
-        const params = new URLSearchParams(window.location.search);
-        const configured = params.get('scopeify_api');
-        if (configured) return configured.replace(/\/+$/, '');
+        if (explicit && isAllowedApiBase(explicit)) return explicit.replace(/\/+$/, '');
 
         if (LIVE_API_HOSTS.has(window.location.hostname)) return DEFAULT_SCOPEIFY_API_BASE;
+
+        const isLocalPage = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+        if (isLocalPage) {
+            const configured = new URLSearchParams(window.location.search).get('scopeify_api');
+            if (configured && isAllowedApiBase(configured)) return configured.replace(/\/+$/, '');
+        }
         return '';
+    }
+
+    function isAllowedApiBase(value) {
+        try {
+            const parsed = new URL(value, window.location.href);
+            if (parsed.origin === new URL(DEFAULT_SCOPEIFY_API_BASE).origin) return true;
+            return ['localhost', '127.0.0.1', '::1'].includes(parsed.hostname)
+                && ['http:', 'https:'].includes(parsed.protocol);
+        } catch (error) {
+            return false;
+        }
     }
 
     function formatGeneratedDate(date) {
@@ -316,9 +109,6 @@
     function compactSowTitle(baseReport, sowTitleText) {
         const titleText = String(sowTitleText || '').trim();
         if (!titleText) return baseReport.sowTitle || 'Statement of Work: public-data feasibility review';
-        if (titleText.length > 86 || /\s-\s/.test(titleText)) {
-            return baseReport.sowTitle || 'Statement of Work: public-data feasibility review';
-        }
         return titleText;
     }
 
@@ -346,15 +136,12 @@
         };
     }
 
-    function publishDataPreview() {
-        window.scopeifyLatestDataPreview = latestDataPreview;
-    }
-
     function setDocumentTab(tabName) {
         documentTabs.forEach(tab => {
             const isActive = tab.dataset.scopeifyTab === tabName;
             tab.classList.toggle('is-active', isActive);
             tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            tab.tabIndex = isActive ? 0 : -1;
         });
 
         documentPanels.forEach(panel => {
@@ -378,14 +165,14 @@
         };
     }
 
-    function staticFeedbackForReport(report) {
+    function initialFeedback() {
         return [
             makeFeedbackItem(
                 'Project route',
-                'complete',
+                'pending',
                 'info',
-                'Example intake is routed to a preliminary bioinformatics scope.',
-                report.sowWindow || ''
+                'Enter a biological question to prepare a project-specific scope.',
+                'Scopeify will identify the analysis route after submission.'
             ),
             makeFeedbackItem(
                 'Browser data preview',
@@ -398,17 +185,17 @@
             ),
             makeFeedbackItem(
                 'Public archive screen',
-                'complete',
+                'pending',
                 'info',
-                `Example inventory includes ${report.selected || 0} selected rows; live records appear after submission.`,
+                'Public archive search begins after submission.',
                 'Dataset inventory stays separate from the Statement of Work.'
             ),
             makeFeedbackItem(
                 'Statement of Work',
-                'complete',
+                'pending',
                 'info',
-                'Draft SOW preview is available with phases, hours, deliverables, assumptions, and exclusions.',
-                'Submit the form to run the backend scoping workflow.'
+                'No project-specific Statement of Work has been generated yet.',
+                'Submit the form to run the scoping workflow.'
             ),
             makeFeedbackItem(
                 'Human review',
@@ -426,15 +213,15 @@
                 'Recovery',
                 'needs_review',
                 'review',
-                'Live scoping feedback was unavailable, so Scopeify kept the static draft visible.',
-                message || 'Retry the live backend or schedule a consultation.'
+                'Live scoping did not return a validated result after one recovery attempt.',
+                message || 'Retry the request or schedule a consultation.'
             ),
             makeFeedbackItem(
                 'Statement of Work',
-                'complete',
-                'info',
-                'The recovered draft still includes the SOW structure and dataset inventory appendix.',
-                'Treat it as a demo example until live search returns.'
+                'blocked',
+                'blocker',
+                'No hypothesis-specific SOW or dataset inventory is being shown as a substitute.',
+                'This prevents a stale example from being mistaken for a live result.'
             ),
             makeFeedbackItem(
                 'Human review',
@@ -500,7 +287,7 @@
         if (!feedbackList) return;
         const safeItems = Array.isArray(items) && items.length
             ? items
-            : staticFeedbackForReport(currentReport || reports.neuro);
+            : initialFeedback();
         feedbackList.innerHTML = safeItems.map(item => `
             <li class="scopeify-feedback-item" data-severity="${escapeHtml(item.severity || 'info')}">
                 <div>
@@ -515,9 +302,75 @@
         `).join('');
     }
 
-    function chooseReport() {
-        const text = hypothesis.value.toLowerCase();
-        return text.match(/cancer|tumou?r|melanoma|immunotherapy|checkpoint|pd-?1/) ? reports.oncology : reports.neuro;
+    function neutralProjectReport(state) {
+        const isFailure = state === 'failed';
+        const projectQuestion = hypothesis.value.trim() || 'Project question pending';
+        const sourceRows = liveArchiveSources().map(source => ({
+            source,
+            query: isFailure ? 'Not completed' : 'Pending source-specific plan',
+            found: 0,
+            screened: 0,
+            selected: 0,
+            note: isFailure ? 'No validated source result returned' : 'Waiting for validated backend search'
+        }));
+        return {
+            title: isFailure ? 'Scoping request not completed' : 'Preparing project scope',
+            status: isFailure ? 'Unavailable' : 'Running',
+            decision: isFailure ? 'No result issued' : 'Scoping in progress',
+            summary: isFailure
+                ? 'Scopeify could not return a validated project-specific result. No static example has been substituted.'
+                : `Scopeify is validating the intake and preparing a project-specific SOW for: ${projectQuestion}`,
+            searchLabel: isFailure ? 'Live search not completed' : 'Live search pending',
+            shortlistLabel: isFailure ? 'No validated inventory issued' : 'Inventory pending',
+            estimate: {
+                title: isFailure ? 'Estimate unavailable' : 'Estimate pending',
+                hours: 'Pending',
+                rationale: isFailure
+                    ? 'Estimated hours require a validated project route and source screen.'
+                    : 'Hours will be calculated from the project route, source coverage, data structure, and review requirements.',
+                outputs: [
+                    'Nextflow pipeline when raw-data processing is applicable',
+                    'Quarto HTML analysis report',
+                    'Slide deck plus review meeting',
+                    'Exported XLSX dataset inventory and project estimates'
+                ]
+            },
+            sowTitle: 'Statement of Work: preliminary project scope',
+            sowWindow: isFailure ? 'Not issued' : 'Generation in progress',
+            generatedDate: new Date().toISOString().slice(0, 10),
+            sowMeta: [
+                { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
+                { label: 'Prepared by', value: 'Orchestrated Biosciences' },
+                { label: 'Document type', value: 'Preliminary Statement of Work' },
+                { label: 'Estimate status', value: isFailure ? 'Not issued' : 'Pending validation' }
+            ],
+            sowObjective: isFailure
+                ? 'Retry the scoping workflow before relying on an estimate.'
+                : 'Translate the submitted hypothesis into a reviewable consulting scope.',
+            sowDecision: isFailure
+                ? 'No project recommendation was issued. Retry or schedule a consultation.'
+                : 'Pending source search, data-structure review, and project routing.',
+            sow: [{
+                phase: '1',
+                workstream: isFailure ? 'Recovery' : 'Intake and evidence review',
+                detail: isFailure ? 'Retry the validated scoping workflow.' : 'Validate the question, identify suitable sources, and determine the appropriate analysis route.',
+                output: isFailure ? 'Validated retry or consultation agenda' : 'Project-specific SOW and evidence appendix',
+                hours: 'Pending'
+            }],
+            sowAssumptions: ['A formal quote requires human review of the generated scope.'],
+            sowExclusions: ['No project-specific evidence or estimate is asserted until the backend returns a validated result.'],
+            clientNotesReflected: getClientNotes(),
+            dataPreviewConsiderations: [],
+            sources: sourceRows,
+            criteria: isFailure
+                ? ['No archive result is treated as selected after an incomplete request.']
+                : ['Source-specific queries and selection criteria will be recorded in the separate inventory appendix.'],
+            evidence: [],
+            selected: 0,
+            screened: 0,
+            found: 0,
+            feedback: []
+        };
     }
 
     function moveShellToTop() {
@@ -533,6 +386,9 @@
         shell.classList.add('scopeify-is-submitted');
         setDocumentTab('sow');
         moveShellToTop();
+        window.setTimeout(() => {
+            if (reportArticle) reportArticle.focus({ preventScroll: true });
+        }, 0);
     }
 
     function enterIntakeState() {
@@ -560,7 +416,11 @@
     }
 
     function isTextLike(file) {
-        return /\.(csv|tsv|txt|json)$/i.test(file.name) || /^text\//.test(file.type);
+        return /\.(csv|tsv|txt|json|jsonl|ndjson)$/i.test(file.name) || /^text\//.test(file.type);
+    }
+
+    function isSpreadsheet(file) {
+        return /\.(xlsx|xls|xlsm|ods)$/i.test(file.name);
     }
 
     function normalizeHeader(header) {
@@ -569,6 +429,18 @@
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '_')
             .replace(/^_+|_+$/g, '');
+    }
+
+    function safeSchemaLabel(value, fallback, maxLength) {
+        const cleaned = String(value == null ? '' : value)
+            .replace(/[\u0000-\u001f\u007f]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+        return (cleaned || fallback).slice(0, maxLength);
+    }
+
+    function safeFileName(fileName) {
+        return safeSchemaLabel(String(fileName || '').replace(/[\\/]/g, '_'), 'unnamed_file', 255);
     }
 
     function isMissingValue(value) {
@@ -615,13 +487,24 @@
 
         row.push(field.trim());
         if (row.some(value => value !== '')) rows.push(row);
-        return rows.slice(0, 251);
+        return { rows: rows.slice(0, 251), unclosedQuote: inQuotes };
     }
 
-    function chooseDelimiter(firstLine) {
-        const tabCount = (firstLine.match(/\t/g) || []).length;
-        const commaCount = (firstLine.match(/,/g) || []).length;
-        return tabCount > commaCount ? '\t' : ',';
+    function chooseDelimiter(text) {
+        const sample = text.split(/\r?\n/).filter(line => line.trim()).slice(0, 12).join('\n');
+        const candidates = ['\t', ',', ';', '|'];
+        return candidates
+            .map(delimiter => ({ delimiter, count: (sample.split(delimiter).length - 1) }))
+            .sort((left, right) => right.count - left.count)[0].delimiter;
+    }
+
+    function delimiterName(delimiter) {
+        return {
+            '\t': 'tab',
+            ',': 'comma',
+            ';': 'semicolon',
+            '|': 'pipe'
+        }[delimiter] || null;
     }
 
     function getColumnValues(rows, index) {
@@ -666,16 +549,6 @@
         return { role: 'unknown', confidence: 0.2 };
     }
 
-    function uniquePreview(values) {
-        const seen = [];
-        values.forEach(value => {
-            const trimmed = String(value || '').trim();
-            if (!trimmed || seen.includes(trimmed)) return;
-            if (seen.length < 6) seen.push(trimmed);
-        });
-        return seen;
-    }
-
     function profileColumns(headers, rows) {
         return headers.map((header, index) => {
             const values = getColumnValues(rows, index);
@@ -683,8 +556,8 @@
             const primitiveType = inferPrimitiveType(values);
             const role = inferColumnRole(header, primitiveType);
             return {
-                name: header,
-                normalized_name: normalizeHeader(header),
+                name: safeSchemaLabel(header, `unnamed_${index + 1}`, 256),
+                normalized_name: normalizeHeader(header).slice(0, 256) || `column_${index + 1}`,
                 index,
                 inferred_type: primitiveType,
                 inferred_role: role.role,
@@ -692,7 +565,7 @@
                 missing_count: missingCount,
                 missing_rate: rows.length ? Number((missingCount / rows.length).toFixed(3)) : 0,
                 unique_count_preview: new Set(values.filter(value => !isMissingValue(value)).map(value => value.toLowerCase())).size,
-                unique_values_preview: uniquePreview(values)
+                value_examples_redacted: true
             };
         });
     }
@@ -772,7 +645,7 @@
         const riskMessages = filePreview.risk_flags.map(flag => flag.message);
         const riskSummary = riskMessages.length ? `risk flags: ${riskMessages.slice(0, 5).join('; ')}` : 'no immediate table-structure risks in preview';
 
-        return `${filePreview.file_name}: ${filePreview.columns.length || 'unknown'} columns, ${filePreview.rows_previewed || 'unknown'} preview rows; LLM-ready table preview validated; ${fieldSummaries.join('; ')}; ${riskSummary}.`;
+        return `${filePreview.file_name}: ${filePreview.columns.length || 'unknown'} profiled columns, ${filePreview.rows_previewed || 'unknown'} locally inspected rows; schema summary validated; ${fieldSummaries.join('; ')}; ${riskSummary}. Cell values remain in this browser.`.slice(0, 1200);
     }
 
     function validateFilePreview(filePreview) {
@@ -797,8 +670,16 @@
     }
 
     function profileParsedTable(file, headers, rows, parserMetadata) {
-        const cleanHeaders = headers.map((header, index) => String(header || '').trim() || `unnamed_${index + 1}`);
-        const columns = profileColumns(cleanHeaders, rows);
+        const observedColumnCount = headers.length;
+        const cleanHeaders = headers
+            .slice(0, MAX_PROFILE_COLUMNS)
+            .map((header, index) => safeSchemaLabel(header, `unnamed_${index + 1}`, 256));
+        const boundedRows = rows.map(row => row.slice(0, MAX_PROFILE_COLUMNS));
+        const formulaCellCount = parserMetadata.formulaCellCount || boundedRows.reduce(
+            (total, row) => total + row.filter(value => /^\s*[=+\-@]/.test(String(value || ''))).length,
+            0
+        );
+        const columns = profileColumns(cleanHeaders, boundedRows);
         const candidateRoles = {
             sample_id_fields: fieldsByRole(columns, ['sample_id']),
             outcome_fields: fieldsByRole(columns, ['outcome']),
@@ -808,22 +689,56 @@
             covariate_fields: fieldsByRole(columns, ['covariate']),
             design_field_candidates: fieldsByRole(columns, ['candidate_design_field'])
         };
-        const riskFlags = buildRiskFlags(file.name, columns, rows);
+        const riskFlags = buildRiskFlags(file.name, columns, boundedRows);
+        if (observedColumnCount > MAX_PROFILE_COLUMNS) {
+            riskFlags.push(makeFlag(
+                'column_profile_limit',
+                'review',
+                `${observedColumnCount} columns observed; schema summary limited to the first ${MAX_PROFILE_COLUMNS}`,
+                [file.name]
+            ));
+        }
+        if (parserMetadata.unclosedQuote) {
+            riskFlags.push(makeFlag('unclosed_quote', 'blocker', 'an unclosed quoted field was detected', [file.name]));
+        }
+        if (parserMetadata.rowWidthMismatch) {
+            riskFlags.push(makeFlag('row_width_mismatch', 'review', 'rows with inconsistent field counts were detected', [file.name]));
+        }
+        if (formulaCellCount) {
+            riskFlags.push(makeFlag(
+                'formula_cells_present',
+                'info',
+                `${formulaCellCount} formula-like cells detected; formulas were not executed`,
+                [parserMetadata.selectedSheet || file.name]
+            ));
+        }
+        if (parserMetadata.hiddenSheetCount) {
+            riskFlags.push(makeFlag(
+                'hidden_sheets_present',
+                'review',
+                `${parserMetadata.hiddenSheetCount} hidden workbook sheet(s) require review`,
+                [file.name]
+            ));
+        }
         const filePreview = {
-            file_name: file.name,
+            file_name: safeFileName(file.name),
             extension: getFileExtension(file.name),
             mime_type: file.type || 'unknown',
             size_bytes: file.size,
-            parser_status: rows.length ? 'parsed' : 'empty',
+            parser_status: boundedRows.length ? 'parsed' : 'empty',
             delimiter: parserMetadata.delimiter || null,
-            rows_previewed: rows.length,
+            rows_previewed: boundedRows.length,
+            columns_observed: observedColumnCount,
             columns,
+            workbook_sheet_count: parserMetadata.workbookSheetCount || 0,
+            sheet_names: parserMetadata.sheetNames || [],
+            selected_sheet: parserMetadata.selectedSheet || '',
             candidate_roles: candidateRoles,
             risk_flags: riskFlags,
             llm_prompt_summary: '',
             summary: ''
         };
-        if (!rows.length) {
+        if (!boundedRows.length) {
             filePreview.risk_flags.push(makeFlag('no_data_rows', 'review', 'empty file or no readable rows detected', [file.name]));
             filePreview.summary = `${file.name}: empty file or no readable rows detected.`;
         } else {
@@ -843,14 +758,18 @@
         } catch (error) {
             const summary = `${file.name}: JSON selected, but the preview could not parse it cleanly. Production review would inspect schema and representative records.`;
             return {
-                file_name: file.name,
+                file_name: safeFileName(file.name),
                 extension: getFileExtension(file.name),
                 mime_type: file.type || 'application/json',
                 size_bytes: file.size,
                 parser_status: 'parse_error',
                 delimiter: null,
                 rows_previewed: 0,
+                columns_observed: 0,
                 columns: [],
+                workbook_sheet_count: 0,
+                sheet_names: [],
+                selected_sheet: '',
                 candidate_roles: {
                     sample_id_fields: [],
                     outcome_fields: [],
@@ -867,7 +786,46 @@
         }
     }
 
+    function profileJsonLinesFile(file, text) {
+        const lines = text.split(/\r?\n/).filter(line => line.trim()).slice(0, 250);
+        try {
+            const records = lines.map(line => JSON.parse(line)).filter(item => item && typeof item === 'object' && !Array.isArray(item));
+            const headers = [...new Set(records.flatMap(record => Object.keys(record)))];
+            const rows = records.map(record => headers.map(header => record[header] == null ? '' : String(record[header])));
+            return profileParsedTable(file, headers, rows, { delimiter: null });
+        } catch (error) {
+            const summary = `${file.name}: JSON Lines selected, but at least one inspected line was not a valid object.`;
+            return {
+                file_name: safeFileName(file.name),
+                extension: getFileExtension(file.name),
+                mime_type: file.type || 'application/x-ndjson',
+                size_bytes: file.size,
+                parser_status: 'parse_error',
+                delimiter: null,
+                rows_previewed: 0,
+                columns_observed: 0,
+                columns: [],
+                workbook_sheet_count: 0,
+                sheet_names: [],
+                selected_sheet: '',
+                candidate_roles: {
+                    sample_id_fields: [],
+                    outcome_fields: [],
+                    treatment_fields: [],
+                    batch_fields: [],
+                    timepoint_fields: [],
+                    covariate_fields: [],
+                    design_field_candidates: []
+                },
+                risk_flags: [makeFlag('invalid_json_lines', 'blocker', 'JSON Lines preview contains an invalid record', [file.name])],
+                llm_prompt_summary: summary,
+                summary
+            };
+        }
+    }
+
     function profileTextFile(file, text) {
+        text = text.replace(/^\uFEFF/, '');
         const lines = text.split(/\r?\n/).filter(line => line.trim()).slice(0, 250);
         if (!lines.length) {
             return profileParsedTable(file, [], [], { delimiter: null });
@@ -876,25 +834,137 @@
         if (/\.json$/i.test(file.name)) {
             return profileJsonFile(file, text);
         }
+        if (/\.(jsonl|ndjson)$/i.test(file.name)) {
+            return profileJsonLinesFile(file, text);
+        }
 
-        const delimiter = chooseDelimiter(lines[0]);
-        const parsedRows = parseDelimitedRows(text, delimiter);
-        const headers = (parsedRows[0] || []).filter(Boolean);
+        const delimiter = chooseDelimiter(text);
+        const parsed = parseDelimitedRows(text, delimiter);
+        const parsedRows = parsed.rows;
+        const headers = parsedRows[0] || [];
         const rows = parsedRows.slice(1, 251);
-        return profileParsedTable(file, headers, rows, { delimiter: delimiter === '\t' ? 'tab' : 'comma' });
+        const expectedWidth = (parsedRows[0] || []).length;
+        const rowWidthMismatch = rows.some(row => row.length !== expectedWidth);
+        return profileParsedTable(file, headers, rows, {
+            delimiter: delimiterName(delimiter),
+            unclosedQuote: parsed.unclosedQuote,
+            rowWidthMismatch
+        });
+    }
+
+    async function profileSpreadsheetFile(file) {
+        if (file.size > MAX_SPREADSHEET_BYTES) {
+            const preview = profileBinaryFile(file);
+            preview.risk_flags = [makeFlag(
+                'spreadsheet_size_limit',
+                'review',
+                `workbook exceeds the ${formatBytes(MAX_SPREADSHEET_BYTES)} browser inspection limit`,
+                [file.name]
+            )];
+            preview.summary = `${file.name}: ${formatBytes(file.size)} workbook selected. It is too large for bounded browser-side schema inspection and requires consultation review.`;
+            preview.llm_prompt_summary = preview.summary;
+            return preview;
+        }
+        if (!window.XLSX) {
+            const preview = profileBinaryFile(file);
+            preview.risk_flags = [makeFlag('spreadsheet_parser_unavailable', 'blocker', 'workbook parser is unavailable', [file.name])];
+            preview.summary = `${file.name}: workbook parser did not load, so no sheet or column structure was inspected.`;
+            preview.llm_prompt_summary = preview.summary;
+            return preview;
+        }
+
+        try {
+            const workbook = window.XLSX.read(await file.arrayBuffer(), {
+                type: 'array',
+                cellFormula: true,
+                cellHTML: false,
+                cellNF: false,
+                cellStyles: false,
+                cellDates: false,
+                dense: false
+            });
+            let sheetNames = (workbook.SheetNames || []).slice(0, 20);
+            const sheetMetadata = workbook.Workbook && Array.isArray(workbook.Workbook.Sheets)
+                ? workbook.Workbook.Sheets
+                : [];
+            const hiddenByName = new Map(sheetMetadata.map((item, index) => [
+                item.name || workbook.SheetNames[index],
+                Number(item.Hidden || 0)
+            ]));
+            const hiddenSheetCount = sheetMetadata.filter(item => Number(item.Hidden || 0) > 0).length;
+            const selectedSheet = (workbook.SheetNames || []).find(name => {
+                const worksheet = workbook.Sheets[name];
+                return Number(hiddenByName.get(name) || 0) === 0 && worksheet && worksheet['!ref'];
+            }) || '';
+            if (selectedSheet && !sheetNames.includes(selectedSheet)) {
+                sheetNames = [...sheetNames.slice(0, 19), selectedSheet];
+            }
+
+            if (!selectedSheet) {
+                const preview = profileBinaryFile(file);
+                preview.workbook_sheet_count = (workbook.SheetNames || []).length;
+                preview.sheet_names = sheetNames;
+                preview.risk_flags = [makeFlag(
+                    'no_visible_worksheet',
+                    'review',
+                    'no visible readable worksheet data were found; hidden sheets were not profiled',
+                    [file.name]
+                )];
+                preview.summary = `${file.name}: workbook opened locally, but no visible readable worksheet data were found. Hidden sheets were not profiled.`;
+                preview.llm_prompt_summary = preview.summary;
+                return preview;
+            }
+
+            const worksheet = workbook.Sheets[selectedSheet];
+            const tableRows = window.XLSX.utils.sheet_to_json(worksheet, {
+                header: 1,
+                raw: false,
+                defval: '',
+                blankrows: false,
+                range: 0
+            }).slice(0, 251);
+            const headers = (tableRows[0] || []).map(value => String(value || ''));
+            const rows = tableRows.slice(1);
+            const expectedWidth = headers.length;
+            const formulaCellCount = Object.keys(worksheet).slice(0, 100000).reduce((total, address) => {
+                if (address.startsWith('!')) return total;
+                const cell = worksheet[address];
+                return total + (cell && typeof cell.f === 'string' ? 1 : 0);
+            }, 0);
+            return profileParsedTable(file, headers, rows, {
+                delimiter: null,
+                rowWidthMismatch: rows.some(row => row.length !== expectedWidth),
+                formulaCellCount,
+                hiddenSheetCount,
+                workbookSheetCount: (workbook.SheetNames || []).length,
+                sheetNames,
+                selectedSheet
+            });
+        } catch (error) {
+            const preview = profileBinaryFile(file);
+            preview.parser_status = 'parse_error';
+            preview.risk_flags = [makeFlag('workbook_parse_failed', 'blocker', 'workbook could not be inspected locally', [file.name])];
+            preview.summary = `${file.name}: workbook could not be inspected. Encrypted, damaged, or unsupported workbook features may require consultation review.`;
+            preview.llm_prompt_summary = preview.summary;
+            return preview;
+        }
     }
 
     function profileBinaryFile(file) {
-        const summary = `${file.name}: ${formatBytes(file.size)} selected. Demo scans file name, format, and size only; production review would extract sheet/schema summaries before LLM scoping.`;
+        const summary = `${file.name}: ${formatBytes(file.size)} selected. This format is recognized, but only file metadata can be inspected safely in the current browser parser.`;
         return {
-            file_name: file.name,
+            file_name: safeFileName(file.name),
             extension: getFileExtension(file.name),
             mime_type: file.type || 'unknown',
             size_bytes: file.size,
             parser_status: 'metadata_only',
             delimiter: null,
             rows_previewed: 0,
+            columns_observed: 0,
             columns: [],
+            workbook_sheet_count: 0,
+            sheet_names: [],
+            selected_sheet: '',
             candidate_roles: {
                 sample_id_fields: [],
                 outcome_fields: [],
@@ -904,7 +974,7 @@
                 covariate_fields: [],
                 design_field_candidates: []
             },
-            risk_flags: [makeFlag('metadata_only', 'info', 'selected. Demo scans file name, format, and size only', [file.name])],
+            risk_flags: [makeFlag('metadata_only', 'review', 'schema inspection is not available for this file format', [file.name])],
             llm_prompt_summary: summary,
             summary
         };
@@ -913,16 +983,21 @@
     function validateClientDataPreview(preview) {
         const errors = [];
         const warnings = [];
+        let hasBlocker = false;
         preview.files.forEach(filePreview => {
             const result = validateFilePreview(filePreview);
             errors.push(...result.errors);
             warnings.push(...result.warnings);
+            filePreview.risk_flags.forEach(flag => {
+                warnings.push(`${filePreview.file_name}: ${flag.code}`);
+                if (flag.severity === 'blocker') hasBlocker = true;
+            });
         });
 
         return {
-            status: errors.length ? 'invalid' : warnings.length ? 'valid_with_warnings' : 'valid',
-            errors,
-            warnings
+            status: errors.length || hasBlocker ? 'invalid' : warnings.length ? 'valid_with_warnings' : 'valid',
+            errors: errors.slice(0, 32),
+            warnings: [...new Set(warnings)].slice(0, 32)
         };
     }
 
@@ -978,9 +1053,7 @@
             dataReview.textContent = textOverride || dataScanReview;
             dataReview.dataset.previewSchema = latestDataPreview.schema_version;
             dataReview.dataset.previewStatus = latestDataPreview.validation.status;
-            dataReview.dataset.previewJson = JSON.stringify(latestDataPreview);
         }
-        publishDataPreview();
     }
 
     function renderEstimate(report) {
@@ -1087,6 +1160,7 @@
 
     function renderReport(report, statusText) {
         currentReport = report;
+        if (reportArticle) reportArticle.setAttribute('aria-busy', 'false');
         briefTitle.textContent = report.title;
         statusPill.textContent = statusText || 'Draft SOW';
         if (decision) decision.textContent = report.decision;
@@ -1103,17 +1177,18 @@
         downloadButton.disabled = false;
     }
 
-    async function fetchScopeifyJson(url, payload, timeoutMs, method) {
+    async function fetchScopeifyJson(url, payload, timeoutMs, method, requestHeaders) {
         const controller = new AbortController();
         const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
         const requestMethod = method || 'POST';
         const options = {
             method: requestMethod,
             credentials: 'omit',
-            signal: controller.signal
+            signal: controller.signal,
+            headers: { ...(requestHeaders || {}) }
         };
         if (requestMethod !== 'GET') {
-            options.headers = { 'content-type': 'application/json' };
+            options.headers['content-type'] = 'application/json';
             options.body = JSON.stringify(payload);
         }
         try {
@@ -1121,6 +1196,10 @@
             if (!response.ok) {
                 const error = new Error(`Scopeify API returned ${response.status}`);
                 error.status = response.status;
+                const retryAfter = Number(response.headers.get('retry-after') || 0);
+                error.retryAfterMs = Number.isFinite(retryAfter) && retryAfter > 0
+                    ? Math.min(retryAfter * 1000, 30000)
+                    : 0;
                 throw error;
             }
             return response.json();
@@ -1139,18 +1218,18 @@
         return error.status === 408 || error.status === 429 || error.status >= 500;
     }
 
-    async function postScopeify(endpoint, payload) {
+    async function postScopeify(endpoint, payload, requestHeaders) {
         if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
 
         const url = `${scopeifyApiBase}${endpoint}`;
         let lastError = null;
         for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
             try {
-                return await fetchScopeifyJson(url, payload, SCOPEIFY_API_TIMEOUT_MS);
+                return await fetchScopeifyJson(url, payload, SCOPEIFY_API_TIMEOUT_MS, 'POST', requestHeaders);
             } catch (error) {
                 lastError = error;
                 if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
-                await wait(450 * attempt);
+                await wait(error.retryAfterMs || 450 * attempt);
             }
         }
 
@@ -1168,7 +1247,7 @@
             } catch (error) {
                 lastError = error;
                 if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
-                await wait(450 * attempt);
+                await wait(error.retryAfterMs || 450 * attempt);
             }
         }
 
@@ -1176,24 +1255,7 @@
     }
 
     function liveArchiveSources() {
-        return ['PubMed', 'GEO', 'SRA'];
-    }
-
-    function buildArchiveSearchPayload() {
-        return {
-            project: {
-                hypothesis: hypothesis.value.trim(),
-                notes: notes ? notes.value.trim() : '',
-                requested_outputs: [
-                    'Preliminary Statement of Work',
-                    'Dataset inventory',
-                    'Project estimate'
-                ]
-            },
-            allowed_archive_sources: liveArchiveSources(),
-            max_results_per_source: 3,
-            expected_response_schema: 'scopeify.archive_search.v1'
-        };
+        return ['PubMed', 'GEO', 'SRA', 'ENA', 'GSA/CNSA', 'bioRxiv'];
     }
 
     function buildDraftPayload() {
@@ -1246,6 +1308,11 @@
             id: record.identifier || 'Record',
             title: record.title || 'Untitled record',
             year: record.year || record.citation || 'Year pending',
+            url: record.url || '',
+            authors: Array.isArray(record.authors) ? record.authors.join('; ') : '',
+            pmid: record.pmid || '',
+            doi: record.doi || '',
+            citation: record.citation || '',
             cohort: record.cohort || 'Needs manual cohort review',
             technology: record.technology || 'Needs manual technology review',
             availability: record.data_availability || 'Availability requires manual verification',
@@ -1373,16 +1440,11 @@
     }
 
     function markLiveSearchUnavailable(report, message) {
+        const failedReport = neutralProjectReport('failed');
         return {
-            ...report,
+            ...failedReport,
             feedback: fallbackFeedback(message),
-            searchLabel: 'Demo search; live backend unavailable',
-            shortlistLabel: 'Static example shown after live-search recovery',
-            criteria: [
-                'Scopeify switched to the static example so the draft SOW remains usable.',
-                message || 'The public backend did not return a live archive-search response after retry.',
-                ...report.criteria
-            ]
+            clientNotesReflected: report.clientNotesReflected || getClientNotes()
         };
     }
 
@@ -1408,8 +1470,18 @@
         renderFeedback(job && job.feedback ? job.feedback : [], progressTextForJob(job));
     }
 
-    async function runDraftJob(payload) {
-        let job = await postScopeify('/v1/scopeify/draft-jobs', payload);
+    function newIdempotencyKey() {
+        if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+            return `scopeify:${window.crypto.randomUUID()}`;
+        }
+        const entropy = `${Date.now()}:${Math.random().toString(36).slice(2)}:${Math.random().toString(36).slice(2)}`;
+        return `scopeify:${entropy}`.slice(0, 120);
+    }
+
+    async function runDraftJob(payload, idempotencyKey) {
+        let job = await postScopeify('/v1/scopeify/draft-jobs', payload, {
+            'x-idempotency-key': idempotencyKey
+        });
         renderJobProgress(job);
 
         for (let poll = 0; poll < SCOPEIFY_JOB_MAX_POLLS; poll += 1) {
@@ -1423,18 +1495,36 @@
     }
 
     async function requestScopeifyDraft(payload) {
-        try {
-            const job = await runDraftJob(payload);
-            if (job.status === 'completed' && job.draft) {
-                return {
-                    response: job.draft,
-                    feedback: job.feedback || feedbackFromDraftResponse(job.draft),
-                    statusText: statusTextForJob(job)
-                };
+        let lastError = null;
+        for (let recoveryAttempt = 0; recoveryAttempt < 2; recoveryAttempt += 1) {
+            try {
+                const job = await runDraftJob(payload, newIdempotencyKey());
+                if (job.status === 'completed' && job.draft) {
+                    return {
+                        response: job.draft,
+                        feedback: job.feedback || feedbackFromDraftResponse(job.draft),
+                        statusText: statusTextForJob(job)
+                    };
+                }
+                const failure = new Error(job.error || job.message || 'Scopeify scoping job failed.');
+                failure.status = 503;
+                throw failure;
+            } catch (error) {
+                lastError = error;
+                if (recoveryAttempt === 0 && shouldRetryScopeify(error)) {
+                    renderFeedback([
+                        makeFeedbackItem('Recovery', 'running', 'review', 'The first scoping job did not finish. Starting one bounded recovery attempt.')
+                    ], 'Recovering');
+                    await wait(error.retryAfterMs || 800);
+                    continue;
+                }
+                break;
             }
-            throw new Error(job.error || job.message || 'Scopeify scoping job failed.');
-        } catch (error) {
-            if (error && (error.status === 404 || error.status === 405)) {
+        }
+
+        try {
+            const apiUrl = new URL(scopeifyApiBase);
+            if (lastError && lastError.status === 405 && ['localhost', '127.0.0.1', '::1'].includes(apiUrl.hostname)) {
                 const response = await postScopeify('/v1/scopeify/draft', payload);
                 return {
                     response,
@@ -1442,75 +1532,118 @@
                     statusText: response.status === 'needs_clarification' ? 'Needs details' : 'Live SOW'
                 };
             }
-            throw error;
+        } catch (error) {
+            lastError = error;
         }
+        throw lastError || new Error('Scopeify could not complete the scoping request.');
     }
 
-    function toCsv(report) {
-        const header = [
-            'source',
-            'record_id',
-            'fit',
-            'client_hypothesis',
-            'client_notes',
-            'browser_side_data_scan',
-            'llm_ready_data_preview_json',
-            'estimated_hours',
-            'expected_outputs',
-            'title',
-            'year_or_citation',
-            'cohort',
-            'technology',
-            'availability',
-            'selection_rationale',
-            'reuse_risk',
-            'consulting_next_action'
+    function neutralizeSpreadsheetText(value) {
+        const text = String(value == null ? '' : value);
+        return /^\s*[=+\-@]/.test(text) ? `'${text}` : text;
+    }
+
+    function safeWorkbookValue(value) {
+        return typeof value === 'number' && Number.isFinite(value)
+            ? value
+            : neutralizeSpreadsheetText(value);
+    }
+
+    function worksheetFromRows(rows) {
+        return window.XLSX.utils.aoa_to_sheet(rows.map(row => row.map(safeWorkbookValue)));
+    }
+
+    function workbookRows(report) {
+        const estimateRows = [
+            ['Scopeify project estimate', ''],
+            ['Generated', report.generatedDate || new Date().toISOString().slice(0, 10)],
+            ['Hypothesis', hypothesis.value.trim() || 'No hypothesis entered'],
+            ['Client notes', notes && notes.value.trim() ? notes.value.trim() : 'No client notes entered'],
+            ['SOW title', report.sowTitle],
+            ['Estimated effort', report.estimate.hours],
+            ['Expected timeline', report.sowWindow],
+            ['Scope decision', report.sowDecision],
+            [],
+            ['Phase', 'Workstream', 'Activities', 'Expected output', 'Hours'],
+            ...report.sow.map(item => [item.phase, item.workstream, item.detail, item.output, item.hours]),
+            [],
+            ['Deliverables'],
+            ...report.estimate.outputs.map(item => [item]),
+            [],
+            ['Assumptions'],
+            ...report.sowAssumptions.map(item => [item]),
+            [],
+            ['Exclusions'],
+            ...report.sowExclusions.map(item => [item])
         ];
-        const safe = value => `"${String(value).replace(/"/g, '""')}"`;
-        const clientHypothesis = hypothesis.value.trim() || 'No hypothesis entered';
-        const clientNoteText = notes && notes.value.trim() ? notes.value.trim() : 'No client notes entered';
-        const expectedOutputs = report.estimate.outputs.join('; ');
-        const inventory = report.evidence.length ? report.evidence : [{
-            source: 'Scopeify',
-            id: 'Project estimate',
-            fit: 'Project estimate',
-            title: report.sowTitle,
-            year: report.generatedDate || '',
-            cohort: 'Not applicable',
-            technology: 'Not applicable',
-            availability: report.estimate.hours,
-            rationale: report.sowDecision,
-            risk: report.estimate.rationale
-        }];
-        const rows = inventory.map(item => [
-            item.source,
-            item.id,
-            item.fit,
-            clientHypothesis,
-            clientNoteText,
-            dataScanReview,
-            JSON.stringify(latestDataPreview),
-            report.estimate.hours,
-            expectedOutputs,
-            item.title,
-            item.year,
-            item.cohort,
-            item.technology,
-            item.availability,
-            item.rationale,
-            item.risk,
-            item.fit.toLowerCase().includes('dataset') ? 'Verify metadata and include in feasibility package' : 'Use as support or optional reprocessing path'
-        ].map(safe).join(','));
-        return [header.join(','), ...rows].join('\n');
+
+        const inventoryRows = [[
+            'source', 'record_id', 'role', 'title', 'year', 'authors', 'pmid', 'doi', 'url',
+            'cohort', 'technology', 'availability', 'selection_rationale', 'reuse_risk'
+        ], ...report.evidence.map(item => [
+            item.source, item.id, item.fit, item.title, item.year, item.authors || '', item.pmid || '',
+            item.doi || '', item.url || '', item.cohort, item.technology, item.availability, item.rationale, item.risk
+        ])];
+
+        const auditRows = [[
+            'source', 'query_focus', 'found', 'screened', 'selected', 'source_note'
+        ], ...report.sources.map(item => [
+            item.source, item.query, Number(item.found || 0), Number(item.screened || 0),
+            Number(item.selected || 0), item.note
+        ])];
+
+        const schemaRows = [[
+            'file_name', 'format', 'sheet', 'parser_status', 'rows_inspected', 'columns_observed',
+            'column_name', 'inferred_type', 'inferred_role', 'role_confidence',
+            'missing_count', 'missing_rate', 'unique_count_inspected', 'cell_values_exported'
+        ]];
+        latestDataPreview.files.forEach(file => {
+            if (!file.columns.length) {
+                schemaRows.push([
+                    file.file_name, file.extension, file.selected_sheet || '', file.parser_status,
+                    file.rows_previewed, file.columns_observed, '', '', '', '', '', '', '', 'No'
+                ]);
+            }
+            file.columns.forEach(column => {
+                schemaRows.push([
+                    file.file_name, file.extension, file.selected_sheet || '', file.parser_status,
+                    file.rows_previewed, file.columns_observed, column.name, column.inferred_type,
+                    column.inferred_role, column.role_confidence, column.missing_count,
+                    column.missing_rate, column.unique_count_preview, 'No'
+                ]);
+            });
+        });
+
+        return { estimateRows, inventoryRows, auditRows, schemaRows };
     }
 
-    function downloadCsv() {
+    function toFallbackCsv(report) {
+        const rows = workbookRows(report).inventoryRows;
+        const safeCsv = value => `"${neutralizeSpreadsheetText(value).replace(/"/g, '""')}"`;
+        return rows.map(row => row.map(safeCsv).join(',')).join('\n');
+    }
+
+    function downloadProjectWorkbook() {
         if (!currentReport) return;
-        const blob = new Blob([toCsv(currentReport)], { type: 'text/csv;charset=utf-8' });
+        if (window.XLSX) {
+            const workbook = window.XLSX.utils.book_new();
+            const rows = workbookRows(currentReport);
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.estimateRows), 'Project Estimate');
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.inventoryRows), 'Dataset Inventory');
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.auditRows), 'Search Audit');
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.schemaRows), 'Data Schema');
+            window.XLSX.writeFile(workbook, 'scopeify-project-scope.xlsx', {
+                compression: true,
+                bookType: 'xlsx'
+            });
+            return;
+        }
+
+        const blob = new Blob([toFallbackCsv(currentReport)], { type: 'text/csv;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'scopeify-dataset-inventory-project-estimate.csv';
+        a.download = 'scopeify-dataset-inventory.csv';
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -1518,14 +1651,16 @@
     }
 
     async function runDemo() {
-        const report = chooseReport();
+        await dataScanPromise;
+        const report = neutralProjectReport('pending');
         enterSubmittedState();
         renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
+        if (reportArticle) reportArticle.setAttribute('aria-busy', 'true');
         renderFeedback([
             makeFeedbackItem('Intake received', 'complete', 'info', 'Client question accepted for preliminary scoping.', hypothesis.value.trim()),
             makeFeedbackItem('Browser data preview', latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review', latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review', dataScanReview),
-            makeFeedbackItem('Public archive screen', scopeifyApiBase ? 'pending' : 'complete', 'info', scopeifyApiBase ? 'Queued for backend archive screening.' : 'Static demo inventory is shown because no API is configured.'),
-            makeFeedbackItem('Statement of Work', scopeifyApiBase ? 'pending' : 'complete', 'info', scopeifyApiBase ? 'Waiting for the scoped SOW response.' : 'Static SOW preview is visible.'),
+            makeFeedbackItem('Public archive screen', 'pending', 'info', scopeifyApiBase ? 'Queued for backend archive screening.' : 'No live API is configured for this page.'),
+            makeFeedbackItem('Statement of Work', 'pending', 'info', scopeifyApiBase ? 'Waiting for the scoped SOW response.' : 'No project-specific SOW can be issued without the live API.'),
             makeFeedbackItem('Human review', 'needs_review', 'review', 'Preliminary output requires review before quote.')
         ], scopeifyApiBase ? 'queued · 0%' : 'Local demo');
         if (decision) decision.textContent = 'Scoping in progress';
@@ -1533,7 +1668,7 @@
         downloadButton.disabled = true;
 
         if (!scopeifyApiBase) {
-            window.setTimeout(() => renderReport(report, 'Draft SOW'), 620);
+            window.setTimeout(() => renderReport(markLiveSearchUnavailable(report, 'The live Scopeify API is not configured for this page.'), 'No result'), 620);
             return;
         }
 
@@ -1543,7 +1678,7 @@
             liveReport.feedback = feedback;
             renderReport(liveReport, statusText);
         } catch (error) {
-            renderReport(markLiveSearchUnavailable(report, error.message), 'Draft SOW');
+            renderReport(markLiveSearchUnavailable(report, error.message), 'No result');
         }
     }
 
@@ -1551,7 +1686,7 @@
         const params = new URLSearchParams(window.location.search);
         const initialHypothesis = params.get('hypothesis');
         if (initialHypothesis) hypothesis.value = initialHypothesis;
-        renderReport(chooseReport(), 'Example brief');
+        renderReport(neutralProjectReport('pending'), 'Ready to scope');
     }
 
     form.addEventListener('submit', event => {
@@ -1568,24 +1703,57 @@
     });
 
     async function scanSelectedFiles() {
-        const files = dataFiles ? Array.from(dataFiles.files || []) : [];
-        if (!files.length) {
+        const selectedFiles = dataFiles ? Array.from(dataFiles.files || []) : [];
+        if (!selectedFiles.length) {
             latestDataPreview = createEmptyDataPreview();
             dataScanReview = 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
             renderDataReview();
             return;
         }
 
+        const files = selectedFiles.slice(0, MAX_SCHEMA_FILES);
         dataScanReview = 'Scanning selected file metadata in browser...';
         renderDataReview();
 
         const previews = await Promise.all(files.map(async file => {
+            if (isSpreadsheet(file)) {
+                return profileSpreadsheetFile(file);
+            }
             if (!isTextLike(file)) {
                 return profileBinaryFile(file);
             }
 
             try {
-                const text = await file.slice(0, MAX_TEXT_PREVIEW_BYTES).text();
+                const isTruncated = file.size > MAX_TEXT_PREVIEW_BYTES;
+                let text = await file.slice(0, MAX_TEXT_PREVIEW_BYTES).text();
+                if (isTruncated && /\.json$/i.test(file.name)) {
+                    const preview = profileBinaryFile(file);
+                    preview.risk_flags = [makeFlag(
+                        'json_size_limit',
+                        'review',
+                        `JSON exceeds the ${formatBytes(MAX_TEXT_PREVIEW_BYTES)} complete-document parsing limit`,
+                        [file.name]
+                    )];
+                    preview.summary = `${file.name}: oversized JSON was not partially parsed because a truncated document could produce false schema findings.`;
+                    preview.llm_prompt_summary = preview.summary;
+                    return preview;
+                }
+                if (isTruncated && /\.(jsonl|ndjson)$/i.test(file.name)) {
+                    const lastCompleteLine = Math.max(text.lastIndexOf('\n'), text.lastIndexOf('\r'));
+                    if (lastCompleteLine <= 0) {
+                        const preview = profileBinaryFile(file);
+                        preview.risk_flags = [makeFlag(
+                            'json_lines_record_too_large',
+                            'review',
+                            'no complete JSON Lines record fit within the bounded browser preview',
+                            [file.name]
+                        )];
+                        preview.summary = `${file.name}: no complete JSON Lines record fit within the bounded browser preview.`;
+                        preview.llm_prompt_summary = preview.summary;
+                        return preview;
+                    }
+                    text = text.slice(0, lastCompleteLine);
+                }
                 const preview = profileTextFile(file, text);
                 if (file.size > MAX_TEXT_PREVIEW_BYTES) {
                     preview.risk_flags.push(makeFlag('preview_truncated', 'info', `preview limited to ${formatBytes(MAX_TEXT_PREVIEW_BYTES)}`, [file.name]));
@@ -1596,14 +1764,18 @@
             } catch (error) {
                 const summary = `${file.name}: ${formatBytes(file.size)} selected, but browser preview failed. Production review would retry with a server-side parser.`;
                 return {
-                    file_name: file.name,
+                    file_name: safeFileName(file.name),
                     extension: getFileExtension(file.name),
                     mime_type: file.type || 'unknown',
                     size_bytes: file.size,
                     parser_status: 'parse_error',
                     delimiter: null,
                     rows_previewed: 0,
+                    columns_observed: 0,
                     columns: [],
+                    workbook_sheet_count: 0,
+                    sheet_names: [],
+                    selected_sheet: '',
                     candidate_roles: {
                         sample_id_fields: [],
                         outcome_fields: [],
@@ -1621,6 +1793,14 @@
         }));
 
         latestDataPreview = buildClientDataPreview(previews);
+        if (selectedFiles.length > MAX_SCHEMA_FILES) {
+            latestDataPreview.validation.warnings.push(
+                `${selectedFiles.length - MAX_SCHEMA_FILES} additional file(s) were not inspected because one scoping request supports ${MAX_SCHEMA_FILES} files.`
+            );
+            if (latestDataPreview.validation.status === 'valid') {
+                latestDataPreview.validation.status = 'valid_with_warnings';
+            }
+        }
         dataScanReview = summarizeDataPreview(latestDataPreview);
         renderDataReview();
     }
@@ -1632,7 +1812,9 @@
     }
 
     if (dataFiles) {
-        dataFiles.addEventListener('change', scanSelectedFiles);
+        dataFiles.addEventListener('change', () => {
+            dataScanPromise = scanSelectedFiles();
+        });
     }
 
     if (editButton) {
@@ -1641,8 +1823,21 @@
 
     documentTabs.forEach(tab => {
         tab.addEventListener('click', () => setDocumentTab(tab.dataset.scopeifyTab || 'sow'));
+        tab.addEventListener('keydown', event => {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const currentIndex = documentTabs.indexOf(tab);
+            let nextIndex = currentIndex;
+            if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + documentTabs.length) % documentTabs.length;
+            if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % documentTabs.length;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = documentTabs.length - 1;
+            const nextTab = documentTabs[nextIndex];
+            setDocumentTab(nextTab.dataset.scopeifyTab || 'sow');
+            nextTab.focus();
+        });
     });
 
-    downloadButton.addEventListener('click', downloadCsv);
+    downloadButton.addEventListener('click', downloadProjectWorkbook);
     applyInitialParams();
 })();

@@ -3,7 +3,7 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
-vendor/
+/vendor/
 
 # OS files
 .DS_Store
