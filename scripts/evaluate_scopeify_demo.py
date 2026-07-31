@@ -367,6 +367,40 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         ["script"]
     )
 
+    require_terms(
+        checks,
+        sources,
+        "client_confidence_agent",
+        "explicit_human_review_handoff",
+        "A completed draft can enter human review only after validated contact details and explicit retention consent.",
+        [
+            "Request human review",
+            "Request a reviewed estimate",
+            "type=\"email\"",
+            "consent_to_human_review",
+            "retaining my contact information",
+            "/v1/scopeify/review-submissions",
+            "currentDraftJobId",
+            "Review request received"
+        ],
+        ["include", "script"]
+    )
+
+    require_terms(
+        checks,
+        sources,
+        "client_confidence_agent",
+        "human_review_status_recovery",
+        "A returning browser session can use its private receipt token to retrieve and render an approved proposal.",
+        [
+            "Check review status",
+            "restoreReviewReceipt",
+            "x-scopeify-review-token",
+            "Human reviewed"
+        ],
+        ["include", "script"]
+    )
+
     include = sources.get("include", "")
     sow_position = include.find("scopeify-panel-sow")
     inventory_position = include.find("scopeify-panel-inventory")

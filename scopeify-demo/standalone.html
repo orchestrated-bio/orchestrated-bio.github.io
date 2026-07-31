@@ -11,7 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
     <link rel="stylesheet" href="../assets/css/company-site/base.css">
-    <link rel="stylesheet" href="../assets/css/scopeify-demo.css?v=70128b9b843e">
+    <link rel="stylesheet" href="../assets/css/scopeify-demo.css?v=f0f17538c10e">
 </head>
 <body>
 <section class="scopeify-demo-shell" aria-labelledby="scopeify-title">
@@ -182,6 +182,7 @@
                 </div>
 
                 <footer class="scopeify-report-actions">
+                    <button type="button" class="scopeify-primary" id="scopeify-review-request" disabled>Request human review</button>
                     <a class="scopeify-consult-link scopeify-consult-primary" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Schedule consultation</a>
                     <button type="button" class="scopeify-download" id="scopeify-download">Download project workbook (.xlsx)</button>
                     <button type="button" class="scopeify-text-button scopeify-edit-scope" id="scopeify-edit">Edit intake</button>
@@ -189,9 +190,51 @@
             </article>
         </div>
     </div>
+
+    <dialog class="scopeify-review-dialog" id="scopeify-review-dialog" aria-labelledby="scopeify-review-title">
+        <form class="scopeify-review-form" id="scopeify-review-form">
+            <header>
+                <div>
+                    <p class="scopeify-panel-label">Human review</p>
+                    <h2 id="scopeify-review-title">Request a reviewed estimate</h2>
+                </div>
+                <button type="button" class="scopeify-dialog-close" id="scopeify-review-close" aria-label="Close">&#x2715;</button>
+            </header>
+            <div id="scopeify-review-fields">
+                <p class="scopeify-review-intro">An Orchestrated Biosciences scientist will check the evidence, assumptions, deliverables, and estimated hours before contacting you.</p>
+                <div class="scopeify-review-field-grid">
+                    <label for="scopeify-review-name">Name
+                        <input id="scopeify-review-name" name="name" maxlength="160" autocomplete="name" required>
+                    </label>
+                    <label for="scopeify-review-email">Work email
+                        <input id="scopeify-review-email" name="email" type="email" maxlength="254" autocomplete="email" required>
+                    </label>
+                </div>
+                <label for="scopeify-review-organization">Organization <span>(optional)</span>
+                    <input id="scopeify-review-organization" name="organization" maxlength="200" autocomplete="organization">
+                </label>
+                <label class="scopeify-review-consent" for="scopeify-review-consent">
+                    <input id="scopeify-review-consent" name="consent" type="checkbox" required>
+                    <span>I consent to Orchestrated Biosciences retaining my contact information, project question, and generated brief for up to 90 days for human review and follow-up.</span>
+                </label>
+                <footer>
+                    <button type="submit" class="scopeify-primary" id="scopeify-review-submit">Submit for review</button>
+                    <button type="button" class="scopeify-text-button" id="scopeify-review-cancel">Cancel</button>
+                </footer>
+            </div>
+            <div class="scopeify-review-receipt" id="scopeify-review-receipt" hidden>
+                <strong>Review request received</strong>
+                <p id="scopeify-review-receipt-message"></p>
+                <p class="scopeify-review-reference">Reference <span id="scopeify-review-reference"></span></p>
+                <button type="button" class="scopeify-primary" id="scopeify-review-refresh">Check review status</button>
+                <a class="scopeify-consult-link scopeify-consult-primary" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Schedule consultation</a>
+            </div>
+            <p class="scopeify-review-error" id="scopeify-review-error" role="alert"></p>
+        </form>
+    </dialog>
 </section>
 
 <script src="../assets/vendor/sheetjs/xlsx.full.min.js?v=cc015130aa85"></script>
-<script src="../assets/js/scopeify-demo.js?v=881ca712bf32"></script>
+<script src="../assets/js/scopeify-demo.js?v=7e0b939aeb8d"></script>
 </body>
 </html>

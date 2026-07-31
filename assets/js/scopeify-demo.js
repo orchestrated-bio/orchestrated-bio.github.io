@@ -31,6 +31,20 @@
     const evidenceList = document.getElementById('scopeify-evidence-list');
     const downloadButton = document.getElementById('scopeify-download');
     const editButton = document.getElementById('scopeify-edit');
+    const reviewRequestButton = document.getElementById('scopeify-review-request');
+    const reviewDialog = document.getElementById('scopeify-review-dialog');
+    const reviewForm = document.getElementById('scopeify-review-form');
+    const reviewFields = document.getElementById('scopeify-review-fields');
+    const reviewReceipt = document.getElementById('scopeify-review-receipt');
+    const reviewReceiptMessage = document.getElementById('scopeify-review-receipt-message');
+    const reviewReference = document.getElementById('scopeify-review-reference');
+    const reviewRefreshButton = document.getElementById('scopeify-review-refresh');
+    const reviewError = document.getElementById('scopeify-review-error');
+    const reviewSubmitButton = document.getElementById('scopeify-review-submit');
+    const reviewName = document.getElementById('scopeify-review-name');
+    const reviewEmail = document.getElementById('scopeify-review-email');
+    const reviewOrganization = document.getElementById('scopeify-review-organization');
+    const reviewConsent = document.getElementById('scopeify-review-consent');
     const documentTabs = Array.from(document.querySelectorAll('[data-scopeify-tab]'));
     const documentPanels = Array.from(document.querySelectorAll('.scopeify-document-panel'));
     const feedbackProgress = document.getElementById('scopeify-feedback-progress');
@@ -51,6 +65,8 @@
     const DATA_PREVIEW_SCHEMA_VERSION = 'scopeify.client_data_preview.v1';
 
     let currentReport = null;
+    let currentDraftJobId = '';
+    let currentReviewReceipt = null;
     let dataScanReview = 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
     let latestDataPreview = createEmptyDataPreview();
     let dataScanPromise = Promise.resolve();
@@ -393,6 +409,12 @@
 
     function enterIntakeState() {
         if (!shell) return;
+        currentDraftJobId = '';
+        currentReviewReceipt = null;
+        if (reviewRequestButton) {
+            reviewRequestButton.disabled = true;
+            reviewRequestButton.textContent = 'Request human review';
+        }
         shell.classList.remove('scopeify-is-submitted');
         moveShellToTop();
         window.setTimeout(() => hypothesis.focus(), 180);
@@ -1194,7 +1216,12 @@
         try {
             const response = await fetch(url, options);
             if (!response.ok) {
-                const error = new Error(`Scopeify API returned ${response.status}`);
+                const errorPayload = await response.json().catch(() => ({}));
+                const error = new Error(
+                    errorPayload.detail
+                    || errorPayload.error?.message
+                    || `Scopeify API returned ${response.status}`
+                );
                 error.status = response.status;
                 const retryAfter = Number(response.headers.get('retry-after') || 0);
                 error.retryAfterMs = Number.isFinite(retryAfter) && retryAfter > 0
@@ -1237,14 +1264,14 @@
         throw lastError || new Error('Scopeify API did not return a response');
     }
 
-    async function getScopeify(endpoint) {
+    async function getScopeify(endpoint, requestHeaders) {
         if (!scopeifyApiBase) throw new Error('Scopeify API is not configured for this host.');
 
         const url = `${scopeifyApiBase}${endpoint}`;
         let lastError = null;
         for (let attempt = 1; attempt <= SCOPEIFY_API_MAX_ATTEMPTS; attempt += 1) {
             try {
-                return await fetchScopeifyJson(url, null, SCOPEIFY_API_TIMEOUT_MS, 'GET');
+                return await fetchScopeifyJson(url, null, SCOPEIFY_API_TIMEOUT_MS, 'GET', requestHeaders);
             } catch (error) {
                 lastError = error;
                 if (attempt >= SCOPEIFY_API_MAX_ATTEMPTS || !shouldRetryScopeify(error)) break;
@@ -1510,7 +1537,8 @@
                     return {
                         response: job.draft,
                         feedback: job.feedback || feedbackFromDraftResponse(job.draft),
-                        statusText: statusTextForJob(job)
+                        statusText: statusTextForJob(job),
+                        jobId: job.job_id
                     };
                 }
                 const failure = new Error(job.error || job.message || 'Scopeify scoping job failed.');
@@ -1659,6 +1687,13 @@
 
     async function runDemo() {
         await dataScanPromise;
+        currentDraftJobId = '';
+        currentReviewReceipt = null;
+        try { sessionStorage.removeItem('scopeify_review_receipt'); } catch (_error) { /* no-op */ }
+        if (reviewRequestButton) {
+            reviewRequestButton.disabled = true;
+            reviewRequestButton.textContent = 'Request human review';
+        }
         const report = neutralProjectReport('pending');
         enterSubmittedState();
         renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
@@ -1680,10 +1715,14 @@
         }
 
         try {
-            const { response, feedback, statusText } = await requestScopeifyDraft(buildDraftPayload());
+            const { response, feedback, statusText, jobId } = await requestScopeifyDraft(buildDraftPayload());
             const liveReport = reportFromDraftResponse(report, response);
             liveReport.feedback = feedback;
             renderReport(liveReport, statusText);
+            if (response.status === 'validated' && response.sow && jobId) {
+                currentDraftJobId = jobId;
+                if (reviewRequestButton) reviewRequestButton.disabled = false;
+            }
         } catch (error) {
             renderReport(markLiveSearchUnavailable(report, error.message), 'No result');
         }
@@ -1694,6 +1733,129 @@
         const initialHypothesis = params.get('hypothesis');
         if (initialHypothesis) hypothesis.value = initialHypothesis;
         renderReport(neutralProjectReport('pending'), 'Ready to scope');
+    }
+
+    function openReviewDialog() {
+        if (!reviewDialog || (!currentDraftJobId && !currentReviewReceipt)) return;
+        if (reviewError) reviewError.textContent = '';
+        if (reviewFields) reviewFields.hidden = Boolean(currentReviewReceipt);
+        if (reviewReceipt) reviewReceipt.hidden = !currentReviewReceipt;
+        if (currentReviewReceipt) renderReviewReceipt(currentReviewReceipt);
+        if (typeof reviewDialog.showModal === 'function') reviewDialog.showModal();
+        else reviewDialog.setAttribute('open', '');
+        window.setTimeout(() => {
+            const target = currentReviewReceipt ? reviewDialog.querySelector('a') : reviewName;
+            if (target) target.focus();
+        }, 0);
+        if (currentReviewReceipt) refreshReviewStatus();
+    }
+
+    function closeReviewDialog() {
+        if (!reviewDialog) return;
+        if (typeof reviewDialog.close === 'function') reviewDialog.close();
+        else reviewDialog.removeAttribute('open');
+    }
+
+    function renderReviewReceipt(receipt) {
+        if (reviewFields) reviewFields.hidden = true;
+        if (reviewReceipt) reviewReceipt.hidden = false;
+        if (reviewReceiptMessage) reviewReceiptMessage.textContent = receipt.message;
+        if (reviewReference) reviewReference.textContent = receipt.review_id.slice(0, 12).toUpperCase();
+    }
+
+    function restoreReviewReceipt() {
+        try {
+            const stored = JSON.parse(sessionStorage.getItem('scopeify_review_receipt') || 'null');
+            if (!stored || typeof stored.review_id !== 'string' || typeof stored.access_token !== 'string') return;
+            currentReviewReceipt = stored;
+            if (reviewRequestButton) {
+                reviewRequestButton.disabled = false;
+                reviewRequestButton.textContent = 'Check review status';
+            }
+            enterSubmittedState();
+            window.setTimeout(openReviewDialog, 0);
+        } catch (_error) {
+            try { sessionStorage.removeItem('scopeify_review_receipt'); } catch (_storageError) { /* no-op */ }
+        }
+    }
+
+    async function refreshReviewStatus() {
+        if (!currentReviewReceipt || !reviewRefreshButton) return;
+        reviewRefreshButton.disabled = true;
+        reviewRefreshButton.textContent = 'Checking…';
+        if (reviewError) reviewError.textContent = '';
+        try {
+            const status = await getScopeify(
+                `/v1/scopeify/review-submissions/${encodeURIComponent(currentReviewReceipt.review_id)}`,
+                { 'x-scopeify-review-token': currentReviewReceipt.access_token }
+            );
+            currentReviewReceipt = {
+                ...currentReviewReceipt,
+                status: status.status,
+                message: status.message
+            };
+            try {
+                sessionStorage.setItem('scopeify_review_receipt', JSON.stringify(currentReviewReceipt));
+            } catch (_error) { /* The active page still retains the receipt. */ }
+            renderReviewReceipt(currentReviewReceipt);
+            if (status.status === 'approved' && status.proposal) {
+                const reviewedReport = reportFromDraftResponse(neutralProjectReport('pending'), {
+                    status: 'validated',
+                    sow: status.proposal,
+                    archive_search: null
+                });
+                reviewedReport.feedback = [
+                    makeFeedbackItem('Human review', 'complete', 'info', 'The human-reviewed preliminary proposal is ready.', status.message)
+                ];
+                renderReport(reviewedReport, 'Human reviewed');
+                enterSubmittedState();
+                reviewRequestButton.disabled = false;
+                reviewRequestButton.textContent = 'Reviewed proposal';
+            }
+        } catch (error) {
+            if (reviewError) reviewError.textContent = error.message;
+        } finally {
+            reviewRefreshButton.disabled = false;
+            reviewRefreshButton.textContent = 'Check review status';
+        }
+    }
+
+    async function submitReviewRequest() {
+        if (!reviewForm || !currentDraftJobId || !reviewForm.reportValidity()) return;
+        if (reviewError) reviewError.textContent = '';
+        reviewSubmitButton.disabled = true;
+        reviewSubmitButton.textContent = 'Submitting…';
+        try {
+            const receipt = await postScopeify('/v1/scopeify/review-submissions', {
+                job_id: currentDraftJobId,
+                contact: {
+                    name: reviewName.value.trim(),
+                    email: reviewEmail.value.trim(),
+                    organization: reviewOrganization.value.trim()
+                },
+                consent_to_human_review: reviewConsent.checked
+            }, {}, 1);
+            currentReviewReceipt = receipt;
+            try {
+                sessionStorage.setItem('scopeify_review_receipt', JSON.stringify(receipt));
+            } catch (error) {
+                // The receipt remains available for this page even when storage is unavailable.
+            }
+            renderReviewReceipt(receipt);
+            reviewRequestButton.disabled = false;
+            reviewRequestButton.textContent = 'Check review status';
+            if (currentReport && Array.isArray(currentReport.feedback)) {
+                currentReport.feedback = currentReport.feedback.map(item => item.label === 'Human review'
+                    ? makeFeedbackItem('Human review', 'complete', 'info', 'Submitted to Orchestrated Biosciences for human review.', `Reference ${receipt.review_id.slice(0, 12).toUpperCase()}`)
+                    : item);
+                renderFeedback(currentReport.feedback, 'Human review requested');
+            }
+        } catch (error) {
+            if (reviewError) reviewError.textContent = error.message;
+        } finally {
+            reviewSubmitButton.disabled = Boolean(currentReviewReceipt);
+            reviewSubmitButton.textContent = currentReviewReceipt ? 'Submitted' : 'Submit for review';
+        }
     }
 
     form.addEventListener('submit', event => {
@@ -1828,6 +1990,24 @@
         editButton.addEventListener('click', enterIntakeState);
     }
 
+    if (reviewRequestButton) reviewRequestButton.addEventListener('click', openReviewDialog);
+    if (reviewRefreshButton) reviewRefreshButton.addEventListener('click', refreshReviewStatus);
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', event => {
+            event.preventDefault();
+            submitReviewRequest();
+        });
+    }
+    ['scopeify-review-close', 'scopeify-review-cancel'].forEach(id => {
+        const button = document.getElementById(id);
+        if (button) button.addEventListener('click', closeReviewDialog);
+    });
+    if (reviewDialog) {
+        reviewDialog.addEventListener('click', event => {
+            if (event.target === reviewDialog) closeReviewDialog();
+        });
+    }
+
     documentTabs.forEach(tab => {
         tab.addEventListener('click', () => setDocumentTab(tab.dataset.scopeifyTab || 'sow'));
         tab.addEventListener('keydown', event => {
@@ -1847,4 +2027,5 @@
 
     downloadButton.addEventListener('click', downloadProjectWorkbook);
     applyInitialParams();
+    restoreReviewReceipt();
 })();

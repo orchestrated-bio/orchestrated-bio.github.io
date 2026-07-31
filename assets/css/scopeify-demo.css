@@ -270,6 +270,19 @@
     transform: none;
 }
 
+.scopeify-primary:disabled,
+.scopeify-download:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.scopeify-primary:disabled:hover,
+.scopeify-download:disabled:hover {
+    background: var(--scope-ink);
+    border-color: var(--scope-ink);
+    color: var(--scope-paper);
+}
+
 .scopeify-method {
     border-top: 1px solid var(--scope-rule);
     margin-top: 1rem;
@@ -920,6 +933,157 @@
     padding: 1rem 1.1rem;
 }
 
+.scopeify-review-dialog {
+    background: var(--scope-paper);
+    border: 1px solid var(--scope-rule-firm);
+    border-radius: 4px;
+    color: var(--scope-ink);
+    margin: auto;
+    max-height: calc(100vh - 2rem);
+    max-width: min(94vw, 42rem);
+    padding: 0;
+    width: 100%;
+}
+
+.scopeify-review-dialog::backdrop {
+    background: rgb(7 13 20 / 0.76);
+}
+
+.scopeify-review-form {
+    padding: 1.4rem;
+}
+
+.scopeify-review-form > header {
+    align-items: start;
+    border-bottom: 1px solid var(--scope-rule);
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+}
+
+.scopeify-review-form h2 {
+    color: var(--scope-ink);
+    font-size: 1.25rem;
+    margin: 0.25rem 0 0;
+}
+
+.scopeify-dialog-close {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--scope-rule-firm);
+    border-radius: 2px;
+    color: var(--scope-ink-2);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 0 0 auto;
+    font: inherit;
+    height: 2.25rem;
+    justify-content: center;
+    width: 2.25rem;
+}
+
+.scopeify-review-intro {
+    color: var(--scope-ink-2);
+    line-height: 1.55;
+    margin: 0 0 1.15rem;
+}
+
+.scopeify-review-field-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.scopeify-review-form label {
+    color: var(--scope-ink);
+    display: grid;
+    font-size: 0.8rem;
+    font-weight: 800;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+}
+
+.scopeify-review-form label span {
+    color: var(--scope-ink-3);
+    font-weight: 500;
+}
+
+.scopeify-review-form input:not([type="checkbox"]) {
+    background: var(--scope-raised);
+    border: 1px solid var(--scope-rule-firm);
+    border-radius: 2px;
+    color: var(--scope-ink);
+    font: inherit;
+    min-height: 42px;
+    padding: 0 0.7rem;
+    width: 100%;
+}
+
+.scopeify-review-form input:focus {
+    border-color: var(--scope-accent);
+    box-shadow: 0 0 0 3px var(--scope-accent-wash);
+    outline: 0;
+}
+
+.scopeify-review-form .scopeify-review-consent {
+    align-items: start;
+    border-top: 1px solid var(--scope-rule);
+    display: grid;
+    font-weight: 500;
+    gap: 0.65rem;
+    grid-template-columns: 1.1rem minmax(0, 1fr);
+    line-height: 1.45;
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+}
+
+.scopeify-review-consent input {
+    height: 1rem;
+    margin: 0.15rem 0 0;
+    width: 1rem;
+}
+
+.scopeify-review-form footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.2rem;
+}
+
+.scopeify-review-error {
+    color: #b13d32;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin: 0.8rem 0 0;
+    min-height: 1.1rem;
+}
+
+.scopeify-review-receipt {
+    border-left: 3px solid var(--scope-accent);
+    padding: 0.25rem 0 0.25rem 1rem;
+}
+
+.scopeify-review-receipt > strong {
+    font-size: 1.05rem;
+}
+
+.scopeify-review-receipt p {
+    color: var(--scope-ink-2);
+    line-height: 1.5;
+}
+
+.scopeify-review-reference {
+    font-family: var(--mono, ui-monospace, "SF Mono", Menlo, Consolas, monospace);
+    font-size: 0.74rem;
+}
+
+.scopeify-review-receipt .scopeify-primary,
+.scopeify-review-receipt .scopeify-consult-link {
+    margin: 0.4rem 0.55rem 0 0;
+}
+
 @media (max-width: 1040px) {
     .scopeify-layout {
         grid-template-columns: 1fr;
@@ -1023,6 +1187,19 @@
     .scopeify-document-tab {
         justify-content: center;
         width: 100%;
+    }
+
+    .scopeify-review-dialog {
+        max-height: calc(100vh - 1rem);
+        max-width: calc(100vw - 1rem);
+    }
+
+    .scopeify-review-form {
+        padding: 1rem;
+    }
+
+    .scopeify-review-field-grid {
+        grid-template-columns: 1fr;
     }
 
     .scopeify-sow-meta div,
