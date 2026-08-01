@@ -67,7 +67,7 @@
     let currentReport = null;
     let currentDraftJobId = '';
     let currentReviewReceipt = null;
-    let dataScanReview = 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
+    let dataScanReview = 'No local files selected.';
     let latestDataPreview = createEmptyDataPreview();
     let dataScanPromise = Promise.resolve();
 
@@ -184,41 +184,25 @@
     function initialFeedback() {
         return [
             makeFeedbackItem(
-                'Project route',
-                'pending',
-                'info',
-                'Enter a biological question to prepare a project-specific scope.',
-                'Scopeify will identify the analysis route after submission.'
-            ),
-            makeFeedbackItem(
-                'Browser data preview',
+                'File check',
                 latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review',
                 latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review',
                 latestDataPreview.validation.status === 'no_files'
-                    ? 'No local files selected; Scopeify can still scope against public data.'
+                    ? 'No local files selected.'
                     : dataScanReview,
                 latestDataPreview.aggregate.risk_flags.join(', ')
             ),
             makeFeedbackItem(
-                'Public archive screen',
+                'Evidence search',
                 'pending',
                 'info',
-                'Public archive search begins after submission.',
-                'Dataset inventory stays separate from the Statement of Work.'
+                'Runs after submission.'
             ),
             makeFeedbackItem(
                 'Statement of Work',
                 'pending',
                 'info',
-                'No project-specific Statement of Work has been generated yet.',
-                'Submit the form to run the scoping workflow.'
-            ),
-            makeFeedbackItem(
-                'Human review',
-                'needs_review',
-                'review',
-                'Preliminary output requires Orchestrated Biosciences review before it becomes a formal quote.',
-                'Use the consultation link after reviewing the draft.'
+                'Submit the form to draft the SOW.'
             )
         ];
     }
@@ -229,22 +213,14 @@
                 'Recovery',
                 'needs_review',
                 'review',
-                'Live scoping did not return a validated result after one recovery attempt.',
-                message || 'Retry the request or schedule a consultation.'
+                'No result was issued.',
+                message || 'Retry or schedule a consultation.'
             ),
             makeFeedbackItem(
                 'Statement of Work',
                 'blocked',
                 'blocker',
-                'No hypothesis-specific SOW or dataset inventory is being shown as a substitute.',
-                'This prevents a stale example from being mistaken for a live result.'
-            ),
-            makeFeedbackItem(
-                'Human review',
-                'needs_review',
-                'review',
-                'A human review is still required before quoting.',
-                'Schedule a consultation to confirm scope, data access, and assumptions.'
+                'No draft or inventory is available.'
             )
         ];
     }
@@ -259,47 +235,33 @@
         const riskFlags = response && Array.isArray(response.data_preview_risk_flags) ? response.data_preview_risk_flags : latestDataPreview.aggregate.risk_flags;
         return [
             makeFeedbackItem(
-                'Project route',
-                hasSow ? 'complete' : 'needs_review',
-                hasSow ? 'info' : 'blocker',
-                hasSow ? `Routed to ${response.project_type || 'a Scopeify SOW template'}.` : 'More project detail is needed before a useful SOW can be drafted.',
-                response && response.message ? response.message : ''
-            ),
-            makeFeedbackItem(
-                'Browser data preview',
+                'File check',
                 dataStatus === 'invalid' ? 'blocked' : riskFlags.length ? 'needs_review' : 'complete',
                 dataStatus === 'invalid' ? 'blocker' : riskFlags.length ? 'review' : 'info',
-                riskFlags.length ? `Data preview passed with review flags: ${riskFlags.join(', ')}.` : `Data preview status: ${dataStatus}.`,
+                riskFlags.length ? `Review: ${riskFlags.join(', ')}.` : dataStatus === 'no_files' ? 'No local files selected.' : 'No structure issues found.',
                 dataScanReview
             ),
             makeFeedbackItem(
-                'Public archive screen',
+                'Evidence search',
                 archive ? (archive.status === 'searched' ? 'complete' : 'needs_review') : 'complete',
                 archive && archive.status === 'searched' ? 'info' : 'review',
                 archive
-                    ? `Screened ${searched || 'configured sources'} and returned ${returned} candidate records for the inventory appendix.`
-                    : 'No live archive search was included in this draft response.',
+                    ? `${searched || 'Sources'}: ${returned} candidates.`
+                    : 'Archive search not run.',
                 archive && Array.isArray(archive.warnings) ? archive.warnings.slice(0, 3).join(' ') : ''
             ),
             makeFeedbackItem(
                 'Statement of Work',
                 hasSow ? 'complete' : 'needs_review',
                 hasSow ? 'info' : 'blocker',
-                hasSow ? `Validated SOW generated with ${response.sow.estimated_hours_min}-${response.sow.estimated_hours_max} estimated hours.` : 'Clarification response returned instead of a SOW.',
-                hasSow ? `Generation mode: ${response.sow.generation_mode}.` : response && response.next_step ? response.next_step : ''
-            ),
-            makeFeedbackItem(
-                'Human review',
-                'needs_review',
-                'review',
-                'Preliminary output requires human review before quoting.',
-                response && response.next_step ? response.next_step : 'Schedule a consultation to confirm assumptions.'
+                hasSow ? `${response.sow.estimated_hours_min}-${response.sow.estimated_hours_max} hours; review required before quoting.` : 'More project detail needed.',
+                hasSow ? '' : response && response.next_step ? response.next_step : ''
             )
         ];
     }
 
     function renderFeedback(items, progressText) {
-        if (feedbackProgress) feedbackProgress.textContent = progressText || 'Ready for review';
+        if (feedbackProgress) feedbackProgress.textContent = progressText || 'Ready';
         if (!feedbackList) return;
         const safeItems = Array.isArray(items) && items.length
             ? items
@@ -327,23 +289,23 @@
             found: 0,
             screened: 0,
             selected: 0,
-            note: isFailure ? 'No validated source result returned' : 'Waiting for validated backend search'
+            note: isFailure ? 'Search unavailable' : 'Search pending'
         }));
         return {
             title: isFailure ? 'Scoping request not completed' : 'Preparing project scope',
             status: isFailure ? 'Unavailable' : 'Running',
             decision: isFailure ? 'No result issued' : 'Scoping in progress',
             summary: isFailure
-                ? 'Scopeify could not return a validated project-specific result. No static example has been substituted.'
-                : `Scopeify is validating the intake and preparing a project-specific SOW for: ${projectQuestion}`,
+                ? 'Scopeify could not return a project-specific result.'
+                : `Preparing a SOW for: ${projectQuestion}`,
             searchLabel: isFailure ? 'Live search not completed' : 'Live search pending',
-            shortlistLabel: isFailure ? 'No validated inventory issued' : 'Inventory pending',
+            shortlistLabel: isFailure ? 'No inventory issued' : 'Inventory pending',
             estimate: {
                 title: isFailure ? 'Estimate unavailable' : 'Estimate pending',
                 hours: 'Pending',
                 rationale: isFailure
-                    ? 'Estimated hours require a validated project route and source screen.'
-                    : 'Hours will be calculated from the project route, source coverage, data structure, and review requirements.',
+                    ? 'No estimate issued.'
+                    : 'Calculating hours from the planned work.',
                 outputs: [
                     'Nextflow pipeline when raw-data processing is applicable',
                     'Quarto HTML analysis report',
@@ -351,36 +313,34 @@
                     'Exported XLSX dataset inventory and project estimates'
                 ]
             },
-            sowTitle: 'Statement of Work: preliminary project scope',
+            sowTitle: 'Statement of Work',
             sowWindow: isFailure ? 'Not issued' : 'Generation in progress',
             generatedDate: new Date().toISOString().slice(0, 10),
             sowMeta: [
                 { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
-                { label: 'Prepared by', value: 'Orchestrated Biosciences' },
-                { label: 'Document type', value: 'Preliminary Statement of Work' },
-                { label: 'Estimate status', value: isFailure ? 'Not issued' : 'Pending validation' }
+                { label: 'Prepared by', value: 'Orchestrated Biosciences' }
             ],
             sowObjective: isFailure
                 ? 'Retry the scoping workflow before relying on an estimate.'
-                : 'Translate the submitted hypothesis into a reviewable consulting scope.',
+                : 'Define the work needed to address the project question.',
             sowDecision: isFailure
                 ? 'No project recommendation was issued. Retry or schedule a consultation.'
-                : 'Pending source search, data-structure review, and project routing.',
+                : 'Pending project and evidence checks.',
             sow: [{
                 phase: '1',
                 workstream: isFailure ? 'Recovery' : 'Intake and evidence review',
-                detail: isFailure ? 'Retry the validated scoping workflow.' : 'Validate the question, identify suitable sources, and determine the appropriate analysis route.',
-                output: isFailure ? 'Validated retry or consultation agenda' : 'Project-specific SOW and evidence appendix',
+                detail: isFailure ? 'Retry the request.' : 'Check the question, sources, and analysis route.',
+                output: isFailure ? 'Retry or consultation' : 'Draft SOW and evidence workbook',
                 hours: 'Pending'
             }],
-            sowAssumptions: ['A formal quote requires human review of the generated scope.'],
-            sowExclusions: ['No project-specific evidence or estimate is asserted until the backend returns a validated result.'],
+            sowAssumptions: ['Human review is required before quoting.'],
+            sowExclusions: ['No estimate is issued until the request completes.'],
             clientNotesReflected: getClientNotes(),
             dataPreviewConsiderations: [],
             sources: sourceRows,
             criteria: isFailure
-                ? ['No archive result is treated as selected after an incomplete request.']
-                : ['Source-specific queries and selection criteria will be recorded in the separate inventory appendix.'],
+                ? ['No records selected.']
+                : ['Queries and selection notes appear in the workbook.'],
             evidence: [],
             selected: 0,
             screened: 0,
@@ -422,7 +382,7 @@
 
     function getClientNotes() {
         const value = notes ? notes.value.trim() : '';
-        return value || 'No additional notes entered yet. Scopeify will use comments here to tune estimate assumptions, deliverable format, and consultation agenda.';
+        return value || 'None provided.';
     }
 
     function formatBytes(bytes) {
@@ -659,15 +619,15 @@
 
         const roles = filePreview.candidate_roles;
         const fieldSummaries = [
-            roles.sample_id_fields.length ? `sample identifiers appear present (${roles.sample_id_fields.slice(0, 3).join(', ')})` : 'no obvious sample identifier field',
-            summarizeFieldList('candidate outcome fields', roles.outcome_fields, 'no obvious response or outcome field'),
-            summarizeFieldList('candidate group/treatment fields', roles.treatment_fields, 'no obvious group or treatment field'),
-            summarizeFieldList('batch-effect fields to review', roles.batch_fields, 'no obvious batch field in preview')
+            summarizeFieldList('sample ID', roles.sample_id_fields, 'sample ID not found'),
+            summarizeFieldList('outcome', roles.outcome_fields, 'outcome not found'),
+            summarizeFieldList('group', roles.treatment_fields, 'group not found'),
+            summarizeFieldList('batch', roles.batch_fields, 'batch not found')
         ];
         const riskMessages = filePreview.risk_flags.map(flag => flag.message);
-        const riskSummary = riskMessages.length ? `risk flags: ${riskMessages.slice(0, 5).join('; ')}` : 'no immediate table-structure risks in preview';
+        const riskSummary = riskMessages.length ? `Review: ${riskMessages.slice(0, 3).join('; ')}` : 'No structure issues found';
 
-        return `${filePreview.file_name}: ${filePreview.columns.length || 'unknown'} profiled columns, ${filePreview.rows_previewed || 'unknown'} locally inspected rows; schema summary validated; ${fieldSummaries.join('; ')}; ${riskSummary}. Cell values remain in this browser.`.slice(0, 1200);
+        return `${filePreview.file_name}: ${filePreview.columns.length || 'unknown'} columns; ${filePreview.rows_previewed || 'unknown'} rows checked. ${fieldSummaries.join('; ')}. ${riskSummary}. Values stayed local.`.slice(0, 600);
     }
 
     function validateFilePreview(filePreview) {
@@ -778,7 +738,7 @@
             const rows = records.slice(0, 250).map(record => headers.map(header => record[header] == null ? '' : String(record[header])));
             return profileParsedTable(file, headers, rows, { delimiter: null });
         } catch (error) {
-            const summary = `${file.name}: JSON selected, but the preview could not parse it cleanly. Production review would inspect schema and representative records.`;
+            const summary = `${file.name}: JSON could not be parsed.`;
             return {
                 file_name: safeFileName(file.name),
                 extension: getFileExtension(file.name),
@@ -883,7 +843,7 @@
                 `workbook exceeds the ${formatBytes(MAX_SPREADSHEET_BYTES)} browser inspection limit`,
                 [file.name]
             )];
-            preview.summary = `${file.name}: ${formatBytes(file.size)} workbook selected. It is too large for bounded browser-side schema inspection and requires consultation review.`;
+            preview.summary = `${file.name}: too large for browser review (${formatBytes(file.size)}).`;
             preview.llm_prompt_summary = preview.summary;
             return preview;
         }
@@ -1060,13 +1020,13 @@
 
     function summarizeDataPreview(preview) {
         if (!preview.files.length) {
-            return 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
+            return 'No local files selected.';
         }
 
         const summaries = preview.files.map(file => file.summary);
         const validationText = preview.validation.status === 'valid'
-            ? 'Structured DataPreview is ready for the backend LLM.'
-            : `Structured DataPreview requires review: ${[...preview.validation.errors, ...preview.validation.warnings].slice(0, 3).join('; ')}`;
+            ? 'No structure issues found.'
+            : `Review: ${[...preview.validation.errors, ...preview.validation.warnings].slice(0, 3).join('; ')}`;
         return `${summaries.join(' ')} ${validationText}`;
     }
 
@@ -1377,9 +1337,8 @@
                 : 'No live records returned for review',
             sources: sourceResults.map(sourceResultToAudit),
             criteria: [
-                'Dataset inventory rows are separate from the Statement of Work and still require manual inclusion review.',
-                'Source warnings record records screened out for weak visible metadata, false-positive terms, or missing query concepts.',
-                'Public-data search informs scope assumptions, but the consulting quote still requires human review.'
+                'Review candidate records before selecting data for analysis.',
+                'Source warnings and exclusions are saved in the workbook.'
             ],
             evidence: liveEvidence
         };
@@ -1392,11 +1351,11 @@
                 ...baseReport,
                 title: 'Scope clarification needed',
                 decision: 'More project detail needed',
-                summary: response && response.message ? response.message : 'Scopeify needs a more specific research question before drafting a useful SOW.',
+                summary: response && response.message ? response.message : 'Add more project detail before drafting the SOW.',
                 estimate: {
-                    title: 'Clarification-first scoping',
+                    title: 'Clarification needed',
                     hours: 'Pending',
-                    rationale: 'A defensible estimate needs the study system, modality, comparison, and intended decision.',
+                    rationale: 'Add the study system, data type, comparison, and intended decision.',
                     outputs: ['Clarified intake', 'Recommended next scoping path', 'Consultation agenda']
                 },
                 sowTitle: 'Statement of Work: clarification needed',
@@ -1404,17 +1363,15 @@
                 generatedDate: '',
                 sowMeta: [
                     { label: 'Prepared for', value: 'Prospective Orchestrated.bio client' },
-                    { label: 'Prepared by', value: 'Orchestrated Biosciences' },
-                    { label: 'Document type', value: 'Preliminary Statement of Work' },
-                    { label: 'Estimate status', value: 'Needs clarification before quote' }
+                    { label: 'Prepared by', value: 'Orchestrated Biosciences' }
                 ],
                 sowObjective: 'Clarify the project question before preparing a consulting scope.',
                 sowDecision: response && response.next_step ? response.next_step : 'Schedule a consultation or revise the intake with organism, modality, comparison, and intended output.',
                 sow: [
                     { phase: '1', workstream: 'Clarify intake', detail: questions.join(' ') || 'Confirm organism, data type, comparison groups, and desired decision.', output: 'Scoped project question', hours: 'Pending' }
                 ],
-                sowAssumptions: ['No final estimate should be issued until the intake is clarified.'],
-                sowExclusions: ['Technical analysis, archive screening, and formal quoting are excluded from this clarification response.'],
+                sowAssumptions: ['The project question will be clarified before estimating the work.'],
+                sowExclusions: ['No analysis or quote is included in this response.'],
                 clientNotesReflected: getClientNotes(),
                 dataPreviewConsiderations: [],
                 evidence: []
@@ -1438,9 +1395,9 @@
             decision: 'Draft SOW generated',
             summary: sow.objective || baseReport.summary,
             estimate: {
-                title: sow.estimate_status || 'Preliminary project estimate',
+                title: 'Estimated effort',
                 hours,
-                rationale: [sow.expected_timeline, sow.public_data_summary].filter(Boolean).join(' '),
+                rationale: sow.expected_timeline || '',
                 outputs: Array.isArray(sow.deliverables) ? sow.deliverables : baseReport.estimate.outputs
             },
             sowTitle: displayTitle,
@@ -1448,9 +1405,7 @@
             generatedDate: sow.generated_date || '',
             sowMeta: [
                 { label: 'Prepared for', value: sow.prepared_for || 'Prospective Orchestrated.bio client' },
-                { label: 'Prepared by', value: sow.prepared_by || 'Orchestrated Biosciences' },
-                { label: 'Document type', value: sow.document_type || 'Preliminary Statement of Work' },
-                { label: 'Estimate status', value: sow.estimate_status || 'Ballpark; human review before quote' }
+                { label: 'Prepared by', value: sow.prepared_by || 'Orchestrated Biosciences' }
             ],
             sowObjective: sow.objective || baseReport.sowObjective,
             sowDecision: sow.scope_decision || baseReport.sowDecision,
@@ -1478,15 +1433,14 @@
 
     function progressTextForJob(job) {
         const progress = Number(job && job.progress || 0);
-        const status = job && job.status ? formatFeedbackStatus(job.status) : 'running';
-        return `${status} · ${progress}%`;
+        return progress >= 100 ? 'Complete' : `${progress}%`;
     }
 
     function statusTextForJob(job) {
         if (!job) return 'Checking scope';
         if (job.status === 'failed') return 'Recovered';
         if (job.status === 'completed') {
-            return job.draft && job.draft.status === 'needs_clarification' ? 'Needs details' : 'Live SOW';
+            return job.draft && job.draft.status === 'needs_clarification' ? 'Needs details' : 'Ready';
         }
         if (job.status === 'queued') return 'Queued';
         return 'Checking scope';
@@ -1699,14 +1653,12 @@
         renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
         if (reportArticle) reportArticle.setAttribute('aria-busy', 'true');
         renderFeedback([
-            makeFeedbackItem('Intake received', 'complete', 'info', 'Client question accepted for preliminary scoping.', hypothesis.value.trim()),
-            makeFeedbackItem('Browser data preview', latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review', latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review', dataScanReview),
-            makeFeedbackItem('Public archive screen', 'pending', 'info', scopeifyApiBase ? 'Queued for backend archive screening.' : 'No live API is configured for this page.'),
-            makeFeedbackItem('Statement of Work', 'pending', 'info', scopeifyApiBase ? 'Waiting for the scoped SOW response.' : 'No project-specific SOW can be issued without the live API.'),
-            makeFeedbackItem('Human review', 'needs_review', 'review', 'Preliminary output requires review before quote.')
-        ], scopeifyApiBase ? 'queued · 0%' : 'Local demo');
+            makeFeedbackItem('File check', latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review', latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review', dataScanReview),
+            makeFeedbackItem('Evidence search', 'pending', 'info', scopeifyApiBase ? 'Queued.' : 'Live API unavailable.'),
+            makeFeedbackItem('Statement of Work', 'pending', 'info', scopeifyApiBase ? 'Drafting.' : 'Live API unavailable.')
+        ], scopeifyApiBase ? '0%' : 'Local demo');
         if (decision) decision.textContent = 'Scoping in progress';
-        if (summary) summary.textContent = 'Validating the intake, preparing feedback, drafting the SOW, and keeping the dataset inventory appendix separate.';
+        if (summary) summary.textContent = 'Preparing the SOW and dataset inventory.';
         downloadButton.disabled = true;
 
         if (!scopeifyApiBase) {
@@ -1866,7 +1818,7 @@
     exampleButton.addEventListener('click', () => {
         hypothesis.value = 'Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?';
         if (notes) {
-            notes.value = 'We need a practical preliminary estimate for a client-ready biomarker feasibility package before deciding whether to fund a larger analysis.';
+            notes.value = 'Estimate a biomarker study before we decide whether to fund a larger analysis.';
         }
         runDemo();
     });
@@ -1875,7 +1827,7 @@
         const selectedFiles = dataFiles ? Array.from(dataFiles.files || []) : [];
         if (!selectedFiles.length) {
             latestDataPreview = createEmptyDataPreview();
-            dataScanReview = 'No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.';
+            dataScanReview = 'No local files selected.';
             renderDataReview();
             return;
         }
@@ -1931,7 +1883,7 @@
                 }
                 return preview;
             } catch (error) {
-                const summary = `${file.name}: ${formatBytes(file.size)} selected, but browser preview failed. Production review would retry with a server-side parser.`;
+                const summary = `${file.name}: browser review failed.`;
                 return {
                     file_name: safeFileName(file.name),
                     extension: getFileExtension(file.name),

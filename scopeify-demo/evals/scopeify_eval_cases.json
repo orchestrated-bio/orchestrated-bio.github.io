@@ -35,13 +35,13 @@
       "query": "Render a preliminary Statement of Work.",
       "expected_decision": "SOW is the default document and includes dates, phases, hours, assumptions, exclusions, and deliverables.",
       "must_find_terms": [
-        "Draft statement of work",
+        "Statement of work",
         "Generation date",
         "Project window",
         "Estimated effort",
         "Expected deliverables",
-        "Assumptions and client inputs",
-        "Exclusions and change controls"
+        "Assumptions",
+        "Not included"
       ]
     },
     {
@@ -79,7 +79,7 @@
       "query": "Inspect arbitrary local table fields without transmitting cell values.",
       "expected_decision": "Only schema labels, derived counts, inferred roles, and risk flags are sent.",
       "must_find_terms": [
-        "Cell values stay local",
+        "Files stay in your browser",
         "value_examples_redacted",
         "inferred_type",
         "inferred_role",
@@ -115,7 +115,7 @@
         "Parquet",
         "Feather",
         "metadata_only",
-        "format-specific review"
+        "require separate review"
       ]
     },
     {
@@ -154,10 +154,10 @@
       "query": "Fail the live project request.",
       "expected_decision": "No unrelated static report or evidence is shown as a live result.",
       "must_find_terms": [
-        "No static example has been substituted",
-        "No result issued",
-        "No validated inventory issued",
-        "No project-specific evidence or estimate is asserted"
+        "No result was issued",
+        "No inventory issued",
+        "No draft or inventory is available",
+        "No estimate is issued until the request completes"
       ]
     },
     {
