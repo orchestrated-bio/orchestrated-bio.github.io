@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v=fca36d21c338"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
-    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=f0f17538c10e" />
+    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=2a47969a47ec" />
     <script src="./assets/js/cookie-consent.js"></script>
   </head>
   <body class="scopeify-page">
@@ -52,13 +52,8 @@
             <div>
                 <p class="scopeify-kicker">Scopeify</p>
                 <h1 id="scopeify-title">Scope a bioinformatics project before the first call.</h1>
-                <p class="scopeify-subtitle">Describe the hypothesis in plain language. Scopeify drafts the first-pass statement of work and keeps the public-data appendix separate from the client-facing scope.</p>
+                <p class="scopeify-subtitle">Describe the question. Get a draft statement of work, estimated hours, and a separate evidence workbook.</p>
             </div>
-            <dl class="scopeify-output-markers" aria-label="Scopeify output summary">
-                <div><dt>Primary output</dt><dd>Draft SOW</dd></div>
-                <div><dt>Appendix</dt><dd>Dataset inventory</dd></div>
-                <div><dt>Next step</dt><dd>Consultation</dd></div>
-            </dl>
         </header>
 
         <div class="scopeify-layout">
@@ -74,29 +69,21 @@
                 <label for="scopeify-notes">Comments, constraints, or desired outputs</label>
                 <textarea id="scopeify-notes" name="notes" rows="5" placeholder="Example: We want a quick feasibility read before grant submission. Please flag whether raw reprocessing is worth the extra cost."></textarea>
 
-                <label for="scopeify-data-files">Optional browser-side data scan</label>
+                <label for="scopeify-data-files">Optional file structure check</label>
                 <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
-                <p class="scopeify-file-note">Scopeify inspects bounded CSV, TSV, text, JSON, JSON Lines, and spreadsheet structure in this browser. Cell values stay local. Only filenames, sheet and field names, inferred types and roles, derived counts, and review flags are sent for scoping. H5AD, RDS, Parquet, and Feather files are identified but require format-specific review.</p>
+                <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
 
                 <div class="scopeify-actions">
-                    <button type="submit" class="scopeify-primary">Generate brief</button>
+                    <button type="submit" class="scopeify-primary">Draft SOW</button>
                     <button type="button" class="scopeify-text-button" id="scopeify-example">Try oncology example</button>
                 </div>
 
-                <section class="scopeify-method" aria-label="Production method">
-                    <p class="scopeify-panel-label">Production method</p>
-                    <ul>
-                        <li>The private backend validates the table preview, source plan, SOW draft, and workbook rows against typed schemas before anything client-facing is rendered.</li>
-                        <li>PubMed, GEO, SRA, ENA, GSA/CNSA, and bioRxiv discovery calls run server-side with source-specific queries, bounded results, and provenance.</li>
-                        <li>Pydantic AI can revise the typed SOW when enabled, but the public page keeps a cost-safe validated SOW path available.</li>
-                    </ul>
-                </section>
             </form>
 
             <article class="scopeify-report" aria-live="polite" aria-busy="false" tabindex="-1">
                 <header class="scopeify-report-header">
                     <div>
-                        <p class="scopeify-panel-label">Preliminary client brief</p>
+                        <p class="scopeify-panel-label">Scopeify result</p>
                         <h2 id="scopeify-brief-title">Preparing project scope</h2>
                     </div>
                     <span class="scopeify-status-pill" id="scopeify-status-pill">Ready to scope</span>
@@ -107,22 +94,14 @@
                     <button type="button" class="scopeify-document-tab" id="scopeify-tab-inventory" data-scopeify-tab="inventory" role="tab" aria-selected="false" aria-controls="scopeify-panel-inventory">Dataset Inventory</button>
                 </div>
 
-                <section class="scopeify-feedback-panel" aria-label="Scopeify scoping feedback">
-                    <div class="scopeify-feedback-head">
-                        <p class="scopeify-panel-label">Scoping feedback</p>
-                        <span id="scopeify-feedback-progress" aria-live="polite">Ready for review</span>
-                    </div>
-                    <ol class="scopeify-feedback-list" id="scopeify-feedback-list"></ol>
-                </section>
-
                 <div class="scopeify-pdf-canvas">
                     <div class="scopeify-document-panel is-active" id="scopeify-panel-sow" role="tabpanel" aria-labelledby="scopeify-tab-sow">
                         <div class="scopeify-pdf-page scopeify-sow-page">
                             <section class="scopeify-report-section scopeify-sow" aria-labelledby="scopeify-sow-heading">
                                 <div class="scopeify-section-heading">
                                     <div>
-                                        <p class="scopeify-section-label" id="scopeify-sow-heading">Draft statement of work</p>
-                                        <h3 id="scopeify-sow-title">Statement of Work: preliminary project scope</h3>
+                                        <p class="scopeify-section-label" id="scopeify-sow-heading">Statement of work</p>
+                                        <h3 id="scopeify-sow-title">Statement of Work</h3>
                                     </div>
                                     <span id="scopeify-sow-window">Pending submission</span>
                                 </div>
@@ -131,10 +110,10 @@
                                     <div class="scopeify-sow-summary">
                                         <div>
                                             <strong>Objective</strong>
-                                            <p id="scopeify-sow-objective">Define the consulting question, available evidence, expected work products, and limits of the preliminary scope.</p>
+                                            <p id="scopeify-sow-objective">Define the work needed to address the project question.</p>
                                         </div>
                                         <div>
-                                            <strong>Scope decision</strong>
+                                            <strong>Recommended scope</strong>
                                             <p id="scopeify-sow-decision">Pending generated scope recommendation.</p>
                                         </div>
                                     </div>
@@ -152,21 +131,21 @@
                                     <div class="scopeify-sow-grid" id="scopeify-sow-grid" role="table" aria-label="Statement of work phases"></div>
                                     <div class="scopeify-sow-inputs">
                                         <div>
-                                            <strong>Client comments reflected</strong>
+                                            <strong>Client comments</strong>
                                             <p id="scopeify-client-notes">No additional notes entered yet.</p>
                                         </div>
                                         <div>
-                                            <strong>Browser-side data scan</strong>
-                                            <p id="scopeify-data-review">No file selected. Scopeify can still scope against public data, or scan local metadata headings to flag low sample size, missing outcome labels, and batch-effect risks.</p>
+                                            <strong>File check</strong>
+                                            <p id="scopeify-data-review">No local files selected.</p>
                                         </div>
                                     </div>
                                     <div class="scopeify-sow-terms">
                                         <div>
-                                            <strong>Assumptions and client inputs</strong>
+                                            <strong>Assumptions</strong>
                                             <ul id="scopeify-sow-assumptions"></ul>
                                         </div>
                                         <div>
-                                            <strong>Exclusions and change controls</strong>
+                                            <strong>Not included</strong>
                                             <ul id="scopeify-sow-exclusions"></ul>
                                         </div>
                                     </div>
@@ -185,7 +164,7 @@
                                     </div>
                                     <span id="scopeify-last-checked">Search pending</span>
                                 </div>
-                                <p class="scopeify-inventory-note">This appendix is separate from the SOW draft. Production Scopeify would export the full screened inventory, excluded evidence, metadata checks, and estimate assumptions as workbook tabs.</p>
+                                <p class="scopeify-inventory-note">Search details, excluded records, file checks, and estimate assumptions are exported as workbook tabs.</p>
                             </section>
 
                             <section class="scopeify-report-section" aria-labelledby="scopeify-audit-heading">
@@ -213,6 +192,14 @@
                     </div>
                 </div>
 
+                <section class="scopeify-feedback-panel" aria-label="Scopeify checks">
+                    <div class="scopeify-feedback-head">
+                        <p class="scopeify-panel-label">Checks</p>
+                        <span id="scopeify-feedback-progress" aria-live="polite">Ready</span>
+                    </div>
+                    <ol class="scopeify-feedback-list" id="scopeify-feedback-list"></ol>
+                </section>
+
                 <footer class="scopeify-report-actions">
                     <button type="button" class="scopeify-primary" id="scopeify-review-request" disabled>Request human review</button>
                     <a class="scopeify-consult-link scopeify-consult-primary" href="https://calendar.app.google/BUsnTrvrYw8Y5b9p6" target="_blank" rel="noopener">Schedule consultation</a>
@@ -233,7 +220,7 @@
                 <button type="button" class="scopeify-dialog-close" id="scopeify-review-close" aria-label="Close">&#x2715;</button>
             </header>
             <div id="scopeify-review-fields">
-                <p class="scopeify-review-intro">An Orchestrated Biosciences scientist will check the evidence, assumptions, deliverables, and estimated hours before contacting you.</p>
+                <p class="scopeify-review-intro">A scientist will check the evidence, scope, and hours before contacting you.</p>
                 <div class="scopeify-review-field-grid">
                     <label for="scopeify-review-name">Name
                         <input id="scopeify-review-name" name="name" maxlength="160" autocomplete="name" required>
@@ -279,6 +266,6 @@
       </div>
     </footer>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v=cc015130aa85"></script>
-    <script src="./assets/js/scopeify-demo.js?v=7e0b939aeb8d"></script>
+    <script src="./assets/js/scopeify-demo.js?v=6851de779f71"></script>
   </body>
 </html>

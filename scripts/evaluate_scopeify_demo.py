@@ -302,22 +302,20 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         "sow_and_quote_shape",
         "The generated output separates the SOW from the inventory appendix and keeps business actions visible.",
         [
-            "Draft statement of work",
-            "Statement of Work:",
+            "Statement of work",
             "Prepared for",
             "Prepared by",
-            "Preliminary Statement of Work",
             "Generation date",
             "Project window",
             "Phase",
             "Workstream",
             "Expected output",
-            "Assumptions and client inputs",
-            "Exclusions and change controls",
+            "Assumptions",
+            "Not included",
             "Estimated effort",
             "Expected deliverables",
-            "Client comments reflected",
-            "Browser-side data scan",
+            "Client comments",
+            "File check",
             "Dataset Inventory",
             "Search appendix",
             "Dataset inventory and project estimates",
@@ -332,17 +330,16 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "client_confidence_agent",
         "scoping_feedback_workflow",
-        "Submit starts a scoping workflow with progress feedback before the SOW is treated as ready.",
+        "Submit runs concise file, evidence, and SOW checks.",
         [
-            "Scoping feedback",
+            "Checks",
             "scopeify-feedback-progress",
             "scopeify-feedback-list",
             "draft-jobs",
             "runDraftJob",
             "renderJobProgress",
-            "Project route",
-            "Browser data preview",
-            "Public archive screen",
+            "File check",
+            "Evidence search",
             "Statement of Work",
             "Human review",
             "queued",
@@ -421,6 +418,36 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "sow_default_document",
             "The SOW document should appear before the inventory appendix.",
             []
+        )
+
+    client_copy = sources.get("include", "")
+    slop_terms = [
+        "Production method",
+        "private backend validates",
+        "Pydantic AI can revise",
+        "client-ready",
+        "comprehensive",
+        "defensible basis",
+        "valuable insights",
+    ]
+    present_slop = [term for term in slop_terms if lower_contains(client_copy, term)]
+    if present_slop:
+        add_check(
+            checks,
+            "FAIL",
+            "client_confidence_agent",
+            "plain_client_copy",
+            f"Client-facing copy contains implementation jargon or promotional filler: {', '.join(present_slop)}",
+            [find_line({"include": client_copy}, term) or term for term in present_slop],
+        )
+    else:
+        add_check(
+            checks,
+            "PASS",
+            "client_confidence_agent",
+            "plain_client_copy",
+            "Client-facing copy avoids implementation jargon and common AI filler.",
+            [],
         )
 
     removed_main_terms = [
@@ -546,10 +573,10 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "browser_data_review_agent",
         "browser_side_file_review",
-        "Local data handling is framed as a browser-side scan and includes preview-level risk flags.",
+        "Local file review stays in the browser and reports structure risks.",
         [
-            "Optional browser-side data scan",
-            "Cell values stay local",
+            "Optional file structure check",
+            "Files stay in your browser",
             "selected file metadata in browser",
             "JSON Lines",
             "profileSpreadsheetFile",
@@ -569,7 +596,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         [
             "scopeify.client_data_preview.v1",
             "value_examples_redacted",
-            "schema summary validated",
+            "No structure issues found",
             "inferred_type",
             "inferred_role",
             "role_confidence",
@@ -577,7 +604,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "unique_count_preview",
             "candidate_roles",
             "risk_flags",
-            "Cell values remain in this browser"
+            "Values stayed local"
         ],
         ["include", "script"]
     )
@@ -658,11 +685,11 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         sources,
         "client_confidence_agent",
         "demo_truthfulness",
-        "The page describes the validated backend and typed LLM revision path without claiming unverified records.",
+        "The client and request path preserve typed data, ticket, and review boundaries.",
         [
-            "private backend validates",
-            "Pydantic AI can revise the typed SOW when enabled",
-            "run server-side",
+            "scopeify.client_data_preview.v1",
+            "value_examples_redacted",
+            "/v1/scopeify/submission-ticket",
             "human review"
         ],
         ["include", "script"]

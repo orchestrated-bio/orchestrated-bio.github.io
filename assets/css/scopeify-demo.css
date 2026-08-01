@@ -34,7 +34,7 @@
     color: var(--scope-ink-2);
     display: grid;
     gap: clamp(1.25rem, 4vw, 3rem);
-    grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.72fr);
+    grid-template-columns: minmax(0, 42rem);
     margin: 0 0 clamp(1.35rem, 4vw, 2.1rem);
 }
 
@@ -68,44 +68,6 @@
     margin: 0.85rem 0 0;
     max-width: var(--measure, 34rem);
     text-wrap: pretty;
-}
-
-.scopeify-output-markers {
-    align-self: end;
-    background: transparent;
-    border-bottom: 1px solid var(--scope-rule-firm);
-    border-top: 1px solid var(--scope-rule-firm);
-    border-radius: 0;
-    display: grid;
-    gap: 0;
-    grid-template-columns: 1fr;
-    margin: 0;
-}
-
-.scopeify-output-markers div {
-    border-top: 1px solid var(--scope-rule);
-    padding: 0.78rem 0;
-}
-
-.scopeify-output-markers div:first-child {
-    border-top: 0;
-}
-
-.scopeify-output-markers dt {
-    color: var(--scope-ink-3);
-    font-family: var(--sans, -apple-system, BlinkMacSystemFont, "SF Pro Text", ui-sans-serif, "Segoe UI", Roboto, system-ui, sans-serif);
-    font-size: 0.7rem;
-    font-weight: 650;
-    letter-spacing: 0.055em;
-    margin: 0 0 0.18rem;
-    text-transform: uppercase;
-}
-
-.scopeify-output-markers dd {
-    color: var(--scope-ink);
-    font-size: 0.86rem;
-    font-weight: 600;
-    margin: 0;
 }
 
 .scopeify-layout {
@@ -281,28 +243,6 @@
     background: var(--scope-ink);
     border-color: var(--scope-ink);
     color: var(--scope-paper);
-}
-
-.scopeify-method {
-    border-top: 1px solid var(--scope-rule);
-    margin-top: 1rem;
-    padding-top: 1rem;
-}
-
-.scopeify-method ul {
-    color: var(--scope-ink-2);
-    display: grid;
-    gap: 0.55rem;
-    line-height: 1.5;
-    list-style: none;
-    margin: 0.65rem 0 0;
-    padding: 0;
-}
-
-.scopeify-method li {
-    border-left: 2px solid var(--scope-accent);
-    font-size: 0.8rem;
-    padding-left: 0.65rem;
 }
 
 .scopeify-report {
@@ -548,7 +488,7 @@
 @media (min-width: 780px) {
     .scopeify-is-submitted .scopeify-feedback-list {
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .scopeify-is-submitted .scopeify-feedback-item {
@@ -637,7 +577,7 @@
 .scopeify-sow-meta {
     background: var(--scope-paper);
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .scopeify-sow-meta div {
@@ -1117,7 +1057,6 @@
     }
 
     .scopeify-topline,
-    .scopeify-output-markers,
     .scopeify-sow-meta,
     .scopeify-sow-summary,
     .scopeify-sow-estimate,
