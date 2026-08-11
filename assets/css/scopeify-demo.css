@@ -319,6 +319,55 @@
     white-space: nowrap;
 }
 
+/* Landing sample ---------------------------------------------------------- */
+
+/* The landing view leads with a finished example and keeps the intake form below it,
+   so a visitor sees the deliverable before being asked to type. Unlike the submitted
+   state, the form stays visible: the example is an illustration, not their result. */
+.scopeify-is-sample .scopeify-layout {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* .scopeify-report is display:none until there is something to show. */
+.scopeify-is-sample .scopeify-report {
+    background: var(--paper-raised);
+    border-color: var(--rule);
+    border-radius: 8px;
+    display: block;
+    order: 1;
+}
+
+.scopeify-is-sample .scopeify-report-section,
+.scopeify-is-sample .scopeify-report-actions {
+    padding-left: clamp(1.1rem, 3vw, 1.6rem);
+    padding-right: clamp(1.1rem, 3vw, 1.6rem);
+}
+
+.scopeify-is-sample .scopeify-intake {
+    order: 2;
+}
+
+/* Sample banner ----------------------------------------------------------- */
+
+/* Marks the landing example so a stored run is never mistaken for a live one. */
+.scopeify-sample-banner {
+    background: var(--scope-accent-wash);
+    border: 1px solid var(--scope-rule);
+    border-left: 3px solid var(--scope-accent);
+    border-radius: 2px;
+    color: var(--scope-ink-soft, inherit);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    margin: 0 0 1rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.scopeify-sample-banner strong {
+    color: var(--scope-accent);
+}
+
 /* Job progress ------------------------------------------------------------ */
 
 .scopeify-progress {
