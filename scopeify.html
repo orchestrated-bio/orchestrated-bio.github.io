@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v=fca36d21c338"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
-    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=87c759e12c9a" />
+    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=180099af17b2" />
     <script src="./assets/js/cookie-consent.js"></script>
   </head>
   <body class="scopeify-page">
@@ -72,6 +72,14 @@
                 <label for="scopeify-data-files">Optional file structure check</label>
                 <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
                 <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
+
+                <div class="scopeify-option">
+                    <label class="scopeify-checkbox" for="scopeify-extended-search">
+                        <input type="checkbox" id="scopeify-extended-search" name="extended-search">
+                        <span>Extended search (slower)</span>
+                    </label>
+                    <p class="scopeify-file-note">Also searches ENA and the China National GeneBank archives. These answer more slowly, and ENA largely mirrors records SRA already covers.</p>
+                </div>
 
                 <div class="scopeify-actions">
                     <button type="submit" class="scopeify-primary" id="scopeify-submit">Draft SOW</button>
@@ -288,6 +296,6 @@
     </footer>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v=cc015130aa85"></script>
     <script src="./assets/js/scopeify-sample-report.js?v=638170a1964e"></script>
-    <script src="./assets/js/scopeify-demo.js?v=b6b143faca76"></script>
+    <script src="./assets/js/scopeify-demo.js?v=69de4978d06e"></script>
   </body>
 </html>
