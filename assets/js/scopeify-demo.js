@@ -7,6 +7,7 @@
     const notes = document.getElementById('scopeify-notes');
     const dataFiles = document.getElementById('scopeify-data-files');
     const exampleButton = document.getElementById('scopeify-example');
+    const submitButton = document.getElementById('scopeify-submit');
     const statusPill = document.getElementById('scopeify-status-pill');
     const briefTitle = document.getElementById('scopeify-brief-title');
     const decision = document.getElementById('scopeify-decision');
@@ -50,6 +51,11 @@
     const feedbackProgress = document.getElementById('scopeify-feedback-progress');
     const feedbackList = document.getElementById('scopeify-feedback-list');
     const reportArticle = document.querySelector('.scopeify-report');
+    const progressPanel = document.getElementById('scopeify-progress');
+    const progressBar = document.getElementById('scopeify-progress-bar');
+    const progressMessage = document.getElementById('scopeify-progress-message');
+    const progressElapsed = document.getElementById('scopeify-progress-elapsed');
+    const progressStages = Array.from(document.querySelectorAll('[data-scopeify-stage]'));
     const DEFAULT_SCOPEIFY_API_BASE = 'https://scopeify-api.orchestrated.bio';
     const LIVE_API_HOSTS = new Set(['orchestrated.bio', 'www.orchestrated.bio', 'orchestrated-bio.github.io']);
     const SCOPEIFY_API_TIMEOUT_MS = 12000;
@@ -66,6 +72,8 @@
 
     let currentReport = null;
     let currentDraftJobId = '';
+    let partialInventoryJobId = '';
+    let activeRunId = 0;
     let currentReviewReceipt = null;
     let dataScanReview = 'No local files selected.';
     let latestDataPreview = createEmptyDataPreview();
@@ -369,6 +377,11 @@
 
     function enterIntakeState() {
         if (!shell) return;
+        // Abandon any in-flight run so its polling stops writing to a screen the user left.
+        activeRunId += 1;
+        stopProgressPanel();
+        setSubmitBusy(false);
+        if (reportArticle) reportArticle.setAttribute('aria-busy', 'false');
         currentDraftJobId = '';
         currentReviewReceipt = null;
         if (reviewRequestButton) {
@@ -1100,11 +1113,11 @@
             </div>
             ${report.sources.map(item => `
                 <div class="scopeify-audit-row" role="row">
-                    <strong role="cell">${escapeHtml(item.source)}</strong>
-                    <span role="cell">${escapeHtml(item.query)}<br>${escapeHtml(item.note)}</span>
-                    <span role="cell">${item.found}</span>
-                    <span role="cell">${item.screened}</span>
-                    <span role="cell">${item.selected}</span>
+                    <strong role="cell" data-label="Source">${escapeHtml(item.source)}</strong>
+                    <span role="cell" data-label="Query focus">${escapeHtml(item.query)}<br>${escapeHtml(item.note)}</span>
+                    <span role="cell" data-label="Found">${item.found}</span>
+                    <span role="cell" data-label="Screened">${item.screened}</span>
+                    <span role="cell" data-label="Selected">${item.selected}</span>
                 </div>
             `).join('')}
         `;
@@ -1130,10 +1143,10 @@
                 </div>
                 ${report.evidence.map(item => `
                     <div class="scopeify-inventory-row" role="row">
-                        <strong role="cell">${escapeHtml(item.id)}<small>${escapeHtml(item.source)} · ${escapeHtml(item.year)}</small></strong>
-                        <span role="cell">${escapeHtml(item.fit)}<br>${escapeHtml(item.title)}</span>
-                        <span role="cell"><b>Cohort:</b> ${escapeHtml(item.cohort)}<br><b>Technology:</b> ${escapeHtml(item.technology)}</span>
-                        <span role="cell"><b>Availability:</b> ${escapeHtml(item.availability)}<br><b>Risk:</b> ${escapeHtml(item.risk)}</span>
+                        <strong role="cell" data-label="Record">${escapeHtml(item.id)}<small>${escapeHtml(item.source)} · ${escapeHtml(item.year)}</small></strong>
+                        <span role="cell" data-label="Role">${escapeHtml(item.fit)}<br>${escapeHtml(item.title)}</span>
+                        <span role="cell" data-label="Cohort / technology"><b>Cohort:</b> ${escapeHtml(item.cohort)}<br><b>Technology:</b> ${escapeHtml(item.technology)}</span>
+                        <span role="cell" data-label="Availability / risk"><b>Availability:</b> ${escapeHtml(item.availability)}<br><b>Risk:</b> ${escapeHtml(item.risk)}</span>
                     </div>
                 `).join('')}
             </div>
@@ -1431,9 +1444,110 @@
         };
     }
 
+    const SCOPEIFY_STAGE_ORDER = ['queued', 'reading_intake', 'searching_archives', 'drafting_sow', 'finished'];
+    const SKELETON_WIDTHS = ['is-long', 'is-medium', 'is-short'];
+    let jobStartedAt = 0;
+    let elapsedTimerId = 0;
+
+    function skeletonLines(count) {
+        return Array.from({ length: count }, (_unused, index) =>
+            `<span class="scopeify-skeleton scopeify-skeleton-line ${SKELETON_WIDTHS[index % SKELETON_WIDTHS.length]}"></span>`
+        ).join('');
+    }
+
+    function applySkeleton(panel) {
+        if (!panel) return;
+        panel.querySelectorAll('[data-scopeify-skeleton]').forEach(node => {
+            node.innerHTML = skeletonLines(Number(node.dataset.scopeifySkeleton) || 2);
+        });
+    }
+
+    function clearSkeleton(panel) {
+        if (!panel) return;
+        panel.querySelectorAll('[data-scopeify-skeleton]').forEach(node => {
+            node.querySelectorAll('.scopeify-skeleton').forEach(bar => bar.remove());
+        });
+    }
+
+    // #scopeify-feedback-progress is an aria-live region. Polling ticks every 900ms, so
+    // announcing a raw percentage there would queue dozens of interruptions per job.
+    // Announce the stage instead: it changes about four times and carries real meaning.
+    const SCOPEIFY_STAGE_LABELS = {
+        queued: 'Queued',
+        reading_intake: 'Reading intake',
+        searching_archives: 'Searching archives',
+        drafting_sow: 'Drafting statement of work',
+        finished: 'Complete'
+    };
+
     function progressTextForJob(job) {
         const progress = Number(job && job.progress || 0);
-        return progress >= 100 ? 'Complete' : `${progress}%`;
+        if (progress >= 100) return 'Complete';
+        const stage = job && job.stage;
+        return SCOPEIFY_STAGE_LABELS[stage] || `${progress}%`;
+    }
+
+    function formatElapsed(ms) {
+        const totalSeconds = Math.max(0, Math.round(ms / 1000));
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return minutes ? `${minutes}m ${String(seconds).padStart(2, '0')}s` : `${seconds}s`;
+    }
+
+    function tickElapsed() {
+        if (!progressElapsed || !jobStartedAt) return;
+        progressElapsed.textContent = formatElapsed(Date.now() - jobStartedAt);
+    }
+
+    function setSubmitBusy(busy) {
+        if (submitButton) {
+            submitButton.disabled = busy;
+            submitButton.textContent = busy ? 'Drafting SOW…' : 'Draft SOW';
+        }
+        if (exampleButton) exampleButton.disabled = busy;
+    }
+
+    function startProgressPanel() {
+        if (!progressPanel) return;
+        jobStartedAt = Date.now();
+        progressPanel.hidden = false;
+        if (progressBar) {
+            progressBar.style.width = '8%';
+            progressBar.classList.add('is-working');
+        }
+        if (progressMessage) progressMessage.textContent = 'Preparing the draft SOW.';
+        applyStageMarkers('queued');
+        tickElapsed();
+        window.clearInterval(elapsedTimerId);
+        elapsedTimerId = window.setInterval(tickElapsed, 1000);
+    }
+
+    function stopProgressPanel() {
+        window.clearInterval(elapsedTimerId);
+        elapsedTimerId = 0;
+        jobStartedAt = 0;
+        if (progressBar) progressBar.classList.remove('is-working');
+        if (progressPanel) progressPanel.hidden = true;
+    }
+
+    function applyStageMarkers(stage) {
+        const activeIndex = SCOPEIFY_STAGE_ORDER.indexOf(stage);
+        progressStages.forEach(node => {
+            const nodeIndex = SCOPEIFY_STAGE_ORDER.indexOf(node.dataset.scopeifyStage);
+            node.classList.toggle('is-active', nodeIndex === activeIndex);
+            node.classList.toggle('is-done', activeIndex > nodeIndex);
+        });
+    }
+
+    function updateProgressPanel(job) {
+        if (!progressPanel || progressPanel.hidden) return;
+        const progress = Math.max(0, Math.min(100, Number(job && job.progress || 0)));
+        if (progressBar) {
+            progressBar.style.width = `${Math.max(progress, 8)}%`;
+            progressBar.classList.toggle('is-working', progress < 100);
+        }
+        if (progressMessage && job && job.message) progressMessage.textContent = job.message;
+        applyStageMarkers((job && job.stage) || 'queued');
     }
 
     function statusTextForJob(job) {
@@ -1450,6 +1564,23 @@
         if (statusPill) statusPill.textContent = statusTextForJob(job);
         if (summary && job && job.message) summary.textContent = job.message;
         renderFeedback(job && job.feedback ? job.feedback : [], progressTextForJob(job));
+        updateProgressPanel(job);
+        renderPartialInventory(job);
+    }
+
+    // The job publishes the archive search before the SOW exists, so the dataset
+    // inventory can be populated while the SOW panel is still a skeleton.
+    function renderPartialInventory(job) {
+        const archive = job && job.partial && job.partial.archive_search;
+        if (!archive || partialInventoryJobId === (job && job.job_id)) return;
+        partialInventoryJobId = job.job_id;
+        const merged = mergeLiveArchiveResponse(currentReport || neutralProjectReport('pending'), archive);
+        currentReport = merged;
+        if (lastChecked) lastChecked.textContent = merged.searchLabel;
+        if (shortlistCount) shortlistCount.textContent = merged.shortlistLabel;
+        renderAudit(merged);
+        renderEvidence(merged);
+        clearSkeleton(document.getElementById('scopeify-panel-inventory'));
     }
 
     function newIdempotencyKey() {
@@ -1471,9 +1602,12 @@
         }, 1);
         renderJobProgress(job);
 
+        const pollRunId = activeRunId;
         for (let poll = 0; poll < SCOPEIFY_JOB_MAX_POLLS; poll += 1) {
             if (job.status === 'completed' || job.status === 'failed') return job;
             await wait(SCOPEIFY_JOB_POLL_MS);
+            // A newer submission supersedes this one; stop rendering into its screen.
+            if (pollRunId !== activeRunId) return job;
             job = await getScopeify(`/v1/scopeify/draft-jobs/${encodeURIComponent(job.job_id)}`);
             renderJobProgress(job);
         }
@@ -1640,7 +1774,14 @@
     }
 
     async function runDemo() {
+        // Each run claims a generation. A superseded run must stop touching the DOM:
+        // otherwise a late poll from the previous job overwrites the current one and can
+        // merge two jobs' records into currentReport (and the workbook export).
+        const runId = ++activeRunId;
+        const isStaleRun = () => runId !== activeRunId;
+        setSubmitBusy(true);
         await dataScanPromise;
+        if (isStaleRun()) return;
         currentDraftJobId = '';
         currentReviewReceipt = null;
         try { sessionStorage.removeItem('scopeify_review_receipt'); } catch (_error) { /* no-op */ }
@@ -1649,33 +1790,49 @@
             reviewRequestButton.textContent = 'Request human review';
         }
         const report = neutralProjectReport('pending');
+        partialInventoryJobId = '';
         enterSubmittedState();
         renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
         if (reportArticle) reportArticle.setAttribute('aria-busy', 'true');
+        if (scopeifyApiBase) {
+            startProgressPanel();
+            applySkeleton(document.getElementById('scopeify-panel-sow'));
+            applySkeleton(document.getElementById('scopeify-panel-inventory'));
+        }
         renderFeedback([
             makeFeedbackItem('File check', latestDataPreview.validation.status === 'no_files' ? 'complete' : 'needs_review', latestDataPreview.validation.status === 'valid' || latestDataPreview.validation.status === 'no_files' ? 'info' : 'review', dataScanReview),
             makeFeedbackItem('Evidence search', 'pending', 'info', scopeifyApiBase ? 'Queued.' : 'Live API unavailable.'),
             makeFeedbackItem('Statement of Work', 'pending', 'info', scopeifyApiBase ? 'Drafting.' : 'Live API unavailable.')
-        ], scopeifyApiBase ? '0%' : 'Local demo');
+        ], scopeifyApiBase ? 'Queued' : 'Local demo');
         if (decision) decision.textContent = 'Scoping in progress';
         if (summary) summary.textContent = 'Preparing the SOW and dataset inventory.';
         downloadButton.disabled = true;
 
         if (!scopeifyApiBase) {
-            window.setTimeout(() => renderReport(markLiveSearchUnavailable(report, 'The live Scopeify API is not configured for this page.'), 'No result'), 620);
+            window.setTimeout(() => {
+                if (isStaleRun()) return;
+                setSubmitBusy(false);
+                renderReport(markLiveSearchUnavailable(report, 'The live Scopeify API is not configured for this page.'), 'No result');
+            }, 620);
             return;
         }
 
         try {
             const { response, feedback, statusText, jobId } = await requestScopeifyDraft(buildDraftPayload());
+            if (isStaleRun()) return;
             const liveReport = reportFromDraftResponse(report, response);
             liveReport.feedback = feedback;
+            stopProgressPanel();
+            setSubmitBusy(false);
             renderReport(liveReport, statusText);
             if (response.status === 'validated' && response.sow && jobId) {
                 currentDraftJobId = jobId;
                 if (reviewRequestButton) reviewRequestButton.disabled = false;
             }
         } catch (error) {
+            if (isStaleRun()) return;
+            stopProgressPanel();
+            setSubmitBusy(false);
             renderReport(markLiveSearchUnavailable(report, error.message), 'No result');
         }
     }
