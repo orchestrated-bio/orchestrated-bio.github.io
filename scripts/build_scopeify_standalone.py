@@ -11,6 +11,7 @@ OUTPUT = ROOT / "scopeify-demo" / "standalone.html"
 PAGE = ROOT / "scopeify.html"
 SCOPEIFY_CSS = ROOT / "assets" / "css" / "scopeify-demo.css"
 SCOPEIFY_JS = ROOT / "assets" / "js" / "scopeify-demo.js"
+SCOPEIFY_SAMPLE_JS = ROOT / "assets" / "js" / "scopeify-sample-report.js"
 HTTPS_UPGRADE_JS = ROOT / "assets" / "js" / "scopeify-https-upgrade.js"
 SHEETJS = ROOT / "assets" / "vendor" / "sheetjs" / "xlsx.full.min.js"
 
@@ -23,6 +24,7 @@ def main() -> None:
     body = INCLUDE.read_text(encoding="utf-8")
     css_version = content_version(SCOPEIFY_CSS)
     js_version = content_version(SCOPEIFY_JS)
+    sample_version = content_version(SCOPEIFY_SAMPLE_JS)
     https_upgrade_version = content_version(HTTPS_UPGRADE_JS)
     sheetjs_version = content_version(SHEETJS)
     content_security_policy = (
@@ -54,6 +56,7 @@ def main() -> None:
 <body>
 {body}
 <script src="../assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
+<script src="../assets/js/scopeify-sample-report.js?v={sample_version}"></script>
 <script src="../assets/js/scopeify-demo.js?v={js_version}"></script>
 </body>
 </html>
@@ -121,6 +124,7 @@ def main() -> None:
       </div>
     </footer>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
+    <script src="./assets/js/scopeify-sample-report.js?v={sample_version}"></script>
     <script src="./assets/js/scopeify-demo.js?v={js_version}"></script>
   </body>
 </html>
