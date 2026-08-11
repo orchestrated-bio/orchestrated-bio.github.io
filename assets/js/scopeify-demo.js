@@ -74,6 +74,7 @@
     let currentDraftJobId = '';
     let partialInventoryJobId = '';
     let activeRunId = 0;
+    let documentTabChosen = false;
     let currentReviewReceipt = null;
     let dataScanReview = 'No local files selected.';
     let latestDataPreview = createEmptyDataPreview();
@@ -368,6 +369,7 @@
     function enterSubmittedState() {
         if (!shell) return;
         shell.classList.add('scopeify-is-submitted');
+        documentTabChosen = false;
         setDocumentTab('sow');
         moveShellToTop();
         window.setTimeout(() => {
@@ -1609,6 +1611,10 @@
         renderAudit(merged);
         renderEvidence(merged);
         clearSkeleton(document.getElementById('scopeify-panel-inventory'));
+        // Drafting the SOW takes far longer than the search, so show the records that just
+        // landed rather than leaving a skeleton on screen. A reader who already picked a tab
+        // keeps it: this only moves a view nobody has touched.
+        if (!documentTabChosen && merged.evidence.length) setDocumentTab('inventory');
     }
 
     function newIdempotencyKey() {
@@ -1874,6 +1880,9 @@
             stopProgressPanel();
             setSubmitBusy(false);
             renderReport(liveReport, statusText);
+            // The inventory was shown while the SOW drafted. Now that the SOW exists, return
+            // to it as the primary document — unless the reader chose a tab themselves.
+            if (!documentTabChosen) setDocumentTab('sow');
             if (response.status === 'validated' && response.sow && jobId) {
                 currentDraftJobId = jobId;
                 if (reviewRequestButton) reviewRequestButton.disabled = false;
@@ -2167,10 +2176,14 @@
     }
 
     documentTabs.forEach(tab => {
-        tab.addEventListener('click', () => setDocumentTab(tab.dataset.scopeifyTab || 'sow'));
+        tab.addEventListener('click', () => {
+            documentTabChosen = true;
+            setDocumentTab(tab.dataset.scopeifyTab || 'sow');
+        });
         tab.addEventListener('keydown', event => {
             if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
             event.preventDefault();
+            documentTabChosen = true;
             const currentIndex = documentTabs.indexOf(tab);
             let nextIndex = currentIndex;
             if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + documentTabs.length) % documentTabs.length;
