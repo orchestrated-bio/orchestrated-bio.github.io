@@ -926,6 +926,50 @@
     color: var(--scope-ink);
 }
 
+.scopeify-audit-query {
+    color: var(--scope-ink);
+    overflow-wrap: anywhere;
+}
+
+.scopeify-audit-query-details summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+.scopeify-audit-query-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.scopeify-audit-query-details summary::after {
+    color: var(--scope-accent);
+    content: " Show full query";
+    font-size: 0.68rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.scopeify-audit-query-details[open] summary::after {
+    content: " Hide full query";
+}
+
+.scopeify-audit-query-details code {
+    color: var(--scope-ink-2);
+    display: block;
+    font-size: 0.68rem;
+    line-height: 1.5;
+    margin-top: 0.4rem;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.scopeify-audit-note {
+    color: var(--scope-ink-3);
+    display: block;
+    font-size: 0.7rem;
+    line-height: 1.45;
+    margin-top: 0.35rem;
+}
+
 .scopeify-inventory-note {
     color: var(--scope-ink-2);
     font-size: 0.84rem;
