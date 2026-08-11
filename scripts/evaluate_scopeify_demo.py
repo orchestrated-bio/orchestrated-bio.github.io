@@ -486,17 +486,28 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
         "Generated from search screen",
         "Demo search",
     }
+    # The landing view may open on an example, but only a real captured run that says so.
+    # A hand-written example shipped once with invented search counts and was removed in
+    # 5b25bee; these terms are its markup, and the sample must stay distinguishable from
+    # a live result.
+    sample_is_labelled = (
+        "scopeify-sample-banner" in include
+        and "window.SCOPEIFY_SAMPLE_REPORT" in script
+        and "'Sample output'" in script
+        and "hideSampleBanner();" in script
+    )
     if (
         "renderReport(neutralProjectReport('pending'), 'Ready to scope')" in script
         and "renderReport(chooseReport()" not in script
         and not any(term in include for term in stale_markup)
+        and sample_is_labelled
     ):
         add_check(
             checks,
             "PASS",
             "client_confidence_agent",
             "no_initial_stale_example",
-            "Initial and query-parameter page state use a neutral report instead of a GLP-1 or melanoma example.",
+            "The landing example is a captured run labelled as a sample, cleared on live submission; no hand-written GLP-1 or melanoma report.",
             [
                 str(SOURCE_FILES["script"].relative_to(ROOT)),
                 str(SOURCE_FILES["include"].relative_to(ROOT)),
@@ -508,7 +519,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "FAIL",
             "client_confidence_agent",
             "no_initial_stale_example",
-            "Initial page state can still render a canned example before live submission.",
+            "Initial page state can render an example that is not labelled as a stored sample or not cleared on live submission.",
             []
         )
 

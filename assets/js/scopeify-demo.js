@@ -9,6 +9,8 @@
     const exampleButton = document.getElementById('scopeify-example');
     const submitButton = document.getElementById('scopeify-submit');
     const statusPill = document.getElementById('scopeify-status-pill');
+    const sampleBanner = document.getElementById('scopeify-sample-banner');
+    const sampleBannerText = document.getElementById('scopeify-sample-banner-text');
     const briefTitle = document.getElementById('scopeify-brief-title');
     const decision = document.getElementById('scopeify-decision');
     const summary = document.getElementById('scopeify-summary');
@@ -1846,6 +1848,7 @@
         }
         const report = neutralProjectReport('pending');
         partialInventoryJobId = '';
+        hideSampleBanner();
         enterSubmittedState();
         renderReport(report, scopeifyApiBase ? 'Checking scope' : 'Generating');
         if (reportArticle) reportArticle.setAttribute('aria-busy', 'true');
@@ -1895,10 +1898,50 @@
         }
     }
 
+    function showSampleBanner(capturedOn) {
+        if (!sampleBanner) return;
+        if (sampleBannerText && capturedOn) {
+            sampleBannerText.textContent = `A real Scopeify run from ${capturedOn}, kept here as an example.`;
+        }
+        sampleBanner.hidden = false;
+    }
+
+    function hideSampleBanner() {
+        if (sampleBanner) sampleBanner.hidden = true;
+        if (shell) shell.classList.remove('scopeify-is-sample');
+    }
+
+    // The landing view shows a stored run so the page opens on a finished SOW instead of
+    // an empty form. It renders through reportFromDraftResponse, the same transform a live
+    // run uses, so the example cannot drift in shape from a real result. The banner marks
+    // it as stored, and the first live submission clears it.
+    function renderSampleReport() {
+        const sample = window.SCOPEIFY_SAMPLE_REPORT;
+        if (!sample || !sample.draft || !sample.draft.sow) return false;
+
+        // The intake must show the question this sample answers, or the form and the
+        // report on screen describe two different projects.
+        if (hypothesis && sample.hypothesis) hypothesis.value = sample.hypothesis;
+        if (notes && sample.notes) notes.value = sample.notes;
+
+        const report = reportFromDraftResponse(neutralProjectReport('pending'), sample.draft);
+        report.feedback = Array.isArray(sample.feedback) ? sample.feedback : [];
+        renderReport(report, 'Sample output');
+        if (shell) shell.classList.add('scopeify-is-sample');
+        showSampleBanner(sample.captured_on);
+        // A stored draft has no job, so human review cannot be requested from it.
+        currentDraftJobId = '';
+        if (reviewRequestButton) reviewRequestButton.disabled = true;
+        if (!documentTabChosen) setDocumentTab('sow');
+        return true;
+    }
+
     function applyInitialParams() {
         const params = new URLSearchParams(window.location.search);
         const initialHypothesis = params.get('hypothesis');
         if (initialHypothesis) hypothesis.value = initialHypothesis;
+        // A visitor-supplied question gets the neutral intake state, not the example.
+        if (!initialHypothesis && renderSampleReport()) return;
         renderReport(neutralProjectReport('pending'), 'Ready to scope');
     }
 
