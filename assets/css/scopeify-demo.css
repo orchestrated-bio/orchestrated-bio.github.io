@@ -319,6 +319,31 @@
     white-space: nowrap;
 }
 
+/* Extended search option -------------------------------------------------- */
+
+.scopeify-option {
+    margin-top: 0.9rem;
+}
+
+.scopeify-checkbox {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-weight: 600;
+    gap: 0.5rem;
+}
+
+.scopeify-checkbox input {
+    accent-color: var(--scope-accent);
+    height: 1rem;
+    margin: 0;
+    width: 1rem;
+}
+
+.scopeify-option .scopeify-file-note {
+    margin-top: 0.3rem;
+}
+
 /* Landing sample ---------------------------------------------------------- */
 
 /* The landing view leads with a finished example and keeps the intake form below it,

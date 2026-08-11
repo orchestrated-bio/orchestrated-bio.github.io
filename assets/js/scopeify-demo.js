@@ -6,6 +6,7 @@
     const hypothesis = document.getElementById('scopeify-hypothesis');
     const notes = document.getElementById('scopeify-notes');
     const dataFiles = document.getElementById('scopeify-data-files');
+    const extendedSearch = document.getElementById('scopeify-extended-search');
     const exampleButton = document.getElementById('scopeify-example');
     const submitButton = document.getElementById('scopeify-submit');
     const statusPill = document.getElementById('scopeify-status-pill');
@@ -1259,8 +1260,17 @@
         throw lastError || new Error('Scopeify API did not return a response');
     }
 
+    // ENA and GSA/CNSA answer far more slowly than the rest, and ENA largely mirrors the
+    // INSDC records SRA already exposes, so they are opt-in rather than part of every run.
+    const EXTENDED_ARCHIVE_SOURCES = ['ENA', 'GSA/CNSA'];
+
+    function extendedSearchRequested() {
+        return Boolean(extendedSearch && extendedSearch.checked);
+    }
+
     function liveArchiveSources() {
-        return ['PubMed', 'GEO', 'SRA', 'ENA', 'GSA/CNSA', 'bioRxiv'];
+        const sources = ['PubMed', 'GEO', 'SRA', 'bioRxiv'];
+        return extendedSearchRequested() ? sources.concat(EXTENDED_ARCHIVE_SOURCES) : sources;
     }
 
     function buildDraftPayload() {
