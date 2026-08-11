@@ -25,6 +25,14 @@
                 <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
                 <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
 
+                <div class="scopeify-option">
+                    <label class="scopeify-checkbox" for="scopeify-extended-search">
+                        <input type="checkbox" id="scopeify-extended-search" name="extended-search">
+                        <span>Extended search (slower)</span>
+                    </label>
+                    <p class="scopeify-file-note">Also searches ENA and the China National GeneBank archives. These answer more slowly, and ENA largely mirrors records SRA already covers.</p>
+                </div>
+
                 <div class="scopeify-actions">
                     <button type="submit" class="scopeify-primary" id="scopeify-submit">Draft SOW</button>
                     <button type="button" class="scopeify-text-button" id="scopeify-example">Try oncology example</button>
