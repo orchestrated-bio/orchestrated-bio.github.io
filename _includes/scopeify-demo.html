@@ -26,7 +26,7 @@
                 <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
 
                 <div class="scopeify-actions">
-                    <button type="submit" class="scopeify-primary">Draft SOW</button>
+                    <button type="submit" class="scopeify-primary" id="scopeify-submit">Draft SOW</button>
                     <button type="button" class="scopeify-text-button" id="scopeify-example">Try oncology example</button>
                 </div>
 
@@ -40,6 +40,21 @@
                     </div>
                     <span class="scopeify-status-pill" id="scopeify-status-pill">Ready to scope</span>
                 </header>
+
+                <div class="scopeify-progress" id="scopeify-progress" aria-hidden="true" hidden>
+                    <div class="scopeify-progress-track">
+                        <div class="scopeify-progress-bar" id="scopeify-progress-bar"></div>
+                    </div>
+                    <ol class="scopeify-progress-stages" id="scopeify-progress-stages">
+                        <li data-scopeify-stage="reading_intake">Reading intake</li>
+                        <li data-scopeify-stage="searching_archives">Searching archives</li>
+                        <li data-scopeify-stage="drafting_sow">Drafting SOW</li>
+                    </ol>
+                    <p class="scopeify-progress-caption">
+                        <span id="scopeify-progress-message">Preparing the draft SOW.</span>
+                        <span class="scopeify-progress-elapsed" id="scopeify-progress-elapsed"></span>
+                    </p>
+                </div>
 
                 <div class="scopeify-document-tabs" role="tablist" aria-label="Scopeify generated documents">
                     <button type="button" class="scopeify-document-tab is-active" id="scopeify-tab-sow" data-scopeify-tab="sow" role="tab" aria-selected="true" aria-controls="scopeify-panel-sow">Statement of Work</button>
@@ -62,11 +77,11 @@
                                     <div class="scopeify-sow-summary">
                                         <div>
                                             <strong>Objective</strong>
-                                            <p id="scopeify-sow-objective">Define the work needed to address the project question.</p>
+                                            <p id="scopeify-sow-objective" data-scopeify-skeleton="2">Define the work needed to address the project question.</p>
                                         </div>
                                         <div>
                                             <strong>Recommended scope</strong>
-                                            <p id="scopeify-sow-decision">Pending generated scope recommendation.</p>
+                                            <p id="scopeify-sow-decision" data-scopeify-skeleton="2">Pending generated scope recommendation.</p>
                                         </div>
                                     </div>
                                     <div class="scopeify-sow-estimate">
@@ -77,10 +92,10 @@
                                         </div>
                                         <div>
                                             <strong>Expected deliverables</strong>
-                                            <ul id="scopeify-outputs-list"></ul>
+                                            <ul id="scopeify-outputs-list" data-scopeify-skeleton="3"></ul>
                                         </div>
                                     </div>
-                                    <div class="scopeify-sow-grid" id="scopeify-sow-grid" role="table" aria-label="Statement of work phases"></div>
+                                    <div class="scopeify-sow-grid" id="scopeify-sow-grid" role="table" aria-label="Statement of work phases" data-scopeify-skeleton="5"></div>
                                     <div class="scopeify-sow-inputs">
                                         <div>
                                             <strong>Client comments</strong>
@@ -126,7 +141,7 @@
                                         <h3>Sources screened</h3>
                                     </div>
                                 </div>
-                                <div class="scopeify-audit-table" id="scopeify-audit-table" role="table" aria-label="Source coverage"></div>
+                                <div class="scopeify-audit-table" id="scopeify-audit-table" role="table" aria-label="Source coverage" data-scopeify-skeleton="4"></div>
                                 <ul class="scopeify-criteria" id="scopeify-criteria-list"></ul>
                             </section>
 
@@ -138,7 +153,7 @@
                                     </div>
                                     <span id="scopeify-shortlist-count">0 records selected</span>
                                 </div>
-                                <div class="scopeify-evidence-list" id="scopeify-evidence-list"></div>
+                                <div class="scopeify-evidence-list" id="scopeify-evidence-list" data-scopeify-skeleton="4"></div>
                             </section>
                         </div>
                     </div>
