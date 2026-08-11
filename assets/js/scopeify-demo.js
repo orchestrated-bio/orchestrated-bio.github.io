@@ -1114,7 +1114,7 @@
             ${report.sources.map(item => `
                 <div class="scopeify-audit-row" role="row">
                     <strong role="cell" data-label="Source">${escapeHtml(item.source)}</strong>
-                    <span role="cell" data-label="Query focus">${escapeHtml(item.query)}<br>${escapeHtml(item.note)}</span>
+                    <span role="cell" data-label="Query focus">${auditQueryMarkup(item.query)}${item.displayNote ? `<span class="scopeify-audit-note">${escapeHtml(item.displayNote)}</span>` : ''}</span>
                     <span role="cell" data-label="Found">${item.found}</span>
                     <span role="cell" data-label="Screened">${item.screened}</span>
                     <span role="cell" data-label="Selected">${item.selected}</span>
@@ -1283,6 +1283,30 @@
         }, 0);
     }
 
+    // "screened out N records" is already reported by the Screened column, so it is dropped
+    // from the displayed note. Caveats that qualify what the counts mean are kept.
+    function auditCaveats(warnings) {
+        return warnings.filter(warning => !/screened out\s+\d+/i.test(String(warning)));
+    }
+
+    const AUDIT_QUERY_INLINE_LIMIT = 96;
+
+    // Backend queries run to several hundred characters. Show a readable head and keep the
+    // exact query one click away; the workbook always carries the full string.
+    function auditQueryMarkup(query) {
+        const text = String(query || 'Query unavailable');
+        if (text.length <= AUDIT_QUERY_INLINE_LIMIT) {
+            return `<span class="scopeify-audit-query">${escapeHtml(text)}</span>`;
+        }
+        const head = text.slice(0, AUDIT_QUERY_INLINE_LIMIT).replace(/\s+\S*$/, '');
+        return `
+            <details class="scopeify-audit-query-details">
+                <summary><span class="scopeify-audit-query">${escapeHtml(head)}…</span></summary>
+                <code>${escapeHtml(text)}</code>
+            </details>
+        `;
+    }
+
     function sourceResultToAudit(result) {
         const returned = Number(result.returned_count || 0);
         const warnings = Array.isArray(result.warnings) ? result.warnings.filter(Boolean) : [];
@@ -1296,7 +1320,11 @@
             found: Number(result.found_count || 0),
             screened: returned + screenedOut,
             selected: returned,
-            note
+            // Full text goes to the workbook; the table shows a readable summary.
+            note,
+            displayNote: result.status === 'searched'
+                ? auditCaveats(warnings).join(' ')
+                : warnings[0] || 'Source not searched by the current backend adapter'
         };
     }
 
@@ -1672,8 +1700,25 @@
             : neutralizeSpreadsheetText(value);
     }
 
-    function worksheetFromRows(rows) {
-        return window.XLSX.utils.aoa_to_sheet(rows.map(row => row.map(safeWorkbookValue)));
+    // Without explicit widths every column renders at Excel's ~8 character default, so long
+    // queries and titles arrive as unreadable slivers. Widths are derived from the content and
+    // capped. (The vendored SheetJS community build writes !cols but not freeze panes.)
+    function worksheetColumnWidths(rows, { min = 10, max = 62 } = {}) {
+        const widths = [];
+        rows.forEach(row => {
+            row.forEach((value, index) => {
+                const text = value == null ? '' : String(value);
+                const longestLine = text.split('\n').reduce((a, b) => (a.length > b.length ? a : b), '');
+                widths[index] = Math.max(widths[index] || min, Math.min(max, longestLine.length + 2));
+            });
+        });
+        return widths.map(width => ({ wch: width }));
+    }
+
+    function worksheetFromRows(rows, options) {
+        const sheet = window.XLSX.utils.aoa_to_sheet(rows.map(row => row.map(safeWorkbookValue)));
+        sheet['!cols'] = worksheetColumnWidths(rows, options);
+        return sheet;
     }
 
     function workbookRows(report) {
@@ -1701,24 +1746,24 @@
         ];
 
         const inventoryRows = [[
-            'source', 'record_id', 'role', 'title', 'year', 'authors', 'pmid', 'doi', 'url',
-            'cohort', 'technology', 'availability', 'selection_rationale', 'reuse_risk'
+            'Source', 'Record ID', 'Role', 'Title', 'Year', 'Authors', 'PMID', 'DOI', 'URL',
+            'Cohort', 'Technology', 'Availability', 'Selection rationale', 'Reuse risk'
         ], ...report.evidence.map(item => [
             item.source, item.id, item.fit, item.title, item.year, item.authors || '', item.pmid || '',
             item.doi || '', item.url || '', item.cohort, item.technology, item.availability, item.rationale, item.risk
         ])];
 
         const auditRows = [[
-            'source', 'query_focus', 'found', 'screened', 'selected', 'source_note'
+            'Source', 'Query', 'Found', 'Screened', 'Selected', 'Notes'
         ], ...report.sources.map(item => [
             item.source, item.query, Number(item.found || 0), Number(item.screened || 0),
             Number(item.selected || 0), item.note
         ])];
 
         const schemaRows = [[
-            'file_name', 'format', 'sheet', 'parser_status', 'rows_inspected', 'columns_observed',
-            'column_name', 'inferred_type', 'inferred_role', 'role_confidence',
-            'missing_count', 'missing_rate', 'unique_count_inspected', 'cell_values_exported'
+            'File name', 'Format', 'Sheet', 'Parser status', 'Rows inspected', 'Columns observed',
+            'Column name', 'Inferred type', 'Inferred role', 'Role confidence',
+            'Missing count', 'Missing rate', 'Unique values inspected', 'Cell values exported'
         ]];
         latestDataPreview.files.forEach(file => {
             if (!file.columns.length) {
@@ -1737,6 +1782,10 @@
             });
         });
 
+        if (schemaRows.length === 1) {
+            schemaRows.push(['No files were selected for the browser-side structure check.']);
+        }
+
         return { estimateRows, inventoryRows, auditRows, schemaRows };
     }
 
@@ -1751,9 +1800,9 @@
         if (window.XLSX) {
             const workbook = window.XLSX.utils.book_new();
             const rows = workbookRows(currentReport);
-            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.estimateRows), 'Project Estimate');
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.estimateRows, { min: 14, max: 78 }), 'Project Estimate');
             window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.inventoryRows), 'Dataset Inventory');
-            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.auditRows), 'Search Audit');
+            window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.auditRows, { max: 80 }), 'Search Audit');
             window.XLSX.utils.book_append_sheet(workbook, worksheetFromRows(rows.schemaRows), 'Data Schema');
             window.XLSX.writeFile(workbook, 'scopeify-project-scope.xlsx', {
                 compression: true,
