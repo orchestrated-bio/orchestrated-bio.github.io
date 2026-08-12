@@ -7,6 +7,7 @@
     const notes = document.getElementById('scopeify-notes');
     const dataFiles = document.getElementById('scopeify-data-files');
     const extendedSearch = document.getElementById('scopeify-extended-search');
+    const moreOptions = document.getElementById('scopeify-more');
     const exampleButton = document.getElementById('scopeify-example');
     const submitButton = document.getElementById('scopeify-submit');
     const statusPill = document.getElementById('scopeify-status-pill');
@@ -1930,9 +1931,10 @@
         if (!sample || !sample.draft || !sample.draft.sow) return false;
 
         // The intake must show the question this sample answers, or the form and the
-        // report on screen describe two different projects.
+        // report on screen describe two different projects. The notes stay out of the
+        // collapsed form: showing them would mean opening the disclosure on load and
+        // undoing the compact landing state.
         if (hypothesis && sample.hypothesis) hypothesis.value = sample.hypothesis;
-        if (notes && sample.notes) notes.value = sample.notes;
 
         const report = reportFromDraftResponse(neutralProjectReport('pending'), sample.draft);
         report.feedback = Array.isArray(sample.feedback) ? sample.feedback : [];
@@ -1944,6 +1946,19 @@
         if (reviewRequestButton) reviewRequestButton.disabled = true;
         if (!documentTabChosen) setDocumentTab('sow');
         return true;
+    }
+
+    function revealMoreOptionsWhenUsed() {
+        if (!moreOptions) return;
+        const hasContent = () => Boolean(
+            (notes && notes.value.trim())
+            || (dataFiles && dataFiles.files && dataFiles.files.length)
+            || (extendedSearch && extendedSearch.checked)
+        );
+        if (hasContent()) moreOptions.open = true;
+        [notes, dataFiles, extendedSearch].forEach(field => {
+            if (field) field.addEventListener('change', () => { if (hasContent()) moreOptions.open = true; });
+        });
     }
 
     function applyInitialParams() {
@@ -2250,6 +2265,7 @@
     });
 
     downloadButton.addEventListener('click', downloadProjectWorkbook);
+    revealMoreOptionsWhenUsed();
     applyInitialParams();
     restoreReviewReceipt();
 })();
