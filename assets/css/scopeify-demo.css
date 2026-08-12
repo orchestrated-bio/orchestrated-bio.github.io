@@ -353,6 +353,16 @@
     display: flex;
     flex-direction: column;
     gap: clamp(1.25rem, 3vw, 2rem);
+    margin: 0 auto;
+    max-width: min(100%, 74rem);
+}
+
+/* The intake leads so the entry point is reachable without scrolling past the
+   example, which sits below it as evidence of what a run produces. */
+.scopeify-is-sample .scopeify-intake {
+    max-width: min(100%, 74rem);
+    order: 1;
+    width: 100%;
 }
 
 /* .scopeify-report is display:none until there is something to show. */
@@ -361,7 +371,7 @@
     border-color: var(--rule);
     border-radius: 8px;
     display: block;
-    order: 1;
+    order: 2;
 }
 
 .scopeify-is-sample .scopeify-report-section,
@@ -370,8 +380,34 @@
     padding-right: clamp(1.1rem, 3vw, 1.6rem);
 }
 
-.scopeify-is-sample .scopeify-intake {
-    order: 2;
+/* Compact on landing: one question, one button. The secondary fields live behind
+   the disclosure so the form costs a few hundred pixels instead of most a screen. */
+.scopeify-is-sample .scopeify-intake textarea#scopeify-hypothesis {
+    height: 5.5rem;
+    min-height: 0;
+}
+
+.scopeify-more {
+    border-top: 1px solid var(--scope-rule);
+    margin-top: 0.9rem;
+    padding-top: 0.75rem;
+}
+
+.scopeify-more > summary {
+    color: var(--scope-accent);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    list-style-position: inside;
+    padding: 0.15rem 0;
+}
+
+.scopeify-more > summary:hover {
+    text-decoration: underline;
+}
+
+.scopeify-more[open] > summary {
+    margin-bottom: 0.6rem;
 }
 
 /* Sample banner ----------------------------------------------------------- */
