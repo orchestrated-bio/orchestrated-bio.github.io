@@ -21,7 +21,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v=fca36d21c338"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css" />
-    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=180099af17b2" />
+    <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v=bc8f00cbcd32" />
     <script src="./assets/js/cookie-consent.js"></script>
   </head>
   <body class="scopeify-page">
@@ -66,20 +66,24 @@
                 <label for="scopeify-hypothesis">Plain-language hypothesis</label>
                 <textarea id="scopeify-hypothesis" name="hypothesis" rows="9">Can public transcriptomics data test whether GLP-1 receptor agonists alter reward circuitry after cocaine exposure in mouse brain?</textarea>
 
-                <label for="scopeify-notes">Comments, constraints, or desired outputs</label>
-                <textarea id="scopeify-notes" name="notes" rows="5" placeholder="Example: We want a quick feasibility read before grant submission. Please flag whether raw reprocessing is worth the extra cost."></textarea>
+                <details class="scopeify-more" id="scopeify-more">
+                    <summary>Add context, files, or search options</summary>
 
-                <label for="scopeify-data-files">Optional file structure check</label>
-                <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
-                <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
+                    <label for="scopeify-notes">Comments, constraints, or desired outputs</label>
+                    <textarea id="scopeify-notes" name="notes" rows="5" placeholder="Example: We want a quick feasibility read before grant submission. Please flag whether raw reprocessing is worth the extra cost."></textarea>
 
-                <div class="scopeify-option">
-                    <label class="scopeify-checkbox" for="scopeify-extended-search">
-                        <input type="checkbox" id="scopeify-extended-search" name="extended-search">
-                        <span>Extended search (slower)</span>
-                    </label>
-                    <p class="scopeify-file-note">Also searches ENA and the China National GeneBank archives. These answer more slowly, and ENA largely mirrors records SRA already covers.</p>
-                </div>
+                    <label for="scopeify-data-files">Optional file structure check</label>
+                    <input class="scopeify-file-input" id="scopeify-data-files" name="data-files" type="file" accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,.xlsx,.xls,.xlsm,.ods,.h5ad,.rds,.parquet,.feather" multiple>
+                    <p class="scopeify-file-note">Files stay in your browser. Scopeify sends only names, headings, inferred field roles, counts, and review flags. H5AD, RDS, Parquet, and Feather require separate review.</p>
+
+                    <div class="scopeify-option">
+                        <label class="scopeify-checkbox" for="scopeify-extended-search">
+                            <input type="checkbox" id="scopeify-extended-search" name="extended-search">
+                            <span>Extended search (slower)</span>
+                        </label>
+                        <p class="scopeify-file-note">Also searches ENA and the China National GeneBank archives. These answer more slowly, and ENA largely mirrors records SRA already covers.</p>
+                    </div>
+                </details>
 
                 <div class="scopeify-actions">
                     <button type="submit" class="scopeify-primary" id="scopeify-submit">Draft SOW</button>
@@ -100,7 +104,7 @@
                 <p class="scopeify-sample-banner" id="scopeify-sample-banner" hidden>
                     <strong>Sample output.</strong>
                     <span id="scopeify-sample-banner-text">A real Scopeify run, kept here as an example.</span>
-                    Enter your own question below for a live result.
+                    Enter your own question above for a live result.
                 </p>
 
                 <div class="scopeify-progress" id="scopeify-progress" aria-hidden="true" hidden>
@@ -296,6 +300,6 @@
     </footer>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v=cc015130aa85"></script>
     <script src="./assets/js/scopeify-sample-report.js?v=638170a1964e"></script>
-    <script src="./assets/js/scopeify-demo.js?v=69de4978d06e"></script>
+    <script src="./assets/js/scopeify-demo.js?v=130bcd67b82d"></script>
   </body>
 </html>
