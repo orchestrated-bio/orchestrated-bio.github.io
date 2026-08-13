@@ -2,7 +2,7 @@
 // A real captured API run, shown on load as a labelled sample. Never fabricate
 // these numbers: the hand-written example this replaced was removed in 5b25bee.
 window.SCOPEIFY_SAMPLE_REPORT = {
-    "captured_on": "2026-08-11",
+    "captured_on": "2026-08-13",
     "hypothesis": "Can public tumor transcriptomics data identify biomarkers of anti-PD-1 response in melanoma patients?",
     "notes": "Estimate a biomarker study before we decide whether to fund a larger analysis.",
     "draft": {
@@ -28,7 +28,7 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                     "source": "PubMed",
                     "status": "searched",
                     "query": "(\"pd 1\" OR \"pd l1\" OR checkpoint OR pembrolizumab OR nivolumab OR immunotherapy) AND melanoma AND (tumor OR tumour OR biopsy)",
-                    "found_count": 28598,
+                    "found_count": 28613,
                     "returned_count": 2,
                     "records": [
                         {
@@ -79,54 +79,36 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                         },
                         {
                             "source": "PubMed",
-                            "identifier": "PMID 31942075",
-                            "title": "B cells and tertiary lymphoid structures promote immunotherapy response.",
-                            "url": "https://pubmed.ncbi.nlm.nih.gov/31942075/",
-                            "year": "2020",
+                            "identifier": "PMID 26558876",
+                            "title": "CTLA-4 and PD-1 Pathways: Similarities, Differences, and Implications of Their Inhibition.",
+                            "url": "https://pubmed.ncbi.nlm.nih.gov/26558876/",
+                            "year": "2016",
                             "authors": [
-                                "Helmink BA",
-                                "Reddy SM",
-                                "Gao J",
-                                "Zhang S",
-                                "Basar R",
-                                "Thakur R",
-                                "Yizhak K",
-                                "Sade-Feldman M",
-                                "Blando J",
-                                "Han G",
-                                "Gopalakrishnan V",
-                                "Xi Y",
-                                "Zhao H",
-                                "Amaria RN",
-                                "Tawbi HA",
-                                "Cogdill AP",
-                                "Liu W",
-                                "LeBleu VS",
-                                "Kugeratski FG",
-                                "Patel S"
+                                "Buchbinder EI",
+                                "Desai A"
                             ],
-                            "source_detail": "Nature",
+                            "source_detail": "American journal of clinical oncology",
                             "data_availability": "Literature record; inspect article and supplements for reusable data links.",
                             "technology": "",
                             "cohort": "",
                             "credibility": "PubMed-indexed literature metadata from NCBI Entrez.",
-                            "citation": "Nature; 2020; PMID 31942075",
-                            "pmid": "31942075",
-                            "doi": "10.1038/s41586-019-1922-8",
-                            "abstract_or_summary": "Treatment with immune checkpoint blockade (ICB) has revolutionized cancer therapy. Until now, predictive biomarkers1-10 and strategies to augment clinical response have largely focused on the T cell compartment. However, other immune subsets may also contribute to anti-tumour immunity11-15, although these have been less well-studied in ICB treatment16. A previously conducted neoadjuvant ICB trial in patients with melanoma showed via targeted expression profiling17 that B cell signatures were enriched in the tumours of patients who respond to treatment versus non-responding patients. To build on this, here we performed bulk RNA sequencing and found that B cell markers were the most differentially expressed genes in the tumours of responders versus non-responders. Our findings were corroborated using a computational method (MCP-counter18) to estimate the immune and stromal composition in this and two other ICB-treated cohorts (patients with melanoma and renal cell carcinoma). Histological evaluation highlighted the localization of B cells within tertiary lymphoid structures. We assessed the potential functional contributions of B cells via bulk and single-cell RNA sequencing, which demonstrate clonal expansion and unique functional states of B cells in responders. Mass cytometry showed that switched memory B cells were enriched in the tumours of responders. Together, these data provide insights into the potential role of B cells and tertiary lymphoid structures in the response to ICB treatment, with implications for the development of biomarkers and therapeutic targets.",
+                            "citation": "American journal of clinical oncology; 2016; PMID 26558876",
+                            "pmid": "26558876",
+                            "doi": "10.1097/COC.0000000000000239",
+                            "abstract_or_summary": "The cytotoxic T-lymphocyte-associated antigen 4 (CTLA-4) and programmed death 1 (PD-1) immune checkpoints are negative regulators of T-cell immune function. Inhibition of these targets, resulting in increased activation of the immune system, has led to new immunotherapies for melanoma, non-small cell lung cancer, and other cancers. Ipilimumab, an inhibitor of CTLA-4, is approved for the treatment of advanced or unresectable melanoma. Nivolumab and pembrolizumab, both PD-1 inhibitors, are approved to treat patients with advanced or metastatic melanoma and patients with metastatic, refractory non-small cell lung cancer. In addition the combination of ipilimumab and nivolumab has been approved in patients with BRAF WT metastatic or unresectable melanoma. The roles of CTLA-4 and PD-1 in inhibiting immune responses, including antitumor responses, are largely distinct. CTLA-4 is thought to regulate T-cell proliferation early in an immune response, primarily in lymph nodes, whereas PD-1 suppresses T cells later in an immune response, primarily in peripheral tissues. The clinical profiles of immuno-oncology agents inhibiting these 2 checkpoints may vary based on their mechanistic differences. This article provides an overview of the CTLA-4 and PD-1 pathways and implications of their inhibition in cancer therapy.",
                             "raw_metadata": {
-                                "uid": "31942075",
-                                "pubdate": "2020 Jan",
-                                "source": "Nature",
-                                "title": "B cells and tertiary lymphoid structures promote immunotherapy response.",
-                                "fulljournalname": "Nature",
-                                "sortpubdate": "2020/01/01 00:00"
+                                "uid": "26558876",
+                                "pubdate": "2016 Feb",
+                                "source": "Am J Clin Oncol",
+                                "title": "CTLA-4 and PD-1 Pathways: Similarities, Differences, and Implications of Their Inhibition.",
+                                "fulljournalname": "American journal of clinical oncology",
+                                "sortpubdate": "2016/02/01 00:00"
                             }
                         }
                     ],
                     "warnings": [
-                        "PubMed screened out 7 candidate records that did not study the question's concepts.",
-                        "PubMed screened a bounded candidate window of 10 from 28598 indexed matches; zero selected rows is not an exhaustive negative result."
+                        "PubMed screened out 18 candidate records that did not study the question's concepts.",
+                        "PubMed screened a bounded candidate window of 24 from 28613 indexed matches; zero selected rows is not an exhaustive negative result."
                     ]
                 },
                 {
@@ -160,30 +142,30 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                         },
                         {
                             "source": "GEO",
-                            "identifier": "GSE109563",
-                            "title": "Melanocyte-specific regulation of PD-L1 by MITF confers immune tolerance to UV mutagenesis",
-                            "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109563",
+                            "identifier": "GSE303456",
+                            "title": "Sequential Imatinib and Anti-PD-1 Therapy in KIT-Altered Melanoma: Mechanistic Insights and Clinical Benefit",
+                            "url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE303456",
                             "year": "2026",
                             "authors": [],
                             "source_detail": "NCBI GEO DataSets",
                             "data_availability": "GEO series/dataset metadata; inspect record for matrix, supplement, and linked SRA/BioProject accessions.",
-                            "technology": "Genome binding/occupancy profiling by high throughput sequencing; Homo sapiens",
-                            "cohort": "4 samples",
+                            "technology": "Expression profiling by high throughput sequencing; Homo sapiens",
+                            "cohort": "48 samples",
                             "credibility": "NCBI GEO/DataSets metadata from Entrez.",
-                            "citation": "GSE109563; 2026",
+                            "citation": "GSE303456; 2026",
                             "pmid": null,
                             "doi": null,
                             "abstract_or_summary": "",
                             "raw_metadata": {
-                                "uid": "200109563",
-                                "accession": "GSE109563",
-                                "title": "Melanocyte-specific regulation of PD-L1 by MITF confers immune tolerance to UV mutagenesis"
+                                "uid": "200303456",
+                                "accession": "GSE303456",
+                                "title": "Sequential Imatinib and Anti-PD-1 Therapy in KIT-Altered Melanoma: Mechanistic Insights and Clinical Benefit"
                             }
                         }
                     ],
                     "warnings": [
-                        "GEO screened out 7 candidate records that did not study the question's concepts.",
-                        "GEO screened a bounded candidate window of 10 from 1491 indexed matches; zero selected rows is not an exhaustive negative result."
+                        "GEO screened out 22 candidate records that did not study the question's concepts.",
+                        "GEO screened a bounded candidate window of 24 from 1491 indexed matches; zero selected rows is not an exhaustive negative result."
                     ]
                 },
                 {
@@ -191,51 +173,11 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                     "status": "searched",
                     "query": "(\"pd 1\" OR \"pd l1\" OR checkpoint OR pembrolizumab OR nivolumab OR immunotherapy) AND melanoma AND (tumor OR tumour OR biopsy) AND (\"RNA-seq\" OR \"RNA sequencing\" OR rnaseq OR transcriptomic OR transcriptome OR \"expression profiling\" OR \"gene expression\")",
                     "found_count": 6935,
-                    "returned_count": 2,
-                    "records": [
-                        {
-                            "source": "SRA",
-                            "identifier": "SRA2508792",
-                            "title": "Single-cell TCR V(D)J-seq of Mus musculus: B16 melanoma tumor-infiltrating T cells (partial response, day 28, mouse M1)",
-                            "url": "https://www.ncbi.nlm.nih.gov/sra?term=SRA2508792",
-                            "year": null,
-                            "authors": [],
-                            "source_detail": "NCBI SRA",
-                            "data_availability": "Raw sequencing/run metadata; inspect run table for file availability and sample linkage.",
-                            "technology": "ILLUMINA",
-                            "cohort": "",
-                            "credibility": "NCBI SRA metadata from Entrez.",
-                            "citation": "SRA2508792",
-                            "pmid": null,
-                            "doi": null,
-                            "abstract_or_summary": "Single-cell TCR V(D)J-seq of Mus musculus: B16 melanoma tumor-infiltrating T cells (partial response, day 28, mouse M1) ILLUMINA TP1_M1_VDJ RNA-Seq TRANSCRIPTOMIC SINGLE CELL PCR PRJNA1510788 SAMN62333325",
-                            "raw_metadata": {
-                                "uid": "46147956"
-                            }
-                        },
-                        {
-                            "source": "SRA",
-                            "identifier": "SRA2508792",
-                            "title": "Single-cell 5' RNA-seq of Mus musculus: B16 melanoma tumor-infiltrating leukocytes (partial response, day 28, mouse M1)",
-                            "url": "https://www.ncbi.nlm.nih.gov/sra?term=SRA2508792",
-                            "year": null,
-                            "authors": [],
-                            "source_detail": "NCBI SRA",
-                            "data_availability": "Raw sequencing/run metadata; inspect run table for file availability and sample linkage.",
-                            "technology": "ILLUMINA",
-                            "cohort": "",
-                            "credibility": "NCBI SRA metadata from Entrez.",
-                            "citation": "SRA2508792",
-                            "pmid": null,
-                            "doi": null,
-                            "abstract_or_summary": "Single-cell 5' RNA-seq of Mus musculus: B16 melanoma tumor-infiltrating leukocytes (partial response, day 28, mouse M1) ILLUMINA TP1_M1_GEX RNA-Seq TRANSCRIPTOMIC SINGLE CELL cDNA PRJNA1510788 SAMN62333325",
-                            "raw_metadata": {
-                                "uid": "46147955"
-                            }
-                        }
-                    ],
+                    "returned_count": 0,
+                    "records": [],
                     "warnings": [
-                        "SRA screened a bounded candidate window of 10 from 6935 indexed matches; zero selected rows is not an exhaustive negative result."
+                        "SRA screened out 24 candidate records that did not study the question's concepts.",
+                        "SRA screened a bounded candidate window of 24 from 6935 indexed matches; zero selected rows is not an exhaustive negative result."
                     ]
                 },
                 {
@@ -271,31 +213,31 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                         },
                         {
                             "source": "ENA",
-                            "identifier": "PRJNA753468",
-                            "title": "Multiomic profiling of checkpoint inhibitor-treated melanoma: Identifying predictors of response and resistance, and markers of biological discordance",
-                            "url": "https://www.ebi.ac.uk/ena/browser/view/PRJNA753468",
-                            "year": "2021",
+                            "identifier": "PRJNA1028535",
+                            "title": "SMARCAL1 is a dual regulator of innate immune signaling and PD-L1 expression that promotes tumor immune evasion [RNA-seq]",
+                            "url": "https://www.ebi.ac.uk/ena/browser/view/PRJNA1028535",
+                            "year": "2024",
                             "authors": [],
                             "source_detail": "European Nucleotide Archive study",
                             "data_availability": "ENA study metadata; inspect linked samples, experiments, and read runs for downloadable files.",
                             "technology": "",
                             "cohort": "Homo sapiens",
                             "credibility": "Primary ENA public study metadata from EMBL-EBI.",
-                            "citation": "PRJNA753468",
+                            "citation": "PRJNA1028535",
                             "pmid": null,
                             "doi": null,
-                            "abstract_or_summary": "This study concurrently examined the genome, transcriptome, methylome and immune cell infiltrates in baseline tumors from advanced cutaneous melanoma patients treated with anti-PD-1 +/- anti-CTLA-4 immune checkpoint immunotherapy. Illumina MethylationEPIC BeadChip array analysis of 43 melanoma tumors was carried out as part of the study. Higher PSMB8 methylation (and therefore lower PSMB8 expression) was associated with poor response to immunotherapy. There were higher amounts of CD8+ T cells, as estimated by methylCIBERSORT, in the tumor microenvironment of good responders. Although we observed a significant correlation between PD-L1 expression and methylation of the cg197224470 CpG site, there was no significant difference between PD-L1 methylation in good and poor responders. Overall design: Illumina Infinium MethylationEPIC BeadChip array analysis of 43 melanoma tumours. Samples were collected prior to immune checkpoint immunotherapy",
+                            "abstract_or_summary": "Genomic instability can trigger cancer-intrinsic innate immune responses that promote tumor rejection. However, cancer cells often evade these responses by overexpressing immune checkpoint regulators, such as PD-L1. Here, we identify the SNF2-family DNA translocase SMARCAL1 as a factor that favors tumor immune evasion by a dual mechanism involving both the suppression of innate immune signaling and the induction of PD-L1-mediated immune checkpoint responses. Mechanistically, SMARCAL1 relieves endogenous DNA damage and suppresses cGAS-STING-dependent signaling during cancer cell growth. Simultaneously, it cooperates with the AP-1 family member JUN to maintain chromatin accessibility at a transcriptional regulatory element in the PD-L1 gene, thereby promoting PD-L1 expression in cancer cells. SMARCAL1 loss hinders the ability of tumor cells to induce PD-L1 in response to genomic instability, enhances anti-tumor immune responses and sensitizes tumors to immune checkpoint blockade in a mouse melanoma model. Collectively, these studies uncover SMARCAL1 as a promising target for cancer immunotherapy. Overall design: Gene expression profiling analysis using data from RNA-seq and plate-seq generated from SMARCAL1-proficient and -deficient MDA-MB-436 cells",
                             "raw_metadata": {
-                                "secondary_study_accession": "",
-                                "center_name": "QIMR Berghofer Medical Research Institute",
-                                "first_public": "2021-12-10",
-                                "last_updated": "2026-08-08",
+                                "secondary_study_accession": "SRP466509",
+                                "center_name": "The Trustees of Columbia University in the City of New York",
+                                "first_public": "2024-01-26",
+                                "last_updated": "2026-05-04",
                                 "tax_id": "9606"
                             }
                         }
                     ],
                     "warnings": [
-                        "ENA screened out 3 candidate records that did not study the question's concepts.",
+                        "ENA screened out 2 candidate records that did not study the question's concepts.",
                         "ENA total-match counts are not exposed by this bounded study query; found_count reflects the candidate window."
                     ]
                 },
@@ -316,8 +258,53 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                     "status": "searched",
                     "query": "((\"pd 1\" OR \"pd l1\" OR checkpoint OR pembrolizumab OR nivolumab OR immunotherapy) AND melanoma AND (tumor OR tumour OR biopsy)) AND SRC:PPR AND PUBLISHER:\"bioRxiv\"",
                     "found_count": 570,
-                    "returned_count": 1,
+                    "returned_count": 2,
                     "records": [
+                        {
+                            "source": "bioRxiv",
+                            "identifier": "10.1101/2022.03.21.485049",
+                            "title": "The CD58:CD2 axis is co-regulated with PD-L1 via CMTM6 and governs anti-tumor immunity",
+                            "url": "https://doi.org/10.1101/2022.03.21.485049",
+                            "year": "2022",
+                            "authors": [
+                                "Ho P",
+                                "Melms JC",
+                                "Rogava M",
+                                "Frangieh CJ",
+                                "Shah SB",
+                                "Walsh Z",
+                                "Kyrysyuk O",
+                                "Amin AD",
+                                "Caprio L",
+                                "Fullerton BT",
+                                "Soni R",
+                                "Ager CR",
+                                "Biermann J",
+                                "Wang Y",
+                                "Mu M",
+                                "Fatima H",
+                                "Moore EK",
+                                "Vasan N",
+                                "Bakhoum SF",
+                                "Reiner SL"
+                            ],
+                            "source_detail": "bioRxiv preprint indexed by Europe PMC",
+                            "data_availability": "Preprint record; inspect the DOI landing page, supplements, data accessions, and any linked peer-reviewed version.",
+                            "technology": "",
+                            "cohort": "",
+                            "credibility": "Non-peer-reviewed bioRxiv preprint metadata indexed by Europe PMC.",
+                            "citation": "bioRxiv; 2022; 10.1101/2022.03.21.485049",
+                            "pmid": null,
+                            "doi": "10.1101/2022.03.21.485049",
+                            "abstract_or_summary": "ABSTRACT The cell autonomous balance of immune-inhibitory and -stimulatory signals is a critical yet poorly understood process in cancer immune evasion. Using patient-derived co-culture models and humanized mouse models, we show that an intact CD58:CD2 interaction is necessary for anti-tumor immunity. Defects in this axis lead to multi-faceted immune evasion through impaired CD2-dependent T cell polyfunctionality, T cell exclusion, impaired intra-tumoral proliferation, and concurrent protein stabilization of PD-L1. We performed genome-scale CRISPR-Cas9 and CD58 coimmunoprecipitation mass spectrometry screens identifying CMTM6 as a key stabilizer of CD58, and show that CMTM6 is required for concurrent upregulation of PD-L1 in CD58 loss. Single-cell RNA-seq analysis of patient melanoma samples demonstrates that most TILs lack expression of primary costimulatory signals required for response to PD-1 blockade (e.g. CD28 ), but maintain strong CD2 expression, thus providing an opportunity to mobilize a so far therapeutically untapped pool of TILs for anti-tumor immunity. We identify two potential therapeutic avenues, including rescued activation of human CD2 -expressing TILs using recombinant CD58 protein, and targeted disruption of PD-L1/CMTM6 interactions. Our work identifies an underappreciated yet critical axis at the nexus of cancer immunity and evasion, uncovers a fundamental mechanism of co-inhibitory and -stimulatory signal balancing, and provides new approaches to improving cancer immunotherapies.",
+                            "raw_metadata": {
+                                "europe_pmc_id": "PPR471133",
+                                "first_publication_date": "2022-03-21",
+                                "has_supplement": "N",
+                                "has_data": "N",
+                                "published_version": ""
+                            }
+                        },
                         {
                             "source": "bioRxiv",
                             "identifier": "10.1101/2022.08.11.502598",
@@ -365,45 +352,46 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                         }
                     ],
                     "warnings": [
-                        "bioRxiv screened out 9 candidate records that did not study the question's concepts.",
+                        "bioRxiv screened out 8 candidate records that did not study the question's concepts.",
                         "bioRxiv discovery uses the Europe PMC preprint index; publication status and the latest server version require DOI review."
                     ]
                 }
             ],
             "warnings": [
-                "PubMed screened out 7 candidate records that did not study the question's concepts.",
-                "PubMed screened a bounded candidate window of 10 from 28598 indexed matches; zero selected rows is not an exhaustive negative result.",
-                "GEO screened out 7 candidate records that did not study the question's concepts.",
-                "GEO screened a bounded candidate window of 10 from 1491 indexed matches; zero selected rows is not an exhaustive negative result.",
-                "SRA screened a bounded candidate window of 10 from 6935 indexed matches; zero selected rows is not an exhaustive negative result.",
-                "ENA screened out 3 candidate records that did not study the question's concepts.",
+                "PubMed screened out 18 candidate records that did not study the question's concepts.",
+                "PubMed screened a bounded candidate window of 24 from 28613 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "GEO screened out 22 candidate records that did not study the question's concepts.",
+                "GEO screened a bounded candidate window of 24 from 1491 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "SRA screened out 24 candidate records that did not study the question's concepts.",
+                "SRA screened a bounded candidate window of 24 from 6935 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "ENA screened out 2 candidate records that did not study the question's concepts.",
                 "ENA total-match counts are not exposed by this bounded study query; found_count reflects the candidate window.",
                 "NGDC GSA BIG Search can include INSDC mirrors; each row retains its center and archive accession.",
                 "GSA/CNSA screened out 2 candidate records that did not study the question's concepts.",
-                "bioRxiv screened out 9 candidate records that did not study the question's concepts.",
+                "bioRxiv screened out 8 candidate records that did not study the question's concepts.",
                 "bioRxiv discovery uses the Europe PMC preprint index; publication status and the latest server version require DOI review."
             ]
         },
         "sow": {
             "schema_version": "scopeify.sow_draft.v1",
             "title": "Statement of Work: Public Data Feasibility Review",
-            "generated_date": "2026-08-11",
+            "generated_date": "2026-08-13",
             "prepared_for": "Prospective Orchestrated Biosciences client",
             "prepared_by": "Orchestrated Biosciences",
             "document_type": "Preliminary Statement of Work",
             "estimate_status": "Draft estimate",
-            "objective": "Assess whether public tumor transcriptomics datasets can identify biomarkers of anti-PD-1 response in melanoma patients.",
-            "scope_decision": "Review the 9 candidate records before selecting data for analysis.",
-            "estimated_hours_min": 18,
-            "estimated_hours_max": 28,
+            "objective": "Determine if public human melanoma tumor RNA‑seq data can support biomarker discovery for anti‑PD‑1 response.",
+            "scope_decision": "Review the eight identified public datasets before selecting ones for analysis.",
+            "estimated_hours_min": 17,
+            "estimated_hours_max": 26,
             "expected_timeline": "1-2 weeks after the project question is confirmed.",
             "phases": [
                 {
                     "phase": 1,
                     "workstream": "Public evidence search",
                     "activities": [
-                        "Run source-specific searches",
-                        "Screen public-data accessions",
+                        "Query PubMed for human melanoma tumor RNA‑seq studies comparing anti‑PD‑1 responders vs non‑responders",
+                        "Query GEO for human melanoma RNA‑seq datasets with responder status",
                         "Log exclusions and weak hits"
                     ],
                     "expected_output": "Search log and candidate inventory",
@@ -414,21 +402,21 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                     "phase": 2,
                     "workstream": "Dataset review",
                     "activities": [
-                        "Inspect cohort and technology metadata",
-                        "Check reuse constraints",
-                        "Match records to the hypothesis"
+                        "Extract cohort size, assay type, and PD‑1 response annotation from each candidate",
+                        "Assess data reuse constraints for human melanoma RNA‑seq",
+                        "Map records to the anti‑PD‑1 biomarker hypothesis"
                     ],
                     "expected_output": "Dataset inventory",
                     "hours_min": 6,
-                    "hours_max": 10
+                    "hours_max": 9
                 },
                 {
                     "phase": 3,
                     "workstream": "Analysis plan",
                     "activities": [
-                        "Select the analysis path",
-                        "Estimate reprocessing needs",
-                        "Flag sample, batch, and endpoint risks"
+                        "Choose analysis pipeline for differential expression between responders and non‑responders",
+                        "Estimate reprocessing effort for raw RNA‑seq reads",
+                        "Identify sample, batch, and endpoint risks"
                     ],
                     "expected_output": "Draft analysis plan",
                     "hours_min": 4,
@@ -438,45 +426,62 @@ window.SCOPEIFY_SAMPLE_REPORT = {
                     "phase": 4,
                     "workstream": "Reporting and review",
                     "activities": [
-                        "Prepare the SOW",
-                        "Export XLSX tables",
-                        "Create review slide deck"
+                        "Compose final SOW draft",
+                        "Export XLSX inventory and effort tables",
+                        "Prepare slide deck for review meeting"
                     ],
                     "expected_output": "SOW, workbook, and review meeting",
-                    "hours_min": 4,
-                    "hours_max": 6
+                    "hours_min": 3,
+                    "hours_max": 5
                 }
             ],
             "deliverables": [
                 "Nextflow pipeline to reprocess the selected raw sequencing runs",
                 "Quarto HTML report covering search coverage, candidate datasets, and the recommended analysis path",
                 "Slide deck and results review of dataset fit, reuse limits, and the recommended next step",
-                "XLSX workbook of the dataset inventory, search audit, and effort estimate for 9 candidate records"
+                "XLSX workbook of the dataset inventory, search audit, and effort estimate for 8 candidate records"
             ],
             "assumptions": [
                 "The client will confirm the organism, groups, and intended decision.",
                 "File review uses browser-generated metadata unless secure transfer is approved.",
-                "Hours may change after labels, permissions, and raw-data access are checked.",
-                "Candidate records are available under their existing public access terms."
+                "Hours may change after labels, permissions, and raw-data access are checked."
             ],
             "exclusions": [
                 "This draft is not a quote.",
-                "Wet-lab design, IRB review, and controlled-data access are not included.",
+                "Wet‑lab design, IRB review, and controlled-data access are not included.",
                 "Data hosting and regulated-data handling require a separate agreement.",
                 "Raw SRA or ENA reprocessing is not included unless added to the final scope."
             ],
             "client_notes_reflected": "Estimate a biomarker study before we decide whether to fund a larger analysis.",
-            "public_data_summary": "Searched PubMed, GEO, SRA, ENA, GSA/CNSA, bioRxiv. Returned 9 candidates from 37630 matches.",
+            "public_data_summary": "Searched PubMed, GEO, SRA, ENA, GSA/CNSA, bioRxiv. Returned 8 candidates from 37645 matches.",
             "data_preview_considerations": [
                 "No local files reviewed."
             ],
             "consultation_next_step": "Schedule a consultation to confirm scope and pricing.",
             "human_review_required": true,
             "generation_mode": "pydantic_ai",
-            "model_used": "deepseek/deepseek-v4-flash:nitro",
-            "warnings": []
+            "model_used": "openai/gpt-oss-120b:nitro",
+            "warnings": [
+                "PubMed screened out 18 candidate records that did not study the question's concepts.",
+                "PubMed screened a bounded candidate window of 24 from 28613 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "GEO screened out 22 candidate records that did not study the question's concepts.",
+                "GEO screened a bounded candidate window of 24 from 1491 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "SRA screened out 24 candidate records that did not study the question's concepts.",
+                "SRA screened a bounded candidate window of 24 from 6935 indexed matches; zero selected rows is not an exhaustive negative result.",
+                "ENA screened out 2 candidate records that did not study the question's concepts.",
+                "ENA total-match counts are not exposed by this bounded study query; found_count reflects the candidate window."
+            ]
         },
-        "warnings": [],
+        "warnings": [
+            "PubMed screened out 18 candidate records that did not study the question's concepts.",
+            "PubMed screened a bounded candidate window of 24 from 28613 indexed matches; zero selected rows is not an exhaustive negative result.",
+            "GEO screened out 22 candidate records that did not study the question's concepts.",
+            "GEO screened a bounded candidate window of 24 from 1491 indexed matches; zero selected rows is not an exhaustive negative result.",
+            "SRA screened out 24 candidate records that did not study the question's concepts.",
+            "SRA screened a bounded candidate window of 24 from 6935 indexed matches; zero selected rows is not an exhaustive negative result.",
+            "ENA screened out 2 candidate records that did not study the question's concepts.",
+            "ENA total-match counts are not exposed by this bounded study query; found_count reflects the candidate window."
+        ],
         "next_step": "Request human review before using this as a quote."
     },
     "feedback": [
@@ -491,14 +496,14 @@ window.SCOPEIFY_SAMPLE_REPORT = {
             "label": "Evidence search",
             "status": "needs_review",
             "severity": "review",
-            "message": "PubMed, GEO, SRA, ENA, GSA/CNSA, bioRxiv: 9 candidates from 37630 matches.",
-            "detail": "PubMed screened out 7 candidate records that did not study the question's concepts. PubMed screened a bounded candidate window of 10 from 28598 indexed matches; zero selected rows is not an exhaustive negative result. GEO screened out 7 candidate records that did not study the question's concepts. GEO screened a bounded candidate window of 10 from 1491 indexed matches; zero selected rows is not an exhaustive negative result."
+            "message": "PubMed, GEO, SRA, ENA, GSA/CNSA, bioRxiv: 8 candidates from 37645 matches.",
+            "detail": "PubMed screened out 18 candidate records that did not study the question's concepts. PubMed screened a bounded candidate window of 24 from 28613 indexed matches; zero selected rows is not an exhaustive negative result. GEO screened out 22 candidate records that did not study the question's concepts. GEO screened a bounded candidate window of 24 from 1491 indexed matches; zero selected rows is not an exhaustive negative result."
         },
         {
             "label": "Statement of Work",
             "status": "complete",
             "severity": "info",
-            "message": "Draft SOW: 18-28 hours.",
+            "message": "Draft SOW: 17-26 hours.",
             "detail": ""
         }
     ]
