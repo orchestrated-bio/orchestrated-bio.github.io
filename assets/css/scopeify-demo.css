@@ -1382,6 +1382,15 @@
         flex-direction: column;
     }
 
+    /* A project result is the main mobile reading surface, not a tiny PDF
+       preview. Let it join the page scroll so the review actions remain
+       reachable after the document. */
+    .scopeify-pdf-canvas {
+        max-height: none;
+        overflow: visible;
+        padding: 0.75rem;
+    }
+
     .scopeify-feedback-item {
         grid-template-columns: 1fr;
     }
