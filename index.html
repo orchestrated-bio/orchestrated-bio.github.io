@@ -30,7 +30,8 @@
           <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./" aria-current="page">DrugAdopt</a>
           <a href="./insight.html">Insight</a>
           <a href="./scopeify.html">Scopeify</a>
@@ -46,8 +47,8 @@
         <div class="shell">
           <div class="opening-copy">
             <h1>Find the patients most likely to respond before your trial&nbsp;starts.</h1>
-            <p class="opening-lede">DrugAdopt is a biomarker-discovery engine. Give it a drug and an indication, and it works the public evidence for the biomarkers that could separate the patients who respond from the patients who do not.</p>
-            <p class="opening-lede opening-lede-tight">You get the candidate biomarkers, the evidence for and against each, and <strong>the experiment that would close the gap</strong>. Every conclusion links to the source or analysis it came from, so you can check it yourself.</p>
+            <p class="opening-lede">Give DrugAdopt a drug and indication. It identifies candidate response biomarkers from public evidence.</p>
+            <p class="opening-lede opening-lede-tight">You get the evidence for and against each marker, plus <strong>the experiment that would close the gap</strong>. Every conclusion links to its source.</p>
             <div class="opening-actions">
               <a class="btn" href="./report.html">Explore an example report <span aria-hidden="true">→</span></a>
               <a class="link-quiet" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot ↗</a>
@@ -99,7 +100,7 @@
 
                   <div class="dax-ov-foot">
                     <span>Prepared 2026-07-16 · from public evidence</span>
-                    <span>Every claim hash-bound to its source</span>
+                    <span>Every conclusion links to its source</span>
                   </div>
                 </article>
 
@@ -261,7 +262,7 @@
               <p>Evidence + analyses + gaps</p>
             </div>
           </div>
-          <p class="pilot-terms"><b>We are taking on a small number of pilot assets.</b> We are early and looking for case studies we can point to, so early partners get engagement terms that reflect that. Most of the work runs on public evidence alone — anything you share stays on private cloud infrastructure and never reaches a public model API. <a href="./company.html#data-handling">How your data is handled</a>.</p>
+          <p class="pilot-terms"><b>We are taking on a small number of pilot assets.</b> Most of the work runs on public evidence alone. Anything you share stays on private cloud infrastructure and never reaches a public model API. <a href="./company.html#data-handling">How your data is handled</a>.</p>
           <p class="pilot-terms-cta">
             <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call <span aria-hidden="true">→</span></a>
             <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Or email us ↗</a>
@@ -319,6 +320,7 @@
         </nav>
       </div>
     </footer>
+    <script src="./assets/js/company-site/mobile-nav.js"></script>
     <script src="./assets/js/company-site/drugadopt-demo.js"></script>
   </body>
 </html>

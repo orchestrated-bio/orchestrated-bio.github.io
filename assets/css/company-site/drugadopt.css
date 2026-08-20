@@ -254,14 +254,14 @@
   .dax-spine { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 0.6em; align-items: center; }
   .dax-spine-brand { border-bottom: 0; padding: 0 0.5em 0 0; margin: 0 0.5em 0 0; }
   .dax-nav {
-    flex: 1 1 100%; flex-direction: row; flex-wrap: nowrap;
-    overflow-x: auto; padding: 0.3em 0 0; gap: 0.2em;
-    scrollbar-width: thin; scrollbar-color: #526173 transparent;
+    flex: 1 1 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible; padding: 0.35em 0 0; gap: 0.25em;
   }
-  .dax-nav > li { flex: none; }
-  .dax-nav-item { width: auto; border-left: 0; border-bottom: 2px solid transparent; padding: 0.55em 0.75em; }
+  .dax-nav > li { min-width: 0; }
+  .dax-nav-item { min-height: 2.7rem; align-items: center; width: 100%; border-left: 0; border-bottom: 2px solid transparent; padding: 0.45em 0.55em; }
   .dax-nav-item-active { border-left: 0; border-bottom-color: #5fbf9c; }
   .dax-nav-num { display: none; }
+  .dax-nav-label { font-size: 0.62em; line-height: 1.2; }
   .dax-spine-foot { display: none; }
   .dax-paper { min-height: 22em; }
 }
