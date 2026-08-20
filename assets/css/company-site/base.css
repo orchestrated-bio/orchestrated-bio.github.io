@@ -234,6 +234,18 @@ body {
   margin-left: auto;
 }
 
+.site-nav-toggle {
+  display: none;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule-firm);
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+}
+
 .site-nav a {
   font-family: var(--sans);
   font-size: var(--step--1);
@@ -265,23 +277,19 @@ body {
 
 @media (max-width: 40rem) {
   .masthead .shell { flex-wrap: wrap; gap: 0.5rem 1rem; padding-block: 0.7rem; }
-  .site-nav {
-    gap: 0.9rem;
-    margin-left: 0;
+  .site-nav-toggle { display: inline-flex; align-items: center; min-height: 44px; margin-left: auto; }
+  .site-nav.site-nav-enhanced {
+    display: none;
+    flex: 1 0 100%;
     order: 3;
-    width: 100%;
-    flex-wrap: wrap;
+    gap: 0;
+    margin-left: 0;
+    padding-top: 0.35rem;
+    border-top: 1px solid var(--rule);
   }
-  /* The CTA is nowrap and won't fit a 375px row beside four nav items —
-     it pushed the whole page sideways. Let it take its own line. */
-  .nav-cta {
-    padding: 0.35rem 0.6rem;
-    margin-left: auto;
-  }
-}
-
-@media (max-width: 26rem) {
-  .nav-cta { width: 100%; text-align: center; margin-left: 0; }
+  .site-nav.site-nav-enhanced[data-open="true"] { display: grid; grid-template-columns: 1fr; }
+  .site-nav.site-nav-enhanced a { min-height: 44px; display: flex; align-items: center; }
+  .site-nav.site-nav-enhanced .nav-cta { justify-content: center; margin-top: 0.35rem; }
 }
 
 /* --- Hero: the register itself ----------------------------------------- */
