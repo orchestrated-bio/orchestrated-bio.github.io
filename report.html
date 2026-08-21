@@ -46,8 +46,8 @@
     <main class="rpt-stage">
       <div class="rpt-intro">
         <p class="rpt-intro-kicker">Example DrugAdopt report</p>
-        <h1 class="rpt-intro-title">Built from public data alone — no sponsor data, no data room.</h1>
-        <p class="rpt-intro-lede">Every figure below was computed from published papers, trial registries and public repositories. DrugAdopt assessed and graded five candidate selection markers for Prexasertib, and named the experiment that would settle the leading one. <a href="./">What DrugAdopt does</a>.</p>
+        <h1 class="rpt-intro-title">Hold the unselected trial until the missing evidence is in hand.</h1>
+        <p class="rpt-intro-lede">This public-evidence example finds a clinical signal, but no trial-ready selection marker or combination safety window. It names the one experiment that would change that decision. <a href="./">What DrugAdopt does</a>.</p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on Prexasertib in Platinum-resistant HGSOC">
@@ -280,24 +280,25 @@
           <section class="dax-page" id="traceability">
             <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
             <p class="dax-sec-num">Traceability</p>
-            <h2 class="dax-sec-h">Every claim resolves to a source</h2>
+            <h2 class="dax-sec-h">Evidence you can inspect</h2>
 
-            <p class="dax-body-p">Each sentence in this report is bound to the source it came from and to the reviewer verdict that checked it. Sources are downloaded and hashed at retrieval, so the exact bytes behind a number are preserved even if the page it came from later changes. You can check any claim without taking our word for it.</p>
+            <p class="dax-body-p">Each conclusion links to the source and review that supports it. You can reopen the evidence behind a finding and see what changed the decision.</p>
 
             <dl class="dax-stats">
-              <div><dt>89</dt><dd>claims carried in the table</dd></div>
-              <div><dt>44</dt><dd>sources, all hashed and preserved</dd></div>
-              <div><dt>64/89</dt><dd>claims semantically reviewed, all bound to a current verdict</dd></div>
-              <div><dt>23/44</dt><dd>sources you can open yourself</dd></div>
+              <div><dt>89</dt><dd>report claims</dd></div>
+              <div><dt>44</dt><dd>source records</dd></div>
+              <div><dt>64/89</dt><dd>claims reviewed</dd></div>
+              <div><dt>23/44</dt><dd>public source links</dd></div>
             </dl>
-            <p class="dax-scope-line">The remaining 25 claims are figure, decision-packet and biomarker entries bound by manifest rather than by semantic review. The remaining 21 sources are this case's own analysis outputs — hashed and preserved, but internal rather than public.</p>
+            <p class="dax-scope-line">Some entries describe figures and internal analysis outputs rather than independent external validation. The report labels those boundaries instead of presenting them as settled evidence.</p>
 
-            <p class="dax-scope-line">One claim per chapter, showing the binding runs across the whole report:</p>
+            <details class="dax-trace-details">
+              <summary>Technical traceability details</summary>
+              <p class="dax-scope-line">One checked claim from each chapter:</p>
             <ol class="dax-claims"><li><span class="dax-claim-text">All 49 participants in cohorts 5 and 6 received prexasertib, but only 39 were RECIST-evaluable</span><span class="dax-claim-meta"><code>SEM-clinical-001</code> · module <code>clinical</code> @ <code>26dcd59142a1</code></span></li><li><span class="dax-claim-text">Published KEGG result reproduced: source-oriented weighted ES was −0.55321745 versus −0.5532175 in the source (absolute error 4.7×10⁻⁸). The source reported NES −1.81, nominal p=0.00101, and FDR q=0.0253</span><span class="dax-claim-meta"><code>SEM-pharmacology-001</code> · module <code>pharmacology</code> @ <code>414056576a09</code></span></li><li><span class="dax-claim-text">CHK1 enzyme <code>IC50 &lt;1 nM</code> and binding <code>Ki 0.9 nM</code> establish potent target pharmacology, while CHK2 and p90S6 kinase inhibition below 10 nM in the cited 224-kinase panel prevent a CHK1-exclusive claim</span><span class="dax-claim-meta"><code>SEM-adme-001</code> · module <code>adme</code> @ <code>c334c52857aa</code></span></li><li><span class="dax-claim-text">Grade 3 or 4 treatment-related neutropenia occurred in 42 (85.7%), leukocytopenia in 38 (77.6%), thrombocytopenia in 20 (40.8%), anemia in 15 (30.6%), and febrile neutropenia in 6 (12.2%).</span><span class="dax-claim-meta"><code>SEM-toxicology-001</code> · module <code>toxicology</code> @ <code>2b1e9b9355d5</code></span></li></ol>
 
-            <p class="dax-body-p">The identifier is the claim, the module is the chapter it lives in, and the hash fixes the reviewed text. If a chapter is edited, its hash changes and the claim is flagged for re-review rather than silently inheriting an old verdict.</p>
-
-            <p class="dax-scope-line">This reader surface projects existing semantic-review, search-log, public-source, and evidence-state bindings. A matching content hash detects case-local drift; it does not authenticate publisher origin or establish scientific truth. Existing case artifacts present only in the case manifest are labeled internally hash-bound, not independently scientifically reviewed; artifacts absent from every binding surface remain unreviewed.</p>
+              <p class="dax-scope-line">The identifier fixes the reviewed claim and its chapter. If that text changes, the claim is flagged for another review. This record detects changes within this case; it does not establish publisher origin or scientific truth on its own.</p>
+            </details>
 
             <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Trace</span></div>
           </section>
@@ -307,10 +308,10 @@
 
       <aside class="rpt-outro">
         <div class="rpt-outro-body">
-          <h2>This report was generated from public data alone.</h2>
-          <p>Every figure above was computed from published papers, trial registries and public repositories — no sponsor data, no data room, no privileged access. Each chapter is hash-bound to its sources and to the verification verdict that checked it, so any claim here can be traced back to the bytes it came from.</p>
+          <h2>A decision-ready report from public evidence.</h2>
+          <p>Every figure above was computed from published papers, trial registries, and public repositories — no sponsor data, no data room, no privileged access. Each conclusion links to its source and review.</p>
           <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. Several gates this report leaves open — participant-linked exposure, dose-modification records, archived tissue — are ones a sponsor's own data room can close directly.</p>
-          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> We are early, and we are looking for case studies we can point to, so early partners get engagement terms that reflect that. Tell us the drug and the indication and we will tell you what the public evidence can and cannot settle before you commit anything.</p>
+          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> Tell us the drug and the indication, and we will show what public evidence can and cannot settle before you commit anything.</p>
         </div>
         <div class="rpt-outro-actions">
           <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot <span aria-hidden="true">→</span></a>
