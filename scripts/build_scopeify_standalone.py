@@ -98,7 +98,8 @@ def main() -> None:
           <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./">DrugAdopt</a>
           <a href="./insight.html">Insight</a>
           <a href="./scopeify.html" aria-current="page">Scopeify</a>
@@ -123,6 +124,7 @@ def main() -> None:
         </nav>
       </div>
     </footer>
+    <script src="./assets/js/company-site/mobile-nav.js"></script>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
     <script src="./assets/js/scopeify-sample-report.js?v={sample_version}"></script>
     <script src="./assets/js/scopeify-demo.js?v={js_version}"></script>

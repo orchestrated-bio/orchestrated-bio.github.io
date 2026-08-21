@@ -542,6 +542,22 @@
   color: #47554f;
 }
 
+.dax-trace-details {
+  margin-top: 1em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--kd-rule);
+}
+
+.dax-trace-details summary {
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.68em;
+  font-weight: 650;
+  color: var(--kd-blue);
+}
+
+.dax-trace-details[open] summary { margin-bottom: 0.9em; }
+
 /* Analysis identifiers are filesystem paths from the case; their length is
    not under this stylesheet's control, so they must be able to break. */
 .dax-claim-meta,
