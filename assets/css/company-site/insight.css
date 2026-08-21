@@ -1025,18 +1025,18 @@
   font-size: 0.53em;
 }
 
-.iui-lolli-protein .iui-stem:nth-child(2) .iui-stem-label {
-  right: 0.55em;
+.iui-lolli-protein .iui-stem-label-left {
+  right: 1.35em;
   left: auto;
   transform: none;
 }
 
-.iui-lolli-protein .iui-stem:nth-child(3) .iui-stem-label {
-  top: -2.65em;
+.iui-lolli-protein .iui-stem-label-high {
+  top: -3.5em;
 }
 
-.iui-lolli-protein .iui-stem:nth-child(4) .iui-stem-label {
-  left: 0.55em;
+.iui-lolli-protein .iui-stem-label-right {
+  left: 1.35em;
   transform: none;
 }
 
