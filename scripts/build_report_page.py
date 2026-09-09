@@ -598,9 +598,9 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css" />
-    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css" />
-    <link rel="stylesheet" href="./assets/css/company-site/report.css" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=289430860909" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=d29b250732d4" />
+    <link rel="stylesheet" href="./assets/css/company-site/report.css?v=ffe4602ac8cb" />
   </head>
   <body>
     <a class="skip-link" href="#overview">Skip to content</a>
@@ -779,8 +779,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         </nav>
       </div>
     </footer>
-    <script src="./assets/js/company-site/mobile-nav.js"></script>
-    <script src="./assets/js/company-site/report-spine.js"></script>
+    <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
+    <script src="./assets/js/company-site/report-spine.js?v=2088a5c33b26"></script>
   </body>
 </html>
 """
