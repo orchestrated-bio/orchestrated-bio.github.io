@@ -10,10 +10,11 @@ homepage hero: dark section spine, serif paper, numbered sections, numbered
 figures with real captions, inline [PMID ...] citations. Here it runs at
 full-page scale rather than shrunk into a figure.
 
-Content rule: every sentence of prose is copied verbatim from the case --
+Content rule: scientific report prose is copied verbatim from the case --
 either from report_view_model.json or from the module pages' own
 Question / Answer / Interpretation blocks. Structural labels ("Figure 3.",
-"Section 2") are the only text authored here. Nothing is paraphrased.
+"Section 2") and the marketing introduction and closing invitation are authored
+here. Scientific conclusions are not paraphrased.
 
 Inputs, all produced from the case by scripts/extract_report_content.py:
     scripts/module_sections.json   Question/Answer/Interpretation per module
@@ -627,8 +628,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <main id="main" class="rpt-stage">
       <div class="rpt-intro">
         <p class="rpt-intro-kicker">Example DrugAdopt report</p>
-        <h1 class="rpt-intro-title">Built from public data alone — no sponsor data, no data room.</h1>
-        <p class="rpt-intro-lede">Every figure below was computed from published papers, trial registries and public repositories. DrugAdopt assessed and graded five candidate selection markers for {esc(asset)}, and named the experiment that would settle the leading one. <a href="./">What DrugAdopt does</a>.</p>
+        <h1 class="rpt-intro-title">The evidence for candidate biomarkers, and what is still missing.</h1>
+        <p class="rpt-intro-lede">This public-evidence example examines candidate response biomarkers for {esc(asset)}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>.</p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on {esc(asset)} in {esc(indication)}">
@@ -755,10 +756,10 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
       <aside class="rpt-outro">
         <div class="rpt-outro-body">
-          <h2>This report was generated from public data alone.</h2>
-          <p>Every figure above was computed from published papers, trial registries and public repositories — no sponsor data, no data room, no privileged access. Each chapter is hash-bound to its sources and to the verification verdict that checked it, so any claim here can be traced back to the bytes it came from.</p>
-          <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. Several gates this report leaves open — participant-linked exposure, dose-modification records, archived tissue — are ones a sponsor's own data room can close directly.</p>
-          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> We are early, and we are looking for case studies we can point to, so early partners get engagement terms that reflect that. Tell us the drug and the indication and we will tell you what the public evidence can and cannot settle before you commit anything.</p>
+          <h2>A decision-ready report from public evidence.</h2>
+          <p>Every figure above was computed from published papers, trial registries, and public repositories. No sponsor data or privileged access was used. Each conclusion links to its source and review.</p>
+          <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. A sponsor can help close several gaps by sharing participant-linked exposure data, dose-modification records, or archived tissue.</p>
+          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> Tell us the drug and the indication, and we will show what public evidence can and cannot settle before you commit anything.</p>
         </div>
         <div class="rpt-outro-actions">
           <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot <span aria-hidden="true">→</span></a>
