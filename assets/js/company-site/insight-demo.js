@@ -25,7 +25,7 @@
   ].filter(Boolean);
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var phase = 0;
-  var playing = !reducedMotion;
+  var playing = false;
   var phaseTimer = null;
   var phaseTimers = [];
   var typingTimer = null;
@@ -216,15 +216,19 @@
     });
 
     if (phase === 0) renderScene(0, false);
-    if (phase === 1) renderScene(0, true);
-    if (phase === 2) renderScene(1, true);
+    if (phase === 1) renderScene(0, playing);
+    if (phase === 2) renderScene(1, playing);
     if (phase === 3) renderScene(1, false);
 
     scheduleNext();
   }
 
   controls.forEach(function (button, index) {
-    button.addEventListener('click', function () { showPhase(index); });
+    button.addEventListener('click', function () {
+      playing = false;
+      updatePlayControl();
+      showPhase(index);
+    });
   });
 
   playControl.addEventListener('click', function () {
