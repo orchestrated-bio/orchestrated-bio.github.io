@@ -50,7 +50,7 @@ def main() -> None:
     <script src="../assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
     <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon.png">
-    <link rel="stylesheet" href="../assets/css/company-site/base.css">
+    <link rel="stylesheet" href="../assets/css/company-site/base.css?v=289430860909">
     <link rel="stylesheet" href="../assets/css/scopeify-demo.css?v={css_version}">
 </head>
 <body>
@@ -84,9 +84,9 @@ def main() -> None:
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
-    <link rel="stylesheet" href="./assets/css/company-site/base.css" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=289430860909" />
     <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v={css_version}" />
-    <script src="./assets/js/cookie-consent.js"></script>
+    <script src="./assets/js/cookie-consent.js?v=15c24d3881c0"></script>
   </head>
   <body class="scopeify-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -123,7 +123,7 @@ def main() -> None:
         </nav>
       </div>
     </footer>
-    <script src="./assets/js/company-site/mobile-nav.js"></script>
+    <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
     <script src="./assets/vendor/sheetjs/xlsx.full.min.js?v={sheetjs_version}"></script>
     <script src="./assets/js/scopeify-sample-report.js?v={sample_version}"></script>
     <script src="./assets/js/scopeify-demo.js?v={js_version}"></script>
