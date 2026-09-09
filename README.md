@@ -13,15 +13,13 @@ The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no app
 | Scopeify | `scopeify.html`, `_includes/scopeify-demo.html` |
 | Example report | `report.html` |
 | Company | `company.html` |
-| Blog index | `blog/index.html` |
-| Blog articles | `blog/YYYY/MM/DD/slug/index.html` |
 | Privacy and terms | `privacy-policy.html`, `terms.html` |
 | Shared styles | `assets/css/company-site/base.css` |
 | Page styles | `assets/css/company-site/` |
 | Interactive demos | `assets/js/company-site/` |
 | Portable review artifact | `concepts/asset-diligence/asset-diligence.artifact.html` |
 
-The `.nojekyll` marker tells GitHub Pages to publish these files directly. `sitemap.xml` and `blog/feed.xml` are maintained as static files.
+The `.nojekyll` marker tells GitHub Pages to publish these files directly. `sitemap.xml` is maintained as a static file.
 
 The root product pages can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
 
@@ -61,9 +59,8 @@ The builder keeps the standalone review page and production `scopeify.html` sync
 | Change product positioning or page content | Root HTML pages |
 | Change shared layout or typography | `assets/css/company-site/base.css` |
 | Change one product page | Its page-specific CSS and JavaScript |
-| Add a blog article | Add a static `index.html` under its dated URL and update `blog/index.html`, `blog/feed.xml`, and `sitemap.xml` |
 | Change Scopeify | Edit its include, CSS, or JavaScript; run the Scopeify builder and evaluator |
-| Change blog or policy styling | `assets/css/company-site/editorial.css` |
+| Change policy styling | `assets/css/company-site/editorial.css` |
 | Rebuild the portable review artifact | `concepts/asset-diligence/build_artifact.py` |
 
 ## Deployment

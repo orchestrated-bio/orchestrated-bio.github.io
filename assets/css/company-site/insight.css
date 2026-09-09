@@ -20,6 +20,8 @@
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
 }
 
+.insight-ui [hidden] { display: none !important; }
+
 .iui-side {
   position: absolute;
   left: 0; top: 0; bottom: 0;
@@ -752,6 +754,7 @@
 }
 
 .insight-demo-switcher button {
+  min-height: 44px;
   appearance: none;
   border: 1px solid var(--rule);
   border-radius: 999px;
@@ -1169,6 +1172,7 @@
 }
 
 @media (max-width: 48rem) {
+  .insight-product-proof .insight-ui { min-height: 32em; }
   .insight-demo-switcher { align-items: stretch; flex-wrap: wrap; }
   .insight-demo-switcher > span { flex-basis: 100%; }
   .insight-demo-switcher button { flex: 1 1 auto; }
@@ -1190,76 +1194,88 @@
   .insight-boundary .btn { justify-self: start; }
 }
 
-@media (max-width: 30rem) {
-  .insight-product-proof .insight-ui { aspect-ratio: 3 / 5; font-size: clamp(10px, 2.6vw, 13px); }
+/* On phones, use the available width for readable content. The desktop
+   workspace becomes stacked panels; phone and notebook scenes size to content. */
+@media (max-width: 40rem) {
+  .insight-demo-switcher { display: grid; grid-template-columns: 1fr 1fr; }
+  .insight-demo-switcher > span { grid-column: 1 / -1; }
+  .insight-demo-switcher .insight-story-play { grid-column: 1 / -1; }
+  .insight-product-proof .insight-ui { aspect-ratio: auto; min-height: 0; font-size: 16px; }
   .insight-product-proof .iui-side { display: none; }
-  .insight-product-proof .iui-bar { left: 0; padding-inline: 0.65em; }
-  .insight-product-proof .iui-crumb-cohort { max-width: 12em; overflow: hidden; text-overflow: ellipsis; }
-  .insight-product-proof .iui-cohort { display: none; }
-  .insight-product-proof .iui-chat {
-    top: 2.4em;
-    left: 0;
-    right: 0;
-    bottom: auto;
-    width: auto;
-    height: 14.5em;
-    border-right: 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  .insight-product-proof .iui-bar {
+    position: relative; inset: auto; height: auto; min-height: 2.4em;
+    padding: 0.65em; flex-wrap: wrap;
   }
+  .insight-product-proof .iui-cohort { display: none; }
+  .insight-product-proof .iui-crumbs { flex-wrap: wrap; gap: 0.3em; }
+  .insight-product-proof .iui-chat {
+    position: relative; inset: auto; width: auto; height: auto;
+    border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  }
+  .insight-product-proof .iui-paras { padding-bottom: 1em; }
+  .insight-product-proof .iui-paras p { font-size: 0.85em; }
   .insight-product-proof .iui-follow,
   .insight-product-proof .iui-ask { display: none; }
-  .insight-product-proof .iui-vis {
-    display: block;
-    top: 16.9em;
-    left: 0;
-  }
+  .insight-product-proof .iui-vis { display: block; position: relative; inset: auto; }
+  .insight-product-proof .iui-scene { display: none; position: relative; inset: auto; }
+  .insight-product-proof .iui-scene-active { display: flex; }
+  .insight-product-proof .iui-card-analysis,
+  .insight-product-proof .iui-card-volcano { height: auto; }
   .insight-product-proof .iui-analysis-grid {
-    grid-template-columns: minmax(0, 1.25fr) minmax(10em, 0.75fr);
-    gap: 0.45em;
+    grid-template-columns: 1fr; grid-template-rows: 16em auto; gap: 0.6em; flex: none;
   }
-  .insight-product-proof .iui-plot-summary { padding: 0.55em; }
-  .insight-product-proof .iui-plot-summary-label { margin-bottom: 0.4em; }
-  .insight-product-proof .iui-rank-row { padding-block: 0.32em; }
-  .insight-product-proof .iui-plot-summary-note { padding-top: 0.45em; }
-  .insight-product-proof .iui-analysis-facts > div { padding-block: 0.32em; }
-  .insight-product-proof .iui-volcano { min-height: 0; }
+  .insight-product-proof .iui-card-head { flex-wrap: wrap; }
+  .insight-product-proof .iui-card-note { margin-left: 0; font-size: 0.65em; }
+  .insight-product-proof .iui-card-foot { flex-wrap: wrap; }
+  .insight-product-proof .iui-volcano-label { font-size: 16px; }
+  .insight-product-proof .iui-plot-summary { padding: 0.7em; }
+  .insight-product-proof .iui-plot-summary-label,
+  .insight-product-proof .iui-rank-head,
+  .insight-product-proof .iui-rank-row,
+  .insight-product-proof .iui-plot-summary-note,
+  .insight-product-proof .iui-analysis-facts dt,
+  .insight-product-proof .iui-analysis-facts dd,
+  .insight-product-proof .iui-volcano-legend span,
+  .insight-product-proof .iui-plot-callout span { font-size: 0.7em; }
+  .insight-product-proof .iui-rank-row { padding-block: 0.3em; }
+  .insight-product-proof .iui-analysis-facts > div { padding-block: 0.3em; }
   .insight-product-proof .iui-domain-protein .iui-domain-tad span,
   .insight-product-proof .iui-domain-protein .iui-domain-prd span,
   .insight-product-proof .iui-domain-protein .iui-domain-tet span,
   .insight-product-proof .iui-domain-protein .iui-domain-tail span { display: none; }
-  .iui-mobile-story {
-    grid-template-columns: minmax(0, 0.8fr) minmax(11em, 1fr);
-    gap: 0.8em;
-    padding: 1.2em;
-  }
-  .iui-mobile-copy > strong { font-size: 1.45em; }
-  .iui-mobile-copy > p:last-child { font-size: 0.65em; }
-  .iui-phone-frame {
-    width: 12em;
-    height: 23em;
-    border-radius: 1.7em;
-  }
-  .iui-phone-result { padding: 0.45em; }
-  .iui-phone-chart { height: 4.5em; }
-  .iui-notebook-story { padding: 0.8em; }
-  .iui-notebook-head { align-items: start; }
-  .iui-notebook-head > span { max-width: 10em; text-align: right; }
-  .iui-notebook-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  }
-  .iui-notebook-code {
-    border-right: 0;
-    border-bottom: 1px solid rgb(255 255 255 / 0.07);
-  }
-  .iui-notebook-code pre { font-size: 0.55em; }
-  .iui-notebook-record { padding: 0.7em 0.85em; }
-  .iui-notebook-record dl > div { padding: 0.35em 0; }
-  .iui-notebook-boundary { display: none; }
+  .iui-mobile-story { grid-template-columns: 1fr; gap: 1.5em; padding: 1.2em; }
+  .iui-phase-phone .iui-mobile-story,
+  .iui-phase-notebook .iui-notebook-story { position: relative; inset: auto; }
+  .iui-mobile-copy > strong { font-size: 1.5em; max-width: none; }
+  .iui-mobile-copy > p:last-child { font-size: 0.85em; }
+  .iui-phone-frame { width: min(100%, 18em); height: auto; min-height: 27.5em; border-radius: 1.7em; }
+  .iui-phone-status { font-size: 0.65em; }
+  .iui-phone-appbar strong,
+  .iui-phone-query { font-size: 0.85em; }
+  .iui-phone-appbar > span:last-child,
+  .iui-phone-working,
+  .iui-phone-result > strong,
+  .iui-phone-chart b,
+  .iui-phone-labels,
+  .iui-phone-result small,
+  .iui-phone-note,
+  .iui-phone-input { font-size: 0.7em; }
+  .iui-phone-chart { height: 6.2em; }
+  .iui-phone-input { margin-top: 1em; }
+  .iui-notebook-story { padding: 1em; }
+  .iui-notebook-head { align-items: start; flex-wrap: wrap; gap: 0.5em; }
+  .iui-notebook-head > span { font-size: 0.75em; }
+  .iui-notebook-grid { grid-template-columns: 1fr; grid-template-rows: auto auto; }
+  .iui-notebook-code { border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
+  .iui-notebook-code pre { font-size: 0.75em; }
+  .iui-notebook-record { padding: 0.85em; }
+  .iui-notebook-record dl > div { grid-template-columns: 5.5em minmax(0, 1fr); }
+  .iui-notebook-record dt,
+  .iui-notebook-record dd { font-size: 0.75em; overflow-wrap: anywhere; }
+  .iui-notebook-boundary { font-size: 0.75em; }
   .return-contract { grid-template-columns: 1fr; }
   .return-contract > div + div { border-left: 0; border-top: 1px solid var(--rule); }
 }
-
 
 @media (prefers-reduced-motion: reduce) {
   .iui-phone-chart i { transform: scaleY(1); }
