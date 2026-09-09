@@ -19,4 +19,19 @@
   nav.addEventListener('click', function (event) {
     if (event.target.closest('a')) setOpen(false);
   });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && nav.dataset.open === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+
+  // Report section links need to clear the actual masthead, including the
+  // expanded mobile menu and text zoom, rather than a guessed fixed offset.
+  var masthead = document.querySelector('.masthead');
+  if (masthead && 'ResizeObserver' in window) {
+    new ResizeObserver(function () {
+      document.documentElement.style.setProperty('--masthead-height', masthead.offsetHeight + 'px');
+    }).observe(masthead);
+  }
 })();

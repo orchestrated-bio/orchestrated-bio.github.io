@@ -96,7 +96,7 @@
   width: min(100% - 2.5rem, 78rem);
   margin-inline: auto;
   /* The mockup shrinks to fit a hero figure; a real page wants reading size. */
-  font-size: clamp(13px, 0.95vw, 17px);
+  font-size: 18px;
   min-height: 0;
   border-radius: 8px;
   align-items: stretch;
@@ -108,7 +108,7 @@
 
 .dax-full .dax-spine {
   position: sticky;
-  top: 4.6rem;
+  top: calc(var(--masthead-height, 4.2rem) + 0.5rem);
   align-self: flex-start;
   width: 15em;
   max-height: calc(100vh - 5.5rem);
@@ -263,11 +263,6 @@
   color: #96570b;
 }
 
-/* Restore the accents the blanket inherit rule above would flatten. */
-.dax-paper-scroll .dax-ov-ind {
-  color: var(--kd-amber);
-}
-
 .dax-paper-scroll .dax-callout-item,
 .dax-paper-scroll .dax-gate-claim,
 .dax-paper-scroll .dax-gate-field,
@@ -316,6 +311,7 @@
 .dax-full .dax-ov-readout {
   font-size: 0.82em;
   line-height: 1.62;
+  text-align: left;
 }
 
 .dax-full .dax-ov-question {
@@ -324,6 +320,7 @@
 
 .dax-full .dax-figcap {
   font-size: 0.72em;
+  text-align: left;
 }
 
 .dax-full .dax-callout-item {
@@ -578,7 +575,7 @@
 
   .dax-full .dax-spine {
     position: sticky;
-    top: 4.1rem;
+    top: var(--masthead-height, 4.2rem);
     z-index: 5;
     flex-direction: row;
     align-items: center;
@@ -589,6 +586,7 @@
        the row was clipped by .dax-full instead, making later sections
        unreachable. Constrain it to the column so it actually scrolls. */
     min-width: 0;
+    width: 100%;
     max-width: 100%;
     max-height: none;
     padding: 0.5em 0.9em;
@@ -603,6 +601,7 @@
   }
 
   .dax-full .dax-nav {
+    display: flex;
     flex-direction: row;
     gap: 0.35em;
     padding: 0;
@@ -627,6 +626,7 @@
 
   .dax-paper-scroll .dax-page {
     padding: 1.8em 1.3em 1.5em;
+    scroll-margin-top: calc(var(--masthead-height, 4.2rem) + 4rem);
   }
 
   .dax-stats {
@@ -652,15 +652,13 @@
     padding-top: 0;
   }
 
-  /* The masthead wraps to two rows below this width, so the sticky spine has
-     to clear a taller header than the tablet breakpoint assumes. */
-  .dax-full .dax-spine {
-    top: 8rem;
-  }
-
-  .dax-paper-scroll .dax-page {
-    scroll-margin-top: 11rem;
-  }
+  .dax-full .dax-spine { flex-wrap: nowrap; }
+  .dax-full .dax-nav-label { font-size: 0.95rem; }
+  .dax-full .dax-nav-item { min-height: 44px; }
+  .dax-full .dax-ov-link { flex-direction: column; gap: 0.45em; }
+  .dax-full .dax-ov-chip { white-space: normal; }
+  .dax-full .dax-rhead { flex-wrap: wrap; gap: 0.3em; }
+  .dax-full .dax-ov-foot { flex-direction: column; }
 
   .dax-full .dax-ov-top {
     flex-direction: column;

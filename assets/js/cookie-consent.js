@@ -19,34 +19,25 @@
     function showBanner() {
         var banner = document.createElement('div');
         banner.id = 'cookie-banner';
-        banner.setAttribute('style',
-            'position:fixed;bottom:0;left:0;right:0;z-index:9999;' +
-            'background:#152040;border-top:1px solid rgba(255,255,255,0.1);' +
-            'padding:12px 16px;display:flex;align-items:center;justify-content:center;' +
-            'gap:12px;flex-wrap:wrap;font-family:system-ui,sans-serif;font-size:13px;color:#9ca3af;'
-        );
+        banner.className = 'cookie-banner';
+        banner.setAttribute('role', 'region');
+        banner.setAttribute('aria-label', 'Cookie preferences');
 
         var text = document.createElement('span');
         text.textContent = 'We use cookies for analytics. ';
         var link = document.createElement('a');
         link.href = '/privacy-policy.html';
         link.textContent = 'Privacy Policy';
-        link.setAttribute('style', 'color:#40cea0;text-decoration:underline;');
         text.appendChild(link);
 
         var acceptBtn = document.createElement('button');
         acceptBtn.textContent = 'Accept';
-        acceptBtn.setAttribute('style',
-            'padding:6px 16px;border-radius:6px;background:#1B7760;color:white;' +
-            'font-size:13px;font-weight:500;border:none;cursor:pointer;'
-        );
+        acceptBtn.type = 'button';
+        acceptBtn.className = 'cookie-accept';
 
         var declineBtn = document.createElement('button');
         declineBtn.textContent = 'Decline';
-        declineBtn.setAttribute('style',
-            'padding:6px 16px;border-radius:6px;background:transparent;color:#9ca3af;' +
-            'font-size:13px;font-weight:500;border:1px solid rgba(255,255,255,0.1);cursor:pointer;'
-        );
+        declineBtn.type = 'button';
 
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem(CONSENT_KEY, 'accepted');
@@ -60,8 +51,11 @@
         });
 
         banner.appendChild(text);
-        banner.appendChild(acceptBtn);
-        banner.appendChild(declineBtn);
+        var actions = document.createElement('div');
+        actions.className = 'cookie-actions';
+        actions.appendChild(acceptBtn);
+        actions.appendChild(declineBtn);
+        banner.appendChild(actions);
         document.body.appendChild(banner);
     }
 

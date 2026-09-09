@@ -118,7 +118,6 @@ def main() -> None:
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
         <nav class="foot-links" aria-label="Footer">
-          <a href="https://orchestrated.bio/blog/">Blog</a>
           <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
           <a href="https://orchestrated.bio/terms.html">Terms</a>
         </nav>

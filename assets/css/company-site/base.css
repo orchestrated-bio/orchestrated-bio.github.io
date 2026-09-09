@@ -246,7 +246,7 @@ body {
   cursor: pointer;
 }
 
-.site-nav a {
+.site-nav a:not(.nav-cta) {
   font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
@@ -255,7 +255,7 @@ body {
   border-bottom: 1px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease;
 }
-.site-nav a:hover { color: var(--ink); }
+.site-nav a:not(.nav-cta):hover { color: var(--ink); }
 .site-nav a[aria-current="page"] {
   color: var(--ink);
   border-bottom-color: var(--accent);
@@ -275,9 +275,11 @@ body {
 }
 .nav-cta:hover { background: var(--accent-deep); border-color: var(--accent-deep); }
 
-@media (max-width: 40rem) {
+@media (max-width: 52rem) {
   .masthead .shell { flex-wrap: wrap; gap: 0.5rem 1rem; padding-block: 0.7rem; }
+  .site-nav { flex-wrap: wrap; flex-basis: 100%; margin-left: 0; gap: 0.5rem 1rem; }
   .site-nav-toggle { display: inline-flex; align-items: center; min-height: 44px; margin-left: auto; }
+  .site-nav-toggle[hidden] { display: none; }
   .site-nav.site-nav-enhanced {
     display: none;
     flex: 1 0 100%;
@@ -483,6 +485,8 @@ body {
   text-wrap: pretty;
 }
 
+.band-head > .band-label { margin-bottom: 0.7rem; }
+
 /* --- The register (hero artifact) -------------------------------------- */
 
 /* nowrap keeps short identifiers like "PMID 38555285" from breaking across
@@ -653,7 +657,7 @@ body {
   color: var(--ink-4);
 }
 
-.shot img {
+.shot > img {
   display: block;
   width: 100%;
   height: auto;
@@ -669,7 +673,7 @@ body {
     0 12px 32px -8px rgb(0 0 0 / 0.22);
 }
 
-.shot figcaption {
+.shot > figcaption {
   font-family: var(--sans);
   font-size: var(--step--1);
   color: var(--ink-3);
@@ -846,6 +850,8 @@ body {
   font-weight: 620;
 }
 
+.pilot-flow + .pilot-terms { border-top: 0; padding-top: 0; margin-top: 0; }
+
 /* The masthead is sticky, so an anchored section otherwise lands underneath
    it. Applies to every in-page target on the site, not just one link. */
 :target,
@@ -875,4 +881,48 @@ section[id],
      ch value here would overshoot. */
   max-width: 38rem;
   margin: 1.3rem auto 0;
+}
+
+.pilot-terms-cta + .band-head { margin-top: clamp(2.75rem, 6vw, 4rem); }
+
+@media (max-width: 40rem) {
+  .pilot-terms { text-align: left; font-size: var(--step-0); }
+  .pilot-terms b { display: block; margin-bottom: 0.5rem; }
+  .pilot-terms-cta { justify-content: flex-start; margin-inline: 0; }
+}
+
+/* Consent belongs to the same site, with full-size touch targets. */
+.cookie-banner {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  padding: 0.85rem 1.25rem calc(0.85rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--rule-firm);
+  background: var(--paper-raised);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  box-shadow: 0 -4px 20px rgb(0 0 0 / 0.08);
+}
+.cookie-banner a { color: var(--accent); text-underline-offset: 0.15em; }
+.cookie-actions { display: flex; gap: 0.75rem; }
+.cookie-actions button {
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--rule-firm);
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cookie-actions .cookie-accept { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+@media (max-width: 40rem) {
+  .cookie-banner > span,
+  .cookie-actions { flex-basis: 100%; }
+  .cookie-actions button { flex: 1; }
 }
