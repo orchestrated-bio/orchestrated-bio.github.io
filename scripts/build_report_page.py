@@ -437,11 +437,13 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         '<li><a class="dax-nav-item" href="#overview"><span class="dax-nav-num">◆</span>'
         '<span class="dax-nav-label">Overview</span></a></li>'
     ]
+    short_labels = {"clinical": "Clinical", "mechanism": "Mechanism", "pharmacology": "Exposure", "toxicology": "Safety"}
     for s in SECTIONS:
         nav.append(
             f'<li><a class="dax-nav-item" href="#{s["id"]}">'
             f'<span class="dax-nav-num">{s["num"]}</span>'
-            f'<span class="dax-nav-label">{s["label"]}</span></a></li>'
+            f'<span class="dax-nav-label"><span class="dax-nav-long">{s["label"]}</span>'
+            f'<span class="dax-nav-short">{short_labels[s["id"]]}</span></span></a></li>'
         )
     nav.append(
         '<li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-num">◆</span>'
@@ -610,9 +612,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
           <span class="brand-word">rchestrated<span>.bio</span></span>
         </a>
-        <nav class="site-nav" aria-label="Primary">
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./">DrugAdopt</a>
           <a href="./insight.html">Insight</a>
+          <a href="./scopeify.html">Scopeify</a>
           <a href="./report.html" aria-current="page">Report</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
@@ -620,7 +624,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
       </div>
     </header>
 
-    <main class="rpt-stage">
+    <main id="main" class="rpt-stage">
       <div class="rpt-intro">
         <p class="rpt-intro-kicker">Example DrugAdopt report</p>
         <h1 class="rpt-intro-title">Built from public data alone — no sponsor data, no data room.</h1>
@@ -770,12 +774,12 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
         <nav class="foot-links" aria-label="Footer">
-          <a href="https://orchestrated.bio/blog/">Blog</a>
           <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
           <a href="https://orchestrated.bio/terms.html">Terms</a>
         </nav>
       </div>
     </footer>
+    <script src="./assets/js/company-site/mobile-nav.js"></script>
     <script src="./assets/js/company-site/report-spine.js"></script>
   </body>
 </html>

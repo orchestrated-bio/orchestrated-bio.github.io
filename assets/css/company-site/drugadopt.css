@@ -3,7 +3,7 @@
    chrome) that opens each part of the prexasertib report as an actual
    K-Dense report page (right, on white paper). Serif headings, blue accents,
    boxed callouts, data tables, inline citations — faithful to the real PDF
-   output. Auto-cycles through sections and each spine item is clickable.
+   output. Each spine item opens a section under the reader's control.
    Content is the real prexasertib view-model; sizes to content. */
 .dax-ui {
   --kd-blue:   #1a5490;
@@ -66,6 +66,7 @@
   font-family: var(--mono); font-size: 0.62em; color: #6f7c8b; flex: none; min-width: 1.1em;
 }
 .dax-nav-label { font-size: 0.68em; line-height: 1.3; color: #9aa6b4; }
+.dax-nav-short { display: none; }
 .dax-nav-item-active {
   background: rgb(39 159 129 / 0.10);
   border-left-color: #5fbf9c;
@@ -250,6 +251,8 @@
 .dax-conf-med  { color: var(--kd-amber); font-weight: 700; }
 
 @media (max-width: 40rem) {
+  .dax-nav-long { display: none; }
+  .dax-nav-short { display: inline; }
   .dax-ui { flex-direction: column; min-height: 0; }
   .dax-spine { width: 100%; flex-direction: row; flex-wrap: wrap; padding: 0.6em; align-items: center; }
   .dax-spine-brand { border-bottom: 0; padding: 0 0.5em 0 0; margin: 0 0.5em 0 0; }
@@ -286,4 +289,48 @@
 .dax-ov-link { align-items: flex-start; }
 .dax-ov-sec-gist {
   font-family: var(--kd-serif); font-size: 0.62em; line-height: 1.45; color: var(--kd-muted);
+}
+
+/* Keep the embedded sample readable instead of scaling text down with the
+   viewport. Scope these rules so the full report retains its own layout. */
+.shot-render .dax-ui { font-size: 15px; }
+.shot-render .dax-spine { width: 10.5em; }
+.shot-render .dax-spine-title { font-size: 0.87em; }
+.shot-render .dax-nav-label { font-size: 0.8em; }
+.shot-render .dax-page { display: none; padding: 1.2em; }
+.shot-render .dax-page-active { display: block; }
+.shot-render .dax-page[hidden] { display: none; }
+.shot-render .dax-ov-readout,
+.shot-render .dax-body-p { font-size: 0.87em; text-align: left; }
+.shot-render .dax-ov-question { font-size: 0.95em; }
+.shot-render .dax-ov-target,
+.shot-render .dax-ov-ind,
+.shot-render .dax-figcap,
+.shot-render .dax-callout-item { font-size: 0.8em; text-align: left; }
+.shot-render .dax-figure img { aspect-ratio: auto; }
+.shot-render .dax-ov-link { flex-direction: column; gap: 0.4em; padding-block: 0.65em; }
+.shot-render .dax-ov-sec-name { font-size: 0.87em; font-weight: 700; }
+.shot-render .dax-ov-sec-gist { font-size: 0.8em; }
+.shot-render .dax-ov-chip { font-size: 0.73em; white-space: normal; }
+.shot-render .dax-sec-num,
+.shot-render .dax-ov-sechead,
+.shot-render .dax-callout-head { font-size: 0.75em; }
+.shot-render .dax-ov-foot,
+.shot-render .dax-rhead,
+.shot-render .dax-rfoot { font-size: 0.67em; flex-wrap: wrap; gap: 0.4em; }
+.shot-render .dax-table { font-size: 0.77em; overflow-wrap: anywhere; }
+
+@media (max-width: 40rem) {
+  .shot-render .dax-spine { width: 100%; padding: 0.8em; }
+  .shot-render .dax-spine-brand { padding: 0 0 0.5em; }
+  .shot-render .dax-spine-title span { font-size: 0.85em; }
+  .shot-render .dax-nav { gap: 0.3em; }
+  .shot-render .dax-nav-item { min-height: 48px; justify-content: center; text-align: center; }
+  .shot-render .dax-nav-label { font-size: 0.95rem; font-weight: 550; line-height: 1.35; }
+  .shot-render .dax-paper { min-height: 0; }
+  .shot-render .dax-page { position: relative; inset: auto; overflow: visible; padding: 1.1em; }
+  .shot-render .dax-ov-asset { font-size: 1.6em; }
+  .shot-render .dax-ov-readout,
+  .shot-render .dax-body-p { font-size: 0.95em; }
+  .shot-render .dax-sec-h { font-size: 1.2em; line-height: 1.3; }
 }
