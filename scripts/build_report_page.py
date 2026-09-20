@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import hashlib
 import pathlib
 import re
 import sys
@@ -37,6 +38,14 @@ import sys
 SUPPORTED_SCHEMA = 3
 FIGURE_DIR = "./images/drugadopt/report"
 CONTENT_DIR = pathlib.Path(__file__).parent
+ROOT = CONTENT_DIR.parent
+
+
+def asset_version(rel: str) -> str:
+    """?v= fingerprint for a site asset: first 12 hex of its sha256, the
+    convention every page uses. Computed rather than hardcoded so a base.css
+    edit never leaves this generator emitting a stale reference."""
+    return hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()[:12]
 
 # Section spine. Order and labels mirror the homepage demo so the two read as
 # the same product. `module` keys into module_sections.json; `figure` keys into
@@ -599,9 +608,9 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=289430860909" />
-    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=d29b250732d4" />
-    <link rel="stylesheet" href="./assets/css/company-site/report.css?v=ffe4602ac8cb" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v={asset_version("assets/css/company-site/base.css")}" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v={asset_version("assets/css/company-site/drugadopt.css")}" />
+    <link rel="stylesheet" href="./assets/css/company-site/report.css?v={asset_version("assets/css/company-site/report.css")}" />
   </head>
   <body>
     <a class="skip-link" href="#overview">Skip to content</a>
@@ -780,8 +789,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         </nav>
       </div>
     </footer>
-    <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
-    <script src="./assets/js/company-site/report-spine.js?v=2088a5c33b26"></script>
+    <script src="./assets/js/company-site/mobile-nav.js?v={asset_version("assets/js/company-site/mobile-nav.js")}"></script>
+    <script src="./assets/js/company-site/report-spine.js?v={asset_version("assets/js/company-site/report-spine.js")}"></script>
   </body>
 </html>
 """
