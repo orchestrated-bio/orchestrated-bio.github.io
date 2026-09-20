@@ -206,7 +206,7 @@ body {
    SVG for dark. The near-black O disappears on the dark masthead, so swap by
    theme rather than tint one file. Light shown by default; dark theme (via
    media query or the toggle's data-theme) swaps them. */
-.brand-logo { width: 25px; height: 25px; }
+.brand-logo { width: 25px; height: 25px; object-fit: contain; }
 .brand-logo-light { display: block; }
 .brand-logo-dark  { display: none; }
 
@@ -723,15 +723,20 @@ body {
   text-align: center;
 }
 
+/* Inline-blocks rather than flex so `text-wrap: balance` can even out the
+   lines: a greedy flex-wrap leaves one name orphaned (5+1) whenever the
+   set outgrows a row, and no breakpoint fixes that for every count. The
+   margins reproduce the old 1.1rem 2.6rem gap between neighbours. Browsers
+   without balance fall back to ordinary wrapping. */
 .orgs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 1.1rem 2.6rem;
+  text-align: center;
+  text-wrap: balance;
+  margin-inline: -1.3rem;
 }
 
 .org {
+  display: inline-block;
+  margin: 0.55rem 1.3rem;
   font-size: var(--step-2);
   font-weight: 600;
   letter-spacing: -0.015em;
@@ -742,9 +747,13 @@ body {
 }
 .org:hover { color: var(--accent); }
 
-@media (max-width: 46rem) {
-  .orgs { gap: 0.9rem 1.9rem; }
+@media (max-width: 60rem) {
   .org { font-size: var(--step-1); }
+}
+
+@media (max-width: 46rem) {
+  .orgs { margin-inline: -0.95rem; }
+  .org { margin: 0.45rem 0.95rem; }
 }
 
 /* --- Footer ------------------------------------------------------------- */
