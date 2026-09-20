@@ -769,7 +769,7 @@
 .insight-demo-switcher button b {
   margin-right: 0.3rem;
   font-family: var(--mono);
-  font-size: 0.72em;
+  font-size: max(0.72em, 10px);
   font-weight: 500;
   color: var(--ink-4);
 }
@@ -1023,24 +1023,70 @@
   height: var(--h);
 }
 
+/* Crowded hotspots (R196, R213 and Y220 sit within ~24aa) are separated by
+   stacking labels into vertical tiers instead of nudging them sideways:
+   the dot's x-position encodes protein coordinate and must not move, while
+   the label's y-position carries no data and is free to shift. */
 .iui-lolli-protein .iui-stem-label {
-  top: -1.55em;
+  top: calc(-1.55em - (var(--tier, 0) * 2.6em));
   font-size: 0.53em;
+  left: 50%;
+  transform: translateX(-50%);
+  /* keep the label legible where it passes over a neighbouring stem */
+  padding: 0 0.15em;
+  border-radius: 0.2em;
 }
 
-.iui-lolli-protein .iui-stem-label-left {
-  right: 1.35em;
-  left: auto;
-  transform: none;
+/* Leader line connecting a raised label back down to its own dot, so a
+   tiered label is never misread as belonging to a taller neighbour. */
+.iui-lolli-protein .iui-stem-label::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: calc(var(--tier, 0) * 2.6em);
+  background: rgb(255 255 255 / 0.18);
 }
 
-.iui-lolli-protein .iui-stem-label-high {
-  top: -3.5em;
+/* Adjacent dots (R213 and Y220 are under 1px apart) need a ring to read as two
+   circles rather than one blob. */
+.iui-lolli-protein .iui-dot {
+  box-shadow: 0 0 0 1.5px #0d1726, 0 0 6px rgb(22 177 126 / 0.5);
 }
 
-.iui-lolli-protein .iui-stem-label-right {
-  left: 1.35em;
-  transform: none;
+/* Dot size is in px while dot position is a % of a shrinking plot, so on
+   narrower viewports the closest pair (R213/Y220, ~1.8% apart) collides.
+   Shrink the marker rather than move it: the x-position encodes real
+   protein coordinate and must stay truthful. */
+@media (max-width: 80rem) {
+  .iui-lolli-protein .iui-dot {
+    width: 6px;
+    height: 6px;
+    top: -3px;
+    box-shadow: 0 0 0 1.25px #0d1726, 0 0 5px rgb(22 177 126 / 0.5);
+  }
+}
+
+/* Below ~52rem the plot drops under ~333px, where the closest pair's 1.8%
+   gap is narrower than a 6px dot. Step the marker down again. */
+@media (max-width: 52rem) {
+  .iui-lolli-protein .iui-dot {
+    width: 5px;
+    height: 5px;
+    top: -2.5px;
+    box-shadow: 0 0 0 1px #0d1726, 0 0 4px rgb(22 177 126 / 0.5);
+  }
+}
+
+/* Below ~30rem the plot is ~220px wide: five ~30px labels cannot coexist with
+   stems ~3px apart at any font size. Label only the dominant peaks and let the
+   ranked table beside the chart carry the rest - the same trade-off cBioPortal
+   and IGV make when a track gets crowded. */
+@media (max-width: 30rem) {
+  .iui-lolli-protein .iui-stem-crowded .iui-stem-label {
+    display: none;
+  }
 }
 
 .iui-protein-ticks {
@@ -1054,7 +1100,9 @@
 .iui-protein-ticks span {
   position: absolute;
   transform: translateX(-50%);
-  font-size: 0.4em;
+  /* 0.4em of the 15px card resolves to 6px, below the size at which these
+     numerals stay legible at 1x; clamp to a readable floor. */
+  font-size: max(0.4em, 9px);
   color: #768295;
 }
 
@@ -1077,7 +1125,9 @@
 
 .iui-domain-protein .iui-domain-seg span {
   overflow: hidden;
-  font-size: 0.38em;
+  /* 0.38em of the 15px card resolves to ~5.7px, below legibility; clamp to a
+     readable floor. Narrow segments still ellipsize via the rules below. */
+  font-size: max(0.38em, 9px);
   text-overflow: ellipsis;
   white-space: nowrap;
 }

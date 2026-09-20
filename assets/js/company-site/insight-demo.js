@@ -234,13 +234,24 @@
   playControl.addEventListener('click', function () {
     playing = !playing;
     updatePlayControl();
-    scheduleNext();
+    if (playing) scheduleNext();
+    else window.clearTimeout(phaseTimer);
   });
 
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) window.clearTimeout(phaseTimer);
-    else scheduleNext();
+    else if (playing) scheduleNext();
   });
+
+  if (typeof window.IntersectionObserver === 'function') {
+    new window.IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!playing) return;
+        if (entry.isIntersecting) scheduleNext();
+        else window.clearTimeout(phaseTimer);
+      });
+    }, { threshold: 0 }).observe(proof);
+  }
 
   window.addEventListener('hashchange', function () {
     if (proof.getClientRects().length === 0) {
