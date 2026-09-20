@@ -189,7 +189,7 @@
 }
 .dax-ov-sec-name { font-family: var(--kd-serif); font-size: 0.68em; color: var(--kd-ink); }
 .dax-ov-chip {
-  flex: none; font-size: 0.52em; padding: 0.15em 0.5em; border-radius: 0.7em; white-space: nowrap;
+  flex: none; font-size: max(0.52em, 10px); padding: 0.15em 0.5em; border-radius: 0.7em; white-space: nowrap;
 }
 .dax-chip-ok   { color: #157347; background: #e6f4ec; border: 1px solid #b7ddc6; }
 .dax-chip-warn { color: #97600a; background: #fbf1df; border: 1px solid #e6cfa0; }
