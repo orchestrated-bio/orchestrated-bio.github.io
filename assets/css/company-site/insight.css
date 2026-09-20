@@ -769,7 +769,7 @@
 .insight-demo-switcher button b {
   margin-right: 0.3rem;
   font-family: var(--mono);
-  font-size: 0.72em;
+  font-size: max(0.72em, 10px);
   font-weight: 500;
   color: var(--ink-4);
 }
