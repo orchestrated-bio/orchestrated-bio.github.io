@@ -38,12 +38,12 @@ def main() -> None:
     content_security_policy = (
         "default-src 'self'; "
         "base-uri 'self'; "
-        "connect-src 'self' https://scopeify-api.orchestrated.bio http://localhost:* http://127.0.0.1:*; "
+        "connect-src 'self' https://scopeify-api.orchestrated.bio https://cloudflareinsights.com http://localhost:* http://127.0.0.1:*; "
         "font-src 'self' data:; "
         "form-action 'self'; "
         "img-src 'self' data:; "
         "object-src 'none'; "
-        "script-src 'self'; "
+        "script-src 'self' https://static.cloudflareinsights.com; "
         "style-src 'self' 'unsafe-inline'"
     )
     standalone_html = f"""<!doctype html>
