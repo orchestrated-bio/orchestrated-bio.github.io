@@ -14,7 +14,7 @@
   padding-top: 0.5rem;
 }
 
-.person h3 {
+.person h2 {
   font-size: var(--step-1);
   font-weight: 620;
   letter-spacing: -0.02em;
@@ -63,6 +63,11 @@
   .pub { grid-template-columns: 1fr auto; }
   .pub-venue { grid-column: 1 / -1; }
 }
+
+/* Beside a page heading the list only gets half the width, so stack the
+   venue over the title at every size rather than squeezing both into a row. */
+.page-head-split .pub { grid-template-columns: 1fr auto; }
+.page-head-split .pub-venue { grid-column: 1 / -1; }
 
 .pub-venue {
   font-family: var(--sans);
