@@ -4,27 +4,31 @@ On-page SEO is done (titles, descriptions, canonicals, JSON-LD, sitemap,
 robots). The two things that actually move indexing and ranking from here both
 need account access, so they live here as steps rather than code.
 
-## 1. Google Search Console — not yet claimed
+## 1. Google Search Console — done
 
-Nothing tells Google to crawl the sitemap today. The sitemap is live at
-`/sitemap.xml` and referenced from `robots.txt`, so only the claim is missing.
+Claimed 2026-09-21. Ownership auto-verified by **DNS TXT** at the domain
+provider, which covers the apex and every subdomain. The record is
+`google-site-verification=CqLkxJY3OvFLzQkhUa-ZRepmPoiKimABJ77kxkYpJzs` on the
+apex TXT — **do not remove it**, or verification is lost. Consider adding a
+second method under Settings → Ownership verification as a backup.
 
-**Verify by DNS TXT, not by HTML tag.** Porkbun holds the DNS, and a TXT record
-verifies the whole domain including `insight.` and `next.` subdomains, so it
-only has to be done once. An HTML tag or file verifies the apex alone.
+`sitemap.xml` submitted and read successfully: 6 pages discovered. Indexing
+requested for the newest page.
 
-1. <https://search.google.com/search-console> → Add property → **Domain** →
-   `orchestrated.bio`.
-2. Copy the `google-site-verification=...` TXT value it shows.
-3. Porkbun → DNS for `orchestrated.bio` → add a **TXT** record, host blank
-   (apex), value as given. Save.
-4. Back in Search Console, press Verify. DNS can take a few minutes.
-5. Once verified: **Sitemaps** → submit `sitemap.xml`.
-6. **URL Inspection** → paste `https://orchestrated.bio/` → Request indexing.
-   Repeat for `custom-analysis.html`, the newest page.
+Verified from Googlebot's own perspective (Cloudflare fronts the origin, so
+this was worth confirming rather than assuming):
 
-If you would rather verify with a meta tag, say so and the tag can be added to
-`index.html`; the apex-only limitation is the tradeoff.
+- All six indexable pages return **200** to a Googlebot user-agent, with real
+  content and no challenge page.
+- `robots.txt` serves normally; the `Disallow` rules cover only build inputs.
+- Organization and Service JSON-LD both parse, with the Service referencing
+  the Organization by `@id`.
+
+**"Discovered — currently not indexed" is expected** on a new property with no
+inbound links. It means Google knows the URL and has not crawled it yet;
+it usually resolves in days to weeks. It is not an error and needs no fix.
+Re-requesting indexing repeatedly does not speed it up. The thing that does
+is section 2.
 
 ## 2. Inbound links — the real ranking lever
 
