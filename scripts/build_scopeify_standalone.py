@@ -114,7 +114,6 @@ def main() -> None:
           <a href="./insight.html">Insight</a>
           <a href="./scopeify.html" aria-current="page">Scopeify</a>
           <a href="./custom-analysis.html">Custom analysis</a>
-          <a href="./report.html">Report</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
         </nav>
