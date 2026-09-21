@@ -15,6 +15,9 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+# Local Claude Code state (worktrees, launch configs). The Pages workflow
+# publishes the repo root, so keep it out of commits.
+.claude/
 
 # Temp files
 tmp/

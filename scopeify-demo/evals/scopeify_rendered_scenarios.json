@@ -87,7 +87,7 @@
       "category": "routing variation",
       "edge_case": false,
       "viewport": "desktop",
-      "hypothesis": "Can GWAS summary statistics support a risk equation for MASLD progression?",
+      "hypothesis": "Can GWAS summary statistics support a risk equation for coronary artery disease progression?",
       "expected_product_state": "pass_current_demo",
       "must_find_sow_terms": ["GWAS", "Expected deliverables"]
     },
@@ -105,7 +105,7 @@
       "category": "routing variation",
       "edge_case": false,
       "viewport": "desktop",
-      "hypothesis": "Review PubMed and preprints for mechanisms linking DKK1 to MASLD-associated HCC.",
+      "hypothesis": "Review PubMed and preprints for mechanisms linking TREM2 to Alzheimer's disease progression.",
       "expected_product_state": "pass_current_demo",
       "must_find_sow_terms": ["evidence review", "Dataset Inventory"]
     },

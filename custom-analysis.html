@@ -20,8 +20,8 @@
     <meta property="og:url" content="https://orchestrated.bio/custom-analysis.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=d2d0fb3c1565" />
-    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=2e35f5aac809" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=c0e1cc4d7303" />
+    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=4c364ccc6dbd" />
     <script src="./assets/js/cookie-consent.js?v=15c24d3881c0"></script>
     <script type="application/ld+json">
     {
@@ -95,7 +95,7 @@
     </header>
     <main id="main">
       <section class="page-head">
-        <div class="shell page-head-split">
+        <div class="shell split">
           <div>
             <h1>Custom analysis and pipeline development.</h1>
             <p class="opening-lede">We identify biomarkers and build analysis pipelines around your data and your question.</p>
@@ -162,10 +162,62 @@
             </div>
           </div>
           <h2 class="list-title list-title-spaced">Track record</h2>
-          <ul class="data-points data-points-lg">
-            <li><b>Rare cardiac disease response signature.</b> Reanalyzed public RNA-seq to find candidate markers that can be measured in blood.</li>
-            <li><b>Kidney cancer Phase II trial (OPTIC RCC).</b> Before founding Orchestrated, our CTO built the sample-processing and patient-data pipeline for this multi-center trial, which used an RNA-seq biomarker to assign patients to treatment arms.</li>
-          </ul>
+          <div class="split">
+            <ul class="data-points data-points-lg">
+              <li><b>Rare cardiac disease response signature for Myogenex.</b> Reanalyzed public mouse cardiomyocyte RNA-seq across three cohorts. Collagen and matrix-remodeling programs rise in the mutant by six months, and we flagged secreted genes from them as candidate blood markers.</li>
+              <li><b>Kidney cancer Phase II trial (OPTIC RCC).</b> Before founding Orchestrated, our CTO built the sample-processing and patient-data pipeline for this multi-center trial, which used an RNA-seq biomarker to assign patients to treatment arms.</li>
+            </ul>
+            <figure class="hm-figure">
+              <svg class="hm" viewBox="0 0 356 236" role="img" aria-labelledby="hm-title" aria-describedby="hm-desc">
+              <title id="hm-title">Gene programs in a rare cardiac disease model, mutant versus wild type</title>
+              <desc id="hm-desc">Five gene programs across three cohorts: 3 months, 6 months, and 6 months with exercise. At 3 months no gene changes significantly. At 6 months 9 of 9 collagen and extracellular-matrix genes and 4 of 6 matrix-remodeling genes are significantly higher in the mutant, and both programs stay higher with exercise. Disc and cytoskeleton genes trend lower: at 6 months 2 of 5 are significantly lower and 1 higher. Gene names are withheld.</desc>
+              <text class="hm-col" x="186" y="25">3 mo</text>
+              <text class="hm-col" x="254" y="25">6 mo</text>
+              <text class="hm-col" x="322" y="12">6 mo</text>
+              <text class="hm-col" x="322" y="25">+ exercise</text>
+              <text class="hm-module" x="146" y="52">Collagen / ECM <tspan class="hm-n">(9)</tspan></text>
+              <rect class="hm-z" x="154" y="34" width="64" height="28" rx="2"/>
+              <rect class="hm-p2" x="222" y="34" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="254" y="52">↑9</text>
+              <rect class="hm-p2" x="290" y="34" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="322" y="52">↑1</text>
+              <text class="hm-module" x="146" y="84">Matrix remodeling <tspan class="hm-n">(6)</tspan></text>
+              <rect class="hm-z" x="154" y="66" width="64" height="28" rx="2"/>
+              <rect class="hm-p2" x="222" y="66" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="254" y="84">↑4</text>
+              <rect class="hm-p2" x="290" y="66" width="64" height="28" rx="2"/>
+              <text class="hm-module" x="146" y="116">Inflammation <tspan class="hm-n">(3)</tspan></text>
+              <rect class="hm-z" x="154" y="98" width="64" height="28" rx="2"/>
+              <rect class="hm-p1" x="222" y="98" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="254" y="116">↑1</text>
+              <rect class="hm-n1" x="290" y="98" width="64" height="28" rx="2"/>
+              <text class="hm-module" x="146" y="148">Disc / cytoskeleton <tspan class="hm-n">(5)</tspan></text>
+              <rect class="hm-n1" x="154" y="130" width="64" height="28" rx="2"/>
+              <rect class="hm-n1" x="222" y="130" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="254" y="148">↑1 ↓2</text>
+              <rect class="hm-n2" x="290" y="130" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="322" y="148">↓2</text>
+              <text class="hm-module" x="146" y="180">Metabolism <tspan class="hm-n">(4)</tspan></text>
+              <rect class="hm-z" x="154" y="162" width="64" height="28" rx="2"/>
+              <rect class="hm-n1" x="222" y="162" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="254" y="180">↓1</text>
+              <rect class="hm-n1" x="290" y="162" width="64" height="28" rx="2"/>
+              <text class="hm-count" x="322" y="180">↓1</text>
+              <text class="hm-module" x="146" y="216">Median log2 FC</text>
+              <rect class="hm-n3" x="154.00" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-n2" x="182.86" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-n1" x="211.71" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-z" x="240.57" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-p1" x="269.43" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-p2" x="298.29" y="208" width="26.86" height="10" rx="1.5"/>
+              <rect class="hm-p3" x="327.14" y="208" width="26.86" height="10" rx="1.5"/>
+              <text class="hm-tick" x="167.43" y="231" text-anchor="middle">−1.5</text>
+              <text class="hm-tick" x="254.00" y="231" text-anchor="middle">0</text>
+              <text class="hm-tick" x="340.57" y="231" text-anchor="middle">+1.5</text>
+              </svg>
+              <figcaption>Mutant versus wild-type mouse cardiomyocytes, from public RNA-seq we reanalyzed for Myogenex. Each tile is a gene program: color is its median log2 fold change (red higher in the mutant, blue lower), and arrows count genes that changed significantly (FDR &lt; 0.05). Gene names are withheld.</figcaption>
+            </figure>
+          </div>
         </div>
       </section>
 
