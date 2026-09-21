@@ -1219,21 +1219,8 @@
   color: var(--ink-3);
 }
 
-.insight-boundary .shell {
-  display: grid;
-  grid-template-columns: 7rem minmax(0, 1fr) auto;
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: center;
-}
 
-.insight-boundary .band-label,
-.insight-boundary p { margin: 0; }
 
-.insight-boundary p {
-  max-width: 42rem;
-  color: var(--ink-2);
-  text-wrap: pretty;
-}
 
 @media (max-width: 48rem) {
   .insight-product-proof .insight-ui { min-height: 32em; }
@@ -1254,8 +1241,6 @@
   .return-contract { grid-template-columns: repeat(2, 1fr); }
   .return-contract > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--rule); }
   .return-contract > div:nth-child(4) { border-top: 1px solid var(--rule); }
-  .insight-boundary .shell { grid-template-columns: 1fr; }
-  .insight-boundary .btn { justify-self: start; }
 }
 
 /* On phones, use the available width for readable content. The desktop
