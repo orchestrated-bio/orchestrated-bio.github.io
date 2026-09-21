@@ -1,0 +1,49 @@
+# Security headers
+
+The site is served by **Cloudflare proxying to GitHub Pages** (apex A records
+point at Cloudflare; a single response carries both `server: cloudflare` and
+`x-github-request-id`). Neither GitHub Pages nor this repo can set HTTP
+response headers, so the policy is split in two.
+
+## In this repo (done)
+
+Every page carries these as `<meta>` elements, which browsers honour:
+
+| Header | Where |
+|---|---|
+| `Content-Security-Policy` | `<meta http-equiv>` on all 7 pages |
+| `X-Content-Type-Options: nosniff` | `<meta http-equiv>` on all 7 pages |
+| Referrer policy | `<meta name="referrer">` |
+
+`scopeify.html` and `scopeify-demo/standalone.html` are generated — edit
+`scripts/build_scopeify_standalone.py`, never the pages directly.
+
+The CSP needs no `'unsafe-inline'` for scripts because no page uses an inline
+script, inline style attribute, or inline event handler. `style-src` does keep
+`'unsafe-inline'` because the demo scripts assign `element.style` at runtime.
+
+## Still to do, in Cloudflare only
+
+These are **ignored in a `<meta>` element** and must be real response headers.
+Add them in Cloudflare under *Rules → Transform Rules → Modify Response Header*
+(or via a `_headers`-style worker) for `orchestrated.bio/*`:
+
+```
+Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Frame-Options: DENY
+Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+```
+
+Notes:
+
+- **HSTS** is the one with real security value here. HTTP already 301-redirects
+  to HTTPS, but without HSTS a first visit is unprotected before that redirect.
+  Start with a short `max-age` and raise it once confirmed working; `preload`
+  is a one-way door, so do not add it casually.
+- **X-Frame-Options** is the clickjacking control. CSP `frame-ancestors` would
+  be the modern equivalent, but browsers ignore it in a `<meta>` element (it
+  logs a console error), so it is deliberately omitted from the pages.
+- GitHub's own *Enforce HTTPS* setting reads `https_enforced: false` and
+  **cannot be enabled** while Cloudflare proxies the domain — GitHub cannot
+  validate that the domain resolves to its IPs. This is expected; TLS is
+  terminated by Cloudflare, whose certificate is what visitors see.
