@@ -53,6 +53,7 @@ def main() -> None:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="{content_security_policy}">
     <meta name="referrer" content="no-referrer">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <title>Scopeify Demo</title>
     <meta name="description" content="Scopeify demo: AI-assisted public-data scoping for prospective bioinformatics consulting projects.">
     <script src="../assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
@@ -77,6 +78,7 @@ def main() -> None:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Security-Policy" content="{content_security_policy}" />
     <meta name="referrer" content="no-referrer" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="description" content="Scopeify turns a prospective bioinformatics project question into a public-data feasibility brief, ballpark estimate, and draft statement of work." />
     <meta name="theme-color" content="#111826" />
     <title>Scopeify | Orchestrated Biosciences</title>
