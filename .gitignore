@@ -34,3 +34,7 @@ node_modules/
 favicon-test/
 .favicon-backup-2026-05-14/
 .favicon-backup-b6-2026-05-14/
+
+# Python bytecode caches (the page generators rewrite these on every run)
+__pycache__/
+*.pyc
