@@ -562,9 +562,11 @@ body {
    a four-part breakdown. Collapses to one column at the same width where the
    four-up goes to two, since each card carries a paragraph rather than a line. */
 .axes-two { grid-template-columns: repeat(2, 1fr); }
+.axes-three { grid-template-columns: repeat(3, 1fr); }
 
 @media (max-width: 60rem) {
   .axes-two { grid-template-columns: 1fr; }
+  .axes-three { grid-template-columns: 1fr; }
 }
 
 .axis-link {
