@@ -1,4 +1,13 @@
 User-agent: *
 Allow: /
 
+# Pages serves this repository from the root with .nojekyll, so every tracked
+# file is reachable over HTTP. These paths are build inputs and documentation,
+# not site content: keep them out of search results.
+Disallow: /scripts/
+Disallow: /_includes/
+Disallow: /docs/
+Disallow: /.github/
+Disallow: /README.md
+
 Sitemap: https://orchestrated.bio/sitemap.xml
