@@ -317,7 +317,6 @@ body {
   .opening .shell { grid-template-columns: 1fr; }
 }
 
-
 .opening h1 {
   font-size: var(--step-3);
   line-height: 1.06;
@@ -400,6 +399,9 @@ body {
   align-items: center;
   gap: 1.5rem;
 }
+
+/* For a button row that follows body text rather than a hero lede. */
+.opening-actions-spaced { margin-top: 1.4rem; }
 
 .btn {
   display: inline-flex;
@@ -542,77 +544,88 @@ body {
 .tag-partial    { color: var(--partial);    background: var(--partial-wash); }
 .tag-resolved   { color: var(--resolved);   background: var(--resolved-wash); }
 
-/* --- Axis sweep list ---------------------------------------------------- */
+/* --- Titled lists ------------------------------------------------------ */
 
-/* Eight items: pin to 4 / 2 / 1 so the grid always divides evenly and the
-   bottom edge stays straight. auto-fit picks whatever fits the viewport,
-   which at ~1280px gave 5+3 — three empty cells and a ragged edge. */
-.axes {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  border: 1px solid var(--rule);
-}
-
-@media (max-width: 60rem) {
-  .axes { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Two-card variant of the .axes grid, for side-by-side offerings rather than
-   a four-part breakdown. Collapses to one column at the same width where the
-   four-up goes to two, since each card carries a paragraph rather than a line. */
-.axes-two { grid-template-columns: repeat(2, 1fr); }
-.axes-three { grid-template-columns: repeat(3, 1fr); }
-
-@media (max-width: 60rem) {
-  .axes-two { grid-template-columns: 1fr; }
-  .axes-three { grid-template-columns: 1fr; }
-}
-
-.axis-link {
-  margin: 0.7rem 0 0;
-  font-size: var(--step--1);
-  color: var(--ink-3);
-}
-
-/* Supporting detail under a card's claim: sources, timelines, institutions.
-   Quieter than body text so the claim stays the thing you read first. */
-.axis-meta {
-  margin: 0.6rem 0 0;
-  font-size: var(--step--1);
-  line-height: 1.45;
-  color: var(--ink-3);
-}
-
-@media (max-width: 30rem) {
-  .axes { grid-template-columns: 1fr; }
-}
-
-.axis {
-  padding: 1.1rem;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  background: var(--paper-raised);
-}
-
-.axis h3 {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  font-weight: 600;
+/* Content sections are one plain heading and a bulleted list. They replaced a
+   grid of bordered cards under an eyebrow-plus-headline pair, which stated
+   each thing twice and read as boilerplate. */
+.list-title {
+  margin: 0 0 0.6rem;
+  font-size: var(--step-2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 620;
   color: var(--ink);
-  margin: 0 0 0.45rem;
-  letter-spacing: 0.01em;
 }
 
-.axis p {
-  margin: 0;
+.list-title-spaced { margin-top: clamp(2rem, 4vw, 2.75rem); }
+
+/* Two lists side by side on desktop, stacked on narrow screens. Each column
+   spans both parent rows as a subgrid, so when one heading wraps to more
+   lines than the other, the two lists still start on the same line. */
+.list-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.list-pair > div {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+
+/* Grid items do not collapse margins, so the list's top margin alone sets
+   the heading-to-list gap, as it did in block flow. */
+.list-pair .list-title { align-self: end; margin-bottom: 0; }
+
+@media (max-width: 60rem) {
+  .list-pair { grid-template-columns: 1fr; row-gap: clamp(1.75rem, 4vw, 3.5rem); }
+  .list-pair > div { display: block; grid-row: auto; }
+}
+
+/* Primary lists read at body size; the base .data-points is a quieter
+   supporting-note size. */
+.data-points.data-points-lg { max-width: none; margin-top: 0.9rem; }
+.data-points.data-points-lg > li { font-size: var(--step-0); margin-bottom: 0.7rem; }
+
+.data-points .data-points-sub {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.data-points .data-points-sub li {
+  position: relative;
+  margin: 0 0 0.3rem;
+  padding-left: 1rem;
   font-size: var(--step--1);
-  line-height: 1.5;
   color: var(--ink-3);
 }
 
-/* Supporting-lane note under the four-section grid. Quieter than the grid:
-   these lanes are worked but are not the headline scientific readout. */
+.data-points .data-points-sub li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 0.45rem;
+  height: 1px;
+  background: var(--ink-4);
+}
+
+/* Page heading beside a supporting column, e.g. publications. */
+.page-head-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+@media (max-width: 60rem) {
+  .page-head-split { grid-template-columns: 1fr; }
+}
+
+/* Quiet supporting note under a section's main content. */
 .band-note {
   margin: 1.1rem 0 0;
   font-size: var(--step--1);
@@ -620,51 +633,6 @@ body {
   color: var(--ink-4);
   max-width: 60ch;
   text-wrap: pretty;
-}
-
-/* The pitch-sized contract for a DrugAdopt pilot. It precedes the deeper
-   evidence lanes so a buyer can understand the input, work, and output first. */
-.pilot-flow {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) auto minmax(0, 1.6fr) auto minmax(0, 1fr);
-  gap: clamp(0.8rem, 2vw, 1.5rem);
-  align-items: center;
-  padding-block: 1.15rem;
-  margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
-  border-top: 1px solid var(--rule-firm);
-  border-bottom: 1px solid var(--rule-firm);
-}
-
-.pilot-flow-step p { margin: 0; }
-
-.pilot-flow-step > p:last-child {
-  font-size: var(--step--1);
-  line-height: 1.5;
-  font-weight: 560;
-  color: var(--ink);
-  text-wrap: pretty;
-}
-
-.pilot-flow-label {
-  margin-bottom: 0.25rem !important;
-  font-size: 0.68rem;
-  line-height: 1.2;
-  font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
-.pilot-flow-arrow {
-  color: var(--ink-4);
-  font-size: var(--step-1);
-}
-
-@media (max-width: 42rem) {
-  .pilot-flow { grid-template-columns: 1fr; gap: 0; }
-  .pilot-flow-arrow { display: none; }
-  .pilot-flow-step { padding-block: 0.9rem; }
-  .pilot-flow-step:not(:first-child) { border-top: 1px solid var(--rule); }
 }
 
 /* --- The deliverable ---------------------------------------------------
@@ -738,18 +706,7 @@ body {
   letter-spacing: 0.08em !important;
   text-transform: uppercase;
   color: var(--accent) !important;
-  margin: 0 0 0.5rem !important;
-  text-align: center;
-}
-
-/* Says what the relationship actually is: the row mixes employers,
-   collaborators and clients, and an unqualified heading reads as customers. */
-.orgs-note {
-  max-width: 46ch;
-  margin: 0 auto 1.4rem;
-  color: var(--ink-3);
-  font-size: var(--step--1);
-  line-height: 1.55;
+  margin: 0 0 1.25rem !important;
   text-align: center;
 }
 
@@ -870,13 +827,11 @@ body {
   font-weight: 620;
 }
 
-/* Pilot terms under the input/work/readout flow: states the engagement stage
-   plainly rather than leaving a price-shaped silence. */
+/* Pilot terms: states the engagement stage plainly rather than leaving a
+   price-shaped silence. */
 .pilot-terms {
   max-width: 72ch;
-  margin: 1.6rem auto 0;
-  padding-top: 1.2rem;
-  border-top: 1px solid var(--rule);
+  margin: 0 auto;
   font-size: var(--step--1);
   line-height: 1.65;
   color: var(--ink-3);
@@ -888,8 +843,6 @@ body {
   color: var(--ink);
   font-weight: 620;
 }
-
-.pilot-flow + .pilot-terms { border-top: 0; padding-top: 0; margin-top: 0; }
 
 /* The masthead is sticky, so an anchored section otherwise lands underneath
    it. Applies to every in-page target on the site, not just one link. */
@@ -921,8 +874,6 @@ section[id],
   max-width: 38rem;
   margin: 1.3rem auto 0;
 }
-
-.pilot-terms-cta + .band-head { margin-top: clamp(2.75rem, 6vw, 4rem); }
 
 @media (max-width: 40rem) {
   .pilot-terms { text-align: left; font-size: var(--step-0); }

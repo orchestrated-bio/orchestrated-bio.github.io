@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="Orchestrated Biosciences: the people behind DrugAdopt, the agentic tooling we have built, and the research the work comes from." />
+    <meta name="description" content="Who we are at Orchestrated Biosciences: our team, published research in cancer genomics and RNA biology, and how we handle your data." />
     <meta name="theme-color" content="#111826" />
     <title>Company: Cancer Genomics and RNA Biology Team</title>
     <link rel="canonical" href="https://orchestrated.bio/company.html" />
@@ -16,12 +16,12 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="Company | Orchestrated Biosciences" />
-    <meta property="og:description" content="The people, research, and expert-designed workflows behind DrugAdopt and Insight." />
+    <meta property="og:description" content="Our team, published research in cancer genomics and RNA biology, and how we handle your data." />
     <meta property="og:url" content="https://orchestrated.bio/company.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=f631a458f1d4" />
-    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=bea773bf9a00" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=d2d0fb3c1565" />
+    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=2e35f5aac809" />
     <script src="./assets/js/cookie-consent.js?v=15c24d3881c0"></script>
   </head>
   <body>
@@ -48,22 +48,16 @@
     <main id="main">
       <section class="page-head">
         <div class="shell">
-          <h1>An engine for finding the right patients.</h1>
-          <p class="opening-lede">We build <a href="./">DrugAdopt</a> for small pharma teams with a promising candidate and no spare translational capacity. <a href="./insight.html">Insight</a> answers cancer-genomics questions; <a href="./custom-analysis.html">custom analysis</a> works your own data and question.</p>
-          <p class="opening-lede opening-lede-tight">Our team designs biomarker and bioinformatics workflows and adapts them to each asset. DrugAdopt reports bring the analyses and evidence together.</p>
+          <h1>Who we are</h1>
         </div>
       </section>
 
       <section class="band band-first">
         <div class="shell">
-          <div class="band-head">
-            <p class="band-label">Who builds it</p>
-            <h2>The people behind the engine.</h2>
-          </div>
           <div class="people">
             <div class="person">
               <img class="person-photo" src="./images/alex-nesta.jpg" width="200" height="200" alt="Alex Nesta" loading="lazy" decoding="async" />
-              <h3>Alex Nesta, PhD</h3>
+              <h2>Alex Nesta, PhD</h2>
               <p class="person-role">Founder &amp; Chief Technology Officer</p>
               <p>A decade in cancer genomics and RNA biology at UConn and The Jackson Laboratory. Four years at Vindhya Data Science Consulting, working across pharma, academia, and research hospitals. Built the sample-processing pipeline and patient-data infrastructure for OPTIC RCC, a prospective Phase II trial that used RNA-seq biomarkers to assign kidney cancer patients to treatment arms. Now building DrugAdopt around that same patient-selection problem.</p>
               <p class="person-links">
@@ -74,7 +68,7 @@
             </div>
             <div class="person">
               <img class="person-photo" src="./images/noel-cruz.jpg" width="200" height="200" alt="Noel Cruz" loading="lazy" decoding="async" />
-              <h3>Noel Cruz</h3>
+              <h2>Noel Cruz</h2>
               <p class="person-role">Co-Founder &amp; Chief Operating Officer</p>
               <p>U.S. Coast Guard veteran and former intelligence officer. Software engineering, cloud applications, and machine learning, with mission-critical program delivery from the defense side.</p>
               <p class="person-links">
@@ -83,7 +77,7 @@
             </div>
             <div class="person person-advisor">
               <img class="person-photo" src="./images/prakash-narayan.jpg" width="200" height="200" alt="Prakash Narayan" loading="lazy" decoding="async" />
-              <h3>Prakash Narayan, PhD</h3>
+              <h2>Prakash Narayan, PhD</h2>
               <p class="person-role">Strategic Advisor</p>
               <p>Former Vice President of R&amp;D at Angion and ProKidney, with more than a decade of industry drug-development leadership. Advises Orchestrated Biosciences on translational strategy, development risk, and the evidence an industry team needs before committing to the next experiment or trial.</p>
               <p class="person-links">
@@ -91,6 +85,7 @@
               </p>
             </div>
           </div>
+          <h2 class="list-title list-title-spaced">Publications</h2>
           <div class="pubs">
             <a class="pub" href="https://doi.org/10.1093/jimmun/vkag120" target="_blank" rel="noreferrer">
               <span class="pub-venue">The Journal of Immunology · 2026</span>
@@ -134,17 +129,15 @@
 
       <section class="band" id="data-handling" aria-labelledby="data-title">
         <div class="shell">
-          <p class="band-label">Working with your data</p>
-          <h2 id="data-title">How DrugAdopt handles your data.</h2>
-          <p class="band-lede">For DrugAdopt engagements, language models run on private cloud infrastructure we control. Data you share for that engagement is not sent to public or third-party model APIs or used to train a model.</p>
+          <h2 class="list-title" id="data-title">Working with your data</h2>
+          <p class="band-lede">Language models run on private cloud infrastructure we control. Data you share is never sent to public or third-party model APIs.</p>
           <ul class="data-points">
-            <li><b>Per-engagement isolation.</b> Each DrugAdopt asset is worked in its own environment. Your material is not pooled with another client's, and it is not reused to build anything outside your engagement.</li>
+            <li><b>Per-engagement isolation.</b> Each DrugAdopt asset is worked in its own environment. Your material is not pooled with another client's, used to train a model, or reused to build anything outside your engagement.</li>
             <li><b>You set the boundary.</b> Most of what DrugAdopt does runs on public evidence alone. The example report uses no sponsor data. Internal data is optional, and you decide what to share and when.</li>
             <li><b>Contracts before data.</b> We sign an NDA before you send anything, and we will work to your MSA, DPA, or security review rather than asking you to accept ours.</li>
           </ul>
-          <p class="band-note"><b>Scopeify uses a different process.</b> A limited project summary may be sent through OpenRouter to draft a statement of work. See <a href="./privacy-policy.html">Scopeify data handling in our privacy policy</a> for what is sent and how it is handled.</p>
           <p class="band-note">Have a specific security requirement? Ask, and we will tell you plainly whether we can meet it.</p>
-          <p class="pilot-terms-cta">
+          <p class="opening-actions opening-actions-spaced">
             <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call <span aria-hidden="true">→</span></a>
             <a class="link-quiet" href="mailto:support@orchestrated.bio">Or email us ↗</a>
           </p>
@@ -153,8 +146,7 @@
 
       <section class="orgs-band" aria-labelledby="orgs-title">
         <div class="shell">
-          <h2 class="orgs-title" id="orgs-title">Where we've worked</h2>
-          <p class="orgs-note">Institutions and companies our work has come through, as employers, collaborators, or clients. Named references available on request.</p>
+          <h2 class="orgs-title" id="orgs-title">Our collaborators</h2>
           <div class="orgs">
             <a class="org" href="https://praesage.bio/" target="_blank" rel="noreferrer">Praesage Bio</a>
             <a class="org" href="https://nodesnedges.com/" target="_blank" rel="noreferrer">Nodes and Edges</a>
