@@ -20,9 +20,12 @@ Inputs, all produced from the case by scripts/extract_report_content.py:
     scripts/module_sections.json   Question/Answer/Interpretation per module
     scripts/figure_captions.json   real figure captions, scope, evidence type
 
-Usage:
+Usage (the --case default is relative to the main checkout; from a worktree,
+pass the absolute path):
     python3 scripts/build_report_page.py \
-        --case ../drugadopt/out/prexasertib-deliverable
+        --case ../_case_backups/from-out-dir-20260820/prexasertib-deliverable
+
+report.html is generated: change it here and regenerate, never by hand.
 """
 
 from __future__ import annotations
@@ -91,7 +94,26 @@ STATE_LABELS = {
 }
 
 # Decision rows rendered in full on the Evidence & Gaps section.
-FEATURED_ROWS = ("biomarker-01", "replication-01", "mechanism-01", "exposure-01", "safety-01")
+FEATURED_ROWS = (
+    "biomarker-01",
+    "replication-01",
+    "mechanism-01",
+    "exposure-01",
+    "safety-01",
+    "ip-01",
+)
+
+# What a cited source is, where its id alone does not say. The case's own
+# titles are not reliable here: it records US10189818B2 as "Crystalline forms
+# of a CHK1 inhibitor" (the patent claims the (S)-lactate monohydrate salt)
+# and gives the FDA briefing document a trial's title. Each note was checked
+# against the linked document, 2026-09-21.
+SOURCE_NOTES = {
+    "WO2010077758A1": "Eli Lilly: compound and salts",
+    "US10189818B2": "Eli Lilly: (S)-lactate monohydrate salt",
+    "WO2024015484A2": "Acrivon: response-predictive biomarker method",
+    "Prexasertib": "Eli Lilly FDA advisory committee briefing, 2017",
+}
 
 
 def esc(value) -> str:
@@ -140,6 +162,10 @@ def source_url(sid: str) -> str | None:
             if acc
             else None
         )
+    # Patent publication numbers, e.g. WO2010077758A1 or US10189818B2. The
+    # case records Google Patents as the canonical locator for each.
+    if re.fullmatch(r"(WO|US|EP|JP|CN|KR)\d{6,}[A-Z]\d?", upper):
+        return f"https://patents.google.com/patent/{upper}/en"
     return None
 
 
@@ -178,14 +204,29 @@ def linkify(text: str) -> str:
     return re.sub(r"  +", " ", escaped)
 
 
-def source_link(source_id: str) -> str:
+def source_link(source_id: str, locators: dict[str, str] | None = None) -> str:
+    """One source id as a citation, rendered the same wherever it appears.
+
+    Ids source_url() cannot map fall back to the public locator the case
+    recorded for them, then to plain code. SOURCE_NOTES adds what the source
+    is where the id alone does not say.
+    """
     sid = source_id.strip().strip("[]")
+    note = SOURCE_NOTES.get(sid)
+    tail = f' <span class="dax-ref-part">({esc(note)})</span>' if note else ""
     url = source_url(sid)
     if not url:
-        return f"<code>{esc(sid)}</code>"
-    if sid.upper().startswith("PMC"):
-        # Ids like PMC10981752_SUPP_DATA_1 name a specific supplement; the link
-        # can only reach the parent article, so keep the suffix outside it.
+        located = (locators or {}).get(sid, "")
+        if located.startswith("https://"):
+            return (
+                f'<a class="dax-cite" href="{esc(located)}" target="_blank" '
+                f'rel="noreferrer">{esc(sid)}</a>{tail}'
+            )
+        return f"<code>{esc(sid)}</code>{tail}"
+    if sid.upper().startswith(("PMC", "GSE")):
+        # Ids like PMC10981752_SUPP_DATA_1 or GSE249587_PROCESSED name a part of
+        # a record; the link can only reach the record, so keep the suffix
+        # outside it.
         acc = sid.split("_")[0]
         suffix = sid[len(acc):].replace("_", " ").strip().lower()
         anchor = (
@@ -195,7 +236,7 @@ def source_link(source_id: str) -> str:
         return f'{anchor} <span class="dax-ref-part">{esc(suffix)}</span>' if suffix else anchor
     return (
         f'<a class="dax-cite" href="{url}" target="_blank" '
-        f'rel="noreferrer">{esc(sid)}</a>'
+        f'rel="noreferrer">{esc(sid)}</a>{tail}'
     )
 
 
@@ -297,7 +338,9 @@ def paragraphs(text: str) -> str:
     return "".join(render_prose(c) for c in chunks)
 
 
-def figure_block(fig_key: str, figures: dict, number: int, alts: dict) -> str:
+def figure_block(
+    fig_key: str, figures: dict, number: int, alts: dict, locators: dict[str, str]
+) -> str:
     meta = figures.get(fig_key)
     if not meta:
         return ""
@@ -312,7 +355,7 @@ def figure_block(fig_key: str, figures: dict, number: int, alts: dict) -> str:
     if scope:
         tail.append(f"Claim scope: {esc(scope.rstrip('.'))}.")
     src = (
-        " Sources: " + ", ".join(source_link(s) for s in sources) + "."
+        " Sources: " + "; ".join(source_link(s, locators) for s in sources) + "."
         if sources
         else ""
     )
@@ -339,7 +382,7 @@ def state_chip(state: str) -> str:
     return f'<span class="dax-ov-chip {cls}">{esc(label)}</span>'
 
 
-def render_gate(row: dict, blocking: set[str]) -> str:
+def render_gate(row: dict, blocking: set[str], locators: dict[str, str]) -> str:
     """Render one gate in full, to show what a gate actually contains.
 
     Rendering all five this way repeated the same four bold labels five times
@@ -380,7 +423,7 @@ def render_gate(row: dict, blocking: set[str]) -> str:
                   {state_chip(state)}
                   {blocks}
                 </p>
-                <p class="dax-gate-claim">{linkify(row.get('claim', ''))}</p>
+                <p class="dax-gate-claim">{linkify(row.get('claim', ''))} {gate_sources(row, locators)}</p>
                 <p class="dax-gate-owner">{esc(row.get('owner_role', ''))} · {esc(row.get('sequence', ''))}</p>
                 {rendered}
                 {req}
@@ -388,7 +431,23 @@ def render_gate(row: dict, blocking: set[str]) -> str:
 """
 
 
-def render_gate_rows(rows: list[dict], blocking: set[str]) -> str:
+def gate_sources(row: dict, locators: dict[str, str]) -> str:
+    """The row's evidence as citations, so each finding shows its sources.
+
+    Case-local analysis paths are dropped for the same reason linkify drops
+    them: the Traceability section covers them, and a reader cannot open them.
+    """
+    links = [
+        source_link(sid, locators)
+        for sid in (s.strip() for s in row.get("evidence_ids") or [])
+        if "/" not in sid and not sid.endswith((".json", ".csv"))
+    ]
+    if not links:
+        return ""
+    return f'<span class="dax-gate-sources">Sources: {"; ".join(links)}.</span>'
+
+
+def render_gate_rows(rows: list[dict], blocking: set[str], locators: dict[str, str]) -> str:
     """Summarise the remaining gates as table rows."""
     out = []
     for row in rows:
@@ -403,7 +462,7 @@ def render_gate_rows(rows: list[dict], blocking: set[str]) -> str:
             "<tr>"
             f'<th scope="row"><code>{esc(row_id)}</code></th>'
             f"<td>{state_chip(state)}{blocks}</td>"
-            f"<td>{linkify(row.get('claim', ''))}</td>"
+            f"<td>{linkify(row.get('claim', ''))} {gate_sources(row, locators)}</td>"
             f"<td>{esc(row.get('owner_role', ''))}</td>"
             f"<td>{linkify(row.get('next_action', ''))}</td>"
             "</tr>"
@@ -412,6 +471,11 @@ def render_gate_rows(rows: list[dict], blocking: set[str]) -> str:
 
 
 def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
+    # Public locators the case recorded, for ids source_url() cannot map.
+    locators = {
+        s.get("source_id", ""): s.get("locator") or ""
+        for s in vm.get("evidence_traceability", {}).get("sources", [])
+    }
     reader = vm["reader_surface"]
     packet = vm["decision_packet"]
     rec = packet["recommendation"]
@@ -506,11 +570,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     body, fig_no = [], 1
     for s in SECTIONS:
         mod = modules.get(s["module"], {})
-        figs = figure_block(s["figure"], figures, fig_no, alts)
+        figs = figure_block(s["figure"], figures, fig_no, alts, locators)
         fig_no += 1
         extra = ""
         if s.get("figure2"):
-            extra = figure_block(s["figure2"], figures, fig_no, alts)
+            extra = figure_block(s["figure2"], figures, fig_no, alts, locators)
             fig_no += 1
 
         body.append(
@@ -542,8 +606,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     # times.
     by_id = {r.get("row_id"): r for r in packet.get("rows", [])}
     featured = [by_id[r] for r in FEATURED_ROWS if r in by_id]
-    gates = render_gate(featured[0], blocking) if featured else ""
-    gate_rows = render_gate_rows(featured[1:], blocking)
+    gates = render_gate(featured[0], blocking, locators) if featured else ""
+    gate_rows = render_gate_rows(featured[1:], blocking, locators)
 
     bio_rows = "".join(
         "<tr>"
@@ -594,7 +658,10 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A DrugAdopt biomarker and patient-selection readout on {esc(asset)} in {esc(indication)}, generated from public evidence with source-linked figures and named evidence gaps." />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="An example DrugAdopt readout: a CHK1 inhibitor in platinum-resistant ovarian cancer, worked from public evidence with source-linked figures and named gaps." />
     <meta name="theme-color" content="#0c1522" />
     <title>Example report | Orchestrated Biosciences</title>
     <link rel="canonical" href="https://orchestrated.bio/report.html" />
@@ -611,6 +678,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v={asset_version("assets/css/company-site/base.css")}" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v={asset_version("assets/css/company-site/drugadopt.css")}" />
     <link rel="stylesheet" href="./assets/css/company-site/report.css?v={asset_version("assets/css/company-site/report.css")}" />
+    <script src="./assets/js/cookie-consent.js?v={asset_version("assets/js/cookie-consent.js")}"></script>
   </head>
   <body>
     <a class="skip-link" href="#overview">Skip to content</a>
@@ -635,9 +703,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
     <main id="main" class="rpt-stage">
       <div class="rpt-intro">
-        <p class="rpt-intro-kicker">Example DrugAdopt report</p>
         <h1 class="rpt-intro-title">The evidence for candidate biomarkers, and what is still missing.</h1>
-        <p class="rpt-intro-lede">This public-evidence example examines candidate response biomarkers for {esc(asset)}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>.</p>
+        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>.</p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on {esc(asset)} in {esc(indication)}">
@@ -737,24 +804,25 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <section class="dax-page" id="traceability">
             <div class="dax-rhead"><span>{esc(asset)} · {esc(indication)}</span><b>DrugAdopt biomarker readout</b></div>
             <p class="dax-sec-num">Traceability</p>
-            <h2 class="dax-sec-h">Every claim resolves to a source</h2>
+            <h2 class="dax-sec-h">Evidence you can inspect</h2>
 
-            <p class="dax-body-p">Each sentence in this report is bound to the source it came from and to the reviewer verdict that checked it. Sources are downloaded and hashed at retrieval, so the exact bytes behind a number are preserved even if the page it came from later changes. You can check any claim without taking our word for it.</p>
+            <p class="dax-body-p">Each conclusion links to the source and review that supports it. You can reopen the evidence behind a finding and see what changed the decision.</p>
 
             <dl class="dax-stats">
-              <div><dt>{len(claims)}</dt><dd>claims carried in the table</dd></div>
-              <div><dt>{len(sources)}</dt><dd>sources, all hashed and preserved</dd></div>
-              <div><dt>{reviewed}/{len(claims)}</dt><dd>claims semantically reviewed, all bound to a current verdict</dd></div>
-              <div><dt>{external}/{len(sources)}</dt><dd>sources you can open yourself</dd></div>
+              <div><dt>{len(claims)}</dt><dd>report claims</dd></div>
+              <div><dt>{len(sources)}</dt><dd>source records</dd></div>
+              <div><dt>{reviewed}/{len(claims)}</dt><dd>claims reviewed</dd></div>
+              <div><dt>{external}/{len(sources)}</dt><dd>public source links</dd></div>
             </dl>
-            <p class="dax-scope-line">The remaining {len(claims) - reviewed} claims are figure, decision-packet and biomarker entries bound by manifest rather than by semantic review. The remaining {len(sources) - external} sources are this case's own analysis outputs — hashed and preserved, but internal rather than public.</p>
+            <p class="dax-scope-line">Some entries describe figures and internal analysis outputs rather than independent external validation. The report labels those boundaries instead of presenting them as settled evidence.</p>
 
-            <p class="dax-scope-line">One claim per chapter, showing the binding runs across the whole report:</p>
+            <details class="dax-trace-details">
+              <summary>Technical traceability details</summary>
+              <p class="dax-scope-line">One checked claim from each chapter:</p>
             <ol class="dax-claims">{''.join(sample)}</ol>
 
-            <p class="dax-body-p">The identifier is the claim, the module is the chapter it lives in, and the hash fixes the reviewed text. If a chapter is edited, its hash changes and the claim is flagged for re-review rather than silently inheriting an old verdict.</p>
-
-            <p class="dax-scope-line">{esc(et.get('interpretation', ''))}</p>
+              <p class="dax-scope-line">The identifier fixes the reviewed claim and its chapter. If that text changes, the claim is flagged for another review. This record detects changes within this case; it does not establish publisher origin or scientific truth on its own.</p>
+            </details>
 
             <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Trace</span></div>
           </section>
@@ -776,7 +844,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         </div>
       </aside>
 
-      <p class="rpt-caption">A DrugAdopt biomarker readout on {esc(asset).lower()} in {esc(indication).lower()}, from public data. Each section opens the evidence for and against a selection marker, and names the experiment that would close each gap.</p>
+      <p class="rpt-caption">A DrugAdopt biomarker readout on {esc(asset.lower())} in {esc(indication[:1].lower() + indication[1:])}, from public data. Each section opens the evidence for and against a selection marker, and names the experiment that would close each gap.</p>
     </main>
 
     <footer class="foot">
@@ -799,7 +867,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--case",
-        default="../drugadopt/out/prexasertib-deliverable",
+        default="../_case_backups/from-out-dir-20260820/prexasertib-deliverable",
         help="Path to the deliverable directory containing report_view_model.json",
     )
     parser.add_argument("--out", default="report.html", help="Output HTML path")

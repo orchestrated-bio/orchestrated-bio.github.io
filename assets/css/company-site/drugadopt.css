@@ -273,15 +273,6 @@
   .dax-spine-foot .dax-live-dot { animation: none; }
 }
 
-.insight-head .band-label { margin-bottom: 0.65rem; }
-
-.insight-head .tm {
-  font-size: 0.5em;
-  vertical-align: super;
-  color: var(--ink-4);
-  font-weight: 400;
-}
-
 /* Overview rows carry the chapter name plus a one-line finding, so the reader
    sees what each chapter concluded without opening it. Shared by the homepage
    demo and the full report page. */
