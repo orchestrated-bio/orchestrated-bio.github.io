@@ -112,8 +112,7 @@ def main() -> None:
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./">DrugAdopt</a>
           <a href="./insight.html">Insight</a>
-          <a href="./scopeify.html" aria-current="page">Scopeify</a>
-          <a href="./custom-analysis.html">Custom analysis</a>
+          <a href="./custom-analysis.html" aria-current="page">Custom analysis</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
         </nav>
