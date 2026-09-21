@@ -334,10 +334,14 @@
   transition-delay: 0s;
 }
 
+/* The story copy is read by a person, unlike the miniature phone UI beside
+   it, so it gets px floors rather than riding the clamp(10px, 1.25vw, 15px)
+   em base alone: at that base the kicker was 9.3px and the body 11.7px on
+   desktop and 8.5px on phones. */
 .iui-story-kicker {
   margin: 0;
   color: #60c7a4;
-  font-size: 0.62em;
+  font-size: max(0.72em, 11px);
   line-height: 1.3;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -353,7 +357,7 @@
 }
 
 .iui-mobile-copy {
-  max-width: 29em;
+  max-width: 32em;
   padding-left: 2em;
 }
 
@@ -362,17 +366,17 @@
   max-width: 15ch;
   margin-top: 0.45em;
   color: #f3f6f5;
-  font-size: 2em;
+  font-size: max(2.4em, 30px);
   line-height: 1.05;
   letter-spacing: -0.035em;
   font-weight: 620;
 }
 
 .iui-mobile-copy > p:last-child {
-  max-width: 32em;
+  max-width: 34ch;
   margin: 0.9em 0 0;
   color: #aeb8b5;
-  font-size: 0.78em;
+  font-size: max(1em, 14px);
   line-height: 1.55;
 }
 
@@ -507,7 +511,7 @@
   height: 6.2em;
   align-items: end;
   justify-content: space-around;
-  margin: 0.7em 0 0.15em;
+  margin: 1.2em 0 0.15em;
   padding: 0 0.6em;
   border-bottom: 1px solid rgb(255 255 255 / 0.12);
 }
@@ -546,23 +550,33 @@
   transform: translateX(-50%);
 }
 
+/* The count is anchored to the stem top rather than offset from it: at
+   `top: -1.4em` in its own 0.43x font size it landed only ~0.6 stem-em up,
+   inside the dot (which reaches 0.28 stem-em above the top and is 0.6 tall).
+   1em of the label's own size clears the dot at both the desktop (0.43x)
+   and narrow-viewport (0.7x) label sizes. */
 .iui-phone-chart b {
   position: absolute;
-  top: -1.4em;
+  bottom: calc(100% + 1em);
   left: 50%;
   color: #b9c3c0;
-  font-size: 0.43em;
+  font-size: max(0.43em, 9px);
   font-style: normal;
   font-weight: 600;
+  line-height: 1;
   transform: translateX(-50%);
 }
 
+/* One label per bar, in the same five equal columns the bars occupy (the
+   chart's space-around on 2px stems puts each stem at a column centre), and
+   the same side padding, so every residue name sits under its own bar. */
 .iui-phone-labels {
-  display: flex;
-  justify-content: space-between;
-  padding-inline: 0.1em;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 0 0.6em;
   color: #7d8885;
-  font-size: 0.4em;
+  font-size: max(0.4em, 9px);
+  text-align: center;
 }
 
 .iui-phone-result small {
@@ -1296,8 +1310,8 @@
   .iui-mobile-story { grid-template-columns: 1fr; gap: 1.5em; padding: 1.2em; }
   .iui-phase-phone .iui-mobile-story,
   .iui-phase-notebook .iui-notebook-story { position: relative; inset: auto; }
-  .iui-mobile-copy > strong { font-size: 1.5em; max-width: none; }
-  .iui-mobile-copy > p:last-child { font-size: 0.85em; }
+  .iui-mobile-copy > strong { font-size: max(1.5em, 22px); max-width: none; }
+  .iui-mobile-copy > p:last-child { font-size: max(0.85em, 14px); }
   .iui-phone-frame { width: min(100%, 18em); height: auto; min-height: 27.5em; border-radius: 1.7em; }
   .iui-phone-status { font-size: 0.65em; }
   .iui-phone-appbar strong,
