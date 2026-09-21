@@ -305,6 +305,15 @@
    returned with an analysis. */
 
 .insight-head h1 { max-width: 26ch; }
+
+/* The trademark mark on the product's first mention. line-height: 0 keeps the
+   raised glyph from opening a taller line box in the lede. */
+.tm {
+  font-size: 0.6em;
+  line-height: 0;
+  vertical-align: super;
+  color: var(--ink-4);
+}
 .insight-head .opening-actions { margin: 0; }
 
 .insight-product-proof { margin: 0; }
@@ -1198,7 +1207,7 @@
 .return-contract {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0;
+  margin: 0.9rem 0 0;
   border-top: 1px solid var(--rule-firm);
   border-bottom: 1px solid var(--rule-firm);
 }
@@ -1218,9 +1227,6 @@
   line-height: 1.55;
   color: var(--ink-3);
 }
-
-
-
 
 @media (max-width: 48rem) {
   .insight-product-proof .insight-ui { min-height: 32em; }
