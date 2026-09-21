@@ -38,11 +38,29 @@ Notes:
 
 - **HSTS** is the one with real security value here. HTTP already 301-redirects
   to HTTPS, but without HSTS a first visit is unprotected before that redirect.
-  Start with a short `max-age` and raise it once confirmed working; `preload`
-  is a one-way door, so do not add it casually.
-- **X-Frame-Options** is the clickjacking control. CSP `frame-ancestors` would
-  be the modern equivalent, but browsers ignore it in a `<meta>` element (it
-  logs a console error), so it is deliberately omitted from the pages.
+
+  The apex is the only host missing it. As of Sept 2026 the other subdomains
+  already assert HSTS *with* `includeSubDomains`:
+
+  | Host | HSTS |
+  |---|---|
+  | `orchestrated.bio` (apex) | none |
+  | `insight.orchestrated.bio` | `max-age=63072000; includeSubDomains; preload` |
+  | `next.orchestrated.bio` | `max-age=63072000; includeSubDomains; preload` |
+  | `scopeify-api.orchestrated.bio` | `max-age=31536000; includeSubDomains` |
+
+  Because those have been asserting it for a long period already, the usual
+  "ramp up from a short max-age" caution does not really apply — the
+  compatibility question is settled in practice. The real constraint is
+  `includeSubDomains`: once cached, every future subdomain must serve valid
+  HTTPS for the full duration, including ones that do not exist yet. Do not
+  add `preload` at the apex without a deliberate decision; the domain is not
+  on the preload list today and it is a one-way door.
+- **X-Frame-Options** is the clickjacking control. Verified safe: no tracked
+  file or live page contains an `<iframe>`, and no site JS creates one, so
+  `DENY` breaks nothing. CSP `frame-ancestors` would be the modern equivalent,
+  but browsers ignore it in a `<meta>` element (it logs a console error), so it
+  is deliberately omitted from the pages.
 - GitHub's own *Enforce HTTPS* setting reads `https_enforced: false` and
   **cannot be enabled** while Cloudflare proxies the domain — GitHub cannot
   validate that the domain resolves to its IPs. This is expected; TLS is
