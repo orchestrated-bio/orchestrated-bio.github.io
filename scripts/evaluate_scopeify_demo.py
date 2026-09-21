@@ -286,7 +286,6 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "data-theme=\"dark\"",
             "color-scheme: dark",
             ".scopeify-pdf-canvas",
-            "overflow: auto",
             ".scopeify-pdf-page",
             "color-scheme: light",
             "max-width: 8.5in",
