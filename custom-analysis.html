@@ -20,7 +20,7 @@
     <meta property="og:url" content="https://orchestrated.bio/custom-analysis.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=d23ba6b6acda" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=19a1db3ec3e9" />
     <link rel="stylesheet" href="./assets/css/company-site/company.css?v=bea773bf9a00" />
     <script src="./assets/js/cookie-consent.js?v=15c24d3881c0"></script>
   </head>
@@ -50,8 +50,8 @@
       <section class="page-head">
         <div class="shell">
           <h1>Custom analysis and pipeline development.</h1>
-          <p class="opening-lede">Biomarker discovery, RNA-seq, and trial-support bioinformatics, scoped to your question. We built the biomarker pipeline for a prospective Phase II trial and have reanalyzed public cohorts to settle specific mechanistic questions.</p>
-          <p class="opening-lede opening-lede-tight">Same team and the same standard of evidence as a <a href="./">DrugAdopt</a> pilot.</p>
+          <p class="opening-lede">Biomarker discovery, RNA-seq, and the pipelines that run a trial. We built the sample-processing and patient-data infrastructure for a prospective Phase II study, and we reanalyze public cohorts when a published result leaves the question open.</p>
+          <p class="opening-lede opening-lede-tight">Scoped and quoted before any work starts. Same standard of evidence as a <a href="./">DrugAdopt</a> pilot.</p>
         </div>
       </section>
 
@@ -64,12 +64,14 @@
           <div class="axes axes-two">
             <div class="axis">
               <h3>DrugAdopt pilot</h3>
-              <p><strong>A single drug and indication.</strong> We work the public evidence for patient selection and return what supports each candidate biomarker and what contradicts it. An evidence report linking every claim to its source, an executive deck, and the retained data, scripts, and figures. About three weeks from kickoff.</p>
+              <p><strong>One drug, one indication.</strong> We work the public evidence for patient selection and return what supports each candidate marker and what contradicts it.</p>
+              <p class="axis-meta">Evidence report &middot; executive deck &middot; retained data and scripts<br />About three weeks from kickoff.</p>
               <p class="axis-link"><a href="./">How DrugAdopt works</a></p>
             </div>
             <div class="axis">
               <h3>Custom analysis</h3>
-              <p><strong>Your data and your question.</strong> Biomarker discovery, RNA-seq, and trial-support bioinformatics. Analysis, figures, and a written interpretation you can hand to a collaborator or put in front of a board. Scoped and quoted before any work starts, with the timeline set with the scope.</p>
+              <p><strong>Your data, your question.</strong> Analysis, figures, and a written interpretation you can hand to a collaborator or put in front of a board.</p>
+              <p class="axis-meta">Scoped and quoted first &middot; timeline set with the scope</p>
               <p class="axis-link"><a href="mailto:support@orchestrated.bio?subject=Custom%20analysis">Describe your question</a></p>
             </div>
           </div>
@@ -82,7 +84,7 @@
           <div class="band-head">
             <p class="band-label">What we build</p>
             <h2>Pipelines that outlive the analysis.</h2>
-            <p class="band-lede">Some questions need one analysis and a figure. Others need infrastructure that runs for the length of a trial. We do both, and we say which one your question needs before you commit.</p>
+            <p class="band-lede">Some questions need one analysis and a figure. Others need infrastructure that runs for the length of a trial. We say which one you need before you commit.</p>
           </div>
           <div class="axes">
             <div class="axis">
@@ -108,19 +110,47 @@
       <section class="band">
         <div class="shell">
           <div class="band-head">
+            <p class="band-label">Where this applies</p>
+            <h2>Scenarios we have worked.</h2>
+          </div>
+          <div class="axes">
+            <div class="axis">
+              <h3>Small-molecule inhibitors</h3>
+              <p>Target engagement, exposure, and selection markers. Our example report works a CHK1 inhibitor in platinum-resistant ovarian cancer.</p>
+            </div>
+            <div class="axis">
+              <h3>Antibody-drug conjugates</h3>
+              <p>Payload mechanism and target expression separated, so a marker reflects the biology that drives response rather than the antibody alone.</p>
+            </div>
+            <div class="axis">
+              <h3>Antibodies and biologics</h3>
+              <p>Where a target behaves differently by tissue. IL-17A blockade improves psoriasis and worsens Crohn's; both results stay in the report.</p>
+            </div>
+            <div class="axis">
+              <h3>Real-world-data biomarkers</h3>
+              <p>Cohorts built from electronic health records and All of Us, with phenotype definitions written down before anything is counted.</p>
+            </div>
+          </div>
+          <p class="band-note">We have not worked on cell or gene therapy, and we will say so rather than take the engagement.</p>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="shell">
+          <div class="band-head">
             <p class="band-label">Selected work</p>
             <h2>Two examples.</h2>
           </div>
           <div class="axes axes-two">
             <div class="axis">
               <h3>OPTIC RCC, Phase II</h3>
-              <p>A prospective trial across Cleveland Clinic, University Hospitals, UC Irvine, and UT Southwestern that used an RNA-seq biomarker to assign kidney cancer patients to treatment arms. We built the sample-processing pipeline and patient-data infrastructure, from tissue intake through analysis to results returned to the sites.</p>
-              <p class="axis-link">Results published in <em>Annals of Oncology</em>, 2025</p>
+              <p>An RNA-seq biomarker assigned kidney cancer patients to treatment arms across four centers. We built the pipeline: tissue intake, analysis, results returned to the sites.</p>
+              <p class="axis-meta">Cleveland Clinic &middot; University Hospitals &middot; UC Irvine &middot; UT Southwestern<br />Published in <em>Annals of Oncology</em>, 2025</p>
             </div>
             <div class="axis">
               <h3>Desmoplakin cardiomyopathy</h3>
-              <p>Thirty cardiomyocyte RNA-seq samples reanalyzed from public GEO data, with independent fits per cohort and no pooling. Collagen and matrix-remodeling genes moved together in the heterozygote by six months, and two of the separating proteins are secreted, so both can be measured in blood.</p>
-              <p class="axis-link">Public GEO data, reanalyzed in R</p>
+              <p>Thirty cardiomyocyte RNA-seq samples, reanalyzed with independent edgeR fits per cohort and no pooling. Two of the separating proteins are secreted, so both can be measured in blood.</p>
+              <p class="axis-meta">Public GEO data &middot; reanalyzed in R</p>
             </div>
           </div>
           <p class="band-note">Ten years of published work in cancer genomics and RNA biology sits behind these engagements. <a href="./company.html">The team and the publications</a>.</p>
@@ -132,7 +162,7 @@
           <div class="band-head">
             <p class="band-label">Start here</p>
             <h2>Tell us the question.</h2>
-            <p class="band-lede">Describe the data you have and what you need to decide. We will tell you whether public evidence can settle it, what it would take if it cannot, and what the work would cost, before anything starts.</p>
+            <p class="band-lede">Tell us the data you have and what you need to decide. We will say whether public evidence can settle it, what it would take if it cannot, and what the work costs, before anything starts.</p>
           </div>
           <p class="cta-row">
             <a class="btn" href="mailto:support@orchestrated.bio?subject=Custom%20analysis">Email us <span aria-hidden="true">&rarr;</span></a>
