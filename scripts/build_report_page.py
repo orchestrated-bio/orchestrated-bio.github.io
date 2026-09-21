@@ -627,6 +627,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <a href="./">DrugAdopt</a>
           <a href="./insight.html">Insight</a>
           <a href="./scopeify.html">Scopeify</a>
+          <a href="./custom-analysis.html">Custom analysis</a>
           <a href="./report.html" aria-current="page">Report</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>

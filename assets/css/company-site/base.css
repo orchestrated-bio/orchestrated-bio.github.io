@@ -558,6 +558,21 @@ body {
   .axes { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Two-card variant of the .axes grid, for side-by-side offerings rather than
+   a four-part breakdown. Collapses to one column at the same width where the
+   four-up goes to two, since each card carries a paragraph rather than a line. */
+.axes-two { grid-template-columns: repeat(2, 1fr); }
+
+@media (max-width: 60rem) {
+  .axes-two { grid-template-columns: 1fr; }
+}
+
+.axis-link {
+  margin: 0.7rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ink-3);
+}
+
 @media (max-width: 30rem) {
   .axes { grid-template-columns: 1fr; }
 }
