@@ -1,0 +1,46 @@
+name: Deploy to GitHub Pages
+
+# Replaces the legacy Pages builder. The site is static: .nojekyll is present
+# and there is no _config.yml or Gemfile, so this uploads the repository as-is
+# rather than running Jekyll.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it, so a half-published
+# site is never left behind.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Guard against publishing build inputs
+        run: |
+          test -f .nojekyll || { echo "::error::.nojekyll is missing; Pages would run Jekyll"; exit 1; }
+          test -f CNAME || { echo "::error::CNAME is missing; the custom domain would be dropped"; exit 1; }
+          grep -q '^orchestrated\.bio$' CNAME || { echo "::error::CNAME does not contain orchestrated.bio"; exit 1; }
+
+      - uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
