@@ -14,7 +14,7 @@ Writes two files next to this script:
 
 Usage:
     python3 scripts/extract_report_content.py \
-        --case ../drugadopt/out/prexasertib-deliverable
+        --case ../_case_backups/from-out-dir-20260820/prexasertib-deliverable
 """
 
 from __future__ import annotations
@@ -217,7 +217,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--case",
-        default="../drugadopt/out/prexasertib-deliverable",
+        default="../_case_backups/from-out-dir-20260820/prexasertib-deliverable",
         help="Path to the deliverable directory",
     )
     args = parser.parse_args()

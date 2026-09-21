@@ -38,7 +38,6 @@
     margin: 0 0 clamp(1.35rem, 4vw, 2.1rem);
 }
 
-.scopeify-kicker,
 .scopeify-panel-label,
 .scopeify-section-label {
     color: var(--scope-accent);
@@ -56,7 +55,7 @@
     font-weight: 620;
     letter-spacing: -0.03em;
     line-height: 1.08;
-    margin: 0.45rem 0 0;
+    margin: 0;
     max-width: 22ch;
     text-wrap: balance;
 }

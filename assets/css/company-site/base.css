@@ -463,36 +463,6 @@ body {
    separated it, and a rule here reads as a false section break. */
 .band-first { padding-top: 0; }
 
-.band-head { margin-bottom: 2rem; max-width: var(--measure); }
-
-.band-label {
-  font-family: var(--sans);
-  font-size: var(--step--1);
-  letter-spacing: 0.055em;
-  font-weight: 590;
-  text-transform: uppercase;
-  color: var(--ink-3);
-  margin: 0 0 0.8rem;
-}
-
-.band-head h2 {
-  font-size: var(--step-2);
-  line-height: 1.18;
-  letter-spacing: -0.025em;
-  font-weight: 620;
-  color: var(--ink);
-  margin: 0 0 0.7rem;
-  text-wrap: balance;
-}
-
-.band-head p {
-  margin: 0;
-  color: var(--ink-2);
-  text-wrap: pretty;
-}
-
-.band-head > .band-label { margin-bottom: 0.7rem; }
-
 /* --- The register (hero artifact) -------------------------------------- */
 
 /* nowrap keeps short identifiers like "PMID 38555285" from breaking across
@@ -613,8 +583,9 @@ body {
   background: var(--ink-4);
 }
 
-/* Page heading beside a supporting column, e.g. publications. */
-.page-head-split {
+/* A main column beside a supporting one: the page heading beside selected
+   publications, or the track record beside its figure. */
+.split {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: clamp(1.75rem, 4vw, 3.5rem);
@@ -622,8 +593,13 @@ body {
 }
 
 @media (max-width: 60rem) {
-  .page-head-split { grid-template-columns: 1fr; }
+  .split { grid-template-columns: 1fr; }
 }
+
+/* Under a section title, the split carries the list's usual gap itself so
+   the list and the figure beside it start on the same line. */
+.list-title + .split { margin-top: 0.9rem; }
+.split > .data-points { margin-top: 0; }
 
 /* Quiet supporting note under a section's main content. */
 .band-note {

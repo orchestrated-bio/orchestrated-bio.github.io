@@ -64,10 +64,10 @@
   .pub-venue { grid-column: 1 / -1; }
 }
 
-/* Beside a page heading the list only gets half the width, so stack the
-   venue over the title at every size rather than squeezing both into a row. */
-.page-head-split .pub { grid-template-columns: 1fr auto; }
-.page-head-split .pub-venue { grid-column: 1 / -1; }
+/* In a split column the list only gets half the width, so stack the venue
+   over the title at every size rather than squeezing both into a row. */
+.split .pub { grid-template-columns: 1fr auto; }
+.split .pub-venue { grid-column: 1 / -1; }
 
 .pub-venue {
   font-family: var(--sans);
@@ -90,3 +90,70 @@
 
 .pub-mark { color: var(--ink-4); font-size: 0.85rem; }
 .pub:hover .pub-mark { color: var(--accent); }
+
+/* --- Heat map ------------------------------------------------------------
+   Client work shown at the level of gene programs, never one row per gene:
+   a per-gene row of binned effects is a fingerprint a reanalysis of the
+   public data can match back to the gene. Red/blue rather than red/green so
+   it still reads with red-green colour blindness. Each theme gets a fixed
+   palette; color-mix() with var() renders black where it is unsupported. */
+.hm-figure { margin: 0; }
+
+.hm {
+  --hm-p1: #edbdba; --hm-p2: #d67b77; --hm-p3: #b2182b;
+  --hm-n1: #bacee5; --hm-n2: #769fcc; --hm-n3: #2166ac;
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  font-family: var(--sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hm {
+    --hm-p1: #50372e; --hm-p2: #935244; --hm-p3: #e8735f;
+    --hm-n1: #2f424e; --hm-n2: #4b6e8c; --hm-n3: #6ea6dc;
+  }
+}
+:root[data-theme="dark"] .hm {
+  --hm-p1: #50372e; --hm-p2: #935244; --hm-p3: #e8735f;
+  --hm-n1: #2f424e; --hm-n2: #4b6e8c; --hm-n3: #6ea6dc;
+}
+
+/* The outline keeps no-change tiles, and the legend's zero swatch, visible
+   against a page only a shade darker than they are. */
+.hm-z {
+  fill: var(--paper-raised);
+  stroke: var(--rule-firm);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.hm-p1 { fill: var(--hm-p1); }
+.hm-p2 { fill: var(--hm-p2); }
+.hm-p3 { fill: var(--hm-p3); }
+.hm-n1 { fill: var(--hm-n1); }
+.hm-n2 { fill: var(--hm-n2); }
+.hm-n3 { fill: var(--hm-n3); }
+
+.hm-module { fill: var(--ink-2); font-size: 11px; font-weight: 600; text-anchor: end; }
+.hm-n { fill: var(--ink-4); font-weight: 400; }
+.hm-col, .hm-tick { fill: var(--ink-3); font-size: 11px; }
+.hm-col { text-anchor: middle; }
+/* Counts only sit on the lighter bins (program medians never reach the end
+   bins), where --ink clears 4.5:1 in both themes. */
+.hm-count {
+  fill: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-anchor: middle;
+}
+
+.hm-figure figcaption {
+  max-width: 22rem;
+  margin-top: 0.85rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}

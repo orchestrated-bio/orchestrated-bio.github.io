@@ -342,7 +342,6 @@
   font-size: 0.64em;
 }
 
-
 .dax-full .dax-rhead {
   font-size: 0.7em;
 }
@@ -392,6 +391,17 @@
 }
 
 .dax-ref-part {
+  color: var(--kd-muted);
+}
+
+/* A gate's public sources, set under its finding. */
+.dax-gate-sources {
+  display: block;
+  margin-top: 0.35em;
+  font-size: 0.86em;
+  /* The worked-example gate sets its claim in bold; its sources should read
+     like the ones in Table 2. */
+  font-weight: 400;
   color: var(--kd-muted);
 }
 
@@ -790,17 +800,8 @@
   margin: 0 auto 1.2rem;
 }
 
-.rpt-intro-kicker {
-  margin: 0;
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
 .rpt-intro-title {
-  margin: 0.4rem 0 0;
+  margin: 0;
   max-width: 30ch;
   color: var(--ink);
   font-size: clamp(1.3rem, 2.4vw, 1.9rem);
