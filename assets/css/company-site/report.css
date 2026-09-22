@@ -29,14 +29,6 @@
   background: var(--paper-sunk, #0b0e0d);
 }
 
-.rpt-caption {
-  width: min(100% - 2.5rem, 78rem);
-  margin: 1.1rem auto 0;
-  color: var(--ink-3, #55625c);
-  font-size: 0.84rem;
-  line-height: 1.6;
-}
-
 /* Closing panel: says what the reader just looked at and what changes on
    their own asset. Sits outside the paper so it reads as us, not the report. */
 /* The outro sits outside the paper, so it is site chrome and follows the
@@ -257,10 +249,10 @@
   color: var(--kd-muted);
 }
 
-/* #c0700f on white is 3.71:1 at this size; darkened to clear 4.5:1. Scoped so
-   the shared --kd-amber token still serves the homepage unchanged. */
+/* Specificity only: .dax-paper-scroll p above would otherwise repaint the
+   indication line in body ink. The colour itself is the shared token. */
 .dax-paper-scroll .dax-ov-ind {
-  color: #96570b;
+  color: var(--kd-amber);
 }
 
 .dax-paper-scroll .dax-callout-item,
@@ -340,6 +332,15 @@
 .dax-full .dax-sec-num,
 .dax-full .dax-ov-sechead {
   font-size: 0.64em;
+}
+
+/* A state chip inside a table compounds two reductions (0.64em of a 0.74em
+   table) and lands at 8.5px; it also broke across two lines on mobile, which
+   read as two chips. */
+.dax-full .dax-table .dax-ov-chip {
+  display: inline-block;
+  font-size: max(0.85em, 11px);
+  white-space: nowrap;
 }
 
 .dax-full .dax-rhead {
@@ -651,15 +652,17 @@
   .dax-stats > div:nth-child(n + 3) {
     border-top: 1px solid var(--kd-rule);
   }
-
-  .rpt-caption {
-    width: min(100% - 2.5rem, 78rem);
-  }
 }
 
 @media (max-width: 40rem) {
   .rpt-stage {
     padding-top: 0;
+  }
+
+  /* .rpt-stage drops its top padding so the document runs full-bleed, but the
+     framing band above it still needs air under the masthead. */
+  .rpt-intro {
+    padding-top: 2.25rem;
   }
 
   .dax-full .dax-spine { flex-wrap: nowrap; }
@@ -682,11 +685,22 @@
     font-size: 1.25em;
   }
 
-  /* Wide tables scroll inside their own box rather than the page. */
+  /* Wide tables scroll inside their own box rather than the page. The table
+     stays a table: making it a block put the scrollbar on the table itself,
+     which left the focusable .dax-table-scroll wrapper with nothing to
+     scroll, and nowrap stretched single cells past 1,000px. A minimum width
+     gives the wrapper something to scroll while the cells still wrap. 44rem
+     rather than the narrowest width that fits: below it the five-column
+     gates table squeezes its last column so hard that each row grows to
+     ~350px, most of it blank beside the one column in view. */
   .dax-full .dax-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    min-width: 44rem;
+  }
+
+  /* Centred inside a table wider than the screen, the caption starts
+     off-view; left-aligned it sits at the visible edge. */
+  .dax-full .dax-table caption {
+    text-align: left;
   }
 }
 
@@ -699,7 +713,6 @@
   .foot,
   .skip-link,
   .rpt-outro,
-  .rpt-caption,
   .dax-full .dax-spine {
     display: none !important;
   }
