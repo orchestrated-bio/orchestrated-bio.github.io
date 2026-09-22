@@ -182,10 +182,13 @@
     });
   }
 
+  // The label carries the state on its own; an aria-pressed alongside it said
+  // the opposite ("pressed" while reading "Pause") and took the selected-phase
+  // pill styling.
   function updatePlayControl() {
-    playControl.setAttribute('aria-pressed', playing ? 'true' : 'false');
     playControl.setAttribute('aria-label', playing ? 'Pause automatic demonstration' : 'Play automatic demonstration');
     playControl.textContent = playing ? 'Pause' : 'Play';
+    playControl.classList.toggle('is-playing', playing);
   }
 
   function scheduleNext() {
@@ -247,10 +250,10 @@
     new window.IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!playing) return;
-        if (entry.isIntersecting) scheduleNext();
+        if (entry.intersectionRatio >= 0.6) scheduleNext();
         else window.clearTimeout(phaseTimer);
       });
-    }, { threshold: 0 }).observe(proof);
+    }, { threshold: [0, 0.6] }).observe(proof);
   }
 
   window.addEventListener('hashchange', function () {
@@ -258,6 +261,9 @@
       window.clearTimeout(phaseTimer);
       return;
     }
+    // The in-chat "Method" chip links to #insight-methods; resetting to 01
+    // would lose the phase the reader was on.
+    if (window.location.hash === '#insight-methods') return;
     showPhase(0);
   });
 

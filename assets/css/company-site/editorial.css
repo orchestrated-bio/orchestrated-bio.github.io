@@ -75,8 +75,14 @@
 }
 
 .legal-shell {
-  width: min(100% - 2.5rem, 52rem);
+  width: min(100% - 2.5rem, var(--shell));
   margin-inline: auto;
+}
+
+/* The shell shares the masthead's edges; the text keeps a reading measure. */
+.legal-header,
+.prose {
+  max-width: 42rem;
 }
 
 .legal-header {
@@ -93,22 +99,7 @@
 .legal-updated {
   margin: 0.8rem 0 0;
   color: var(--ink-4);
-  font-family: var(--mono);
-  font-size: 0.72rem;
-}
-
-.editorial-foot-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.2rem;
-}
-
-.editorial-foot-links a {
-  color: var(--ink-4);
+  font-family: var(--sans);
   font-size: var(--step--1);
-  text-decoration: none;
 }
 
-.editorial-foot-links a:hover {
-  color: var(--accent);
-}
