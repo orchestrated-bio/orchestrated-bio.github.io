@@ -9,6 +9,9 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
+  /* The phone and notebook overlays sit at z-index 20 inside this box; without
+     a stacking context of its own they paint over the sticky masthead. */
+  isolation: isolate;
   aspect-ratio: 16 / 10;
   border-radius: 6px;
   overflow: hidden;
@@ -98,7 +101,7 @@
   width: 0.5em; height: 1em;
   background: #7fe0c2;
   vertical-align: text-bottom;
-  animation: iuiBlink 0.9s steps(2) infinite;
+  animation: iuiBlink 0.9s steps(2) 6;
 }
 @keyframes iuiBlink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
@@ -108,11 +111,15 @@
   transition: opacity 0.4s ease;
 }
 .iui-steps-tick {
-  width: 0.85em; height: 0.85em; border-radius: 50%;
+  width: 1.1em; height: 1.1em; border-radius: 50%;
+  flex: none;
   background: rgb(39 159 129 / 0.40);
   color: #6bdeb5;
   display: grid; place-items: center;
-  font-size: 0.7em;
+  /* The inherited 1.6 line-height opened a line box taller than the circle,
+     pushing the glyph out of it. */
+  font-size: 0.55em;
+  line-height: 1;
 }
 .iui-steps-text { font-size: 0.66em; color: #b6bdc9; }
 
@@ -151,10 +158,28 @@
 
 .iui-follow {
   border-top: 1px solid rgb(255 255 255 / 0.05);
-  padding: 0.6em 1em;
+  /* The chat column is a fixed-height flex box whose .iui-paras had no slack,
+     so the chips' extra height is taken back out of this block's padding. */
+  padding: 0.3em 1em;
 }
 .iui-follow-label { font-size: 0.6em; color: #8b94a3; margin: 0 0 0.3em; }
 .iui-follow p { margin: 0 0 0.2em; font-size: 0.6em; color: #aab2bf; line-height: 1.35; }
+/* Beats `.iui-follow p` (0,1,1) so the label matches the ANALYSIS/READOUT/
+   CAVEAT labels above it, and the suggestions below read as options. */
+.iui-follow p.iui-follow-label {
+  margin-bottom: 0.2em;
+  color: #f1f5f3;
+  font-weight: 650;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+.iui-follow-list .iui-part {
+  width: fit-content;
+  padding: 0.1em 0.4em;
+  background: rgb(255 255 255 / 0.06);
+  border-radius: 0.4em;
+}
+.iui-follow-list .iui-part:last-child { margin-bottom: 0; }
 
 .iui-ask {
   border-top: 1px solid rgb(255 255 255 / 0.05);
@@ -345,17 +370,8 @@
 
 /* The story copy is read by a person, unlike the miniature phone UI beside
    it, so it gets px floors rather than riding the clamp(10px, 1.25vw, 15px)
-   em base alone: at that base the kicker was 9.3px and the body 11.7px on
-   desktop and 8.5px on phones. */
-.iui-story-kicker {
-  margin: 0;
-  color: #60c7a4;
-  font-size: max(0.72em, 11px);
-  line-height: 1.3;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
+   em base alone: at that base the body was 11.7px on desktop and 8.5px on
+   phones. */
 
 .iui-mobile-story {
   display: grid;
@@ -482,7 +498,9 @@
   margin-left: 0.12em;
   background: #7fe0c2;
   vertical-align: text-bottom;
-  animation: iuiBlink 0.9s steps(2) infinite;
+  /* Six runs (~5.4s), not infinite: the phone scene is the default view, and
+     WCAG 2.2.2 caps unpausable blinking at 5s. */
+  animation: iuiBlink 0.9s steps(2) 6;
 }
 
 .iui-phone-working {
@@ -586,6 +604,19 @@
   color: #7d8885;
   font-size: max(0.4em, 9px);
   text-align: center;
+}
+
+/* Around 768-960px the em base bottoms out at the 9px floor while the phone
+   frame is still only 16em wide, so the five names ran together and the last
+   one was cut off. A proportional face, a lower floor and a wider frame give
+   each name its own column again; below 40rem the stacked phone takes over
+   with its own width and the 0.7em labels further down. */
+@media (max-width: 60rem) {
+  .iui-phone-frame { width: 19em; }
+  .iui-phone-labels {
+    font-family: var(--sans);
+    font-size: max(0.4em, 7.5px);
+  }
 }
 
 .iui-phone-result small {
@@ -803,16 +834,26 @@
   color: var(--accent);
 }
 
+.insight-demo-switcher button[aria-pressed="true"] b { color: var(--ink-3); }
+
 .insight-demo-switcher .insight-story-play {
   margin-left: 0.25rem;
-  border-color: transparent;
-  color: var(--ink-4);
+  color: var(--ink-3);
   font-family: var(--mono);
   font-size: 0.67rem;
 }
 
+/* A glyph rather than markup, because the script rewrites the button's text
+   between Play and Pause. The class is toggled in insight-demo.js. */
+.insight-demo-switcher .insight-story-play::before {
+  content: "\25B6";
+  margin-right: 0.35rem;
+}
+
+.insight-demo-switcher .insight-story-play.is-playing::before { content: "\275A\275A"; }
+
 .insight-demo-switcher .insight-story-play:hover {
-  border-color: var(--rule);
+  border-color: var(--ink-4);
   color: var(--ink-2);
 }
 
@@ -990,17 +1031,32 @@
   bottom: 3.35em;
 }
 
+/* Right-aligned in the gutter, just left of the y-axis at 2.7 wrapper-em
+   (6em at this 0.45em size), so the rotated "samples" title keeps the far
+   left to itself. */
 .iui-lolli-protein-wrap .iui-axis-max,
 .iui-lolli-protein-wrap .iui-axis-mid,
 .iui-lolli-protein-wrap .iui-axis-min {
-  left: 0.25em;
+  left: 0;
+  width: 5.4em;
+  text-align: right;
   font-size: 0.45em;
   color: #7e899a;
 }
 
+/* The ticks are positioned against the wrapper, but the stems are scaled
+   inside a plot area inset by 3.35em (x-axis) and 0.55em (top), and these
+   labels resolve their own em at 0.45x. So each offset is converted: 10 of 21
+   samples is 45.2% of the plot area (the stems use 95% for 21), and the
+   x-axis sits 3.35 wrapper-em up. The trailing 0.6em centres the glyph on the
+   value. The mid label also needs position: absolute, which only .iui-axis-max
+   and .iui-axis-min get from the base rules. */
 .iui-lolli-protein-wrap .iui-axis-max { top: 0.2em; }
-.iui-lolli-protein-wrap .iui-axis-mid { top: calc(50% - 1.9em); }
-.iui-lolli-protein-wrap .iui-axis-min { bottom: 3.15em; }
+.iui-lolli-protein-wrap .iui-axis-mid {
+  position: absolute;
+  bottom: calc(45.2% + 2.93em);
+}
+.iui-lolli-protein-wrap .iui-axis-min { bottom: calc(3.35em / 0.45 - 0.6em); }
 
 .iui-axis-title {
   position: absolute;
@@ -1322,7 +1378,11 @@
   .iui-notebook-head > span { font-size: 0.75em; }
   .iui-notebook-grid { grid-template-columns: 1fr; grid-template-rows: auto auto; }
   .iui-notebook-code { border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
-  .iui-notebook-code pre { font-size: 0.75em; }
+  .iui-notebook-code pre {
+    font-size: 11px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
   .iui-notebook-record { padding: 0.85em; }
   .iui-notebook-record dl > div { grid-template-columns: 5.5em minmax(0, 1fr); }
   .iui-notebook-record dt,
@@ -1334,4 +1394,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .iui-phone-chart i { transform: scaleY(1); }
+  /* The points only reach opacity .9 through iui-volcano-in, which base.css
+     cancels here, so without this the plot has axes and no data. */
+  .iui-volcano-neutral,
+  .iui-volcano-down,
+  .iui-volcano-up { opacity: 0.9; }
 }

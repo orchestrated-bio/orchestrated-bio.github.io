@@ -39,14 +39,30 @@
         declineBtn.textContent = 'Decline';
         declineBtn.type = 'button';
 
+        // The banner is fixed to the bottom, so without reserved space it
+        // sits on top of the footer: the Privacy and Terms links cannot be
+        // seen, clicked, or reached by keyboard until a choice is made.
+        function reserveSpace() {
+            var h = banner.offsetHeight + 'px';
+            document.body.style.paddingBottom = h;
+            document.documentElement.style.scrollPaddingBottom = h;
+        }
+
+        function releaseSpace() {
+            document.body.style.paddingBottom = '';
+            document.documentElement.style.scrollPaddingBottom = '';
+        }
+
         acceptBtn.addEventListener('click', function() {
             localStorage.setItem(CONSENT_KEY, 'accepted');
+            releaseSpace();
             banner.remove();
             loadGA4();
         });
 
         declineBtn.addEventListener('click', function() {
             localStorage.setItem(CONSENT_KEY, 'declined');
+            releaseSpace();
             banner.remove();
         });
 
@@ -57,6 +73,12 @@
         actions.appendChild(declineBtn);
         banner.appendChild(actions);
         document.body.appendChild(banner);
+        reserveSpace();
+        // The banner reflows from one line to three between desktop and
+        // phone widths, so the reserved space has to follow it.
+        if (typeof ResizeObserver === 'function') {
+            new ResizeObserver(reserveSpace).observe(banner);
+        }
     }
 
     var consent = localStorage.getItem(CONSENT_KEY);

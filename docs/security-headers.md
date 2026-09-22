@@ -11,9 +11,8 @@ Every page carries these as `<meta>` elements, which browsers honour:
 
 | Header | Where |
 |---|---|
-| `Content-Security-Policy` | `<meta http-equiv>` on all 7 pages |
-| `X-Content-Type-Options: nosniff` | `<meta http-equiv>` on all 7 pages |
-| Referrer policy | `<meta name="referrer">` |
+| `Content-Security-Policy` | `<meta http-equiv>` on every page |
+| Referrer policy | `<meta name="referrer">` on every page |
 
 `scopeify.html` and `scopeify-demo/standalone.html` are generated — edit
 `scripts/build_scopeify_standalone.py`, never the pages directly.
@@ -30,6 +29,7 @@ Add them in Cloudflare under *Rules → Transform Rules → Modify Response Head
 
 ```
 Strict-Transport-Security: max-age=31536000; includeSubDomains
+X-Content-Type-Options: nosniff
 X-Frame-Options: DENY
 Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
 ```
@@ -56,6 +56,11 @@ Notes:
   HTTPS for the full duration, including ones that do not exist yet. Do not
   add `preload` at the apex without a deliberate decision; the domain is not
   on the preload list today and it is a one-way door.
+- **X-Content-Type-Options** was previously listed as done because every page
+  carries `<meta http-equiv="X-Content-Type-Options" content="nosniff">`. It is
+  not in the HTML spec's `http-equiv` list, so browsers ignore it, and
+  `curl -sI https://orchestrated.bio/` returns no such header. The metas are
+  inert but harmless and stay on the pages; the header itself is still to do.
 - **X-Frame-Options** is the clickjacking control. Verified safe: no tracked
   file or live page contains an `<iframe>`, and no site JS creates one, so
   `DENY` breaks nothing. CSP `frame-ancestors` would be the modern equivalent,

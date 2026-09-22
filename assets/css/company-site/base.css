@@ -146,7 +146,7 @@ body {
   padding: 0.6rem 1rem;
   z-index: 100;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus { left: 0.5rem; top: 0.5rem; }
 
 /* Prose links had no colour rule, so any inline <a> in body copy fell back to
    the UA default -- blue unvisited, purple visited. Component classes (.btn,
@@ -260,7 +260,7 @@ body {
   transition: color 0.15s ease, border-color 0.15s ease;
 }
 .site-nav a:not(.nav-cta):hover { color: var(--ink); }
-.site-nav a[aria-current="page"] {
+.site-nav a[aria-current] {
   color: var(--ink);
   border-bottom-color: var(--accent);
 }
@@ -295,6 +295,13 @@ body {
   }
   .site-nav.site-nav-enhanced[data-open="true"] { display: grid; grid-template-columns: 1fr; }
   .site-nav.site-nav-enhanced a { min-height: 44px; display: flex; align-items: center; }
+  .site-nav.site-nav-enhanced a[aria-current] {
+    border-bottom-color: transparent;
+    box-shadow: inset 2px 0 0 var(--accent);
+    padding-left: 0.75rem;
+    color: var(--ink);
+    font-weight: 600;
+  }
   .site-nav.site-nav-enhanced .nav-cta { justify-content: center; margin-top: 0.35rem; }
 }
 
@@ -489,7 +496,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin: 0.7rem 0 0 !important;
+  margin: 0.7rem 0 0;
 }
 .person-links a {
   font-size: var(--step--1);
@@ -674,15 +681,24 @@ body {
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+  /* .orgs' negative side margins are wider than the .shell gutter, which made
+     the page 1px wider than the viewport between ~737px and the width where
+     the 68rem max-width absorbs them. `clip` trims that without making this a
+     scroll container. */
+  overflow-x: clip;
 }
 
+main > .orgs-band:last-child { border-bottom: 0; }
+
+/* Same register as .list-title -- this is a section heading, not a label --
+   but centred with the band. */
 .orgs-title {
-  font-size: var(--step--1) !important;
-  font-weight: 650 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase;
-  color: var(--accent) !important;
-  margin: 0 0 1.25rem !important;
+  font-size: var(--step-2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 1.25rem;
   text-align: center;
 }
 
@@ -700,24 +716,25 @@ body {
 .org {
   display: inline-block;
   margin: 0.55rem 1.3rem;
-  font-size: var(--step-2);
+  font-size: var(--step-1);
   font-weight: 600;
   letter-spacing: -0.015em;
-  color: var(--ink);
+  color: var(--ink-2);
   text-decoration: none;
   white-space: nowrap;
   transition: color 0.2s ease;
 }
 .org:hover { color: var(--accent); }
 
-@media (max-width: 60rem) {
-  .org { font-size: var(--step-1); }
-}
-
 @media (max-width: 46rem) {
   .orgs { margin-inline: -0.95rem; }
   .org { margin: 0.45rem 0.95rem; }
 }
+
+/* A page with too little content to fill the viewport (404) would otherwise
+   leave a band of empty paper below the footer. */
+.page-short { display: flex; flex-direction: column; min-height: 100vh; }
+.page-short > main { flex: 1 0 auto; }
 
 /* --- Footer ------------------------------------------------------------- */
 
@@ -808,9 +825,9 @@ body {
 .pilot-terms {
   max-width: 72ch;
   margin: 0 auto;
-  font-size: var(--step--1);
+  font-size: var(--step-0);
   line-height: 1.65;
-  color: var(--ink-3);
+  color: var(--ink-2);
   text-align: center;
   text-wrap: pretty;
 }
@@ -852,7 +869,7 @@ section[id],
 }
 
 @media (max-width: 40rem) {
-  .pilot-terms { text-align: left; font-size: var(--step-0); }
+  .pilot-terms { text-align: left; }
   .pilot-terms b { display: block; margin-bottom: 0.5rem; }
   .pilot-terms-cta { justify-content: flex-start; margin-inline: 0; }
 }

@@ -12,13 +12,15 @@ provider, which covers the apex and every subdomain. The record is
 apex TXT — **do not remove it**, or verification is lost. Consider adding a
 second method under Settings → Ownership verification as a backup.
 
-`sitemap.xml` submitted and read successfully: 6 pages discovered. Indexing
-requested for the newest page.
+`sitemap.xml` submitted and read successfully: 5 pages discovered. Indexing
+requested for the newest page. `scopeify.html` was taken out of the sitemap
+deliberately in b3e9751 — it is an internal scoping tool, not a page to
+promote — so five is the expected count, not a missing page.
 
 Verified from Googlebot's own perspective (Cloudflare fronts the origin, so
 this was worth confirming rather than assuming):
 
-- All six indexable pages return **200** to a Googlebot user-agent, with real
+- All five indexable pages return **200** to a Googlebot user-agent, with real
   content and no challenge page.
 - `robots.txt` serves normally; the `Disallow` rules cover only build inputs.
 - Organization and Service JSON-LD both parse, with the Service referencing

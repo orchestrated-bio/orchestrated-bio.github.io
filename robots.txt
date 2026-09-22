@@ -9,5 +9,7 @@ Disallow: /_includes/
 Disallow: /docs/
 Disallow: /.github/
 Disallow: /README.md
+Disallow: /concepts/asset-diligence/build_artifact.py
+Disallow: /scopeify-demo/evals/
 
 Sitemap: https://orchestrated.bio/sitemap.xml
