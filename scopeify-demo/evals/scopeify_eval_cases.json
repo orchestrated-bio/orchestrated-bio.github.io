@@ -182,7 +182,7 @@
       "query": "Move from preliminary scope to a human-reviewed quote.",
       "expected_decision": "A consultation action remains visible next to the downloadable workbook.",
       "must_find_terms": [
-        "Schedule consultation",
+        "Book a call",
         "Download project workbook (.xlsx)",
         "Human review"
       ]

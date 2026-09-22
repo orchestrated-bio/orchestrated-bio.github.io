@@ -15,7 +15,10 @@ second method under Settings → Ownership verification as a backup.
 `sitemap.xml` submitted and read successfully: 5 pages discovered. Indexing
 requested for the newest page. `scopeify.html` was taken out of the sitemap
 deliberately in b3e9751 — it is an internal scoping tool, not a page to
-promote — so five is the expected count, not a missing page.
+promote — so five is the expected count, not a missing page. Since Sept 2026
+both Scopeify pages also send `robots: noindex, follow`, and the standalone
+copy canonicalises to `/scopeify.html`; they stay crawlable so the noindex is
+actually seen, which is why robots.txt does not disallow them.
 
 Verified from Googlebot's own perspective (Cloudflare fronts the origin, so
 this was worth confirming rather than assuming):
