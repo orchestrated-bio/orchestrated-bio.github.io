@@ -102,6 +102,7 @@
   width: 100%;
   max-width: 28rem;
   height: auto;
+  max-width: 30rem;
   font-family: var(--sans);
 }
 
@@ -153,6 +154,93 @@
   color: var(--ink-3);
   text-wrap: pretty;
 }
+
+/* --- Single-cell target figure ----------------------------------------
+   Fixed per-theme hex tokens, as in .hm: color-mix() with var() is
+   invalid-at-computed-value-time where unsupported and falls back to black.
+
+   Five categorical colors cannot be both colorblind-safe and >=3:1 on the
+   page, so the three distinctions the figure argues from -- tumor vs immune
+   vs stromal -- are the ones held apart (worst pair dE 29 under deuteranopia
+   and protanopia, against 7.7 before). The immune subtypes share a hue
+   family: panel B pools them, so confusing a B cell for a T cell changes no
+   conclusion. */
+.sc {
+  --sc-tumor: #B2182B; --sc-bcell: #0B5FA5; --sc-tcell: #118A86;
+  --sc-myeloid: #6B4FA8; --sc-stromal: #3B3B3B;
+  --sc-dot: #B2182B; --sc-dot-ctrl: #6d7671;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 30rem;
+  font-family: var(--sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sc {
+    --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
+    --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
+    --sc-dot: #E8735F; --sc-dot-ctrl: #8d958f;
+  }
+}
+:root[data-theme="dark"] .sc {
+  --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
+  --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
+  --sc-dot: #E8735F; --sc-dot-ctrl: #8d958f;
+}
+
+.sc-tumor   { fill: var(--sc-tumor); }
+.sc-bcell   { fill: var(--sc-bcell); }
+.sc-tcell   { fill: var(--sc-tcell); }
+.sc-myeloid { fill: var(--sc-myeloid); }
+.sc-stromal { fill: var(--sc-stromal); }
+.sc-c circle { fill-opacity: 0.9; }
+
+.sc-dot { fill: var(--sc-dot); }
+.sc-dot-ctrl { fill: var(--sc-dot-ctrl); }
+.sc-rule { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+.sc-h    { fill: var(--ink); font-size: 13px; font-weight: 620; }
+.sc-sub  { fill: var(--ink-4); font-size: 11px; }
+.sc-leg  { fill: var(--ink-2); font-size: 11.5px; }
+.sc-row  { fill: var(--ink-2); font-size: 11.5px; font-weight: 600; text-anchor: end;
+           font-variant-numeric: tabular-nums; }
+.sc-col  { fill: var(--ink-3); font-size: 11px; text-anchor: middle; }
+.sc-ctrl { fill: var(--ink-4); }
+.sc-tiny { font-size: 11px; text-anchor: middle; font-style: italic; }
+.sc-key  { fill: var(--ink-4); font-size: 11px; text-anchor: end; }
+.sc-tick { fill: var(--ink-4); font-size: 11px; text-anchor: middle; }
+.sc-n    { fill: var(--ink-4); font-weight: 400; }
+
+.sc-figure { margin: 0; }
+.sc-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+  max-width: 62rem;
+}
+.sc-figure figcaption {
+  max-width: 74ch;
+  margin-top: 1rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
+.sc-figure figcaption p { margin: 0 0 0.6rem; }
+.sc-figure figcaption p:last-child { margin-bottom: 0; }
+
+/* Variant figure. Shares .sc for its tokens and type; only the marks differ. */
+.gw-base { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.gw-tick { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.gw-ci   { stroke: var(--sc-dot); stroke-width: 2; }
+.gw-cap  { stroke: var(--sc-dot); stroke-width: 2; }
+.gw-dot  { fill: var(--sc-dot); }
+.gw-bar  { fill: var(--sc-dot); }
+.gw-val  { fill: var(--ink-2); font-size: 11.5px; font-weight: 620; text-anchor: middle;
+           font-variant-numeric: tabular-nums; }
+.gw-val-l, .gw-note { text-anchor: start; }
 
 /* The body-size bullet list here runs the full shell, unlike the one-line link
    lists .data-points-lg was written for, so give the prose a measure again. */
