@@ -213,13 +213,6 @@
 .sc-n    { fill: var(--ink-4); font-weight: 400; }
 
 .sc-figure { margin: 0; }
-.sc-lede {
-  max-width: 74ch;
-  margin: 0 0 1.5rem;
-  font-size: var(--step-0);
-  line-height: 1.6;
-  text-wrap: pretty;
-}
 .sc-panels {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
