@@ -102,6 +102,7 @@
   width: 100%;
   max-width: 28rem;
   height: auto;
+  max-width: 30rem;
   font-family: var(--sans);
 }
 
@@ -159,34 +160,35 @@
    var() is invalid-at-computed-value-time where unsupported, and falls back
    to black rather than to a preceding declaration). */
 .sc {
-  --sc-tumour: #b2182b; --sc-b: #2166ac; --sc-t: #0f8f66;
+  --sc-tumor: #b2182b; --sc-b: #2166ac; --sc-t: #0f8f66;
   --sc-mye: #a9722a;    --sc-str: #6d4b96;
   --sc-d1: #edbdba;     --sc-d2: #d67b77; --sc-d3: #b2182b;
   display: block;
   width: 100%;
   height: auto;
+  max-width: 30rem;
   font-family: var(--sans);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .sc {
-    --sc-tumour: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
+    --sc-tumor: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
     --sc-mye: #e0ab4c;    --sc-str: #a78bce;
     --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
   }
 }
 :root[data-theme="dark"] .sc {
-  --sc-tumour: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
+  --sc-tumor: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
   --sc-mye: #e0ab4c;    --sc-str: #a78bce;
   --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
 }
 
-.sc-tumor   { fill: var(--sc-tumour); }
+.sc-tumor   { fill: var(--sc-tumor); }
 .sc-bcell   { fill: var(--sc-b); }
 .sc-tcell   { fill: var(--sc-t); }
 .sc-myeloid { fill: var(--sc-mye); }
 .sc-stromal { fill: var(--sc-str); }
-.sc-c circle { fill-opacity: 0.85; }
+circle.sc-c, .sc-c circle { fill-opacity: 0.85; }
 
 /* An empty dot has to stay visible on a page barely lighter than it is. */
 .sc-d0 {
@@ -216,7 +218,6 @@
   align-items: start;
   max-width: 62rem;
 }
-.sc { max-width: 30rem; }
 .sc-figure figcaption {
   max-width: 74ch;
   margin-top: 1rem;
