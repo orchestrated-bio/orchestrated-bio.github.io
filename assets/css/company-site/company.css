@@ -156,13 +156,19 @@
 }
 
 /* --- Single-cell target figure ----------------------------------------
-   Same construction as .hm: fixed per-theme hex tokens (color-mix() with
-   var() is invalid-at-computed-value-time where unsupported, and falls back
-   to black rather than to a preceding declaration). */
+   Fixed per-theme hex tokens, as in .hm: color-mix() with var() is
+   invalid-at-computed-value-time where unsupported and falls back to black.
+
+   Five categorical colors cannot be both colorblind-safe and >=3:1 on the
+   page, so the three distinctions the figure argues from -- tumor vs immune
+   vs stromal -- are the ones held apart (worst pair dE 29 under deuteranopia
+   and protanopia, against 7.7 before). The immune subtypes share a hue
+   family: panel B pools them, so confusing a B cell for a T cell changes no
+   conclusion. */
 .sc {
-  --sc-tumor: #b2182b; --sc-b: #2166ac; --sc-t: #0f8f66;
-  --sc-mye: #a9722a;    --sc-str: #6d4b96;
-  --sc-d1: #edbdba;     --sc-d2: #d67b77; --sc-d3: #b2182b;
+  --sc-tumor: #B2182B; --sc-bcell: #0B5FA5; --sc-tcell: #118A86;
+  --sc-myeloid: #6B4FA8; --sc-stromal: #3B3B3B;
+  --sc-dot: #B2182B; --sc-dot-ctrl: #6d7671;
   display: block;
   width: 100%;
   height: auto;
@@ -172,45 +178,48 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .sc {
-    --sc-tumor: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
-    --sc-mye: #e0ab4c;    --sc-str: #a78bce;
-    --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
+    --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
+    --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
+    --sc-dot: #E8735F; --sc-dot-ctrl: #8d958f;
   }
 }
 :root[data-theme="dark"] .sc {
-  --sc-tumor: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
-  --sc-mye: #e0ab4c;    --sc-str: #a78bce;
-  --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
+  --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
+  --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
+  --sc-dot: #E8735F; --sc-dot-ctrl: #8d958f;
 }
 
 .sc-tumor   { fill: var(--sc-tumor); }
-.sc-bcell   { fill: var(--sc-b); }
-.sc-tcell   { fill: var(--sc-t); }
-.sc-myeloid { fill: var(--sc-mye); }
-.sc-stromal { fill: var(--sc-str); }
-circle.sc-c, .sc-c circle { fill-opacity: 0.85; }
+.sc-bcell   { fill: var(--sc-bcell); }
+.sc-tcell   { fill: var(--sc-tcell); }
+.sc-myeloid { fill: var(--sc-myeloid); }
+.sc-stromal { fill: var(--sc-stromal); }
+.sc-c circle { fill-opacity: 0.9; }
 
-/* An empty dot has to stay visible on a page barely lighter than it is. */
-.sc-d0 {
-  fill: var(--paper-raised);
-  stroke: var(--rule-firm);
-  stroke-width: 1;
-  vector-effect: non-scaling-stroke;
-}
-.sc-d1 { fill: var(--sc-d1); }
-.sc-d2 { fill: var(--sc-d2); }
-.sc-d3 { fill: var(--sc-d3); }
+.sc-dot { fill: var(--sc-dot); }
+.sc-dot-ctrl { fill: var(--sc-dot-ctrl); }
+.sc-rule { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
 
 .sc-h    { fill: var(--ink); font-size: 13px; font-weight: 620; }
 .sc-sub  { fill: var(--ink-4); font-size: 11px; }
 .sc-leg  { fill: var(--ink-2); font-size: 11.5px; }
-.sc-row  { fill: var(--ink-2); font-size: 12px; font-weight: 600; text-anchor: end; }
-.sc-col  { fill: var(--ink-3); font-size: 11.5px; text-anchor: middle; }
+.sc-row  { fill: var(--ink-2); font-size: 11.5px; font-weight: 600; text-anchor: end;
+           font-variant-numeric: tabular-nums; }
+.sc-col  { fill: var(--ink-3); font-size: 11px; text-anchor: middle; }
+.sc-ctrl { fill: var(--ink-4); }
+.sc-tiny { font-size: 11px; text-anchor: middle; font-style: italic; }
 .sc-key  { fill: var(--ink-4); font-size: 11px; text-anchor: end; }
-.sc-tick { fill: var(--ink-4); font-size: 10.5px; text-anchor: middle; }
+.sc-tick { fill: var(--ink-4); font-size: 11px; text-anchor: middle; }
 .sc-n    { fill: var(--ink-4); font-weight: 400; }
 
 .sc-figure { margin: 0; }
+.sc-lede {
+  max-width: 74ch;
+  margin: 0 0 1.5rem;
+  font-size: var(--step-0);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
 .sc-panels {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
@@ -226,6 +235,8 @@ circle.sc-c, .sc-c circle { fill-opacity: 0.85; }
   color: var(--ink-3);
   text-wrap: pretty;
 }
+.sc-figure figcaption p { margin: 0 0 0.6rem; }
+.sc-figure figcaption p:last-child { margin-bottom: 0; }
 
 /* The body-size bullet list here runs the full shell, unlike the one-line link
    lists .data-points-lg was written for, so give the prose a measure again. */

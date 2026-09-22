@@ -24,8 +24,8 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=b752cd5607ba" />
-    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=ca603dd1f8fe" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=a85d077e1c15" />
+    <link rel="stylesheet" href="./assets/css/company-site/company.css?v=6082c1e1fdfe" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
     <script type="application/ld+json">
     {
@@ -253,88 +253,170 @@
       <section class="band">
         <div class="shell">
           <h2 class="list-title">Single-cell target selection</h2>
+          <p class="sc-lede">A worked example on public data, not client work: what a single-cell
+            reanalysis looks like before an antibody-drug conjugate target is chosen.</p>
           <figure class="sc-figure">
             <div class="sc-panels">
-              <svg class="sc sc-map" viewBox="0 0 340 400" role="img" aria-labelledby="scmap-t" aria-describedby="scmap-d">
-              <title id="scmap-t">Map of 515 single cells from 11 primary breast tumors, colored by cell type</title>
-              <desc id="scmap-d">A two-dimensional embedding of 515 cells. The 83 B cells, 54 T cells and 38 myeloid cells group together in one region. The 317 tumor cells form several separate groups, one per patient. The 23 stromal cells sit between them.</desc>
+              <svg class="sc sc-map" viewBox="0 0 340 398" role="img" aria-labelledby="scmap-t" aria-describedby="scmap-d">
+              <title id="scmap-t">Map of 515 single cells from 11 breast cancer patients, colored by cell type</title>
+              <desc id="scmap-d">A two-dimensional embedding of 515 cells. The 83 B cells, 54 T cells and 38 myeloid cells group together in one region. The 317 tumor cells form several separate groups. The 23 stromal cells are scattered between them.</desc>
               <text class="sc-h" x="6" y="16">Cells, colored by type</text>
-              <text class="sc-sub" x="6" y="32">515 cells · 11 primary breast tumors</text>
+              <text class="sc-sub" x="6" y="32">515 cells · 13 samples · 11 patients</text>
               <g class="sc-c sc-tumor"><circle cx="282.6" cy="169.8" r="3"/><circle cx="286.6" cy="168.6" r="3"/><circle cx="285.8" cy="162.0" r="3"/><circle cx="277.9" cy="166.7" r="3"/><circle cx="283.3" cy="158.3" r="3"/><circle cx="279.5" cy="165.1" r="3"/><circle cx="277.3" cy="159.6" r="3"/><circle cx="272.9" cy="165.2" r="3"/><circle cx="278.3" cy="158.2" r="3"/><circle cx="276.7" cy="162.1" r="3"/><circle cx="281.9" cy="164.4" r="3"/><circle cx="281.0" cy="165.6" r="3"/><circle cx="271.9" cy="160.3" r="3"/><circle cx="279.1" cy="169.5" r="3"/><circle cx="282.8" cy="166.6" r="3"/><circle cx="275.9" cy="162.4" r="3"/><circle cx="277.6" cy="170.6" r="3"/><circle cx="275.8" cy="166.3" r="3"/><circle cx="274.8" cy="167.1" r="3"/><circle cx="282.0" cy="161.8" r="3"/><circle cx="119.5" cy="302.8" r="3"/><circle cx="107.7" cy="283.2" r="3"/><circle cx="109.6" cy="272.4" r="3"/><circle cx="104.3" cy="304.2" r="3"/><circle cx="113.0" cy="298.0" r="3"/><circle cx="101.8" cy="291.5" r="3"/><circle cx="122.6" cy="291.6" r="3"/><circle cx="105.5" cy="297.9" r="3"/><circle cx="102.1" cy="287.4" r="3"/><circle cx="111.3" cy="299.3" r="3"/><circle cx="97.0" cy="268.4" r="3"/><circle cx="85.8" cy="273.7" r="3"/><circle cx="96.3" cy="273.3" r="3"/><circle cx="87.8" cy="282.3" r="3"/><circle cx="123.3" cy="301.4" r="3"/><circle cx="116.7" cy="300.4" r="3"/><circle cx="103.6" cy="293.4" r="3"/><circle cx="94.5" cy="271.8" r="3"/><circle cx="112.5" cy="284.9" r="3"/><circle cx="94.5" cy="267.4" r="3"/><circle cx="115.3" cy="286.7" r="3"/><circle cx="118.1" cy="294.9" r="3"/><circle cx="111.7" cy="294.0" r="3"/><circle cx="123.7" cy="300.8" r="3"/><circle cx="111.7" cy="301.8" r="3"/><circle cx="101.5" cy="283.1" r="3"/><circle cx="91.0" cy="271.7" r="3"/><circle cx="109.2" cy="310.0" r="3"/><circle cx="95.2" cy="269.2" r="3"/><circle cx="97.8" cy="279.6" r="3"/><circle cx="98.5" cy="287.5" r="3"/><circle cx="115.3" cy="284.1" r="3"/><circle cx="120.2" cy="282.5" r="3"/><circle cx="118.4" cy="301.0" r="3"/><circle cx="123.9" cy="305.0" r="3"/><circle cx="99.8" cy="272.3" r="3"/><circle cx="108.9" cy="297.0" r="3"/><circle cx="127.0" cy="294.9" r="3"/><circle cx="115.0" cy="296.2" r="3"/><circle cx="108.9" cy="280.0" r="3"/><circle cx="100.6" cy="267.0" r="3"/><circle cx="102.5" cy="276.7" r="3"/><circle cx="124.2" cy="296.4" r="3"/><circle cx="106.8" cy="293.1" r="3"/><circle cx="108.5" cy="288.6" r="3"/><circle cx="103.0" cy="273.8" r="3"/><circle cx="102.6" cy="295.3" r="3"/><circle cx="94.4" cy="294.5" r="3"/><circle cx="120.8" cy="291.5" r="3"/><circle cx="107.8" cy="303.0" r="3"/><circle cx="93.8" cy="273.8" r="3"/><circle cx="88.5" cy="277.9" r="3"/><circle cx="109.6" cy="286.6" r="3"/><circle cx="261.9" cy="95.4" r="3"/><circle cx="259.8" cy="93.6" r="3"/><circle cx="261.1" cy="100.0" r="3"/><circle cx="270.6" cy="92.7" r="3"/><circle cx="261.4" cy="97.4" r="3"/><circle cx="267.9" cy="91.2" r="3"/><circle cx="261.9" cy="96.1" r="3"/><circle cx="253.8" cy="97.5" r="3"/><circle cx="264.5" cy="89.1" r="3"/><circle cx="266.4" cy="91.3" r="3"/><circle cx="263.4" cy="96.3" r="3"/><circle cx="272.1" cy="96.7" r="3"/><circle cx="269.2" cy="98.2" r="3"/><circle cx="267.9" cy="93.5" r="3"/><circle cx="258.0" cy="100.7" r="3"/><circle cx="256.8" cy="94.5" r="3"/><circle cx="250.8" cy="97.9" r="3"/><circle cx="257.5" cy="100.3" r="3"/><circle cx="254.8" cy="91.0" r="3"/><circle cx="249.0" cy="99.4" r="3"/><circle cx="258.3" cy="88.4" r="3"/><circle cx="255.5" cy="82.6" r="3"/><circle cx="263.9" cy="85.0" r="3"/><circle cx="271.7" cy="103.9" r="3"/><circle cx="264.3" cy="103.6" r="3"/><circle cx="161.8" cy="163.2" r="3"/><circle cx="103.0" cy="180.5" r="3"/><circle cx="160.5" cy="165.8" r="3"/><circle cx="154.8" cy="157.1" r="3"/><circle cx="98.3" cy="181.3" r="3"/><circle cx="163.1" cy="169.7" r="3"/><circle cx="94.1" cy="182.2" r="3"/><circle cx="100.3" cy="188.0" r="3"/><circle cx="149.9" cy="161.2" r="3"/><circle cx="97.2" cy="181.1" r="3"/><circle cx="154.9" cy="176.0" r="3"/><circle cx="154.8" cy="166.2" r="3"/><circle cx="153.0" cy="167.6" r="3"/><circle cx="101.2" cy="182.5" r="3"/><circle cx="155.0" cy="164.6" r="3"/><circle cx="90.0" cy="181.0" r="3"/><circle cx="150.6" cy="173.2" r="3"/><circle cx="150.4" cy="178.7" r="3"/><circle cx="146.5" cy="165.2" r="3"/><circle cx="142.4" cy="175.3" r="3"/><circle cx="157.8" cy="172.0" r="3"/><circle cx="166.1" cy="165.4" r="3"/><circle cx="119.3" cy="176.9" r="3"/><circle cx="123.1" cy="177.0" r="3"/><circle cx="119.1" cy="178.6" r="3"/><circle cx="152.0" cy="169.5" r="3"/><circle cx="157.3" cy="161.6" r="3"/><circle cx="107.5" cy="180.6" r="3"/><circle cx="111.0" cy="180.6" r="3"/><circle cx="151.4" cy="165.0" r="3"/><circle cx="114.8" cy="178.4" r="3"/><circle cx="160.0" cy="174.5" r="3"/><circle cx="99.2" cy="184.1" r="3"/><circle cx="139.0" cy="176.3" r="3"/><circle cx="155.7" cy="171.1" r="3"/><circle cx="123.6" cy="176.9" r="3"/><circle cx="144.8" cy="168.3" r="3"/><circle cx="132.8" cy="167.1" r="3"/><circle cx="162.6" cy="172.1" r="3"/><circle cx="162.2" cy="167.1" r="3"/><circle cx="149.8" cy="166.9" r="3"/><circle cx="147.1" cy="171.9" r="3"/><circle cx="111.7" cy="179.3" r="3"/><circle cx="147.2" cy="169.1" r="3"/><circle cx="105.7" cy="182.2" r="3"/><circle cx="106.2" cy="178.0" r="3"/><circle cx="157.9" cy="169.7" r="3"/><circle cx="328.8" cy="232.8" r="3"/><circle cx="300.7" cy="245.5" r="3"/><circle cx="323.6" cy="226.0" r="3"/><circle cx="289.4" cy="278.6" r="3"/><circle cx="297.1" cy="252.5" r="3"/><circle cx="306.4" cy="244.3" r="3"/><circle cx="284.5" cy="271.3" r="3"/><circle cx="315.7" cy="237.2" r="3"/><circle cx="311.3" cy="252.6" r="3"/><circle cx="283.6" cy="264.2" r="3"/><circle cx="292.5" cy="288.2" r="3"/><circle cx="320.2" cy="238.1" r="3"/><circle cx="308.4" cy="250.7" r="3"/><circle cx="332.2" cy="236.2" r="3"/><circle cx="295.2" cy="246.4" r="3"/><circle cx="334.0" cy="242.6" r="3"/><circle cx="289.7" cy="272.7" r="3"/><circle cx="326.2" cy="226.2" r="3"/><circle cx="294.5" cy="264.2" r="3"/><circle cx="293.2" cy="272.7" r="3"/><circle cx="299.3" cy="275.6" r="3"/><circle cx="311.7" cy="263.2" r="3"/><circle cx="295.1" cy="259.6" r="3"/><circle cx="312.3" cy="242.6" r="3"/><circle cx="326.6" cy="238.1" r="3"/><circle cx="332.9" cy="236.6" r="3"/><circle cx="303.9" cy="252.8" r="3"/><circle cx="326.8" cy="236.1" r="3"/><circle cx="314.7" cy="234.2" r="3"/><circle cx="291.9" cy="286.6" r="3"/><circle cx="306.8" cy="260.0" r="3"/><circle cx="310.5" cy="235.2" r="3"/><circle cx="307.4" cy="239.6" r="3"/><circle cx="332.1" cy="228.2" r="3"/><circle cx="299.4" cy="256.6" r="3"/><circle cx="314.1" cy="240.2" r="3"/><circle cx="306.4" cy="249.7" r="3"/><circle cx="289.0" cy="259.6" r="3"/><circle cx="301.6" cy="250.5" r="3"/><circle cx="298.4" cy="248.0" r="3"/><circle cx="300.1" cy="270.6" r="3"/><circle cx="322.3" cy="232.6" r="3"/><circle cx="330.4" cy="231.6" r="3"/><circle cx="322.0" cy="258.4" r="3"/><circle cx="319.0" cy="227.6" r="3"/><circle cx="302.6" cy="250.7" r="3"/><circle cx="312.5" cy="243.8" r="3"/><circle cx="313.3" cy="258.0" r="3"/><circle cx="319.2" cy="236.3" r="3"/><circle cx="318.5" cy="233.1" r="3"/><circle cx="313.7" cy="275.2" r="3"/><circle cx="308.3" cy="260.7" r="3"/><circle cx="318.8" cy="253.4" r="3"/><circle cx="293.9" cy="278.2" r="3"/><circle cx="321.6" cy="239.4" r="3"/><circle cx="312.6" cy="268.1" r="3"/><circle cx="299.9" cy="280.9" r="3"/><circle cx="306.4" cy="269.7" r="3"/><circle cx="320.3" cy="246.9" r="3"/><circle cx="302.3" cy="263.6" r="3"/><circle cx="303.0" cy="258.3" r="3"/><circle cx="288.5" cy="270.9" r="3"/><circle cx="310.7" cy="247.2" r="3"/><circle cx="296.7" cy="278.5" r="3"/><circle cx="290.2" cy="263.7" r="3"/><circle cx="286.2" cy="248.6" r="3"/><circle cx="311.9" cy="248.1" r="3"/><circle cx="320.5" cy="233.9" r="3"/><circle cx="298.6" cy="266.0" r="3"/><circle cx="293.0" cy="268.0" r="3"/><circle cx="304.8" cy="259.0" r="3"/><circle cx="292.1" cy="285.5" r="3"/><circle cx="319.8" cy="242.3" r="3"/><circle cx="315.1" cy="247.1" r="3"/><circle cx="306.7" cy="275.5" r="3"/><circle cx="237.1" cy="188.5" r="3"/><circle cx="244.1" cy="186.3" r="3"/><circle cx="236.9" cy="191.2" r="3"/><circle cx="240.2" cy="188.9" r="3"/><circle cx="243.7" cy="186.6" r="3"/><circle cx="237.7" cy="190.0" r="3"/><circle cx="241.6" cy="187.2" r="3"/><circle cx="242.7" cy="187.0" r="3"/><circle cx="192.3" cy="131.4" r="3"/><circle cx="190.4" cy="97.1" r="3"/><circle cx="199.0" cy="99.0" r="3"/><circle cx="192.6" cy="97.4" r="3"/><circle cx="206.3" cy="101.3" r="3"/><circle cx="205.8" cy="103.6" r="3"/><circle cx="172.9" cy="131.8" r="3"/><circle cx="179.1" cy="97.2" r="3"/><circle cx="200.5" cy="96.8" r="3"/><circle cx="209.6" cy="95.0" r="3"/><circle cx="192.1" cy="104.3" r="3"/><circle cx="209.1" cy="107.1" r="3"/><circle cx="203.9" cy="94.6" r="3"/><circle cx="203.2" cy="104.5" r="3"/><circle cx="204.3" cy="102.1" r="3"/><circle cx="187.4" cy="92.7" r="3"/><circle cx="178.9" cy="111.7" r="3"/><circle cx="190.3" cy="101.9" r="3"/><circle cx="211.1" cy="101.1" r="3"/><circle cx="193.1" cy="94.3" r="3"/><circle cx="66.7" cy="153.0" r="3"/><circle cx="171.4" cy="131.5" r="3"/><circle cx="176.5" cy="99.0" r="3"/><circle cx="185.2" cy="128.7" r="3"/><circle cx="184.4" cy="97.1" r="3"/><circle cx="176.1" cy="130.8" r="3"/><circle cx="195.7" cy="106.2" r="3"/><circle cx="193.8" cy="111.4" r="3"/><circle cx="186.4" cy="116.7" r="3"/><circle cx="191.2" cy="128.5" r="3"/><circle cx="185.8" cy="113.3" r="3"/><circle cx="199.4" cy="115.5" r="3"/><circle cx="200.8" cy="115.8" r="3"/><circle cx="178.1" cy="126.5" r="3"/><circle cx="196.8" cy="102.6" r="3"/><circle cx="196.4" cy="121.6" r="3"/><circle cx="193.9" cy="120.4" r="3"/><circle cx="192.0" cy="121.8" r="3"/><circle cx="189.8" cy="108.3" r="3"/><circle cx="201.0" cy="106.7" r="3"/><circle cx="198.2" cy="117.6" r="3"/><circle cx="188.1" cy="114.9" r="3"/><circle cx="188.2" cy="124.1" r="3"/><circle cx="211.0" cy="95.1" r="3"/><circle cx="184.3" cy="111.4" r="3"/><circle cx="185.7" cy="108.5" r="3"/><circle cx="184.7" cy="102.4" r="3"/><circle cx="203.2" cy="114.1" r="3"/><circle cx="192.8" cy="112.1" r="3"/><circle cx="195.1" cy="111.6" r="3"/><circle cx="198.3" cy="107.9" r="3"/><circle cx="192.9" cy="107.4" r="3"/><circle cx="71.2" cy="176.3" r="3"/><circle cx="119.3" cy="226.7" r="3"/><circle cx="132.5" cy="212.6" r="3"/><circle cx="149.5" cy="213.7" r="3"/><circle cx="118.2" cy="216.3" r="3"/><circle cx="125.9" cy="215.8" r="3"/><circle cx="126.8" cy="215.3" r="3"/><circle cx="151.1" cy="213.7" r="3"/><circle cx="125.9" cy="216.8" r="3"/><circle cx="149.5" cy="213.9" r="3"/><circle cx="146.3" cy="215.5" r="3"/><circle cx="123.6" cy="225.4" r="3"/><circle cx="126.7" cy="216.1" r="3"/><circle cx="147.9" cy="215.3" r="3"/><circle cx="150.1" cy="213.7" r="3"/><circle cx="132.1" cy="233.5" r="3"/><circle cx="138.3" cy="234.3" r="3"/><circle cx="134.5" cy="237.0" r="3"/><circle cx="137.8" cy="235.8" r="3"/><circle cx="138.6" cy="235.0" r="3"/><circle cx="126.6" cy="232.4" r="3"/><circle cx="137.5" cy="234.2" r="3"/><circle cx="130.4" cy="235.7" r="3"/><circle cx="125.5" cy="229.1" r="3"/><circle cx="127.3" cy="232.4" r="3"/><circle cx="130.5" cy="231.8" r="3"/><circle cx="190.9" cy="193.7" r="3"/><circle cx="186.8" cy="200.3" r="3"/><circle cx="198.7" cy="187.9" r="3"/><circle cx="188.0" cy="194.1" r="3"/><circle cx="190.6" cy="200.2" r="3"/><circle cx="188.5" cy="197.9" r="3"/><circle cx="192.2" cy="201.3" r="3"/><circle cx="195.6" cy="196.6" r="3"/><circle cx="195.7" cy="196.5" r="3"/><circle cx="193.5" cy="200.7" r="3"/><circle cx="195.1" cy="194.3" r="3"/></g>
               <g class="sc-c sc-bcell"><circle cx="26.2" cy="94.3" r="3"/><circle cx="24.1" cy="80.9" r="3"/><circle cx="27.4" cy="44.1" r="3"/><circle cx="46.9" cy="147.1" r="3"/><circle cx="45.1" cy="142.5" r="3"/><circle cx="46.3" cy="141.2" r="3"/><circle cx="54.6" cy="146.9" r="3"/><circle cx="53.8" cy="144.5" r="3"/><circle cx="24.4" cy="85.9" r="3"/><circle cx="33.1" cy="42.0" r="3"/><circle cx="34.8" cy="47.6" r="3"/><circle cx="44.1" cy="144.7" r="3"/><circle cx="30.9" cy="52.1" r="3"/><circle cx="23.5" cy="67.1" r="3"/><circle cx="35.1" cy="49.1" r="3"/><circle cx="28.1" cy="55.2" r="3"/><circle cx="29.8" cy="50.9" r="3"/><circle cx="26.6" cy="52.3" r="3"/><circle cx="31.8" cy="52.2" r="3"/><circle cx="32.3" cy="46.0" r="3"/><circle cx="33.8" cy="145.5" r="3"/><circle cx="24.2" cy="47.3" r="3"/><circle cx="29.8" cy="68.9" r="3"/><circle cx="30.8" cy="43.1" r="3"/><circle cx="35.6" cy="44.5" r="3"/><circle cx="19.7" cy="66.1" r="3"/><circle cx="26.9" cy="49.6" r="3"/><circle cx="30.9" cy="46.9" r="3"/><circle cx="27.8" cy="67.7" r="3"/><circle cx="36.5" cy="134.2" r="3"/><circle cx="29.0" cy="47.0" r="3"/><circle cx="35.9" cy="53.3" r="3"/><circle cx="50.4" cy="157.5" r="3"/><circle cx="24.3" cy="72.3" r="3"/><circle cx="51.3" cy="155.3" r="3"/><circle cx="33.3" cy="56.8" r="3"/><circle cx="18.9" cy="78.4" r="3"/><circle cx="16.7" cy="74.3" r="3"/><circle cx="20.7" cy="89.3" r="3"/><circle cx="50.6" cy="156.1" r="3"/><circle cx="47.8" cy="149.2" r="3"/><circle cx="23.4" cy="73.4" r="3"/><circle cx="51.5" cy="163.7" r="3"/><circle cx="19.9" cy="58.4" r="3"/><circle cx="22.7" cy="69.6" r="3"/><circle cx="39.2" cy="136.4" r="3"/><circle cx="20.8" cy="83.2" r="3"/><circle cx="29.2" cy="136.6" r="3"/><circle cx="42.3" cy="152.4" r="3"/><circle cx="13.3" cy="110.5" r="3"/><circle cx="33.6" cy="146.0" r="3"/><circle cx="63.7" cy="127.1" r="3"/><circle cx="15.4" cy="69.6" r="3"/><circle cx="40.6" cy="151.2" r="3"/><circle cx="39.4" cy="157.1" r="3"/><circle cx="27.2" cy="84.8" r="3"/><circle cx="53.8" cy="150.1" r="3"/><circle cx="54.2" cy="150.7" r="3"/><circle cx="37.4" cy="58.7" r="3"/><circle cx="49.9" cy="132.2" r="3"/><circle cx="42.2" cy="96.2" r="3"/><circle cx="24.0" cy="60.4" r="3"/><circle cx="41.0" cy="81.3" r="3"/><circle cx="42.9" cy="62.1" r="3"/><circle cx="40.9" cy="76.7" r="3"/><circle cx="41.7" cy="97.1" r="3"/><circle cx="33.8" cy="74.5" r="3"/><circle cx="24.3" cy="96.2" r="3"/><circle cx="56.0" cy="154.8" r="3"/><circle cx="34.4" cy="128.9" r="3"/><circle cx="45.4" cy="78.5" r="3"/><circle cx="50.7" cy="134.6" r="3"/><circle cx="45.5" cy="99.8" r="3"/><circle cx="43.4" cy="100.9" r="3"/><circle cx="29.7" cy="59.2" r="3"/><circle cx="43.3" cy="99.2" r="3"/><circle cx="36.4" cy="125.8" r="3"/><circle cx="35.1" cy="66.7" r="3"/><circle cx="54.2" cy="135.7" r="3"/><circle cx="55.3" cy="66.0" r="3"/><circle cx="40.4" cy="98.3" r="3"/><circle cx="14.6" cy="110.5" r="3"/><circle cx="27.5" cy="132.3" r="3"/></g>
               <g class="sc-c sc-tcell"><circle cx="60.2" cy="155.1" r="3"/><circle cx="60.0" cy="151.8" r="3"/><circle cx="58.5" cy="64.8" r="3"/><circle cx="58.6" cy="151.5" r="3"/><circle cx="57.2" cy="67.1" r="3"/><circle cx="54.0" cy="159.6" r="3"/><circle cx="48.3" cy="124.7" r="3"/><circle cx="61.9" cy="148.9" r="3"/><circle cx="59.1" cy="142.7" r="3"/><circle cx="55.2" cy="69.1" r="3"/><circle cx="58.1" cy="156.1" r="3"/><circle cx="47.4" cy="122.5" r="3"/><circle cx="57.3" cy="64.0" r="3"/><circle cx="17.7" cy="116.8" r="3"/><circle cx="93.4" cy="180.5" r="3"/><circle cx="138.9" cy="167.4" r="3"/><circle cx="58.5" cy="62.1" r="3"/><circle cx="61.2" cy="75.3" r="3"/><circle cx="44.7" cy="112.9" r="3"/><circle cx="74.2" cy="84.1" r="3"/><circle cx="59.2" cy="72.0" r="3"/><circle cx="53.6" cy="88.5" r="3"/><circle cx="55.1" cy="81.9" r="3"/><circle cx="65.5" cy="70.7" r="3"/><circle cx="57.4" cy="95.4" r="3"/><circle cx="57.9" cy="68.7" r="3"/><circle cx="15.4" cy="116.7" r="3"/><circle cx="9.8" cy="124.1" r="3"/><circle cx="36.6" cy="166.2" r="3"/><circle cx="205.4" cy="180.1" r="3"/><circle cx="11.6" cy="126.6" r="3"/><circle cx="6.8" cy="122.6" r="3"/><circle cx="18.1" cy="133.2" r="3"/><circle cx="12.5" cy="126.8" r="3"/><circle cx="208.7" cy="178.1" r="3"/><circle cx="30.8" cy="159.9" r="3"/><circle cx="32.9" cy="167.8" r="3"/><circle cx="33.1" cy="164.7" r="3"/><circle cx="14.7" cy="123.4" r="3"/><circle cx="19.4" cy="148.5" r="3"/><circle cx="9.5" cy="150.9" r="3"/><circle cx="35.2" cy="159.0" r="3"/><circle cx="9.3" cy="129.4" r="3"/><circle cx="6.0" cy="127.4" r="3"/><circle cx="12.2" cy="149.7" r="3"/><circle cx="38.0" cy="162.5" r="3"/><circle cx="21.2" cy="155.0" r="3"/><circle cx="37.6" cy="164.2" r="3"/><circle cx="21.8" cy="131.2" r="3"/><circle cx="15.8" cy="139.1" r="3"/><circle cx="16.2" cy="132.8" r="3"/><circle cx="14.1" cy="130.6" r="3"/><circle cx="17.9" cy="137.9" r="3"/><circle cx="14.7" cy="150.7" r="3"/></g>
               <g class="sc-c sc-myeloid"><circle cx="68.5" cy="105.3" r="3"/><circle cx="78.3" cy="110.9" r="3"/><circle cx="76.4" cy="114.2" r="3"/><circle cx="70.3" cy="96.5" r="3"/><circle cx="88.4" cy="195.7" r="3"/><circle cx="71.0" cy="95.3" r="3"/><circle cx="61.2" cy="109.2" r="3"/><circle cx="87.3" cy="202.1" r="3"/><circle cx="83.5" cy="181.0" r="3"/><circle cx="60.5" cy="103.3" r="3"/><circle cx="63.5" cy="110.7" r="3"/><circle cx="44.5" cy="112.9" r="3"/><circle cx="76.3" cy="218.3" r="3"/><circle cx="67.6" cy="122.4" r="3"/><circle cx="82.1" cy="120.5" r="3"/><circle cx="92.5" cy="112.2" r="3"/><circle cx="87.8" cy="116.0" r="3"/><circle cx="47.7" cy="165.2" r="3"/><circle cx="89.6" cy="113.9" r="3"/><circle cx="87.5" cy="122.8" r="3"/><circle cx="81.4" cy="126.2" r="3"/><circle cx="78.7" cy="121.0" r="3"/><circle cx="82.7" cy="119.4" r="3"/><circle cx="88.1" cy="123.2" r="3"/><circle cx="90.2" cy="117.2" r="3"/><circle cx="210.8" cy="176.2" r="3"/><circle cx="16.6" cy="155.9" r="3"/><circle cx="84.9" cy="118.8" r="3"/><circle cx="83.0" cy="121.3" r="3"/><circle cx="86.6" cy="119.2" r="3"/><circle cx="14.1" cy="152.7" r="3"/><circle cx="19.3" cy="155.9" r="3"/><circle cx="85.9" cy="128.5" r="3"/><circle cx="13.0" cy="154.8" r="3"/><circle cx="16.2" cy="151.8" r="3"/><circle cx="19.7" cy="158.0" r="3"/><circle cx="70.1" cy="118.6" r="3"/><circle cx="69.6" cy="122.4" r="3"/></g>
               <g class="sc-c sc-stromal"><circle cx="97.8" cy="245.7" r="3"/><circle cx="98.2" cy="245.9" r="3"/><circle cx="82.3" cy="215.6" r="3"/><circle cx="83.9" cy="112.6" r="3"/><circle cx="105.2" cy="245.0" r="3"/><circle cx="111.4" cy="270.5" r="3"/><circle cx="132.1" cy="286.4" r="3"/><circle cx="88.4" cy="210.9" r="3"/><circle cx="134.5" cy="286.0" r="3"/><circle cx="78.4" cy="217.6" r="3"/><circle cx="76.4" cy="219.1" r="3"/><circle cx="84.4" cy="216.7" r="3"/><circle cx="88.0" cy="207.3" r="3"/><circle cx="88.0" cy="214.0" r="3"/><circle cx="87.6" cy="207.9" r="3"/><circle cx="67.9" cy="174.6" r="3"/><circle cx="86.0" cy="215.8" r="3"/><circle cx="209.0" cy="177.6" r="3"/><circle cx="84.4" cy="217.4" r="3"/><circle cx="209.8" cy="177.0" r="3"/><circle cx="206.6" cy="179.3" r="3"/><circle cx="68.8" cy="174.9" r="3"/><circle cx="67.7" cy="174.3" r="3"/></g>
-              <circle class="sc-c sc-tumor" cx="10" cy="336" r="4.5"/>
+              <circle class="sc-sw sc-tumor" cx="10" cy="336" r="4.5"/>
               <text class="sc-leg" x="21" y="340">Tumor <tspan class="sc-n">317</tspan></text>
-              <circle class="sc-c sc-bcell" cx="122" cy="336" r="4.5"/>
+              <circle class="sc-sw sc-bcell" cx="122" cy="336" r="4.5"/>
               <text class="sc-leg" x="133" y="340">B cell <tspan class="sc-n">83</tspan></text>
-              <circle class="sc-c sc-tcell" cx="234" cy="336" r="4.5"/>
+              <circle class="sc-sw sc-tcell" cx="234" cy="336" r="4.5"/>
               <text class="sc-leg" x="245" y="340">T cell <tspan class="sc-n">54</tspan></text>
-              <circle class="sc-c sc-myeloid" cx="10" cy="357" r="4.5"/>
+              <circle class="sc-sw sc-myeloid" cx="10" cy="357" r="4.5"/>
               <text class="sc-leg" x="21" y="361">Myeloid <tspan class="sc-n">38</tspan></text>
-              <circle class="sc-c sc-stromal" cx="122" cy="357" r="4.5"/>
+              <circle class="sc-sw sc-stromal" cx="122" cy="357" r="4.5"/>
               <text class="sc-leg" x="133" y="361">Stromal <tspan class="sc-n">23</tspan></text>
-              <text class="sc-sub" x="6" y="392">Tumor cells separate by patient; immune cells do not.</text>
+              <text class="sc-sub" x="6" y="390">Tumor cells fall into several separate groups.</text>
               </svg>
-              <svg class="sc sc-dots" viewBox="0 0 340 372" role="img" aria-labelledby="scdot-t" aria-describedby="scdot-d">
-              <title id="scdot-t">Share of cells expressing six clinical antibody-drug conjugate targets, by cell type</title>
-              <desc id="scdot-d">Share of cells expressing each target, by cell type. HER2 (ERBB2): Tumor 79%, B cell 2%, T cell 13%, Myeloid 10%, Stromal 26%. TROP2 (TACSTD2): Tumor 76%, B cell 4%, T cell 9%, Myeloid 21%, Stromal 22%. MUC1 (MUC1): Tumor 88%, B cell 7%, T cell 9%, Myeloid 13%, Stromal 39%. FRα (FOLR1): Tumor 24%, B cell 0%, T cell 4%, Myeloid 3%, Stromal 13%. CEA (CEACAM5): Tumor 19%, B cell 0%, T cell 7%, Myeloid 5%, Stromal 4%. B7-H3 (CD276): Tumor 33%, B cell 0%, T cell 4%, Myeloid 29%, Stromal 30%. HER2 and TROP2 are near-exclusive to tumor cells. B7-H3 is carried by myeloid and stromal cells about as often as by tumor cells.</desc>
-              <text class="sc-h" x="4" y="16">Where each target sits</text>
-              <text class="sc-sub" x="4" y="32">Circle size = share of cells · color = mean level</text>
-              <text class="sc-col" x="100" y="58">Tumor</text>
-              <text class="sc-col" x="148" y="58">B cell</text>
-              <text class="sc-col" x="196" y="58">T cell</text>
-              <text class="sc-col" x="244" y="58">Myeloid</text>
-              <text class="sc-col" x="292" y="58">Stromal</text>
-              <text class="sc-row" x="72" y="88">HER2</text>
-              <circle class="sc-d3" cx="100" cy="84" r="13.7"/>
-              <circle class="sc-d0" cx="148" cy="84" r="4.9"/>
-              <circle class="sc-d1" cx="196" cy="84" r="7.3"/>
-              <circle class="sc-d1" cx="244" cy="84" r="6.9"/>
-              <circle class="sc-d1" cx="292" cy="84" r="9.1"/>
-              <text class="sc-row" x="72" y="128">TROP2</text>
-              <circle class="sc-d3" cx="100" cy="124" r="13.5"/>
-              <circle class="sc-d0" cx="148" cy="124" r="5.3"/>
-              <circle class="sc-d0" cx="196" cy="124" r="6.7"/>
-              <circle class="sc-d1" cx="244" cy="124" r="8.5"/>
-              <circle class="sc-d1" cx="292" cy="124" r="8.6"/>
-              <text class="sc-row" x="72" y="168">MUC1</text>
-              <circle class="sc-d3" cx="100" cy="164" r="14.3"/>
-              <circle class="sc-d0" cx="148" cy="164" r="6.2"/>
-              <circle class="sc-d1" cx="196" cy="164" r="6.7"/>
-              <circle class="sc-d1" cx="244" cy="164" r="7.4"/>
-              <circle class="sc-d1" cx="292" cy="164" r="10.5"/>
-              <text class="sc-row" x="72" y="208">FRα</text>
-              <circle class="sc-d1" cx="100" cy="204" r="8.9"/>
-              <circle class="sc-d0" cx="148" cy="204" r="3.0"/>
-              <circle class="sc-d0" cx="196" cy="204" r="5.3"/>
-              <circle class="sc-d0" cx="244" cy="204" r="4.9"/>
-              <circle class="sc-d1" cx="292" cy="204" r="7.3"/>
-              <text class="sc-row" x="72" y="248">CEA</text>
-              <circle class="sc-d1" cx="100" cy="244" r="8.2"/>
-              <circle class="sc-d0" cx="148" cy="244" r="3.0"/>
-              <circle class="sc-d0" cx="196" cy="244" r="6.3"/>
-              <circle class="sc-d0" cx="244" cy="244" r="5.8"/>
-              <circle class="sc-d0" cx="292" cy="244" r="5.5"/>
-              <text class="sc-row" x="72" y="288">B7-H3</text>
-              <circle class="sc-d1" cx="100" cy="284" r="9.9"/>
-              <circle class="sc-d0" cx="148" cy="284" r="3.0"/>
-              <circle class="sc-d0" cx="196" cy="284" r="5.3"/>
-              <circle class="sc-d1" cx="244" cy="284" r="9.5"/>
-              <circle class="sc-d1" cx="292" cy="284" r="9.6"/>
-              <text class="sc-key" x="72" y="332">Share of cells</text>
-              <circle class="sc-d0" cx="100" cy="328" r="5.7"/>
-              <text class="sc-tick" x="100" y="358">5%</text>
-              <circle class="sc-d0" cx="148" cy="328" r="9.0"/>
-              <text class="sc-tick" x="148" y="358">25%</text>
-              <circle class="sc-d0" cx="196" cy="328" r="11.5"/>
-              <text class="sc-tick" x="196" y="358">50%</text>
-              <circle class="sc-d0" cx="244" cy="328" r="15.0"/>
-              <text class="sc-tick" x="244" y="358">100%</text>
+              <svg class="sc sc-dots" viewBox="0 0 360 504" role="img" aria-labelledby="scdot-t" aria-describedby="scdot-d">
+              <title id="scdot-t">Share of cells carrying six clinical antibody-drug conjugate targets, one row per patient</title>
+              <desc id="scdot-d">Share of cells carrying each target above 10 TPM, by patient. BC01 (20 cells): HER2 30%, TROP2 55%, MUC1 40%, FRα 0%, CEA 0%, B7-H3 30%, CD45 5%. BC02 (53 cells): HER2 26%, TROP2 45%, MUC1 89%, FRα 0%, CEA 2%, B7-H3 15%, CD45 2%. BC03 (25 cells): HER2 100%, TROP2 68%, MUC1 80%, FRα 0%, CEA 8%, B7-H3 16%, CD45 40%. BC04 (47 cells): HER2 96%, TROP2 32%, MUC1 47%, FRα 49%, CEA 87%, B7-H3 21%, CD45 11%. BC05 (75 cells): HER2 100%, TROP2 47%, MUC1 100%, FRα 8%, CEA 1%, B7-H3 21%, CD45 80%. BC06 (8 cells): HER2 100%, TROP2 88%, MUC1 50%, FRα 62%, CEA 12%, B7-H3 0%, CD45 0%. BC07 (52 cells): HER2 42%, TROP2 90%, MUC1 79%, FRα 36%, CEA 12%, B7-H3 15%, CD45 40%. BC08 (15 cells): HER2 47%, TROP2 73%, MUC1 67%, FRα 33%, CEA 0%, B7-H3 7%, CD45 0%. BC10 (11 cells): HER2 27%, TROP2 82%, MUC1 64%, FRα 54%, CEA 0%, B7-H3 9%, CD45 0%. BC11 (11 cells): HER2 0%, TROP2 91%, MUC1 100%, FRα 9%, CEA 0%, B7-H3 18%, CD45 27%. Immune (175 cells): HER2 4%, TROP2 3%, MUC1 5%, FRα 1%, CEA 3%, B7-H3 4%, CD45 90%. Stromal (23 cells): HER2 13%, TROP2 17%, MUC1 13%, FRα 13%, CEA 4%, B7-H3 22%, CD45 4%. HER2 ranges from none of the tumor cells in one patient to all of them in three. TROP2 is above the threshold in a third to nine-tenths of tumor cells in every patient. CEA is confined to one patient. CD45 is a control and not a target: it is high in immune cells and low in tumor cells except in three samples.</desc>
+              <text class="sc-h" x="4" y="16">Same targets, one row per patient</text>
+              <text class="sc-sub" x="4" y="32">Circle area = share of that row’s cells above 10 TPM</text>
+              <text class="sc-col" x="98" y="82">HER2</text>
+              <text class="sc-col" x="135" y="82">TROP2</text>
+              <text class="sc-col" x="172" y="82">MUC1</text>
+              <text class="sc-col" x="209" y="82">FRα</text>
+              <text class="sc-col" x="246" y="82">CEA</text>
+              <text class="sc-col" x="283" y="82">B7-H3</text>
+              <text class="sc-col sc-ctrl" x="336" y="82">CD45</text>
+              <text class="sc-ctrl sc-tiny" x="336" y="68">control</text>
+              <text class="sc-row" x="76" y="100">BC01 <tspan class="sc-n">20</tspan></text>
+              <circle class="sc-dot" cx="98" cy="96" r="8.3"/>
+              <circle class="sc-dot" cx="135" cy="96" r="10.8"/>
+              <circle class="sc-dot" cx="172" cy="96" r="9.4"/>
+              <circle class="sc-dot" cx="209" cy="96" r="1.2"/>
+              <circle class="sc-dot" cx="246" cy="96" r="1.2"/>
+              <circle class="sc-dot" cx="283" cy="96" r="8.3"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="96" r="4.1"/>
+              <text class="sc-row" x="76" y="127">BC02 <tspan class="sc-n">53</tspan></text>
+              <circle class="sc-dot" cx="98" cy="123" r="7.9"/>
+              <circle class="sc-dot" cx="135" cy="123" r="9.9"/>
+              <circle class="sc-dot" cx="172" cy="123" r="13.4"/>
+              <circle class="sc-dot" cx="209" cy="123" r="1.2"/>
+              <circle class="sc-dot" cx="246" cy="123" r="3.0"/>
+              <circle class="sc-dot" cx="283" cy="123" r="6.3"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="123" r="3.0"/>
+              <text class="sc-row" x="76" y="154">BC03 <tspan class="sc-n">25</tspan></text>
+              <circle class="sc-dot" cx="98" cy="150" r="14.2"/>
+              <circle class="sc-dot" cx="135" cy="150" r="11.9"/>
+              <circle class="sc-dot" cx="172" cy="150" r="12.8"/>
+              <circle class="sc-dot" cx="209" cy="150" r="1.2"/>
+              <circle class="sc-dot" cx="246" cy="150" r="4.9"/>
+              <circle class="sc-dot" cx="283" cy="150" r="6.4"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="150" r="9.4"/>
+              <text class="sc-row" x="76" y="181">BC04 <tspan class="sc-n">47</tspan></text>
+              <circle class="sc-dot" cx="98" cy="177" r="13.9"/>
+              <circle class="sc-dot" cx="135" cy="177" r="8.5"/>
+              <circle class="sc-dot" cx="172" cy="177" r="10.1"/>
+              <circle class="sc-dot" cx="209" cy="177" r="10.3"/>
+              <circle class="sc-dot" cx="246" cy="177" r="13.3"/>
+              <circle class="sc-dot" cx="283" cy="177" r="7.2"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="177" r="5.4"/>
+              <text class="sc-row" x="76" y="208">BC05 <tspan class="sc-n">75</tspan></text>
+              <circle class="sc-dot" cx="98" cy="204" r="14.2"/>
+              <circle class="sc-dot" cx="135" cy="204" r="10.1"/>
+              <circle class="sc-dot" cx="172" cy="204" r="14.2"/>
+              <circle class="sc-dot" cx="209" cy="204" r="4.9"/>
+              <circle class="sc-dot" cx="246" cy="204" r="2.7"/>
+              <circle class="sc-dot" cx="283" cy="204" r="7.2"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="204" r="12.8"/>
+              <text class="sc-row" x="76" y="235">BC06 <tspan class="sc-n">8</tspan></text>
+              <circle class="sc-dot" cx="98" cy="231" r="14.2"/>
+              <circle class="sc-dot" cx="135" cy="231" r="13.4"/>
+              <circle class="sc-dot" cx="172" cy="231" r="10.4"/>
+              <circle class="sc-dot" cx="209" cy="231" r="11.5"/>
+              <circle class="sc-dot" cx="246" cy="231" r="5.8"/>
+              <circle class="sc-dot" cx="283" cy="231" r="1.2"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="231" r="1.2"/>
+              <text class="sc-row" x="76" y="262">BC07 <tspan class="sc-n">52</tspan></text>
+              <circle class="sc-dot" cx="98" cy="258" r="9.7"/>
+              <circle class="sc-dot" cx="135" cy="258" r="13.6"/>
+              <circle class="sc-dot" cx="172" cy="258" r="12.7"/>
+              <circle class="sc-dot" cx="209" cy="258" r="9.1"/>
+              <circle class="sc-dot" cx="246" cy="258" r="5.6"/>
+              <circle class="sc-dot" cx="283" cy="258" r="6.3"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="258" r="9.5"/>
+              <text class="sc-row" x="76" y="289">BC08 <tspan class="sc-n">15</tspan></text>
+              <circle class="sc-dot" cx="98" cy="285" r="10.1"/>
+              <circle class="sc-dot" cx="135" cy="285" r="12.3"/>
+              <circle class="sc-dot" cx="172" cy="285" r="11.8"/>
+              <circle class="sc-dot" cx="209" cy="285" r="8.7"/>
+              <circle class="sc-dot" cx="246" cy="285" r="1.2"/>
+              <circle class="sc-dot" cx="283" cy="285" r="4.6"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="285" r="1.2"/>
+              <text class="sc-row" x="76" y="316">BC10 <tspan class="sc-n">11</tspan></text>
+              <circle class="sc-dot" cx="98" cy="312" r="8.0"/>
+              <circle class="sc-dot" cx="135" cy="312" r="13.0"/>
+              <circle class="sc-dot" cx="172" cy="312" r="11.6"/>
+              <circle class="sc-dot" cx="209" cy="312" r="10.8"/>
+              <circle class="sc-dot" cx="246" cy="312" r="1.2"/>
+              <circle class="sc-dot" cx="283" cy="312" r="5.1"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="312" r="1.2"/>
+              <text class="sc-row" x="76" y="343">BC11 <tspan class="sc-n">11</tspan></text>
+              <circle class="sc-dot" cx="98" cy="339" r="1.2"/>
+              <circle class="sc-dot" cx="135" cy="339" r="13.6"/>
+              <circle class="sc-dot" cx="172" cy="339" r="14.2"/>
+              <circle class="sc-dot" cx="209" cy="339" r="5.1"/>
+              <circle class="sc-dot" cx="246" cy="339" r="1.2"/>
+              <circle class="sc-dot" cx="283" cy="339" r="6.7"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="339" r="8.0"/>
+              <line class="sc-rule" x1="4" y1="351" x2="354" y2="351"/>
+              <text class="sc-row" x="76" y="370">Immune <tspan class="sc-n">175</tspan></text>
+              <circle class="sc-dot" cx="98" cy="366" r="3.8"/>
+              <circle class="sc-dot" cx="135" cy="366" r="3.6"/>
+              <circle class="sc-dot" cx="172" cy="366" r="4.0"/>
+              <circle class="sc-dot" cx="209" cy="366" r="2.6"/>
+              <circle class="sc-dot" cx="246" cy="366" r="3.4"/>
+              <circle class="sc-dot" cx="283" cy="366" r="3.8"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="366" r="13.5"/>
+              <text class="sc-row" x="76" y="397">Stromal <tspan class="sc-n">23</tspan></text>
+              <circle class="sc-dot" cx="98" cy="393" r="5.9"/>
+              <circle class="sc-dot" cx="135" cy="393" r="6.6"/>
+              <circle class="sc-dot" cx="172" cy="393" r="5.9"/>
+              <circle class="sc-dot" cx="209" cy="393" r="5.9"/>
+              <circle class="sc-dot" cx="246" cy="393" r="3.9"/>
+              <circle class="sc-dot" cx="283" cy="393" r="7.3"/>
+              <circle class="sc-dot sc-dot-ctrl" cx="336" cy="393" r="3.9"/>
+              <text class="sc-key" x="76" y="450">Share of cells</text>
+              <circle class="sc-dot" cx="98" cy="446" r="1.2"/>
+              <text class="sc-tick" x="98" y="474">0%</text>
+              <circle class="sc-dot" cx="148" cy="446" r="7.7"/>
+              <text class="sc-tick" x="148" y="474">25%</text>
+              <circle class="sc-dot" cx="198" cy="446" r="10.4"/>
+              <text class="sc-tick" x="198" y="474">50%</text>
+              <circle class="sc-dot" cx="248" cy="446" r="14.2"/>
+              <text class="sc-tick" x="248" y="474">100%</text>
               </svg>
             </div>
-            <figcaption>A worked example on public data: 515 cells from 11 primary breast tumors (GEO accession GSE75688), reanalyzed here with the cell-type labels published alongside them. An ADC needs a target the tumor carries and the cells beside it do not. HER2 (<i>ERBB2</i>) and TROP2 (<i>TACSTD2</i>) come close here, on roughly three-quarters of tumor cells and near-absent from B cells. B7-H3 (<i>CD276</i>) does not: myeloid and stromal cells carry it about as often as the tumor does. Expression is RNA, not protein, and one dataset is a starting point, not a decision.</figcaption>
+            <figcaption>
+              <p>515 cells from 13 samples across 11 breast cancer patients (GEO accession
+                GSE75688), using the cell-type labels published with them. Two patients also
+                contributed a lymph-node metastasis, pooled here with their primary, and one
+                contributed no tumor cells. Each circle is the share of that row&rsquo;s cells
+                carrying the target above 10&nbsp;TPM.</p>
+              <p>Read down a column. TROP2 clears that threshold in a third to nine-tenths of tumor
+                cells in every patient. HER2 runs from none of them to all of them, which is the
+                difference between a trial that works and one that does not, and it is settled
+                before anyone enrolls. CEA is essentially one patient&rsquo;s target. B7-H3 sits on
+                stromal cells about as often as on tumor cells here, though 23 stromal cells cannot
+                settle that.</p>
+              <p>CD45 is a control, not a target: it should be high in immune cells and low in tumor
+                cells, and it is, except in three samples whose tumor-labeled cells carry immune
+                signal. Cell labels are inferred, not measured. Expression is RNA, not protein, and
+                the ordering holds from 1 to 50&nbsp;TPM.</p>
+            </figcaption>
           </figure>
         </div>
       </section>
