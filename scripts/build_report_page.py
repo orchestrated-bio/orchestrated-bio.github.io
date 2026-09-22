@@ -740,7 +740,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta property="og:description" content="{esc(asset)} in {esc(indication)}: what the public evidence supports, what it does not, and the experiment that would close the gap." />
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
-    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Agentic AI for Life Sciences and Cancer genomics, Drug discovery, Precision medicine" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
