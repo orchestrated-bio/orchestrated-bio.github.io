@@ -36,12 +36,14 @@ import json
 import hashlib
 import pathlib
 import re
+import struct
 import sys
 
 SUPPORTED_SCHEMA = 3
 FIGURE_DIR = "./images/drugadopt/report"
 CONTENT_DIR = pathlib.Path(__file__).parent
 ROOT = CONTENT_DIR.parent
+FIGURE_ROOT = ROOT / "images/drugadopt/report"
 
 
 def asset_version(rel: str) -> str:
@@ -85,6 +87,21 @@ SECTIONS = [
     },
 ]
 
+# The reader-facing chapter a claim's internal module id belongs to. The two
+# do not line up -- the Mechanism chapter is built from the `pharmacology`
+# module and the Pharmacology chapter from `adme` -- so a traceability entry
+# tagged "module pharmacology" sits under a Mechanism claim.
+SECTION_BY_MODULE = {s["module"]: s["label"] for s in SECTIONS}
+
+# What a traceability entry is when it carries no semantic review: these are
+# structured records, not prose claims a reviewer could sign off.
+CLAIM_KIND_LABELS = {
+    "figure": "figure records",
+    "decision_packet": "decision-packet rows",
+    "biomarker_decision": "biomarker-brief rows",
+    "semantic_review": "prose claims awaiting re-review",
+}
+
 STATE_LABELS = {
     "blocker": "Blocker",
     "gap": "Gap",
@@ -118,6 +135,29 @@ SOURCE_NOTES = {
 
 def esc(value) -> str:
     return html.escape(str(value if value is not None else ""), quote=True)
+
+
+def png_size(path: pathlib.Path) -> tuple[int, int] | None:
+    """Intrinsic pixel size from a PNG's IHDR chunk, or None.
+
+    Read here rather than hardcoded so a re-exported figure never leaves the
+    page declaring the old aspect ratio, and without adding a Pillow
+    dependency for 8 bytes of header.
+    """
+    try:
+        head = path.read_bytes()[:24]
+    except OSError:
+        return None
+    if head[:8] != b"\x89PNG\r\n\x1a\n" or head[12:16] != b"IHDR":
+        return None
+    return struct.unpack(">II", head[16:24])
+
+
+def join_and(items: list[str]) -> str:
+    """Join as prose: a / a and b / a, b, and c."""
+    if len(items) < 3:
+        return " and ".join(items)
+    return ", ".join(items[:-1]) + ", and " + items[-1]
 
 
 def humanize(enum_value: str) -> str:
@@ -169,15 +209,17 @@ def source_url(sid: str) -> str | None:
     return None
 
 
-def linkify(text: str) -> str:
+def linkify(text: str, code: bool = True) -> str:
     """Turn inline [PMID 38555285] / [NCT02203513] markers into real citations.
 
     The module prose carries these markers already; rendering them as links is
     presentation, not new content. Claim text also arrives as raw markdown, so
     `code spans` are converted here rather than shown as literal backticks.
+    Pass code=False where a span holds a measurement rather than an
+    identifier: "IC50 <1 nM" set in monospace mid-sentence reads as a bug.
     """
     escaped = esc(text)
-    escaped = re.sub(r"`([^`]+)`", r"<code>\1</code>", escaped)
+    escaped = re.sub(r"`([^`]+)`", r"<code>\1</code>" if code else r"\1", escaped)
 
     def repl(match: re.Match) -> str:
         inner = match.group(1)
@@ -364,9 +406,14 @@ def figure_block(
     # instead of repeating the conclusion a screen-reader user just heard.
     alt = alts.get(fig_key) or meta.get("title", "")
 
+    # Intrinsic size reserves the space: without it every lazy figure lays out
+    # 2px tall and shoves the caption down when the PNG arrives.
+    size = png_size(FIGURE_ROOT / fig_key)
+    dims = f' width="{size[0]}" height="{size[1]}"' if size else ""
+
     return f"""
               <figure class="dax-figure">
-                <img src="{FIGURE_DIR}/{esc(fig_key)}" alt="{esc(alt)}" loading="lazy" decoding="async" />
+                <a class="dax-fig-link" href="{FIGURE_DIR}/{esc(fig_key)}" target="_blank" rel="noopener"><img src="{FIGURE_DIR}/{esc(fig_key)}" alt="{esc(alt)}"{dims} loading="lazy" decoding="async" /></a>
                 <figcaption class="dax-figcap">
                   <b>Figure {number}.</b> {linkify(meta.get('title', ''))}
                   {linkify(caption)}
@@ -498,17 +545,34 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
     claims = et.get("claims", [])
     sources = et.get("sources", [])
-    reviewed = sum(
-        1
-        for c in claims
-        if c.get("kind") == "semantic_review"
-        and (c.get("review_binding") or {}).get("status") == "current"
-    )
+
+    def is_reviewed(claim: dict) -> bool:
+        return (
+            claim.get("kind") == "semantic_review"
+            and (claim.get("review_binding") or {}).get("status") == "current"
+        )
+
+    reviewed = sum(1 for c in claims if is_reviewed(c))
     external = sum(1 for s in sources if s.get("locator"))
+
+    # The stat row prints "64/89 claims reviewed" and "23/44 public source
+    # links" with no denominator, which reads as 25 unchecked claims and 21
+    # undisclosed sources. Both remainders are computed here so the page can
+    # say what they actually are.
+    kinds = {c.get("kind") for c in claims if not is_reviewed(c)}
+    kind_names = [v for k, v in CLAIM_KIND_LABELS.items() if k in kinds]
+    kind_names += sorted(
+        f"{humanize(k).lower()} records" for k in kinds if k not in CLAIM_KIND_LABELS
+    )
+    remainder = (
+        f"The remaining {len(claims) - reviewed} entries are {join_and(kind_names)}. "
+        if kind_names
+        else ""
+    )
 
     # ---- spine -----------------------------------------------------------
     nav = [
-        '<li><a class="dax-nav-item" href="#overview"><span class="dax-nav-num">◆</span>'
+        '<li><a class="dax-nav-item" href="#overview"><span class="dax-nav-num" aria-hidden="true">◆</span>'
         '<span class="dax-nav-label">Overview</span></a></li>'
     ]
     short_labels = {"clinical": "Clinical", "mechanism": "Mechanism", "pharmacology": "Exposure", "toxicology": "Safety"}
@@ -520,11 +584,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             f'<span class="dax-nav-short">{short_labels[s["id"]]}</span></span></a></li>'
         )
     nav.append(
-        '<li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-num">◆</span>'
+        '<li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-num" aria-hidden="true">◆</span>'
         '<span class="dax-nav-label">Evidence &amp; Gaps</span></a></li>'
     )
     nav.append(
-        '<li><a class="dax-nav-item" href="#traceability"><span class="dax-nav-num">◆</span>'
+        '<li><a class="dax-nav-item" href="#traceability"><span class="dax-nav-num" aria-hidden="true">◆</span>'
         '<span class="dax-nav-label">Traceability</span></a></li>'
     )
 
@@ -643,11 +707,12 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             binding = c.get("review_binding") or {}
             if not refs or binding.get("status") != "current":
                 continue
+            chapter = SECTION_BY_MODULE.get(module, esc(module))
             sample.append(
                 "<li>"
-                f'<span class="dax-claim-text">{linkify(c.get("claim", ""))}</span>'
+                f'<span class="dax-claim-text">{linkify(c.get("claim", ""), code=False)}</span>'
                 f'<span class="dax-claim-meta"><code>{esc(c.get("claim_id", ""))}</code>'
-                f' · module <code>{esc(c.get("module", ""))}</code>'
+                f' · {chapter}'
                 f' @ <code>{esc((binding.get("module_sha256") or "")[:12])}</code></span>'
                 "</li>"
             )
@@ -662,7 +727,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="description" content="An example DrugAdopt readout: a CHK1 inhibitor in platinum-resistant ovarian cancer, worked from public evidence with source-linked figures and named gaps." />
-    <meta name="theme-color" content="#0c1522" />
+    <meta name="theme-color" content="#f2f3f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101412" media="(prefers-color-scheme: dark)" />
     <title>Example report | Orchestrated Biosciences</title>
     <link rel="canonical" href="https://orchestrated.bio/report.html" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
@@ -674,6 +740,9 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta property="og:description" content="{esc(asset)} in {esc(indication)}: what the public evidence supports, what it does not, and the experiment that would close the gap." />
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Agentic AI for Life Sciences and Cancer genomics, Drug discovery, Precision medicine" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v={asset_version("assets/css/company-site/base.css")}" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v={asset_version("assets/css/company-site/drugadopt.css")}" />
@@ -692,7 +761,9 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         </a>
         <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
-          <a href="./" aria-current="page">DrugAdopt</a>
+          <!-- "true", not "page": this marks the current section, and the
+               link goes to another page. -->
+          <a href="./" aria-current="true">DrugAdopt</a>
           <a href="./custom-analysis.html">Custom analysis</a>
           <a href="./insight.html">Insight</a>
           <a href="./company.html">Company</a>
@@ -704,7 +775,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <main id="main" class="rpt-stage">
       <div class="rpt-intro">
         <h1 class="rpt-intro-title">The evidence for candidate biomarkers, and what is still missing.</h1>
-        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>.</p>
+        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>. <a href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a></p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on {esc(asset)} in {esc(indication)}">
@@ -723,7 +794,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <div class="dax-ov-top">
               <div>
                 <p class="dax-sec-num">Biomarker &amp; patient-selection readout</p>
-                <p class="dax-ov-asset">{esc(asset)}</p>
+                <h2 class="dax-ov-asset">{esc(asset)}</h2>
                 <p class="dax-ov-target">{humanize(reader.get('modality', ''))} · Target {esc(reader.get('target', ''))}</p>
                 <p class="dax-ov-ind">{esc(indication_full)}</p>
               </div>
@@ -737,7 +808,6 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               <div class="dax-callout-head">Recommendation · {esc(humanize(rec.get('disposition', '')))} · confidence {esc(rec.get('confidence', ''))}</div>
               <div class="dax-callout-body">
                 <p class="dax-callout-item">{linkify(rec.get('summary', ''))}</p>
-                <p class="dax-callout-item"><b>Question asked.</b> {linkify(packet.get('decision_question', ''))}</p>
               </div>
             </div>
 
@@ -746,7 +816,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
             <div class="dax-ov-foot">
               <span>Prepared {esc(prepared)} · sources as of {esc(as_of)} · from public evidence</span>
-              <span>Every claim hash-bound to its source and verification verdict</span>
+              <span>Each reviewed claim hash-bound to its source and verification verdict</span>
             </div>
           </section>
 
@@ -770,7 +840,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <p class="dax-scope-line">{esc(brief.get('guardrail', ''))}</p>
 
             <h3 class="dax-sub-h">The gates behind the recommendation</h3>
-            <p class="dax-body-p">{linkify(packet.get('diligence_question', ''))} Each gate names who owns it, what would let it pass, and the rule that stops it. One is shown in full below; the rest follow in Table 2.</p>
+            <p class="dax-body-p">Each gate names who owns it, what would let it pass, and the rule that stops it. One is shown in full below; the rest follow in Table 2.</p>
             {gates}
 
             <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining decision gates">
@@ -814,7 +884,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               <div><dt>{reviewed}/{len(claims)}</dt><dd>claims reviewed</dd></div>
               <div><dt>{external}/{len(sources)}</dt><dd>public source links</dd></div>
             </dl>
-            <p class="dax-scope-line">Some entries describe figures and internal analysis outputs rather than independent external validation. The report labels those boundaries instead of presenting them as settled evidence.</p>
+            <p class="dax-scope-line">{remainder}{len(sources) - external} of the {len(sources)} source records are analysis outputs computed for this report rather than external links. The report labels those boundaries instead of presenting them as settled evidence.</p>
 
             <details class="dax-trace-details">
               <summary>Technical traceability details</summary>
@@ -838,21 +908,19 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> Tell us the drug and the indication, and we will show what public evidence can and cannot settle before you commit anything.</p>
         </div>
         <div class="rpt-outro-actions">
-          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call about a pilot <span aria-hidden="true">→</span></a>
+          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
           <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Or email us</a>
           <a class="link-quiet" href="./company.html#data-handling">How your data is handled</a>
         </div>
       </aside>
-
-      <p class="rpt-caption">A DrugAdopt biomarker readout on {esc(asset.lower())} in {esc(indication[:1].lower() + indication[1:])}, from public data. Each section opens the evidence for and against a selection marker, and names the experiment that would close each gap.</p>
     </main>
 
     <footer class="foot">
       <div class="shell">
         <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
         <nav class="foot-links" aria-label="Footer">
-          <a href="https://orchestrated.bio/privacy-policy.html">Privacy</a>
-          <a href="https://orchestrated.bio/terms.html">Terms</a>
+          <a href="./privacy-policy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
         </nav>
       </div>
     </footer>

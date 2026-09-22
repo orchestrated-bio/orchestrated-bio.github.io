@@ -8,7 +8,7 @@
 .dax-ui {
   --kd-blue:   #1a5490;
   --kd-blue-2: #2c6cb0;
-  --kd-amber:  #c0700f;
+  --kd-amber:  #96570b;
   --kd-ink:    #1a1a1a;
   --kd-muted:  #5a6472;
   --kd-rule:   #d7dde3;
@@ -44,7 +44,8 @@
   background: rgb(39 159 129 / 0.20); display: grid; place-items: center;
 }
 .dax-spine-logo img { width: 1em; height: 1em; }
-.dax-spine-title { font-size: 0.72em; font-weight: 600; color: #eaf1ee; letter-spacing: 0.02em; }
+/* An h2 on the homepage (the demo's one heading), a span in the report. */
+.dax-spine-title { margin: 0; font-size: 0.72em; font-weight: 600; color: #eaf1ee; letter-spacing: 0.02em; }
 .dax-spine-title span { display: block; font-weight: 400; color: #8b97a6; font-size: 0.85em; margin-top: 0.1em; }
 
 .dax-nav { list-style: none; margin: 0; padding: 0.4em 0; display: flex; flex-direction: column; gap: 0.1em; }
@@ -63,7 +64,7 @@
   outline-offset: -3px;
 }
 .dax-nav-num {
-  font-family: var(--mono); font-size: 0.62em; color: #6f7c8b; flex: none; min-width: 1.1em;
+  font-family: var(--mono); font-size: 0.62em; color: #7d8a99; flex: none; min-width: 1.1em;
 }
 .dax-nav-label { font-size: 0.68em; line-height: 1.3; color: #9aa6b4; }
 .dax-nav-short { display: none; }
@@ -107,6 +108,7 @@
 .dax-page::-webkit-scrollbar { width: 6px; }
 .dax-page::-webkit-scrollbar-thumb { background: #cbd3db; border-radius: 3px; }
 .dax-page-active { opacity: 1; pointer-events: auto; }
+.dax-page:focus-visible { outline: 2px solid var(--kd-blue); outline-offset: -3px; }
 
 /* running header + footer */
 .dax-rhead {
@@ -129,6 +131,7 @@
   border: 1px solid var(--kd-rule); border-radius: 2px;
   background: #fff;
 }
+.dax-fig-link { display: block; cursor: zoom-in; }
 .dax-figcap {
   font-size: 0.58em; line-height: 1.45; color: #333;
   margin-top: 0.4em; text-align: justify;
@@ -175,6 +178,7 @@
 .dax-ov-sections li {
   border-bottom: 1px solid var(--kd-rule);
 }
+.dax-ov-sections li:last-child { border-bottom: 0; }
 .dax-ov-link {
   width: 100%; min-height: 2.75rem;
   display: flex; align-items: center; justify-content: space-between; gap: 0.6em;
@@ -242,9 +246,17 @@
 .dax-table caption { font-style: italic; color: var(--kd-muted); font-size: 0.95em; margin-bottom: 0.3em; }
 .dax-table th {
   text-align: left; font-weight: 700; color: var(--kd-ink);
-  border-top: 1.5px solid #333; border-bottom: 1px solid #333;
   padding: 0.3em 0.5em 0.3em 0;
 }
+.dax-table thead th {
+  border-top: 1.5px solid #333; border-bottom: 1px solid #333;
+}
+/* A row header is a label beside its cells, not a second header band. */
+.dax-table tbody th {
+  border-bottom: 1px solid var(--kd-rule); vertical-align: top;
+  padding: 0.25em 0.5em 0.25em 0;
+}
+.dax-table tbody th code { white-space: nowrap; }
 .dax-table td { padding: 0.25em 0.5em 0.25em 0; border-bottom: 1px solid var(--kd-rule); color: #333; vertical-align: top; }
 .dax-table .dax-td-gate { color: var(--kd-amber); font-style: italic; }
 .dax-conf-high { color: #157347; font-weight: 700; }
@@ -291,6 +303,19 @@
 .shot-render .dax-page { display: none; padding: 1.2em; }
 .shot-render .dax-page-active { display: block; }
 .shot-render .dax-page[hidden] { display: none; }
+
+/* The panel is shorter than every section, and macOS hides the scrollbar
+   until you scroll: a bottom fade says there is more. drugadopt-demo.js adds
+   .is-end once the page is scrolled to the bottom. Also the scroll target
+   when a mobile overview row opens a section, so the sticky masthead does
+   not cover the heading. */
+.shot-render .dax-paper { scroll-margin-top: 5rem; }
+.shot-render .dax-paper::after {
+  content: ''; position: absolute; inset: auto 0 0 0; height: 2.5em;
+  background: linear-gradient(transparent, #fdfdfc);
+  pointer-events: none; transition: opacity 0.2s ease;
+}
+.shot-render .dax-paper.is-end::after { opacity: 0; }
 .shot-render .dax-ov-readout,
 .shot-render .dax-body-p { font-size: 0.87em; text-align: left; }
 .shot-render .dax-ov-question { font-size: 0.95em; }
@@ -298,7 +323,6 @@
 .shot-render .dax-ov-ind,
 .shot-render .dax-figcap,
 .shot-render .dax-callout-item { font-size: 0.8em; text-align: left; }
-.shot-render .dax-figure img { aspect-ratio: auto; }
 .shot-render .dax-ov-link { flex-direction: column; gap: 0.4em; padding-block: 0.65em; }
 .shot-render .dax-ov-sec-name { font-size: 0.87em; font-weight: 700; }
 .shot-render .dax-ov-sec-gist { font-size: 0.8em; }
@@ -309,7 +333,7 @@
 .shot-render .dax-ov-foot,
 .shot-render .dax-rhead,
 .shot-render .dax-rfoot { font-size: 0.67em; flex-wrap: wrap; gap: 0.4em; }
-.shot-render .dax-table { font-size: 0.77em; overflow-wrap: anywhere; }
+.shot-render .dax-table { font-size: 0.77em; overflow-wrap: break-word; }
 
 @media (max-width: 40rem) {
   .shot-render .dax-spine { width: 100%; padding: 0.8em; }
@@ -319,6 +343,7 @@
   .shot-render .dax-nav-item { min-height: 48px; justify-content: center; text-align: center; }
   .shot-render .dax-nav-label { font-size: 0.95rem; font-weight: 550; line-height: 1.35; }
   .shot-render .dax-paper { min-height: 0; }
+  .shot-render .dax-paper::after { display: none; }
   .shot-render .dax-page { position: relative; inset: auto; overflow: visible; padding: 1.1em; }
   .shot-render .dax-ov-asset { font-size: 1.6em; }
   .shot-render .dax-ov-readout,

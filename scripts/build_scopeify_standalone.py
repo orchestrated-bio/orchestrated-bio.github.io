@@ -80,7 +80,7 @@ def main() -> None:
     <meta name="referrer" content="no-referrer" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="description" content="Scopeify turns a prospective bioinformatics project question into a public-data feasibility brief, ballpark estimate, and draft statement of work." />
-    <meta name="theme-color" content="#111826" />
+    <meta name="theme-color" content="#101412" />
     <title>Scopeify | Orchestrated Biosciences</title>
     <link rel="canonical" href="https://orchestrated.bio/scopeify.html" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
@@ -92,6 +92,9 @@ def main() -> None:
     <meta property="og:description" content="Scope a bioinformatics consulting project from a natural-language hypothesis, public-data evidence, browser-side metadata scan, and a draft SOW." />
     <meta property="og:url" content="https://orchestrated.bio/scopeify.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Agentic AI for Life Sciences and Cancer genomics, Drug discovery, Precision medicine." />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v={base_version}" />
@@ -111,7 +114,7 @@ def main() -> None:
         <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./">DrugAdopt</a>
-          <a href="./custom-analysis.html" aria-current="page">Custom analysis</a>
+          <a href="./custom-analysis.html" aria-current="true">Custom analysis</a>
           <a href="./insight.html">Insight</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>

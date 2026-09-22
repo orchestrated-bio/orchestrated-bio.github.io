@@ -5,6 +5,11 @@
   var links = [].slice.call(document.querySelectorAll('.dax-nav a[href^="#"]'));
   if (!links.length) return;
 
+  var motion = window.matchMedia
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 'auto'
+    : 'smooth';
+
   function mark(link) {
     links.forEach(function (item) {
       if (item === link) {
@@ -15,6 +20,13 @@
         item.removeAttribute('aria-current');
       }
     });
+    // Below 62rem the spine is a sideways-scrolling row of pills, so the
+    // active one is usually off-screen. Scroll the spine itself rather than
+    // scrollIntoView, which would also move the page vertically.
+    var spine = link.closest && link.closest('.dax-spine');
+    if (spine && spine.scrollWidth > spine.clientWidth) {
+      spine.scrollTo({ left: link.offsetLeft - 16, behavior: motion });
+    }
   }
 
   function linkFor(id) {

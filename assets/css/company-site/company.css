@@ -8,9 +8,6 @@
 }
 
 .person-advisor {
-  grid-column: 1 / -1;
-  justify-self: center;
-  width: min(100%, calc(50% - 1rem));
   padding-top: 0.5rem;
 }
 
@@ -29,20 +26,9 @@
   margin: 0 0 0.6rem;
 }
 
-.person p:last-child {
-  margin: 0;
-  font-size: var(--step--1);
-  line-height: 1.55;
-  color: var(--ink-2);
-}
-
 @media (max-width: 40rem) {
   .people { grid-template-columns: 1fr; }
-  .person-advisor {
-    grid-column: auto;
-    width: 100%;
-    padding-top: 0;
-  }
+  .person-advisor { padding-top: 0; }
 }
 
 .pubs { display: flex; flex-direction: column; border-top: 1px solid var(--rule); }
@@ -59,14 +45,16 @@
 }
 .pub:hover { background: var(--paper-raised); }
 
+/* Stacked, the 1rem column gap would also space venue from title, pushing the
+   venue closer to the rule above than to its own title. */
 @media (max-width: 40rem) {
-  .pub { grid-template-columns: 1fr auto; }
+  .pub { grid-template-columns: 1fr auto; gap: 0.2rem 1rem; }
   .pub-venue { grid-column: 1 / -1; }
 }
 
 /* In a split column the list only gets half the width, so stack the venue
    over the title at every size rather than squeezing both into a row. */
-.split .pub { grid-template-columns: 1fr auto; }
+.split .pub { grid-template-columns: 1fr auto; row-gap: 0.2rem; }
 .split .pub-venue { grid-column: 1 / -1; }
 
 .pub-venue {
@@ -90,6 +78,14 @@
 
 .pub-mark { color: var(--ink-4); font-size: 0.85rem; }
 .pub:hover .pub-mark { color: var(--accent); }
+/* The row background alone shifts by about 1.08:1, too little to read as a
+   hover on a full-width row. */
+.pub:hover .pub-title {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+}
 
 /* --- Heat map ------------------------------------------------------------
    Client work shown at the level of gene programs, never one row per gene:
@@ -104,7 +100,7 @@
   --hm-n1: #bacee5; --hm-n2: #769fcc; --hm-n3: #2166ac;
   display: block;
   width: 100%;
-  max-width: 22rem;
+  max-width: 28rem;
   height: auto;
   font-family: var(--sans);
 }
@@ -150,10 +146,14 @@
 }
 
 .hm-figure figcaption {
-  max-width: 22rem;
+  max-width: 28rem;
   margin-top: 0.85rem;
   font-size: var(--step--1);
   line-height: 1.5;
   color: var(--ink-3);
   text-wrap: pretty;
 }
+
+/* The body-size bullet list here runs the full shell, unlike the one-line link
+   lists .data-points-lg was written for, so give the prose a measure again. */
+#data-handling .data-points-lg { max-width: 66ch; }
