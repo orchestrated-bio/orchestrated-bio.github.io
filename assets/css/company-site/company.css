@@ -231,6 +231,17 @@
 .sc-figure figcaption p { margin: 0 0 0.6rem; }
 .sc-figure figcaption p:last-child { margin-bottom: 0; }
 
+/* Variant figure. Shares .sc for its tokens and type; only the marks differ. */
+.gw-base { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.gw-tick { stroke: var(--rule-firm); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.gw-ci   { stroke: var(--sc-dot); stroke-width: 2; }
+.gw-cap  { stroke: var(--sc-dot); stroke-width: 2; }
+.gw-dot  { fill: var(--sc-dot); }
+.gw-bar  { fill: var(--sc-dot); }
+.gw-val  { fill: var(--ink-2); font-size: 11.5px; font-weight: 620; text-anchor: middle;
+           font-variant-numeric: tabular-nums; }
+.gw-val-l, .gw-note { text-anchor: start; }
+
 /* The body-size bullet list here runs the full shell, unlike the one-line link
    lists .data-points-lg was written for, so give the prose a measure again. */
 #data-handling .data-points-lg { max-width: 66ch; }
