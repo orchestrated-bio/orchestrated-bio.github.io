@@ -344,8 +344,12 @@
 .insight-product-proof { margin: 0; }
 .insight-product-proof .insight-ui {
   width: 100%;
-  aspect-ratio: 16 / 7;
-  font-size: clamp(10px, 1.25vw, 15px);
+  /* The demo's whole geometry is in em off this one size. Deriving it from
+     the viewport width (clamp) is what drove the labels down to 4-8px, so the
+     size is fixed and the box height follows from it. */
+  aspect-ratio: auto;
+  height: 36em;
+  font-size: 15px;
 }
 
 .iui-mobile-story,
@@ -613,10 +617,6 @@
    with its own width and the 0.7em labels further down. */
 @media (max-width: 60rem) {
   .iui-phone-frame { width: 19em; }
-  .iui-phone-labels {
-    font-family: var(--sans);
-    font-size: max(0.4em, 7.5px);
-  }
 }
 
 .iui-phone-result small {
@@ -1282,6 +1282,152 @@
   font-size: var(--step--1);
   line-height: 1.55;
   color: var(--ink-3);
+}
+
+/* --- Demo type floors ---------------------------------------------------
+   Everything inside the demo is sized in em off .insight-ui, which is what
+   let real content fall to 4-8px on narrow screens. Each piece of type keeps
+   its em ratio but cannot go below a readable floor: ~11px for prose, ~9px
+   for labels drawn inside a chart. Sized boxes that hold a glyph grow with
+   it, or the glyph clips. */
+.insight-product-proof .iui-crumb { font-size: max(0.68em, 11px); }
+.insight-product-proof .iui-cohort { font-size: max(0.60em, 11px); }
+.insight-product-proof .iui-query { font-size: max(0.78em, 12px); }
+.insight-product-proof .iui-steps-text { font-size: max(0.66em, 11px); }
+.insight-product-proof .iui-paras p { font-size: max(0.70em, 11.5px); }
+.insight-product-proof .iui-part-label { font-size: max(0.84em, 11px); }
+.insight-product-proof .iui-cite { font-size: max(0.86em, 11px); }
+.insight-product-proof .iui-follow-label,
+.insight-product-proof .iui-follow p { font-size: max(0.60em, 11px); }
+.insight-product-proof .iui-ask-box > span:first-child { font-size: max(0.65em, 11px); }
+.insight-product-proof .iui-ask-send { font-size: max(0.75em, 11px); }
+.insight-product-proof .iui-card-title { font-size: max(0.72em, 12px); }
+.insight-product-proof .iui-card-note { font-size: max(0.50em, 11px); }
+.insight-product-proof .iui-chip { font-size: max(0.50em, 11px); }
+.insight-product-proof .iui-card-foot .iui-foot-label { font-size: max(0.55em, 11px); }
+.insight-product-proof .iui-foot-ms { font-size: max(0.42em, 10px); }
+.insight-product-proof .iui-plot-summary-label { font-size: max(0.50em, 11px); }
+.insight-product-proof .iui-rank-head { font-size: max(0.43em, 11px); }
+.insight-product-proof .iui-rank-row { font-size: max(0.50em, 11px); }
+.insight-product-proof .iui-plot-callout strong { font-size: max(0.78em, 13px); }
+.insight-product-proof .iui-plot-callout span { font-size: max(0.45em, 11px); }
+.insight-product-proof .iui-plot-summary-note { font-size: max(0.47em, 11px); }
+.insight-product-proof .iui-analysis-facts dt { font-size: max(0.43em, 11px); }
+.insight-product-proof .iui-analysis-facts dd { font-size: max(0.52em, 11px); }
+.insight-product-proof .iui-volcano-legend span { font-size: max(0.46em, 11px); }
+.insight-product-proof .iui-card-num { font-size: max(0.60em, 11px); width: 1.35em; height: 1.35em; }
+.insight-product-proof .iui-steps-tick { font-size: max(0.55em, 11px); width: 1.25em; height: 1.25em; }
+.insight-product-proof .iui-side-user { font-size: max(0.65em, 11px); }
+
+/* Labels drawn inside the charts. */
+.insight-product-proof .iui-axis-title { font-size: max(0.41em, 9px); }
+.insight-product-proof .iui-lolli-protein-wrap .iui-axis-max,
+.insight-product-proof .iui-lolli-protein-wrap .iui-axis-mid,
+.insight-product-proof .iui-lolli-protein-wrap .iui-axis-min { font-size: max(0.45em, 9px); }
+.insight-product-proof .iui-lolli-protein .iui-stem-label { font-size: max(0.53em, 9px); }
+.insight-product-proof .iui-phone-chart b { font-size: max(0.43em, 9px); }
+.insight-product-proof .iui-phone-labels { font-family: var(--sans); font-size: max(0.40em, 9px); }
+
+/* Notebook and phone chrome: smaller floors, since these depict a device. */
+.insight-product-proof .iui-notebook-head > span { font-size: max(0.58em, 11px); }
+.insight-product-proof .iui-codebar b { font-size: max(0.52em, 10px); }
+.insight-product-proof .iui-notebook-code pre { font-size: max(0.68em, 11.5px); }
+.insight-product-proof .iui-notebook-record dt { font-size: max(0.57em, 11px); }
+.insight-product-proof .iui-notebook-record dd { font-size: max(0.60em, 11.5px); }
+.insight-product-proof .iui-notebook-boundary { font-size: max(0.56em, 11px); }
+.insight-product-proof .iui-phone-status { font-size: max(0.44em, 9px); }
+.insight-product-proof .iui-phone-appbar strong { font-size: max(0.62em, 11px); }
+.insight-product-proof .iui-phone-appbar > span:last-child { font-size: max(0.42em, 11px); }
+.insight-product-proof .iui-phone-query { font-size: max(0.66em, 11.5px); }
+.insight-product-proof .iui-phone-working { font-size: max(0.48em, 10px); }
+.insight-product-proof .iui-phone-result > strong { font-size: max(0.55em, 11px); }
+.insight-product-proof .iui-phone-result small { font-size: max(0.43em, 10px); }
+.insight-product-proof .iui-phone-note { font-size: max(0.48em, 10.5px); }
+.insight-product-proof .iui-phone-input { font-size: max(0.50em, 10.5px); }
+
+/* Above the stacking breakpoint the summary column has to hold an 11px
+   "Samples" header, and the phone frame its floored labels. */
+@media (min-width: 64rem) {
+  .insight-product-proof .iui-analysis-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(13.5em, 0.3fr);
+  }
+  .insight-product-proof .iui-phone-frame { width: 18em; }
+}
+
+/* Below 64rem the two-column workspace cannot hold floored type inside a
+   fixed box, so the panels stack and the box grows with them. The phone tier
+   below refines this further. */
+@media (max-width: 63.999rem) {
+  .insight-product-proof .insight-ui {
+    height: auto;
+    min-height: 0;
+    font-size: 16px;
+  }
+  .insight-product-proof .iui-side { display: none; }
+  .insight-product-proof .iui-bar {
+    position: relative; inset: auto; height: auto; min-height: 2.4em;
+    padding: 0.65em 0.9em; flex-wrap: wrap;
+  }
+  .insight-product-proof .iui-crumbs { flex-wrap: wrap; gap: 0.3em; }
+  .insight-product-proof .iui-chat {
+    position: relative; inset: auto; width: auto; height: auto;
+    border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  }
+  .insight-product-proof .iui-vis { display: block; position: relative; inset: auto; }
+  .insight-product-proof .iui-scene { display: none; position: relative; inset: auto; }
+  .insight-product-proof .iui-scene-active { display: flex; }
+  .insight-product-proof .iui-card-analysis,
+  .insight-product-proof .iui-card-volcano { height: auto; }
+  .insight-product-proof .iui-card-head { flex-wrap: wrap; }
+  .insight-product-proof .iui-card-note { margin-left: 0; }
+  .insight-product-proof .iui-card-foot { flex-wrap: wrap; }
+  /* The story overlays are absolutely positioned, so with the workspace
+     hidden in phases 01 and 04 the box would have no in-flow content. */
+  .insight-product-proof .iui-phase-phone .iui-mobile-story,
+  .insight-product-proof .iui-phase-notebook .iui-notebook-story {
+    position: relative; inset: auto;
+  }
+  .insight-product-proof .iui-phone-frame {
+    width: min(19em, 100%); height: auto; min-height: 27.5em;
+  }
+  .insight-product-proof .iui-notebook-grid { flex: none; }
+}
+
+@media (min-width: 40.001rem) and (max-width: 63.999rem) {
+  /* Full-width chat would otherwise set 170-character lines. */
+  .insight-product-proof .iui-paras {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    gap: 0.6em 1.4em;
+    padding-block: 0.2em 0.8em;
+  }
+  .insight-product-proof .iui-follow-list { display: flex; flex-wrap: wrap; gap: 0.4em; }
+  .insight-product-proof .iui-follow-list .iui-part { margin-bottom: 0; }
+  .insight-product-proof .iui-analysis-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(13em, 0.3fr);
+    grid-template-rows: minmax(18em, auto);
+    flex: none;
+  }
+  .insight-product-proof .iui-plot-panel { min-height: 18em; }
+  .insight-product-proof .iui-mobile-story {
+    grid-template-columns: minmax(0, 1fr) minmax(12em, 0.5fr);
+    gap: 2.4em;
+    padding: 1.8em 2.2em;
+  }
+  .insight-product-proof .iui-mobile-copy { padding-left: 0; }
+  .insight-product-proof .iui-notebook-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(15em, 0.85fr);
+  }
+}
+
+/* Keeping the plot beside its summary down to 40rem stays shorter than
+   stacking them, and holds the volcano's 9px labels. */
+@media (min-width: 40.001rem) and (max-width: 47.999rem) {
+  .insight-product-proof .iui-analysis-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(10.5em, 0.28fr);
+    grid-template-rows: minmax(16em, auto);
+  }
+  .insight-product-proof .iui-plot-panel { min-height: 16em; }
 }
 
 @media (max-width: 48rem) {

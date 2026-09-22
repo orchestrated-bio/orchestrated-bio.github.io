@@ -15,7 +15,6 @@ SCOPEIFY_SAMPLE_JS = ROOT / "assets" / "js" / "scopeify-sample-report.js"
 HTTPS_UPGRADE_JS = ROOT / "assets" / "js" / "scopeify-https-upgrade.js"
 SHEETJS = ROOT / "assets" / "vendor" / "sheetjs" / "xlsx.full.min.js"
 BASE_CSS = ROOT / "assets" / "css" / "company-site" / "base.css"
-COOKIE_CONSENT_JS = ROOT / "assets" / "js" / "cookie-consent.js"
 MOBILE_NAV_JS = ROOT / "assets" / "js" / "company-site" / "mobile-nav.js"
 
 
@@ -33,7 +32,6 @@ def main() -> None:
     # Shared site assets were hardcoded here, so any edit to base.css made
     # the committed pages "stale" until someone updated this script by hand.
     base_version = content_version(BASE_CSS)
-    cookie_consent_version = content_version(COOKIE_CONSENT_JS)
     mobile_nav_version = content_version(MOBILE_NAV_JS)
     content_security_policy = (
         "default-src 'self'; "
@@ -53,6 +51,8 @@ def main() -> None:
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Security-Policy" content="{content_security_policy}">
     <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://orchestrated.bio/scopeify.html">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <title>Scopeify Demo</title>
     <meta name="description" content="Scopeify demo: AI-assisted public-data scoping for prospective bioinformatics consulting projects.">
@@ -78,6 +78,7 @@ def main() -> None:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Security-Policy" content="{content_security_policy}" />
     <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex, follow" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="description" content="Scopeify turns a prospective bioinformatics project question into a public-data feasibility brief, ballpark estimate, and draft statement of work." />
     <meta name="theme-color" content="#101412" />
@@ -92,14 +93,13 @@ def main() -> None:
     <meta property="og:description" content="Scope a bioinformatics consulting project from a natural-language hypothesis, public-data evidence, browser-side metadata scan, and a draft SOW." />
     <meta property="og:url" content="https://orchestrated.bio/scopeify.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
-    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Agentic AI for Life Sciences and Cancer genomics, Drug discovery, Precision medicine." />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <script src="./assets/js/scopeify-https-upgrade.js?v={https_upgrade_version}"></script>
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v={base_version}" />
     <link rel="stylesheet" href="./assets/css/scopeify-demo.css?v={css_version}" />
-    <script src="./assets/js/cookie-consent.js?v={cookie_consent_version}"></script>
   </head>
   <body class="scopeify-page">
     <a class="skip-link" href="#main">Skip to content</a>

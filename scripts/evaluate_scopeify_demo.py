@@ -318,7 +318,7 @@ def static_workflow_checks(checks: list[Check], sources: dict[str, str]) -> None
             "Dataset Inventory",
             "Search appendix",
             "Dataset inventory and project estimates",
-            "Schedule consultation",
+            "Book a call",
             "Download project workbook (.xlsx)"
         ],
         ["include", "script"]
