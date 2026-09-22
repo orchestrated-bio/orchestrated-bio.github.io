@@ -154,6 +154,78 @@
   text-wrap: pretty;
 }
 
+/* --- Single-cell target figure ----------------------------------------
+   Same construction as .hm: fixed per-theme hex tokens (color-mix() with
+   var() is invalid-at-computed-value-time where unsupported, and falls back
+   to black rather than to a preceding declaration). */
+.sc {
+  --sc-tumour: #b2182b; --sc-b: #2166ac; --sc-t: #0f8f66;
+  --sc-mye: #a9722a;    --sc-str: #6d4b96;
+  --sc-d1: #edbdba;     --sc-d2: #d67b77; --sc-d3: #b2182b;
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--sans);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .sc {
+    --sc-tumour: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
+    --sc-mye: #e0ab4c;    --sc-str: #a78bce;
+    --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
+  }
+}
+:root[data-theme="dark"] .sc {
+  --sc-tumour: #e8735f; --sc-b: #6ea6dc; --sc-t: #3ad39f;
+  --sc-mye: #e0ab4c;    --sc-str: #a78bce;
+  --sc-d1: #50372e;     --sc-d2: #935244; --sc-d3: #e8735f;
+}
+
+.sc-tumor   { fill: var(--sc-tumour); }
+.sc-bcell   { fill: var(--sc-b); }
+.sc-tcell   { fill: var(--sc-t); }
+.sc-myeloid { fill: var(--sc-mye); }
+.sc-stromal { fill: var(--sc-str); }
+.sc-c circle { fill-opacity: 0.85; }
+
+/* An empty dot has to stay visible on a page barely lighter than it is. */
+.sc-d0 {
+  fill: var(--paper-raised);
+  stroke: var(--rule-firm);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.sc-d1 { fill: var(--sc-d1); }
+.sc-d2 { fill: var(--sc-d2); }
+.sc-d3 { fill: var(--sc-d3); }
+
+.sc-h    { fill: var(--ink); font-size: 13px; font-weight: 620; }
+.sc-sub  { fill: var(--ink-4); font-size: 11px; }
+.sc-leg  { fill: var(--ink-2); font-size: 11.5px; }
+.sc-row  { fill: var(--ink-2); font-size: 12px; font-weight: 600; text-anchor: end; }
+.sc-col  { fill: var(--ink-3); font-size: 11.5px; text-anchor: middle; }
+.sc-key  { fill: var(--ink-4); font-size: 11px; text-anchor: end; }
+.sc-tick { fill: var(--ink-4); font-size: 10.5px; text-anchor: middle; }
+.sc-n    { fill: var(--ink-4); font-weight: 400; }
+
+.sc-figure { margin: 0; }
+.sc-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+  max-width: 62rem;
+}
+.sc { max-width: 30rem; }
+.sc-figure figcaption {
+  max-width: 74ch;
+  margin-top: 1rem;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  color: var(--ink-3);
+  text-wrap: pretty;
+}
+
 /* The body-size bullet list here runs the full shell, unlike the one-line link
    lists .data-points-lg was written for, so give the prose a measure again. */
 #data-handling .data-points-lg { max-width: 66ch; }
