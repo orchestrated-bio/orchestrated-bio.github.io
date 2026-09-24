@@ -16,6 +16,18 @@ Question / Answer / Interpretation blocks. Structural labels ("Figure 3.",
 "Section 2") and the marketing introduction and closing invitation are authored
 here. Scientific conclusions are not paraphrased.
 
+Second content rule: the page presents evidence, not recommendations
+(drugadopt docs/capability-boundary.md, "Evidence presentation contract").
+The source case predates that contract and carries a recommendation layer,
+so this builder never reads decision_packet.recommendation, a row's
+owner_role / sequence / pass_fail_criteria / failure_rule / next_action, a
+delta's next_step, reader_surface.what_to_test_next,
+reader_surface.diligence_question (a question about "another prexasertib
+study" whose only answer in the case is the hold disposition),
+biomarker_decision_brief.summary, or a brief row's readiness. Case prose that
+directs an action is handled by WITHHELD_SENTENCES: whole sentences are left
+out, never reworded, and the page says so.
+
 Inputs, all produced from the case by scripts/extract_report_content.py:
     scripts/module_sections.json   Question/Answer/Interpretation per module
     scripts/figure_captions.json   real figure captions, scope, evidence type
@@ -77,6 +89,9 @@ SECTIONS = [
         "label": "Pharmacology &amp; Exposure",
         "module": "adme",
         "figure": "prexasertib_exposure_boundary.png",
+        # drugadopt docs/capability-boundary.md: ADME/PK is a bounded
+        # prototype, "Public labels and literature only -- no measured PK".
+        "scope": "From published papers, trial records and regulatory documents. No drug levels were measured for this report.",
     },
     {
         "id": "toxicology",
@@ -97,28 +112,114 @@ SECTION_BY_MODULE = {s["module"]: s["label"] for s in SECTIONS}
 # structured records, not prose claims a reviewer could sign off.
 CLAIM_KIND_LABELS = {
     "figure": "figure records",
-    "decision_packet": "decision-packet rows",
+    "decision_packet": "evidence-summary rows",
     "biomarker_decision": "biomarker-brief rows",
     "semantic_review": "prose claims awaiting re-review",
 }
 
 STATE_LABELS = {
-    "blocker": "Blocker",
+    "blocker": "Not established",
     "gap": "Gap",
     "not_supported": "Not supported",
     "conditional": "Conditional",
     "supported": "Supported",
 }
 
-# Decision rows rendered in full on the Evidence & Gaps section.
+# Evidence rows rendered on the Evidence & Gaps section. The case's
+# biomarker-01 claim is a readiness verdict ("No public biomarker is ready to
+# select patients") and its ip-01 claim ends in a legal directive ("require
+# counsel review before ..."); each is a single sentence, so both rows are left
+# out rather than cut mid-sentence. Table 1 carries the biomarker evidence.
+# clinical-01 states the finding the Clinical chapter already shows, and
+# protocol-01 and cmc-01 are from lanes the current DrugAdopt modules do not
+# have. The Traceability disclosure names each of these reasons.
 FEATURED_ROWS = (
-    "biomarker-01",
     "replication-01",
     "mechanism-01",
     "exposure-01",
     "safety-01",
-    "ip-01",
 )
+
+# Missing-evidence rows shown in Table 3, by their missing_evidence text. The
+# case's other two are trial-design ("Censoring-aware design inputs") and
+# manufacturing/rights ("Product-quality and rights package") rows from lanes
+# the current DrugAdopt modules do not have.
+FEATURED_DELTAS = (
+    "Independent biomarker cohort",
+    "Participant-linked exposure",
+    "POLA1-combination therapeutic index",
+)
+
+# Case sentences that direct an action, set a priority, or state a
+# disposition, keyed by the text they appear in. Whole sentences are withheld,
+# never clauses, and nothing is reworded. Each entry is the sentence's opening
+# words. withhold() fails the build if a key names no text the page shows, or
+# if a prefix does not open exactly one sentence, so a re-extraction that
+# rewords one of these openings stops the build. That is all it checks. It
+# does not catch a new directive sentence, and a sentence is only what
+# SENTENCE_BREAK splits (a period, then a capital or "("): a withheld sentence
+# that ends in "?" or a quote, or is followed by one opening with a digit,
+# takes the next sentence with it. After any re-extraction, re-read the
+# withheld sentences and the prose around them before publishing.
+WITHHELD_SENTENCES = {
+    "reader_surface.current_readout": (
+        "Another unselected efficacy study should remain on hold",
+    ),
+    "biomarker_decision_brief.guardrail": (
+        "Use these rows as report-level translational decision support",
+    ),
+    "pharmacology.Interpretation": (
+        "Do not select patients or propose a clinical POLA1 combination",
+        "Freeze one continuous assay, score orientation",
+        "Run a therapeutic-index experiment before advancing",
+    ),
+    "adme.Interpretation": (
+        "The development consequence is narrow",
+        "The next analysis should estimate",
+    ),
+    "toxicology.Interpretation": (
+        "That number must be frozen before CRO execution",
+        "The POLA1 result in the pharmacology chapter merits",
+    ),
+}
+SENTENCE_BREAK = re.compile(r"(?<=[.])\s+(?=[A-Z(])")
+
+
+def withhold(texts: dict[str, str]) -> dict[str, str]:
+    """Each case text with the sentences WITHHELD_SENTENCES names removed.
+
+    Takes every text the page shows that WITHHELD_SENTENCES may name, keyed the
+    same way, in one call, so a key that names none of them (a typo, a renamed
+    module) stops the build instead of letting its sentences through.
+    """
+    unread = sorted(set(WITHHELD_SENTENCES) - set(texts))
+    if unread:
+        raise SystemExit(
+            f"error: WITHHELD_SENTENCES keys {unread} name no text this page "
+            "shows, so their sentences would not be withheld. Fix the keys."
+        )
+    shown = {}
+    for key, text in texts.items():
+        prefixes = WITHHELD_SENTENCES.get(key, ())
+        sentences = SENTENCE_BREAK.split((text or "").strip())
+        for prefix in prefixes:
+            hits = sum(1 for s in sentences if s.startswith(prefix))
+            if hits != 1:
+                raise SystemExit(
+                    f"error: {key}: expected one sentence starting {prefix!r}, "
+                    f"found {hits}. Re-read the case prose before publishing."
+                )
+        shown[key] = " ".join(s for s in sentences if not s.startswith(prefixes))
+    return shown
+
+
+def pick(rows: dict[str, dict], wanted: tuple[str, ...], where: str) -> list[dict]:
+    """The rows named in `wanted`, in that order; the build stops on a missing
+    one, so a count printed from `wanted` is never larger than what is shown."""
+    missing = [w for w in wanted if w not in rows]
+    if missing:
+        raise SystemExit(f"error: {where} has no row for {missing}")
+    return [rows[w] for w in wanted]
 
 # What a cited source is, where its id alone does not say. The case's own
 # titles are not reliable here: it records US10189818B2 as "Crystalline forms
@@ -429,50 +530,34 @@ def state_chip(state: str) -> str:
     return f'<span class="dax-ov-chip {cls}">{esc(label)}</span>'
 
 
-def render_gate(row: dict, blocking: set[str], locators: dict[str, str]) -> str:
-    """Render one gate in full, to show what a gate actually contains.
+def render_gate(row: dict, locators: dict[str, str]) -> str:
+    """Render one evidence row in full: its finding, sources, and the data
+    that would resolve it.
 
-    Rendering all five this way repeated the same four bold labels five times
-    over 780 words, which read as a filled-in template however real the content
-    was. One worked example plus a summary table carries the same information.
+    Rendering every row this way repeated the same bold labels row after row,
+    which read as a filled-in template however real the content was. One
+    worked example plus a summary table carries the same information.
     Confidence is omitted: every row in a case tends to be "high", so a scale
-    that never varies is decoration.
+    that never varies is decoration. Owner, sequence, pass/fail criteria,
+    failure rule and next action are not read (see the module docstring).
     """
     row_id = row.get("row_id", "")
     state = row.get("status") or row.get("state") or ""
-    fields = [
-        ("Pass / fail criteria", row.get("pass_fail_criteria")),
-        ("Failure rule", row.get("failure_rule")),
-        ("Next action", row.get("next_action")),
-    ]
-    rendered = "".join(
-        f'<p class="dax-gate-field"><b>{esc(name)}.</b> {linkify(value)}</p>'
-        for name, value in fields
-        if value
-    )
     requested = row.get("requested_files_or_data") or []
     req = ""
     if requested:
         items = "".join(f"<li>{esc(i)}</li>" for i in requested)
         req = (
-            '<p class="dax-gate-reqhead">Data requested to close this gate</p>'
+            '<p class="dax-gate-reqhead">Data that would resolve this</p>'
             f'<ul class="dax-gate-req">{items}</ul>'
         )
-    blocks = (
-        '<span class="dax-gate-blocking">Blocks the decision</span>'
-        if row_id in blocking
-        else ""
-    )
     return f"""
               <article class="dax-gate">
                 <p class="dax-gate-head">
                   <code>{esc(row_id)}</code>
                   {state_chip(state)}
-                  {blocks}
                 </p>
                 <p class="dax-gate-claim">{linkify(row.get('claim', ''))} {gate_sources(row, locators)}</p>
-                <p class="dax-gate-owner">{esc(row.get('owner_role', ''))} · {esc(row.get('sequence', ''))}</p>
-                {rendered}
                 {req}
               </article>
 """
@@ -494,24 +579,20 @@ def gate_sources(row: dict, locators: dict[str, str]) -> str:
     return f'<span class="dax-gate-sources">Sources: {"; ".join(links)}.</span>'
 
 
-def render_gate_rows(rows: list[dict], blocking: set[str], locators: dict[str, str]) -> str:
-    """Summarise the remaining gates as table rows."""
+def render_gate_rows(rows: list[dict], locators: dict[str, str]) -> str:
+    """Summarise the remaining evidence rows as table rows."""
     out = []
     for row in rows:
         row_id = row.get("row_id", "")
         state = row.get("status") or row.get("state") or ""
-        blocks = (
-            ' <span class="dax-gate-blocking">Blocks</span>'
-            if row_id in blocking
-            else ""
-        )
+        items = "".join(f"<li>{esc(i)}</li>" for i in row.get("requested_files_or_data") or [])
+        requested = f'<ul class="dax-gate-req">{items}</ul>' if items else ""
         out.append(
             "<tr>"
             f'<th scope="row"><code>{esc(row_id)}</code></th>'
-            f"<td>{state_chip(state)}{blocks}</td>"
+            f"<td>{state_chip(state)}</td>"
             f"<td>{linkify(row.get('claim', ''))} {gate_sources(row, locators)}</td>"
-            f"<td>{esc(row.get('owner_role', ''))}</td>"
-            f"<td>{linkify(row.get('next_action', ''))}</td>"
+            f"<td>{requested}</td>"
             "</tr>"
         )
     return "".join(out)
@@ -525,9 +606,18 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     }
     reader = vm["reader_surface"]
     packet = vm["decision_packet"]
-    rec = packet["recommendation"]
     brief = vm["biomarker_decision_brief"]
     et = vm.get("evidence_traceability", {})
+    shown = withhold(
+        {
+            "reader_surface.current_readout": reader.get("current_readout", ""),
+            "biomarker_decision_brief.guardrail": brief.get("guardrail", ""),
+            **{
+                s["module"] + ".Interpretation": modules.get(s["module"], {}).get("Interpretation", "")
+                for s in SECTIONS
+            },
+        }
+    )
 
     asset = vm.get("asset", "")
     # The top-level indication is an abbreviation ("Platinum-resistant HGSOC")
@@ -541,7 +631,6 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     )
     prepared = vm.get("prepared_date", "")
     as_of = packet.get("source_status_as_of", prepared)
-    blocking = set(rec.get("blocking_row_ids", []))
 
     claims = et.get("claims", [])
     sources = et.get("sources", [])
@@ -602,22 +691,22 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         "clinical": (
             "dax-chip-ok",
             "Responder subset observed",
-            "12 of 39 evaluable patients responded — a real subset to select for.",
+            "12 of 39 evaluable patients responded, so there is a responder subset to explain.",
         ),
         "mechanism": (
             "dax-chip-warn",
             "2 candidates, neither validated",
-            "The replication score and POLA1 both survive as candidates; neither is trial-ready yet.",
+            "The replication score and POLA1 both remain candidates; neither has independent validation.",
         ),
         "pharmacology": (
             "dax-chip-warn",
-            "Regimen exposure adequate",
-            "Aggregate PK makes regimen-level underexposure unlikely; individual exposure is still unresolved.",
+            "Gross underexposure less likely",
+            "Aggregate PK makes regimen-level underexposure less likely; individual exposure is still unresolved.",
         ),
         "toxicology": (
             "dax-chip-warn",
             "Marrow toxicity quantified",
-            "Marrow toxicity is characterized; the combination margin still has to be measured.",
+            "Marrow toxicity is characterized; the combination margin is unmeasured.",
         ),
     }
     for s in SECTIONS:
@@ -637,6 +726,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         figs = figure_block(s["figure"], figures, fig_no, alts, locators)
         fig_no += 1
         extra = ""
+        scope = f'<p class="dax-scope-line">{esc(s["scope"])}</p>' if s.get("scope") else ""
         if s.get("figure2"):
             extra = figure_block(s["figure2"], figures, fig_no, alts, locators)
             fig_no += 1
@@ -656,10 +746,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
               <div class="dax-callout">
                 <div class="dax-callout-head">Interpretation</div>
-                <div class="dax-callout-body">{paragraphs(mod.get('Interpretation', ''))}</div>
+                <div class="dax-callout-body">{paragraphs(shown[s['module'] + '.Interpretation'])}</div>
               </div>
+              {scope}
 
-              <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>{s['num']}</span></div>
+              <div class="dax-rfoot"><span>Generated by DrugAdopt · evidence synthesis, not medical advice</span><span>{s['num']}</span></div>
             </section>
 """
         )
@@ -669,26 +760,25 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     # are summarised, so the reader sees the structure once instead of five
     # times.
     by_id = {r.get("row_id"): r for r in packet.get("rows", [])}
-    featured = [by_id[r] for r in FEATURED_ROWS if r in by_id]
-    gates = render_gate(featured[0], blocking, locators) if featured else ""
-    gate_rows = render_gate_rows(featured[1:], blocking, locators)
+    featured = pick(by_id, FEATURED_ROWS, "decision_packet.rows")
+    gates = render_gate(featured[0], locators) if featured else ""
+    gate_rows = render_gate_rows(featured[1:], locators)
 
     bio_rows = "".join(
         "<tr>"
         f'<th scope="row">{esc(r.get("biomarker"))}</th>'
         f"<td>{esc(r.get('evidence_strength'))}</td>"
-        f"<td>{esc(r.get('readiness'))}</td>"
         "</tr>"
         for r in brief.get("rows", [])
     )
 
+    delta_by_gap = {d.get("missing_evidence"): d for d in packet.get("decision_deltas", [])}
     deltas = "".join(
         "<tr>"
         f'<th scope="row">{esc(d.get("missing_evidence"))}</th>'
         f"<td>{esc(d.get('would_change_decision_if'))}</td>"
-        f"<td>{esc(d.get('next_step'))}</td>"
         "</tr>"
-        for d in packet.get("decision_deltas", [])
+        for d in pick(delta_by_gap, FEATURED_DELTAS, "decision_deltas")
     )
 
     # ---- traceability ----------------------------------------------------
@@ -775,7 +865,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <main id="main" class="rpt-stage">
       <div class="rpt-intro">
         <h1 class="rpt-intro-title">The evidence for candidate biomarkers, and what is still missing.</h1>
-        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No selection marker is trial-ready. <a href="./">What DrugAdopt does</a>. <a href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a></p>
+        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No candidate marker has independent validation. <a href="./">What DrugAdopt does</a>. <a href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a></p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on {esc(asset)} in {esc(indication)}">
@@ -800,14 +890,12 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               </div>
             </div>
 
-            <p class="dax-ov-question">{linkify(reader.get('diligence_question', ''))}</p>
             <p class="dax-ov-readout">{linkify(reader.get('what_happened', ''))}</p>
-            <p class="dax-ov-readout">{linkify(reader.get('current_readout', ''))}</p>
 
             <div class="dax-callout dax-callout-verdict">
-              <div class="dax-callout-head">Recommendation · {esc(humanize(rec.get('disposition', '')))} · confidence {esc(rec.get('confidence', ''))}</div>
+              <div class="dax-callout-head">What the public evidence leaves open</div>
               <div class="dax-callout-body">
-                <p class="dax-callout-item">{linkify(rec.get('summary', ''))}</p>
+                <p class="dax-callout-item">{linkify(shown['reader_surface.current_readout'])}</p>
               </div>
             </div>
 
@@ -816,7 +904,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
             <div class="dax-ov-foot">
               <span>Prepared {esc(prepared)} · sources as of {esc(as_of)} · from public evidence</span>
-              <span>Each reviewed claim hash-bound to its source and verification verdict</span>
+              <span>Each reviewed claim is hash-bound to its source and its review record</span>
             </div>
           </section>
 
@@ -827,48 +915,40 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <p class="dax-sec-num">Evidence &amp; Gaps</p>
             <h2 class="dax-sec-h">Candidate biomarkers and what would validate them</h2>
 
-            <p class="dax-body-p"><b>A responder subset exists, so a selection biomarker is plausible.</b> These are the {len(brief.get('rows', []))} candidates the public evidence raises, where each stands today, and the experiment that would move it from hypothesis to a marker you could enrich on.</p>
-            <p class="dax-body-p">{linkify(brief.get('summary', ''))}</p>
+            <p class="dax-body-p"><b>A responder subset exists, so a selection biomarker is plausible.</b> These are the {len(brief.get('rows', []))} candidates the public evidence raises, the evidence behind each, and the data that would show whether it predicts response.</p>
 
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 1. Candidate biomarkers, evidence strength, and readiness">
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 1. Candidate biomarkers and evidence strength">
             <table class="dax-table">
-              <caption>Table 1. Every candidate we assessed, the evidence behind it, and our call</caption>
-              <thead><tr><th scope="col">Candidate</th><th scope="col">Evidence strength</th><th scope="col">Our call</th></tr></thead>
+              <caption>Table 1. Every candidate assessed and the evidence behind it</caption>
+              <thead><tr><th scope="col">Candidate</th><th scope="col">Evidence strength</th></tr></thead>
               <tbody>{bio_rows}</tbody>
             </table>
             </div>
-            <p class="dax-scope-line">{esc(brief.get('guardrail', ''))}</p>
+            <p class="dax-scope-line">{esc(shown['biomarker_decision_brief.guardrail'])}</p>
 
-            <h3 class="dax-sub-h">The gates behind the recommendation</h3>
-            <p class="dax-body-p">Each gate names who owns it, what would let it pass, and the rule that stops it. One is shown in full below; the rest follow in Table 2.</p>
+            <h3 class="dax-sub-h">Open questions and the evidence behind them</h3>
+            <p class="dax-body-p">Each row states a finding, its sources, and the data that would resolve it. One is shown in full below; the rest follow in Table 2.</p>
             {gates}
 
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining decision gates">
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining open questions">
             <table class="dax-table">
-              <caption>Table 2. The remaining gates, with the owner and next action for each</caption>
-              <thead><tr><th scope="col">Gate</th><th scope="col">State</th><th scope="col">Finding</th><th scope="col">Owner</th><th scope="col">Next action</th></tr></thead>
+              <caption>Table 2. The remaining open questions, with the data that would resolve each</caption>
+              <thead><tr><th scope="col">Row</th><th scope="col">State</th><th scope="col">Finding</th><th scope="col">Data that would resolve it</th></tr></thead>
               <tbody>{gate_rows}</tbody>
             </table>
             </div>
-            <p class="dax-scope-line">{len(FEATURED_ROWS)} of {len(packet.get('rows', []))} decision rows shown. The full case carries every row across all {len(vm.get('diligence_lane_coverage', {}).get('present', []))} diligence lanes DrugAdopt covers.</p>
+            <p class="dax-scope-line">{len(featured)} of the {len(packet.get('rows', []))} evidence rows in the source case are shown.</p>
 
-            <h3 class="dax-sub-h">What would change the decision</h3>
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 3. Missing evidence and the next step for each">
+            <h3 class="dax-sub-h">What would change the interpretation</h3>
+            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 3. Missing evidence and what it would show">
             <table class="dax-table">
-              <caption>Table 3. Missing evidence, the result that would change the decision, and the next step</caption>
-              <thead><tr><th scope="col">Missing evidence</th><th scope="col">Would change the decision if</th><th scope="col">Next step</th></tr></thead>
+              <caption>Table 3. Missing evidence and the result that would change the interpretation</caption>
+              <thead><tr><th scope="col">Missing evidence</th><th scope="col">Would change the interpretation if</th></tr></thead>
               <tbody>{deltas}</tbody>
             </table>
             </div>
 
-            <div class="dax-callout">
-              <div class="dax-callout-head">The one experiment that unlocks the rest</div>
-              <div class="dax-callout-body">
-                <p class="dax-callout-item">{linkify(reader.get('what_to_test_next', ''))}</p>
-              </div>
-            </div>
-
-            <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Gaps</span></div>
+            <div class="dax-rfoot"><span>Generated by DrugAdopt · evidence synthesis, not medical advice</span><span>Gaps</span></div>
           </section>
 
           <section class="dax-page" id="traceability">
@@ -876,7 +956,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <p class="dax-sec-num">Traceability</p>
             <h2 class="dax-sec-h">Evidence you can inspect</h2>
 
-            <p class="dax-body-p">Each conclusion links to the source and review that supports it. You can reopen the evidence behind a finding and see what changed the decision.</p>
+            <p class="dax-body-p">Where a finding cites a public source, the citation links to it. The counts below cover the whole source case, including chapters this page does not show.</p>
 
             <dl class="dax-stats">
               <div><dt>{len(claims)}</dt><dd>report claims</dd></div>
@@ -885,16 +965,17 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               <div><dt>{external}/{len(sources)}</dt><dd>public source links</dd></div>
             </dl>
             <p class="dax-scope-line">{remainder}{len(sources) - external} of the {len(sources)} source records are analysis outputs computed for this report rather than external links. The report labels those boundaries instead of presenting them as settled evidence.</p>
+            <p class="dax-scope-line">This case was prepared on {esc(prepared)} by an earlier DrugAdopt version that also wrote recommendations: a disposition, owners, next actions and stop rules. Current DrugAdopt reports present evidence and leave those decisions to you. This page therefore leaves out those fields, every row or sentence of the case that directs an action or rates readiness, rows from lanes current DrugAdopt does not cover, and the clinical row, whose finding the Clinical chapter already states. What it shows from the case is not reworded.</p>
 
             <details class="dax-trace-details">
               <summary>Technical traceability details</summary>
-              <p class="dax-scope-line">One checked claim from each chapter:</p>
+              <p class="dax-scope-line">One reviewed claim from each chapter:</p>
             <ol class="dax-claims">{''.join(sample)}</ol>
 
               <p class="dax-scope-line">The identifier fixes the reviewed claim and its chapter. If that text changes, the claim is flagged for another review. This record detects changes within this case; it does not establish publisher origin or scientific truth on its own.</p>
             </details>
 
-            <div class="dax-rfoot"><span>Generated by DrugAdopt · decision support, not medical advice</span><span>Trace</span></div>
+            <div class="dax-rfoot"><span>Generated by DrugAdopt · evidence synthesis, not medical advice</span><span>Trace</span></div>
           </section>
 
         </div>
@@ -902,8 +983,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
       <aside class="rpt-outro">
         <div class="rpt-outro-body">
-          <h2>A decision-ready report from public evidence.</h2>
-          <p>Every figure above was computed from published papers, trial registries, and public repositories. No sponsor data or privileged access was used. Each conclusion links to its source and review.</p>
+          <h2>What public evidence can and cannot settle, with the sources cited.</h2>
+          <p>Every figure above comes from published papers, trial registries, and public repositories. No sponsor data or privileged access was used.</p>
           <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. A sponsor can help close several gaps by sharing participant-linked exposure data, dose-modification records, or archived tissue.</p>
           <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> Tell us the drug and the indication, and we will show what public evidence can and cannot settle before you commit anything.</p>
         </div>
@@ -957,13 +1038,10 @@ def main() -> int:
         )
         return 1
 
-    for field in ("reader_surface", "biomarker_decision_brief", "evidence_traceability"):
+    for field in ("reader_surface", "decision_packet", "biomarker_decision_brief", "evidence_traceability"):
         if field not in vm:
             print(f"error: view model is missing {field}", file=sys.stderr)
             return 1
-    if "recommendation" not in vm.get("decision_packet", {}):
-        print("error: view model has no decision_packet.recommendation", file=sys.stderr)
-        return 1
 
     modules = json.loads((CONTENT_DIR / "module_sections.json").read_text())
     figures = json.loads((CONTENT_DIR / "figure_captions.json").read_text())
