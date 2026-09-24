@@ -829,3 +829,10 @@
   font-size: 0.92rem;
   line-height: 1.6;
 }
+
+/* A resolving-data list inside a Table 2 cell keeps the cell's type size.
+   The 0.74em on .dax-gate-req is sized for the full-width worked example
+   and would compound to about 10px inside a table cell. */
+.dax-table .dax-gate-req {
+  font-size: 1em;
+}
