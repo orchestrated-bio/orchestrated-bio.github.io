@@ -10,11 +10,12 @@ homepage hero: dark section spine, serif paper, numbered sections, numbered
 figures with real captions, inline [PMID ...] citations. Here it runs at
 full-page scale rather than shrunk into a figure.
 
-Content rule: scientific report prose is copied verbatim from the case --
-either from report_view_model.json or from the module pages' own
-Question / Answer / Interpretation blocks. Structural labels ("Figure 3.",
-"Section 2") and the marketing introduction and closing invitation are authored
-here. Scientific conclusions are not paraphrased.
+Content rule: scientific report prose is copied from the case -- either from
+report_view_model.json or from the module pages' own Question / Answer /
+Interpretation blocks. Structural labels ("Figure 3.", "Section 2") and the
+marketing introduction and closing invitation are authored here. Scientific
+conclusions are not paraphrased; the only rewording is the short, exact list
+in REWORDED, which changes no finding or number, and the page states its count.
 
 Second content rule: the page presents evidence, not recommendations
 (drugadopt docs/capability-boundary.md, "Evidence presentation contract").
@@ -183,6 +184,55 @@ WITHHELD_SENTENCES = {
     ),
 }
 SENTENCE_BREAK = re.compile(r"(?<=[.])\s+(?=[A-Z(])")
+
+# Case phrases reworded for readability (2026-09-28, at the site owner's
+# request): stock phrasing and one em-dash aside. Each entry is (module or
+# figure file, field, exact case text, replacement); none changes a finding,
+# a number, or a citation. reword() stops the build if a phrase is missing or
+# repeated, so a re-extracted case cannot silently skip an edit, and the
+# Traceability section states how many sentences were reworded.
+REWORDED = (
+    ("clinical", "Interpretation",
+     "Its useful question is narrower\u2014whether",
+     "It can address only a narrower question: whether"),
+    ("pharmacology", "Answer",
+     "The paper's KEGG DNA-replication enrichment is real as a computation:",
+     "The paper's KEGG DNA-replication enrichment is reproducible:"),
+    ("pharmacology", "Interpretation",
+     "The strongest statement is narrow:",
+     "Two narrow statements hold:"),
+    ("adme", "Answer",
+     "Prexasertib is a potent CHK1 inhibitor with an explicit selectivity boundary:",
+     "Prexasertib is a potent CHK1 inhibitor that also inhibits other kinases:"),
+    ("adme", "Answer",
+     "but exposes no participant-linked concentrations",
+     "but reports no participant-linked concentrations"),
+    ("adme", "Answer",
+     "A public exposure\u2013response model would therefore manufacture an answer from the wrong population and was not fit",
+     "An exposure\u2013response model built on public data would therefore describe the wrong population, so none was fit"),
+    ("toxicology", "Interpretation",
+     "The decisive toxicology weakness is that the same biological strategy that can deepen tumor replication stress can also injure proliferating marrow and GI tissues.",
+     "The main toxicology concern is that deepening replication stress in tumors can also injure proliferating marrow and GI tissue."),
+    ("mechanism_evidence_chain.png", "title",
+     "POLA1 perturbation supports an experiment, not a clinical combination.",
+     "POLA1 perturbation supports a preclinical experiment only."),
+    ("prexasertib_exposure_boundary.png", "title",
+     "Public PK supports regimen-level exposure, not patient-level underexposure.",
+     "Public PK covers regimen-level exposure only."),
+)
+
+
+def reword(modules: dict, figures: dict) -> None:
+    """Apply REWORDED in place to the module prose and figure titles."""
+    for where, field, old, new in REWORDED:
+        block = (figures if where.endswith(".png") else modules).get(where, {})
+        text = block.get(field, "")
+        if text.count(old) != 1:
+            raise SystemExit(
+                f"error: {where}.{field}: expected the REWORDED phrase "
+                f"{old[:50]!r} once, found {text.count(old)}. Re-read the case prose."
+            )
+        block[field] = text.replace(old, new)
 
 
 def withhold(texts: dict[str, str]) -> dict[str, str]:
@@ -626,6 +676,8 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     # the full population; use it on the cover and keep the short form for
     # running heads where space is tight.
     indication = vm.get("indication", "")
+    count_words = {2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine"}
+    candidate_count = count_words.get(len(brief.get("rows", [])), str(len(brief.get("rows", []))))
     indication_full = (
         packet.get("biomarker_decision_brief", {}).get("indication") or indication
     )
@@ -816,7 +868,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="An example DrugAdopt readout: a CHK1 inhibitor in platinum-resistant ovarian cancer, worked from public evidence with source-linked figures and named gaps." />
+    <meta name="description" content="An example DrugAdopt report on candidate response biomarkers for a CHK1 inhibitor in platinum-resistant ovarian cancer." />
     <meta name="theme-color" content="#f2f3f1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#101412" media="(prefers-color-scheme: dark)" />
     <title>Example report | Orchestrated Biosciences</title>
@@ -827,7 +879,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="DrugAdopt example report | Orchestrated Biosciences" />
-    <meta property="og:description" content="{esc(asset)} in {esc(indication)}: what the public evidence supports, what it does not, and the experiment that would close the gap." />
+    <meta property="og:description" content="An example DrugAdopt report on candidate response biomarkers for {esc(asset)} in {esc(indication)}." />
     <meta property="og:url" content="https://orchestrated.bio/report.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
@@ -865,7 +917,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
     <main id="main" class="rpt-stage">
       <div class="rpt-intro">
         <h1 class="rpt-intro-title">Public evidence on prexasertib's candidate response biomarkers.</h1>
-        <p class="rpt-intro-lede">This example DrugAdopt report uses public evidence to examine candidate response biomarkers for {esc(asset.lower())}. It shows the evidence for and against each marker and the experiments needed to address the gaps. No candidate marker has independent validation. <a href="./">What DrugAdopt does</a>. <a href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a></p>
+        <p class="rpt-intro-lede">This example DrugAdopt report assesses {candidate_count} candidate markers. None has independent validation. <a href="./">What DrugAdopt does</a>.</p>
       </div>
 
       <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on {esc(asset)} in {esc(indication)}">
@@ -904,7 +956,6 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
             <div class="dax-ov-foot">
               <span>Prepared {esc(prepared)} · sources as of {esc(as_of)} · from public evidence</span>
-              <span>Each reviewed claim is hash-bound to its source and its review record</span>
             </div>
           </section>
 
@@ -915,7 +966,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <p class="dax-sec-num">Evidence &amp; Gaps</p>
             <h2 class="dax-sec-h">Candidate biomarkers and what would validate them</h2>
 
-            <p class="dax-body-p"><b>A responder subset makes a selection biomarker plausible.</b> These are the {len(brief.get('rows', []))} candidates the public evidence raises, the evidence behind each, and the data that would show whether it predicts response.</p>
+            <p class="dax-body-p"><b>A responder subset makes a selection biomarker plausible.</b></p>
 
             <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 1. Candidate biomarkers and evidence strength">
             <table class="dax-table">
@@ -927,7 +978,6 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
             <p class="dax-scope-line">{esc(shown['biomarker_decision_brief.guardrail'])}</p>
 
             <h3 class="dax-sub-h">Open questions and the evidence behind them</h3>
-            <p class="dax-body-p">Each row states a finding, its sources, and the data that would resolve it. One is shown in full below; the rest follow in Table 2.</p>
             {gates}
 
             <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining open questions">
@@ -937,7 +987,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               <tbody>{gate_rows}</tbody>
             </table>
             </div>
-            <p class="dax-scope-line">{len(featured)} of the {len(packet.get('rows', []))} evidence rows in the source case are shown.</p>
+            <p class="dax-scope-line">{len(featured)} of the {len(packet.get('rows', []))} evidence rows in the full report are shown.</p>
 
             <h3 class="dax-sub-h">What would change the interpretation</h3>
             <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 3. Missing evidence and what it would show">
@@ -954,9 +1004,9 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <section class="dax-page" id="traceability">
             <div class="dax-rhead"><span>{esc(asset)} · {esc(indication)}</span><b>DrugAdopt biomarker readout</b></div>
             <p class="dax-sec-num">Traceability</p>
-            <h2 class="dax-sec-h">Evidence you can inspect</h2>
+            <h2 class="dax-sec-h">Sources</h2>
 
-            <p class="dax-body-p">Where a finding cites a public source, the citation links to it. The counts below cover the whole source case, including chapters this page does not show.</p>
+            <p class="dax-body-p">Counts cover the full report, including chapters not shown on this page.</p>
 
             <dl class="dax-stats">
               <div><dt>{len(claims)}</dt><dd>report claims</dd></div>
@@ -964,11 +1014,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
               <div><dt>{reviewed}/{len(claims)}</dt><dd>claims reviewed</dd></div>
               <div><dt>{external}/{len(sources)}</dt><dd>public source links</dd></div>
             </dl>
-            <p class="dax-scope-line">{remainder}{len(sources) - external} of the {len(sources)} source records are analysis outputs computed for this report rather than external links. The report labels those boundaries instead of presenting them as settled evidence.</p>
-            <p class="dax-scope-line">This case was prepared on {esc(prepared)} by an earlier DrugAdopt version that also wrote recommendations: a disposition, owners, next actions and stop rules. Current DrugAdopt reports present evidence and leave those decisions to you. This page therefore leaves out those fields, every row or sentence of the case that directs an action or rates readiness, rows from lanes current DrugAdopt does not cover, and the clinical row, whose finding the Clinical chapter already states. What it shows from the case is not reworded.</p>
+            <p class="dax-scope-line">{remainder}{len(sources) - external} of the {len(sources)} source records are analysis outputs computed for this report rather than external links.</p>
+            <p class="dax-scope-line">This report was generated on {esc(prepared)} by an earlier DrugAdopt version that also made recommendations, such as whether to proceed and what to run next. Current DrugAdopt reports present evidence only. This page leaves out every recommendation and readiness rating, the topics current DrugAdopt does not cover, and one clinical row that repeats the Clinical chapter. For readability, {len(REWORDED)} sentences are reworded; no finding or number is changed.</p>
 
             <details class="dax-trace-details">
-              <summary>Technical traceability details</summary>
+              <summary>Technical details</summary>
               <p class="dax-scope-line">One reviewed claim from each chapter:</p>
             <ol class="dax-claims">{''.join(sample)}</ol>
 
@@ -983,14 +1033,11 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 
       <aside class="rpt-outro">
         <div class="rpt-outro-body">
-          <h2>What public evidence can and cannot settle, with the sources cited.</h2>
-          <p>Every figure above comes from published papers, trial registries, and public repositories. No sponsor data or privileged access was used.</p>
-          <p>On your own asset, the same pipeline runs against whatever you can share: internal PK, participant-level outcomes, unpublished assays. A sponsor can help close several gaps by sharing participant-linked exposure data, dose-modification records, or archived tissue.</p>
-          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b> Tell us the drug and the indication, and we will show what public evidence can and cannot settle before you commit anything.</p>
+          <p>On your own asset, DrugAdopt can also use data you share. In this case, participant-linked exposure data, dose-modification records, or archived tissue would answer several of the open questions above.</p>
+          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b></p>
         </div>
         <div class="rpt-outro-actions">
           <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
-          <a class="link-quiet" href="mailto:support@orchestrated.bio?subject=DrugAdopt%20pilot">Or email us</a>
           <a class="link-quiet" href="./company.html#data-handling">How your data is handled</a>
         </div>
       </aside>
@@ -1050,6 +1097,7 @@ def main() -> int:
         for k, v in json.loads((CONTENT_DIR / "figure_alt.json").read_text()).items()
         if not k.startswith("_")
     }
+    reword(modules, figures)
 
     missing_figs = [
         s[k]

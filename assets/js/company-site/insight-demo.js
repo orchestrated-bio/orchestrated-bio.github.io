@@ -45,7 +45,6 @@
           label: 'Caveat',
           text: 'Each rate uses all 1,066 profiled tumors as the denominator. This is not the overall prevalence of TP53 alteration.',
           chips: [
-            { label: 'Method', href: '#insight-methods' },
             { label: 'TCGA data', href: 'https://www.cbioportal.org/study/summary?id=brca_tcga_pan_can_atlas_2018', external: true }
           ]
         }
@@ -66,7 +65,6 @@
           label: 'Caveat',
           text: 'PAM50 subtype and tumor composition can drive expression differences, so the model needs stratification or covariate adjustment.',
           chips: [
-            { label: 'Method', href: '#insight-methods' },
             { label: 'TCGA data', href: 'https://www.cbioportal.org/study/summary?id=brca_tcga_pan_can_atlas_2018', external: true }
           ]
         }
@@ -261,9 +259,6 @@
       window.clearTimeout(phaseTimer);
       return;
     }
-    // The in-chat "Method" chip links to #insight-methods; resetting to 01
-    // would lose the phase the reader was on.
-    if (window.location.hash === '#insight-methods') return;
     showPhase(0);
   });
 
