@@ -1260,30 +1260,6 @@
   font-size: 9px;
 }
 
-.return-contract {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 0.9rem 0 0;
-  border-top: 1px solid var(--rule-firm);
-  border-bottom: 1px solid var(--rule-firm);
-}
-
-.return-contract > div { padding: 1.25rem; }
-.return-contract > div + div { border-left: 1px solid var(--rule); }
-
-.return-contract dt {
-  margin-bottom: 0.45rem;
-  font-weight: 620;
-  color: var(--ink);
-}
-
-.return-contract dd {
-  margin: 0;
-  font-size: var(--step--1);
-  line-height: 1.55;
-  color: var(--ink-3);
-}
-
 /* --- Demo type floors ---------------------------------------------------
    Everything inside the demo is sized in em off .insight-ui, which is what
    let real content fall to 4-8px on narrow screens. Each piece of type keeps
@@ -1446,9 +1422,6 @@
   }
   .iui-mobile-copy { padding-left: 0; }
   .iui-notebook-grid { grid-template-columns: minmax(0, 1.1fr) minmax(14em, 0.9fr); }
-  .return-contract { grid-template-columns: repeat(2, 1fr); }
-  .return-contract > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--rule); }
-  .return-contract > div:nth-child(4) { border-top: 1px solid var(--rule); }
 }
 
 /* On phones, use the available width for readable content. The desktop
@@ -1534,8 +1507,6 @@
   .iui-notebook-record dt,
   .iui-notebook-record dd { font-size: 0.75em; overflow-wrap: anywhere; }
   .iui-notebook-boundary { font-size: 0.75em; }
-  .return-contract { grid-template-columns: 1fr; }
-  .return-contract > div + div { border-left: 0; border-top: 1px solid var(--rule); }
 }
 
 @media (prefers-reduced-motion: reduce) {
