@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="Insight turns plain-language cancer-genomics questions into cohort-backed analyses with methods, figures, and sources that can be inspected." />
+    <meta name="description" content="Ask TCGA a cancer-genomics question. Insight picks the cohort and runs the analysis." />
     <meta name="theme-color" content="#f2f3f1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#101412" media="(prefers-color-scheme: dark)" />
     <title>Insight: Ask Cancer Genomics Questions of TCGA Data</title>
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="Insight | Orchestrated Biosciences" />
-    <meta property="og:description" content="Ask a cancer-genomics question in plain language. Insight selects the cohort, runs the analysis, and keeps the methods, limits, and sources attached." />
+    <meta property="og:description" content="Ask TCGA a cancer-genomics question. Insight picks the cohort and runs the analysis." />
     <meta property="og:url" content="https://orchestrated.bio/insight.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
@@ -25,7 +25,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=a85d077e1c15" />
-    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=8f66ad9f91b7" />
+    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=9cf502c97542" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
   <body>
@@ -52,9 +52,9 @@
     <main id="main">
       <section class="page-head insight-head">
         <div class="shell">
-          <h1>Ask a cancer-genomics question. Get an analysis you can check.</h1>
-          <p class="opening-lede">Ask in plain language. Insight<span class="tm">™</span> selects the cohort, runs the analysis, reports the result and its limits, and keeps the methods and sources attached.</p>
-          <p class="opening-lede opening-lede-tight">Insight came first, and it is still live and under active development. The cohort handling and provenance work here is what <a href="./">DrugAdopt</a> runs on.</p>
+          <h1>Ask TCGA a cancer-genomics question.</h1>
+          <p class="opening-lede">Insight<span class="tm">™</span> picks the cohort and runs the analysis.</p>
+          <p class="opening-lede opening-lede-tight">Insight came first and is still in active development. <a href="./">DrugAdopt</a> is built on it.</p>
           <p class="opening-actions">
             <a class="btn" href="https://insight.orchestrated.bio" target="_blank" rel="noreferrer">Try Insight <span aria-hidden="true">↗</span></a>
           </p>
@@ -64,7 +64,7 @@
       <section class="band band-first">
         <div class="shell">
           <figure class="insight-product-proof">
-            <div class="insight-demo-switcher" role="group" aria-label="Follow an Insight analysis from question to reproducible handoff">
+            <div class="insight-demo-switcher" role="group" aria-label="Insight demo steps">
               <span>Follow one analysis</span>
               <button type="button" data-insight-phase="0" aria-pressed="true"><b>01</b> Ask</button>
               <button type="button" data-insight-phase="1" aria-pressed="false"><b>02</b> Analyze</button>
@@ -72,11 +72,11 @@
               <button type="button" data-insight-phase="3" aria-pressed="false"><b>04</b> Reproduce</button>
               <button class="insight-story-play" type="button" data-insight-play aria-label="Play automatic demonstration">Play</button>
             </div>
-            <div class="insight-ui iui-phase-phone" role="region" aria-label="Interactive Insight example following a question from a phone through analysis, follow-up, and reproducible handoff.">
+            <div class="insight-ui iui-phase-phone" role="region" aria-label="Interactive Insight example">
               <div class="iui-mobile-story" aria-hidden="false">
                 <div class="iui-mobile-copy">
                   <strong>Ask from your phone.</strong>
-                  <p>Insight keeps the cohort and working context when you continue on desktop.</p>
+                  <p>Insight keeps the cohort and analysis when you continue on desktop.</p>
                 </div>
                 <div class="iui-phone-frame">
                   <div class="iui-phone-status"><span>9:41</span><span class="iui-phone-island"></span><span>5G&nbsp; ▰</span></div>
@@ -140,7 +140,7 @@ model.volcano(
                       <div><dt>Adjustment</dt><dd>Benjamini–Hochberg FDR</dd></div>
                       <div><dt>Unmodeled</dt><dd>Tumor purity</dd></div>
                     </dl>
-                    <p class="iui-notebook-boundary">The recipe adjusts for PAM50 subtype. Tumor purity is not modeled. It does not turn an observational comparison into a causal result.</p>
+                    <p class="iui-notebook-boundary">The recipe adjusts for PAM50 subtype. Tumor purity is not modeled.</p>
                   </div>
                 </div>
               </div>
@@ -300,33 +300,8 @@ model.volcano(
                 </div>
               </div>
             </div>
-            <figcaption>The same BRCA/TP53 question moves from phone to desktop, follow-up analysis, and a notebook-ready export. Cohort, methods, and caveats stay visible.</figcaption>
+            <figcaption>One BRCA/TP53 question: asked on a phone, analyzed and followed up on desktop, then exported as a notebook recipe.</figcaption>
           </figure>
-        </div>
-      </section>
-
-      <section class="band" id="insight-methods">
-        <div class="shell">
-          <h2 class="list-title">Every result carries its working context</h2>
-          <dl class="return-contract">
-            <div>
-              <dt>Question and cohort</dt>
-              <dd>The dataset, profiled denominator, comparison, and endpoint remain visible.</dd>
-            </div>
-            <div>
-              <dt>Analysis and settings</dt>
-              <dd>The method, thresholds, assay match, and model definition travel with the result.</dd>
-            </div>
-            <div>
-              <dt>Interpretation and limits</dt>
-              <dd>The readout is separated from the caveat that changes how it should be used.</dd>
-            </div>
-            <div>
-              <dt>Next step and export</dt>
-              <dd>Follow-up analyses and a notebook-ready recipe preserve the same context.</dd>
-            </div>
-          </dl>
-          <p class="band-note">Want Insight on your own cohorts? <a href="mailto:support@orchestrated.bio?subject=Insight">Email us</a> or <a href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">book a call</a>.</p>
         </div>
       </section>
     </main>
@@ -341,6 +316,6 @@ model.volcano(
       </div>
     </footer>
     <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
-    <script src="./assets/js/company-site/insight-demo.js?v=9f7ef2faf7d3"></script>
+    <script src="./assets/js/company-site/insight-demo.js?v=c4689f1379e1"></script>
   </body>
 </html>

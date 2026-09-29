@@ -80,7 +80,7 @@ def main() -> None:
     <meta name="referrer" content="no-referrer" />
     <meta name="robots" content="noindex, follow" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="description" content="Scopeify turns a prospective bioinformatics project question into a public-data feasibility brief, ballpark estimate, and draft statement of work." />
+    <meta name="description" content="Describe a bioinformatics project and Scopeify drafts a statement of work with estimated hours and a search of public datasets." />
     <meta name="theme-color" content="#101412" />
     <title>Scopeify | Orchestrated Biosciences</title>
     <link rel="canonical" href="https://orchestrated.bio/scopeify.html" />
@@ -90,7 +90,7 @@ def main() -> None:
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="Scopeify | Orchestrated Biosciences" />
-    <meta property="og:description" content="Scope a bioinformatics consulting project from a natural-language hypothesis, public-data evidence, browser-side metadata scan, and a draft SOW." />
+    <meta property="og:description" content="Describe a bioinformatics project and Scopeify drafts a statement of work with estimated hours and a search of public datasets." />
     <meta property="og:url" content="https://orchestrated.bio/scopeify.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
