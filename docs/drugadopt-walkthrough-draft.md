@@ -2,6 +2,24 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Independent Astra website review, October 5
+
+Three `gpt-6-astra` agents reviewed the current page independently: visual design, positioning/copy, and the scientific reader's experience. They did not see each other's feedback. The copy review used the current source and screenshot; the visual and reader reviews also inspected live interactions. The local preview server had stopped and was restarted during the review. No shared viewport was changed. These are website reviews, not scientific validation of the case.
+
+The reviewers favored the restrained light palette, report-led hero, real scientific example, and four-card presentation. Their headline preferences differed: the positioning reviewer favored an explicit drug-and-indication review, while the visual and reader reviewers found the current wording approachable but broad. All found that “reviews the research” understates the analytical work.
+
+The primary recommendation is **“A scientific review of your drug and indication.”** Suggested supporting copy: “DrugAdopt reviews published research and analyzes available data for a specific drug and disease. You receive a report, slide deck, and evidence workbook with sources and analysis code.” This is a review recommendation; the website copy has not yet been changed.
+
+Remaining refinements:
+
+- Make the fourth card complete the trace: link to the retained analysis and input table, and show a useful calculation rather than just imports and a CSV read. Keep the paper link distinct.
+- Show one complete figure or result in the initial reader view, with the full-section link visible near its title. Preserve introductory disease/mechanism context for visitors unfamiliar with ADPKD.
+- Reduce the repeated report presentation below the hero. Consolidate overlapping previews or use topic headings for the distinct examples.
+- Move the secondary custom-analysis/AI-pipeline sentence out of the opening product explanation.
+- Preserve the selected report section and scroll position when a reader follows the full-report link and returns with browser Back.
+
+The reader review confirmed section changes, the full-report destination, exact Slide 8 and Parameters cross-links, next/backcard controls, enlargement, larger text, focus return, and the matching Torres 2012 publication. It found that browser Back resets the homepage reader to Overview. The review did not repeat the earlier visual mobile checks.
+
 ## Report hero and four-card source view
 
 The interactive HTML reader now sits in the opening hero beside “Understand the evidence for your drug.” Its seven sections remain reader-controlled. Desktop typography is 17px; the report scrolls within its frame. On phones, the section buttons form a horizontal strip and the report expands into the page.
