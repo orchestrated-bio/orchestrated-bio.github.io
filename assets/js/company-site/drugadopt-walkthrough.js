@@ -1,6 +1,41 @@
 /* Reader-controlled artifact highlights. Images remain ordinary links without JS. */
 (function () {
   'use strict';
+  var gallery = document.querySelector('[data-case-gallery]');
+  var formats = gallery ? Array.from(gallery.querySelectorAll('[data-case-format]')) : [];
+  var chapters = gallery ? Array.from(gallery.querySelectorAll('[data-case-panel]')) : [];
+  function showFormat(next, moveFocus) {
+    if (!chapters.length) return;
+    var active = (next + chapters.length) % chapters.length;
+    chapters.forEach(function (chapter, i) { chapter.hidden = i !== active; });
+    formats.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === active)); });
+    if (moveFocus) formats[active].focus();
+  }
+  function formatForHash() {
+    return chapters.findIndex(function (chapter) { return '#' + chapter.id === window.location.hash; });
+  }
+  if (gallery) {
+    formats.forEach(function (button, i) {
+      button.addEventListener('click', function () { showFormat(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowRight') next = i + 1;
+        if (event.key === 'ArrowLeft') next = i - 1;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = chapters.length - 1;
+        if (next !== undefined) { event.preventDefault(); showFormat(next, true); }
+      });
+    });
+    showFormat(Math.max(0, formatForHash()));
+    gallery.querySelector('.case-formats').hidden = false;
+    window.addEventListener('hashchange', function () {
+      var next = formatForHash();
+      if (next < 0) return;
+      var wasHidden = chapters[next].hidden;
+      showFormat(next);
+      if (wasHidden) chapters[next].scrollIntoView({ block: 'start' });
+    });
+  }
   function createBackcards(container, panels, select) {
     var layer = document.createElement('div');
     layer.className = 'artifact-backcards';
@@ -64,7 +99,11 @@
     viewer.querySelector('[data-artifact-next]').addEventListener('click', function () { show(index + 1); });
     var chapterId = viewer.closest('.artifact-chapter').id;
     document.querySelectorAll('a[href="#' + chapterId + '"][data-artifact-index]').forEach(function (link) {
-      link.addEventListener('click', function () { show(Number(link.dataset.artifactIndex)); });
+      link.addEventListener('click', function () {
+        var format = chapters.findIndex(function (chapter) { return chapter.id === chapterId; });
+        if (format >= 0) showFormat(format);
+        show(Number(link.dataset.artifactIndex));
+      });
     });
     show(0);
     viewer.querySelector('.artifact-selector').hidden = false;

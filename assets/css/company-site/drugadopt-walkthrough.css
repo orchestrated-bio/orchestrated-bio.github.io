@@ -5,7 +5,6 @@ body.drugadopt-home .opening h1 { font-size: clamp(2.3rem, 3.4vw, 3.7rem); max-w
 body.drugadopt-home .opening .shell { grid-template-columns: minmax(0, .7fr) minmax(0, 1.35fr); gap: clamp(2rem, 4vw, 3.5rem); }
 .opening-actions { gap: 1rem; }
 .opening-eyebrow { font-size: .8rem; font-weight: 600; color: var(--accent-deep); margin: 0 0 1.2rem; }
-.opening-note { margin: 1rem 0 0; font-size: .85rem; line-height: 1.6; color: var(--ink-3); }
 .opening-trust { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin-top: .65rem; font-size: .85rem; }
 .opening-trust a { color: var(--accent-deep); text-underline-offset: .2em; }
 .research-project { padding-block: 3rem; border-block: 1px solid var(--rule); }
@@ -93,15 +92,19 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .artifact-selector button { min-height: 44px; padding: .6rem .85rem; border: 1px solid transparent; border-radius: .3rem; background: transparent; color: var(--ink-2); font: inherit; font-size: .85rem; cursor: pointer; }
 .artifact-selector button[aria-pressed="true"] { color: var(--accent-deep); background: var(--accent-wash); font-weight: 650; }
 .artifact-selector button:hover { border-color: var(--rule-firm); }
-.artifact-chapter { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: center; gap: clamp(2.5rem, 6vw, 6rem); padding-block: clamp(3.5rem, 7vw, 6rem); }
+.case-gallery { padding-top: 3rem; }
+.case-gallery-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem 2rem; }
+.case-gallery-heading h2 { margin: 0; font-size: var(--step-2); line-height: 1.25; letter-spacing: -.02em; }
+.case-formats { display: flex; flex-wrap: wrap; gap: .35rem; }
+.case-formats button { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--rule-firm); border-radius: .3rem; background: transparent; color: var(--ink-2); font: inherit; font-size: .9rem; cursor: pointer; }
+.case-formats button[aria-pressed="true"] { background: var(--accent-wash); border-color: var(--accent); color: var(--accent-deep); font-weight: 650; }
+.case-formats button:hover { border-color: var(--accent); }
+.artifact-chapter { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: center; gap: clamp(2.5rem, 6vw, 6rem); padding-block: 1.5rem 3rem; }
 .artifact-chapter-copy { grid-column: 2; grid-row: 1; }
-.artifact-chapter-copy h2 { margin: 0 0 1rem; max-width: 17ch; font-size: clamp(1.9rem, 2.7vw, 2.75rem); font-weight: 700; color: var(--ink); letter-spacing: -.03em; line-height: 1.15; }
+.artifact-chapter-copy h3 { margin: 0; max-width: 20ch; font-size: clamp(1.75rem, 2.5vw, 2.5rem); font-weight: 700; color: var(--ink); letter-spacing: -.03em; line-height: 1.15; }
 .artifact-chapter-copy > p { margin: 0 0 .75rem; }
 .artifact-chapter-copy > p:not(.artifact-eyebrow) { font-size: 1.08rem; line-height: 1.65; }
 .artifact-stack { grid-column: 1; grid-row: 1; min-width: 0; }
-#slide-highlights { grid-template-columns: minmax(0, 1fr) minmax(0, 1.65fr); }
-#slide-highlights .artifact-chapter-copy { grid-column: 1; }
-#slide-highlights .artifact-stack { grid-column: 2; }
 .artifact-viewer { min-width: 0; }
 .artifact-selector { padding: .5rem; border-bottom: 1px solid var(--rule); }
 .artifact-panel { margin: 0; }
@@ -118,7 +121,7 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .artifact-controls button { font: inherit; color: var(--ink); background: transparent; border: 0; min-width: 44px; min-height: 44px; cursor: pointer; }
 .artifact-controls button:hover { background: var(--accent-wash); }
 .artifact-dialog { width: min(96vw, 92rem); max-width: 96vw; height: 94dvh; max-height: 94dvh; margin: auto; padding: 0; border: 1px solid var(--rule-firm); background: var(--paper); color: var(--ink); }
-.artifact-dialog:not([open]), .artifact-selector[hidden], .artifact-controls[hidden], .artifact-panel[hidden] { display: none; }
+.artifact-dialog:not([open]), .case-formats[hidden], .artifact-chapter[hidden], .artifact-selector[hidden], .artifact-controls[hidden], .artifact-panel[hidden] { display: none; }
 .artifact-dialog[open] { display: flex; flex-direction: column; }
 .artifact-dialog::backdrop { background: rgb(5 14 10 / .8); }
 .artifact-dialog-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem 1rem; padding: .75rem 1rem; border-bottom: 1px solid var(--rule); }
@@ -138,10 +141,10 @@ html:has(.artifact-dialog[open]) { overflow: hidden; }
   .project-heading, .case-introduction { grid-template-columns: 1fr; gap: 1.25rem; }
   .project-heading > p { max-width: 59ch; }
   .project-outcomes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .artifact-chapter, #slide-highlights { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-block: 3.5rem; }
-  .artifact-chapter-copy, #slide-highlights .artifact-chapter-copy { grid-column: 1; grid-row: 1; max-width: 44rem; }
-  .artifact-stack, #slide-highlights .artifact-stack { grid-column: 1; grid-row: 2; }
-  .artifact-chapter-copy h2 { max-width: 24ch; }
+  .artifact-chapter { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .artifact-chapter-copy { grid-column: 1; grid-row: 1; max-width: 44rem; }
+  .artifact-stack { grid-column: 1; grid-row: 2; }
+  .artifact-chapter-copy h3 { max-width: 30ch; }
 }
 @media (max-width: 40rem) {
   .research-project { padding-block: 2rem; }
@@ -168,8 +171,12 @@ html:has(.artifact-dialog[open]) { overflow: hidden; }
   .artifact-backcard:last-child { right: 0; transform: rotate(3deg); }
   .artifact-backcard span { font-size: .65rem; padding: .6rem .75rem; }
   .artifact-selector button { flex: 1 1 auto; padding-inline: .5rem; font-size: .78rem; }
-  .artifact-chapter { padding-block: 2.5rem; }
-  .artifact-chapter-copy h2 { font-size: 1.75rem; }
+  .case-gallery { padding-top: 2rem; }
+  .case-gallery-heading { gap: 1rem; }
+  .case-formats { width: 100%; }
+  .case-formats button { flex: 1 1 auto; padding-inline: .6rem; font-size: .85rem; }
+  .artifact-chapter { padding-block: 1.5rem 2.5rem; }
+  .artifact-chapter-copy h3 { font-size: 1.65rem; }
   .artifact-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border: 0; }
   .artifact-dialog-bar { padding: .5rem .7rem; }
   .artifact-dialog-actions { width: 100%; }
