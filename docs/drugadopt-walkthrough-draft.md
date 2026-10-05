@@ -8,7 +8,7 @@ Three `gpt-6-astra` agents reviewed the current page independently: visual desig
 
 The reviewers favored the restrained light palette, report-led hero, real scientific example, and four-card presentation. Their headline preferences differed: the positioning reviewer favored an explicit drug-and-indication review, while the visual and reader reviewers found the current wording approachable but broad. All found that “reviews the research” understates the analytical work.
 
-The primary recommendation is **“A scientific review of your drug and indication.”** Suggested supporting copy: “DrugAdopt reviews published research and analyzes available data for a specific drug and disease. You receive a report, slide deck, and evidence workbook with sources and analysis code.” This is a review recommendation; the website copy has not yet been changed.
+Alex clarified that DrugAdopt’s primary value is novel scientific insight generated through analysis. The review-led headline recommendation was withdrawn. The homepage now leads with **“New insight into your drug and indication.”** Its supporting copy describes new analyses of molecular and clinical data, investigating mechanisms, biomarkers, and treatment response. The report, slide deck, and evidence workbook carry the findings and supporting work. This correction should guide subsequent website refinements.
 
 Remaining refinements:
 
