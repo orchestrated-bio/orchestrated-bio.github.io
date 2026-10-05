@@ -52,6 +52,9 @@ MIME = {
     ".jpeg": "image/jpeg",
     ".gif": "image/gif",
     ".svg": "image/svg+xml",
+    ".py": "text/plain;charset=utf-8",
+    ".qmd": "text/plain;charset=utf-8",
+    ".csv": "text/csv;charset=utf-8",
 }
 
 # JPEG-encode big report screenshots instead of PNG (q, max width).
@@ -101,7 +104,7 @@ def inline_srcs(html: str) -> str:
         if src.startswith("data:") or src.startswith("http"):
             return m.group(0)
         return f'{m.group(1)}="{data_uri(src)}"'
-    return re.sub(r'(src|href|data-trace-href)="((?:\./|\.\./)[^"]+\.(?:png|jpe?g|gif|svg))"',
+    return re.sub(r'(src|href|data-trace-href)="((?:\./|\.\./)[^"]+\.(?:png|jpe?g|gif|svg|py|qmd|csv))"',
                   repl, html)
 
 # ---------------------------------------------------------------------------

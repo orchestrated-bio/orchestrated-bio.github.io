@@ -1174,6 +1174,12 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
         if key == "exposure":
             paragraphs = section.find(id="a-published-population-pharmacokinetic-model-generates-regimen-and-kidney-function-dependent-profiles").find_all("p")[:1]
         selected = ''.join(str(copy.deepcopy(p)) for p in paragraphs)
+        if key == "overview":
+            # Keep the source's disease and mechanism explanations short enough
+            # that the complete graphical abstract fits in the opening reader.
+            disease = summary_paragraphs[0].find("span")
+            therapy = summary_paragraphs[1].find_all("span")[:2]
+            selected = f'<p>{copy.deepcopy(disease)}</p><p>{" ".join(str(copy.deepcopy(s)) for s in therapy)}</p>'
         figure = section.find(class_="dax-print-figure")
         if key in selected_figures:
             figure = section.find("img", src=f"./images/drugadopt/tolvaptan/report/{selected_figures[key]}").find_parent(class_="dax-print-figure")
@@ -1186,8 +1192,12 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
             del node["id"]
         for link in excerpt.select('a[href^="#"]'):
             link["href"] = "./report.html" + link["href"]
+        for image in excerpt.find_all("img"):
+            link = excerpt.new_tag("a", href=f"./report.html#{key}")
+            link["aria-label"] = f"Read {label.lower()} in the full report"
+            image.wrap(link)
         title = "Tolvaptan in ADPKD" if key == "overview" else label
-        preview_pages.append(f'<article class="dax-page published-report-section" data-page="{page_key}"><h3 class="dax-sec-h" id="sample-{key}">{title}</h3>{excerpt}<p class="sample-section-link"><a href="./report.html#{key}">Read this section →</a></p></article>')
+        preview_pages.append(f'<article class="dax-page published-report-section" data-page="{page_key}"><div class="sample-page-title"><h3 class="dax-sec-h" id="sample-{key}">{title}</h3><a class="sample-section-link" href="./report.html#{key}">Read section →</a></div>{excerpt}</article>')
     preview = f'''<section class="report-sample hero-reader" id="report-reader" aria-labelledby="reader-title"><h2 id="reader-title">Explore the report.</h2><div class="shot-render"><div class="dax-ui" role="region" aria-label="Interactive tolvaptan ADPKD report preview"><nav class="dax-spine" aria-label="Preview report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><div class="dax-nav">{''.join(preview_nav)}</div></nav><div class="dax-paper">{''.join(preview_pages)}</div></div></div></section>'''
     home = ROOT / "index.html"
     text = home.read_text()
