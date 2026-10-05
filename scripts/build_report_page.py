@@ -1188,14 +1188,14 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
             link["href"] = "./report.html" + link["href"]
         title = "Tolvaptan in ADPKD" if key == "overview" else label
         preview_pages.append(f'<article class="dax-page published-report-section" data-page="{page_key}"><h3 class="dax-sec-h" id="sample-{key}">{title}</h3>{excerpt}<p class="sample-section-link"><a href="./report.html#{key}">Read this section →</a></p></article>')
-    preview = f'''<section class="report-sample shell" id="report-reader" aria-labelledby="reader-title"><h2 id="reader-title">Explore the report.</h2><div class="shot-render"><div class="dax-ui" role="region" aria-label="Interactive tolvaptan ADPKD report preview"><nav class="dax-spine" aria-label="Preview report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><div class="dax-nav">{''.join(preview_nav)}</div></nav><div class="dax-paper">{''.join(preview_pages)}</div></div></div></section>'''
+    preview = f'''<section class="report-sample hero-reader" id="report-reader" aria-labelledby="reader-title"><h2 id="reader-title">Explore the report.</h2><div class="shot-render"><div class="dax-ui" role="region" aria-label="Interactive tolvaptan ADPKD report preview"><nav class="dax-spine" aria-label="Preview report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><div class="dax-nav">{''.join(preview_nav)}</div></nav><div class="dax-paper">{''.join(preview_pages)}</div></div></div></section>'''
     home = ROOT / "index.html"
     text = home.read_text()
     marked = '<!-- report-reader:start -->\n' + preview + '\n<!-- report-reader:end -->'
     if '<!-- report-reader:start -->' in text:
         text = re.sub(r'<!-- report-reader:start -->.*?<!-- report-reader:end -->', lambda _: marked, text, flags=re.S)
     else:
-        text = text.replace('<section class="artifact-chapter shell" id="report-highlights"', marked + '\n\n      <section class="artifact-chapter shell" id="report-highlights"', 1)
+        raise SystemExit("Homepage is missing its report-reader projection marker")
     home.write_text(text)
     record = {"source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "source_name": source.name, "sections": [key for key, _ in labels], "figure_sha256": figures, "copy_replacements": replacements, "omitted_internal_sections": ["Quantitative data", "Report provenance"]}
     (asset_dir / "projection-sources.json").write_text(json.dumps(record, indent=2) + "\n")

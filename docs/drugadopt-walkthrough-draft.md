@@ -2,7 +2,17 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
-## Latest visual refinement
+## Report hero and four-card source view
+
+The interactive HTML reader now sits in the opening hero beside “Understand the evidence for your drug.” Its seven sections remain reader-controlled. Desktop typography is 17px; the report scrolls within its frame. On phones, the section buttons form a horizontal strip and the report expands into the page.
+
+The finding walkthrough now shows four vertical cards together: Report, Slide deck, Spreadsheet, and Code & source. The report card uses the original trial figure and rates. The spreadsheet card presents the retained Parameters rows 2–4 in a readable two-column layout; the original labels and values remain available in the larger worksheet preview. The code card retains the original Quarto/Python excerpt and publication link. The Slide 8 and Parameters links select those exact views in the larger galleries.
+
+The former hero rotation, walkthrough switcher, status announcements, and separate code disclosure are removed, including their unused JavaScript and CSS. The angled cards remain on the larger report, slide, and workbook galleries. Repeated topic descriptions and the extra report-topic/modality list were removed. The report builder refreshes the marked reader in place, preserving its hero position on rebuild.
+
+Checks covered all seven report selections, image loading, slide detail and Escape focus return, precise gallery links, and the 390px mobile layout without horizontal page overflow. Four columns were checked on desktop. All 194 local file/anchor references resolve across the five main pages. Full HTML report and figure bytes match the prior commit; original code and worksheet values match their retained sources. JavaScript/Python syntax, whitespace checks, prose review, and the existing portable build completed. The portable file is 8.49 MB. Screenshots are in `test-results/drugadopt-walkthrough/design-review/`.
+
+## Earlier visual refinement (superseded above)
 
 The latest revision removes visible enlargement links, playback, repeated viewing instructions, redundant preview descriptions, and the generic feature lists. Images themselves open the reading dialog. The section descriptions name scientific topics instead of generic document features. The Quarto/Python disclosure is retained with its literal code unchanged.
 

@@ -62,94 +62,14 @@
     });
     viewer.querySelector('[data-artifact-prev]').addEventListener('click', function () { show(index - 1); });
     viewer.querySelector('[data-artifact-next]').addEventListener('click', function () { show(index + 1); });
+    var chapterId = viewer.closest('.artifact-chapter').id;
+    document.querySelectorAll('a[href="#' + chapterId + '"][data-artifact-index]').forEach(function (link) {
+      link.addEventListener('click', function () { show(Number(link.dataset.artifactIndex)); });
+    });
     show(0);
     viewer.querySelector('.artifact-selector').hidden = false;
     viewer.querySelector('.artifact-controls').hidden = false;
   });
-
-  var hero = document.querySelector('[data-hero-gallery]');
-  if (hero) {
-    var heroPanels = Array.from(hero.querySelectorAll('[data-hero-panel]'));
-    var heroButtons = Array.from(hero.querySelectorAll('[data-hero-select]'));
-    var heroCaption = hero.querySelector('[data-hero-caption]');
-    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    var heroIndex = 0;
-    var heroTimer;
-    var heroManual = false;
-    var heroVisible = true;
-    var updateHeroBackcards = createBackcards(hero.parentElement, heroPanels, function (next) {
-      heroManual = true;
-      window.clearTimeout(heroTimer);
-      showHero(next);
-    });
-    function showHero(next) {
-      heroIndex = (next + heroPanels.length) % heroPanels.length;
-      heroPanels.forEach(function (panel, i) {
-        panel.classList.toggle('is-active', i === heroIndex);
-        panel.setAttribute('aria-hidden', String(i !== heroIndex));
-        panel.inert = i !== heroIndex;
-      });
-      heroButtons.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === heroIndex)); });
-      heroCaption.textContent = heroPanels[heroIndex].querySelector('figcaption').textContent;
-      updateHeroBackcards(heroIndex);
-    }
-    function scheduleHero() {
-      window.clearTimeout(heroTimer);
-      if (motion.matches || heroManual || !heroVisible || document.hidden || hero.parentElement.matches(':hover, :focus-within')) return;
-      heroTimer = window.setTimeout(function () { showHero(heroIndex + 1); scheduleHero(); }, 9000);
-    }
-    heroButtons.forEach(function (button, i) {
-      button.addEventListener('click', function () { heroManual = true; window.clearTimeout(heroTimer); showHero(i); });
-      button.addEventListener('keydown', function (event) {
-        var next;
-        if (event.key === 'ArrowRight') next = heroIndex + 1;
-        if (event.key === 'ArrowLeft') next = heroIndex - 1;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = heroPanels.length - 1;
-        if (next !== undefined) { event.preventDefault(); heroManual = true; window.clearTimeout(heroTimer); showHero(next); heroButtons[heroIndex].focus(); }
-      });
-    });
-    hero.parentElement.addEventListener('mouseenter', function () { window.clearTimeout(heroTimer); });
-    hero.parentElement.addEventListener('mouseleave', scheduleHero);
-    hero.parentElement.addEventListener('focusin', function () { window.clearTimeout(heroTimer); });
-    hero.parentElement.addEventListener('focusout', function () { window.setTimeout(scheduleHero, 0); });
-    document.addEventListener('visibilitychange', scheduleHero);
-    motion.addEventListener('change', scheduleHero);
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) { heroVisible = entries[0].isIntersecting; scheduleHero(); }).observe(hero);
-    }
-    hero.querySelector('.hero-selectors').hidden = false;
-    showHero(0);
-    scheduleHero();
-  }
-
-  var trace = document.querySelector('[data-evidence-trace]');
-  if (trace) {
-    var steps = Array.from(trace.querySelectorAll('[data-trace-step]'));
-    var tracePanels = Array.from(trace.querySelectorAll('[data-trace-panel]'));
-    var traceStatus = trace.querySelector('[data-trace-status]');
-    var traceIndex = 0;
-    function showTrace(next, moveFocus) {
-      traceIndex = (next + steps.length) % steps.length;
-      steps.forEach(function (step, i) { step.setAttribute('aria-pressed', String(i === traceIndex)); });
-      tracePanels.forEach(function (panel, i) { panel.hidden = i !== traceIndex; });
-      traceStatus.textContent = steps[traceIndex].textContent + ' view';
-      if (moveFocus) steps[traceIndex].focus();
-    }
-    steps.forEach(function (step, i) {
-      step.addEventListener('click', function () { showTrace(i); });
-      step.addEventListener('keydown', function (event) {
-        var next;
-        if (event.key === 'ArrowRight') next = traceIndex + 1;
-        if (event.key === 'ArrowLeft') next = traceIndex - 1;
-        if (event.key === 'Home') next = 0;
-        if (event.key === 'End') next = steps.length - 1;
-        if (next !== undefined) { event.preventDefault(); showTrace(next, true); }
-      });
-    });
-    showTrace(0);
-    trace.querySelector('.trace-switcher').hidden = false;
-  }
 
   var dialog = document.querySelector('.artifact-dialog');
   if (!dialog || typeof dialog.showModal !== 'function') return;
