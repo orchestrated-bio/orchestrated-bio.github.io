@@ -214,7 +214,7 @@ def build() -> str:
         "<head>\n"
         "<meta charset=\"utf-8\" />\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n"
-        "<title>DrugAdopt — Scientific Evidence for a Drug and Indication</title>\n"
+        "<title>DrugAdopt: Scientific Evidence for a Drug and Indication</title>\n"
         f"<style>\n{styles}\n</style>\n"
         "</head>\n"
         "<body class=\"drugadopt-home\">\n"

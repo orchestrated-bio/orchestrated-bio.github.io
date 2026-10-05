@@ -51,3 +51,13 @@ The final browser screenshot is saved in the ignored `test-results/drugadopt-wal
 Preview: `http://127.0.0.1:8773/`. Rebuild the same-source portable artifact with `python3 concepts/asset-diligence/build_artifact.py`. The portable file includes DrugAdopt, Insight, the existing example report, and Company; links to Custom analysis, Privacy, and Terms open their existing public pages.
 
 This remains a local draft for review. No push, PR, deployment, or client-file modification is included.
+
+## Copy review with de-ai-slop
+
+The homepage copy was edited with the refined de-ai-slop skill. The review covered headings, section descriptions, captions, reading controls, accessibility text, and metadata. Generic slogans and internal terminology were replaced with direct descriptions of what a reader can learn or look up. For example, “One finding, from explanation to evidence” became “Where the numbers come from.” “Values and units stay attached to stable identifiers” became “Recorded values and units, with an ID for each entry.”
+
+Before/after scans of the source and extracted prose were followed by a manual reading of each section. The original draft already had short sentences, so sentence-length scores did not expose the vague headings. The remaining technical terms name actual methods, fields, and statistical quantities. Lists of formats and scientific topics were retained where they help the reader.
+
+Checks confirmed identical displayed numbers, quoted code, source and image links, and anchor IDs. Captions were checked against the selected renders. The source-list caption describes full-paper versus abstract access; the code panel describes plotting the published trial values. The portable review file was rebuilt. Desktop and narrow-screen review confirmed that the revised copy wraps within its panels and that the code disclosure still opens.
+
+Review files and screenshots are in the ignored `test-results/drugadopt-walkthrough/copy-review/` directory. The edited homepage remains the same local review draft.

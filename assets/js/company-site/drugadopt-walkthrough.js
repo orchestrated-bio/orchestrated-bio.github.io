@@ -55,7 +55,7 @@
       window.clearTimeout(timer);
       playing = false;
       play.setAttribute('aria-pressed', 'false');
-      play.textContent = 'Play walkthrough →';
+      play.textContent = 'Play example →';
     }
     function advanceTrace() {
       if (!playing) return;
@@ -79,7 +79,7 @@
       showTrace(0);
       playing = true;
       play.setAttribute('aria-pressed', 'true');
-      play.textContent = 'Pause walkthrough';
+      play.textContent = 'Pause example';
       timer = window.setTimeout(advanceTrace, 4000);
     });
     function setMotionPreference() { stopTrace(); play.hidden = motion.matches; }
