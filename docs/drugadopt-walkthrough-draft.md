@@ -2,6 +2,27 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Customer goals and program milestones, October 5
+
+Alex supplied concrete customer motives: comparing candidate assets before a purchase, discovering a therapeutic biomarker alongside the full diligence package, and commissioning analyses for an experimental research company's own projects. He also identified IND preparation, clinical-trial patient selection, the Phase I-to-II transition, and prioritizing leading pipeline assets as relevant buying situations. These motives guide the offer; they are not published testimonials or evidence of completed purchases. Client-specific details remain outside the public page.
+
+The current opening is **“Uncover the scientific potential of drug assets.”** The description joins original analyses with scientific due diligence for teams evaluating, developing, or studying drugs. Four entries make the buying situations recognizable:
+
+- Asset acquisition and pipeline priorities: compare mechanisms, observed results, safety evidence, and scientific uncertainties across assets.
+- Preparing for an IND or first trial: examine the scientific evidence around mechanism, disease relevance, exposure, and safety.
+- Phase I to II: investigate response differences, candidate patient groups, biomarkers, and stratification factors.
+- Biomarker discovery and drug studies: uncover candidate markers and investigate the biology behind observed effects.
+
+The offer remains scientific investigation and evidence presentation. Portfolio choices, regulatory submissions, protocol choices, and patient eligibility remain the customer's responsibility. The wording describes how findings clarify the science; it does not promise regulatory readiness, clinical success, validated patient-selection rules, or a quantified reduction in development risk. IND preparation names the customer's context, not a complete IND-authoring service. Biomarker and patient-selection terminology was checked against FDA's [clinical-research overview](https://www.fda.gov/patients/drug-development-process/step-3-clinical-research) and [biomarker context-of-use guidance](https://www.fda.gov/drugs/biomarker-qualification-program/context-use).
+
+The buyer journey is expressed through the existing page: the opening explains the value and identifies the offer; the four entries relate it to a current project; the tolvaptan example presents original analysis within the broader evidence; the enquiry describes an agreed scope, fee, delivery date, and deliverables. Team and data-handling links are visible at the opening. Both booking actions now say “Discuss your project,” and email remains available at the enquiry. The site uses the existing booking link and contact address. No form, tracking system, or new JavaScript was added.
+
+The report reader, original scientific report, and artifact images remain intact. The tolvaptan introduction relates the mouse-expression analysis to clinical, safety, and exposure evidence without turning its Aqp2 observation into a validated biomarker. The light palette and layered galleries remain. The entries use four columns on desktop, two below 960px, and one below 640px.
+
+Direct scientific customers and their internal scientific and budget sponsors are the audience. The research-platform opportunity described here is direct project purchasing. The earlier suggestion of a distribution-partner role was a hypothesis, not an established channel. Introductions, referrals, and targeted outreach remain channel hypotheses to test. A useful introduction should name the customer's scientific question, the potential value of an investigation, and a relevant example. Customer conversations should establish the current problem, available data, prior spending, approval process, and what outcome would justify a project. Track qualified conversations, proposals, funded projects, and repeat work separately by buying situation and source.
+
+Checks covered the 390px phone layout, 940px tablet layout, and desktop layouts with four columns. Each stayed within the viewport. The new data-handling link and browser Back were checked. All 206 local references across the five main pages resolve, IDs are unique, and the full report and embedded report-reader hashes match the pre-edit snapshot. The public copy was read and scanned; screenshots and scans are in `test-results/drugadopt-walkthrough/design-review/buyer-situations-*`. The existing portable artifact was rebuilt. This is a local draft, with no push or deployment.
+
 ## Value proposition first, October 5
 
 Alex clarified that advertising must lead with the customer's benefit. The current opening is “Discover new possibilities for your drug.” It describes new explanations for drug activity, candidate biomarkers to investigate, and hypotheses the customer's team can test. Those scientific gains lead the page. Computational capacity, named methods, and document formats support the offer farther down. Future revisions should preserve this order and the emphasis on novel scientific insight.
