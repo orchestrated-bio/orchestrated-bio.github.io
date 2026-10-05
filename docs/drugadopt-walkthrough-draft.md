@@ -2,6 +2,16 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Research customers without a drug, October 5
+
+Alex corrected an audience assumption: a biomarker-discovery customer may have no drug. The previous hero, “Discover what sets your drug apart,” and the introduction about comparing assets or studying a drug already in development both excluded that starting point.
+
+The current hero is **“Discover biomarkers and therapeutic possibilities.”** Its description includes candidate biomarkers, disease mechanisms, and comparisons of therapeutic approaches. The project introduction accepts a biological question, research data, or therapeutic assets. Biomarker discovery is the first of four entries, with disease-associated signals and possible therapeutic relevance included alongside treatment response. The enquiry starts with a research question. Asset comparisons, IND preparation, and patient-selection investigations remain specific customer situations. Client names and unpublished commercial details are not added to the public copy.
+
+This changes the buyer framing and introductory text. It does not change the scientific example, report, figures, analysis code, gallery behavior, or runtime. Candidate biomarker discovery describes an investigation; the page does not promise clinical validation of every finding.
+
+The opening was reviewed at desktop and 390px phone widths, with no horizontal page overflow. The temporary viewport override was reset. Scientific files and the embedded report reader match the prior source hashes. Prose and whitespace checks completed, and the existing portable artifact was rebuilt. Screenshots and scans are in `test-results/drugadopt-walkthrough/design-review/research-audience-*`. This is still a local review version.
+
 ## Focused buyer copy and shorter case preview, October 5
 
 After reviewing the previous iteration, Alex asked to correct abstract claims, formulaic copy, an overly narrow Phase I-to-II framing, and repeated demonstrations. The current hero is **“Discover what sets your drug apart.”** Original data analyses and scientific due diligence remain the offer. Its description names the gains: candidate biomarkers, an investigation of response differences, and an understanding of the evidence for drug effects and safety. Fee and timing stay with the project enquiry.
