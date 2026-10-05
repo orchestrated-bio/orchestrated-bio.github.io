@@ -38,35 +38,24 @@
   if (trace) {
     var steps = Array.from(trace.querySelectorAll('[data-trace-step]'));
     var play = trace.querySelector('[data-trace-play]');
-    var traceCaption = trace.querySelector('[data-trace-caption]');
-    var locator = trace.querySelector('[data-trace-locator]');
+    var tracePanels = Array.from(trace.querySelectorAll('[data-trace-panel]'));
+    var traceStatus = trace.querySelector('[data-trace-status]');
     var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var traceIndex = 0;
     var timer;
     var playing = false;
-    var records = [
-      ['Report.', 'Section 1.1.2 explains the −2.7 percentage-point annual growth contrast, trial eligibility, and the source’s analysis population.', 'Open report page 6 ↗'],
-      ['Slide.', 'Slide 8 carries the same −2.7 percentage-point annual growth contrast and 95% CI −3.3 to −2.1 beside the distinct filtration results.', 'Open slide 8 ↗'],
-      ['Parameter.', 'Parameters row 4 identifies tempo_tkv_diff: −2.7 percentage points/year. Its 95% interval is stored in L4:M4; the publication ID is retained in AO4.', 'Open parameter excerpt ↗'],
-      ['Source.', 'PMID 23121377, Results → Primary End Point: the reported adjusted growth-rate difference was −2.7 percentage points/year (95% CI −3.3 to −2.1).', 'Read the TEMPO publication ↗']
-    ];
     function showTrace(next, moveFocus) {
       traceIndex = (next + steps.length) % steps.length;
       steps.forEach(function (step, i) { step.setAttribute('aria-pressed', String(i === traceIndex)); });
-      trace.style.setProperty('--trace-progress', ((traceIndex + 1) * 25) + '%');
-      var record = records[traceIndex];
-      var label = document.createElement('strong');
-      label.textContent = record[0] + ' ';
-      traceCaption.replaceChildren(label, document.createTextNode(record[1]));
-      locator.href = steps[traceIndex].dataset.traceHref;
-      locator.textContent = record[2];
+      tracePanels.forEach(function (panel, i) { panel.hidden = i !== traceIndex; });
+      traceStatus.textContent = steps[traceIndex].textContent + ' view · ' + (traceIndex + 1) + ' of ' + steps.length;
       if (moveFocus) steps[traceIndex].focus();
     }
     function stopTrace() {
       window.clearTimeout(timer);
       playing = false;
       play.setAttribute('aria-pressed', 'false');
-      play.textContent = 'Play trace →';
+      play.textContent = 'Play walkthrough →';
     }
     function advanceTrace() {
       if (!playing) return;
@@ -90,12 +79,14 @@
       showTrace(0);
       playing = true;
       play.setAttribute('aria-pressed', 'true');
-      play.textContent = 'Pause trace';
+      play.textContent = 'Pause walkthrough';
       timer = window.setTimeout(advanceTrace, 4000);
     });
     function setMotionPreference() { stopTrace(); play.hidden = motion.matches; }
     motion.addEventListener('change', setMotionPreference);
     document.addEventListener('visibilitychange', function () { if (document.hidden) stopTrace(); });
+    showTrace(0);
+    trace.querySelector('.trace-switcher').hidden = false;
     setMotionPreference();
   }
 
