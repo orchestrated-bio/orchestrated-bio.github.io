@@ -2,6 +2,12 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Value proposition first, October 5
+
+Alex clarified that advertising must lead with the customer's benefit. The current opening is “Discover new possibilities for your drug.” It describes new explanations for drug activity, candidate biomarkers to investigate, and hypotheses the customer's team can test. Those scientific gains lead the page. Computational capacity, named methods, and document formats support the offer farther down. Future revisions should preserve this order and the emphasis on novel scientific insight.
+
+The numbered project process has become three parallel scientific outcomes. The defined engagement, proposal, fee, timing, and deliverables remain near the contact section. The tolvaptan example and its evidence remain intact. Metadata follows the revised proposition. A browser check confirmed the opening and outcome layout on desktop and at 390px without horizontal overflow; the temporary mobile override was reset. Prose was reviewed and scanned, the existing portable artifact rebuilt, and whitespace checks passed. Screenshots and scans are saved as `test-results/drugadopt-walkthrough/design-review/value-proposition-*`. This is still a local draft.
+
 ## Research service and buyer offer, October 5
 
 The opening now names a computational research service for small biotech teams. It retains Alex's novel-insight positioning and explains that an engagement investigates a scientific question using published research and new analyses of public or customer-provided data. The project section explains scope, available data, a proposal with fee and delivery date, the investigation, and a discussion of the findings. It makes no price, turnaround, or discovery guarantee. The main action is “Discuss a project,” using the existing scheduling link.

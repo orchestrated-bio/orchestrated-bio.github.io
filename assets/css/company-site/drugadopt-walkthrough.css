@@ -9,11 +9,10 @@ body.drugadopt-home .opening .shell { grid-template-columns: minmax(0, .7fr) min
 .project-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 .project-heading h2 { margin: 0; font-size: var(--step-3); line-height: 1.15; letter-spacing: -.025em; max-width: 23ch; }
 .project-heading > p { margin: .2rem 0 0; max-width: 42ch; font-size: 1.08rem; line-height: 1.7; color: var(--ink-2); }
-.project-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; list-style: none; counter-reset: project; margin: 2.5rem 0 0; padding: 0; }
-.project-steps li { counter-increment: project; }
-.project-steps h3 { margin: 0 0 .7rem; font-size: 1.05rem; }
-.project-steps h3::before { content: "0" counter(project); font: .75rem var(--mono); color: var(--accent); margin-right: .7rem; }
-.project-steps p { margin: 0; font-size: .98rem; line-height: 1.7; color: var(--ink-2); }
+.project-outcomes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem; margin-top: 2.5rem; }
+.project-outcomes h3 { margin: 0 0 .7rem; font-size: 1.05rem; }
+.project-outcomes p { margin: 0; font-size: .98rem; line-height: 1.7; color: var(--ink-2); }
+body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 [id$="-highlights"], #evidence-walkthrough, #trace-title, #report-reader { scroll-margin-top: 6rem; }
 .artifact-viewer { border: 1px solid var(--rule-firm); border-radius: .75rem; overflow: hidden; background: var(--paper-raised); box-shadow: 0 18px 54px rgb(0 0 0 / .12); }
 .preview-stack { position: relative; isolation: isolate; padding: 3rem .8rem 0; min-width: 0; }
@@ -142,7 +141,7 @@ html:has(.artifact-dialog[open]) { overflow: hidden; }
 @media (max-width: 40rem) {
   .research-project { padding-block: 2rem; }
   .project-heading h2 { font-size: 1.9rem; }
-  .project-steps { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
+  .project-outcomes { grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem; }
   .hero-reader .dax-ui { font-size: 17px; min-height: 0; }
   .hero-reader .dax-spine { width: 100%; min-width: 0; padding: .75em; }
   .hero-reader .dax-spine-brand { margin: 0; padding: 0 0 .6em; }
