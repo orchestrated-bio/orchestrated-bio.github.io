@@ -110,7 +110,7 @@ def inline_srcs(html: str) -> str:
 def read(name): return (ROOT / name).read_text()
 
 def extract_main(html: str) -> str:
-    m = re.search(r"<main id=\"main\"[^>]*>(.*)</main>", html, re.S)
+    m = re.search(r'<main\b(?=[^>]*\bid="main")[^>]*>(.*)</main>', html, re.S)
     return m.group(1).strip()
 
 def extract_scripts(html: str) -> str:

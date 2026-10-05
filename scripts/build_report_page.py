@@ -39,6 +39,10 @@ pass the absolute path):
         --case ../_case_backups/from-out-dir-20260820/prexasertib-deliverable
 
 report.html is generated: change it here and regenerate, never by hand.
+
+For the completed tolvaptan website example, --tolvaptan-qmd projects the
+retained report source and figures into the full reader and homepage sample.
+It needs installed Pandoc and BeautifulSoup and executes no analysis code.
 """
 
 from __future__ import annotations
@@ -51,6 +55,8 @@ import pathlib
 import re
 import struct
 import sys
+import subprocess
+import copy
 
 SUPPORTED_SCHEMA = 3
 FIGURE_DIR = "./images/drugadopt/report"
@@ -1059,6 +1065,142 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
 """
 
 
+def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None:
+    """Project a completed Quarto report into the existing website reader.
+
+    Pandoc converts retained Markdown; it does not execute analyses. Scientific
+    sections and figures come from that source, rather than the old view-model
+    format. The compact homepage reader selects paragraphs and one figure or
+    table from each section of the same projection.
+    """
+    from bs4 import BeautifulSoup
+
+    raw = source.read_text()
+    body = re.sub(r"\A---\n.*?\n---\n", "", raw, count=1, flags=re.S)
+    # Alex's explicit copy corrections; estimates, units and citations stay.
+    replacements = {
+        "tested the same drug": "tested tolvaptan",
+        "Our same-study reanalysis of 12 treated and 12 untreated mice":
+            "An analysis of 12 treated and 12 untreated mice",
+        "The annualized difference in eGFR change was +1.27 mL/min/1.73 m^2^ versus placebo":
+            "In the annualized comparison, eGFR fell less with tolvaptan than with placebo, a difference of +1.27 mL/min/1.73 m^2^",
+    }
+    for before, after in replacements.items():
+        body = body.replace(before, after)
+    converted = subprocess.run(
+        ["pandoc", "--from=markdown", "--to=html5", "--section-divs"],
+        input=body, text=True, capture_output=True, check=True,
+    ).stdout
+    content = BeautifulSoup(converted, "html.parser")
+    sections = content.select("section.level1")
+    if not sections:
+        raise ValueError("The published report has no top-level sections")
+    figures = {}
+    asset_dir = ROOT / "images/drugadopt/tolvaptan/report"
+    asset_dir.mkdir(parents=True, exist_ok=True)
+    for image in content.select("img"):
+        path = source.parent / image["src"]
+        destination = asset_dir / path.name
+        data = path.read_bytes()
+        destination.write_bytes(data)
+        figures[path.name] = hashlib.sha256(data).hexdigest()
+        image["src"] = f"./images/drugadopt/tolvaptan/report/{path.name}"
+        image["loading"] = "lazy"
+        image["decoding"] = "async"
+        figure = image.find_parent(class_="dax-print-figure")
+        if figure and not image.get("alt"):
+            captions = figure.find_all("p")
+            image["alt"] = next((p.get_text(" ", strip=True) for p in captions if p.get_text(strip=True).startswith("Figure")), "Report figure")
+    # The website carries scientific prose and public citations. Internal run
+    # receipts and links to files in the client package remain in that package.
+    for heading in list(content.select("h2")):
+        if heading.get_text(strip=True) in {"Quantitative data", "Report provenance"}:
+            heading.find_parent("section").decompose()
+    for link in content.select("a[href]"):
+        href = link["href"]
+        if not href.startswith(("#", "https://", "http://", "mailto:")):
+            link.unwrap()
+    for table in content.select("table"):
+        table["class"] = ["dax-table"]
+        wrapper = content.new_tag("div", attrs={"class": "dax-table-scroll", "tabindex": "0", "role": "region", "aria-label": "Report data table"})
+        table.wrap(wrapper)
+    labels = []
+    for section in sections:
+        heading = section.find("h1")
+        label = heading.get_text(" ", strip=True)
+        labels.append((section["id"], "Overview" if section["id"] == "overview" else re.sub(r"^\d+\.\s*", "", label)))
+        section["class"] = ["dax-page", "published-report-section"]
+        heading.name = "h2"
+        heading["class"] = ["dax-sec-h"]
+    nav = ''.join(f'<li><a class="dax-nav-item" href="#{html.escape(key)}"><span class="dax-nav-label">{html.escape(label)}</span></a></li>' for key, label in labels)
+    reader = f'''<div class="dax-ui dax-full" role="region" aria-label="Tolvaptan ADPKD scientific report">
+      <nav class="dax-spine" aria-label="Report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><ul class="dax-nav">{nav}</ul></nav>
+      <div class="dax-paper dax-paper-scroll">{''.join(str(section) for section in sections)}</div></div>'''
+    document = BeautifulSoup((ROOT / "report.html").read_text(), "html.parser")
+    document.title.string = "Tolvaptan in ADPKD | DrugAdopt report"
+    description = "A DrugAdopt report on tolvaptan in ADPKD: disease biology, mechanism, clinical outcomes, pharmacology, safety, and the IP landscape."
+    for tag in document.select('meta[name="description"], meta[property="og:description"]'):
+        tag["content"] = description
+    document.select_one('meta[property="og:title"]')["content"] = "Tolvaptan in ADPKD | DrugAdopt"
+    main = document.find("main")
+    main.clear()
+    main.append(BeautifulSoup('<div class="rpt-intro"><h1 class="rpt-intro-title">Tolvaptan in ADPKD</h1><p class="rpt-intro-lede">Disease biology, drug mechanism, clinical evidence, pharmacology, safety, and the IP landscape.</p></div>' + reader, "html.parser"))
+    document.select_one('.skip-link')["href"] = "#overview"
+    output.write_text(str(document))
+
+    # Reuse the existing reader-controlled demo, with short source excerpts.
+    preview_nav = []
+    preview_pages = []
+    short_labels = {"overview": "Overview", "clinical-phenotype": "Disease biology", "mechanism": "Mechanism", "clinical-outcomes": "Clinical results", "exposure": "Exposure", "safety": "Safety", "landscape": "IP landscape"}
+    summary_paragraphs = content.find(id="executive-summary").find_all("p")
+    # The readable introduction already explains these topics. Use it in the
+    # preview rather than the report's compact technical key-finding rows.
+    introductions = {
+        "overview": summary_paragraphs[:2],
+        "clinical-phenotype": summary_paragraphs[:1],
+        "mechanism": summary_paragraphs[1:2],
+        "clinical-outcomes": summary_paragraphs[2:4],
+        "safety": summary_paragraphs[5:6],
+    }
+    selected_figures = {"mechanism": "receptor-pocket.png", "exposure": "pk-report.png", "landscape": "ip_estate_timeline-fig-ip-patent-timeline-output-1.png"}
+    for section in sections:
+        key = section["id"]
+        if key not in short_labels:
+            continue
+        page_key = "cover" if key == "overview" else key
+        label = short_labels[key]
+        preview_nav.append(f'<button class="dax-nav-item" type="button" data-page="{page_key}"><span class="dax-nav-label">{label}</span></button>')
+        paragraphs = introductions.get(key, section.find_all("p")[:1])
+        if key == "exposure":
+            paragraphs = section.find(id="a-published-population-pharmacokinetic-model-generates-regimen-and-kidney-function-dependent-profiles").find_all("p")[:1]
+        selected = ''.join(str(copy.deepcopy(p)) for p in paragraphs)
+        figure = section.find(class_="dax-print-figure")
+        if key in selected_figures:
+            figure = section.find("img", src=f"./images/drugadopt/tolvaptan/report/{selected_figures[key]}").find_parent(class_="dax-print-figure")
+        table = section.find(class_="dax-table-scroll")
+        display = table if key in {"clinical-outcomes", "safety"} else figure
+        if display:
+            selected += str(copy.deepcopy(display))
+        excerpt = BeautifulSoup(selected, "html.parser")
+        for node in excerpt.select("[id]"):
+            del node["id"]
+        for link in excerpt.select('a[href^="#"]'):
+            link["href"] = "./report.html" + link["href"]
+        title = "Tolvaptan in ADPKD" if key == "overview" else label
+        preview_pages.append(f'<article class="dax-page published-report-section" data-page="{page_key}"><h3 class="dax-sec-h" id="sample-{key}">{title}</h3>{excerpt}<p class="sample-section-link"><a href="./report.html#{key}">Read this section →</a></p></article>')
+    preview = f'''<section class="report-sample shell" id="report-reader" aria-labelledby="reader-title"><h2 id="reader-title">Explore the report.</h2><div class="shot-render"><div class="dax-ui" role="region" aria-label="Interactive tolvaptan ADPKD report preview"><nav class="dax-spine" aria-label="Preview report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><div class="dax-nav">{''.join(preview_nav)}</div></nav><div class="dax-paper">{''.join(preview_pages)}</div></div></div></section>'''
+    home = ROOT / "index.html"
+    text = home.read_text()
+    marked = '<!-- report-reader:start -->\n' + preview + '\n<!-- report-reader:end -->'
+    if '<!-- report-reader:start -->' in text:
+        text = re.sub(r'<!-- report-reader:start -->.*?<!-- report-reader:end -->', lambda _: marked, text, flags=re.S)
+    else:
+        text = text.replace('<section class="artifact-chapter shell" id="report-highlights"', marked + '\n\n      <section class="artifact-chapter shell" id="report-highlights"', 1)
+    home.write_text(text)
+    record = {"source_sha256": hashlib.sha256(source.read_bytes()).hexdigest(), "source_name": source.name, "sections": [key for key, _ in labels], "figure_sha256": figures, "copy_replacements": replacements, "omitted_internal_sections": ["Quantitative data", "Report provenance"]}
+    (asset_dir / "projection-sources.json").write_text(json.dumps(record, indent=2) + "\n")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -1067,7 +1209,13 @@ def main() -> int:
         help="Path to the deliverable directory containing report_view_model.json",
     )
     parser.add_argument("--out", default="report.html", help="Output HTML path")
+    parser.add_argument("--tolvaptan-qmd", help="Completed tolvaptan Quarto report to project into the website reader and homepage preview")
     args = parser.parse_args()
+
+    if args.tolvaptan_qmd:
+        project_tolvaptan_report(pathlib.Path(args.tolvaptan_qmd), pathlib.Path(args.out))
+        print(f"wrote {args.out} and the homepage preview from the completed report")
+        return 0
 
     case = pathlib.Path(args.case)
     model_path = case / "report_view_model.json"

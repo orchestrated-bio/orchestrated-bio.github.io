@@ -1,12 +1,44 @@
 /* Reader-controlled artifact highlights. Images remain ordinary links without JS. */
 (function () {
   'use strict';
+  function createBackcards(container, panels, select) {
+    var layer = document.createElement('div');
+    layer.className = 'artifact-backcards';
+    var cards = [0, 1].map(function () {
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'artifact-backcard';
+      var label = document.createElement('span');
+      var preview = document.createElement('img');
+      preview.alt = '';
+      preview.decoding = 'async';
+      card.append(label, preview);
+      card.addEventListener('click', function () { select(Number(card.dataset.previewIndex)); });
+      layer.append(card);
+      return card;
+    });
+    container.classList.add('preview-stack');
+    container.prepend(layer);
+    return function (index) {
+      cards.forEach(function (card, offset) {
+        var next = (index + offset + 1) % panels.length;
+        var panel = panels[next];
+        var image = panel.querySelector('img');
+        var label = panel.querySelector('figcaption strong').textContent.split(' · ')[0];
+        card.dataset.previewIndex = String(next);
+        card.setAttribute('aria-label', 'Show ' + label);
+        card.querySelector('span').textContent = label;
+        card.querySelector('img').src = image.src;
+      });
+    };
+  }
   var viewers = document.querySelectorAll('[data-artifact-viewer]');
   viewers.forEach(function (viewer) {
     var panels = Array.from(viewer.querySelectorAll('[data-artifact-panel]'));
     var selectors = Array.from(viewer.querySelectorAll('[data-artifact-select]'));
     var status = viewer.querySelector('[data-artifact-status]');
     var index = 0;
+    var updateBackcards = createBackcards(viewer.parentElement, panels, function (next) { show(next); });
     function show(next, moveFocus) {
       index = (next + panels.length) % panels.length;
       panels.forEach(function (panel, i) { panel.hidden = i !== index; });
@@ -14,6 +46,7 @@
         button.setAttribute('aria-pressed', String(i === index));
       });
       status.textContent = viewer.dataset.kind + ' · ' + (index + 1) + ' of ' + panels.length;
+      updateBackcards(index);
       if (moveFocus) selectors[index].focus();
     }
     selectors.forEach(function (button, i) {
@@ -34,60 +67,88 @@
     viewer.querySelector('.artifact-controls').hidden = false;
   });
 
+  var hero = document.querySelector('[data-hero-gallery]');
+  if (hero) {
+    var heroPanels = Array.from(hero.querySelectorAll('[data-hero-panel]'));
+    var heroButtons = Array.from(hero.querySelectorAll('[data-hero-select]'));
+    var heroCaption = hero.querySelector('[data-hero-caption]');
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var heroIndex = 0;
+    var heroTimer;
+    var heroManual = false;
+    var heroVisible = true;
+    var updateHeroBackcards = createBackcards(hero.parentElement, heroPanels, function (next) {
+      heroManual = true;
+      window.clearTimeout(heroTimer);
+      showHero(next);
+    });
+    function showHero(next) {
+      heroIndex = (next + heroPanels.length) % heroPanels.length;
+      heroPanels.forEach(function (panel, i) {
+        panel.classList.toggle('is-active', i === heroIndex);
+        panel.setAttribute('aria-hidden', String(i !== heroIndex));
+        panel.inert = i !== heroIndex;
+      });
+      heroButtons.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === heroIndex)); });
+      heroCaption.textContent = heroPanels[heroIndex].querySelector('figcaption').textContent;
+      updateHeroBackcards(heroIndex);
+    }
+    function scheduleHero() {
+      window.clearTimeout(heroTimer);
+      if (motion.matches || heroManual || !heroVisible || document.hidden || hero.parentElement.matches(':hover, :focus-within')) return;
+      heroTimer = window.setTimeout(function () { showHero(heroIndex + 1); scheduleHero(); }, 9000);
+    }
+    heroButtons.forEach(function (button, i) {
+      button.addEventListener('click', function () { heroManual = true; window.clearTimeout(heroTimer); showHero(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowRight') next = heroIndex + 1;
+        if (event.key === 'ArrowLeft') next = heroIndex - 1;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = heroPanels.length - 1;
+        if (next !== undefined) { event.preventDefault(); heroManual = true; window.clearTimeout(heroTimer); showHero(next); heroButtons[heroIndex].focus(); }
+      });
+    });
+    hero.parentElement.addEventListener('mouseenter', function () { window.clearTimeout(heroTimer); });
+    hero.parentElement.addEventListener('mouseleave', scheduleHero);
+    hero.parentElement.addEventListener('focusin', function () { window.clearTimeout(heroTimer); });
+    hero.parentElement.addEventListener('focusout', function () { window.setTimeout(scheduleHero, 0); });
+    document.addEventListener('visibilitychange', scheduleHero);
+    motion.addEventListener('change', scheduleHero);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) { heroVisible = entries[0].isIntersecting; scheduleHero(); }).observe(hero);
+    }
+    hero.querySelector('.hero-selectors').hidden = false;
+    showHero(0);
+    scheduleHero();
+  }
+
   var trace = document.querySelector('[data-evidence-trace]');
   if (trace) {
     var steps = Array.from(trace.querySelectorAll('[data-trace-step]'));
-    var play = trace.querySelector('[data-trace-play]');
     var tracePanels = Array.from(trace.querySelectorAll('[data-trace-panel]'));
     var traceStatus = trace.querySelector('[data-trace-status]');
-    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     var traceIndex = 0;
-    var timer;
-    var playing = false;
     function showTrace(next, moveFocus) {
       traceIndex = (next + steps.length) % steps.length;
       steps.forEach(function (step, i) { step.setAttribute('aria-pressed', String(i === traceIndex)); });
       tracePanels.forEach(function (panel, i) { panel.hidden = i !== traceIndex; });
-      traceStatus.textContent = steps[traceIndex].textContent + ' view · ' + (traceIndex + 1) + ' of ' + steps.length;
+      traceStatus.textContent = steps[traceIndex].textContent + ' view';
       if (moveFocus) steps[traceIndex].focus();
     }
-    function stopTrace() {
-      window.clearTimeout(timer);
-      playing = false;
-      play.setAttribute('aria-pressed', 'false');
-      play.textContent = 'Play example →';
-    }
-    function advanceTrace() {
-      if (!playing) return;
-      if (traceIndex === steps.length - 1) { stopTrace(); return; }
-      showTrace(traceIndex + 1);
-      timer = window.setTimeout(advanceTrace, 4000);
-    }
     steps.forEach(function (step, i) {
-      step.addEventListener('click', function () { stopTrace(); showTrace(i); });
+      step.addEventListener('click', function () { showTrace(i); });
       step.addEventListener('keydown', function (event) {
         var next;
         if (event.key === 'ArrowRight') next = traceIndex + 1;
         if (event.key === 'ArrowLeft') next = traceIndex - 1;
         if (event.key === 'Home') next = 0;
         if (event.key === 'End') next = steps.length - 1;
-        if (next !== undefined) { event.preventDefault(); stopTrace(); showTrace(next, true); }
+        if (next !== undefined) { event.preventDefault(); showTrace(next, true); }
       });
     });
-    play.addEventListener('click', function () {
-      if (playing) { stopTrace(); return; }
-      showTrace(0);
-      playing = true;
-      play.setAttribute('aria-pressed', 'true');
-      play.textContent = 'Pause example';
-      timer = window.setTimeout(advanceTrace, 4000);
-    });
-    function setMotionPreference() { stopTrace(); play.hidden = motion.matches; }
-    motion.addEventListener('change', setMotionPreference);
-    document.addEventListener('visibilitychange', function () { if (document.hidden) stopTrace(); });
     showTrace(0);
     trace.querySelector('.trace-switcher').hidden = false;
-    setMotionPreference();
   }
 
   var dialog = document.querySelector('.artifact-dialog');

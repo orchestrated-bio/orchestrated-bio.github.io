@@ -106,12 +106,6 @@
   font-family: var(--sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hm {
-    --hm-p1: #50372e; --hm-p2: #935244; --hm-p3: #e8735f;
-    --hm-n1: #2f424e; --hm-n2: #4b6e8c; --hm-n3: #6ea6dc;
-  }
-}
 :root[data-theme="dark"] .hm {
   --hm-p1: #50372e; --hm-p2: #935244; --hm-p3: #e8735f;
   --hm-n1: #2f424e; --hm-n2: #4b6e8c; --hm-n3: #6ea6dc;
@@ -176,13 +170,6 @@
   font-family: var(--sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .sc {
-    --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
-    --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
-    --sc-dot: #E8735F; --sc-dot-ctrl: #8d958f;
-  }
-}
 :root[data-theme="dark"] .sc {
   --sc-tumor: #E8735F; --sc-bcell: #6EA6DC; --sc-tcell: #48C9C0;
   --sc-myeloid: #A78BCE; --sc-stromal: #C9C3BA;
