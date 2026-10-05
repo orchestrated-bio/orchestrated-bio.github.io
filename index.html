@@ -6,10 +6,10 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="Biomarker discovery for patient selection. DrugAdopt looks for candidate response biomarkers for a drug and indication in public evidence." />
+    <meta name="description" content="DrugAdopt connects disease biology, pharmacology, clinical outcomes, and candidate biomarkers to supporting evidence and sources." />
     <meta name="theme-color" content="#f2f3f1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#101412" media="(prefers-color-scheme: dark)" />
-    <title>DrugAdopt: Biomarker Discovery for Patient Selection</title>
+    <title>DrugAdopt: Scientific Evidence for a Drug and Indication</title>
     <link rel="canonical" href="https://orchestrated.bio/" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="DrugAdopt | Orchestrated Biosciences" />
-    <meta property="og:description" content="DrugAdopt looks for candidate response biomarkers for a drug and indication in public evidence." />
+    <meta property="og:description" content="Explore the report, presentation, and source-linked records behind a drug and indication." />
     <meta property="og:url" content="https://orchestrated.bio/" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
@@ -25,7 +25,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=a85d077e1c15" />
-    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=5a45469a54b6" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt-walkthrough.css?v=f1706014d6c3" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
     <script type="application/ld+json">
 {
@@ -77,7 +77,7 @@
     }
     </script>
   </head>
-  <body>
+  <body class="drugadopt-home">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="masthead">
@@ -102,207 +102,173 @@
       <section class="opening">
         <div class="shell">
           <div class="opening-copy">
-            <h1>Find the patients most likely to respond before your trial&nbsp;starts.</h1>
-            <p class="opening-lede">Give DrugAdopt a drug and indication. It identifies candidate response biomarkers from public evidence.</p>
+            <h1>Understand the evidence behind a drug and indication.</h1>
+            <p class="opening-lede">DrugAdopt connects disease biology, pharmacology, clinical outcomes, and candidate biomarkers to their supporting sources.</p>
             <div class="opening-actions">
-              <a class="btn" href="./report.html">Explore an example report <span aria-hidden="true">→</span></a>
+              <a class="btn" href="#evidence-walkthrough">Explore an evidence package <span aria-hidden="true">↓</span></a>
+              <a class="link-quiet" href="./report.html">Read the ovarian-cancer example <span aria-hidden="true">→</span></a>
             </div>
             <p class="product-switch">We also run <a href="./custom-analysis.html">custom analyses</a> and build agentic AI pipelines for preclinical and biomarker work.</p>
           </div>
 
-          <figure class="shot shot-render">
-            <p class="demo-cue">Interactive sample · choose a section</p>
-            <div class="dax-ui" role="region" aria-label="Interactive DrugAdopt biomarker readout on prexasertib in platinum-resistant BRCA-wild-type ovarian cancer">
-
-              <nav class="dax-spine" aria-label="Report sections">
-                <div class="dax-spine-brand">
-                  <h2 class="dax-spine-title">DrugAdopt<span>Biomarker &amp; patient-selection readout</span></h2>
-                </div>
-                <ul class="dax-nav">
-                  <li><button type="button" class="dax-nav-item dax-nav-item-active" data-page="cover" aria-current="page"><span class="dax-nav-label">Overview</span></button></li>
-                  <li><button type="button" class="dax-nav-item" data-page="clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label"><span class="dax-nav-long">Clinical Phenotype &amp; Endpoints</span><span class="dax-nav-short">Clinical</span></span></button></li>
-                  <li><button type="button" class="dax-nav-item" data-page="mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label"><span class="dax-nav-long">Mechanism &amp; Biomarker Biology</span><span class="dax-nav-short">Mechanism</span></span></button></li>
-                  <li><button type="button" class="dax-nav-item" data-page="pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label"><span class="dax-nav-long">Pharmacology &amp; Exposure</span><span class="dax-nav-short">Exposure</span></span></button></li>
-                  <li><button type="button" class="dax-nav-item" data-page="toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label"><span class="dax-nav-long">Toxicology &amp; Therapeutic Window</span><span class="dax-nav-short">Safety</span></span></button></li>
-                  <li><button type="button" class="dax-nav-item" data-page="recommendation"><span class="dax-nav-label">Evidence &amp; Gaps</span></button></li>
-                </ul>
-              </nav>
-
-              <div class="dax-paper">
-                <!-- Overview -->
-                <article class="dax-page dax-page-active dax-overview" data-page="cover">
-                  <div class="dax-ov-top">
-                    <div>
-                      <p class="dax-sec-num">Biomarker &amp; patient-selection readout</p>
-                      <h3 class="dax-ov-asset" id="dax-h-cover">Prexasertib</h3>
-                      <p class="dax-ov-target">Small molecule · Target CHEK1</p>
-                      <p class="dax-ov-ind">BRCA-wild-type platinum-resistant recurrent high-grade serous ovarian carcinoma</p>
-                    </div>
-                  </div>
-
-                  <p class="dax-ov-question">Does the public evidence explain why some patients responded to prexasertib?</p>
-
-                  <p class="dax-ov-readout"><strong>Twelve of 39 evaluable patients responded.</strong> Five candidate markers were assessed: a DNA-replication RNA score and POLA1 remain candidates, the evidence for CCNE1 was not supportive in either study, and two on-treatment readouts measure change after dosing starts. None has independent validation.</p>
-
-                  <p class="dax-ov-sechead">What each section found</p>
-                  <ul class="dax-ov-sections">
-                    <li><button type="button" class="dax-ov-link" data-goto="clinical"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-sec-gist">12 of 39 evaluable patients had a partial response.</span></span><span class="dax-ov-chip dax-chip-ok">Responder subset observed</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="mechanism"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-sec-gist">Neither the DNA-replication score nor POLA1 has independent validation.</span></span><span class="dax-ov-chip dax-chip-warn">Two unvalidated candidates</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="pharmacology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-sec-gist">Public data cannot show whether individual nonresponders were underexposed.</span></span><span class="dax-ov-chip dax-chip-warn">Gross underexposure less likely</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="toxicology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-sec-gist">The therapeutic margin in combination regimens remains unmeasured.</span></span><span class="dax-ov-chip dax-chip-warn">Marrow toxicity quantified</span></button></li>
-                    <li><button type="button" class="dax-ov-link" data-goto="recommendation"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Evidence &amp; Gaps</span><span class="dax-ov-sec-gist">One blinded test in an independent cohort would separate a real selection marker from a same-cohort artifact.</span></span><span class="dax-ov-chip dax-chip-ok">Validation test identified</span></button></li>
-                  </ul>
-
-                  <div class="dax-ov-foot">
-                    <span>Prepared 2026-07-17 · from public evidence</span>
-                  </div>
-                </article>
-
-                <!-- 1. Clinical -->
-                <article class="dax-page" data-page="clinical">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-                  <p class="dax-sec-num">Section 1</p>
-                  <h3 class="dax-sec-h" id="dax-h-clinical">Clinical Phenotype &amp; Endpoints</h3>
-                  <figure class="dax-figure">
-                    <a class="dax-fig-link" href="./images/drugadopt/report/clinical.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/clinical.png" alt="CONSORT-style cohort-flow diagram reconstructing the NCT02203513 clinical-response and biopsy-analysis populations: 49 enrolled and treated, splitting to a RECIST-evaluable analysis population and a nested pretreatment-biopsy transcriptomic population." width="1200" height="688" loading="lazy" decoding="async" /></a>
-                    <figcaption class="dax-figcap"><b>Figure 1.</b> Public cohort reconstruction separates the clinical-response and biopsy-analysis denominators. The registry &ldquo;completed&rdquo; n&nbsp;=&nbsp;43 is a disposition milestone, not the RECIST-evaluable n&nbsp;=&nbsp;39 <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">[PMID 38555285]</a>.</figcaption>
-                  </figure>
-                  <p class="dax-body-p">Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response. The signal-seeking study ended before its planned evaluable denominators were reached <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">[NCT02203513]</a>. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">[PMID 38555285]</a>.</p>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Endpoint and denominator finding</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item"><b>clinical-01 · high.</b> A real activity signal exists, but early-stopped cohorts and mixed analysis denominators do not establish a clean efficacy result; the larger NCT03414047 provides lower external single-arm context and no significant genomic-response biomarker.</p>
-                    </div>
-                  </div>
-                  <table class="dax-table">
-                    <caption>Table 1. Evaluable population and endpoints</caption>
-                    <thead><tr><th>Cohort</th><th>Treated</th><th>Evaluable</th><th>PR</th><th>Source</th></tr></thead>
-                    <tbody>
-                      <tr><td>NCT02203513</td><td>49</td><td>39</td><td>12</td><td>PMID 38555285</td></tr>
-                      <tr><td>NCT03414047</td><td>not reported</td><td>ext. context</td><td>lower</td><td>PMID 36192237</td></tr>
-                    </tbody>
-                  </table>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>1</span></div>
-                </article>
-
-                <!-- 2. Mechanism & Biomarker -->
-                <article class="dax-page" data-page="mechanism">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-                  <p class="dax-sec-num">Section 2</p>
-                  <h3 class="dax-sec-h" id="dax-h-mechanism">Mechanism &amp; Biomarker Biology</h3>
-                  <figure class="dax-figure">
-                    <a class="dax-fig-link" href="./images/drugadopt/report/mechanism.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/mechanism.png" alt="Four bar panels of relative growth for control, siPOLA1, prexasertib and the combination in the HGSOC lineages OVCAR3 and OVCAR5 and their acquired prexasertib-resistant derivatives; an open diamond marks the descriptive Bliss-independence expectation." width="1200" height="778" loading="lazy" decoding="async" /></a>
-                    <figcaption class="dax-figcap"><b>Figure 2.</b> POLA1 knockdown plus prexasertib in two HGSOC lineages and their acquired-resistant derivatives; the open diamond is a descriptive Bliss reference, not formal synergy <a class="dax-cite" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10981752/" target="_blank" rel="noreferrer">[PMC10981752]</a>.</figcaption>
-                  </figure>
-                  <p class="dax-body-p">Two candidates come out of the mechanism, and neither has been validated for patient selection. The published KEGG DNA-replication enrichment can be reproduced, but the patient-level replication signal is not robust across prespecified score definitions in the same 15 biopsies <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">[GSE249587]</a>. POLA1 remains a testable mechanism hypothesis, but the ST1926 source-data experiments do not prove POLA1-mediated combination benefit <a class="dax-cite" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10981752/" target="_blank" rel="noreferrer">[PMC10981752]</a>.</p>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Biomarker evidence</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item"><b>biomarker-01 · high.</b> No public biomarker establishes clinical validity, predictive utility, or a patient-selection threshold. Research assays exist, but locked transfer, QC, precision, and clinical-use thresholds are absent.</p>
-                    </div>
-                  </div>
-                  <table class="dax-table">
-                    <caption>Table 2. Candidate biomarkers by role and evidence state</caption>
-                    <thead><tr><th>Marker</th><th>Role</th><th>Evidence state</th></tr></thead>
-                    <tbody>
-                      <tr><td>DNA-replication RNA score</td><td>Baseline association</td><td class="dax-td-gate">unstable across score definitions</td></tr>
-                      <tr><td>POLA1 dependence</td><td>Combination hypothesis</td><td class="dax-td-gate">unproven</td></tr>
-                    </tbody>
-                  </table>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>2</span></div>
-                </article>
-
-                <!-- 3. Pharmacology & Exposure -->
-                <article class="dax-page" data-page="pharmacology">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-                  <p class="dax-sec-num">Section 3</p>
-                  <h3 class="dax-sec-h" id="dax-h-pharmacology">Pharmacology &amp; Exposure</h3>
-                  <figure class="dax-figure">
-                    <a class="dax-fig-link" href="./images/drugadopt/report/pharmacology.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/pharmacology.png" alt="Prexasertib exposure boundary: which exposure and exposure-response questions can and cannot be answered from public aggregate pharmacokinetic data." width="1200" height="646" loading="lazy" decoding="async" /></a>
-                    <figcaption class="dax-figcap"><b>Figure 3.</b> Public aggregate PK can bound gross underexposure. It cannot resolve individual exposure-response, tumor concentration, or CHK1 occupancy <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">[PMC6247064]</a>.</figcaption>
-                  </figure>
-                  <p class="dax-body-p">Public aggregate PK makes gross regimen underexposure less likely <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">[PMC6247064]</a>, but it cannot test whether individual nonresponders had lower exposure. None of the baseline markers directly measures CHK1 occupancy; C1D15 CTC and on-treatment pharmacodynamic readouts were not linked to individual outcomes in the public record.</p>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Exposure–response evidence</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item"><b>exposure-01 · high.</b> Public aggregate PK cannot link exposure to outcome <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">[PMC6247064]</a>. Participant-level concentrations tied to response, with prespecified covariates and assay and model diagnostics, would show whether nonresponders were underexposed.</p>
-                    </div>
-                  </div>
-                  <table class="dax-table">
-                    <caption>Table 3. Exposure questions by modelability</caption>
-                    <thead><tr><th>Question</th><th>What public data can settle</th></tr></thead>
-                    <tbody>
-                      <tr><td>Gross regimen underexposure</td><td>testable (unlikely)</td></tr>
-                      <tr><td>Individual nonresponder exposure</td><td class="dax-td-gate">not modelable</td></tr>
-                      <tr><td>Tumor concentration / CHK1 occupancy</td><td class="dax-td-gate">not modelable</td></tr>
-                    </tbody>
-                  </table>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>3</span></div>
-                </article>
-
-                <!-- 4. Toxicology -->
-                <article class="dax-page" data-page="toxicology">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-                  <p class="dax-sec-num">Section 4</p>
-                  <h3 class="dax-sec-h" id="dax-h-toxicology">Toxicology &amp; Therapeutic Window</h3>
-                  <figure class="dax-figure">
-                    <a class="dax-fig-link" href="./images/drugadopt/report/toxicology.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/toxicology.png" alt="Grade 3 and Grade 4 prexasertib toxicity by type, showing neutropenia, leukocytopenia, lymphocytopenia, thrombocytopenia, anemia and febrile neutropenia as percentages with 95 percent confidence intervals." width="1200" height="829" loading="lazy" decoding="async" /></a>
-                    <figcaption class="dax-figcap"><b>Figure 4.</b> Severe prexasertib toxicity is predominantly hematologic: neutropenia 42/49 (85.7%; 95% CI 73.3&ndash;92.9), with dose reductions in 22.4% and no on-treatment deaths <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">[PMID 38555285]</a>.</figcaption>
-                  </figure>
-                  <p class="dax-body-p">Prexasertib has a prominent, monitorable hematologic toxicity burden, while the safety window for a POLA1-directed combination is unknown. Grade 3–4 neutropenia is consistently the dose-limiting toxicity across reported datasets, but no exposure-normalized tumor-versus-marrow margin can be frozen from the public record.</p>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Combination safety window</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item"><b>safety-01 · high.</b> The public record sets no exposure-normalized tumor-versus-marrow/GI margin for a POLA1-directed combination <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">[PMID 38555285]</a> <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">[PMC6247064]</a> <a class="dax-cite" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10981752/" target="_blank" rel="noreferrer">[PMC10981752]</a>. Tumor and normal proliferative-cell data, read against a margin fixed in advance, would show whether one exists.</p>
-                    </div>
-                  </div>
-                  <table class="dax-table">
-                    <caption>Table 4. Grade 3–4 treatment-related events in 49 treated participants</caption>
-                    <thead><tr><th scope="col">Event</th><th scope="col">n (%)</th><th scope="col">Source</th></tr></thead>
-                    <tbody>
-                      <tr><th scope="row">Neutropenia</th><td>42 (85.7%)</td><td rowspan="3"><a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a> Supp. Data 2</td></tr>
-                      <tr><th scope="row">Leukocytopenia</th><td>38 (77.6%)</td></tr>
-                      <tr><th scope="row">Thrombocytopenia</th><td>20 (40.8%)</td></tr>
-                    </tbody>
-                  </table>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt</span><span>4</span></div>
-                </article>
-
-                <!-- Evidence & Gaps -->
-                <article class="dax-page" data-page="recommendation">
-                  <div class="dax-rhead"><span>Prexasertib · platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-                  <p class="dax-sec-num">Evidence &amp; Gaps</p>
-                  <h3 class="dax-sec-h" id="dax-h-recommendation">Candidate biomarkers and what would validate them</h3>
-                  <p class="dax-body-p">A responder subset makes a selection biomarker plausible.</p>
-                  <table class="dax-table">
-                    <caption>Evidence that would resolve each open question</caption>
-                    <thead><tr><th>Candidate</th><th>Evidence state</th><th>Evidence that would resolve it</th></tr></thead>
-                    <tbody>
-                      <tr><td>DNA-replication RNA score</td><td class="dax-td-gate">unstable across score definitions</td><td>A frozen continuous score with fixed assay and QC tested blind in an independent cohort.</td></tr>
-                      <tr><td>POLA1 dependence</td><td class="dax-td-gate">unproven mechanism</td><td>Reproducible interaction across lineages with genetic rescue and target engagement.</td></tr>
-                      <tr><td>Exposure–response</td><td class="dax-td-gate">not linked to outcome</td><td>Participant-linked concentration–time tied to who responded.</td></tr>
-                    </tbody>
-                  </table>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Independent-cohort test</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item">NCT03414047 is an independent prexasertib cohort. Its archived baseline tissue with linked outcomes, scored blind to outcome with a frozen continuous DNA-replication score and a fixed assay/QC procedure, would separate a real selection marker from a same-cohort artifact <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT03414047" target="_blank" rel="noreferrer">[NCT03414047]</a>.</p>
-                    </div>
-                  </div>
-                  <div class="dax-callout">
-                    <div class="dax-callout-head">Public patent landscape</div>
-                    <div class="dax-callout-body">
-                      <p class="dax-callout-item"><b>ip-01 · medium.</b> Public patent families touch the compound, salt/form, and response-predictive biomarker paths. This is a public-record landscape, not a legal or freedom-to-operate opinion. Eli Lilly filed the compound and salt families <a class="dax-cite" href="https://patents.google.com/patent/WO2010077758A1/en" target="_blank" rel="noreferrer">[WO2010077758A1]</a> <a class="dax-cite" href="https://patents.google.com/patent/US10189818B2/en" target="_blank" rel="noreferrer">[US10189818B2]</a>; Acrivon filed the response-predictive biomarker method <a class="dax-cite" href="https://patents.google.com/patent/WO2024015484A2/en" target="_blank" rel="noreferrer">[WO2024015484A2]</a>.</p>
-                    </div>
-                  </div>
-                  <div class="dax-rfoot"><span>Generated by DrugAdopt · not medical advice</span><span>Gaps</span></div>
-                </article>
-              </div>
-            </div>
-            <figcaption>Example DrugAdopt readout: prexasertib in platinum-resistant ovarian cancer. <a href="./report.html">Open the full report <span aria-hidden="true">→</span></a></figcaption>
+          <figure class="artifact-feature">
+            <div class="artifact-feature-head"><span>Tolvaptan · ADPKD</span><span>Selected adult trials</span></div>
+            <a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-trials.jpg" target="_blank" rel="noopener" data-detail-width="1600" data-detail-alt="Full slide 8: TEMPO and REPRISE adult clinical outcomes, definitions, units, intervals, and report locator." aria-label="Enlarge the full adult clinical-trial slide">
+              <img src="./images/drugadopt/tolvaptan/slide-trials-excerpt.jpg" width="643" height="423" alt="Excerpt from slide 8: TEMPO kidney-volume growth difference −2.7 percentage points per year, 95% CI −3.3 to −2.1; separate TEMPO and REPRISE filtration contrasts retain their units and intervals." fetchpriority="high" decoding="async" />
+              <span class="artifact-enlarge" aria-hidden="true">Enlarge ↗</span>
+            </a>
+            <figcaption><strong>TEMPO 3:4 · three-year adult trial.</strong> Annual kidney-volume growth difference: −2.7 percentage points/year (95% CI −3.3 to −2.1). Excerpt from slide 8.</figcaption>
           </figure>
         </div>
       </section>
+
+      <section class="evidence-intro shell" id="evidence-walkthrough" aria-labelledby="evidence-title">
+        <p class="artifact-eyebrow">Inside a DrugAdopt evidence package</p>
+        <h2 id="evidence-title">Follow a finding all the way to its source.</h2>
+        <p>This example examines tolvaptan in autosomal dominant polycystic kidney disease (ADPKD). Explore disease biology, adult trial outcomes, and conditional exposure models in three connected formats.</p>
+        <nav class="artifact-path" aria-label="Explore the evidence package">
+          <a href="#report-highlights"><span>01</span> Report</a>
+          <a href="#slide-highlights"><span>02</span> Slides</a>
+          <a href="#data-highlights"><span>03</span> Workbook &amp; records</a>
+        </nav>
+        <p class="artifact-selection-note">Selected renders from an October 2026 analysis of public evidence. Choose a highlight or open it larger to read the detail.</p>
+      </section>
+
+      <section class="evidence-trace shell" aria-labelledby="trace-title" data-evidence-trace>
+        <div class="trace-finding">
+          <div><p class="artifact-eyebrow">One finding, four connected views</p><h3 id="trace-title">TEMPO 3:4 kidney-volume growth</h3><p>Tolvaptan versus placebo · selected adults · three years</p></div>
+          <p class="trace-estimate"><strong>−2.7</strong><span>percentage points / year</span><span>95% CI −3.3 to −2.1</span></p>
+        </div>
+        <div class="trace-toolbar"><p>Choose a step to follow the same reported result.</p><button type="button" data-trace-play aria-pressed="false" hidden>Play trace <span aria-hidden="true">→</span></button></div>
+        <ol class="trace-steps">
+          <li><button type="button" data-trace-step="0" data-trace-href="./images/drugadopt/tolvaptan/report-endpoints.jpg" aria-pressed="true"><span class="trace-step-number">01</span><strong>Report</strong><span>The clinical finding</span><small>§1.1.2 · page 6</small></button></li>
+          <li><button type="button" data-trace-step="1" data-trace-href="./images/drugadopt/tolvaptan/slide-trials.jpg" aria-pressed="false"><span class="trace-step-number">02</span><strong>Slide</strong><span>The presentation highlight</span><small>Adult trial outcomes · slide 8</small></button></li>
+          <li><button type="button" data-trace-step="2" data-trace-href="./images/drugadopt/tolvaptan/workbook-parameters-tempo.jpg" aria-pressed="false"><span class="trace-step-number">03</span><strong>Parameter</strong><span>The exact estimate</span><small>tempo_tkv_diff · row 4</small></button></li>
+          <li><button type="button" data-trace-step="3" data-trace-href="https://pubmed.ncbi.nlm.nih.gov/23121377/" aria-pressed="false"><span class="trace-step-number">04</span><strong>Source</strong><span>The original publication</span><small>PMID 23121377 · Results</small></button></li>
+        </ol>
+        <div class="trace-progress" aria-hidden="true"><span></span></div>
+        <div class="trace-context">
+          <p data-trace-caption aria-live="polite" aria-atomic="true"><strong>Report.</strong> Section 1.1.2 explains the −2.7 percentage-point annual growth contrast, trial eligibility, and the source's analysis population.</p>
+          <a data-trace-locator href="./images/drugadopt/tolvaptan/report-endpoints.jpg" target="_blank" rel="noopener">Open report page 6 ↗</a>
+        </div>
+        <details class="trace-code">
+          <summary>Inspect the Quarto and plotting code</summary>
+          <div class="trace-code-body">
+            <p>These excerpts come from the retained analysis. The −2.7 estimate and its confidence interval are source-reported. The code plots the retained arm estimates and intervals.</p>
+            <div class="trace-code-grid">
+              <div><h4>Quarto figure source</h4><p><code>orientation_efficacy_landscape.qmd</code> · lines 14–23</p><pre tabindex="0" aria-label="Retained Quarto figure annotations and retained data input"><code>```{python}
+#| label: fig-tempo-tkv
+#| fig-cap: &quot;Annual total kidney volume (TKV) growth (%/year; point estimates and source-reported 95% confidence intervals) by randomized arm in TEMPO 3:4: adults aged 18–50 with baseline TKV ≥750 ml and estimated creatinine clearance ≥60 ml/min; three-year primary TKV endpoint, primary efficacy analysis N=1,307 of 1,445 randomized. Values from the TEMPO 3:4 publication (PMID 23121377), NCT00428948.&quot;
+#| evidence: randomized_trial
+#| sources: PMID 23121377, NCT00428948
+import pandas as pd
+import altair as alt
+
+rows = pd.read_csv(&quot;raw/orientation/tempo_tkv.csv&quot;)
+rows[&quot;axis_label&quot;] = rows[&quot;arm&quot;]</code></pre></div>
+              <div><h4>Plotting calculation</h4><p><code>plot_tempo_labels.py</code> · lines 21–27</p><pre tabindex="0" aria-label="Retained Python plotting calculation"><code>for y, row in enumerate(rows):
+    mean, lo, hi = (float(row[k]) for k in (&#x27;mean&#x27;, &#x27;ci_low&#x27;, &#x27;ci_high&#x27;))
+    ax.errorbar(mean, y, xerr=[[mean-lo], [hi-mean]], fmt=&#x27;o&#x27;,
+                color=&#x27;#39718E&#x27;, ms=7, capsize=4, lw=1.6)
+ax.set(yticks=range(len(rows)), yticklabels=[r[&#x27;arm&#x27;] for r in rows],
+       xlabel=&#x27;Annual total kidney volume growth (%/year)&#x27;,
+       ylabel=&#x27;Treatment arm&#x27;, xlim=(2, 6.4), ylim=(-.6, 1.6))</code></pre></div>
+            </div>
+            <p class="trace-code-note">The plot uses arm means of 2.8 and 5.5% per year with their own source-reported intervals. The adjusted between-group interval is retained separately in <code>Parameters!L4:M4</code>. Read-only excerpts from the retained analysis.</p>
+          </div>
+        </details>
+      </section>
+
+      <section class="artifact-chapter shell" id="report-highlights" aria-labelledby="report-title">
+        <div class="artifact-chapter-copy"><p class="artifact-eyebrow">01 / The report</p><h2 id="report-title">Read the science in context.</h2><p>Disease biology, endpoints, and clinical results come together in an explanatory report. Study populations and model assumptions sit beside each finding.</p><ul class="artifact-benefits"><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="4" width="20" height="24" rx="2"/><path d="M10 11h10M10 16h10M10 21h6"/></svg><span>Study populations and endpoints</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h24M5 11v10M27 11v10"/><circle cx="16" cy="16" r="4"/></svg><span>Estimates with uncertainty</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m11 9-7 7 7 7m10-14 7 7-7 7m-3-18-4 26"/></svg><span>Methods and model assumptions</span></li></ul></div>
+        <div class="artifact-stack"><div class="artifact-background" aria-hidden="true"><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/report-trials.jpg" width="1237" height="1600" alt="" loading="lazy" decoding="async" /><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/report-modeling.jpg" width="1237" height="1600" alt="" loading="lazy" decoding="async" /></div>
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Report" role="region" aria-label="Selected report pages">
+          <div class="artifact-selector" aria-label="Choose a report highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">Disease endpoints</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Trial context</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Model assumptions</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-report-page" data-artifact-zoom data-detail-width="1237" href="./images/drugadopt/tolvaptan/report-endpoints.jpg" target="_blank" rel="noopener" aria-label="Enlarge report page 6 on disease endpoints"><img src="./images/drugadopt/tolvaptan/report-endpoints-excerpt.jpg" width="1005" height="655" alt="Excerpt from report page 6: plotted changes in kidney volume and measured filtration in 93 CRISP participants, with the figure caption, source citation, and the retained analysis-file locator." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Open full page ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Disease biology &amp; endpoints · Excerpt, report p. 6</strong><span>Kidney enlargement and filtration loss over eight years in 93 CRISP participants. These are observational group averages; the source supplies no uncertainty intervals. <a href="https://pubmed.ncbi.nlm.nih.gov/22344503/" target="_blank" rel="noreferrer">CRISP publication ↗</a></span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-report-page" data-artifact-zoom data-detail-width="1237" href="./images/drugadopt/tolvaptan/report-trials.jpg" target="_blank" rel="noopener" aria-label="Enlarge report page 15 on adult trial comparisons"><img src="./images/drugadopt/tolvaptan/report-trials-excerpt.jpg" width="1005" height="424" alt="Excerpt from report page 15: TEMPO 3:4 and REPRISE estimates with confidence intervals, different filtration outcome definitions, analysis populations, and the REPRISE tolerability run-in." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Open full page ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Clinical trial contrast · Excerpt, report p. 15</strong><span>TEMPO followed earlier-stage ADPKD for three years; REPRISE studied later-stage disease for one year after a tolerability run-in. Their filtration estimates use different analysis windows.</span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-report-page" data-artifact-zoom data-detail-width="1237" href="./images/drugadopt/tolvaptan/report-modeling.jpg" target="_blank" rel="noopener" aria-label="Enlarge report page 22 on plasma simulations"><img src="./images/drugadopt/tolvaptan/report-modeling-excerpt.jpg" width="1005" height="977" alt="Excerpt from report page 22: published-parameter simulations of total plasma tolvaptan across historical regimens and kidney-function scenarios. The page states the weight, dose timing, and limits of the conditional model." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Open full page ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Reproducible modeling · Excerpt, report p. 22</strong><span>Conditional total-plasma simulations use a weight of 79.5 kg, dose timing, and stated kidney-function scenarios. The 150 ng/mL reference marks a urine-excretion association.</span></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous report highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next report highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      <section class="artifact-chapter shell" id="slide-highlights" aria-labelledby="slides-title">
+        <div class="artifact-chapter-copy"><p class="artifact-eyebrow">02 / The slide deck</p><h2 id="slides-title">Bring the findings into focus.</h2><p>The deck turns report findings into presentation highlights: V2 receptor biology, adult trial outcomes, treatment safety, and clearly labeled predictions.</p><ul class="artifact-benefits"><li><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="8" cy="8" r="4"/><circle cx="24" cy="24" r="4"/><circle cx="8" cy="24" r="3"/><path d="m11 11 10 10M8 12v9"/></svg><span>Mechanism and pharmacology</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 27h23M8 23V13h5v10m5 0V5h5v18"/></svg><span>Clinical outcomes and safety</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M16 5v22M8 12h4m8 0h4M8 19h4m8 0h4"/></svg><span>Measured results and predictions</span></li></ul></div>
+        <div class="artifact-stack"><div class="artifact-background" aria-hidden="true"><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/slide-safety.jpg" width="1600" height="900" alt="" loading="lazy" decoding="async" /><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/slide-predictions.jpg" width="1600" height="900" alt="" loading="lazy" decoding="async" /></div>
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Slides" role="region" aria-label="Selected presentation slides">
+          <div class="artifact-selector" aria-label="Choose a presentation highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">V2 mechanism</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Adult trials</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Safety</button>
+            <button type="button" data-artifact-select="3" aria-pressed="false">Predictions</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-mechanism.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 4 on V2 receptor mechanism"><img src="./images/drugadopt/tolvaptan/slide-mechanism-excerpt.jpg" width="1416" height="386" alt="Excerpt from slide 4: stimulated-signaling IC50 about 0.2 nM in three human ADPKD culture preparations; pediatric urine-osmolality changes with treatment and placebo groups. Clinical benefit in children remains unresolved." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge slide ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Drug mechanism &amp; biomarkers · Excerpt, slide 4</strong><span>Tolvaptan reduced stimulated signaling in human ADPKD cultures. Pediatric urine changes indicate V2 pharmacodynamic response; clinical benefit remains unresolved. <a href="https://pubmed.ncbi.nlm.nih.gov/21816754/" target="_blank" rel="noreferrer">Human cell study ↗</a></span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-trials.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 8 on adult trial outcomes"><img src="./images/drugadopt/tolvaptan/slide-trials-excerpt.jpg" width="643" height="423" alt="Excerpt from slide 8: TEMPO 3:4 kidney-volume growth difference was minus 2.7 percentage points per year; filtration contrasts were plus 0.98 for TEMPO annual slope and plus 1.27 for REPRISE annualized change, with source-reported confidence intervals." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge slide ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Human outcomes in selected adult trials · Excerpt, slide 8</strong><span>TEMPO reported −2.7 percentage points/year in kidney-volume growth; the filtration contrasts use distinct trial windows. <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/" target="_blank" rel="noreferrer">TEMPO 3:4 ↗</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/" target="_blank" rel="noreferrer">REPRISE ↗</a></span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-safety.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 11 on treatment safety"><img src="./images/drugadopt/tolvaptan/slide-safety-excerpt.jpg" width="1415" height="498" alt="Excerpt from slide 11: treatment discontinuation, aquaretic events, and liver-enzyme elevations with treatment and placebo counts, percentages, observation windows, and serious liver-injury context." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge slide ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Tolerability &amp; liver safety · Excerpt, slide 11</strong><span>Tolvaptan carries a risk of serious liver injury. The table shows treatment discontinuation and liver-enzyme elevations with their event counts and follow-up periods.</span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-predictions.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 10 on ADME predictions and simulations"><img src="./images/drugadopt/tolvaptan/slide-predictions-excerpt.jpg" width="692" height="434" alt="Excerpt from slide 10: ADME predictions include a 5.50 percent unbound fraction compared with the reported plasma limit below 2 percent. Assay conditions differ." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge slide ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Predictions &amp; plasma simulations · Excerpt, slide 10</strong><span>Predicted plasma unbound fraction: 5.50%; reported limit: &lt;2%. Assay conditions differ. The full slide also shows a conditional plasma simulation; tissue exposure and clinical prediction remain unvalidated.</span></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous slide highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next slide highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      <section class="artifact-chapter shell" id="data-highlights" aria-labelledby="data-title">
+        <div class="artifact-chapter-copy"><p class="artifact-eyebrow">03 / The workbook &amp; records</p><h2 id="data-title">Trace the number to its record.</h2><p>The TEMPO kidney-volume contrast leads to a parameter ID, its units and confidence interval, and the original publication. The workbook connects those records with field definitions.</p><ul class="artifact-benefits"><li><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M16 5v22M8 12h4m8 0h4M8 19h4m8 0h4"/></svg><span>Values, units, and stable IDs</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m14 10 4-4a7 7 0 0 1 10 10l-4 4m-6 2-4 4A7 7 0 0 1 4 16l4-4m3 9 10-10"/></svg><span>Publication links and access depth</span></li><li><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m11 9-7 7 7 7m10-14 7 7-7 7m-3-18-4 26"/></svg><span>Retained code and field definitions</span></li></ul></div>
+        <div class="artifact-stack"><div class="artifact-background" aria-hidden="true"><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/workbook-parameters-tempo.jpg" width="2004" height="378" alt="" loading="lazy" decoding="async" /><img data-artifact-decorative aria-hidden="true" src="./images/drugadopt/tolvaptan/workbook-sources-trials.jpg" width="1505" height="318" alt="" loading="lazy" decoding="async" /></div>
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Workbook" role="region" aria-label="Selected workbook ranges">
+          <div class="artifact-selector" aria-label="Choose a workbook highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">Summary</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Parameters</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Sources</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="1829" data-detail-alt="Full selected Summary A5:F8: three adult trial contrasts, values, units, and confidence intervals." data-detail-title="Summary · A5:F8" href="./images/drugadopt/tolvaptan/workbook-summary-clinical.jpg" target="_blank" rel="noopener" aria-label="Enlarge workbook Summary range A5 to F8"><img src="./images/drugadopt/tolvaptan/workbook-summary-finding.jpg" width="959" height="223" alt="Excerpt Summary C5:F6: TEMPO kidney-volume growth contrast −2.7 percentage points per year, with confidence interval bounds −3.3 and −2.1." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge table ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>TEMPO kidney-volume growth · Summary C5:F6</strong><span>Adjusted contrast: −2.7 percentage points/year (95% CI −3.3 to −2.1). Open the selected summary range for the distinct filtration contrasts.</span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="2004" data-detail-alt="Full selected Parameters A1:E4: stable IDs, domains, endpoint, arm estimates, adjusted contrast, and units." data-detail-title="Parameters · A1:E4" href="./images/drugadopt/tolvaptan/workbook-parameters-tempo.jpg" target="_blank" rel="noopener" aria-label="Enlarge workbook Parameters range A1 to E4"><img src="./images/drugadopt/tolvaptan/workbook-parameters-values.jpg" width="1107" height="378" alt="Excerpt Parameters C1:E4: kidney-volume endpoint, tolvaptan and placebo arm growth rates of 2.8 and 5.5 percent per year, and adjusted contrast −2.7 percentage points per year." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge table ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Growth-rate records · Parameters C1:E4</strong><span>Tolvaptan: 2.8%/year. Placebo: 5.5%/year. The adjusted contrast belongs to <code>tempo_tkv_diff</code>, row 4; full selected-range view includes the stable IDs.</span></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel>
+            <div class="artifact-canvas" tabindex="0" role="region" aria-label="Scrollable artifact excerpt"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="1505" data-detail-alt="Full selected Sources F1:G3: publication URLs and access depth for TEMPO and REPRISE." data-detail-title="Sources · F1:G3" href="./images/drugadopt/tolvaptan/workbook-sources-trials.jpg" target="_blank" rel="noopener" aria-label="Enlarge workbook Sources range F1 to G3"><img src="./images/drugadopt/tolvaptan/workbook-sources-links.jpg" width="1032" height="318" alt="Excerpt Sources F1:F3: public publication URLs for TEMPO PMID 23121377 and REPRISE PMID 29105594." loading="lazy" decoding="async" /><span class="artifact-enlarge" aria-hidden="true">Enlarge table ↗</span></a></div><p class="artifact-pan-hint">Swipe or scroll across the excerpt, or open it larger.</p>
+            <figcaption><strong>Publication records · Sources F1:F3</strong><span>Row 2: <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/" target="_blank" rel="noreferrer">TEMPO · PMID 23121377 ↗</a>, retained full text. Row 3: <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/" target="_blank" rel="noreferrer">REPRISE · PMID 29105594 ↗</a>, abstract plus separate registry results. Open the selected range to inspect its access-depth column.</span></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous workbook highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next workbook highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      <dialog class="artifact-dialog" aria-labelledby="artifact-dialog-title">
+        <div class="artifact-dialog-bar"><h2 id="artifact-dialog-title">Artifact detail</h2><div class="artifact-dialog-actions"><button type="button" data-artifact-fit aria-pressed="true">Fit</button><button type="button" data-artifact-detail aria-pressed="false">Read detail</button><button type="button" data-artifact-close autofocus>Close <span aria-hidden="true">×</span></button></div></div>
+        <p class="artifact-dialog-hint" id="artifact-dialog-hint">Choose “Read detail” for larger text. Scroll horizontally or vertically to inspect the image. Escape closes this view.</p>
+        <div class="artifact-dialog-scroll" tabindex="0" role="region" aria-label="Enlarged artifact image" aria-describedby="artifact-dialog-hint"><img alt="" /></div>
+        <p class="artifact-dialog-caption"></p>
+      </dialog>
+
 
       <section class="band">
         <div class="shell">
@@ -365,6 +331,6 @@
       </div>
     </footer>
     <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
-    <script src="./assets/js/company-site/drugadopt-demo.js?v=5eef22cf6968"></script>
+    <script src="./assets/js/company-site/drugadopt-walkthrough.js?v=0dd23952b9d6"></script>
   </body>
 </html>
