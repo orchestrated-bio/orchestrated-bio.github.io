@@ -1137,6 +1137,11 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
       <nav class="dax-spine" aria-label="Report sections"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><ul class="dax-nav">{nav}</ul></nav>
       <div class="dax-paper dax-paper-scroll">{''.join(str(section) for section in sections)}</div></div>'''
     document = BeautifulSoup((ROOT / "report.html").read_text(), "html.parser")
+    for tag in document.select('link[href], script[src]'):
+        attribute = "href" if tag.name == "link" else "src"
+        asset = tag[attribute].split("?")[0]
+        if asset.startswith("./assets/") and asset.endswith((".css", ".js")):
+            tag[attribute] = f"{asset}?v={asset_version(asset)}"
     document.title.string = "Tolvaptan in ADPKD | DrugAdopt report"
     description = "A DrugAdopt report on tolvaptan in ADPKD: disease biology, mechanism, clinical outcomes, pharmacology, safety, and the IP landscape."
     for tag in document.select('meta[name="description"], meta[property="og:description"]'):

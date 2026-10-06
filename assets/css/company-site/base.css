@@ -211,15 +211,31 @@ body {
 
 .site-nav-toggle {
   display: none;
+  position: relative;
   font: inherit;
-  font-size: var(--step--1);
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--ink);
   background: transparent;
   border: 1px solid var(--rule-firm);
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 2.6rem 0.5rem 0.8rem;
   cursor: pointer;
 }
+.site-nav-toggle::before,
+.site-nav-toggle::after {
+  content: "";
+  position: absolute;
+  right: 0.8rem;
+  top: 50%;
+  width: 17px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.15s ease;
+}
+.site-nav-toggle::before { transform: translateY(-4px); }
+.site-nav-toggle::after { transform: translateY(2px); }
+.site-nav-toggle[aria-expanded="true"]::before { transform: translateY(-1px) rotate(45deg); }
+.site-nav-toggle[aria-expanded="true"]::after { transform: translateY(-1px) rotate(-45deg); }
 
 .site-nav a:not(.nav-cta) {
   font-family: var(--sans);
@@ -257,23 +273,58 @@ body {
   .site-nav-toggle[hidden] { display: none; }
   .site-nav.site-nav-enhanced {
     display: none;
-    flex: 1 0 100%;
-    order: 3;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
     gap: 0;
-    margin-left: 0;
-    padding-top: 0.35rem;
-    border-top: 1px solid var(--rule);
+    align-items: stretch;
+    margin: 0;
+    padding: 0.75rem 1.25rem 1.25rem;
+    color: var(--ink);
+    background: var(--paper-raised);
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 12px 24px rgb(19 24 21 / 0.08);
+    max-height: calc(100dvh - var(--masthead-height, 68px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .site-nav.site-nav-enhanced[popover] {
+    position: fixed;
+    inset: var(--masthead-height, 68px) 0 auto;
+  }
+  .site-nav.site-nav-enhanced[popover]::backdrop {
+    background: rgb(19 24 21 / 0.12);
+    clip-path: inset(var(--masthead-height, 68px) 0 0);
   }
   .site-nav.site-nav-enhanced[data-open="true"] { display: grid; grid-template-columns: 1fr; }
-  .site-nav.site-nav-enhanced a { min-height: 44px; display: flex; align-items: center; }
-  .site-nav.site-nav-enhanced a[aria-current] {
+  .site-nav.site-nav-enhanced a {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    color: var(--ink-2);
     border-bottom-color: transparent;
-    box-shadow: inset 2px 0 0 var(--accent);
-    padding-left: 0.75rem;
-    color: var(--ink);
+  }
+  .site-nav.site-nav-enhanced a[aria-current] {
+    background: var(--accent-wash);
+    color: var(--accent-deep);
     font-weight: 600;
   }
-  .site-nav.site-nav-enhanced .nav-cta { justify-content: center; margin-top: 0.35rem; }
+  .site-nav.site-nav-enhanced .nav-cta {
+    justify-content: center;
+    margin-top: 0.75rem;
+    color: var(--paper);
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-toggle::before,
+  .site-nav-toggle::after { transition: none; }
 }
 
 /* --- Hero: the register itself ----------------------------------------- */
