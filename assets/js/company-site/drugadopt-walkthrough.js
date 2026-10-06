@@ -1,0 +1,180 @@
+/* Reader-controlled artifact highlights. Images remain ordinary links without JS. */
+(function () {
+  'use strict';
+  var gallery = document.querySelector('[data-case-gallery]');
+  var formats = gallery ? Array.from(gallery.querySelectorAll('[data-case-format]')) : [];
+  var chapters = gallery ? Array.from(gallery.querySelectorAll('[data-case-panel]')) : [];
+  var activeFormat = 0;
+  function formatStorageKey() {
+    return 'drugadopt-preview:' + window.location.pathname + window.location.hash + ':format';
+  }
+  function showFormat(next, moveFocus) {
+    if (!chapters.length) return;
+    var active = (next + chapters.length) % chapters.length;
+    activeFormat = active;
+    chapters.forEach(function (chapter, i) { chapter.hidden = i !== active; });
+    formats.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === active)); });
+    if (moveFocus) formats[active].focus();
+  }
+  function formatForHash() {
+    return chapters.findIndex(function (chapter) { return '#' + chapter.id === window.location.hash; });
+  }
+  if (gallery) {
+    formats.forEach(function (button, i) {
+      button.addEventListener('click', function () { showFormat(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowRight') next = i + 1;
+        if (event.key === 'ArrowLeft') next = i - 1;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = chapters.length - 1;
+        if (next !== undefined) { event.preventDefault(); showFormat(next, true); }
+      });
+    });
+    var initialFormat = Math.max(0, formatForHash());
+    try {
+      var rememberedFormat = window.sessionStorage.getItem(formatStorageKey());
+      var rememberedIndex = chapters.findIndex(function (chapter) { return chapter.id === rememberedFormat; });
+      if (rememberedIndex >= 0) initialFormat = rememberedIndex;
+    } catch (_) {}
+    showFormat(initialFormat);
+    window.addEventListener('pagehide', function () {
+      try { window.sessionStorage.setItem(formatStorageKey(), chapters[activeFormat].id); } catch (_) {}
+    });
+    gallery.querySelector('.case-formats').hidden = false;
+    window.addEventListener('hashchange', function () {
+      var next = formatForHash();
+      if (next < 0) return;
+      var wasHidden = chapters[next].hidden;
+      showFormat(next);
+      if (wasHidden) chapters[next].scrollIntoView({ block: 'start' });
+    });
+  }
+  function createBackcards(container, panels, select) {
+    var layer = document.createElement('div');
+    layer.className = 'artifact-backcards';
+    var cards = [0, 1].map(function () {
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'artifact-backcard';
+      var label = document.createElement('span');
+      var preview = document.createElement('img');
+      preview.alt = '';
+      preview.decoding = 'async';
+      card.append(label, preview);
+      card.addEventListener('click', function () { select(Number(card.dataset.previewIndex)); });
+      layer.append(card);
+      return card;
+    });
+    container.classList.add('preview-stack');
+    container.prepend(layer);
+    return function (index) {
+      cards.forEach(function (card, offset) {
+        var next = (index + offset + 1) % panels.length;
+        var panel = panels[next];
+        var image = panel.querySelector('img');
+        var label = panel.querySelector('figcaption strong').textContent.split(' · ')[0];
+        card.dataset.previewIndex = String(next);
+        card.setAttribute('aria-label', 'Show ' + label);
+        card.querySelector('span').textContent = label;
+        card.querySelector('img').src = image.src;
+      });
+    };
+  }
+  var viewers = document.querySelectorAll('[data-artifact-viewer]');
+  viewers.forEach(function (viewer) {
+    var panels = Array.from(viewer.querySelectorAll('[data-artifact-panel]'));
+    var selectors = Array.from(viewer.querySelectorAll('[data-artifact-select]'));
+    var status = viewer.querySelector('[data-artifact-status]');
+    var heading = viewer.closest('.artifact-chapter').querySelector('[data-highlight-heading]');
+    var chapterId = viewer.closest('.artifact-chapter').id;
+    var storageKey = 'drugadopt-preview:' + window.location.pathname + ':' + chapterId;
+    var index = 0;
+    try {
+      var remembered = Number(window.sessionStorage.getItem(storageKey));
+      if (Number.isInteger(remembered) && remembered >= 0 && remembered < panels.length) index = remembered;
+    } catch (_) {}
+    var updateBackcards = createBackcards(viewer.parentElement, panels, function (next) { show(next); });
+    function show(next, moveFocus) {
+      index = (next + panels.length) % panels.length;
+      panels.forEach(function (panel, i) { panel.hidden = i !== index; });
+      selectors.forEach(function (button, i) {
+        button.setAttribute('aria-pressed', String(i === index));
+      });
+      status.textContent = viewer.dataset.kind + ' · ' + (index + 1) + ' of ' + panels.length;
+      heading.textContent = panels[index].dataset.highlightTitle;
+      updateBackcards(index);
+      if (moveFocus) selectors[index].focus();
+    }
+    selectors.forEach(function (button, i) {
+      button.addEventListener('click', function () { show(i); });
+      button.addEventListener('keydown', function (event) {
+        var next;
+        if (event.key === 'ArrowRight') next = index + 1;
+        if (event.key === 'ArrowLeft') next = index - 1;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = panels.length - 1;
+        if (next !== undefined) { event.preventDefault(); show(next, true); }
+      });
+    });
+    viewer.querySelector('[data-artifact-prev]').addEventListener('click', function () { show(index - 1); });
+    viewer.querySelector('[data-artifact-next]').addEventListener('click', function () { show(index + 1); });
+    document.querySelectorAll('a[href="#' + chapterId + '"][data-artifact-index]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var format = chapters.findIndex(function (chapter) { return chapter.id === chapterId; });
+        if (format >= 0) showFormat(format);
+        show(Number(link.dataset.artifactIndex));
+      });
+    });
+    show(index);
+    window.addEventListener('pagehide', function () {
+      try { window.sessionStorage.setItem(storageKey, String(index)); } catch (_) {}
+    });
+    viewer.querySelector('.artifact-selector').hidden = false;
+    viewer.querySelector('.artifact-controls').hidden = false;
+  });
+
+  var dialog = document.querySelector('.artifact-dialog');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  var image = dialog.querySelector('img');
+  var scroller = dialog.querySelector('.artifact-dialog-scroll');
+  var title = dialog.querySelector('#artifact-dialog-title');
+  var caption = dialog.querySelector('.artifact-dialog-caption');
+  var fit = dialog.querySelector('[data-artifact-fit]');
+  var detail = dialog.querySelector('[data-artifact-detail]');
+  var trigger;
+  function zoom(isDetail) {
+    scroller.dataset.detail = String(isDetail);
+    fit.setAttribute('aria-pressed', String(!isDetail));
+    detail.setAttribute('aria-pressed', String(isDetail));
+    scroller.scrollTop = 0;
+    scroller.scrollLeft = 0;
+  }
+  document.querySelectorAll('[data-artifact-zoom]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      // Preserve modified clicks and the direct-image fallback.
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      trigger = link;
+      var source = link.querySelector('img');
+      var figure = link.closest('figure');
+      var description = figure.querySelector('figcaption');
+      image.src = link.href;
+      image.alt = link.dataset.detailAlt || (source ? source.alt.replace(/^Excerpt from /, 'Full ') : link.getAttribute('aria-label'));
+      // A wide worksheet needs its native width so the text remains readable.
+      // Slides and report pages already render at useful reading dimensions.
+      image.style.setProperty('--artifact-detail-width', (Number(link.dataset.detailWidth) || (source && (Number(source.getAttribute('width')) || source.naturalWidth))) + 'px');
+      title.textContent = link.dataset.detailTitle || description.querySelector('strong').textContent.replace('· Excerpt, ', '· Full ');
+      caption.textContent = description.innerText.replace(/\s+/g, ' ').trim();
+      zoom(false);
+      dialog.showModal();
+    });
+  });
+  fit.addEventListener('click', function () { zoom(false); });
+  detail.addEventListener('click', function () { zoom(true); scroller.focus(); });
+  dialog.querySelector('[data-artifact-close]').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('close', function () {
+    image.removeAttribute('src');
+    if (trigger) trigger.focus({ preventScroll: true });
+  });
+})();

@@ -1,0 +1,508 @@
+{
+  "accession": "GSE198340",
+  "contrast": "treatment: treated with Tolvaptan versus untreated within genotype Pkd1 KO",
+  "groups": {
+    "treated with Tolvaptan": 12,
+    "untreated": 12
+  },
+  "sample_counts": {
+    "recorded": 57,
+    "fitted": 47,
+    "not_fitted": 10,
+    "not_fitted_by_reason": {
+      "outside subset genotype": 10
+    }
+  },
+  "probes_fitted": 34472,
+  "BH_significant_probes": 7988,
+  "BH_alpha": 0.05,
+  "QC_flags": [],
+  "scale_transform": "none",
+  "selected_probes": [
+    {
+      "probe": 17535712,
+      "symbol": "Avpr2",
+      "logFC": 0.1150000000000011,
+      "CI.L": -0.0162988724571696,
+      "CI.R": 0.2462988724571718,
+      "adj.P.Val": 0.2276210651272486
+    },
+    {
+      "probe": 17314833,
+      "symbol": "Aqp2",
+      "logFC": -0.4016666666666656,
+      "CI.L": -0.5719115727559061,
+      "CI.R": -0.2314217605774251,
+      "adj.P.Val": 0.0002176596246344
+    },
+    {
+      "probe": 17352862,
+      "symbol": "Aqp4",
+      "logFC": 0.1525000000000012,
+      "CI.L": -0.0475352258316592,
+      "CI.R": 0.3525352258316617,
+      "adj.P.Val": 0.3097755938699086
+    },
+    {
+      "probe": 17334304,
+      "symbol": "Pkd1",
+      "logFC": -0.1274999999999996,
+      "CI.L": -0.2227603604956774,
+      "CI.R": -0.0322396395043218,
+      "adj.P.Val": 0.043608702868622
+    },
+    {
+      "probe": 17213676,
+      "symbol": "Creb1",
+      "logFC": -0.1041666666666642,
+      "CI.L": -0.2184297127296143,
+      "CI.R": 0.0100963793962858,
+      "adj.P.Val": 0.205160136042545
+    },
+    {
+      "probe": 17510983,
+      "symbol": "Prkaca",
+      "logFC": 0.2375000000000015,
+      "CI.L": 0.1007735828441331,
+      "CI.R": 0.37422641715587,
+      "adj.P.Val": 0.0066463590401763
+    },
+    {
+      "probe": 17503031,
+      "symbol": "Prkaca",
+      "logFC": 0.11416666666667,
+      "CI.L": -0.0128921970587993,
+      "CI.R": 0.2412255303921394,
+      "adj.P.Val": 0.2128233683064685
+    },
+    {
+      "probe": 17515813,
+      "symbol": "Kcnj1",
+      "logFC": 0.367499999999999,
+      "CI.L": 0.2708540219337933,
+      "CI.R": 0.4641459780662048,
+      "adj.P.Val": 5.555674269530837e-08
+    }
+  ],
+  "source_reported_experiments": [
+    {
+      "candidate_id": "PMID21816754",
+      "result_id": "human-primary-cyst-area-tolvaptan",
+      "result_role": "structural_or_durable_outcome",
+      "study_design": "Controlled ex-vivo culture treatment after cyst initiation; three kidney preparations; control, AVP, AVP+tolvaptan arms.",
+      "design_basis": "AVP challenge and antagonist contrast support treatment-associated cyst phenotype in primary ADPKD epithelium; no receptor-specific loss/re-expression in this endpoint.",
+      "evidence_scope": "exact_asset",
+      "source_id": "PMID:21816754",
+      "evidence_path": "analysis/raw/orientation/PMC3213906_pmc_article_html.html",
+      "genotype_or_variant_class": "ADPKD-derived primary cultures; genotype not resolved",
+      "disease_stage": "Discarded kidney specimens; donor disease stage not resolved",
+      "model": {
+        "species": "Homo sapiens",
+        "system": "primary renal epithelial culture in collagen gel",
+        "disease_relevance": "human ADPKD-derived epithelium; in-vitro cyst induction"
+      },
+      "perturbation": "AVP 10^-8 M; antagonist tolvaptan 10^-8 M",
+      "rescue": "Tolvaptan added with AVP after forskolin+EGF cyst initiation stimuli removed",
+      "context": "Forskolin+EGF cyst initiation for 3 days, removed; treatment thereafter 5\u20137 days",
+      "temporal_order": "cyst initiation 3 days, then control/AVP/AVP+tolvaptan for 5\u20137 days",
+      "comparison_groups": [
+        {
+          "label": "control",
+          "n": 3,
+          "role": "baseline control preparations"
+        },
+        {
+          "label": "AVP",
+          "n": 3,
+          "role": "ligand challenge"
+        },
+        {
+          "label": "AVP plus tolvaptan",
+          "n": 3,
+          "role": "asset treatment"
+        }
+      ],
+      "controls": [
+        {
+          "label": "control",
+          "purpose": "baseline cyst area"
+        },
+        {
+          "label": "AVP alone",
+          "purpose": "ligand challenge comparator"
+        }
+      ],
+      "biological_unit": "kidney preparation/donor; three independent preparations",
+      "denominator": [
+        {
+          "endpoint": "summed cross-sectional cyst area for cysts >=100 \u03bcm",
+          "n": 3,
+          "as_reported": "n=3 kidney preparations"
+        }
+      ],
+      "repeated_measures_or_pseudoreplication": "Multiple cysts/wells nested within preparation; preparations, not cysts or wells, are independent units.",
+      "assay": "Collagen-gel cyst assay; summed two-dimensional cross-sectional area",
+      "timepoint": "5\u20137 days after AVP/tolvaptan treatment began",
+      "endpoint": "Summed cross-sectional area of cysts at least 100 \u03bcm",
+      "effect": {
+        "estimate": "Significantly lower for AVP+tolvaptan than AVP alone (P<0.05); AVP+tolvaptan remained above control in inspected figure",
+        "unit": "two-dimensional summed area per well",
+        "interval": [
+          null,
+          null
+        ],
+        "uncertainty": "Source reports significance/direction; no numeric estimate reported in retained account",
+        "origin": "source_reported"
+      },
+      "confirmation": {
+        "exposure_or_perturbation": "AVP and tolvaptan additions reported in assay; receptor occupancy not measured",
+        "amount": "AVP 10^-8 M; tolvaptan 10^-8 M in assay",
+        "localization": "not measured",
+        "function": "Separate experiments show antagonist-sensitive cAMP/current; functional signaling not confirmed in each cyst assay well"
+      },
+      "translation_limits": [
+        "Short in-vitro exposure versus chronic oral dosing",
+        "Donor genotype and disease stage not established",
+        "Only three preparations",
+        "Two-dimensional cyst area is not three-dimensional kidney volume or filtration",
+        "No AVPR2 loss-and-rescue in this endpoint",
+        "No patient-level outcome"
+      ]
+    },
+    {
+      "candidate_id": "PMID18032793",
+      "result_id": "PCK-AVP-loss-addback-cyst-outcome",
+      "result_role": "structural_or_durable_outcome",
+      "study_design": "Crossed PCK Pkhd1 disease rat with AVP-deficient Brattleboro rat; ligand depletion and dDAVP add-back; source-reported outcomes.",
+      "design_basis": "AVP-deficiency comparison and agonist restoration test ligand availability causally in an ARPKD animal model; systemic intervention cannot assign AVPR2 specifically.",
+      "evidence_scope": "modality_neutral_mechanism",
+      "source_id": "PMID:18032793",
+      "evidence_path": "analysis/raw/target_validation/PMC2391034_pmc_article_html.html",
+      "genotype_or_variant_class": "PCK Pkhd1-associated disease crossed with AVP-deficient Brattleboro genotype",
+      "disease_stage": "10 and 20 weeks; add-back 12\u201320 weeks",
+      "model": {
+        "species": "Rattus norvegicus",
+        "system": "PCK ARPKD disease rat crossed to AVP-deficient rat",
+        "disease_relevance": "recessive Pkhd1 cystic disease; not ADPKD"
+      },
+      "perturbation": "AVP depletion by AVP-deficient genotype",
+      "rescue": "dDAVP minipump add-back at 10 ng/h/100 g body weight",
+      "context": "Systemic vasopressin/water-balance context",
+      "temporal_order": "AVP-deficient PCK group then dDAVP minipump from 12 to 20 weeks",
+      "comparison_groups": [
+        {
+          "label": "AVP+/+ PCK",
+          "n": null,
+          "role": "disease comparator"
+        },
+        {
+          "label": "AVP-/- PCK",
+          "n": null,
+          "role": "ligand depletion"
+        },
+        {
+          "label": "AVP-/- PCK plus dDAVP",
+          "n": 4,
+          "role": "add-back rescue; per genotype and sex"
+        },
+        {
+          "label": "AVP+/+ PCK plus dDAVP",
+          "n": 4,
+          "role": "agonist in ligand-replete disease"
+        }
+      ],
+      "controls": [
+        {
+          "label": "AVP+/+ PCK",
+          "purpose": "ligand-replete disease comparator"
+        },
+        {
+          "label": "wild-type animals",
+          "purpose": "noncystic context"
+        }
+      ],
+      "biological_unit": "animal; group sizes approximately 10 per sex and age except rescue groups n=4 per genotype and sex",
+      "denominator": [
+        {
+          "endpoint": "kidney/cyst/fibrosis measures",
+          "n": null,
+          "as_reported": "rescue groups n=4 per genotype and sex; other groups approximately n=10 per sex and age"
+        }
+      ],
+      "repeated_measures_or_pseudoreplication": "Animal-level groups; sex and age strata; source account does not report repeated-measures structure.",
+      "assay": "Kidney cAMP/P-ERK assays and renal cyst/fibrosis histology/measurements",
+      "timepoint": "10 and 20 weeks; dDAVP infusion 12\u201320 weeks",
+      "endpoint": "Renal cystic/fibrotic disease measures",
+      "effect": {
+        "estimate": "AVP depletion associated with lower disease measures; dDAVP restored measures in AVP-deficient PCK and aggravated disease in AVP-replete PCK; source-reported direction/significance",
+        "unit": "multiple renal measures",
+        "interval": [
+          null,
+          null
+        ],
+        "uncertainty": "No digitized effect estimates; group-specific significance reported in source",
+        "origin": "source_reported"
+      },
+      "confirmation": {
+        "exposure_or_perturbation": "AVP deficiency genotype; dDAVP minipump add-back",
+        "amount": "dDAVP 10 ng/h per 100 g body weight",
+        "localization": "systemic, not kidney-restricted",
+        "function": "Urine concentration and renal cAMP reported restored; cyst/fibrotic phenotype also measured"
+      },
+      "translation_limits": [
+        "ARPKD Pkhd1 model rather than dominant PKD1/PKD2 ADPKD",
+        "Ligand depletion/add-back is not AVPR2 antagonist or exact-asset evidence",
+        "Systemic water-balance effects and non-V2 AVP routes remain",
+        "Source-reported directions, no digitized effect size"
+      ]
+    },
+    {
+      "candidate_id": "PMID42772449",
+      "result_id": "PKD2-organoid-tolvaptan-null-abstract",
+      "result_role": "structural_or_durable_outcome",
+      "study_design": "Abstract-reported ten-day tolvaptan compound screen in PKD2-deficient iPSC-derived ureteric-bud organoid model.",
+      "design_basis": "Abstract reports no cyst response; details on exposure, control performance, independent lines and replication unavailable, so null interpretation is uncertain.",
+      "evidence_scope": "exact_asset",
+      "source_id": "PMID:42772449",
+      "evidence_path": "analysis/raw/orientation/avpr2_42772449_abstract.json",
+      "genotype_or_variant_class": "PKD2 deficient",
+      "disease_stage": "organoid developmental model; stage relative to mature kidney not equivalent",
+      "model": {
+        "species": "Homo sapiens",
+        "system": "iPSC-derived ureteric-bud organoid",
+        "disease_relevance": "human PKD2-deficient cyst-like organoid; abstract-level report"
+      },
+      "perturbation": "Tolvaptan treatment",
+      "rescue": "none reported",
+      "context": "Ten-day compound screen",
+      "temporal_order": "Tolvaptan exposure during ten-day screen; finer sequence unavailable",
+      "comparison_groups": [
+        {
+          "label": "tolvaptan vs comparator",
+          "n": null,
+          "role": "abstract-reported screen; group details unavailable"
+        }
+      ],
+      "controls": [
+        {
+          "label": "not available in abstract",
+          "purpose": "not assessable"
+        }
+      ],
+      "biological_unit": "not reported in available abstract",
+      "denominator": [
+        {
+          "endpoint": "cyst response",
+          "n": null,
+          "as_reported": "independent line/sample denominator not available in abstract"
+        }
+      ],
+      "repeated_measures_or_pseudoreplication": "Not assessable from abstract.",
+      "assay": "Organoid cyst phenotype screen",
+      "timepoint": "10 days",
+      "endpoint": "Cyst response",
+      "effect": {
+        "estimate": "No tolvaptan-associated cyst response reported",
+        "unit": "not stated",
+        "interval": [
+          null,
+          null
+        ],
+        "uncertainty": "Abstract-level qualitative null; no estimate/uncertainty",
+        "origin": "source_reported"
+      },
+      "confirmation": {
+        "exposure_or_perturbation": "Tolvaptan screen reported; achieved exposure not shown in available abstract",
+        "amount": "not available",
+        "localization": "not available",
+        "function": "Authors suggest low AVPR2 expression; receptor engagement/function not established"
+      },
+      "translation_limits": [
+        "Abstract only; original claim-bearing full Methods/figures not available in retained case sources",
+        "Dose/exposure, independent lines, controls and biological denominator unknown",
+        "Ureteric-bud organoid is not mature adult kidney",
+        "A null in a model with potentially low receptor does not refute a target-engaged antagonist effect"
+      ]
+    },
+    {
+      "candidate_id": "PMID36743216",
+      "result_id": "Pkd1-mouse-tolvaptan-SD-monotherapy-phenotypes",
+      "result_role": "structural_or_durable_outcome",
+      "study_design": "After tamoxifen-induced kidney-specific Pkd1 deletion, mice were randomized after weaning to untreated, salsalate, tolvaptan-SD or combination arms; tolvaptan-SD vs untreated is separately evaluated. Figure 1 and Methods/Results inspected.",
+      "design_basis": "Randomized assigned treatment within a conditional Pkd1 disease model supports causal treatment comparison. Source prose says tolvaptan monotherapy reduced cystic index, but Figure 1D labels tolvaptan vs KO p=0.19; preserve figure-level non-significant cyst-index contrast rather than repeat the prose implication.",
+      "evidence_scope": "exact_asset",
+      "source_id": "PMID:36743216",
+      "evidence_path": "analysis/raw/dependency/PMC9893022_operator_retained_article.html",
+      "genotype_or_variant_class": "Tamoxifen-inducible kidney-specific Pkd1 conditional knockout (iKsp-Pkd1del)",
+      "disease_stage": "Tamoxifen at P18/P19; treatment started P40; endpoint was individual failure/survival or common study sacrifice when about 75% untreated mutants reached ESRD, approximately 111\u2013120 days in study protocol.",
+      "model": {
+        "species": "Mus musculus",
+        "system": "Male iKsp-Pkd1del conditional knockout mice",
+        "disease_relevance": "ADPKD-relevant Pkd1 disease genotype; mouse kidney disease, not human patient response."
+      },
+      "perturbation": "Tolvaptan-SD monotherapy vs untreated mutant controls; separate salsalate and combination arms not pooled.",
+      "rescue": "None; pharmacologic disease modification.",
+      "context": "Tolvaptan-SD chow formulation containing 66.7% tolvaptan; 0.15% formulation in food, described by authors as equivalent to commonly used 0.1% tolvaptan chow. Tamoxifen-induced disease.",
+      "temporal_order": "Tamoxifen at P18 and P19; randomized after weaning; assigned diet started P40; BU monitoring from P75; endpoint-triggered sacrifices and common sacrifice when ~75% untreated group reached ESRD.",
+      "comparison_groups": [
+        {
+          "label": "untreated Pkd1 KO",
+          "n": 22,
+          "role": "disease control"
+        },
+        {
+          "label": "tolvaptan-SD Pkd1 KO",
+          "n": 19,
+          "role": "exact-asset treatment formulation"
+        }
+      ],
+      "controls": [
+        {
+          "label": "untreated Pkd1 KO",
+          "purpose": "within-model disease control"
+        },
+        {
+          "label": "wild-type controls",
+          "n": null,
+          "purpose": "non-disease baseline; not monotherapy comparator"
+        }
+      ],
+      "biological_unit": "individual mouse",
+      "denominator": [
+        {
+          "endpoint": "kidney survival (time to ESRD endpoint)",
+          "n": 19,
+          "as_reported": "TOL n=19; untreated KO n=22; all mutant mice with and without ESRD included in panels B\u2013E"
+        },
+        {
+          "endpoint": "2-kidney weight/body-weight ratio at endpoint",
+          "n": 19,
+          "as_reported": "TOL n=19; untreated KO n=22"
+        },
+        {
+          "endpoint": "cystic index: cystic area / total kidney area at endpoint",
+          "n": 19,
+          "as_reported": "TOL n=19; untreated KO n=22"
+        },
+        {
+          "endpoint": "blood urea at endpoint",
+          "n": 19,
+          "as_reported": "TOL n=19; untreated KO n=22"
+        }
+      ],
+      "repeated_measures_or_pseudoreplication": "BU measured weekly from P75 with increased frequency as required; repeated measures within mouse are not independent. Survival is animal-level. Endpoint kidney measures use one animal-level measurement; Figure 1F images are representative median sections, not biological replicates.",
+      "assay": "Kaplan\u2013Meier kidney survival; kidney weight/body-weight ratio; cystic index from PAS histology; blood urea. Figure 1 includes protocol and representative kidney sections.",
+      "timepoint": "Individual endpoint; untreated failure monitoring and common sacrifice near 111\u2013120 days; kidney endpoints assessed at each animal endpoint.",
+      "endpoint": "Kidney survival and structural disease measures (2KW/BW and cystic index); source-reported Figure 1 outcomes.",
+      "effect": {
+        "estimate": "Tolvaptan-SD vs untreated: kidney survival improved (Fig. 1B, p<0.01 symbol); 2KW/BW lower (Fig. 1C, p<0.01); cystic index contrast labeled p=0.19 (not significant; Fig. 1D); blood urea lower (Fig. 1E, p<0.05).",
+        "unit": "days to ESRD; 2KW/BW%; percent cystic area; blood urea mmol/L",
+        "interval": [
+          null,
+          null
+        ],
+        "uncertainty": "Source reports significance symbols; no numeric effect or interval transcribed. Figure 1D conflicts with broad Results prose describing cystic index reduction; panel-specific p=0.19 retained as the direct contrast. Combination vs monotherapy differences are reported not significant.",
+        "origin": "source_reported"
+      },
+      "confirmation": {
+        "exposure_or_perturbation": "Assigned tolvaptan-SD diet; authors report food pellet formulation; no individual exposure measurements shown here.",
+        "amount": "0.15% tolvaptan-SD formulation in food (66.7% tolvaptan); authors describe equivalence to commonly used 0.1% tolvaptan chow; individual mg/kg exposure not supplied.",
+        "localization": "Oral systemic delivery; kidney receptor occupancy/localization not measured.",
+        "function": "Separate tissue protein and phosphorylation assays reported treatment-associated signaling changes, but these do not substitute for the animal outcomes; no AVPR2-specific genetic control."
+      },
+      "translation_limits": [
+        "Tolvaptan-SD is a formulation designed to improve oral bioavailability, not shown identical to marketed formulation/exposure.",
+        "Male mouse, conditional Pkd1 model; tamoxifen induction at P18/P19.",
+        "Animal survival improved, but cystic-index comparison is not significant in Figure 1D (p=0.19), despite broad prose statement.",
+        "Variable endpoint timing and repeated BU monitoring; figure panels include animals with/without ESRD.",
+        "Salsalate combination is a distinct arm; authors report no significant combination-vs-monotherapy difference.",
+        "Animal disease outcome cannot establish human patient efficacy.",
+        "Authors thank Otsuka Pharmaceuticals for providing tolvaptan-SD; this material contribution is disclosed."
+      ]
+    },
+    {
+      "candidate_id": "PMID21816754",
+      "result_id": "human-primary-MTT-proliferation-proxy",
+      "result_role": "context_modification",
+      "study_design": "Controlled AVP and tolvaptan titration in primary ADPKD epithelial cultures; separate 72-hour MTT proxy assay, reported source result.",
+      "design_basis": "Within-culture ligand and antagonist comparisons; MTT is metabolic readout and high-dose basal suppression limits specific proliferation interpretation.",
+      "evidence_scope": "exact_asset",
+      "source_id": "PMID:21816754",
+      "evidence_path": "analysis/raw/orientation/PMC3213906_pmc_article_html.html",
+      "genotype_or_variant_class": "ADPKD-derived primary cultures; genotype unresolved",
+      "disease_stage": "discarded kidney specimens; stage unresolved",
+      "model": {
+        "species": "Homo sapiens",
+        "system": "primary ADPKD renal epithelial culture",
+        "disease_relevance": "human ADPKD-derived cells; in vitro"
+      },
+      "perturbation": "AVP challenge with tolvaptan dose series",
+      "rescue": "tolvaptan reduces AVP-associated MTT increment",
+      "context": "72-hour exposure; basal high-dose MTT suppression in separate no-AVP panel",
+      "temporal_order": "AVP/tolvaptan assay over 72 h",
+      "comparison_groups": [
+        {
+          "label": "control",
+          "n": 11,
+          "role": "baseline"
+        },
+        {
+          "label": "AVP",
+          "n": 11,
+          "role": "ligand stimulus"
+        },
+        {
+          "label": "AVP plus tolvaptan",
+          "n": 11,
+          "role": "antagonist dose series"
+        }
+      ],
+      "controls": [
+        {
+          "label": "control",
+          "purpose": "baseline signal"
+        },
+        {
+          "label": "AVP alone",
+          "purpose": "ligand effect comparator"
+        }
+      ],
+      "biological_unit": "kidney preparation",
+      "denominator": [
+        {
+          "endpoint": "MTT signal in ADPKD cultures",
+          "n": 11,
+          "as_reported": "Figure 4A, 11 kidney preparations"
+        }
+      ],
+      "repeated_measures_or_pseudoreplication": "Preparation is independent biological unit; wells are nested technical measures.",
+      "assay": "MTT metabolic activity assay, used by source as proliferation proxy",
+      "timepoint": "72 hours",
+      "endpoint": "MTT signal, not direct cell count",
+      "effect": {
+        "estimate": "AVP increased ADPKD-culture readout 52% over control; tolvaptan reduced AVP-associated increment by 30% and 43% at 10^-10 and 10^-9 M (P<0.05 and P<0.001), while 10^-8 M blocked it.",
+        "unit": "percent of control/AVP-associated increment",
+        "interval": [
+          null,
+          null
+        ],
+        "uncertainty": "Source-reported percentages and significance; no interval transcribed.",
+        "origin": "source_reported"
+      },
+      "confirmation": {
+        "exposure_or_perturbation": "AVP and tolvaptan added in vitro",
+        "amount": "tolvaptan dose series includes 10^-10, 10^-9, 10^-8 M",
+        "localization": "not measured",
+        "function": "MTT metabolic proxy only; separate cAMP studies are not confirmation within this endpoint."
+      },
+      "translation_limits": [
+        "MTT is not direct cell proliferation/cell count",
+        "Small donor/preparation denominator",
+        "High-dose basal signal suppression leaves nonspecific effects",
+        "No receptor-specific loss/re-expression in assay",
+        "In-vitro exposure not oral dose or clinical phenotype"
+      ]
+    }
+  ],
+  "interpretation_limit": "Bulk whole-kidney transcript levels do not measure receptor occupancy, cAMP/protein phosphorylation, cellular composition, cyst area/volume, or renal function."
+}

@@ -2,8 +2,8 @@
    A live CSS/JS port of the animated Insight UI from the marketing site
    (was Tailwind + Jekyll; ported to plain CSS here). Sizes in em off one
    clamped root font-size so it scales; JS carries one question from phone to
-   analysis, follow-up, and notebook handoff. Dark UI in both themes because
-   it is the product's own chrome. */
+   analysis, follow-up, and notebook handoff. The illustration shares the
+   company pages' surface and text colors. */
 
 .insight-ui {
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -16,11 +16,11 @@
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--rule);
-  background: #0c1522;
+  background: var(--paper-sunk);
   font-family: var(--sans);
   font-size: clamp(10px, 1.1vw, 15px);
-  color: #cdd5df;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
+  color: var(--ink-2);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.12);
 }
 
 .insight-ui [hidden] { display: none !important; }
@@ -34,24 +34,24 @@
   align-items: center;
   gap: 0.6em;
   padding: 1.2em 0.5em;
-  background: #111b2b;
-  border-right: 1px solid rgb(255 255 255 / 0.05);
+  background: var(--paper-raised);
+  border-right: 1px solid rgb(19 24 21 / 0.05);
   z-index: 3;
 }
 .iui-side-logo {
   width: 1.7em; height: 1.7em;
   border-radius: 0.4em;
-  background: rgb(39 159 129 / 0.20);
+  background: var(--accent-wash);
   display: grid; place-items: center;
 }
 .iui-side-logo img { width: 1.1em; height: 1.1em; }
-.iui-side-icon { width: 1.4em; height: 1.4em; border-radius: 0.3em; background: rgb(255 255 255 / 0.05); }
+.iui-side-icon { width: 1.4em; height: 1.4em; border-radius: 0.3em; background: rgb(19 24 21 / 0.05); }
 .iui-side-user {
   margin-top: auto;
   width: 1.5em; height: 1.5em; border-radius: 50%;
-  background: rgb(39 159 129 / 0.30);
+  background: var(--accent-wash);
   display: grid; place-items: center;
-  font-size: 0.65em; font-weight: 700; color: #6bdeb5;
+  font-size: 0.65em; font-weight: 700; color: var(--accent);
 }
 
 .iui-bar {
@@ -61,8 +61,8 @@
   display: flex; align-items: center;
   gap: 0.7em;
   padding-inline: 1em;
-  background: #0e1829;
-  border-bottom: 1px solid rgb(255 255 255 / 0.05);
+  background: var(--paper-raised);
+  border-bottom: 1px solid rgb(19 24 21 / 0.05);
   z-index: 2;
 }
 .iui-crumbs { display: flex; align-items: center; gap: 0.6em; }
@@ -72,25 +72,25 @@
   border-radius: 0.25em;
   white-space: nowrap;
 }
-.iui-crumb-focus  { background: rgb(39 159 129 / 0.20); color: #4fcfa5; }
-.iui-crumb-cohort { background: rgb(214 158 46 / 0.16); color: #e0b64e; }
-.iui-crumb-gene   { background: rgb(96 165 250 / 0.16); color: #7fb2f6; }
-.iui-cohort { margin-left: auto; font-size: 0.6em; color: #8b94a3; white-space: nowrap; }
+.iui-crumb-focus  { background: var(--accent-wash); color: var(--accent); }
+.iui-crumb-cohort { background: rgb(214 158 46 / 0.16); color: var(--partial); }
+.iui-crumb-gene   { background: rgb(96 165 250 / 0.16); color: #325e80; }
+.iui-cohort { margin-left: auto; font-size: 0.6em; color: var(--ink-3); white-space: nowrap; }
 
 .iui-chat {
   position: absolute;
   top: 2.4em; left: 3em; bottom: 0;
   width: 17em;
   display: flex; flex-direction: column;
-  border-right: 1px solid rgb(255 255 255 / 0.05);
+  border-right: 1px solid rgb(19 24 21 / 0.05);
   overflow: hidden;
 }
 .iui-query {
   margin: 1em 1em 0.5em;
   padding: 0.45em 0.6em;
   border-radius: 0.4em;
-  background: rgb(27 119 96 / 0.30);
-  color: #7fe0c2;
+  background: var(--accent-wash);
+  color: var(--accent);
   font-size: 0.78em;
   font-weight: 500;
   line-height: 1.35;
@@ -99,7 +99,7 @@
 .iui-cursor {
   display: inline-block;
   width: 0.5em; height: 1em;
-  background: #7fe0c2;
+  background: var(--accent);
   vertical-align: text-bottom;
   animation: iuiBlink 0.9s steps(2) 6;
 }
@@ -113,15 +113,15 @@
 .iui-steps-tick {
   width: 1.1em; height: 1.1em; border-radius: 50%;
   flex: none;
-  background: rgb(39 159 129 / 0.40);
-  color: #6bdeb5;
+  background: var(--accent-wash);
+  color: var(--accent);
   display: grid; place-items: center;
   /* The inherited 1.6 line-height opened a line box taller than the circle,
      pushing the glyph out of it. */
   font-size: 0.55em;
   line-height: 1;
 }
-.iui-steps-text { font-size: 0.66em; color: #b6bdc9; }
+.iui-steps-text { font-size: 0.66em; color: var(--ink-2); }
 
 .iui-paras {
   flex: 1;
@@ -130,11 +130,11 @@
   overflow: hidden;
   transition: opacity 0.4s ease;
 }
-.iui-paras p { margin: 0; font-size: 0.7em; line-height: 1.5; color: #b6bdc9; }
+.iui-paras p { margin: 0; font-size: 0.7em; line-height: 1.5; color: var(--ink-2); }
 .iui-part-label {
   display: block;
   margin-bottom: 0.12em;
-  color: #f1f5f3;
+  color: var(--ink);
   font-size: 0.84em;
   font-weight: 650;
   letter-spacing: 0.045em;
@@ -143,8 +143,8 @@
 .iui-cite {
   padding: 0.08em 0.32em;
   border-radius: 0.2em;
-  background: rgb(27 119 96 / 0.25);
-  color: #4fcfa5;
+  background: var(--accent-wash);
+  color: var(--accent);
   font-size: 0.86em;
   margin-left: 0.3em;
   text-decoration: none;
@@ -152,23 +152,23 @@
 }
 .iui-cite:hover,
 .iui-cite:focus-visible {
-  background: rgb(27 119 96 / 0.42);
-  color: #78e2bf;
+  background: var(--accent-wash);
+  color: var(--accent-deep);
 }
 
 .iui-follow {
-  border-top: 1px solid rgb(255 255 255 / 0.05);
+  border-top: 1px solid rgb(19 24 21 / 0.05);
   /* The chat column is a fixed-height flex box whose .iui-paras had no slack,
      so the chips' extra height is taken back out of this block's padding. */
   padding: 0.3em 1em;
 }
-.iui-follow-label { font-size: 0.6em; color: #8b94a3; margin: 0 0 0.3em; }
-.iui-follow p { margin: 0 0 0.2em; font-size: 0.6em; color: #aab2bf; line-height: 1.35; }
+.iui-follow-label { font-size: 0.6em; color: var(--ink-3); margin: 0 0 0.3em; }
+.iui-follow p { margin: 0 0 0.2em; font-size: 0.6em; color: var(--ink-2); line-height: 1.35; }
 /* Beats `.iui-follow p` (0,1,1) so the label matches the ANALYSIS/READOUT/
    CAVEAT labels above it, and the suggestions below read as options. */
 .iui-follow p.iui-follow-label {
   margin-bottom: 0.2em;
-  color: #f1f5f3;
+  color: var(--ink);
   font-weight: 650;
   letter-spacing: 0.045em;
   text-transform: uppercase;
@@ -176,26 +176,26 @@
 .iui-follow-list .iui-part {
   width: fit-content;
   padding: 0.1em 0.4em;
-  background: rgb(255 255 255 / 0.06);
+  background: rgb(19 24 21 / 0.06);
   border-radius: 0.4em;
 }
 .iui-follow-list .iui-part:last-child { margin-bottom: 0; }
 
 .iui-ask {
-  border-top: 1px solid rgb(255 255 255 / 0.05);
+  border-top: 1px solid rgb(19 24 21 / 0.05);
   padding: 0.6em 1em;
 }
 .iui-ask-box {
   display: flex; align-items: center; gap: 0.4em;
   padding: 0.4em 0.6em;
   border-radius: 0.4em;
-  background: rgb(255 255 255 / 0.05);
-  border: 1px solid rgb(255 255 255 / 0.10);
+  background: rgb(19 24 21 / 0.05);
+  border: 1px solid rgb(19 24 21 / 0.10);
 }
 /* Scope to the label span only — the send button is also a span, and a bare
    `.iui-ask-box span` (0,1,1) was overriding .iui-ask-send (0,1,0), stretching
    the send button flush and shrinking its font. */
-.iui-ask-box > span:first-child { font-size: 0.65em; color: #8b94a3; flex: 1; }
+.iui-ask-box > span:first-child { font-size: 0.65em; color: var(--ink-3); flex: 1; }
 .iui-ask-send {
   flex: 0 0 auto;
   width: 1.6em;
@@ -203,8 +203,8 @@
   height: 1.6em;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: rgb(39 159 129 / 0.30);
-  color: #6bdeb5;
+  background: var(--accent-wash);
+  color: var(--accent);
   display: grid;
   place-items: center;
   font-size: 0.75em;
@@ -232,8 +232,8 @@
 
 .iui-card {
   border-radius: 0.4em;
-  background: #111b2b;
-  border: 1px solid rgb(255 255 255 / 0.05);
+  background: var(--paper-raised);
+  border: 1px solid rgb(19 24 21 / 0.05);
   padding: 0.6em;
 }
 .iui-card-head { display: flex; align-items: center; gap: 0.3em; margin-bottom: 0.3em; }
@@ -242,29 +242,29 @@
   border-radius: 0.2em; font-size: 0.6em; font-weight: 700;
   display: grid; place-items: center;
 }
-.iui-num-brand  { background: rgb(39 159 129 / 0.20); color: #5fbf9c; }
-.iui-num-amber  { background: rgb(245 158 11 / 0.20); color: #f5b544; }
-.iui-num-violet { background: rgb(139 92 246 / 0.20); color: #b39cf7; }
-.iui-num-emerald{ background: rgb(16 185 129 / 0.20); color: #34d399; }
-.iui-card-title { font-size: 0.72em; color: #fff; font-weight: 500; }
-.iui-card-note  { font-size: 0.5em; color: #8b94a3; margin-left: 0.3em; }
+.iui-num-brand  { background: var(--accent-wash); color: var(--accent); }
+.iui-num-amber  { background: rgb(245 158 11 / 0.20); color: var(--partial); }
+.iui-num-violet { background: rgb(139 92 246 / 0.20); color: #6a5388; }
+.iui-num-emerald{ background: rgb(16 185 129 / 0.20); color: var(--accent); }
+.iui-card-title { font-size: 0.72em; color: var(--ink); font-weight: 500; }
+.iui-card-note  { font-size: 0.5em; color: var(--ink-3); margin-left: 0.3em; }
 .iui-card-foot  { display: flex; align-items: center; gap: 0.4em; margin-top: 0.3em; }
-.iui-card-foot .iui-foot-label { font-size: 0.55em; color: #8b94a3; }
+.iui-card-foot .iui-foot-label { font-size: 0.55em; color: var(--ink-3); }
 .iui-chip {
   font-size: 0.5em; padding: 0.1em 0.3em; border-radius: 0.15em; white-space: nowrap;
 }
-.iui-chip-brand { background: rgb(39 159 129 / 0.15); color: #5fbf9c; }
-.iui-chip-sky   { background: rgb(56 189 248 / 0.15); color: #6fc9f5; }
-.iui-chip-gray  { background: rgb(148 163 184 / 0.15); color: #94a3b8; }
-.iui-chip-red   { background: rgb(239 68 68 / 0.15);  color: #f08b8b; }
-.iui-foot-ms { font-size: 0.42em; color: #6b7280; margin-left: auto; }
+.iui-chip-brand { background: var(--accent-wash); color: var(--accent); }
+.iui-chip-sky   { background: rgb(56 189 248 / 0.15); color: #325e80; }
+.iui-chip-gray  { background: rgb(148 163 184 / 0.15); color: var(--ink-3); }
+.iui-chip-red   { background: rgb(239 68 68 / 0.15);  color: var(--unresolved); }
+.iui-foot-ms { font-size: 0.42em; color: var(--ink-3); margin-left: auto; }
 
 /* Lollipop chart */
 .iui-lolli-wrap { position: relative; height: 5.5em; margin-top: 0.4em; }
-.iui-axis-y { position: absolute; left: 2em; top: 0; bottom: 1em; width: 1px; background: rgb(255 255 255 / 0.10); }
-.iui-axis-x { position: absolute; left: 2em; right: 0; bottom: 1em; height: 1px; background: rgb(255 255 255 / 0.10); }
-.iui-axis-max { position: absolute; left: 0; top: 0; font-size: 0.5em; color: #8b94a3; }
-.iui-axis-min { position: absolute; left: 0.3em; bottom: 1em; font-size: 0.5em; color: #8b94a3; }
+.iui-axis-y { position: absolute; left: 2em; top: 0; bottom: 1em; width: 1px; background: rgb(19 24 21 / 0.10); }
+.iui-axis-x { position: absolute; left: 2em; right: 0; bottom: 1em; height: 1px; background: rgb(19 24 21 / 0.10); }
+.iui-axis-max { position: absolute; left: 0; top: 0; font-size: 0.5em; color: var(--ink-3); }
+.iui-axis-min { position: absolute; left: 0.3em; bottom: 1em; font-size: 0.5em; color: var(--ink-3); }
 .iui-lolli {
   position: absolute; left: 2em; right: 0.5em; bottom: 1em;
   display: flex; align-items: flex-end; gap: 0.5em; padding-left: 1em;
@@ -272,7 +272,7 @@
 }
 .iui-stem {
   position: relative; width: 2px; border-radius: 1px;
-  background: rgb(255 255 255 / 0.28);
+  background: rgb(19 24 21 / 0.28);
   transform-origin: bottom; transform: scaleY(0);
 }
 .iui-scene-active .iui-stem {
@@ -283,7 +283,7 @@
 .iui-dot {
   position: absolute; top: -4px; left: 50%;
   width: 8px; height: 8px; border-radius: 50%;
-  background: #16b17e; box-shadow: 0 0 6px rgb(22 177 126 / 0.5);
+  background: var(--accent); box-shadow: 0 0 6px rgb(21 94 74 / 0.10);
   transform: translateX(-50%) scale(0);
 }
 .iui-scene-active .iui-dot {
@@ -293,7 +293,7 @@
 @keyframes iui-dot-pop { to { transform: translateX(-50%) scale(1); } }
 .iui-stem-label {
   position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-  font-size: 0.45em; color: #d1d5db; white-space: nowrap;
+  font-size: 0.45em; color: var(--ink-2); white-space: nowrap;
 }
 .iui-domain {
   position: absolute; left: 2em; right: 0.5em; bottom: 0; height: 0.8em;
@@ -303,7 +303,7 @@
   flex: 1; border-radius: 0.15em; background: rgb(245 158 11 / 0.40);
   display: grid; place-items: center;
 }
-.iui-domain-seg span { font-size: 0.4em; color: #fff; font-weight: 500; }
+.iui-domain-seg span { font-size: 0.4em; color: var(--ink); font-weight: 500; }
 
 .iui-part {
   opacity: 0;
@@ -357,7 +357,7 @@
   position: absolute;
   inset: 0;
   z-index: 20;
-  background: #0c1522;
+  background: var(--paper-sunk);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -394,7 +394,7 @@
   display: block;
   max-width: 15ch;
   margin-top: 0.45em;
-  color: #f3f6f5;
+  color: var(--ink);
   font-size: max(2.4em, 30px);
   line-height: 1.05;
   letter-spacing: -0.035em;
@@ -404,7 +404,7 @@
 .iui-mobile-copy > p:last-child {
   max-width: 34ch;
   margin: 0.9em 0 0;
-  color: #aeb8b5;
+  color: var(--ink-2);
   font-size: max(1em, 14px);
   line-height: 1.55;
 }
@@ -415,13 +415,13 @@
   height: 27.5em;
   padding: 0.6em 0.7em 0.8em;
   overflow: hidden;
-  border: 0.16em solid rgb(255 255 255 / 0.16);
+  border: 0.16em solid rgb(19 24 21 / 0.16);
   border-radius: 2.2em;
-  background: #0b1420;
+  background: var(--paper-raised);
   box-shadow:
-    0 0 0 0.08em rgb(255 255 255 / 0.05),
-    0 2em 4em rgb(0 0 0 / 0.42),
-    0 0 3em rgb(22 177 126 / 0.06);
+    0 0 0 0.08em rgb(19 24 21 / 0.05),
+    0 2em 4em rgb(0 0 0 / 0.14),
+    0 0 3em rgb(21 94 74 / 0.04);
   transform: translateY(0.7em) scale(0.96);
   transition: transform 600ms var(--ease-out);
 }
@@ -433,7 +433,7 @@
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 0 0.4em 0.45em;
-  color: #87928f;
+  color: var(--ink-3);
   font-size: 0.44em;
 }
 
@@ -459,7 +459,7 @@
 }
 
 .iui-phone-appbar strong {
-  color: #f3f6f5;
+  color: var(--ink);
   font-size: 0.62em;
   font-weight: 650;
 }
@@ -469,7 +469,7 @@
   padding: 0.12em 0.4em;
   border-radius: 0.2em;
   background: rgb(214 158 46 / 0.16);
-  color: #e0b64e;
+  color: var(--partial);
   font-size: 0.42em;
 }
 
@@ -479,7 +479,7 @@
   height: 1.5em;
   place-items: center;
   border-radius: 0.38em;
-  background: rgb(39 159 129 / 0.20);
+  background: var(--accent-wash);
 }
 
 .iui-phone-mark img { width: 0.95em; height: 0.95em; }
@@ -488,8 +488,8 @@
   min-height: 3.2em;
   padding: 0.55em 0.65em;
   border-radius: 0.4em;
-  background: rgb(27 119 96 / 0.30);
-  color: #7fe0c2;
+  background: var(--accent-wash);
+  color: var(--accent);
   font-size: 0.66em;
   line-height: 1.4;
   font-weight: 550;
@@ -500,7 +500,7 @@
   width: 0.42em;
   height: 0.95em;
   margin-left: 0.12em;
-  background: #7fe0c2;
+  background: var(--accent);
   vertical-align: text-bottom;
   /* Six runs (~5.4s), not infinite: the phone scene is the default view, and
      WCAG 2.2.2 caps unpausable blinking at 5s. */
@@ -509,7 +509,7 @@
 
 .iui-phone-working {
   margin: 0.7em 0.15em 0.55em;
-  color: #aeb8b5;
+  color: var(--ink-2);
   font-size: 0.48em;
 }
 
@@ -519,20 +519,20 @@
   height: 0.65em;
   margin-right: 0.22em;
   border-radius: 50%;
-  background: #3fb28d;
+  background: var(--accent);
   box-shadow: 0 0 0 0.22em rgb(63 178 141 / 0.12);
 }
 
 .iui-phone-result {
   padding: 0.65em;
-  border: 1px solid rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(19 24 21 / 0.06);
   border-radius: 0.42em;
-  background: #111b2b;
+  background: var(--paper-raised);
 }
 
 .iui-phone-result > strong {
   display: block;
-  color: #e7ecea;
+  color: var(--ink);
   font-size: 0.55em;
   font-weight: 600;
 }
@@ -544,7 +544,7 @@
   justify-content: space-around;
   margin: 1.2em 0 0.15em;
   padding: 0 0.6em;
-  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  border-bottom: 1px solid rgb(19 24 21 / 0.12);
 }
 
 .iui-phone-chart i {
@@ -552,7 +552,7 @@
   width: 2px;
   height: var(--h);
   border-radius: 2px;
-  background: rgb(255 255 255 / 0.28);
+  background: rgb(19 24 21 / 0.28);
   transform: scaleY(0);
   transform-origin: bottom;
 }
@@ -575,8 +575,8 @@
   width: 0.6em;
   height: 0.6em;
   border-radius: 50%;
-  background: #16b17e;
-  box-shadow: 0 0 0.5em rgb(22 177 126 / 0.5);
+  background: var(--accent);
+  box-shadow: 0 0 0.5em rgb(21 94 74 / 0.10);
   content: "";
   transform: translateX(-50%);
 }
@@ -590,7 +590,7 @@
   position: absolute;
   bottom: calc(100% + 1em);
   left: 50%;
-  color: #b9c3c0;
+  color: var(--ink-2);
   font-size: max(0.43em, 9px);
   font-style: normal;
   font-weight: 600;
@@ -605,7 +605,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   padding: 0 0.6em;
-  color: #7d8885;
+  color: var(--ink-3);
   font-size: max(0.4em, 9px);
   text-align: center;
 }
@@ -622,28 +622,28 @@
 .iui-phone-result small {
   display: block;
   margin-top: 0.55em;
-  color: #61c9a6;
+  color: var(--accent);
   font-size: 0.43em;
 }
 
 .iui-phone-note {
   margin: 0.7em 0.2em 0;
-  color: #8f9b97;
+  color: var(--ink-3);
   font-size: 0.48em;
   line-height: 1.45;
 }
 
-.iui-phone-note b { color: #dbe2df; font-weight: 650; }
+.iui-phone-note b { color: var(--ink); font-weight: 650; }
 
 .iui-phone-input {
   display: flex;
   align-items: center;
   margin-top: auto;
   padding: 0.55em 0.65em;
-  border: 1px solid rgb(255 255 255 / 0.09);
+  border: 1px solid rgb(19 24 21 / 0.09);
   border-radius: 0.42em;
-  background: rgb(255 255 255 / 0.04);
-  color: #7d8885;
+  background: rgb(19 24 21 / 0.04);
+  color: var(--ink-3);
   font-size: 0.5em;
 }
 
@@ -654,8 +654,8 @@
   margin-left: auto;
   place-items: center;
   border-radius: 50%;
-  background: rgb(39 159 129 / 0.28);
-  color: #6bdeb5;
+  background: var(--accent-wash);
+  color: var(--accent);
 }
 
 .iui-notebook-story {
@@ -670,19 +670,19 @@
   justify-content: space-between;
   gap: 2em;
   padding: 0.35em 0.4em 0.8em;
-  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+  border-bottom: 1px solid rgb(19 24 21 / 0.08);
 }
 
 .iui-notebook-head strong {
   display: block;
   margin-top: 0.25em;
-  color: #f3f6f5;
+  color: var(--ink);
   font-size: 1.05em;
   font-weight: 620;
 }
 
 .iui-notebook-head > span {
-  color: #8f9b97;
+  color: var(--ink-3);
   font-size: 0.58em;
 }
 
@@ -693,14 +693,14 @@
   min-height: 0;
   margin-top: 0.85em;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.07);
+  border: 1px solid rgb(19 24 21 / 0.07);
   border-radius: 0.5em;
 }
 
 .iui-notebook-code {
   min-width: 0;
-  background: #0a1220;
-  border-right: 1px solid rgb(255 255 255 / 0.07);
+  background: var(--paper-raised);
+  border-right: 1px solid rgb(19 24 21 / 0.07);
 }
 
 .iui-codebar {
@@ -709,8 +709,8 @@
   gap: 0.35em;
   height: 2.25em;
   padding: 0 0.8em;
-  border-bottom: 1px solid rgb(255 255 255 / 0.07);
-  background: rgb(255 255 255 / 0.025);
+  border-bottom: 1px solid rgb(19 24 21 / 0.07);
+  background: rgb(19 24 21 / 0.025);
 }
 
 .iui-codebar span {
@@ -725,7 +725,7 @@
 
 .iui-codebar b {
   margin-left: 0.35em;
-  color: #8f9b97;
+  color: var(--ink-3);
   font-family: var(--mono);
   font-size: 0.52em;
   font-weight: 500;
@@ -735,20 +735,20 @@
   margin: 0;
   padding: 1.15em 1.3em;
   overflow: auto;
-  color: #cbd5d1;
+  color: var(--ink-2);
   font-family: var(--mono);
   font-size: 0.68em;
   line-height: 1.65;
 }
 
 .iui-notebook-code code { font: inherit; }
-.iui-notebook-code em { color: #73817c; font-style: normal; }
-.iui-notebook-code strong { color: #75d3b4; font-weight: 550; }
+.iui-notebook-code em { color: var(--ink-3); font-style: normal; }
+.iui-notebook-code strong { color: var(--accent); font-weight: 550; }
 
 .iui-notebook-record {
   padding: 1.05em 1.15em;
   overflow: auto;
-  background: #111b2b;
+  background: var(--paper-raised);
 }
 
 .iui-notebook-record dl { margin: 0.6em 0 0; }
@@ -758,17 +758,17 @@
   grid-template-columns: 7.3em minmax(0, 1fr);
   gap: 0.8em;
   padding: 0.55em 0;
-  border-top: 1px solid rgb(255 255 255 / 0.06);
+  border-top: 1px solid rgb(19 24 21 / 0.06);
 }
 
 .iui-notebook-record dt {
-  color: #8f9b97;
+  color: var(--ink-3);
   font-size: 0.57em;
 }
 
 .iui-notebook-record dd {
   margin: 0;
-  color: #e0e6e3;
+  color: var(--ink);
   font-size: 0.6em;
   line-height: 1.4;
 }
@@ -776,8 +776,8 @@
 .iui-notebook-boundary {
   margin: 0.9em 0 0;
   padding-top: 0.8em;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
-  color: #96a19e;
+  border-top: 1px solid rgb(19 24 21 / 0.08);
+  color: var(--ink-3);
   font-size: 0.56em;
   line-height: 1.55;
 }
@@ -877,9 +877,9 @@
 .iui-plot-summary {
   min-width: 0;
   min-height: 0;
-  border: 1px solid rgb(255 255 255 / 0.055);
+  border: 1px solid rgb(19 24 21 / 0.055);
   border-radius: 0.32em;
-  background: #0d1726;
+  background: var(--paper-raised);
 }
 
 .iui-plot-panel {
@@ -900,7 +900,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #9da8b8;
+  color: var(--ink-3);
 }
 
 .iui-rank-head,
@@ -913,20 +913,20 @@
 
 .iui-rank-head {
   padding: 0 0 0.35em;
-  border-bottom: 1px solid rgb(255 255 255 / 0.09);
+  border-bottom: 1px solid rgb(19 24 21 / 0.09);
   font-size: 0.43em;
-  color: #788496;
+  color: var(--ink-3);
 }
 
 .iui-rank-row {
   padding: 0.45em 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.055);
+  border-bottom: 1px solid rgb(19 24 21 / 0.055);
   font-size: 0.5em;
-  color: #aab4c3;
+  color: var(--ink-2);
 }
 
 .iui-rank-row strong {
-  color: #e7ecf3;
+  color: var(--ink);
   font-weight: 620;
 }
 
@@ -940,20 +940,20 @@
   align-items: center;
   margin-top: 0.65em;
   padding: 0.55em 0.6em;
-  border-left: 2px solid #279f81;
-  background: rgb(39 159 129 / 0.08);
+  border-left: 2px solid var(--accent);
+  background: var(--accent-wash);
 }
 
 .iui-plot-callout strong {
   font-family: var(--mono);
   font-size: 0.78em;
-  color: #62c5a5;
+  color: var(--accent);
 }
 
 .iui-plot-callout span {
   font-size: 0.45em;
   line-height: 1.35;
-  color: #b7c1ce;
+  color: var(--ink-2);
 }
 
 .iui-plot-summary-note {
@@ -961,7 +961,7 @@
   padding-top: 0.75em;
   font-size: 0.47em;
   line-height: 1.45;
-  color: #8f9bad;
+  color: var(--ink-3);
 }
 
 .iui-analysis-facts {
@@ -970,20 +970,20 @@
 
 .iui-analysis-facts > div {
   padding: 0.5em 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.055);
+  border-bottom: 1px solid rgb(19 24 21 / 0.055);
 }
 
 .iui-analysis-facts dt {
   margin-bottom: 0.15em;
   font-size: 0.43em;
-  color: #788496;
+  color: var(--ink-3);
 }
 
 .iui-analysis-facts dd {
   margin: 0;
   font-size: 0.52em;
   line-height: 1.35;
-  color: #d3dae5;
+  color: var(--ink-2);
 }
 
 .iui-volcano-legend {
@@ -991,7 +991,7 @@
   gap: 0.38em;
   margin-top: 0.7em;
   padding-top: 0.65em;
-  border-top: 1px solid rgb(255 255 255 / 0.055);
+  border-top: 1px solid rgb(19 24 21 / 0.055);
 }
 
 .iui-volcano-legend span {
@@ -999,7 +999,7 @@
   gap: 0.45em;
   align-items: center;
   font-size: 0.46em;
-  color: #aab4c3;
+  color: var(--ink-2);
 }
 
 .iui-volcano-legend i {
@@ -1010,8 +1010,8 @@
   background: #667085;
 }
 
-.iui-volcano-legend .iui-legend-down { background: #60a5fa; }
-.iui-volcano-legend .iui-legend-up { background: #34d399; }
+.iui-volcano-legend .iui-legend-down { background: #325e80; }
+.iui-volcano-legend .iui-legend-up { background: var(--accent); }
 
 .iui-lolli-protein-wrap {
   height: 100%;
@@ -1041,7 +1041,7 @@
   width: 5.4em;
   text-align: right;
   font-size: 0.45em;
-  color: #7e899a;
+  color: var(--ink-3);
 }
 
 /* The ticks are positioned against the wrapper, but the stems are scaled
@@ -1065,7 +1065,7 @@
   transform: rotate(-90deg) translateX(-50%);
   transform-origin: top left;
   font-size: 0.41em;
-  color: #7e899a;
+  color: var(--ink-3);
 }
 
 .iui-protein-grid {
@@ -1081,7 +1081,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  border-left: 1px dashed rgb(255 255 255 / 0.07);
+  border-left: 1px dashed rgb(19 24 21 / 0.07);
 }
 
 .insight-product-proof .iui-lolli-protein {
@@ -1125,13 +1125,13 @@
   top: 100%;
   width: 1px;
   height: calc(var(--tier, 0) * 2.6em);
-  background: rgb(255 255 255 / 0.18);
+  background: rgb(19 24 21 / 0.18);
 }
 
 /* Adjacent dots (R213 and Y220 are under 1px apart) need a ring to read as two
    circles rather than one blob. */
 .iui-lolli-protein .iui-dot {
-  box-shadow: 0 0 0 1.5px #0d1726, 0 0 6px rgb(22 177 126 / 0.5);
+  box-shadow: 0 0 0 1.5px var(--paper-raised), 0 0 6px rgb(21 94 74 / 0.10);
 }
 
 /* Dot size is in px while dot position is a % of a shrinking plot, so on
@@ -1143,7 +1143,7 @@
     width: 6px;
     height: 6px;
     top: -3px;
-    box-shadow: 0 0 0 1.25px #0d1726, 0 0 5px rgb(22 177 126 / 0.5);
+    box-shadow: 0 0 0 1.25px var(--paper-raised), 0 0 5px rgb(21 94 74 / 0.10);
   }
 }
 
@@ -1154,7 +1154,7 @@
     width: 5px;
     height: 5px;
     top: -2.5px;
-    box-shadow: 0 0 0 1px #0d1726, 0 0 4px rgb(22 177 126 / 0.5);
+    box-shadow: 0 0 0 1px var(--paper-raised), 0 0 4px rgb(21 94 74 / 0.10);
   }
 }
 
@@ -1182,7 +1182,7 @@
   /* 0.4em of the 15px card resolves to 6px, below the size at which these
      numerals stay legible at 1x; clamp to a readable floor. */
   font-size: max(0.4em, 9px);
-  color: #768295;
+  color: var(--ink-3);
 }
 
 .iui-protein-ticks span:first-child { transform: none; }
@@ -1199,7 +1199,7 @@
 .iui-domain-protein .iui-domain-seg {
   min-width: 0;
   background: rgb(124 139 161 / 0.28);
-  border: 1px solid rgb(255 255 255 / 0.055);
+  border: 1px solid rgb(19 24 21 / 0.055);
 }
 
 .iui-domain-protein .iui-domain-seg span {
@@ -1213,7 +1213,7 @@
 
 .iui-domain-protein .iui-domain-tad { background: rgb(96 165 250 / 0.38); }
 .iui-domain-protein .iui-domain-prd { background: rgb(139 92 246 / 0.36); }
-.iui-domain-protein .iui-domain-dbd { background: rgb(39 159 129 / 0.48); }
+.iui-domain-protein .iui-domain-dbd { background: var(--accent-wash); }
 .iui-domain-protein .iui-domain-link { background: rgb(124 139 161 / 0.22); }
 .iui-domain-protein .iui-domain-tet { background: rgb(245 158 11 / 0.38); }
 .iui-domain-protein .iui-domain-tail { background: rgb(96 165 250 / 0.26); }
@@ -1230,19 +1230,19 @@
 }
 
 .iui-volcano-axis {
-  stroke: rgb(255 255 255 / 0.20);
+  stroke: rgb(19 24 21 / 0.20);
   stroke-width: 1;
 }
 
 .iui-volcano-threshold {
-  stroke: rgb(255 255 255 / 0.14);
+  stroke: rgb(19 24 21 / 0.14);
   stroke-width: 1;
   stroke-dasharray: 4 4;
 }
 
 .iui-volcano-neutral { fill: #667085; }
-.iui-volcano-down { fill: #60a5fa; }
-.iui-volcano-up { fill: #34d399; }
+.iui-volcano-down { fill: #325e80; }
+.iui-volcano-up { fill: var(--accent); }
 
 .iui-volcano-neutral,
 .iui-volcano-down,
@@ -1255,7 +1255,7 @@
 @keyframes iui-volcano-in { to { opacity: 0.9; } }
 
 .iui-volcano-label {
-  fill: #8b94a3;
+  fill: var(--ink-3);
   font-family: var(--sans);
   font-size: 9px;
 }
@@ -1347,7 +1347,7 @@
   .insight-product-proof .iui-crumbs { flex-wrap: wrap; gap: 0.3em; }
   .insight-product-proof .iui-chat {
     position: relative; inset: auto; width: auto; height: auto;
-    border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    border-right: 0; border-bottom: 1px solid rgb(19 24 21 / 0.08);
   }
   .insight-product-proof .iui-vis { display: block; position: relative; inset: auto; }
   .insight-product-proof .iui-scene { display: none; position: relative; inset: auto; }
@@ -1440,7 +1440,7 @@
   .insight-product-proof .iui-crumbs { flex-wrap: wrap; gap: 0.3em; }
   .insight-product-proof .iui-chat {
     position: relative; inset: auto; width: auto; height: auto;
-    border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.08);
+    border-right: 0; border-bottom: 1px solid rgb(19 24 21 / 0.08);
   }
   .insight-product-proof .iui-paras { padding-bottom: 1em; }
   .insight-product-proof .iui-paras p { font-size: 0.85em; }
@@ -1496,7 +1496,7 @@
   .iui-notebook-head { align-items: start; flex-wrap: wrap; gap: 0.5em; }
   .iui-notebook-head > span { font-size: 0.75em; }
   .iui-notebook-grid { grid-template-columns: 1fr; grid-template-rows: auto auto; }
-  .iui-notebook-code { border-right: 0; border-bottom: 1px solid rgb(255 255 255 / 0.07); }
+  .iui-notebook-code { border-right: 0; border-bottom: 1px solid rgb(19 24 21 / 0.07); }
   .iui-notebook-code pre {
     font-size: 11px;
     white-space: pre-wrap;

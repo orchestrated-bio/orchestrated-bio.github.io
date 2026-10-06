@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="930" height="598" viewBox="0 0 930 598">
+<title>Evidence.xlsx: Parameters, rows 1 to 28</title>
+<rect width="930" height="598" fill="#fff"/>
+<rect width="930" height="48" fill="#214f41"/>
+<text x="22" y="31" fill="#fff" font-family="Arial,sans-serif" font-size="21">Evidence.xlsx</text>
+<rect y="48" width="930" height="40" fill="#f2f5f3"/>
+<text x="115.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">C</text>
+<text x="275.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">D</text>
+<text x="455.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">L</text>
+<text x="645.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">M</text>
+<text x="835.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">T</text>
+<rect x="40" y="88" width="890" height="90" fill="#e7f0eb"/>
+<text x="20" y="139.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">1</text>
+<text x="52" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Endpoint</text>
+<path d="M40 88v90" stroke="#dce5df"/>
+<text x="202" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Value</text>
+<path d="M190 88v90" stroke="#dce5df"/>
+<text x="372" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">CI lower</text>
+<path d="M360 88v90" stroke="#dce5df"/>
+<text x="562" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">CI upper</text>
+<path d="M550 88v90" stroke="#dce5df"/>
+<text x="752" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Adjusted P value</text>
+<path d="M740 88v90" stroke="#dce5df"/>
+<path d="M40 178H930" stroke="#dce5df"/>
+<rect x="40" y="178" width="890" height="120" fill="#fff"/>
+<text x="20" y="244.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">26</text>
+<text x="52" y="244.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Aqp2</text>
+<path d="M40 178v120" stroke="#dce5df"/>
+<text x="348" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.401667</text>
+<path d="M190 178v120" stroke="#dce5df"/>
+<text x="538" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.571912</text>
+<path d="M360 178v120" stroke="#dce5df"/>
+<text x="728" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.231422</text>
+<path d="M550 178v120" stroke="#dce5df"/>
+<text x="918" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.00021766</text>
+<path d="M740 178v120" stroke="#dce5df"/>
+<path d="M40 298H930" stroke="#dce5df"/>
+<rect x="40" y="298" width="890" height="120" fill="#f4f8f5"/>
+<text x="20" y="364.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">25</text>
+<text x="52" y="364.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Avpr2</text>
+<path d="M40 298v120" stroke="#dce5df"/>
+<text x="348" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.115</text>
+<path d="M190 298v120" stroke="#dce5df"/>
+<text x="538" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.0162989</text>
+<path d="M360 298v120" stroke="#dce5df"/>
+<text x="728" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.246299</text>
+<path d="M550 298v120" stroke="#dce5df"/>
+<text x="918" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.227621</text>
+<path d="M740 298v120" stroke="#dce5df"/>
+<path d="M40 418H930" stroke="#dce5df"/>
+<rect x="40" y="418" width="890" height="120" fill="#fff"/>
+<text x="20" y="484.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">28</text>
+<text x="52" y="484.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Pkd1</text>
+<path d="M40 418v120" stroke="#dce5df"/>
+<text x="348" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.1275</text>
+<path d="M190 418v120" stroke="#dce5df"/>
+<text x="538" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.22276</text>
+<path d="M360 418v120" stroke="#dce5df"/>
+<text x="728" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-0.0322396</text>
+<path d="M550 418v120" stroke="#dce5df"/>
+<text x="918" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.0436087</text>
+<path d="M740 418v120" stroke="#dce5df"/>
+<path d="M40 538H930" stroke="#dce5df"/>
+<text x="52" y="578" font-family="Arial,sans-serif" font-size="17" fill="#406552">Parameters: rows 26, 25, 28; columns C, D, L, M, T</text></svg>

@@ -1,330 +1,2156 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="An example DrugAdopt report on candidate response biomarkers for a CHK1 inhibitor in platinum-resistant ovarian cancer." />
-    <meta name="theme-color" content="#f2f3f1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#101412" media="(prefers-color-scheme: dark)" />
-    <title>Example report | Orchestrated Biosciences</title>
-    <link rel="canonical" href="https://orchestrated.bio/report.html" />
-    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <meta property="og:type" content="article" />
-    <meta property="og:site_name" content="Orchestrated Biosciences" />
-    <meta property="og:title" content="DrugAdopt example report | Orchestrated Biosciences" />
-    <meta property="og:description" content="An example DrugAdopt report on candidate response biomarkers for Prexasertib in Platinum-resistant HGSOC." />
-    <meta property="og:url" content="https://orchestrated.bio/report.html" />
-    <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
-    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=a85d077e1c15" />
-    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=5a45469a54b6" />
-    <link rel="stylesheet" href="./assets/css/company-site/report.css?v=7b08a6edfa07" />
-    <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#overview">Skip to content</a>
-
-    <header class="masthead">
-      <div class="shell">
-        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
-          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
-          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
-          <span class="brand-word">rchestrated<span>.bio</span></span>
-        </a>
-        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
-        <nav class="site-nav" id="site-nav" aria-label="Primary">
-          <!-- "true", not "page": this marks the current section, and the
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" http-equiv="Content-Security-Policy"/>
+<meta content="nosniff" http-equiv="X-Content-Type-Options"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="A DrugAdopt report on tolvaptan in ADPKD: disease biology, mechanism, clinical outcomes, pharmacology, safety, and the IP landscape." name="description"/>
+<meta content="#f4f6f2" name="theme-color"/>
+<title>Tolvaptan in ADPKD | DrugAdopt report</title>
+<link href="https://orchestrated.bio/report.html" rel="canonical"/>
+<link href="./images/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="./favicon.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="./apple-touch-icon.png" rel="apple-touch-icon"/>
+<meta content="article" property="og:type"/>
+<meta content="Orchestrated Biosciences" property="og:site_name"/>
+<meta content="Tolvaptan in ADPKD | DrugAdopt" property="og:title"/>
+<meta content="A DrugAdopt report on tolvaptan in ADPKD: disease biology, mechanism, clinical outcomes, pharmacology, safety, and the IP landscape." property="og:description"/>
+<meta content="https://orchestrated.bio/report.html" property="og:url"/>
+<meta content="https://orchestrated.bio/images/og-image.png" property="og:image"/>
+<meta content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" property="og:image:alt"/>
+<meta content="1200" property="og:image:width"/>
+<meta content="630" property="og:image:height"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<link href="./assets/css/company-site/base.css?v=605cc16e2e8b" rel="stylesheet"/>
+<link href="./assets/css/company-site/drugadopt.css?v=26c6a08ed541" rel="stylesheet"/>
+<link href="./assets/css/company-site/report.css?v=6868fae1ff21" rel="stylesheet"/>
+<script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
+</head>
+<body>
+<a class="skip-link" href="#overview">Skip to content</a>
+<header class="masthead">
+<div class="shell">
+<a aria-label="Orchestrated Biosciences home" class="brand" href="./">
+<img alt="" aria-hidden="true" class="brand-logo brand-logo-light" src="./images/logo-icon.png"/>
+<img alt="" aria-hidden="true" class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg"/>
+<span class="brand-word">rchestrated<span>.bio</span></span>
+</a>
+<button aria-controls="site-nav" aria-expanded="false" class="site-nav-toggle" hidden="" type="button">Menu</button>
+<nav aria-label="Primary" class="site-nav" id="site-nav">
+<!-- "true", not "page": this marks the current section, and the
                link goes to another page. -->
-          <a href="./" aria-current="true">DrugAdopt</a>
-          <a href="./custom-analysis.html">Custom analysis</a>
-          <a href="./insight.html">Insight</a>
-          <a href="./company.html">Company</a>
-          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
-        </nav>
-      </div>
-    </header>
-
-    <main id="main" class="rpt-stage">
-      <div class="rpt-intro">
-        <h1 class="rpt-intro-title">Public evidence on prexasertib's candidate response biomarkers.</h1>
-        <p class="rpt-intro-lede">This example DrugAdopt report assesses five candidate markers. None has independent validation. <a href="./">What DrugAdopt does</a>.</p>
-      </div>
-
-      <div class="dax-ui dax-full" role="region" aria-label="DrugAdopt biomarker readout on Prexasertib in Platinum-resistant HGSOC">
-
-        <nav class="dax-spine" aria-label="Report sections">
-          <div class="dax-spine-brand">
-            <span class="dax-spine-logo"><img src="./images/logo-icon-white.svg" alt="" aria-hidden="true" /></span>
-            <span class="dax-spine-title">DrugAdopt<span>Biomarker &amp; patient-selection readout</span></span>
-          </div>
-          <ul class="dax-nav"><li><a class="dax-nav-item" href="#overview"><span class="dax-nav-num" aria-hidden="true">◆</span><span class="dax-nav-label">Overview</span></a></li><li><a class="dax-nav-item" href="#clinical"><span class="dax-nav-num">1</span><span class="dax-nav-label"><span class="dax-nav-long">Clinical Phenotype &amp; Endpoints</span><span class="dax-nav-short">Clinical</span></span></a></li><li><a class="dax-nav-item" href="#mechanism"><span class="dax-nav-num">2</span><span class="dax-nav-label"><span class="dax-nav-long">Mechanism &amp; Biomarker Biology</span><span class="dax-nav-short">Mechanism</span></span></a></li><li><a class="dax-nav-item" href="#pharmacology"><span class="dax-nav-num">3</span><span class="dax-nav-label"><span class="dax-nav-long">Pharmacology &amp; Exposure</span><span class="dax-nav-short">Exposure</span></span></a></li><li><a class="dax-nav-item" href="#toxicology"><span class="dax-nav-num">4</span><span class="dax-nav-label"><span class="dax-nav-long">Toxicology &amp; Therapeutic Window</span><span class="dax-nav-short">Safety</span></span></a></li><li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-num" aria-hidden="true">◆</span><span class="dax-nav-label">Evidence &amp; Gaps</span></a></li><li><a class="dax-nav-item" href="#traceability"><span class="dax-nav-num" aria-hidden="true">◆</span><span class="dax-nav-label">Traceability</span></a></li></ul>
-        </nav>
-
-        <div class="dax-paper dax-paper-scroll">
-
-          <section class="dax-page dax-overview" id="overview" tabindex="-1">
-            <div class="dax-ov-top">
-              <div>
-                <p class="dax-sec-num">Biomarker &amp; patient-selection readout</p>
-                <h2 class="dax-ov-asset">Prexasertib</h2>
-                <p class="dax-ov-target">Small molecule · Target CHEK1</p>
-                <p class="dax-ov-ind">BRCA-wild-type platinum-resistant recurrent high-grade serous ovarian carcinoma</p>
-              </div>
-            </div>
-
-            <p class="dax-ov-readout">Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response. The signal-seeking study ended before its planned evaluable denominators were reached. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis.</p>
-
-            <div class="dax-callout dax-callout-verdict">
-              <div class="dax-callout-head">What the public evidence leaves open</div>
-              <div class="dax-callout-body">
-                <p class="dax-callout-item">The clinical activity signal is real, but the public data do not identify a validated responder biomarker, participant-linked exposure explanation, or therapeutic window for a POLA1-directed combination.</p>
-              </div>
-            </div>
-
-            <p class="dax-ov-sechead">What each section found</p>
-            <ul class="dax-ov-sections"><li><a class="dax-ov-link" href="#clinical"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Clinical Phenotype &amp; Endpoints</span><span class="dax-ov-sec-gist">12 of 39 evaluable patients had a partial response.</span></span><span class="dax-ov-chip dax-chip-ok">Responder subset observed</span></a></li><li><a class="dax-ov-link" href="#mechanism"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Mechanism &amp; Biomarker Biology</span><span class="dax-ov-sec-gist">Neither the replication score nor POLA1 has independent validation.</span></span><span class="dax-ov-chip dax-chip-warn">Two unvalidated candidates</span></a></li><li><a class="dax-ov-link" href="#pharmacology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Pharmacology &amp; Exposure</span><span class="dax-ov-sec-gist">Public data cannot show whether individual nonresponders were underexposed.</span></span><span class="dax-ov-chip dax-chip-warn">Gross underexposure less likely</span></a></li><li><a class="dax-ov-link" href="#toxicology"><span class="dax-ov-sec-block"><span class="dax-ov-sec-name">Toxicology &amp; Therapeutic Window</span><span class="dax-ov-sec-gist">The therapeutic margin in combination regimens remains unmeasured.</span></span><span class="dax-ov-chip dax-chip-warn">Marrow toxicity quantified</span></a></li></ul>
-
-            <div class="dax-ov-foot">
-              <span>Prepared 2026-07-17 · sources as of 2026-07-16 · from public evidence</span>
-            </div>
-          </section>
-
-          
-            <section class="dax-page" id="clinical">
-              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-              <p class="dax-sec-num">Section 1</p>
-              <h2 class="dax-sec-h">Clinical Phenotype &amp; Endpoints</h2>
-
-              <p class="dax-question-line">What do the public trial record and primary report actually show, and which patient and biopsy denominators can support a clinical or translational claim?</p>
-
-              
-              <figure class="dax-figure">
-                <a class="dax-fig-link" href="./images/drugadopt/report/clinical_cohort_flow.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/clinical_cohort_flow.png" alt="Two-panel cohort diagram. Panel A, the clinical analysis population: 49 enrolled and treated across cohorts 5 and 6, splitting into cohort 5 with biopsiable disease (n=24) and cohort 6 without (n=25); these yield 18 of 36 planned and 21 of 35 planned RECIST-evaluable participants, with 6 partial responses each, combining to a response denominator of 39 of 49 and 12 partial responses. A note records that registry &#x27;completed&#x27; n=43 is a disposition milestone, not the RECIST-evaluable n=39. Panel B, the pretreatment biopsy population: 24 baseline biopsies, of which 18 are tissue-quality eligible after 6 fail for high necrotic content; from these, 18 are DNA sequenced and 17 RNA sequenced, and 15 enter the post-hoc transcriptomic analysis after 2 exclusions, splitting into 6 participants with PFS at or beyond 6 months and 9 below." width="2395" height="1374" loading="lazy" decoding="async" /></a>
-                <figcaption class="dax-figcap">
-                  <b>Figure 1.</b> Public clinical and biopsy denominators are distinct.
-                  
-                  <span class="dax-figmeta">Evidence type: computed. Claim scope: Aggregate public cohort and specimen counts, patient-level public assay-availability reconciliation, and a reviewed source-column linkage for the same 15 post-hoc PFS-labeled biopsies; not independent validation, predictive utility, or overall-survival evidence. Sources: <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a>; <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>; <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a>.</span>
-                </figcaption>
-              </figure>
-
-              <p class="dax-body-p">This was an early-terminated signal-seeking study, not a clean efficacy failure or a validated resistance-biomarker study. Forty-nine participants were treated, 39 were RECIST-evaluable, and 12 had a partial response: ORR was 30.8% (12/39; 95% CI 17.0–47.6) among evaluable participants and 24.5% (12/49; exact 95% CI 13.3–38.9) by intention to treat.</p><p class="dax-body-p">The planned evaluable denominators were not reached. Only 24 participants had baseline biopsies, 17 had RNA sequencing, and 15 entered the post-hoc transcriptomic analysis, so the clinical response and biomarker claims arise from different populations [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>; <a class="dax-cite" href="https://clinicaltrials.gov/study/NCT02203513" target="_blank" rel="noreferrer">NCT02203513</a>].</p>
-              
-
-              <div class="dax-callout">
-                <div class="dax-callout-head">Interpretation</div>
-                <div class="dax-callout-body"><p class="dax-body-p">The clinical record supports a bounded activity signal in heavily pretreated platinum-resistant HGSOC. It does not support calling prexasertib inactive: 12 objective responses were observed. It also does not support calling the regimen effective under the planned phase-2 decision rule, because both cohorts stopped short of their target sample sizes.</p><p class="dax-body-p">The translational result is exploratory. The audited source-column linkage permits a bounded same-cohort PFS reanalysis, but a 15-biopsy, post-hoc split cannot validate a selection biomarker. This is a post-publication reanalysis of the same 15 patients used to generate the published hypothesis. It may test a within-cohort association with published PFS, but it is not independent replication or prospective biomarker validation and does not establish resistance mechanism, predictive utility, or treatment interaction.</p><p class="dax-body-p">The larger multicenter study makes that limit more important [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/36192237/" target="_blank" rel="noreferrer">PMID 36192237</a>]: its lower platinum-resistant ORR and negative genomic screen argue against treating the small trial&#x27;s 30.8% evaluable ORR or any single baseline alteration as transportable. The CA125 paper does not fill the mechanism gap [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/39075200/" target="_blank" rel="noreferrer">PMID 39075200</a>] because it measures response after treatment has started.</p><p class="dax-body-p">It can address only a narrower question: whether lack of a confirmed CA125 decline can prospectively flag low probability of RECIST response without making a treatment decision.</p></div>
-              </div>
-              
-
-              <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>1</span></div>
-            </section>
-
-            <section class="dax-page" id="mechanism">
-              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-              <p class="dax-sec-num">Section 2</p>
-              <h2 class="dax-sec-h">Mechanism &amp; Biomarker Biology</h2>
-
-              <p class="dax-question-line">Why did some patients benefit from prexasertib while others did not, and does the public evidence support a clinically usable DNA-replication biomarker or a causal POLA1 resistance mechanism?</p>
-
-              
-              <figure class="dax-figure">
-                <a class="dax-fig-link" href="./images/drugadopt/report/replication_signal_robustness.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/replication_signal_robustness.png" alt="Forest plot of seven DNA-replication score definitions, each showing a Hedges g effect estimate with a 95 percent stratified percentile-bootstrap confidence interval, plotted against a vertical line at zero effect. KEGG DNA replication mean z, p=0.234; Reactome HGNC-reconciled mean z, p=0.586; Reactome reconciled median z, p=0.608; Reactome reconciled ranks, p=0.583; Reactome DNA strand elongation, p=0.27; Reactome pre-replicative complex, p=0.199; Reactome exact-symbol only, p=0.591. Every one of the seven confidence intervals crosses zero." width="1361" height="781" loading="lazy" decoding="async" /></a>
-                <figcaption class="dax-figcap">
-                  <b>Figure 2.</b> The same-cohort replication signal is not robust to score definition.
-                  Hedges g estimates and pointwise, unadjusted 95% stratified percentile-bootstrap intervals for seven score definitions anchored by KEGG hsa03030 and Reactome R-HSA-69306. Every interval includes no effect; p values are exact two-sided allocation tests.
-                  <span class="dax-figmeta">Evidence type: computed. Claim scope: score-definition sensitivity within the same 15 patients. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a> <span class="dax-ref-part">processed</span>; <a class="dax-cite" href="https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2023.1.Hs/c2.cp.kegg.v2023.1.Hs.symbols.gmt" target="_blank" rel="noreferrer">MSIGDB_C2_CP_KEGG_V2023_1_HS</a>; <a class="dax-cite" href="https://reactome.org/download/current/ReactomePathways.gmt.zip" target="_blank" rel="noreferrer">REACTOME_CURRENT_2026_06_21</a>; <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
-                </figcaption>
-              </figure>
-
-              <p class="dax-body-p">The public data do not explain the patient split. The paper&#x27;s KEGG DNA-replication enrichment is reproducible: its gene ranks and weighted enrichment score can be reconstructed from the same 15 biopsies to floating-point precision. But it was discovered with a post-hoc PFS endpoint in those same 15 patients. When the fixed KEGG set is tested across all 5,005 possible 9-versus-6 patient allocations, the result is not unusual (p=0.105).</p><p class="dax-body-p">A separate, HGNC-reconciled Reactome patient score is also small and imprecise (Hedges g=0.28, 95% bootstrap CI -0.62 to 1.37, exact allocation p=0.586). This is a reproducible hypothesis, not a validated resistance biomarker. POLA1 perturbation is the strongest orthogonal support. In two parental HGSOC lineages and their acquired prexasertib-resistant derivatives, siPOLA1 plus prexasertib suppressed relative growth more than a descriptive Bliss-independence reference.</p><p class="dax-body-p dax-body-lead">That supports a controlled causal experiment. It does not establish:</p><ul class="dax-negation-list"><li>four independent models</li><li>tumor selectivity</li><li>direct ST1926–POLA1 engagement</li><li>an exposure-feasible drug combination</li><li>a therapeutic window</li></ul><p class="dax-body-p">The full ST1926 response surfaces are reported in Pharmacology &amp; Exposure; they are not biomarker-validation evidence.</p>
-              
-              <figure class="dax-figure">
-                <a class="dax-fig-link" href="./images/drugadopt/report/mechanism_evidence_chain.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/mechanism_evidence_chain.png" alt="Four bar panels of relative growth, each comparing control, siPOLA1, prexasertib, and the combination, with three replicate points per bar and an open diamond marking the descriptive Bliss-independence expectation. Panels cover two parental HGSOC lineages, OVCAR3 and OVCAR5, and their acquired prexasertib-resistant derivatives, OVCAR3-PrexR and OVCAR5-PrexR. In every panel the combination bar falls below the Bliss reference diamond. Footnotes record an unresolved dose-label conflict between the article prose, the figure caption, and the source-sheet title." width="1944" height="1260" loading="lazy" decoding="async" /></a>
-                <figcaption class="dax-figcap">
-                  <b>Figure 3.</b> POLA1 perturbation supports a preclinical experiment only.
-                  Triplicate relative-growth measurements compare siPOLA1, prexasertib, and the combination in two parental HGSOC lineages and their acquired-resistant derivatives; the open diamond is a descriptive Bliss reference, not formal synergy.
-                  <span class="dax-figmeta">Evidence type: measured. Claim scope: preclinical hypothesis support only; ST1926 mediation, synergy, exposure feasibility, tumor selectivity, and clinical benefit are not established. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752</a> <span class="dax-ref-part">source data</span>; <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
-                </figcaption>
-              </figure>
-
-
-              <div class="dax-callout">
-                <div class="dax-callout-head">Interpretation</div>
-                <div class="dax-callout-body"><p class="dax-body-p dax-body-lead">Two narrow statements hold: the paper&#x27;s KEGG enrichment statistic is reproducible, and the POLA1 genetic-perturbation result makes the biology worth testing. The public evidence does not show that baseline DNA-replication expression predicts which patients benefit from prexasertib. It cannot separate:</p><ul class="dax-negation-list"><li>treatment resistance from prognosis</li><li>tumor composition</li><li>exposure</li><li>dose intensity</li><li>other unmeasured patient factors</li></ul><p class="dax-body-p">It also cannot show that inhibiting POLA1 would be tolerable in normal proliferative tissues. A treatment-selection claim would still require a randomized treatment-by-biomarker interaction.</p></div>
-              </div>
-              
-
-              <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>2</span></div>
-            </section>
-
-            <section class="dax-page" id="pharmacology">
-              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-              <p class="dax-sec-num">Section 3</p>
-              <h2 class="dax-sec-h">Pharmacology &amp; Exposure</h2>
-
-              <p class="dax-question-line">Is prexasertib pharmacologically active at plausible human exposure, could heterogeneous exposure explain apparent non-response, and what does the ST1926 combination evidence actually establish?</p>
-
-              
-              <figure class="dax-figure">
-                <a class="dax-fig-link" href="./images/drugadopt/report/prexasertib_exposure_boundary.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/prexasertib_exposure_boundary.png" alt="Scatter plot of geometric mean AUC from 0 to 72 hours, in nanogram-hours per millilitre, at four dose-by-cycle points from an external phase-1 study: 80 mg/m squared cycle 1 day 1 at 1,670 (n=6; CV 22 percent) and cycle 2 day 1 at 1,780 (n=4; CV 16 percent), then 105 mg/m squared cycle 1 day 1 at 2,160 (n=6; CV 13 percent) and cycle 2 day 1 at 2,270 (n=3; CV 22 percent). A dashed horizontal line marks a Calu-6 xenograft model target of 1,896. Both 105 mg/m squared points sit above that line and both 80 mg/m squared points below it. A side panel lists what the data can answer (regimen and external aggregate PK, and group dispersion as reported CV percent) and what it cannot: ovarian-trial participant PK, PK linked to response or PFS, and tumour exposure or target engagement." width="2288" height="1232" loading="lazy" decoding="async" /></a>
-                <figcaption class="dax-figcap">
-                  <b>Figure 4.</b> Public PK covers regimen-level exposure only.
-                  External phase-1 geometric mean AUC(0-72) with reported CV and PK n; the horizontal line is a xenograft-derived target, not a clinical efficacy threshold.
-                  <span class="dax-figmeta">Evidence type: measured. Claim scope: Regimen-level exposure plausibility only; no participant-level underexposure or exposure-response inference. Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>; <a class="dax-cite" href="https://www.fda.gov/files/advisory%20committees/published/Eli-Lilly-Briefing-Information--Prexasertib--for-the-June-22--2017-Meeting-of-the-Pediatric-Subcommittee-of-the-Oncologic-Drugs-Advisory-Committee.pdf" target="_blank" rel="noreferrer">Prexasertib</a> <span class="dax-ref-part">(Eli Lilly FDA advisory committee briefing, 2017)</span>; <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
-                </figcaption>
-              </figure>
-
-              <p class="dax-body-p">Prexasertib is a potent CHK1 inhibitor that also inhibits other kinases: the FDA briefing reports CHK1 enzyme IC50 &lt;1 nM, binding Ki 0.9 nM, and CHK2 and p90S6 kinase inhibition below 10 nM in a 224-kinase panel [Prexasertib]. The public evidence makes regimen-level underexposure less likely, but it cannot test whether an individual nonresponder was underexposed.</p><p class="dax-body-p">In an external 12-patient phase-1 study, geometric mean AUC(0–72) at 105 mg/m² was 2,160 ng·h/mL at cycle 1 (n=6; CV 13%) and 2,270 ng·h/mL at cycle 2 (n=3; CV 22%), both above the 1,896 ng·h/mL exposure predicted from a Calu-6 xenograft model. Eight of nine reported 105-mg/m² AUC observations across the two cycles exceeded that target [<a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>].</p><p class="dax-body-p">That is not exposure–response evidence for NCT02203513. The ovarian trial used the same starting regimen, 105 mg/m² intravenously every two weeks, but reports no participant-linked concentrations, individual PK estimates, dose intensity, target engagement, or PK-to-response record. An exposure–response model built on public data would therefore describe the wrong population, so none was fit [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>].</p><p class="dax-body-p">The complete public ST1926-by-prexasertib tumor-cell surfaces support a preclinical interaction hypothesis, not formal synergy or a therapeutic window. The source has unresolved replicate independence and dose-label conflicts, and it contains no matched normal-cell, in-vivo, or combination-exposure data [<a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752_SOURCE_DATA</a>].</p>
-              
-
-              <div class="dax-callout">
-                <div class="dax-callout-head">Interpretation</div>
-                <div class="dax-callout-body"><p class="dax-body-p">The measured potency, full tumor-cell response surfaces, and external PK make the mechanism and regimen experimentally plausible. They do not establish that ST1926 engages POLA1, that the combination is exposure-feasible, or that it has a normal-tissue margin. The external PK data argue against a simple claim that the 105-mg/m² regimen was generally too low to reach the sponsor&#x27;s nonclinical systemic-exposure target.</p><p class="dax-body-p dax-body-lead">They do not exclude:</p><ul class="dax-negation-list"><li>clinically meaningful interpatient variability</li><li>dose-intensity loss</li><li>tissue-exposure differences</li><li>exposure-independent resistance in the ovarian cohort</li></ul></div>
-              </div>
-              <p class="dax-scope-line">From published papers, trial records and regulatory documents. No drug levels were measured for this report.</p>
-
-              <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>3</span></div>
-            </section>
-
-            <section class="dax-page" id="toxicology">
-              <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-              <p class="dax-sec-num">Section 4</p>
-              <h2 class="dax-sec-h">Toxicology &amp; Therapeutic Window</h2>
-
-              <p class="dax-question-line">What limited prexasertib dosing, and does the public evidence establish a therapeutic window for adding a second replication-stress agent?</p>
-
-              
-              <figure class="dax-figure">
-                <a class="dax-fig-link" href="./images/drugadopt/report/clinical_safety_burden.png" target="_blank" rel="noopener"><img src="./images/drugadopt/report/clinical_safety_burden.png" alt="Bar chart of grade 3 or 4 treatment-related adverse events among 49 treated participants, each bar carrying a computed Wilson 95 percent confidence interval: neutropenia 42 participants (85.7 percent), leukocytopenia 38 (77.6 percent), lymphocytopenia 23 (46.9 percent), thrombocytopenia 20 (40.8 percent), anemia 15 (30.6 percent), and febrile neutropenia 6 (12.2 percent). Accompanying counts record 11 participants (22.4 percent) with a toxicity-related dose reduction, 3 (6.1 percent) discontinuing for toxicity, and no on-treatment deaths." width="1848" height="1276" loading="lazy" decoding="async" /></a>
-                <figcaption class="dax-figcap">
-                  <b>Figure 5.</b> Severe prexasertib toxicity is predominantly hematologic.
-                  Grade 3/4 treatment-related adverse events among 49 treated participants, with computed Wilson 95% intervals and reported dose-reduction, discontinuation, and on-treatment-death counts.
-                  <span class="dax-figmeta">Evidence type: measured. Claim scope: Observed prexasertib monotherapy safety only; no exposure-toxicity, combination-safety, or therapeutic-index claim. Sources: <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>.</span>
-                </figcaption>
-              </figure>
-
-              <p class="dax-body-p">Prexasertib dosing was constrained by acute hematologic toxicity. Among 49 treated participants, grade 3 or 4 treatment-related neutropenia occurred in 42 (85.7%), leukocytopenia in 38 (77.6%), lymphocytopenia in 23 (46.9%), thrombocytopenia in 20 (40.8%), anemia in 15 (30.6%), and febrile neutropenia in 6 (12.2%). Eleven participants (22.4%) had a toxicity-related dose reduction and three (6.1%) discontinued for toxicity; no on-treatment deaths were reported [<a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285 Supplementary Data 2</a>].</p><p class="dax-body-p">The public evidence does not establish a numeric combination window. The pharmacology chapter shows real tumor-cell interaction data for ST1926 plus prexasertib, but there are no matched hematopoietic-progenitor or GI-organoid surfaces, participant-linked exposure–toxicity data, in-vivo combination toxicology, or combination-treated patients.</p><p class="dax-body-p">Tumor-cell growth inhibition is therefore not treated as toxicology evidence.</p>
-              
-
-              <div class="dax-callout">
-                <div class="dax-callout-head">Interpretation</div>
-                <div class="dax-callout-body"><p class="dax-body-p">The principal known clinical constraint is predictable, often severe, and monitorable marrow toxicity. Its transient nature and use of G-CSF made monotherapy delivery possible, but that does not create unused safety margin for a second replication inhibitor. The public data cannot supply a defensible numeric combination margin. The main toxicology concern is that deepening replication stress in tumors can also injure proliferating marrow and GI tissue.</p><p class="dax-body-p">Until a clinically qualified POLA1-directed agent demonstrates adequate exposure, target engagement, and a measured normal-tissue window, the public evidence does not support a clinical combination.</p></div>
-              </div>
-              
-
-              <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>4</span></div>
-            </section>
-
-
-          <section class="dax-page" id="gaps">
-            <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-            <p class="dax-sec-num">Evidence &amp; Gaps</p>
-            <h2 class="dax-sec-h">Candidate biomarkers and what would validate them</h2>
-
-            <p class="dax-body-p"><b>A responder subset makes a selection biomarker plausible.</b></p>
-
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 1. Candidate biomarkers and evidence strength">
-            <table class="dax-table">
-              <caption>Table 1. Every candidate assessed and the evidence behind it</caption>
-              <thead><tr><th scope="col">Candidate</th><th scope="col">Evidence strength</th></tr></thead>
-              <tbody><tr><th scope="row">Frozen pretreatment DNA-replication RNA score</th><td>Conflicting same-cohort exploratory evidence; no independent clinical validity.</td></tr><tr><th scope="row">Pretreatment tumor POLA1 mRNA</th><td>Thin same-cohort nominal association plus orthogonal single-study genetic perturbation.</td></tr><tr><th scope="row">CCNE1 amplification or overexpression</th><td>Not supportive: two amplified cases split across benefit groups in the small study, and no significant CCNE1-response association emerged in the larger NCT03414047 genomic analysis.</td></tr><tr><th scope="row">Cycle-1-day-15 change in EpCAM-positive MUC1-positive circulating tumor cells</th><td>Thin single-study exploratory association without prospective validation.</td></tr><tr><th scope="row">On-treatment GCIG CA125 response</th><td>Thin post-hoc pooled single-arm evidence; high NPV but modest PPV, with guarantee-time and endpoint-definition limitations.</td></tr></tbody>
-            </table>
-            </div>
-            <p class="dax-scope-line">They do not establish clinical utility, assay qualification, regulatory biomarker qualification, or companion diagnostic readiness without the stated validation evidence.</p>
-
-            <h3 class="dax-sub-h">Open questions and the evidence behind them</h3>
-            
-              <article class="dax-gate">
-                <p class="dax-gate-head">
-                  <code>replication-01</code>
-                  <span class="dax-ov-chip dax-chip-gap">Not supported</span>
-                </p>
-                <p class="dax-gate-claim">The published KEGG DNA-replication enrichment can be reproduced, but the patient-level replication signal is not robust across prespecified score definitions in the same 15 biopsies. <span class="dax-gate-sources">Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE249587" target="_blank" rel="noreferrer">GSE249587</a> <span class="dax-ref-part">processed</span>; <a class="dax-cite" href="https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2023.1.Hs/c2.cp.kegg.v2023.1.Hs.symbols.gmt" target="_blank" rel="noreferrer">MSIGDB_C2_CP_KEGG_V2023_1_HS</a>.</span></p>
-                <p class="dax-gate-reqhead">Data that would resolve this</p><ul class="dax-gate-req"><li>Archived NCT03414047 baseline FFPE or another independent baseline RNA set</li><li>Complete PFS events and censoring</li><li>Frozen score specification and identifier map</li></ul>
-              </article>
-
-
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 2. The remaining open questions">
-            <table class="dax-table">
-              <caption>Table 2. The remaining open questions, with the data that would resolve each</caption>
-              <thead><tr><th scope="col">Row</th><th scope="col">State</th><th scope="col">Finding</th><th scope="col">Data that would resolve it</th></tr></thead>
-              <tbody><tr><th scope="row"><code>mechanism-01</code></th><td><span class="dax-ov-chip dax-chip-gap">Not established</span></td><td>POLA1 remains a testable mechanism hypothesis, but the ST1926 source-data experiments do not prove POLA1-mediated combination benefit or a therapeutic window. <span class="dax-gate-sources">Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752</a> <span class="dax-ref-part">source data</span>; <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752</a> <span class="dax-ref-part">supp data 7</span>.</span></td><td><ul class="dax-gate-req"><li>Full concentration-response matrices and raw replicates</li><li>ST1926 target-engagement and selectivity data</li><li>POLA1 rescue experiments</li><li>Normal marrow and gastrointestinal proliferative-cell comparators</li></ul></td></tr><tr><th scope="row"><code>exposure-01</code></th><td><span class="dax-ov-chip dax-chip-warn">Gap</span></td><td>Public aggregate PK makes gross regimen underexposure less likely, but it cannot test whether individual nonresponders had lower exposure. <span class="dax-gate-sources">Sources: <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>; <a class="dax-cite" href="https://www.fda.gov/files/advisory%20committees/published/Eli-Lilly-Briefing-Information--Prexasertib--for-the-June-22--2017-Meeting-of-the-Pediatric-Subcommittee-of-the-Oncologic-Drugs-Advisory-Committee.pdf" target="_blank" rel="noreferrer">Prexasertib</a> <span class="dax-ref-part">(Eli Lilly FDA advisory committee briefing, 2017)</span>.</span></td><td><ul class="dax-gate-req"><li>Participant-level concentration-time records</li><li>Actual dose, delays, reductions, and G-CSF</li><li>Participant-level RECIST and PFS/censoring</li><li>Bioanalytical assay report</li></ul></td></tr><tr><th scope="row"><code>safety-01</code></th><td><span class="dax-ov-chip dax-chip-gap">Not established</span></td><td>Prexasertib has a prominent, monitorable hematologic toxicity burden, while the safety window for a POLA1-directed combination is unknown. <span class="dax-gate-sources">Sources: <a class="dax-cite" href="https://pubmed.ncbi.nlm.nih.gov/38555285/" target="_blank" rel="noreferrer">PMID 38555285</a>; <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6247064/" target="_blank" rel="noreferrer">PMC6247064</a>; <a class="dax-cite" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10981752/" target="_blank" rel="noreferrer">PMC10981752</a> <span class="dax-ref-part">source data</span>.</span></td><td><ul class="dax-gate-req"><li>Participant-level cytopenia timing and recovery</li><li>Combination PK and target-engagement data</li><li>Normal-cell and organ-relevant dose matrices</li><li>Supportive-care and dose-modification records</li><li>Prospectively frozen numeric exposure-normalized tumor-versus-marrow/GI margin</li></ul></td></tr></tbody>
-            </table>
-            </div>
-            <p class="dax-scope-line">4 of the 9 evidence rows in the full report are shown.</p>
-
-            <h3 class="dax-sub-h">What would change the interpretation</h3>
-            <div class="dax-table-scroll" tabindex="0" role="group" aria-label="Table 3. Missing evidence and what it would show">
-            <table class="dax-table">
-              <caption>Table 3. Missing evidence and the result that would change the interpretation</caption>
-              <thead><tr><th scope="col">Missing evidence</th><th scope="col">Would change the interpretation if</th></tr></thead>
-              <tbody><tr><th scope="row">Independent biomarker cohort</th><td>A frozen continuous baseline score replicates outcome-blind and later demonstrates a randomized treatment interaction.</td></tr><tr><th scope="row">Participant-linked exposure</th><td>Measured PK explains a material part of nonresponse or supports a feasible exposure-adjusted regimen.</td></tr><tr><th scope="row">POLA1-combination therapeutic index</th><td>Orthogonal POLA1 dependence and a reproducible tumor-versus-normal exposure margin are demonstrated.</td></tr></tbody>
-            </table>
-            </div>
-
-            <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>Gaps</span></div>
-          </section>
-
-          <section class="dax-page" id="traceability">
-            <div class="dax-rhead"><span>Prexasertib · Platinum-resistant HGSOC</span><b>DrugAdopt biomarker readout</b></div>
-            <p class="dax-sec-num">Traceability</p>
-            <h2 class="dax-sec-h">Sources</h2>
-
-            <p class="dax-body-p">Counts cover the full report, including chapters not shown on this page.</p>
-
-            <dl class="dax-stats">
-              <div><dt>89</dt><dd>report claims</dd></div>
-              <div><dt>44</dt><dd>source records</dd></div>
-              <div><dt>64/89</dt><dd>claims reviewed</dd></div>
-              <div><dt>23/44</dt><dd>public source links</dd></div>
-            </dl>
-            <p class="dax-scope-line">The remaining 25 entries are figure records, evidence-summary rows, and biomarker-brief rows. 21 of the 44 source records are analysis outputs computed for this report rather than external links.</p>
-            <p class="dax-scope-line">This report was generated on 2026-07-17 by an earlier DrugAdopt version that also made recommendations, such as whether to proceed and what to run next. Current DrugAdopt reports present evidence only. This page leaves out every recommendation and readiness rating, the topics current DrugAdopt does not cover, and one clinical row that repeats the Clinical chapter. For readability, 9 sentences are reworded; no finding or number is changed.</p>
-
-            <details class="dax-trace-details">
-              <summary>Technical details</summary>
-              <p class="dax-scope-line">One reviewed claim from each chapter:</p>
-            <ol class="dax-claims"><li><span class="dax-claim-text">All 49 participants in cohorts 5 and 6 received prexasertib, but only 39 were RECIST-evaluable</span><span class="dax-claim-meta"><code>SEM-clinical-001</code> · Clinical Phenotype &amp; Endpoints @ <code>26dcd59142a1</code></span></li><li><span class="dax-claim-text">Published KEGG result reproduced: source-oriented weighted ES was −0.55321745 versus −0.5532175 in the source (absolute error 4.7×10⁻⁸). The source reported NES −1.81, nominal p=0.00101, and FDR q=0.0253</span><span class="dax-claim-meta"><code>SEM-pharmacology-001</code> · Mechanism &amp; Biomarker Biology @ <code>414056576a09</code></span></li><li><span class="dax-claim-text">CHK1 enzyme IC50 &lt;1 nM and binding Ki 0.9 nM establish potent target pharmacology, while CHK2 and p90S6 kinase inhibition below 10 nM in the cited 224-kinase panel prevent a CHK1-exclusive claim</span><span class="dax-claim-meta"><code>SEM-adme-001</code> · Pharmacology &amp; Exposure @ <code>c334c52857aa</code></span></li><li><span class="dax-claim-text">Grade 3 or 4 treatment-related neutropenia occurred in 42 (85.7%), leukocytopenia in 38 (77.6%), thrombocytopenia in 20 (40.8%), anemia in 15 (30.6%), and febrile neutropenia in 6 (12.2%).</span><span class="dax-claim-meta"><code>SEM-toxicology-001</code> · Toxicology &amp; Therapeutic Window @ <code>2b1e9b9355d5</code></span></li></ol>
-
-              <p class="dax-scope-line">The identifier fixes the reviewed claim and its chapter. If that text changes, the claim is flagged for another review. This record detects changes within this case; it does not establish publisher origin or scientific truth on its own.</p>
-            </details>
-
-            <div class="dax-rfoot"><span>Generated by DrugAdopt from public evidence · Not medical advice</span><span>Trace</span></div>
-          </section>
-
-        </div>
-      </div>
-
-      <aside class="rpt-outro">
-        <div class="rpt-outro-body">
-          <p>On your own asset, DrugAdopt can also use data you share. In this case, participant-linked exposure data, dose-modification records, or archived tissue would answer several of the open questions above.</p>
-          <p class="rpt-outro-terms"><b>We are taking on a small number of pilot assets.</b></p>
-        </div>
-        <div class="rpt-outro-actions">
-          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
-          <a class="link-quiet" href="./company.html#data-handling">How your data is handled</a>
-        </div>
-      </aside>
-    </main>
-
-    <footer class="foot">
-      <div class="shell">
-        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
-        <nav class="foot-links" aria-label="Footer">
-          <a href="./privacy-policy.html">Privacy</a>
-          <a href="./terms.html">Terms</a>
-        </nav>
-      </div>
-    </footer>
-    <script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
-    <script src="./assets/js/company-site/report-spine.js?v=87375fe5b80e"></script>
-  </body>
+<a aria-current="true" href="./">DrugAdopt</a>
+<a href="./custom-analysis.html">Custom analysis</a>
+<a href="./insight.html">Insight</a>
+<a href="./company.html">Company</a>
+<a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+</nav>
+</div>
+</header>
+<main class="rpt-stage" id="main"><div class="rpt-intro"><h1 class="rpt-intro-title">Tolvaptan in ADPKD</h1><p class="rpt-intro-lede">Disease biology, drug mechanism, clinical evidence, pharmacology, safety, and the IP landscape.</p></div><div aria-label="Tolvaptan ADPKD scientific report" class="dax-ui dax-full" role="region">
+<nav aria-label="Report sections" class="dax-spine"><div class="dax-spine-brand"><span class="dax-spine-title">DrugAdopt<span>Tolvaptan · ADPKD</span></span></div><ul class="dax-nav"><li><a class="dax-nav-item" href="#overview"><span class="dax-nav-label">Overview</span></a></li><li><a class="dax-nav-item" href="#clinical-phenotype"><span class="dax-nav-label">Clinical Phenotype &amp; Endpoints</span></a></li><li><a class="dax-nav-item" href="#mechanism"><span class="dax-nav-label">Mechanism &amp; Biomarker Biology</span></a></li><li><a class="dax-nav-item" href="#clinical-outcomes"><span class="dax-nav-label">Clinical Outcomes</span></a></li><li><a class="dax-nav-item" href="#exposure"><span class="dax-nav-label">Pharmacology &amp; Exposure</span></a></li><li><a class="dax-nav-item" href="#safety"><span class="dax-nav-label">Toxicology &amp; Therapeutic Window</span></a></li><li><a class="dax-nav-item" href="#landscape"><span class="dax-nav-label">IP &amp; Competitive Landscape</span></a></li><li><a class="dax-nav-item" href="#gaps"><span class="dax-nav-label">Evidence Gaps &amp; Development Implications</span></a></li><li><a class="dax-nav-item" href="#traceability"><span class="dax-nav-label">Traceability</span></a></li></ul></nav>
+<div class="dax-paper dax-paper-scroll"><section class="dax-page published-report-section" id="overview">
+<h2 class="dax-sec-h">Analysis of tolvaptan in autosomal dominant polycystic kidney
+disease</h2>
+<section class="level2" id="overview-1">
+<h2>Overview</h2>
+<div id="executive-summary">
+<p><strong>Disease background.</strong> <span id="claim-c-summary-disease">Autosomal dominant polycystic kidney
+disease (ADPKD) is an inherited disease in which fluid-filled cysts
+enlarge the kidneys and gradually reduce their ability to filter
+blood.</span> Long-term observations in CRISP, an ADPKD imaging study,
+showed kidney enlargement before a measurable fall in filtration (<a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">Chapman et al.,
+2012</a>).</p>
+<p><strong>Therapy.</strong> <span id="claim-c-summary-v2-block">Tolvaptan blocks the kidney vasopressin V2
+receptor (AVPR2).</span> <span id="claim-c-summary-water-handling">Vasopressin increases water
+reabsorption in kidney tubules, so blocking its V2 receptor increases
+water excretion.</span> It is used to slow kidney-function decline in
+adults at risk of rapidly progressing ADPKD (<a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/204441s016lbl.pdf">FDA,
+2026</a>).</p>
+<p><strong>Adult benefit.</strong> The <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">TEMPO 3:4 trial</a>
+compared tolvaptan with placebo in earlier-stage ADPKD over three years.
+<span id="claim-c-tempo-summary">Annual kidney-volume growth was 2.8%
+with tolvaptan versus 5.5% with placebo among 1,307 participants in the
+primary MRI analysis.</span> <span id="claim-c-summary-acute-tkv">TEMPO
+authors proposed that an acute reduction in cyst-fluid secretion partly
+explained the larger first-year volume effect.</span> Estimated
+glomerular filtration rate (eGFR) is a blood-based estimate of kidney
+filtration. <span id="claim-c-gfr-summary">In TEMPO, eGFR declined more
+slowly with tolvaptan: the annual slope difference versus placebo was
++0.98 mL/min/1.73 m<sup>2</sup>/year (95% CI +0.60 to +1.36).</span></p>
+<p>The <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">REPRISE
+trial</a> tested tolvaptan in later-stage ADPKD over one year. <span id="claim-c-reprise-summary">Participants were randomized after five
+weeks of tolvaptan titration and tolerability testing. In the annualized
+comparison, eGFR fell less with tolvaptan than with placebo, a
+difference of +1.27 mL/min/1.73 m<sup>2</sup> (95% CI +0.86 to
++1.68).</span> This comparison measured change from pretreatment to
+off-treatment follow-up.</p>
+<p><strong>Biological evidence.</strong> <span id="claim-c-pkd-mouse">In
+male Pkd1-knockout mice, tolvaptan-SD improved survival and kidney-mass
+outcomes versus untreated controls (19 versus 22 animals).</span> <span id="claim-c-pkd-index">The tolvaptan-versus-untreated cystic-index
+comparison was nonsignificant (P=0.19; <a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">Song et al.,
+2023</a>).</span> <span id="claim-c-array-summary">An analysis of 12
+treated and 12 untreated mice found lower Aqp2 RNA with tolvaptan
+(GSE198340).</span> Aqp2 encodes the aquaporin-2 water channel. <span id="claim-c-avpr2">Avpr2 RNA showed no statistically supported change in
+the same comparison.</span> Avpr2 encodes tolvaptan’s V2 receptor
+target. These exploratory mouse measurements are candidate response
+markers. The <a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">separate pediatric
+trial</a> enrolled children aged 5–17 years. <span id="claim-c-summary-pediatric">Tolvaptan changed urine concentration,
+while its small, exploratory one-year comparisons left clinical benefit
+uncertain.</span></p>
+<p><strong>Safety.</strong> <span id="claim-c-summary-discontinuation">In TEMPO, adverse events led to
+discontinuation in 148/961 tolvaptan participants versus 24/483 placebo
+participants. Aquaretic events accounted for 63/961 versus 1/483
+discontinuations.</span> Aquaretic effects include increased urination
+and thirst. Alanine aminotransferase (ALT) is a liver enzyme used to
+detect liver-cell injury. <span id="claim-c-summary-alt">Across two
+trials, ALT rose above three times the upper limit of normal in 80/1,637
+tolvaptan versus 13/1,166 placebo participants.</span> <span id="claim-c-liver">Serious liver injury meeting a combined
+transaminase-and-bilirubin criterion occurred in 3/1,487 tolvaptan
+recipients and none on placebo.</span> The combined criterion required
+transaminases at least three times the upper limit of normal and
+bilirubin at least twice the upper limit (<a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/204441s016lbl.pdf">FDA,
+2026</a>).</p>
+<p><strong>Remaining question.</strong> Direct drug concentration and
+receptor engagement inside human cysts have not been established in the
+reviewed sources. Paired cyst-fluid secretion, kidney-structure and
+receptor-engagement measurements would clarify how acute fluid changes
+contribute to the early kidney-volume response.</p>
+</div>
+</section>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table">
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Section</th>
+<th>Key summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#clinical-phenotype">1. Clinical Phenotype &amp;
+Endpoints</a></td>
+<td>Among 93 selected adults, height-adjusted kidney volume rose 55% by
+year 8; measured filtration changed −10.6% by year 6 and −22.3% by year
+8.</td>
+</tr>
+<tr>
+<td><a href="#mechanism">2. Mechanism &amp; Biomarker Biology</a></td>
+<td>Primary ADPKD cell assays and V2-selective agonist rescue in
+recessive PCK rats support pathway activity, but the Pkd1 mouse
+cystic-index comparison was nonsignificant (P=0.19).</td>
+</tr>
+<tr>
+<td><a href="#clinical-outcomes">3. Clinical Outcomes</a></td>
+<td>TEMPO and REPRISE reported filtration differences in selected
+adults; pediatric publication and registry eGFR results use distinct
+exploratory estimands.</td>
+</tr>
+<tr>
+<td><a href="#exposure">4. Pharmacology &amp; Exposure</a></td>
+<td>FDA-reviewed modeling found no graded kidney-volume response across
+trough concentrations of 82.0–126.3 ng/mL; human cyst-site exposure
+remains unmeasured.</td>
+</tr>
+<tr>
+<td><a href="#safety">5. Toxicology &amp; Therapeutic Window</a></td>
+<td>TEMPO adverse-event discontinuation was 148/961 versus 24/483; the
+2026 FDA label reports combined liver injury in 3/1,487.</td>
+</tr>
+<tr>
+<td><a href="#landscape">6. IP &amp; Competitive Landscape</a></td>
+<td>Six selected ADPKD programs are identified; broader status is
+unknown for venglustat and rapamycin/sirolimus.</td>
+</tr>
+<tr>
+<td><a href="#gaps">7. Evidence Gaps &amp; Development
+Implications</a></td>
+<td>Human cyst-site exposure and receptor engagement remain unmeasured;
+the PCK rat rescue supports V2 contribution, while cyst-cell necessity
+and patient mediation remain open.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="dax-print-figure">
+<p><img alt="Report figure" decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/hero.png"/></p>
+</div>
+</section><section class="dax-page published-report-section" id="clinical-phenotype">
+<h2 class="dax-sec-h">1. Clinical Phenotype &amp; Endpoints</h2>
+<section class="level2" id="key-finding">
+<h2>Key finding</h2>
+<p>Among 93 selected adults, height-adjusted kidney volume rose 55% by
+year 8; measured filtration changed −10.6% by year 6 and −22.3% by year
+8.</p>
+</section>
+<p><span id="claim-c-disease">Kidney Disease: Improving Global Outcomes
+(KDIGO) 2025 and disease-context sources identify PKD1 and PKD2 as major
+ADPKD genes (<a href="#readable-source-key">KDIGO guideline</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/33852874/">PMID 33852874</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/36805211/">PMID
+36805211</a>).</span> This guideline/background support does not
+represent a new human genetic-association or variant-to-cell causal
+analysis in this report. The initiating cellular sequence is not fully
+settled. Tubular epithelial cysts expand, distort kidney architecture,
+and progressively reduce functioning tissue, producing kidney
+enlargement, hypertension, pain, and eventually filtration loss.
+Height-adjusted total kidney volume (htTKV) is a prognostic structural
+measure. KDIGO 2025 describes Mayo imaging classification for typical
+morphology using age and htTKV; class 1C overlaps with slow progressors.
+Its historical eGFR-decline criterion ≥3 mL/min/1.73 m<sup>2</sup>/year
+differs from REPRISE's older-cohort &gt;2.0 criterion. Imaging and
+historical filtration are prognostic or selection measures; urine
+measures reflect V2 pharmacodynamic response. The guideline does not
+validate an individual efficacy surrogate.</p>
+<p>The Consortium for Radiologic Imaging Studies of Polycystic Kidney
+Disease (CRISP) was a long-term observational imaging study of ADPKD
+progression. <span id="claim-c-crisp">Among 93 adults with complete
+repeated measurements and initially preserved filtration, mean
+height-adjusted kidney volume was 55% higher by year 8; measured
+filtration was 10.6% lower at year 6 and 22.3% lower at year 8 (<a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID
+22344503</a>).</span></p>
+<section class="level2" id="supporting-evidence">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="natural-history-and-measurement">
+<h2>1.1 Natural history and measurement</h2>
+<section class="level3" id="cyst-enlargement-can-precede-measurable-filtration-decline">
+<h3>1.1.1 Cyst enlargement can precede measurable filtration
+decline</h3>
+<p>Height-adjusted total kidney volume (htTKV) is kidney volume divided
+by the patient's height. CRISP measured filtration using iothalamate
+clearance, a tracer-based test. In the 93 adults with complete repeated
+measurements, kidney enlargement preceded the first statistically
+significant group-level fall in filtration at year 6. These participants
+were followed to describe disease progression (<a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID 22344503</a>).</p>
+<div class="dax-print-figure">
+<p><span id="fig-1-1"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 1.1. Mean percentage changes in height-adjusted kidney volume
+and measured filtration from baseline in 93 CRISP participants. Points
+show the reported follow-up years. The source provides no uncertainty
+estimates for these values ( Chapman et al.,
+2012 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/disease_frame_endpoint_trajectory-fig-crisp-observed-percent-change-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 1.1. Mean percentage changes in height-adjusted kidney volume
+and measured filtration from baseline in 93 CRISP participants. Points
+show the reported follow-up years. The source provides no uncertainty
+estimates for these values (<a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">Chapman et al.,
+2012</a>).</p>
+<p>Code disease_frame_endpoint_trajectory.qmd</p>
+</div>
+</div>
+</section>
+<section class="level3" id="kidney-volume-measures-structure-filtration-measures-function">
+<h3>1.1.2 Kidney volume measures structure; filtration measures
+function</h3>
+<p><span id="claim-c-tempo">In TEMPO 3:4, annualized MRI TKV growth
+among adults aged 18–50 with baseline TKV ≥750 mL and estimated
+creatinine clearance ≥60 mL/min was 2.8%/year with tolvaptan and
+5.5%/year with placebo; the adjusted between-arm difference was −2.7
+percentage points/year (95% CI −3.3 to −2.1; P&lt;0.001; <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID 23121377</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>).</span>
+TEMPO authors reported favorable TKV benefit across prespecified strata
+and nominal renal-function subgroup differences for age, hypertension,
+and larger TKV. Figure 2D plots reciprocal serum creatinine. These
+exploratory subgroup findings do not validate individual response
+prediction (<a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>). This structural endpoint does not directly measure
+filtration, symptoms, or kidney failure. The primary MRI analysis
+included 1,307 of 1,445 randomized participants; registry outcome groups
+list 819 and 458, a 30-participant difference that retained records do
+not reconcile. <span id="claim-c-tempo-acute">TEMPO authors said the
+larger first-year TKV effect was probably partly due to acute reduction
+in cyst-fluid secretion, citing short-term reports of 3–4% TKV reduction
+at 1–3 weeks (<a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>).</span> The cited predecessor is <a href="https://pubmed.ncbi.nlm.nih.gov/21544064/">PMID 21544064</a>, DOI
+<a href="https://doi.org/10.1038/ki.2011.119">10.1038/ki.2011.119</a>;
+its design, population, and renal outcomes remain unresolved because its
+original was not retained or assessed. This acute-volume interpretation
+does not negate the separately measured filtration effect.</p>
+<div class="dax-print-figure">
+<p><span id="fig-1-2"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 1.2. Annual total kidney volume (TKV) growth (%/year; point
+estimates and source-reported 95% confidence intervals) by randomized
+arm in TEMPO 3:4: adults aged 18–50 with baseline TKV ≥750 ml and
+estimated creatinine clearance ≥60 ml/min; three-year primary TKV
+endpoint, primary efficacy analysis N=1,307 of 1,445 randomized. Values
+from the TEMPO 3:4 publication ( PMID 23121377 ), NCT00428948 ." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/orientation_efficacy_landscape-fig-tempo-tkv-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 1.2. Annual total kidney volume (TKV) growth (%/year; point
+estimates and source-reported 95% confidence intervals) by randomized
+arm in TEMPO 3:4: adults aged 18–50 with baseline TKV ≥750 ml and
+estimated creatinine clearance ≥60 ml/min; three-year primary TKV
+endpoint, primary efficacy analysis N=1,307 of 1,445 randomized. Values
+from the TEMPO 3:4 publication (<a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID 23121377</a>), <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>.</p>
+<p>Code orientation_efficacy_landscape.qmd</p>
+</div>
+</div>
+</section>
+<section class="level3" id="prognostic-measures-and-treatment-response-markers">
+<h3>1.1.3 Prognostic measures and treatment-response markers</h3>
+<p>KDIGO 2025 uses age and htTKV in Mayo classification for typical
+kidney morphology; class 1C overlaps with slow progressors. Its
+historical eGFR-decline criterion of at least 3 mL/min/1.73
+m<sup>2</sup>/year differs from REPRISE's &gt;2.0 criterion for
+participants aged 56–65. These measures support selection or prognosis,
+not validated individual response prediction. Urine osmolality reflects
+V2 pharmacodynamic response; exploratory TEMPO subgroup differences
+likewise do not establish who benefits individually.</p>
+</section>
+<section class="level3" id="disease-stage-is-not-reducible-to-kidney-volume">
+<h3>1.1.4 Disease stage is not reducible to kidney volume</h3>
+<p>CRISP defined functional chronic kidney disease (CKD) stage 3 as GFR
+&lt;60 mL/min/1.73 m<sup>2</sup> and stage 4 as &lt;30; these are
+filtration thresholds, not cyst-morphology stages. Higher baseline htTKV
+predicted later stage-3-or-worse CKD in this selected cohort (adjusted
+odds ratio 1.48 per 100 cc/m, 95% CI 1.29–1.70; <a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID 22344503</a>). An
+odds ratio compares event odds between groups; 1.48 means higher odds in
+this prognostic model, not a 48-percentage-point increase in risk. This
+association does not show that TKV itself causes filtration loss or that
+treatment-induced TKV change predicts treatment benefit. A validated
+ADPKD imaging-stage account is not established by retained primary
+sources.</p>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="mechanism">
+<h2 class="dax-sec-h">2. Mechanism &amp; Biomarker Biology</h2>
+<section class="level2" id="key-finding-1">
+<h2>Key finding</h2>
+<p>Primary ADPKD cell assays and V2-selective agonist rescue in
+recessive PCK rats support pathway activity, but the Pkd1 mouse
+cystic-index comparison was nonsignificant (P=0.19).</p>
+</section>
+<p><span id="claim-c-primary-camp-inhibition">Primary cell assays in
+autosomal dominant polycystic kidney disease (ADPKD) tissue support
+pathway activity: tolvaptan inhibited arginine vasopressin
+(AVP)-stimulated cyclic adenosine monophosphate (cAMP) with apparent
+half-maximal inhibitory concentration (IC50) about 0.2 nM in three
+preparations.</span> In these assays, IC50 is the concentration
+producing half the maximal inhibition of the measured response. The
+causal chain from vasopressin V2 receptor (AVPR2) blockade to clinical
+benefit remains incomplete. A separate engineered-cell study found
+mutant V2 receptors required higher tolvaptan concentrations to inhibit
+AVP-stimulated cAMP. Neither establishes receptor-specific mediation of
+cyst-area change or receptor occupancy in patient kidneys (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID 21816754</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID 38902502</a>).</p>
+<section class="level2" id="supporting-evidence-1">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="disease-biology-and-intervention">
+<h2>2.1 Disease biology and intervention</h2>
+<section class="level3" id="receptor-blockade-changes-water-handling-signaling-not-the-inherited-disease-genes">
+<h3>2.1.1 Receptor blockade changes water-handling signaling, not the
+inherited disease genes</h3>
+<p><span id="claim-c-water-pathway">In collecting-duct cells, arginine
+vasopressin (AVP) activates the vasopressin V2 receptor (AVPR2), raises
+cyclic adenosine monophosphate (cAMP), and supports aquaporin-2
+insertion for water reabsorption.</span> In ADPKD cyst cells,
+AVP-responsive cAMP is linked experimentally to chloride secretion and
+proliferation, processes proposed to support cyst expansion. Tolvaptan
+antagonizes AVPR2; in primary ADPKD cultures it reduced AVP-stimulated
+cAMP, proliferation, chloride-current and cyst-area responses. These
+complementary cell assays do not establish a complete human
+causal-mediation chain or cyst-site engagement (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID 21816754</a>; <a href="#term-jynarque-label">JYNARQUE prescribing information</a>).</p>
+</section>
+<section class="level3" id="adpkd-causal-genes-differ-from-the-pharmacologic-target">
+<h3>2.1.2 ADPKD causal genes differ from the pharmacologic target</h3>
+<p>PKD1 and PKD2 encode polycystin-1 and polycystin-2 and are the
+principal inherited ADPKD genes in the retained disease account. A
+retained review proposes cilia-based tubular-cell signaling for these
+proteins, but the initiating human disease chain remains unsettled (<a href="https://pubmed.ncbi.nlm.nih.gov/36805211/">PMID 36805211</a>).
+Cysts arise from renal tubules and enlarge both kidneys. AVPR2 is
+tolvaptan's pharmacologic target, not an asserted ADPKD causal gene (<a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID 22344503</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/33852874/">PMID 33852874</a>).
+Assessed target-validation sources established neither an AVPR2
+common-variant credible set nor a rare-variant burden for ADPKD. <span id="claim-c-genetics">The exact genome-wide association study (GWAS)
+Catalog ADPKD-trait query returned zero without a same-field positive
+control, so that empty query is not a biological negative.</span></p>
+</section>
+<section class="level3" id="avp-stimulates-several-distinct-responses-in-primary-adpkd-cultures">
+<h3>2.1.3 AVP stimulates several distinct responses in primary ADPKD
+cultures</h3>
+<p><span id="claim-c-cell">In primary autosomal dominant polycystic
+kidney disease (ADPKD) epithelial cultures, arginine vasopressin (AVP)
+raised cyclic adenosine monophosphate (cAMP) from 0.7±0.2 to 4.3±0.6
+pmol/monolayer after 15 minutes at 10<sup>-9</sup> M, across seven
+experiments (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span> This assay measures intracellular signaling, not
+cyst growth. <span id="claim-c-primary-proliferation">In separate
+72-hour cultures, AVP increased the MTT proliferation proxy; tolvaptan
+reduced the AVP-associated increment by 30% at 10<sup>-10</sup> M and
+43% at 10<sup>-9</sup> M, and blocked it at 10<sup>-8</sup> M (11 kidney
+preparations; <a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span> MTT reflects cellular metabolic activity, so the
+result is not a direct cell count. <span id="claim-c-cell-low-dose">In a
+separate no-AVP dose panel (n=13), the lowest tolvaptan concentrations
+significantly increased basal MTT signal; the authors suggested possible
+partial agonism, or weak receptor activation (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span> <span id="claim-c-cell-basal">At 10<sup>-7</sup>
+M, basal MTT signal fell below baseline (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span> <span id="claim-c-normal-cell">Two normal-tubule
+preparations showed an AVP-associated MTT decrease that moved toward
+baseline with tolvaptan; these small controls and basal suppression
+leave off-target effects plausible (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span></p>
+<p>In polarized ADPKD cell monolayers, basolateral AVP raised
+short-circuit current, a transport proxy; benzamil and inhibition of the
+cystic fibrosis transmembrane conductance regulator (CFTR) chloride
+channel support a CFTR-sensitive chloride component, and basolateral
+tolvaptan inhibited the AVP-associated current (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID 21816754</a>). The
+current is not direct fluid volume. In collagen-gel cultures, forskolin
+and epidermal growth factor (EGF) initiated cysts for three days, then
+three kidney preparations received control, AVP, or AVP plus tolvaptan
+(both 10<sup>-8</sup> M) for 5–7 days. <span id="claim-c-primary-cyst-area">AVP increased summed two-dimensional area
+of cysts ≥100 μm; tolvaptan reduced area versus AVP alone (P&lt;0.05),
+but area remained above control (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span> This is an in-vitro structural proxy, not organ
+volume. The retained Figure 7 supports the reported three-preparation
+cyst-area comparison; its plotted summaries do not provide further
+distributional detail. Together, the assays support antagonist-sensitive
+AVP responses in primary ADPKD cultures, but do not establish sequential
+cAMP-to-extracellular signal-regulated kinase (ERK) mediation or the
+clinical contribution of secretion versus proliferation. <span id="claim-c-reif-sponsor">The study discloses Otsuka support and an
+Otsuka-employed coauthor; these primary-cell results come from one
+sponsor-connected study group (<a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>).</span></p>
+</section>
+<section class="level3" id="receptor-mutant-assays-support-residue-sensitive-function-not-tissue-engagement">
+<h3>2.1.4 Receptor-mutant assays support residue-sensitive function, not
+tissue engagement</h3>
+<p><span id="claim-c-mutant">In transiently transfected HEK293T cells,
+wild-type vasopressin V2 receptor (V2R) functional IC50 was
+(5.8±2.1)×10<sup>-9</sup> M for inhibition of AVP-stimulated cAMP;
+R181ECL2A and V183ECL2A values were (1.8±1.2)×10<sup>-7</sup> M and
+(4.1±0.3)×10<sup>-8</sup> M.</span> The source reports three parallel
+experiments but does not define the ± statistic or their independence
+(<a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID 38902502</a>).
+Surface-expression controls support interpretation of functional
+receptor perturbation, but these values are not binding affinity or
+patient occupancy.</p>
+<div class="dax-print-figure">
+<p><span id="fig-2-1"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 2.1. Reported tolvaptan functional IC50 (M) for inhibiting
+AVP-stimulated cAMP in transfected HEK293T cells expressing wild-type or
+mutant V2R; points are means from three parallel experiments, and
+uncertainty type is unspecified ( PMID 38902502 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/target_validation_expression-fig-v2r-mutant-functional-ic50-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 2.1. Reported tolvaptan functional IC50 (M) for inhibiting
+AVP-stimulated cAMP in transfected HEK293T cells expressing wild-type or
+mutant V2R; points are means from three parallel experiments, and
+uncertainty type is unspecified (<a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID 38902502</a>).</p>
+<p>Code target_validation_expression.qmd</p>
+</div>
+</div>
+</section>
+<section class="level3" id="structure-activity-and-receptor-binding">
+<h3>2.1.5 Structure–activity and receptor binding</h3>
+<p><strong>Matched binding records distinguish a V2 benchmark from a
+V1A-oriented series</strong></p>
+<p>The curated ChEMBL bioactivity database records from Szeleczky et
+al. (2021) report Ki values. Ki summarizes binding strength in this
+assay; lower values indicate tighter binding. In human 1321N1 membranes,
+the tolvaptan benchmark had V2 Ki 1 nM and vasopressin V1A-receptor Ki
+32 nM; it is separate from the six-compound V1A-antagonist series (<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/34255509/">PMID
+34255509</a>).</p>
+<div class="dax-print-figure">
+<p><span id="fig-2-2"></span><img alt="Figure 2.2. Matched membrane-binding Ki values (nM): left, tolvaptan
+benchmark; middle, CHEMBL5074709; right, CHEMBL5070075. No uncertainty
+was reported (Szeleczky et al., 2021; PMID 34255509 ; CHEMBL5042479 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/sar-structures.png"/></p>
+<div>
+<p>Figure 2.2. Matched membrane-binding Ki values (nM): left, tolvaptan
+benchmark; middle, CHEMBL5074709; right, CHEMBL5070075. No uncertainty
+was reported (Szeleczky et al., 2021; <a href="https://pubmed.ncbi.nlm.nih.gov/34255509/">PMID 34255509</a>; <a href="https://www.ebi.ac.uk/chembl/document_report_card/CHEMBL5042479/">CHEMBL5042479</a>).</p>
+</div>
+</div>
+<p><span id="claim-c-sar-chemical">Two encoded stereoisomers in that
+separate antagonist series differ at one stereocenter. In the same
+assay, CHEMBL5074709 and CHEMBL5070075 had V2/V1A Ki values of 900/0.3
+and 200/0.3 nM, respectively; their V2 values give a descriptive
+4.5-fold ratio.</span> ChEMBL marks potential duplicates for some
+matched records, and curated values have no uncertainty estimates. The
+numeric comparison is the curator extraction, not a new assay or a
+complete tolvaptan optimization series. Full article assay tables were
+not read, and these records do not support a fitted quantitative SAR
+model.</p>
+<p><strong>The deposited pocket and receptor mutations provide distinct
+evidence types</strong></p>
+<p><span id="claim-c-binding-structure">Zhang et al. (2025) deposited
+the tolvaptan-bound vasopressin V2 receptor (V2R) structure 9U81 at 3.08
+Å resolution, with 16 residues within a geometric 4 Å rule; separately,
+Liu et al. (2024) reported functional cAMP IC50 values of 5.8 nM for
+wild-type receptor and 680 nM for F178A in HEK293T cells (Protein Data
+Bank [PDB] 9U81; <a href="https://pubmed.ncbi.nlm.nih.gov/41188237/">PMID 41188237</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID 38902502</a>). Liu
+et al. tested 16 receptor mutations using inhibition of AVP-stimulated
+cAMP. F178 is phenylalanine at receptor residue 178; three parallel
+experiments were reported, but the ± dispersion label is unspecified.
+Proximity does not assign energetic contributions, and functional cAMP
+inhibition is not binding Ki or patient occupancy. Mutants showed both
+weak and large functional shifts.</span></p>
+<div class="dax-print-figure">
+<p><span id="fig-2-3"></span><img alt="Figure 2.3. Observed tolvaptan pocket in PDB 9U81 and deposited pose
+overlaid with run 2; nearby markers include a subset of the 16 residues
+within the geometric 4 Å rule, ligand carbon, nitrogen, oxygen and
+chlorine are green, blue, red and purple, and deposited and docked poses
+are green and orange (unaligned RMSD 0.64 Å; no uncertainty; Zhang et
+al., 2025; PMID
+41188237 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/receptor-pocket.png"/></p>
+<div>
+<p>Figure 2.3. Observed tolvaptan pocket in PDB 9U81 and deposited pose
+overlaid with run 2; nearby markers include a subset of the 16 residues
+within the geometric 4 Å rule, ligand carbon, nitrogen, oxygen and
+chlorine are green, blue, red and purple, and deposited and docked poses
+are green and orange (unaligned RMSD 0.64 Å; no uncertainty; Zhang et
+al., 2025; <a href="https://pubmed.ncbi.nlm.nih.gov/41188237/">PMID
+41188237</a>).</p>
+</div>
+</div>
+<p>Fouillen et al. (2025) reported the separate deposited structure 9HAP
+at 2.5 Å, but its ligand chemistry is R-tolvaptan rather than the
+S-tolvaptan deposited in 9U81. No docking was performed on 9HAP because
+pocket-adjacent side chains were incomplete, and Zhang et al. state that
+9U81 refinement used 9HAP. The structures therefore are not an
+independent validation pair and do not establish which isolated isomer
+underlies clinical response (PDB 9HAP; <a href="https://pubmed.ncbi.nlm.nih.gov/40274867/">PMID 40274867</a>).</p>
+<p><strong>Three docking searches failed the prespecified all-run
+recovery criterion</strong></p>
+<p>Unaligned heavy-atom root-mean-square deviation (RMSD) measures the
+distances between corresponding ligand atoms in their unchanged receptor
+coordinate frame, without superimposing the docked ligand. <span id="claim-c-binding-pose">In three AutoDock Vina 1.2.7 searches,
+top-ranked pose RMSDs were 8.38, 0.64, and 0.80 Å, with corresponding
+scores of −6.783, −7.878, and −7.525 kcal/mol. The prespecified
+all-three ≤2 Å requirement failed; even the best returned mode in run 1
+was 3.20 Å away. The full 27-mode output and 16-mutation context remain
+available in supporting result tables.</span></p>
+<div class="dax-print-figure">
+<p><span id="fig-2-4"></span><img alt="Figure 2.4. Unaligned heavy-atom RMSD (Å) for the top-ranked and best
+of nine returned poses in each of three Vina searches; bars mark
+top-ranked pose, dots best returned geometry, and dashed line the 2 Å
+threshold, with no uncertainty interval (Vina 1.2.7; PDB 9U81)." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/pose-test.png"/></p>
+<div>
+<p>Figure 2.4. Unaligned heavy-atom RMSD (Å) for the top-ranked and best
+of nine returned poses in each of three Vina searches; bars mark
+top-ranked pose, dots best returned geometry, and dashed line the 2 Å
+threshold, with no uncertainty interval (Vina 1.2.7; PDB 9U81).</p>
+</div>
+</div>
+<p>The scores do not measure affinity or efficacy. Starting conformer
+and random seed varied together, so their separate contributions cannot
+be identified. Open Babel reported an aromatic bond-assignment warning.
+Its hydrogen-addition option overrode requested pH; receptor charge
+columns were zero, and protonation plus donor/acceptor typing were
+unvalidated. Retained coordinate agreement does not validate receptor
+chemistry. This run tests retrospective pose recovery only. It includes
+no molecular dynamics, protonation calculation, clinical fit,
+independent validation, or patient-occupancy inference. Exact commands
+and logs are retained with the methods.</p>
+</section>
+<section class="level3" id="animal-and-organoid-observations-do-not-collapse-into-one-verdict">
+<h3>2.1.6 Animal and organoid observations do not collapse into one
+verdict</h3>
+<p>In male kidney-specific, tamoxifen-induced conditional Pkd1-knockout
+mice, tolvaptan-SD improved kidney survival and lowered
+kidney-weight/body-weight ratio versus untreated mutant controls (n=19
+vs 22; <a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">PMID
+36743216</a>). The study's Figure 1E also marks lower final blood urea
+with tolvaptan than untreated mice (P&lt;0.05). Pkd1 loss was induced at
+postnatal days 18–19, and randomized groups began treatment at day 40
+with food containing 0.15% tolvaptan-SD (66.7% active drug). Blood urea
+monitoring began at day 75; mice above 20 mmol/L were euthanized for
+kidney failure, and all groups were collected when about 75% of
+untreated animals reached that endpoint, around days 111–120. This
+variable endpoint timing and male-only model limit transfer; Otsuka
+supplied the tolvaptan-SD. Figure 1D places P=0.19 over the
+KO_TOL-versus-KO cystic-index comparison (untreated KO n=22; KO_TOL
+n=19), and its key defines significance comparisons versus KO. This is a
+nonsignificant tolvaptan-versus-untreated structural contrast. The
+article's broad Results prose says monotherapy reduced cystic index, so
+the paper contains an internal discordance.</p>
+</section>
+<section class="level3" id="deposited-mouse-arrays-show-a-water-channel-transcript-response-not-receptor-activation">
+<h3>2.1.7 Deposited mouse arrays show a water-channel transcript
+response, not receptor activation</h3>
+<p>In Song et al.'s 2023 mouse study, deposited Gene Expression Omnibus
+(GEO) accession <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340">GSE198340</a>
+is an RMA-normalized microarray matrix produced with Transcriptome
+Analysis Console 4 (TAC4). This case fitted that processed matrix and
+did not reprocess raw CEL files or raw sequencing data. The deposited 57
+samples were one whole-kidney sample per male mouse. <span id="claim-c-array-design">Of these, 47 Pkd1-knockout samples were
+fitted: untreated (12), tolvaptan (12), salsalate (11), and combination
+(12); 10 wild-type samples were excluded.</span> The primary contrast
+was 12 tolvaptan versus 12 untreated samples. The expression kidneys had
+been selected around each treatment group's median
+two-kidney-weight/body-weight (2KW/BW) ratio. A four-arm linear model
+fitted 47 mutant arrays and used empirical-Bayes moderation to estimate
+residual variance; its tolvaptan-minus-untreated contrast used 12
+kidneys per arm. The model tested 34,472 probes. Of these, 7,988 probes
+had Benjamini–Hochberg-adjusted p&lt;0.05; the Benjamini–Hochberg
+procedure controls the expected proportion of false discoveries among
+declared significant probes under its assumptions; it does not assign an
+individual marker a false-probability or control familywise error, and
+these are probes rather than unique genes. Eight marker probes were
+selected after fitting for exploratory display.</p>
+<p>Aqp2 encodes aquaporin-2, a water channel, while Avpr2 encodes the
+receptor itself. <span id="claim-c-array">In the primary contrast, the
+estimated Aqp2 probe 17314833 difference was −0.401667 log2 units (95%
+CI −0.571912 to −0.231422; adjusted p=0.00021766).</span> The Aqp2 probe
+17314833 treatment contrast was −0.401667 log2 units (95% CI −0.571912
+to −0.231422; adjusted p=0.00021766). Avpr2 probe 17535712 was +0.115
+log2 units (95% CI −0.016299 to +0.246299; adjusted p=0.227621). <span id="claim-c-bulk-rna-limit">These are computed probe-level bulk RNA
+differences, not protein abundance, receptor occupancy, signaling, or
+clinical benefit.</span> <span id="claim-c-summary-array-limit">Bulk RNA
+abundance does not establish receptor activity.</span> Arrays were
+selected near each group's median kidney-size measure, and
+disease/end-stage or common-endpoint timing varied; no per-sample
+exposure or harvest-age linkage was available. This same-study
+reanalysis is not independent replication or a human
+disease-by-treatment interaction (<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340">GSE198340</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">PMID
+36743216</a>).</p>
+<div class="dax-print-figure">
+<p><span id="fig-2-5"></span><img alt="Figure 2.5. Post-fit marker-probe log2 expression differences in
+whole-kidney arrays from 12 tolvaptan-treated and 12 untreated male
+Pkd1-knockout mice; dots are estimates and bars are 95% confidence
+intervals ( GSE198340 ; PMID
+36743216 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png"/></p>
+<div>
+<p>Figure 2.5. Post-fit marker-probe log2 expression differences in
+whole-kidney arrays from 12 tolvaptan-treated and 12 untreated male
+Pkd1-knockout mice; dots are estimates and bars are 95% confidence
+intervals (<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340">GSE198340</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">PMID
+36743216</a>).</p>
+<p>Code dependency.qmd</p>
+</div>
+</div>
+<p>The other plotted markers are Aqp4 (a water-channel gene), Pkd1 (the
+mouse polycystin-1 gene), Creb1 (a transcription-factor gene), Kcnj1 (a
+potassium-channel gene), and Prkaca (a protein-kinase-A subunit). These
+marker probes were exploratory, not specified before fitting.</p>
+<p>In polycystic kidney (PCK) rats with Pkhd1-associated recessive
+disease, AVP deficiency reduced cyst and fibrosis measures; continuous
+desmopressin (dDAVP; 1-deamino-8-D-arginine vasopressin) add-back (10
+ng/h per 100 g from weeks 12–20), a V2-selective agonist, reversed
+polyuria, raised renal cAMP, and restored cystic/fibrotic phenotype
+measures in AVP-deficient PCK rats (<a href="https://pubmed.ncbi.nlm.nih.gov/18032793/">PMID 18032793</a>).
+dDAVP also aggravated disease in AVP-sufficient PCK rats, while
+wild-type rats showed slight renal-mass increase without cysts or
+fibrosis. This ligand-loss/selective-agonist rescue is receptor-directed
+pharmacologic causal evidence for a V2 contribution in this PCK/Pkhd1
+recessive model, not absence of structural evidence. Systemic
+water-balance changes remain inseparable; it does not establish
+cyst-cell-specific genetic necessity, tolvaptan mediation in human
+ADPKD, or transfer to dominant PKD1/PKD2 disease. An abstract reports no
+tolvaptan cyst response in PKD2-deficient human ureteric-bud organoids
+and suggests low AVPR2 expression (<a href="https://pubmed.ncbi.nlm.nih.gov/42772449/">PMID 42772449</a>).
+This model-specific contrary observation is not decisive: dose, achieved
+exposure, controls, and independent-line denominator are unavailable in
+the retained abstract. These are different interventions, species/model
+systems, and source depths; neither erases the other's observation.</p>
+</section>
+<section class="level3" id="human-disease-state-receptor-abundance-remains-unmeasured-here">
+<h3>2.1.8 Human disease-state receptor abundance remains unmeasured
+here</h3>
+<p>Normal-tissue Genotype-Tissue Expression (GTEx) RNA is not a measure
+of diseased cyst tissue or receptor protein. GEO accession <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE185948">GSE185948</a>
+is an adult ADPKD single-nucleus series with annotated ADPKD and control
+donors; its matrices were not retrieved or fitted in the owning
+analysis, so no disease-versus-control expression direction follows.
+<span id="claim-c-gtex-rank">A descriptive calculation from GTEx v10
+gave AVPR2 kidney-medulla median expression of 16.5661 transcripts per
+million (TPM), rank 1 among 52 tissue medians; these normal-reference
+aggregates are not individual donors or diseased cyst
+measurements.</span> <span id="claim-c-gse185948-annotations">A separate
+count of <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE185948">GSE185948</a>
+annotation metadata found 102,710 rows labeled across eight PKD and five
+control donor labels; annotation counts are not gene-expression
+estimates and do not establish independent study design.</span>
+Donor-aware receptor RNA, protein, and localization together with
+exposure and engagement would clarify transfer to patient cyst
+epithelium.</p>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="clinical-outcomes">
+<h2 class="dax-sec-h">3. Clinical Outcomes</h2>
+<section class="level2" id="key-finding-2">
+<h2>Key finding</h2>
+<p>TEMPO and REPRISE reported filtration differences in selected adults;
+pediatric publication and registry eGFR results use distinct exploratory
+estimands.</p>
+</section>
+<p>Randomized adult trials report slower estimated glomerular filtration
+rate (eGFR, a blood-creatinine-based estimate of filtration) decline
+with tolvaptan. TEMPO also reported slower magnetic resonance imaging
+(MRI) total kidney volume (TKV, kidney size) growth in selected adults.
+REPRISE provides a one-year result in later-stage adults who tolerated a
+prerandomization tolvaptan run-in. The estimates do not establish
+identical effects across ages, stages, or people unable to tolerate
+treatment (<a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID
+29105594</a>).</p>
+<section class="level2" id="supporting-evidence-2">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="randomized-adult-outcomes">
+<h2>3.1 Randomized adult outcomes</h2>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:98%;">
+<colgroup>
+<col style="width: 24%"/>
+<col style="width: 24%"/>
+<col style="width: 24%"/>
+<col style="width: 24%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Trial and comparison</th>
+<th>eGFR outcome and window</th>
+<th style="text-align: right;">Between-arm difference</th>
+<th>Analysis/population bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TEMPO 3:4 tolvaptan vs placebo</td>
+<td>Annual slopes from end of dose escalation to month 36: −2.72 vs
+−3.70 mL/min/1.73 m<sup>2</sup>/year</td>
+<td style="text-align: right;">+0.98 (95% CI +0.60 to +1.36)</td>
+<td>1,445 randomized; label reports 5% tolvaptan and 2% placebo
+exclusions from slope analysis; exact contributor n not established</td>
+</tr>
+<tr>
+<td>REPRISE tolvaptan vs placebo</td>
+<td>Annualized 12-month change: −2.34 vs −3.61 mL/min/1.73
+m<sup>2</sup></td>
+<td style="text-align: right;">+1.27 (95% CI +0.86 to +1.68)</td>
+<td>Publication: 1,370 randomized; registry efficacy groups 668/663;
+randomization followed tolerability run-in</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>These are distinct randomized comparisons with different windows and
+selection, not head-to-head estimates (<a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID 23121377</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID 29105594</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>; <a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a>).</p>
+<section class="level3" id="tempo-reported-structural-and-filtration-differences">
+<h3>3.1.1 TEMPO reported structural and filtration differences</h3>
+<p>TEMPO 3:4 randomized adults aged 18–50 years with TKV ≥750 mL and
+estimated creatinine clearance ≥60 mL/min. Its primary endpoint was
+annual TKV growth. <span id="claim-c-gfr">In TEMPO, the supporting
+estimated-filtration analysis of the kidney-function secondary endpoint
+reported annual eGFR slopes from the end of dose escalation through
+month 36 of −2.72 versus −3.70 mL/min/1.73 m<sup>2</sup>/year for
+tolvaptan and placebo; the reported between-arm difference was +0.98
+(95% CI +0.60 to +1.36; P&lt;0.001; <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID 23121377</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>).</span>
+The publication states that all 1,445 randomized participants were
+included in the key secondary efficacy analysis, but does not specify
+that as the eGFR-slope denominator. The label specifically says that 5%
+of tolvaptan and 2% of placebo participants were excluded from the slope
+analysis for missing baseline data or discontinuation before end of
+titration, then describes estimates among contributors; exact
+contributor counts are not established, and rounded percentages do not
+support exact-count reconstruction (<a href="#term-jynarque-label">JYNARQUE prescribing information</a>). The
+label's reported difference of 1.0 (95% CI 0.6 to 1.4) is rounded
+reporting of this comparison, not a separately fitted estimate. The
+trial also reported a multiple-event clinical-progression hazard ratio
+of 0.87 (95% CI 0.78–0.97; P=0.01), driven by kidney-function worsening
+and pain; no detected effect was reported for hypertension or
+albuminuria. A hazard ratio compares event rates over time; 0.87
+indicates a lower rate in the tolvaptan arm in this analysis. This is a
+composite event rate, not the proportion of participants with an
+event.</p>
+</section>
+<section class="level3" id="reprise-supports-later-stage-egfr-comparison-after-tolerability-selection">
+<h3>3.1.2 REPRISE supports later-stage eGFR comparison after
+tolerability selection</h3>
+<p>REPRISE enrolled adults aged 18–55 years with eGFR 25–65, or ages
+56–65 with eGFR 25–44 mL/min/1.73 m<sup>2</sup> and historical decline
+&gt;2.0 mL/min/1.73 m<sup>2</sup>/year. Participants were randomized
+after a two-week titration and three-week tolerability period, a
+five-week total tolvaptan run-in. Its primary endpoint compared
+pretreatment baseline with off-treatment follow-up after planned
+12-month treatment and three-week follow-up, annualized by participant
+duration; it is not an on-treatment slope. The publication abstract
+reports 1,370 randomized. The registry lists 1,331 in its primary eGFR
+groups (668/663), and the September 2026 FDA label reports 1,313 in its
+primary analysis; these source counts are distinct, not reconciled or
+interchangeable. The publication reports annualized eGFR changes of
+−2.34 versus −3.61 mL/min/1.73 m<sup>2</sup>, with between-arm
+difference +1.27 (95% CI +0.86 to +1.68; P&lt;0.001; <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID 29105594</a>; <a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a>).
+The retained publication is abstract-depth, and run-in selection limits
+generalization to patients unable to tolerate treatment.</p>
+</section>
+</section>
+<section class="level2" id="pediatric-response-and-limits">
+<h2>3.2 Pediatric response and limits</h2>
+<section class="level3" id="pharmacodynamic-urine-response-did-not-establish-pediatric-efficacy">
+<h3>3.2.1 Pharmacodynamic urine response did not establish pediatric
+efficacy</h3>
+<p>The one-year randomized descriptive study allowed enrollment at ages
+4–17 years with eGFR ≥60 mL/min/1.73 m<sup>2</sup>. The 91 enrolled
+participants were aged 5–17 years (Table 1, <a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID 36719158</a>).
+<span id="claim-c-pediatric-trial-counts">It randomized 91 participants:
+48 to tolvaptan and 43 to placebo across both age groups.</span> Urine
+osmolality and specific gravity were coprimary pharmacodynamic
+endpoints, and adolescent htTKV was the key secondary endpoint.
+Statistical comparisons were exploratory and post hoc, and no formal
+sample-size power calculation was performed. <span id="claim-c-pediatric-osmolality">In all ages, week-one urine osmolality
+fell by least-squares mean 390 mOsm/kg (SEM 28; n=48) with tolvaptan
+versus 90 mOsm/kg (SEM 29; n=42) with placebo (between-arm difference
+−301; 95% CI −381 to −220; nominal P&lt;0.001).</span> <span id="claim-c-pediatric-specific-gravity">Specific gravity fell by 0.009
+(SEM 0.001; n=48) versus 0.002 (SEM 0.001; n=41), respectively
+(between-arm difference −0.007; 95% CI −0.009 to −0.005; nominal
+P&lt;0.001).</span> These coprimary pharmacodynamic comparisons were
+exploratory, not confirmatory. The nominal P values do not establish
+pediatric clinical efficacy. <span id="claim-c-peds">Among adolescents,
+12-month MRI height-adjusted total kidney volume (htTKV, kidney size
+adjusted for height) increased 2.6% with tolvaptan (standard error of
+the mean [SEM] 1.4; n=30 postbaseline) versus 5.8% with placebo (SEM
+1.5; n=27; P=0.14).</span> The pediatric report’s exploratory
+week-1-to-month-12 eGFR least-squares means (model-adjusted averages)
+were +1.9 with tolvaptan versus −1.8 with placebo (P=0.11; estimator n
+unstated; <a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID
+36719158</a>). The publication's all-participant standard errors were
+1.5 versus 1.6 mL/min/1.73 m<sup>2</sup>; arm-specific estimator n was
+not stated. <span id="claim-c-registry-pediatric"></span>Separately, <a href="https://clinicaltrials.gov/study/NCT02964273">NCT02964273</a>
+reports Phase A arithmetic mean changes from week-1 baseline to month 12
+of +2.6 (SD 10.7; n=40; group OG000) versus −3.2 (SD 10.9; n=39; group
+OG001); week-1 baseline group counts were 44 and 42. These registry
+means and publication LS means are separate summaries, not
+interchangeable or pooled. The paper also reports exploratory eGFR
+subgroup differences at months 1 and 6 among adolescents and at month 12
+among children aged 4–11; those analyses do not establish efficacy (<a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID 36719158</a>; <a href="https://clinicaltrials.gov/study/NCT02964273">NCT02964273</a>).
+<span id="claim-c-pediatric-aquaresis">In the pediatric randomized arms,
+aquaretic events occurred in 31/48 tolvaptan participants versus 7/43
+placebo participants.</span> A broad, overlapping standardized Medical
+Dictionary for Regulatory Activities (MedDRA) dehydration query occurred
+in 17/48 versus 6/43; these are not diagnosed dehydration cases (<a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID 36719158</a>).
+<span id="claim-c-pediatric-no-liver">No liver injury occurred in that
+small one-year cohort; this does not rule out adult hepatic
+risk.</span></p>
+</section>
+</section>
+<section class="level2" id="biomarkers-and-generalization">
+<h2>3.3 Biomarkers and generalization</h2>
+<section class="level3" id="no-inspected-pivotal-outcome-establishes-differential-benefit-by-marker">
+<h3>3.3.1 No inspected pivotal outcome establishes differential benefit
+by marker</h3>
+<p>Baseline TKV and eGFR describe structure and function; pediatric
+urine osmolality and specific gravity changed with treatment and
+indicate pharmacodynamic response. The retained TEMPO, REPRISE, and
+pediatric accounts do not establish a treatment-by-marker interaction.
+This is bounded to those named sources, not a universal claim about all
+public literature; assay availability or predictive prevalence is not
+established by trial measurement alone.</p>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="exposure">
+<h2 class="dax-sec-h">4. Pharmacology &amp; Exposure</h2>
+<section class="level2" id="key-finding-3">
+<h2>Key finding</h2>
+<p>FDA-reviewed modeling found no graded kidney-volume response across
+trough concentrations of 82.0–126.3 ng/mL; human cyst-site exposure
+remains unmeasured.</p>
+</section>
+<p>Oral tolvaptan yields systemic exposure and renal pharmacodynamic
+effects, but the clinical exposure-response evidence does not show a
+graded total kidney volume (TKV) response across the studied trough
+plasma concentration (Cmin) range, and the inspected retained JYNARQUE
+label and selected FDA clinical-pharmacology review passages do not
+directly measure human cyst-site exposure. <span id="claim-c-pk-model">The regulator-reviewed sponsor model pooled 1,067
+participants and 6,437 observations from 10 autosomal dominant
+polycystic kidney disease (ADPKD) trials; it used a one-compartment
+model with first-order absorption and elimination.</span> FDA reviewers
+considered it a reasonable description of observations, while noting
+shrinkage in the estimated absorption-rate constant (Ka) and limited
+cytochrome P450 3A (CYP3A)-inhibitor data. <span id="claim-c-pk-exposure-response">The exposure analysis found no
+identified TKV dose-response across steady-state Cmin 82.0–126.3 ng/mL;
+this does not negate randomized treatment-placebo benefit (New Drug
+Application [NDA] 204441).</span></p>
+<section class="level2" id="supporting-evidence-3">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="oral-regimen-and-systemic-pharmacokinetics">
+<h2>4.1 Oral regimen and systemic pharmacokinetics</h2>
+<p><span id="claim-c-summary-dose"></span></p>
+<section class="level3" id="label-parameters-describe-distinct-dose-contexts">
+<h3>4.1.1 Label parameters describe distinct dose contexts</h3>
+<p><span id="claim-c-pk-regimen">The label describes oral split dosing,
+starting at 45 mg on waking plus 15 mg eight hours later and titrating
+as tolerated to 90/30 mg.</span> Values below come from distinct label
+or trial contexts and should not be read as one concentration
+profile.</p>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:99%;">
+<colgroup>
+<col style="width: 30%"/>
+<col style="width: 38%"/>
+<col style="width: 30%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Measure</th>
+<th style="text-align: right;">Source-reported value</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Absolute oral bioavailability after 30 mg</td>
+<td style="text-align: right;"><span id="claim-c-pk-bioavailability">56%
+(range 42%–80%)</span></td>
+<td>Label pharmacokinetic account</td>
+</tr>
+<tr>
+<td>Plasma protein binding</td>
+<td style="text-align: right;"><span id="claim-c-pk-binding">&gt;98%</span></td>
+<td>Label; total plasma is not unbound tissue exposure</td>
+</tr>
+<tr>
+<td>Time to peak concentration (Tmax)</td>
+<td style="text-align: right;"><span id="claim-c-pk-tmax">2–4
+h</span></td>
+<td>Healthy subjects</td>
+</tr>
+<tr>
+<td>Apparent half-life</td>
+<td style="text-align: right;"><span id="claim-c-pk-halflife">~3 h at 15
+mg; ~12 h at 120 mg</span></td>
+<td>Higher-dose prolongation attributed to absorption</td>
+</tr>
+<tr>
+<td>Volume of distribution (Vd)</td>
+<td style="text-align: right;"><span id="claim-c-pk-vd">~3
+L/kg</span></td>
+<td>Label parameter</td>
+</tr>
+<tr>
+<td>Apparent clearance</td>
+<td style="text-align: right;"><span id="claim-c-pk-clearance">~4
+mL/min/kg</span></td>
+<td>Label parameter</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>The label-reported half-life and clearance are parameters, not
+individual measured profiles. At one week of 90/30-mg dosing, three
+small ADPKD strata grouped by estimated glomerular filtration rate
+(eGFR) had nonmonotonic mean peak plasma concentration (Cmax) values of
+828, 591 and 840 ng/mL (n=8, 9 and 9); the source’s parentheticals are
+labeled %CV but their dispersion meaning remains unresolved (NDA 204441;
+study CSR 156-09-284).</p>
+</section>
+</section>
+<section class="level2" id="renal-pharmacodynamic-response">
+<h2>4.2 Renal pharmacodynamic response</h2>
+<section class="level3" id="split-dose-tolvaptan-changes-human-urine-output">
+<h3>4.2.1 Split-dose tolvaptan changes human urine output</h3>
+<p><span id="claim-c-urine-pd-high">Among adults with ADPKD and eGFR
+&gt;60 mL/min/1.73 m<sup>2</sup>, the label reports mean daily urine
+output increased by about 4 L to about 7 L total with 90/30-mg split
+dosing (participant denominator not stated).</span> <span id="claim-c-urine-pd-low">Among adults with eGFR &lt;30 mL/min/1.73
+m<sup>2</sup>, mean daily output increased about 2 L to about 5 L total
+with the same regimen (denominator not stated; <a href="#term-jynarque-label">JYNARQUE prescribing
+information</a>).</span> Urine output and decreased urine osmolality
+(urine concentration) are renal pharmacodynamic readouts of V2 blockade,
+not cyst-cell exposure or occupancy.</p>
+</section>
+</section>
+<section class="level2" id="assays-and-human-regimen">
+<h2>4.3 Assays and human regimen</h2>
+<section class="level3" id="assay-values-are-not-interchangeable-exposure-estimates">
+<h3>4.3.1 Assay values are not interchangeable exposure estimates</h3>
+<p>For receptor binding, a lower inhibition constant (Ki) means less
+compound was needed to displace ligand; a lower half-maximal inhibitory
+concentration (IC50) means less compound was needed to halve the
+measured functional response. <span id="claim-c-bind-pair">The matched
+human 1321N1 membrane vasopressin V2 receptor (V2) and vasopressin V1A
+receptor (V1A) binding pair gave Ki values of 1 and 32 nM, respectively,
+a descriptive 32-fold assay ratio.</span> A separate V2 functional
+cyclic adenosine monophosphate (cAMP) assay reported half-maximal
+inhibitory concentration (IC50) 11.22 nM in Chinese hamster ovary (CHO)
+cells; it is a different endpoint and is not combined with binding
+values. AUC0–5 means area under the plasma concentration-time curve from
+hour zero through hour five.</p>
+<p>Separate ChEMBL (a curated bioactivity database) records report V2
+binding and cell-function values across different cells and endpoints,
+and one in-vitro bile-salt-export-pump (BSEP) value; these do not form a
+common potency curve or clinical margin (<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL824690/">CHEMBL824690</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5163573/">CHEMBL5163573</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a>).
+The available selected assay panel and its retrieval are incomplete.</p>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:99%;">
+<colgroup>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+<col style="width: 33%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Assay or PK comparison</th>
+<th style="text-align: right;">Tolvaptan value</th>
+<th>Meaning and scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Human 1321N1 membrane V2 binding Ki</td>
+<td style="text-align: right;">1 nM</td>
+<td>Lower Ki means less compound was needed to displace ligand</td>
+</tr>
+<tr>
+<td>Human 1321N1 membrane V1A binding Ki</td>
+<td style="text-align: right;">32 nM</td>
+<td>Same assay class; descriptive V1A:V2 ratio 32</td>
+</tr>
+<tr>
+<td>CHO-cell V2 cAMP IC50</td>
+<td style="text-align: right;">11.22 nM</td>
+<td>Functional assay, distinct from binding</td>
+</tr>
+<tr>
+<td>eGFR &gt;60 (n=8), one week 90/30 mg</td>
+<td style="text-align: right;">Cmax 828 ng/mL; AUC0–5 2,850 ng·h/mL</td>
+<td>Source-reported means</td>
+</tr>
+<tr>
+<td>eGFR 30–60 (n=9), same regimen</td>
+<td style="text-align: right;">Cmax 591 ng/mL; AUC0–5 2,140 ng·h/mL</td>
+<td>Source-reported means</td>
+</tr>
+<tr>
+<td>eGFR &lt;30 (n=9), same regimen</td>
+<td style="text-align: right;">Cmax 840 ng/mL; AUC0–5 3,100 ng·h/mL</td>
+<td>Source-reported means</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p><span id="claim-c-pk-means">After one week of oral 90/30-mg dosing,
+FDA-reviewed ADPKD participants with eGFR &gt;60 (n=8), 30–60 (n=9), and
+&lt;30 (n=9) had source-stated mean plasma Cmax values of 828, 591, and
+840 ng/mL, and mean AUC0–5 values of 2,850, 2,140, and 3,100 ng·h/mL,
+respectively.</span> The source labels parenthetical values as
+coefficient of variation (%CV), but their dispersion meaning is
+unresolved; no interval is inferred (FDA clinical-pharmacology review
+for New Drug Application [NDA] 204441; study clinical study report [CSR]
+156-09-284).</p>
+</section>
+<section class="level3" id="cyp3a-interactions-and-food-change-systemic-exposure-differently">
+<h3>4.3.2 CYP3A interactions and food change systemic exposure
+differently</h3>
+<p>Maximum plasma concentration (Cmax) and area under the
+concentration-time curve (AUC) describe peak and integrated systemic
+exposure.</p>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:99%;">
+<colgroup>
+<col style="width: 19%"/>
+<col style="width: 40%"/>
+<col style="width: 40%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Label comparison</th>
+<th>Concomitant treatment and timing</th>
+<th>Effect on tolvaptan systemic exposure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ketoconazole</td>
+<td>200 mg one day before and with 30 mg tolvaptan</td>
+<td>Cmax 3.5-fold; AUC 5.4-fold</td>
+</tr>
+<tr>
+<td>Fluconazole</td>
+<td>400 mg one day before; 200 mg concomitantly</td>
+<td>Cmax +80%; AUC +200%</td>
+</tr>
+<tr>
+<td>Rifampin</td>
+<td>600 mg daily for 7 days, then 240 mg tolvaptan</td>
+<td>Cmax and AUC about 85% lower</td>
+</tr>
+<tr>
+<td>High-fat meal</td>
+<td>With 90 mg tolvaptan</td>
+<td>Cmax doubled; AUC unchanged</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p><span id="claim-c-pk-interactions">In label interaction studies,
+ketoconazole raised Cmax/AUC 3.5/5.4-fold, fluconazole raised them
+80%/200%, and rifampin reduced both about 85%; a high-fat meal doubled
+peak concentration without changing AUC.</span> These are separate
+source-specific comparisons, not a common exposure study (<a href="#term-jynarque-label">JYNARQUE prescribing information</a>).</p>
+<div class="dax-print-figure">
+<p><span id="claim-c-pk-renal-means"></span> <span id="fig-4-1"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 4.1. Five selected tolvaptan assay-level concentration records
+(nM) across receptor binding, cell signaling, and transporter systems;
+symbols distinguish endpoint and target, replicate denominators are not
+consistently stated, no dispersion is shown, and assays are not directly
+comparable ( CHEMBL824690 , CHEMBL5042989 , CHEMBL5042987 , CHEMBL5163573 , CHEMBL4028921 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/admet_pkpd_exposure-fig-assay-concentration-landmarks-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 4.1. Five selected tolvaptan assay-level concentration records
+(nM) across receptor binding, cell signaling, and transporter systems;
+symbols distinguish endpoint and target, replicate denominators are not
+consistently stated, no dispersion is shown, and assays are not directly
+comparable (<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL824690/">CHEMBL824690</a>,
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>,
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>,
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5163573/">CHEMBL5163573</a>,
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a>).</p>
+<p>Code admet_pkpd_exposure.qmd</p>
+</div>
+</div>
+<div class="dax-print-figure">
+<p><span id="fig-4-2"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 4.2. Mean plasma tolvaptan Cmax (ng/mL) after one week of
+90/30-mg dosing by baseline eGFR (&gt;60, n=8; 30–60, n=9; &lt;30, n=9);
+source dispersion labels are unresolved, so no intervals are shown (FDA
+NDA204441; CSR 156-09-284)." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/admet_pkpd_exposure-fig-human-cmax-by-egfr-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 4.2. Mean plasma tolvaptan Cmax (ng/mL) after one week of
+90/30-mg dosing by baseline eGFR (&gt;60, n=8; 30–60, n=9; &lt;30, n=9);
+source dispersion labels are unresolved, so no intervals are shown (FDA
+NDA204441; CSR 156-09-284).</p>
+<p>Code admet_pkpd_exposure.qmd</p>
+</div>
+</div>
+</section>
+<section class="level3" id="human-cyst-site-concentration-and-occupancy-are-not-established">
+<h3>4.3.3 Human cyst-site concentration and occupancy are not
+established</h3>
+<p><span id="claim-c-gap">The specifically inspected JYNARQUE label
+pharmacology/clinical passages and selected FDA clinical-pharmacology
+review passages (NDA 204441; CSR 156-09-284) do not directly measure
+human ADPKD kidney, cyst-fluid, cyst-epithelial concentration, or
+receptor occupancy.</span> Retained ChEMBL response records cover 100 of
+287 records; 187 were not inspected. <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE185948">GSE185948</a>
+expression matrices were not retrieved or fitted. Donor- and
+cell-type-specific receptor abundance and localization remain
+unestablished. Mouse kidney concentration after subcutaneous dosing does
+not bridge to human oral cyst exposure. Paired unbound plasma and
+kidney/cyst concentration with direct receptor engagement and
+time-linked clinical pharmacology would clarify this missing
+connection.</p>
+</section>
+</section>
+<section class="level2" id="model-based-predictions-and-published-parameter-exposure-demonstration">
+<h2>4.4 Model-based predictions and published-parameter exposure
+demonstration</h2>
+<section class="level3" id="a-single-checkpoint-predicts-three-adme-readouts-with-a-binding-mismatch">
+<h3>4.4.1 A single checkpoint predicts three ADME readouts, with a
+binding mismatch</h3>
+<p>The retained OpenADMET checkpoint (revision
+6fb7782db474a9c9198d4ace3a5c6b6a6abb304b) was run on the molecular
+structure of parent tolvaptan to predict absorption, distribution,
+metabolism, and excretion (ADME) properties. <span id="claim-c-predictive-admet">The displayed predictions were
+distribution logD 3.18 (pH unspecified), Caco-2 A→B apparent
+permeability 19.8 × 10<sup>-6</sup> cm/s, and human-plasma unbound
+fraction 5.50%.</span> Caco-2 measures transport across a cultured
+intestinal-cell monolayer; it does not measure oral bioavailability.</p>
+<p><span id="claim-c-predictive-label-bound">The predicted human-plasma
+unbound fraction of 5.50% exceeds the retained JYNARQUE label's strict
+bound of less than 2% unbound, derived from more than 98% protein
+binding.</span> The prediction therefore does not reproduce the label
+context. Because assay conditions are unmatched, this discrepancy is not
+a matched-assay accuracy test. The predicted fraction is not used in the
+clinical PK calculations.</p>
+<div class="dax-print-figure">
+<p><span id="fig-4-3"></span><img alt="Figure 4.3. Single-checkpoint tolvaptan predictions for distribution
+logD, Caco-2 A-to-B permeability, and human-plasma unbound fraction; the
+label region marks &lt;2% unbound, while the model point is 5.50%;
+prediction uncertainty is unavailable (OpenADMET revision
+6fb7782db474a9c9198d4ace3a5c6b6a6abb304b; DailyMed set
+3febc0a1-9e5a-4ce0-843d-210f21d862c4)." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/admet-report.png"/></p>
+<div>
+<p>Figure 4.3. Single-checkpoint tolvaptan predictions for distribution
+logD, Caco-2 A-to-B permeability, and human-plasma unbound fraction; the
+label region marks &lt;2% unbound, while the model point is 5.50%;
+prediction uncertainty is unavailable (OpenADMET revision
+6fb7782db474a9c9198d4ace3a5c6b6a6abb304b; DailyMed set
+3febc0a1-9e5a-4ce0-843d-210f21d862c4).</p>
+</div>
+</div>
+<p>The model card describes a multitask CheMeleon model covering logD,
+Caco-2 transport, and plasma protein binding. This use ran one retained
+checkpoint for one query structure, not a model ensemble, and supplied
+no calibrated compound-level uncertainty. No exact or
+parent-connectivity tolvaptan match was reported among 28,497 disclosed
+fine-tuning structures, but foundation-pretraining membership and
+related-series leakage remain unknown. Endpoint protocols are
+unspecified for the predicted logD pH, Caco-2 assay, and binding assay.
+The output demonstrates executed structure-based prediction, not
+measured ADME, prospective accuracy, a safety predictor, or
+efficacy.</p>
+</section>
+<section class="level3" id="a-published-population-pharmacokinetic-model-generates-regimen-and-kidney-function-dependent-profiles">
+<h3>4.4.2 A published population pharmacokinetic model generates
+regimen- and kidney-function-dependent profiles</h3>
+<p>A separate pharmacokinetic (PK) simulation used published tolvaptan
+population-PK parameters from Lanke and Shoaf's ADPKD model, not the
+predicted unbound fraction above. That paper developed and externally
+evaluated its model in adults with ADPKD; individual records and
+original population-model fitting software control files were not
+available for this reproduction. The selected model represents
+one-compartment disposition, zero-order oral absorption, first-order
+elimination, and dose-dependent relative bioavailability. <span id="claim-c-predictive-pk-inputs">The retained final estimates include
+apparent clearance (CL/F) 12.6 L/h, apparent distribution volume (V/F)
+110 L, and absorption duration 0.58 h (DOI <a href="https://doi.org/10.1002/jcph.1370">10.1002/jcph.1370</a>).</span>
+<span id="claim-c-lanke-iiv">In the source population-PK model, reported
+interindividual variability was 64% for CL/F, 70% for Vd/F, and 238% for
+absorption duration; these published model percentages describe
+population context, not uncertainty estimated by this case.</span> The
+model was developed and evaluated in adults with ADPKD; this case's
+deterministic scenarios describe total parent drug at typical covariates
+and omit metabolite and intrahepatic exposure.</p>
+<p>The typical conditional scenario used a weight of 79.5 kg, eGFR 69.4
+mL/min/1.73 m<sup>2</sup>, and no CYP3A inhibitor. <span id="claim-c-predictive-pk">With the historical 60/30-mg split regimen at
+hours 0 and 8, simulated 24-hour steady-state total-plasma AUC was
+6,045.69 ng·h/mL. Simulated concentration was above 150 ng/mL for 17.94
+hours (DOI <a href="https://doi.org/10.1002/jcph.1370">10.1002/jcph.1370</a>; DOI <a href="https://doi.org/10.1002/jcph.880">10.1002/jcph.880</a>).</span>
+These are deterministic simulated values, not measured patient exposures
+or a population mean. <span id="claim-c-predictive-pk-egfr">Under that
+same 60/30-mg regimen, simulated 24-hour total-plasma AUC was 9,042.22
+ng·h/mL at eGFR 32, 6,045.69 at 69.4, and 4,758.05 at 110 mL/min/1.73
+m<sup>2</sup> (DOI <a href="https://doi.org/10.1002/jcph.1370">10.1002/jcph.1370</a>).</span>
+These eGFR scenarios are not individual predictions or uncertainty
+intervals.</p>
+<div class="dax-print-figure">
+<p><span id="fig-4-4"></span><img alt="Figure 4.4. Simulated total-plasma tolvaptan concentration profiles
+for historical split-dose regimens and kidney-function sensitivity;
+lines encode 45/15, 60/30, and 90/30 mg or eGFR 32, 69.4, and 110, with
+second dose at 8 hours; dotted line marks 150 ng/mL. Typical conditional
+profiles have no population interval (DOI 10.1002/jcph.1370 ; DOI 10.1002/jcph.880 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/pk-report.png"/></p>
+<div>
+<p>Figure 4.4. Simulated total-plasma tolvaptan concentration profiles
+for historical split-dose regimens and kidney-function sensitivity;
+lines encode 45/15, 60/30, and 90/30 mg or eGFR 32, 69.4, and 110, with
+second dose at 8 hours; dotted line marks 150 ng/mL. Typical conditional
+profiles have no population interval (DOI <a href="https://doi.org/10.1002/jcph.1370">10.1002/jcph.1370</a>; DOI <a href="https://doi.org/10.1002/jcph.880">10.1002/jcph.880</a>).</p>
+</div>
+</div>
+<p>Shoaf et al. reported a phase 2 association in adults with autosomal
+dominant polycystic kidney disease (ADPKD) and well-preserved renal
+function: urine-excretion rate increased above plasma concentrations of
+25 ng/mL and reached maximal increases around 150 ng/mL (DOI <a href="https://doi.org/10.1002/jcph.880">10.1002/jcph.880</a>). The 150
+ng/mL concentration is not a therapeutic window, occupancy threshold, or
+safety limit. The 17.94-hour simulated duration above it is exposure
+accounting against a published urine-excretion association, not a fitted
+pharmacodynamic response, predicted urine volume, receptor occupancy, or
+kidney benefit. The simulation uses typical covariates and omits
+individual variability, residual error, food effects, and population
+uncertainty. The retained paper's displayed elimination equation has a
+positive exponential sign inconsistent with its stated elimination
+differential equation; the implementation uses the negative sign implied
+by that equation and verified against numerical integration. Rounded
+relative bioavailability is retained literally. These implementation
+checks support numerical reproducibility, not biological validation. The
+original study data and population-model fitting controls were
+unavailable, so the original fit and population uncertainty were not
+reproduced.</p>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="safety">
+<h2 class="dax-sec-h">5. Toxicology &amp; Therapeutic Window</h2>
+<section class="level2" id="key-finding-4">
+<h2>Key finding</h2>
+<p>TEMPO adverse-event discontinuation was 148/961 versus 24/483; the
+2026 FDA label reports combined liver injury in 3/1,487.</p>
+</section>
+<p>Human observations support two distinct concerns: aquaresis
+(excretion of electrolyte-free water) consistent with vasopressin V2
+receptor (AVPR2) physiology, and serious liver injury that the retained
+target-biology map does not explain. In TEMPO, increased urination
+occurred in 668/961 tolvaptan participants versus 135/483 placebo. The
+label separately reports serious hepatocellular injury in 3/1,487
+treated participants versus no reported placebo events in a
+trial-plus-extension context (<a href="#term-jynarque-label">JYNARQUE
+prescribing information</a>). Neither observation establishes molecular
+causality for every event.</p>
+<section class="level2" id="supporting-evidence-4">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="observed-human-safety-and-mechanistic-interpretation">
+<h2>5.1 Observed human safety and mechanistic interpretation</h2>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:98%;">
+<colgroup>
+<col style="width: 23%"/>
+<col style="width: 13%"/>
+<col style="width: 13%"/>
+<col style="width: 47%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Observation</th>
+<th style="text-align: right;">Tolvaptan</th>
+<th style="text-align: right;">Comparator</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Increased urination composite</td>
+<td style="text-align: right;">668/961 (69.5%)</td>
+<td style="text-align: right;">135/483 (28.0%)</td>
+<td>TEMPO label composite</td>
+</tr>
+<tr>
+<td>Thirst composite</td>
+<td style="text-align: right;">612/961 (63.7%)</td>
+<td style="text-align: right;">113/483 (23.4%)</td>
+<td>TEMPO label composite</td>
+</tr>
+<tr>
+<td>Alanine aminotransferase (ALT) &gt;3× upper limit of normal (ULN;
+upper reference limit)</td>
+<td style="text-align: right;">80/1,637</td>
+<td style="text-align: right;">13/1,166</td>
+<td>Pooled two double-blind trials; first 18 months after
+initiation</td>
+</tr>
+<tr>
+<td>ALT &gt;3× ULN</td>
+<td style="text-align: right;">38/681</td>
+<td style="text-align: right;">8/685</td>
+<td>REPRISE study-specific safety population</td>
+</tr>
+<tr>
+<td>Serious hepatocellular injury</td>
+<td style="text-align: right;">3/1,487</td>
+<td style="text-align: right;">0 reported</td>
+<td>Long-term trial/extension context; no matched placebo denominator
+stated</td>
+</tr>
+<tr>
+<td>Any adverse-event discontinuation</td>
+<td style="text-align: right;">148/961 (15.4%)</td>
+<td style="text-align: right;">24/483 (5.0%)</td>
+<td>TEMPO randomized period</td>
+</tr>
+<tr>
+<td>Aquaretic-event discontinuation</td>
+<td style="text-align: right;">63/961 (6.6%)</td>
+<td style="text-align: right;">1/483 (0.2%)</td>
+<td>TEMPO; pollakiuria, polyuria or nocturia</td>
+</tr>
+<tr>
+<td>Registry event term: anemia (source spelling “Anaemia”)</td>
+<td style="text-align: right;">30/961</td>
+<td style="text-align: right;">26/483</td>
+<td><a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>
+individual event term; not causal evidence</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p><span id="claim-c-reprise-alt">REPRISE participants had alanine
+aminotransferase above three times the upper limit of normal in 38/681
+tolvaptan recipients versus 8/685 placebo recipients (<a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID
+29105594</a>).</span> The trial randomized only after a five-week
+tolvaptan titration/run-in; 126/1,496 participants discontinued during
+run-in, including 52 for aquaretic effects and 10 for liver-test
+findings (<a href="#term-jynarque-label">JYNARQUE prescribing
+information</a>). <span id="claim-c-tempo-discontinuation">The label
+also reports all-adverse-event discontinuation in 148/961 (15.4%) versus
+24/483 (5.0%) and aquaretic-event discontinuation in 63/961 (6.6%)
+versus 1/483 (0.2%) in TEMPO.</span> <span id="claim-c-alt">Across two
+double-blind trials, the label reports ALT above three times the upper
+limit of normal in 80/1,637 tolvaptan participants versus 13/1,166
+placebo participants during the first 18 months after initiation; these
+pooled rates are not TEMPO-only.</span> Composites and individual
+registry terms are different outcome definitions; denominators and
+observation windows differ. The historical 2025 prescribing-information
+record reported a boxed warning and restricted distribution through the
+Tolvaptan for ADPKD Shared System Risk Evaluation and Mitigation
+Strategy (REMS). The September 2026 FDA label is a separate source
+version and specifies testing before treatment, at weeks 2 and 4,
+monthly through month 18, then every three months. The label
+contraindicates strong cytochrome P450 3A (CYP3A) inhibitors and calls
+for dose reduction with moderate inhibitors; exposure ratios are not
+dose multipliers. The label contraindicates significant liver impairment
+or injury, while explicitly excepting uncomplicated polycystic liver
+disease. Human pregnancy data are insufficient to determine
+developmental risk; animal findings occurred at maternally toxic
+exposures. The label advises against breastfeeding. The label adds
+increased creatine phosphokinase without incidence denominator or
+rhabdomyolysis causality. Food and Drug Administration Adverse Event
+Reporting System (FAERS) alias queries were date-unrestricted,
+mixed-indication, and used selected reaction lists; an unreturned term
+does not establish a negative creatine phosphokinase search. The four
+named posted trial adverse-event modules did not assess protocol-defined
+dose-limiting toxicity, so no asset-level absence is inferred.</p>
+<section class="level3" id="aquaretic-effects-align-with-water-handling-physiology">
+<h3>5.1.1 Aquaretic effects align with water-handling physiology</h3>
+<p><span id="claim-c-summary-aquaresis">The FDA label reports increased
+urination in 668/961 (69.5%) versus 135/483 (28.0%) and thirst in
+612/961 (63.7%) versus 113/483 (23.4%) in TEMPO 3:4.</span>
+Hypernatremia, dehydration, and hypovolemia are also labeled risks.
+Concordance with renal AVPR2 water handling supports plausibility, not
+prospective validation or individual exposure thresholds. The label also
+reports serum sodium &gt;150 mEq/L in two unnamed placebo-controlled
+studies as 4.0% versus 0.6% and 1.4% versus 0%; dehydration/hypovolemia
+occurred in those source-unspecified pairs at 2.1% versus 0.7% and 2.3%
+versus 0.4%. Study mapping and denominators are not provided, so these
+rates are not pooled or assigned to named trials.</p>
+</section>
+<section class="level3" id="liver-injury-is-observed-but-mechanistically-unresolved">
+<h3>5.1.2 Liver injury is observed but mechanistically unresolved</h3>
+<p>The September 2026 FDA label defines serious hepatocellular injury
+using transaminases ≥3× upper limit of normal and bilirubin ≥2× upper
+limit. It reports 3/1,487 tolvaptan recipients versus none on placebo in
+a three-year trial and extension, monitored every four months. The
+historical version 19 label gives the same combined criterion and count;
+these are repeated source-version views, not new cohorts. The separate
+ALT-only endpoint occurred in 80/1,637 tolvaptan versus 13/1,166 placebo
+participants across two double-blind trials. Conventional chronic rat
+and dog studies did not reveal overt liver toxicity. This species/model
+difference does not negate the human observations. <span id="claim-c-anemia">The <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>
+posted event table recorded Anaemia (US spelling: anemia) in 30/961
+tolvaptan versus 26/483 placebo participants; these counts do not
+establish causation.</span> Historical trial monitoring was every four
+months; current label monitoring is baseline, weeks 2 and 4, monthly
+through month 18, then every three months. The case makes no adjudicated
+Hy’s Law claim. The retained normal-tissue AVPR2 risk map does not
+explain the liver signal. FDA mass-balance text reports the DM-4103
+metabolite as 52.5% of plasma radioactivity and a 183-hour half-life
+after radiolabeled dosing. FDA Table 3 reports parent bile salt export
+pump (BSEP) inhibition constant (Ki) 34 µM (noncompetitive), DM-4103 Ki
+3.77 µM, and DM-4107 metabolite half-maximal inhibitory concentration
+(IC50) 119 µM. Ki describes an inhibition constant; IC50 is the
+concentration that halves the measured assay response. These are
+analyte- and assay-specific results, unlike the separate ChEMBL (curated
+bioactivity database) parent BSEP IC50 9,990 nM (NDA 204441; <a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a>).
+The 2026 label separately uses “oxobutyric acid metabolite”; no identity
+crosswalk to DM-4103 is established. Parent-only pharmacokinetic (PK)
+scenarios omit metabolite and intrahepatic exposure. Therefore, these
+assay and exposure records establish no clinical drug-induced liver
+injury (DILI) threshold or margin.</p>
+</section>
+<section class="level3" id="nonclinical-and-spontaneous-reports-have-bounded-interpretation">
+<h3>5.1.3 Nonclinical and spontaneous reports have bounded
+interpretation</h3>
+<p>Thirst and increased urination are common aquaretic effects, whereas
+hypernatremia and volume depletion are separate outcomes, not synonyms.
+In the pediatric report, the broad Medical Dictionary for Regulatory
+Activities (MedDRA) dehydration query (17/48 versus 6/43) overlaps
+aquaretic events and is not a count of diagnosed dehydration (<a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID 36719158</a>).
+Animal studies report aquaresis-related effects and
+reproductive/developmental findings at maternally toxic exposures; these
+do not establish a human quantitative therapeutic margin. FDA Adverse
+Event Reporting System (FAERS) query disproportionality signals are
+spontaneous reports without exposed-patient denominators and cannot
+estimate incidence. Trial adverse-event records include a broad range of
+events; occurrence under treatment is not proof of drug causation.</p>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="landscape">
+<h2 class="dax-sec-h">6. IP &amp; Competitive Landscape</h2>
+<section class="level2" id="key-finding-5">
+<h2>Key finding</h2>
+<p>Six selected ADPKD programs are identified; broader status is unknown
+for venglustat and rapamycin/sirolimus.</p>
+</section>
+<p>Six selected ADPKD programs are identified in retained records;
+broader program status is unknown for venglustat and
+rapamycin/sirolimus. Bounded searches do not support a field census or
+efficacy ranking. Tolvaptan's randomized adult outcomes differ from
+short or terminated comparator records in population, endpoint, and
+analysis; those records cannot be ranked head-to-head.</p>
+<section class="level2" id="supporting-evidence-5">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="dated-programs-and-outcomes">
+<h2>6.1 Dated programs and outcomes</h2>
+<section class="level3" id="comparator-results-are-heterogeneous-and-often-incomplete">
+<h3>6.1.1 Comparator results are heterogeneous and often incomplete</h3>
+<p>Within retained records, lixivaptan's phase 2 study posted short
+day-35 descriptive strata without placebo comparison; a phase 3 record
+had five randomized participants but no analyzed efficacy outcome.
+Sponsor materials attributed program discontinuation to
+commercial/development considerations and an ALT/AST observation.
+Venglustat's registered Stage-1 TKV results met a stopping rule
+specified before results were assessed, with treatment contrasts whose
+confidence intervals crossed zero; its later eGFR result is a distinct
+endpoint and analysis population. These outcomes do not establish
+universal class failure or success (<a href="https://clinicaltrials.gov/study/NCT03487913">NCT03487913</a>; <a href="https://clinicaltrials.gov/study/NCT04064346">NCT04064346</a>; <a href="https://clinicaltrials.gov/study/NCT03523728">NCT03523728</a>).</p>
+</section>
+<section class="level3" id="six-selected-programs-are-identified-within-an-incomplete-field">
+<h3>6.1.2 Six selected programs are identified within an incomplete
+field</h3>
+<p>Retained records identify lixivaptan, PYC-003, ABBV-CLS-628,
+bempedoic acid, venglustat, and rapamycin/sirolimus; identification is
+not status resolution, and broader status is unknown for venglustat and
+rapamycin/sirolimus. <a href="https://clinicaltrials.gov/study/NCT00920309">NCT00920309</a> is
+an ADPKD therapeutic study of rapamycin (other name sirolimus),
+terminated with posted kidney-volume and GFR outcomes 0/0 analyzed;
+study termination does not establish program-wide discontinuation. The
+ADPKD search returned bounded pages, including unconsumed tokens, so six
+is not a census (<a href="https://clinicaltrials.gov/study/NCT00920309">NCT00920309</a>; <a href="https://clinicaltrials.gov/study/NCT06714006">NCT06714006</a>; <a href="https://clinicaltrials.gov/study/NCT06902558">NCT06902558</a>; <a href="https://clinicaltrials.gov/study/NCT07282821">NCT07282821</a>; <a href="https://clinicaltrials.gov/study/NCT03523728">NCT03523728</a>).</p>
+<div class="dax-print-figure">
+<p><span id="fig-6-1"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 6.1. Four terminated or withdrawn trial records (N=4) by
+category assigned from sponsor-stated reasons; bars show record counts,
+not efficacy or field-wide frequencies ( NCT00920309 , NCT04064346 , NCT04152837 , NCT05208866 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/clinical_terminations-fig-termination-categories-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 6.1. Four terminated or withdrawn trial records (N=4) by
+category assigned from sponsor-stated reasons; bars show record counts,
+not efficacy or field-wide frequencies (<a href="https://clinicaltrials.gov/study/NCT00920309">NCT00920309</a>, <a href="https://clinicaltrials.gov/study/NCT04064346">NCT04064346</a>, <a href="https://clinicaltrials.gov/study/NCT04152837">NCT04152837</a>, <a href="https://clinicaltrials.gov/study/NCT05208866">NCT05208866</a>).</p>
+<p>Code clinical_terminations.qmd</p>
+</div>
+</div>
+</section>
+</section>
+<section class="level2" id="public-patent-record">
+<h2>6.2 Public patent record</h2>
+<section class="level3" id="orange-book-listings-are-not-claim-scope-determinations">
+<h3>6.2.1 Orange Book listings are not claim-scope determinations</h3>
+<p>The FDA Orange Book is its public listing of approved drug products
+and associated patents. For JYNARQUE product 001, the FDA-listed Patent
+Expiration field gives US 8,501,730 (drug substance [DS]) as 2026-09-01
+and US 10,905,694 (drug product [DP]) as 2030-04-07. These are
+source-reported listing dates, separate from nominal filing-plus-20
+arithmetic. A historical method-of-use filing <a href="https://patents.google.com/patent/US5972882A/en">US5972882A</a>
+names OPC-41061 in a dependent claim; attachment is documentary, not
+claim construction. Two tolvaptan-named formulation discovery hits
+remain search-result-only leads. <span id="claim-c-ip-pkd-discovery-lead">A separate retained
+search-result-only lead, <a href="https://patents.google.com/patent/US11957691B2/en">US11957691B2</a>,
+lists Otsuka as assignee and is titled “Drug for preventing and/or
+treating polycystic kidney disease”; its snippet describes a combination
+containing sustained-release tolvaptan or a prodrug. The primary patent
+was not opened, so claim scope, current legal status, family membership
+and estate attachment remain unresolved.</span> Filing-plus-20
+calculations are nominal arithmetic, not legal expiration determinations
+(<a href="https://patents.google.com/patent/US5972882A/en">US5972882A</a>;
+<a href="https://patents.google.com/patent/US8501730/en">US8501730</a>;
+<a href="https://patents.google.com/patent/US10905694/en">US10905694</a>;
+<a href="https://patents.google.com/patent/US20250144112A1/en">US20250144112A1</a>;
+<a href="https://patents.google.com/patent/US20230381194A1/en">US20230381194A1</a>).</p>
+<div class="dax-print-figure">
+<p><span id="fig-6-2"></span></p>
+<div>
+<div>
+</div>
+<p><img alt="Figure 6.2. Priority and filing dates, independently calculated
+nominal filing-plus-20 term dates, and FDA-listed Patent Expiration
+dates for selected US and lixivaptan records; calendar dates with no
+uncertainty interval, in a bounded bibliographic sample. Circles mark
+priority, diamonds filing, triangles nominal term, and squares
+FDA-listed expiration; labels identify records, with FDA-listed
+categories drug substance (DS) and drug product (DP). The Orange Book
+dates are source-reported entries for product 001, not the independent
+nominal calculation, and neither establishes claim scope or a term
+conclusion ( US5258510A , US5972882A , US8501730 , US10905694 , WO2016077370A1 , US11241441B2 )." decoding="async" loading="lazy" src="./images/drugadopt/tolvaptan/report/ip_estate_timeline-fig-ip-patent-timeline-output-1.png"/></p>
+</div>
+<div>
+<p>Figure 6.2. Priority and filing dates, independently calculated
+nominal filing-plus-20 term dates, and FDA-listed Patent Expiration
+dates for selected US and lixivaptan records; calendar dates with no
+uncertainty interval, in a bounded bibliographic sample. Circles mark
+priority, diamonds filing, triangles nominal term, and squares
+FDA-listed expiration; labels identify records, with FDA-listed
+categories drug substance (DS) and drug product (DP). The Orange Book
+dates are source-reported entries for product 001, not the independent
+nominal calculation, and neither establishes claim scope or a term
+conclusion (<a href="https://patents.google.com/patent/US5258510A/en">US5258510A</a>,
+<a href="https://patents.google.com/patent/US5972882A/en">US5972882A</a>,
+<a href="https://patents.google.com/patent/US8501730/en">US8501730</a>,
+<a href="https://patents.google.com/patent/US10905694/en">US10905694</a>,
+<a href="https://patents.google.com/patent/WO2016077370A1/en">WO2016077370A1</a>,
+<a href="https://patents.google.com/patent/US11241441B2/en">US11241441B2</a>).</p>
+<p>Code ip_estate_timeline.qmd</p>
+</div>
+</div>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="gaps">
+<h2 class="dax-sec-h">7. Evidence Gaps &amp; Development Implications</h2>
+<section class="level2" id="key-finding-6">
+<h2>Key finding</h2>
+<p>Human cyst-site exposure and receptor engagement remain unmeasured;
+the PCK rat rescue supports V2 contribution, while cyst-cell necessity
+and patient mediation remain open.</p>
+</section>
+<p>Evidence across modules converges on an adult TEMPO TKV difference of
+−2.7 percentage points/year and assay-level pathway plausibility, but
+does not close human cyst-site engagement or broad population transfer.
+Cellular, animal, array, and clinical outcomes answer different parts of
+the causal chain. Paired measurements of cyst-fluid secretion,
+time-resolved kidney structure, and receptor engagement in human cysts
+at clinical exposure would clarify whether acute fluid change
+contributes to early kidney-volume effects.</p>
+<p>The <a href="#mechanism">mechanism evidence</a> includes V2-selective
+desmopressin (dDAVP) rescue after vasopressin loss in PCK rats with
+Pkhd1-associated recessive disease. Cyst and fibrosis measures returned
+with agonist treatment, supporting a V2 contribution in this rat model
+(<a href="https://pubmed.ncbi.nlm.nih.gov/18032793/">Wang et al.,
+2008</a>). Transfer to human ADPKD remains uncertain because systemic
+water-balance changes and cyst-cell effects were not separated.</p>
+<section class="level2" id="supporting-evidence-6">
+<h2>Supporting evidence</h2>
+</section>
+<section class="level2" id="cross-module-questions">
+<h2>7.1 Cross-module questions</h2>
+<section class="level3" id="measurements-that-would-distinguish-unresolved-links">
+<h3>7.1.1 Measurements that would distinguish unresolved links</h3>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:98%;">
+<colgroup>
+<col style="width: 24%"/>
+<col style="width: 24%"/>
+<col style="width: 26%"/>
+<col style="width: 24%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Gap</th>
+<th>Why it matters</th>
+<th>Evidence needed</th>
+<th>What it would clarify</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cyst-site mediation and early fluid response</td>
+<td>Cellular assays and clinical TKV outcomes are separate; TEMPO
+authors proposed an acute secretion contribution</td>
+<td>Donor-aware AVPR2 abundance/localization, matched unbound exposure
+and receptor engagement with direct fluid-secretion and time-resolved
+structural readouts</td>
+<td>Whether target engagement at clinical exposure alters cyst secretion
+and could explain part of the early kidney-volume response</td>
+</tr>
+<tr>
+<td>Population transfer</td>
+<td>TEMPO and REPRISE enrolled selected adults; pediatric findings were
+descriptive</td>
+<td>Population-matched longitudinal structural and filtration outcomes
+with explicit analysis denominators</td>
+<td>Whether adult estimates apply to other stages, ages, and
+tolerability groups</td>
+</tr>
+<tr>
+<td>Exposure–safety relationship</td>
+<td>Plasma and urine pharmacodynamics are not linked to individual cyst
+engagement or organ events; parent-only PK omits metabolites and
+intrahepatic exposure</td>
+<td>Individual parent and metabolite exposure, hepatic exposure,
+kidney/cyst engagement, hydration/electrolyte and liver-event
+measurements</td>
+<td>Whether efficacy-related target engagement and safety share or
+diverge in their exposure relationships, and whether metabolites
+contribute to liver injury</td>
+</tr>
+<tr>
+<td>Disease-state receptor signal</td>
+<td>Normal-tissue expression cannot establish ADPKD receptor state</td>
+<td>Donor- and cell-type-resolved RNA, protein, and localization across
+disease stages</td>
+<td>Whether target availability differs in human ADPKD cyst
+epithelium</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</section>
+</section>
+</section><section class="dax-page published-report-section" id="traceability">
+<h2 class="dax-sec-h">8. Traceability</h2>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:99%;">
+<colgroup>
+<col style="width: 21%"/>
+<col style="width: 55%"/>
+<col style="width: 21%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Chapter</th>
+<th>Sources</th>
+<th>Figures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clinical Phenotype &amp; Endpoints</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID
+22344503</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>;
+KDIGO 2025 ADPKD Clinical Practice Guideline; September 2026 FDA
+JYNARQUE prescribing information; <a href="https://pubmed.ncbi.nlm.nih.gov/21544064/">PMID 21544064</a>; DOI
+<a href="https://doi.org/10.1038/ki.2011.119">10.1038/ki.2011.119</a></td>
+<td>Figure <a href="#fig-1-1">1.1</a>, <a href="#fig-1-2">1.2</a></td>
+</tr>
+<tr>
+<td>Mechanism &amp; Biomarker Biology</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID
+38902502</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">PMID
+36743216</a>; <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340">GSE198340</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/18032793/">PMID 18032793</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/42772449/">PMID 42772449</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/36805211/">PMID 36805211</a>;
+<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE185948">GSE185948</a>;
+DOI <a href="https://doi.org/10.1021/acs.jmedchem.1c00863">10.1021/acs.jmedchem.1c00863</a>;
+<a href="https://pubmed.ncbi.nlm.nih.gov/34255509/">PMID 34255509</a>;
+<a href="https://www.ebi.ac.uk/chembl/document_report_card/CHEMBL5042479/">CHEMBL5042479</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>;
+PDB 9U81; <a href="https://pubmed.ncbi.nlm.nih.gov/41188237/">PMID
+41188237</a>; PDB 9HAP; <a href="https://pubmed.ncbi.nlm.nih.gov/40274867/">PMID 40274867</a></td>
+<td>Figure <a href="#fig-2-1">2.1</a>, <a href="#fig-2-2">2.2</a>, <a href="#fig-2-3">2.3</a>, <a href="#fig-2-4">2.4</a>, <a href="#fig-2-5">2.5</a></td>
+</tr>
+<tr>
+<td>Clinical Outcomes</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID 29105594</a>; <a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID 36719158</a>; <a href="https://clinicaltrials.gov/study/NCT02964273">NCT02964273</a></td>
+<td></td>
+</tr>
+<tr>
+<td>Pharmacology &amp; Exposure</td>
+<td>DailyMed set 3febc0a1-9e5a-4ce0-843d-210f21d862c4; NDA204441; CSR
+156-09-284; <a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL824690/">CHEMBL824690</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5163573/">CHEMBL5163573</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a>;
+OpenADMET model revision 6fb7782db474a9c9198d4ace3a5c6b6a6abb304b; DOI
+<a href="https://doi.org/10.1002/jcph.1370">10.1002/jcph.1370</a>
+(PMC6590359); DOI <a href="https://doi.org/10.1002/jcph.880">10.1002/jcph.880</a>
+(PMC5480307)</td>
+<td>Figure <a href="#fig-4-1">4.1</a>, <a href="#fig-4-2">4.2</a>, <a href="#fig-4-3">4.3</a>, <a href="#fig-4-4">4.4</a></td>
+</tr>
+<tr>
+<td>Toxicology &amp; Therapeutic Window</td>
+<td>DailyMed set 3febc0a1-9e5a-4ce0-843d-210f21d862c4; FDA JYNARQUE
+prescribing information, September 2026; NDA 204441; <a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a>;
+<a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a>;
+<a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a>;
+FAERS</td>
+<td></td>
+</tr>
+<tr>
+<td>IP &amp; Competitive Landscape</td>
+<td><a href="https://clinicaltrials.gov/study/NCT03487913">NCT03487913</a>; <a href="https://clinicaltrials.gov/study/NCT04064346">NCT04064346</a>; <a href="https://clinicaltrials.gov/study/NCT03523728">NCT03523728</a>; <a href="https://clinicaltrials.gov/study/NCT00920309">NCT00920309</a>; <a href="https://clinicaltrials.gov/study/NCT06714006">NCT06714006</a>; <a href="https://clinicaltrials.gov/study/NCT06902558">NCT06902558</a>; <a href="https://clinicaltrials.gov/study/NCT07282821">NCT07282821</a>; <a href="https://patents.google.com/patent/US5972882A/en">US5972882A</a>;
+<a href="https://patents.google.com/patent/US8501730/en">US8501730</a>;
+<a href="https://patents.google.com/patent/US10905694/en">US10905694</a>;
+<a href="https://patents.google.com/patent/US20250144112A1/en">US20250144112A1</a>;
+<a href="https://patents.google.com/patent/US20230381194A1/en">US20230381194A1</a>;
+<a href="https://patents.google.com/patent/US11957691B2/en">US11957691B2</a>;
+<a href="https://patents.google.com/patent/US5258510A/en">US5258510A</a></td>
+<td>Figure <a href="#fig-6-1">6.1</a>, <a href="#fig-6-2">6.2</a></td>
+</tr>
+<tr>
+<td>Evidence Gaps &amp; Development Implications</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a>; NDA204441; DailyMed set
+3febc0a1-9e5a-4ce0-843d-210f21d862c4</td>
+<td></td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>The TEMPO Figure <a href="#fig-1-2">1.2</a> display uses
+analysis/predictive_presentation/tempo-count-label.qmd with the
+unchanged retained source table. The October 2, 2026 cover is the
+package date; each source has its own version or retrieval date, and no
+single evidence cutoff was applied. Version 19 (November 2025) is
+retained as historical; the separately retained September 2026
+FDA-approved label was read in this refinement. Concordant label counts
+are repeated source-version views, not new cohorts. The retained
+JYNARQUE prescribing-information label is a submitted label, set version
+19 (November 6, 2025), not independently matched to the current approved
+FDA label. Program statuses describe retained records. Trial cohorts,
+registry programs, and selected patent records are bounded, and the
+cited predecessor <a href="https://pubmed.ncbi.nlm.nih.gov/21544064/">PMID 21544064</a> / DOI
+<a href="https://doi.org/10.1038/ki.2011.119">10.1038/ki.2011.119</a>
+was not assessed.</p>
+<section class="level2" id="terms-and-studies">
+<h2>8.1 Terms and studies</h2>
+<section class="level3" id="term-adpkd">
+<h3>8.1.1 ADPKD</h3>
+<p>Autosomal dominant polycystic kidney disease; inherited tubular cysts
+enlarge the kidneys and can impair filtration.</p>
+</section>
+<section class="level3" id="term-filtration">
+<h3>8.1.2 eGFR and measured GFR</h3>
+<p>Estimated glomerular filtration rate uses blood measurements to
+estimate filtration; measured GFR uses a clearance tracer such as
+iothalamate. They are related but not interchangeable.</p>
+</section>
+<section class="level3" id="term-kidney-volume">
+<h3>8.1.3 TKV and htTKV</h3>
+<p>Total kidney volume measures kidney size; height-adjusted TKV scales
+that volume by height. Neither directly measures filtration.</p>
+</section>
+<section class="level3" id="term-jynarque-label">
+<h3>8.1.4 JYNARQUE prescribing information</h3>
+<p>Historical DailyMed submitted-label version 19 dated November 6,
+2025; preserved separately from the current September 2026 FDA
+label.</p>
+</section>
+<section class="level3" id="term-ki">
+<h3>8.1.5 Ki</h3>
+<p>The inhibition constant for ligand displacement in a binding assay;
+lower values indicate less compound needed under that assay condition.
+It is distinct from a functional IC50.</p>
+</section>
+<section class="level3" id="term-rmsd">
+<h3>8.1.6 RMSD</h3>
+<p>Root-mean-square deviation compares matched atom positions; an
+unaligned value keeps both structures in the same coordinate frame
+rather than superimposing them.</p>
+</section>
+<section class="level3" id="term-chembl">
+<h3>8.1.7 ChEMBL</h3>
+<p>A curated bioactivity database; these values are extracted assay
+records, not newly performed measurements.</p>
+</section>
+</section>
+<section class="level2" id="readable-source-key">
+<h2>8.2 Readable source key</h2>
+<div>
+<div aria-label="Report data table" class="dax-table-scroll" role="region" tabindex="0"><table class="dax-table" style="width:99%;">
+<colgroup>
+<col style="width: 7%"/>
+<col style="width: 6%"/>
+<col style="width: 13%"/>
+<col style="width: 46%"/>
+<col style="width: 24%"/>
+</colgroup>
+<thead>
+<tr>
+<th>Author or organization</th>
+<th>Year</th>
+<th>Study or source</th>
+<th>Identifier or link</th>
+<th>Access depth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arlene B Chapman</td>
+<td>2012 Mar</td>
+<td>Kidney Volume and Functional Outcomes in Autosomal Dominant
+Polycystic Kidney Disease</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/22344503/">PMID
+22344503</a></td>
+<td>Retained article/read aid; observational cohort</td>
+</tr>
+<tr>
+<td>Torres VE et al.</td>
+<td>2012</td>
+<td>Tolvaptan in patients with autosomal dominant polycystic kidney
+disease (TEMPO 3:4)</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/23121377/">PMID
+23121377</a>; <a href="https://clinicaltrials.gov/study/NCT00428948">NCT00428948</a></td>
+<td>Full article retained and read; registry record retained</td>
+</tr>
+<tr>
+<td>Cited predecessor</td>
+<td><hr/></td>
+<td>Cited short-term TKV study</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/21544064/">PMID
+21544064</a>; DOI <a href="https://doi.org/10.1038/ki.2011.119">10.1038/ki.2011.119</a></td>
+<td>Cited by TEMPO; original not retained or assessed</td>
+</tr>
+<tr>
+<td>Reif GA et al.</td>
+<td>2011</td>
+<td>Tolvaptan inhibits ERK-dependent cell proliferation, Cl<sup>-</sup>
+secretion, and in vitro cyst growth of human ADPKD cells stimulated by
+vasopressin</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/21816754/">PMID
+21816754</a></td>
+<td>Full article retained; Methods, figures and captions assessed
+upstream</td>
+</tr>
+<tr>
+<td>Ramalingam H et al.</td>
+<td>2021</td>
+<td>A methionine-Mettl3-N6-methyladenosine axis promotes polycystic
+kidney disease</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/33852874/">PMID
+33852874</a></td>
+<td>Retained publication lead; cited only for disease/biology
+context</td>
+</tr>
+<tr>
+<td>Wang X et al.</td>
+<td>2008</td>
+<td>Vasopressin directly regulates cyst growth in polycystic kidney
+disease</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/18032793/">PMID
+18032793</a></td>
+<td>Full article retained; Methods and figures assessed upstream</td>
+</tr>
+<tr>
+<td>Luo L et al.</td>
+<td>2023</td>
+<td>Polycystic kidney disease: novel insights into polycystin
+function</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/36805211/">PMID
+36805211</a></td>
+<td>Bibliographic/review record retained</td>
+</tr>
+<tr>
+<td>Song X et al.</td>
+<td>2023</td>
+<td>Preclinical evaluation of tolvaptan and salsalate combination
+therapy in a Pkd1-mouse model</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/36743216/">PMID
+36743216</a>; <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340">GSE198340</a></td>
+<td>Full article and deposited processed arrays retained; figure pixels
+inspected; arrays reanalyzed by dependency module</td>
+</tr>
+<tr>
+<td>Liu HL et al.</td>
+<td>2024</td>
+<td>Structural basis of tolvaptan binding to the vasopressin V2
+receptor</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/38902502/">PMID
+38902502</a></td>
+<td>Full article retained; Methods, Results and table read</td>
+</tr>
+<tr>
+<td>Vanichapol T et al.</td>
+<td>2026</td>
+<td>Large-scale organoid-derived cyst cultures as a drug discovery
+platform for polycystic kidney disease</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/42772449/">PMID
+42772449</a></td>
+<td>Abstract-level record only; full details unavailable in retained
+source</td>
+</tr>
+<tr>
+<td>Mekahli D et al.</td>
+<td>2023</td>
+<td>Tolvaptan for Children and Adolescents with ADPKD: Randomized
+Controlled Trial</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/36719158/">PMID
+36719158</a>; <a href="https://clinicaltrials.gov/study/NCT02964273">NCT02964273</a></td>
+<td>Article retained and read; registry retained</td>
+</tr>
+<tr>
+<td>Torres VE et al.</td>
+<td>2017</td>
+<td>Tolvaptan in Later-Stage Autosomal Dominant Polycystic Kidney
+Disease (REPRISE)</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/29105594/">PMID
+29105594</a>; <a href="https://clinicaltrials.gov/study/NCT02160145">NCT02160145</a></td>
+<td>Publication abstract retained; registry record retained</td>
+</tr>
+<tr>
+<td>FDA</td>
+<td>DailyMed version 19; November 6, 2025</td>
+<td>JYNARQUE (tolvaptan) prescribing information</td>
+<td><a href="https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3febc0a1-9e5a-4ce0-843d-210f21d862c4">JYNARQUE
+prescribing information</a>; DailyMed set
+3febc0a1-9e5a-4ce0-843d-210f21d862c4</td>
+<td>Full retained submitted-label text; separate from the later FDA
+label</td>
+</tr>
+<tr>
+<td>FDA</td>
+<td><hr/></td>
+<td>NDA 204441 clinical-pharmacology review, study CSR 156-09-284</td>
+<td>NDA204441</td>
+<td>Retained review passages; source dispersion notation unresolved</td>
+</tr>
+<tr>
+<td>FDA</td>
+<td>September 2026</td>
+<td>JYNARQUE (tolvaptan) prescribing information</td>
+<td><a href="https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/204441s016lbl.pdf">FDA
+label PDF</a></td>
+<td>Current regulatory source read in this refinement; separate from
+historical 2025 DailyMed version</td>
+</tr>
+<tr>
+<td>KDIGO</td>
+<td>2025</td>
+<td>Clinical Practice Guideline for ADPKD evaluation and management</td>
+<td><a href="https://kdigo.org/guidelines/autosomal-dominant-polycystic-kidney-disease-adpkd/">KDIGO
+ADPKD guideline</a></td>
+<td>Retained guideline text; staging, selection and genetic-background
+context</td>
+</tr>
+<tr>
+<td>ChEMBL</td>
+<td><hr/></td>
+<td>Tolvaptan bioactivity records</td>
+<td><a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL824690/">CHEMBL824690</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042989/">CHEMBL5042989</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5042987/">CHEMBL5042987</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL5163573/">CHEMBL5163573</a>;
+<a href="https://www.ebi.ac.uk/chembl/assay_report_card/CHEMBL4028921/">CHEMBL4028921</a></td>
+<td>Selected records retained; panel incomplete</td>
+</tr>
+<tr>
+<td>OpenADMET</td>
+<td>Model revision</td>
+<td>Permeability, LogD and protein-binding CheMeleon checkpoint</td>
+<td><a href="https://huggingface.co/openadmet/permeability-logd-ppb-chemeleon-baseline/tree/6fb7782db474a9c9198d4ace3a5c6b6a6abb304b">Pinned
+model revision</a></td>
+<td>Retained model card, recipe and single-checkpoint output;
+application has no calibrated uncertainty</td>
+</tr>
+<tr>
+<td>Lanke and Shoaf</td>
+<td>2019</td>
+<td>Population pharmacokinetic analyses and model validation in
+ADPKD</td>
+<td><a href="https://doi.org/10.1002/jcph.1370">DOI
+10.1002/jcph.1370</a>; PMC6590359</td>
+<td>Full retained article and methods read; published model parameters
+used for deterministic simulation, original fit not reproduced</td>
+</tr>
+<tr>
+<td>Shoaf et al.</td>
+<td>2017</td>
+<td>Tolvaptan pharmacokinetics and pharmacodynamics in ADPKD phase 2
+trials</td>
+<td><a href="https://doi.org/10.1002/jcph.880">DOI 10.1002/jcph.880</a>;
+PMC5480307</td>
+<td>Full retained article and methods read; phase 2 urine-excretion
+association, not a fitted concentration-response curve</td>
+</tr>
+<tr>
+<td>GTEx Consortium</td>
+<td>v10</td>
+<td>Normal-tissue expression reference</td>
+<td>GTEx v10; GENCODE v39</td>
+<td>Retained tissue-median data and recorded descriptive computation;
+not disease tissue</td>
+</tr>
+<tr>
+<td>GEO</td>
+<td><hr/></td>
+<td>ADPKD single-nucleus series</td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE185948">GSE185948</a></td>
+<td>Annotation metadata and file inventory retained; expression matrices
+not fitted</td>
+</tr>
+<tr>
+<td>ClinicalTrials.gov</td>
+<td><hr/></td>
+<td>ADPKD program records</td>
+<td><a href="https://clinicaltrials.gov/study/NCT03487913">NCT03487913</a>; <a href="https://clinicaltrials.gov/study/NCT04064346">NCT04064346</a>; <a href="https://clinicaltrials.gov/study/NCT03523728">NCT03523728</a>; <a href="https://clinicaltrials.gov/study/NCT00920309">NCT00920309</a>; <a href="https://clinicaltrials.gov/study/NCT06714006">NCT06714006</a>; <a href="https://clinicaltrials.gov/study/NCT06902558">NCT06902558</a>; <a href="https://clinicaltrials.gov/study/NCT07282821">NCT07282821</a></td>
+<td>Registry records retained; searches bounded, landscape not
+census</td>
+</tr>
+<tr>
+<td>US Patent and Trademark Office / FDA Orange Book</td>
+<td>various</td>
+<td>Selected patent filings and listings</td>
+<td><a href="https://patents.google.com/patent/US5972882A/en">US5972882A</a>;
+<a href="https://patents.google.com/patent/US8501730/en">US8501730</a>;
+<a href="https://patents.google.com/patent/US10905694/en">US10905694</a>;
+<a href="https://patents.google.com/patent/US20250144112A1/en">US20250144112A1</a>;
+<a href="https://patents.google.com/patent/US20230381194A1/en">US20230381194A1</a>;
+<a href="https://patents.google.com/patent/US11957691B2/en">US11957691B2</a>;
+<a href="https://patents.google.com/patent/US5258510A/en">US5258510A</a></td>
+<td>Public filing/listing records; <a href="https://patents.google.com/patent/US11957691B2/en">US11957691B2</a>
+is an unopened search-result-only lead; listings are not claim-scope
+determinations</td>
+</tr>
+<tr>
+<td>FDA</td>
+<td><hr/></td>
+<td>Adverse Event Reporting System</td>
+<td>FAERS</td>
+<td>Spontaneous-report query; no exposed-person denominator</td>
+</tr>
+<tr>
+<td>Szeleczky et al.</td>
+<td>2021</td>
+<td>V1A-antagonist stereoisomer study; matched values from ChEMBL
+curator records</td>
+<td><a href="https://doi.org/10.1021/acs.jmedchem.1c00863">DOI
+10.1021/acs.jmedchem.1c00863</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/34255509/">PMID 34255509</a>; <a href="https://www.ebi.ac.uk/chembl/document_report_card/CHEMBL5042479/">CHEMBL5042479</a></td>
+<td>Abstract and bibliographic record read; numeric values are curated
+ChEMBL extraction, full assay tables not read</td>
+</tr>
+<tr>
+<td>Zhang et al.</td>
+<td>2025</td>
+<td>Tolvaptan-bound V2 receptor structure</td>
+<td><a href="https://www.rcsb.org/structure/9U81">PDB 9U81</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/41188237/">PMID 41188237</a></td>
+<td>Retained structure and article text; deposited S-tolvaptan, 3.08
+Å</td>
+</tr>
+<tr>
+<td>Fouillen et al.</td>
+<td>2025</td>
+<td>Inactive V2 receptor structure with deposited R-tolvaptan</td>
+<td><a href="https://www.rcsb.org/structure/9HAP">PDB 9HAP</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/40274867/">PMID 40274867</a></td>
+<td>Retained structure and article text; no docking after
+incomplete-pocket preflight</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</section>
+<section class="level2" id="additional-sources-cited-in-the-report">
+<h2>Additional sources cited in the report</h2>
+<ul>
+<li><a href="https://clinicaltrials.gov/study/NCT04152837">NCT04152837</a></li>
+<li><a href="https://clinicaltrials.gov/study/NCT05208866">NCT05208866</a></li>
+<li>CHEMBL5070075</li>
+<li>CHEMBL5074709</li>
+<li><a href="https://patents.google.com/patent/US11241441B2/en">US11241441B2</a></li>
+<li><a href="https://patents.google.com/patent/WO2016077370A1/en">WO2016077370A1</a></li>
+</ul>
+</section>
+</section></div></div></main>
+<footer class="foot">
+<div class="shell">
+<p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+<nav aria-label="Footer" class="foot-links">
+<a href="./privacy-policy.html">Privacy</a>
+<a href="./terms.html">Terms</a>
+</nav>
+</div>
+</footer>
+<script src="./assets/js/company-site/mobile-nav.js?v=9d313acd51f5"></script>
+<script src="./assets/js/company-site/report-spine.js?v=87375fe5b80e"></script>
+</body>
 </html>
