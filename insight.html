@@ -24,7 +24,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
-    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=e47650c669df" />
+    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=fedae93bf650" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
   <body>
@@ -63,14 +63,6 @@
       <section class="band band-first">
         <div class="shell">
           <figure class="insight-product-proof">
-            <div class="insight-demo-switcher" role="group" aria-label="Insight demo steps">
-              <span>Follow one analysis</span>
-              <button type="button" data-insight-phase="0" aria-pressed="true"><b>01</b> Ask</button>
-              <button type="button" data-insight-phase="1" aria-pressed="false"><b>02</b> Analyze</button>
-              <button type="button" data-insight-phase="2" aria-pressed="false"><b>03</b> Follow up</button>
-              <button type="button" data-insight-phase="3" aria-pressed="false"><b>04</b> Reproduce</button>
-              <button class="insight-story-play" type="button" data-insight-play aria-label="Play automatic demonstration">Play</button>
-            </div>
             <div class="insight-ui iui-phase-phone" role="region" aria-label="Interactive Insight example">
               <div class="iui-mobile-story" aria-hidden="false">
                 <div class="iui-mobile-copy">
@@ -247,31 +239,119 @@ model.volcano(
                     <div class="iui-analysis-grid">
                       <div class="iui-plot-panel">
                         <div class="iui-volcano">
-                          <svg viewBox="0 0 340 190" role="img" aria-label="Volcano plot showing differential expression effect size against adjusted significance.">
-                            <line class="iui-volcano-axis" x1="38" y1="8" x2="38" y2="158"></line>
-                            <line class="iui-volcano-axis" x1="38" y1="158" x2="330" y2="158"></line>
-                            <line class="iui-volcano-threshold" x1="122" y1="8" x2="122" y2="158"></line>
-                            <line class="iui-volcano-threshold" x1="246" y1="8" x2="246" y2="158"></line>
-                            <line class="iui-volcano-threshold" x1="38" y1="87" x2="330" y2="87"></line>
-                            <g class="iui-volcano-neutral">
-                              <circle cx="76" cy="144" r="3"></circle><circle cx="91" cy="132" r="3"></circle><circle cx="106" cy="147" r="3"></circle>
-                              <circle cx="119" cy="125" r="3"></circle><circle cx="132" cy="138" r="3"></circle><circle cx="145" cy="116" r="3"></circle>
-                              <circle cx="154" cy="145" r="3"></circle><circle cx="165" cy="101" r="3"></circle><circle cx="174" cy="132" r="3"></circle>
-                              <circle cx="184" cy="141" r="3"></circle><circle cx="193" cy="109" r="3"></circle><circle cx="202" cy="130" r="3"></circle>
-                              <circle cx="214" cy="145" r="3"></circle><circle cx="225" cy="121" r="3"></circle><circle cx="237" cy="139" r="3"></circle>
-                              <circle cx="251" cy="128" r="3"></circle><circle cx="267" cy="147" r="3"></circle><circle cx="286" cy="136" r="3"></circle>
-                            </g>
-                            <g class="iui-volcano-down">
-                              <circle cx="58" cy="73" r="4"></circle><circle cx="69" cy="52" r="4"></circle><circle cx="82" cy="80" r="4"></circle>
-                              <circle cx="91" cy="34" r="4"></circle><circle cx="103" cy="64" r="4"></circle><circle cx="111" cy="20" r="4"></circle>
-                            </g>
-                            <g class="iui-volcano-up">
-                              <circle cx="258" cy="71" r="4"></circle><circle cx="271" cy="46" r="4"></circle><circle cx="282" cy="78" r="4"></circle>
-                              <circle cx="294" cy="29" r="4"></circle><circle cx="306" cy="60" r="4"></circle><circle cx="318" cy="17" r="4"></circle>
-                            </g>
-                            <text class="iui-volcano-label" x="152" y="181">log2 fold change</text>
-                            <text class="iui-volcano-label" transform="translate(12,117) rotate(-90)">−log10 adjusted p</text>
-                          </svg>
+                          <svg viewBox="0 0 380 250" role="img" aria-label="Illustrative volcano plot: genes cluster near zero fold change, with significant lower and higher expression on either side. Horizontal line: adjusted p equals 0.05; vertical lines: log2 fold change equals minus and plus one.">
+<title>Illustrative differential expression volcano plot</title>
+<line class="iui-volcano-axis" x1="48" y1="14" x2="48" y2="204"></line>
+<line class="iui-volcano-axis" x1="48" y1="204" x2="366" y2="204"></line>
+<line class="iui-volcano-threshold" x1="167.25" y1="14" x2="167.25" y2="204"></line>
+<line class="iui-volcano-threshold" x1="246.75" y1="14" x2="246.75" y2="204"></line>
+<line class="iui-volcano-threshold" x1="48" y1="183.40" x2="366" y2="183.40"></line>
+<g class="iui-volcano-neutral">
+                            <circle cx="167.37" cy="185.19" r="1.9"></circle><circle cx="171.11" cy="194.46" r="1.9"></circle><circle cx="235.46" cy="197.91" r="1.9"></circle><circle cx="195.10" cy="202.41" r="1.9"></circle><circle cx="211.38" cy="202.87" r="1.9"></circle><circle cx="201.58" cy="203.47" r="1.9"></circle>
+                            <circle cx="206.60" cy="203.94" r="1.9"></circle><circle cx="187.22" cy="192.02" r="1.9"></circle><circle cx="189.48" cy="195.85" r="1.9"></circle><circle cx="228.11" cy="188.65" r="1.9"></circle><circle cx="170.33" cy="180.63" r="1.9"></circle><circle cx="205.26" cy="203.84" r="1.9"></circle>
+                            <circle cx="215.51" cy="201.80" r="1.9"></circle><circle cx="206.03" cy="203.75" r="1.9"></circle><circle cx="195.42" cy="201.52" r="1.9"></circle><circle cx="183.45" cy="191.32" r="1.9"></circle><circle cx="214.25" cy="202.77" r="1.9"></circle><circle cx="164.71" cy="193.45" r="1.9"></circle>
+                            <circle cx="209.76" cy="203.77" r="1.9"></circle><circle cx="230.21" cy="190.91" r="1.9"></circle><circle cx="211.02" cy="203.48" r="1.9"></circle><circle cx="212.11" cy="203.44" r="1.9"></circle><circle cx="234.50" cy="192.87" r="1.9"></circle><circle cx="216.26" cy="201.80" r="1.9"></circle>
+                            <circle cx="209.37" cy="203.34" r="1.9"></circle><circle cx="231.95" cy="200.23" r="1.9"></circle><circle cx="216.89" cy="202.66" r="1.9"></circle><circle cx="236.90" cy="196.26" r="1.9"></circle><circle cx="176.44" cy="198.69" r="1.9"></circle><circle cx="211.98" cy="202.67" r="1.9"></circle>
+                            <circle cx="213.59" cy="203.16" r="1.9"></circle><circle cx="227.55" cy="197.72" r="1.9"></circle><circle cx="199.13" cy="200.92" r="1.9"></circle><circle cx="213.52" cy="203.07" r="1.9"></circle><circle cx="210.74" cy="203.08" r="1.9"></circle><circle cx="235.01" cy="189.52" r="1.9"></circle>
+                            <circle cx="227.01" cy="199.87" r="1.9"></circle><circle cx="213.39" cy="203.00" r="1.9"></circle><circle cx="233.30" cy="191.57" r="1.9"></circle><circle cx="236.44" cy="195.03" r="1.9"></circle><circle cx="201.71" cy="202.97" r="1.9"></circle><circle cx="175.83" cy="183.46" r="1.9"></circle>
+                            <circle cx="200.20" cy="203.00" r="1.9"></circle><circle cx="188.59" cy="201.72" r="1.9"></circle><circle cx="240.58" cy="193.58" r="1.9"></circle><circle cx="189.32" cy="193.64" r="1.9"></circle><circle cx="228.58" cy="195.58" r="1.9"></circle><circle cx="180.51" cy="199.29" r="1.9"></circle>
+                            <circle cx="201.56" cy="203.34" r="1.9"></circle><circle cx="178.52" cy="194.12" r="1.9"></circle><circle cx="220.09" cy="201.97" r="1.9"></circle><circle cx="183.13" cy="189.62" r="1.9"></circle><circle cx="178.28" cy="198.33" r="1.9"></circle><circle cx="225.76" cy="199.80" r="1.9"></circle>
+                            <circle cx="213.53" cy="200.65" r="1.9"></circle><circle cx="189.09" cy="197.90" r="1.9"></circle><circle cx="193.54" cy="195.18" r="1.9"></circle><circle cx="182.68" cy="174.11" r="1.9"></circle><circle cx="229.86" cy="200.32" r="1.9"></circle><circle cx="237.70" cy="194.28" r="1.9"></circle>
+                            <circle cx="203.69" cy="203.65" r="1.9"></circle><circle cx="185.53" cy="197.94" r="1.9"></circle><circle cx="176.06" cy="193.57" r="1.9"></circle><circle cx="199.15" cy="203.00" r="1.9"></circle><circle cx="216.04" cy="202.79" r="1.9"></circle><circle cx="251.14" cy="194.75" r="1.9"></circle>
+                            <circle cx="208.14" cy="203.86" r="1.9"></circle><circle cx="222.50" cy="201.21" r="1.9"></circle><circle cx="198.29" cy="202.97" r="1.9"></circle><circle cx="189.51" cy="193.03" r="1.9"></circle><circle cx="218.73" cy="201.95" r="1.9"></circle><circle cx="196.92" cy="202.51" r="1.9"></circle>
+                            <circle cx="234.12" cy="186.80" r="1.9"></circle><circle cx="200.84" cy="203.16" r="1.9"></circle><circle cx="211.09" cy="203.51" r="1.9"></circle><circle cx="202.21" cy="203.34" r="1.9"></circle><circle cx="223.80" cy="199.74" r="1.9"></circle><circle cx="224.24" cy="199.49" r="1.9"></circle>
+                            <circle cx="168.35" cy="184.72" r="1.9"></circle><circle cx="176.92" cy="193.05" r="1.9"></circle><circle cx="190.33" cy="200.49" r="1.9"></circle><circle cx="180.09" cy="195.03" r="1.9"></circle><circle cx="235.31" cy="176.57" r="1.9"></circle><circle cx="191.81" cy="199.23" r="1.9"></circle>
+                            <circle cx="190.41" cy="200.69" r="1.9"></circle><circle cx="224.78" cy="198.69" r="1.9"></circle><circle cx="188.26" cy="200.40" r="1.9"></circle><circle cx="234.01" cy="200.01" r="1.9"></circle><circle cx="170.13" cy="140.50" r="1.9"></circle><circle cx="183.28" cy="194.56" r="1.9"></circle>
+                            <circle cx="202.37" cy="203.00" r="1.9"></circle><circle cx="171.08" cy="193.55" r="1.9"></circle><circle cx="183.57" cy="179.29" r="1.9"></circle><circle cx="216.98" cy="201.12" r="1.9"></circle><circle cx="185.23" cy="194.49" r="1.9"></circle><circle cx="234.41" cy="182.36" r="1.9"></circle>
+                            <circle cx="220.42" cy="201.96" r="1.9"></circle><circle cx="208.03" cy="203.70" r="1.9"></circle><circle cx="197.29" cy="202.88" r="1.9"></circle><circle cx="224.97" cy="201.40" r="1.9"></circle><circle cx="220.39" cy="199.17" r="1.9"></circle><circle cx="210.63" cy="202.97" r="1.9"></circle>
+                            <circle cx="215.06" cy="202.96" r="1.9"></circle><circle cx="203.74" cy="203.63" r="1.9"></circle><circle cx="225.10" cy="185.92" r="1.9"></circle><circle cx="223.61" cy="200.32" r="1.9"></circle><circle cx="195.96" cy="201.91" r="1.9"></circle><circle cx="194.55" cy="202.16" r="1.9"></circle>
+                            <circle cx="180.38" cy="172.89" r="1.9"></circle><circle cx="198.29" cy="200.92" r="1.9"></circle><circle cx="194.23" cy="200.60" r="1.9"></circle><circle cx="229.57" cy="196.57" r="1.9"></circle><circle cx="173.38" cy="144.29" r="1.9"></circle><circle cx="248.04" cy="194.26" r="1.9"></circle>
+                            <circle cx="156.25" cy="190.98" r="1.9"></circle><circle cx="256.37" cy="191.82" r="1.9"></circle><circle cx="198.08" cy="201.95" r="1.9"></circle><circle cx="212.28" cy="203.46" r="1.9"></circle><circle cx="212.71" cy="202.95" r="1.9"></circle><circle cx="216.62" cy="202.88" r="1.9"></circle>
+                            <circle cx="203.40" cy="202.97" r="1.9"></circle><circle cx="218.98" cy="202.05" r="1.9"></circle><circle cx="238.17" cy="183.22" r="1.9"></circle><circle cx="188.26" cy="192.77" r="1.9"></circle><circle cx="229.55" cy="197.62" r="1.9"></circle><circle cx="170.16" cy="191.59" r="1.9"></circle>
+                            <circle cx="220.07" cy="202.67" r="1.9"></circle><circle cx="211.56" cy="202.09" r="1.9"></circle><circle cx="212.28" cy="203.34" r="1.9"></circle><circle cx="192.47" cy="196.34" r="1.9"></circle><circle cx="237.70" cy="198.69" r="1.9"></circle><circle cx="229.26" cy="197.99" r="1.9"></circle>
+                            <circle cx="238.44" cy="197.99" r="1.9"></circle><circle cx="185.44" cy="198.69" r="1.9"></circle><circle cx="235.48" cy="192.50" r="1.9"></circle><circle cx="181.62" cy="194.46" r="1.9"></circle><circle cx="211.67" cy="203.27" r="1.9"></circle><circle cx="199.32" cy="200.83" r="1.9"></circle>
+                            <circle cx="224.13" cy="201.57" r="1.9"></circle><circle cx="179.92" cy="192.87" r="1.9"></circle><circle cx="177.29" cy="195.66" r="1.9"></circle><circle cx="218.68" cy="199.97" r="1.9"></circle><circle cx="235.35" cy="173.42" r="1.9"></circle><circle cx="217.04" cy="202.19" r="1.9"></circle>
+                            <circle cx="229.66" cy="198.02" r="1.9"></circle><circle cx="233.62" cy="182.62" r="1.9"></circle><circle cx="216.59" cy="202.97" r="1.9"></circle><circle cx="179.87" cy="190.24" r="1.9"></circle><circle cx="181.66" cy="198.69" r="1.9"></circle><circle cx="207.39" cy="203.94" r="1.9"></circle>
+                            <circle cx="181.44" cy="186.89" r="1.9"></circle><circle cx="194.06" cy="202.67" r="1.9"></circle><circle cx="184.45" cy="198.69" r="1.9"></circle><circle cx="192.67" cy="195.85" r="1.9"></circle><circle cx="220.12" cy="199.97" r="1.9"></circle><circle cx="221.00" cy="200.95" r="1.9"></circle>
+                            <circle cx="201.49" cy="203.01" r="1.9"></circle><circle cx="204.44" cy="203.75" r="1.9"></circle><circle cx="211.81" cy="203.28" r="1.9"></circle><circle cx="184.22" cy="200.61" r="1.9"></circle><circle cx="190.89" cy="200.53" r="1.9"></circle><circle cx="199.75" cy="202.67" r="1.9"></circle>
+                            <circle cx="190.37" cy="200.83" r="1.9"></circle><circle cx="245.61" cy="194.75" r="1.9"></circle><circle cx="187.31" cy="198.69" r="1.9"></circle><circle cx="210.34" cy="203.64" r="1.9"></circle><circle cx="208.31" cy="203.88" r="1.9"></circle><circle cx="230.37" cy="176.40" r="1.9"></circle>
+                            <circle cx="208.87" cy="203.83" r="1.9"></circle><circle cx="169.70" cy="189.48" r="1.9"></circle><circle cx="199.93" cy="202.71" r="1.9"></circle><circle cx="230.03" cy="198.02" r="1.9"></circle><circle cx="205.82" cy="203.70" r="1.9"></circle><circle cx="175.45" cy="166.12" r="1.9"></circle>
+                            <circle cx="183.90" cy="200.60" r="1.9"></circle><circle cx="235.21" cy="194.74" r="1.9"></circle><circle cx="194.51" cy="200.55" r="1.9"></circle><circle cx="215.61" cy="202.02" r="1.9"></circle><circle cx="219.36" cy="202.41" r="1.9"></circle><circle cx="182.32" cy="186.21" r="1.9"></circle>
+                            <circle cx="220.83" cy="197.16" r="1.9"></circle><circle cx="213.37" cy="203.34" r="1.9"></circle><circle cx="185.01" cy="181.65" r="1.9"></circle><circle cx="211.12" cy="203.00" r="1.9"></circle><circle cx="195.19" cy="201.96" r="1.9"></circle><circle cx="169.77" cy="179.34" r="1.9"></circle>
+                            <circle cx="217.74" cy="202.75" r="1.9"></circle><circle cx="186.03" cy="176.35" r="1.9"></circle><circle cx="235.58" cy="198.74" r="1.9"></circle><circle cx="195.26" cy="202.79" r="1.9"></circle><circle cx="211.68" cy="202.97" r="1.9"></circle><circle cx="211.31" cy="202.88" r="1.9"></circle>
+                            <circle cx="198.65" cy="202.79" r="1.9"></circle><circle cx="176.22" cy="198.69" r="1.9"></circle><circle cx="193.13" cy="198.75" r="1.9"></circle><circle cx="240.83" cy="193.58" r="1.9"></circle><circle cx="217.29" cy="202.45" r="1.9"></circle><circle cx="206.63" cy="203.95" r="1.9"></circle>
+                            <circle cx="215.58" cy="202.93" r="1.9"></circle><circle cx="190.59" cy="198.75" r="1.9"></circle><circle cx="202.22" cy="203.39" r="1.9"></circle><circle cx="206.63" cy="203.94" r="1.9"></circle><circle cx="205.78" cy="203.64" r="1.9"></circle><circle cx="224.42" cy="201.52" r="1.9"></circle>
+                            <circle cx="191.47" cy="202.19" r="1.9"></circle><circle cx="218.40" cy="199.14" r="1.9"></circle><circle cx="200.96" cy="202.33" r="1.9"></circle><circle cx="212.88" cy="202.97" r="1.9"></circle><circle cx="220.61" cy="198.46" r="1.9"></circle><circle cx="257.99" cy="188.57" r="1.9"></circle>
+                            <circle cx="166.17" cy="193.88" r="1.9"></circle><circle cx="210.63" cy="203.64" r="1.9"></circle><circle cx="239.22" cy="166.85" r="1.9"></circle><circle cx="184.15" cy="193.03" r="1.9"></circle><circle cx="230.23" cy="200.46" r="1.9"></circle><circle cx="239.32" cy="197.99" r="1.9"></circle>
+                            <circle cx="191.62" cy="200.83" r="1.9"></circle><circle cx="223.83" cy="201.40" r="1.9"></circle><circle cx="238.52" cy="198.02" r="1.9"></circle><circle cx="207.11" cy="203.98" r="1.9"></circle><circle cx="202.25" cy="203.46" r="1.9"></circle><circle cx="207.56" cy="203.94" r="1.9"></circle>
+                            <circle cx="190.87" cy="201.50" r="1.9"></circle><circle cx="194.87" cy="202.05" r="1.9"></circle><circle cx="246.71" cy="196.14" r="1.9"></circle><circle cx="215.77" cy="202.16" r="1.9"></circle><circle cx="186.64" cy="185.26" r="1.9"></circle><circle cx="204.44" cy="203.79" r="1.9"></circle>
+                            <circle cx="205.17" cy="203.86" r="1.9"></circle><circle cx="191.07" cy="201.12" r="1.9"></circle><circle cx="206.73" cy="203.94" r="1.9"></circle><circle cx="182.02" cy="188.31" r="1.9"></circle><circle cx="171.96" cy="164.39" r="1.9"></circle><circle cx="232.58" cy="175.68" r="1.9"></circle>
+                            <circle cx="205.77" cy="203.92" r="1.9"></circle><circle cx="228.89" cy="200.95" r="1.9"></circle><circle cx="214.41" cy="200.34" r="1.9"></circle><circle cx="187.67" cy="201.52" r="1.9"></circle><circle cx="153.18" cy="186.06" r="1.9"></circle><circle cx="201.02" cy="201.65" r="1.9"></circle>
+                            <circle cx="198.81" cy="202.75" r="1.9"></circle><circle cx="198.00" cy="202.97" r="1.9"></circle><circle cx="181.91" cy="197.48" r="1.9"></circle><circle cx="212.29" cy="203.46" r="1.9"></circle><circle cx="211.69" cy="203.39" r="1.9"></circle><circle cx="217.33" cy="202.16" r="1.9"></circle>
+                            <circle cx="185.87" cy="198.02" r="1.9"></circle><circle cx="225.91" cy="190.91" r="1.9"></circle><circle cx="204.30" cy="203.34" r="1.9"></circle><circle cx="162.11" cy="183.40" r="1.9"></circle><circle cx="227.40" cy="199.74" r="1.9"></circle><circle cx="244.74" cy="194.74" r="1.9"></circle>
+                            <circle cx="239.65" cy="186.59" r="1.9"></circle><circle cx="184.90" cy="184.13" r="1.9"></circle><circle cx="176.89" cy="198.47" r="1.9"></circle><circle cx="205.81" cy="203.86" r="1.9"></circle><circle cx="200.71" cy="203.01" r="1.9"></circle><circle cx="213.17" cy="202.66" r="1.9"></circle>
+                            <circle cx="193.80" cy="202.30" r="1.9"></circle><circle cx="225.86" cy="200.83" r="1.9"></circle><circle cx="229.61" cy="194.56" r="1.9"></circle><circle cx="167.25" cy="153.85" r="1.9"></circle><circle cx="208.88" cy="203.86" r="1.9"></circle><circle cx="226.88" cy="200.83" r="1.9"></circle>
+                            <circle cx="194.54" cy="202.45" r="1.9"></circle><circle cx="201.70" cy="203.41" r="1.9"></circle><circle cx="219.22" cy="202.45" r="1.9"></circle><circle cx="220.89" cy="201.12" r="1.9"></circle><circle cx="240.48" cy="188.31" r="1.9"></circle><circle cx="236.37" cy="198.02" r="1.9"></circle>
+                            <circle cx="227.85" cy="195.87" r="1.9"></circle><circle cx="228.83" cy="199.16" r="1.9"></circle><circle cx="196.66" cy="202.95" r="1.9"></circle><circle cx="210.52" cy="203.64" r="1.9"></circle><circle cx="251.77" cy="188.57" r="1.9"></circle><circle cx="176.53" cy="191.45" r="1.9"></circle>
+                            <circle cx="220.50" cy="201.69" r="1.9"></circle><circle cx="204.75" cy="203.75" r="1.9"></circle><circle cx="245.38" cy="128.82" r="1.9"></circle><circle cx="162.78" cy="193.45" r="1.9"></circle><circle cx="219.50" cy="194.75" r="1.9"></circle><circle cx="234.13" cy="196.37" r="1.9"></circle>
+                            <circle cx="234.85" cy="196.14" r="1.9"></circle><circle cx="201.03" cy="201.91" r="1.9"></circle><circle cx="218.69" cy="201.80" r="1.9"></circle><circle cx="178.16" cy="192.04" r="1.9"></circle><circle cx="155.24" cy="184.34" r="1.9"></circle><circle cx="204.16" cy="203.01" r="1.9"></circle>
+                            <circle cx="224.63" cy="191.05" r="1.9"></circle><circle cx="210.90" cy="203.34" r="1.9"></circle><circle cx="164.89" cy="193.75" r="1.9"></circle><circle cx="170.82" cy="183.50" r="1.9"></circle><circle cx="220.43" cy="197.60" r="1.9"></circle><circle cx="181.00" cy="195.23" r="1.9"></circle>
+                            <circle cx="199.78" cy="202.04" r="1.9"></circle><circle cx="180.89" cy="198.02" r="1.9"></circle><circle cx="212.30" cy="203.34" r="1.9"></circle><circle cx="206.34" cy="203.94" r="1.9"></circle><circle cx="202.25" cy="203.34" r="1.9"></circle><circle cx="176.48" cy="198.75" r="1.9"></circle>
+                            <circle cx="190.76" cy="200.83" r="1.9"></circle><circle cx="169.00" cy="187.63" r="1.9"></circle><circle cx="202.61" cy="203.28" r="1.9"></circle><circle cx="171.93" cy="156.22" r="1.9"></circle><circle cx="183.11" cy="175.26" r="1.9"></circle><circle cx="240.56" cy="187.51" r="1.9"></circle>
+                            <circle cx="217.49" cy="202.67" r="1.9"></circle><circle cx="210.77" cy="203.52" r="1.9"></circle><circle cx="195.03" cy="200.89" r="1.9"></circle><circle cx="244.41" cy="188.98" r="1.9"></circle><circle cx="183.93" cy="197.02" r="1.9"></circle><circle cx="176.59" cy="191.06" r="1.9"></circle>
+                            <circle cx="188.98" cy="200.53" r="1.9"></circle><circle cx="234.26" cy="194.94" r="1.9"></circle><circle cx="221.96" cy="195.85" r="1.9"></circle><circle cx="194.34" cy="202.67" r="1.9"></circle><circle cx="236.59" cy="198.02" r="1.9"></circle><circle cx="183.66" cy="181.65" r="1.9"></circle>
+                            <circle cx="252.58" cy="190.24" r="1.9"></circle><circle cx="207.62" cy="203.94" r="1.9"></circle><circle cx="216.45" cy="201.21" r="1.9"></circle><circle cx="207.86" cy="203.87" r="1.9"></circle><circle cx="246.50" cy="182.11" r="1.9"></circle><circle cx="196.35" cy="202.04" r="1.9"></circle>
+                            <circle cx="177.83" cy="187.71" r="1.9"></circle><circle cx="237.02" cy="195.40" r="1.9"></circle><circle cx="194.49" cy="201.57" r="1.9"></circle><circle cx="216.14" cy="199.98" r="1.9"></circle><circle cx="207.28" cy="203.94" r="1.9"></circle><circle cx="195.38" cy="202.19" r="1.9"></circle>
+                            <circle cx="195.99" cy="202.45" r="1.9"></circle><circle cx="232.93" cy="198.04" r="1.9"></circle><circle cx="198.06" cy="203.00" r="1.9"></circle><circle cx="205.16" cy="203.86" r="1.9"></circle><circle cx="171.78" cy="163.03" r="1.9"></circle><circle cx="211.24" cy="203.63" r="1.9"></circle>
+                            <circle cx="226.82" cy="199.68" r="1.9"></circle><circle cx="192.37" cy="200.53" r="1.9"></circle><circle cx="231.51" cy="175.44" r="1.9"></circle><circle cx="229.50" cy="188.18" r="1.9"></circle><circle cx="238.66" cy="158.64" r="1.9"></circle><circle cx="177.87" cy="199.28" r="1.9"></circle>
+                            <circle cx="188.62" cy="201.12" r="1.9"></circle><circle cx="183.10" cy="172.74" r="1.9"></circle><circle cx="183.90" cy="200.60" r="1.9"></circle><circle cx="189.27" cy="198.69" r="1.9"></circle><circle cx="187.53" cy="200.94" r="1.9"></circle><circle cx="215.11" cy="203.01" r="1.9"></circle>
+                            <circle cx="214.10" cy="202.19" r="1.9"></circle><circle cx="239.62" cy="192.92" r="1.9"></circle><circle cx="210.80" cy="203.63" r="1.9"></circle><circle cx="205.63" cy="203.63" r="1.9"></circle><circle cx="215.05" cy="202.75" r="1.9"></circle><circle cx="200.17" cy="203.29" r="1.9"></circle>
+                            <circle cx="194.76" cy="202.02" r="1.9"></circle><circle cx="196.47" cy="202.88" r="1.9"></circle><circle cx="183.02" cy="200.32" r="1.9"></circle><circle cx="255.08" cy="185.19" r="1.9"></circle><circle cx="165.96" cy="194.54" r="1.9"></circle><circle cx="246.78" cy="195.72" r="1.9"></circle>
+                            <circle cx="169.20" cy="187.51" r="1.9"></circle><circle cx="196.24" cy="202.45" r="1.9"></circle><circle cx="195.41" cy="202.83" r="1.9"></circle><circle cx="206.40" cy="203.94" r="1.9"></circle><circle cx="186.07" cy="195.01" r="1.9"></circle><circle cx="207.74" cy="203.94" r="1.9"></circle>
+                            <circle cx="219.54" cy="199.78" r="1.9"></circle><circle cx="188.29" cy="200.83" r="1.9"></circle><circle cx="161.23" cy="192.92" r="1.9"></circle><circle cx="211.99" cy="202.88" r="1.9"></circle><circle cx="198.43" cy="202.97" r="1.9"></circle><circle cx="176.15" cy="197.90" r="1.9"></circle>
+                            <circle cx="186.34" cy="196.34" r="1.9"></circle><circle cx="213.76" cy="202.88" r="1.9"></circle><circle cx="175.06" cy="198.33" r="1.9"></circle><circle cx="215.12" cy="200.07" r="1.9"></circle><circle cx="202.23" cy="203.47" r="1.9"></circle><circle cx="208.66" cy="203.86" r="1.9"></circle>
+                            <circle cx="197.94" cy="201.22" r="1.9"></circle><circle cx="214.48" cy="202.78" r="1.9"></circle><circle cx="223.84" cy="199.17" r="1.9"></circle><circle cx="176.58" cy="195.92" r="1.9"></circle><circle cx="180.59" cy="196.34" r="1.9"></circle><circle cx="247.64" cy="192.85" r="1.9"></circle>
+                            <circle cx="241.59" cy="192.44" r="1.9"></circle><circle cx="213.14" cy="203.13" r="1.9"></circle><circle cx="176.37" cy="185.92" r="1.9"></circle><circle cx="216.92" cy="202.97" r="1.9"></circle><circle cx="206.87" cy="203.97" r="1.9"></circle><circle cx="257.71" cy="192.60" r="1.9"></circle>
+                            <circle cx="254.30" cy="187.09" r="1.9"></circle><circle cx="156.13" cy="188.65" r="1.9"></circle><circle cx="248.81" cy="190.24" r="1.9"></circle><circle cx="250.99" cy="193.99" r="1.9"></circle><circle cx="263.41" cy="185.92" r="1.9"></circle><circle cx="161.43" cy="185.84" r="1.9"></circle>
+                            <circle cx="250.66" cy="192.04" r="1.9"></circle><circle cx="253.60" cy="192.73" r="1.9"></circle><circle cx="161.23" cy="193.74" r="1.9"></circle><circle cx="250.50" cy="188.57" r="1.9"></circle><circle cx="253.08" cy="187.57" r="1.9"></circle><circle cx="152.80" cy="184.13" r="1.9"></circle>
+</g>
+<g class="iui-volcano-down">
+                            <circle cx="155.50" cy="81.14" r="1.9"></circle><circle cx="160.40" cy="173.21" r="1.9"></circle><circle cx="146.70" cy="154.96" r="1.9"></circle><circle cx="149.64" cy="158.42" r="1.9"></circle><circle cx="157.87" cy="124.89" r="1.9"></circle><circle cx="161.59" cy="139.60" r="1.9"></circle>
+                            <circle cx="141.98" cy="172.99" r="1.9"></circle><circle cx="162.75" cy="126.15" r="1.9"></circle><circle cx="146.29" cy="174.73" r="1.9"></circle><circle cx="164.79" cy="122.71" r="1.9"></circle><circle cx="162.51" cy="182.43" r="1.9"></circle><circle cx="146.91" cy="137.71" r="1.9"></circle>
+                            <circle cx="165.32" cy="137.75" r="1.9"></circle><circle cx="114.02" cy="94.72" r="1.9"></circle><circle cx="66.82" cy="58.62" r="1.9"></circle><circle cx="81.48" cy="132.82" r="1.9"></circle>
+                            <circle cx="151.37" cy="177.75" r="1.9"></circle><circle cx="107.55" cy="145.45" r="1.9"></circle><circle cx="159.57" cy="65.79" r="1.9"></circle>
+                            <circle cx="110.08" cy="114.74" r="1.9"></circle><circle cx="160.82" cy="167.68" r="1.9"></circle><circle cx="117.31" cy="136.00" r="1.9"></circle><circle cx="119.28" cy="164.05" r="1.9"></circle><circle cx="121.86" cy="147.94" r="1.9"></circle>
+                            <circle cx="141.96" cy="168.43" r="1.9"></circle><circle cx="81.49" cy="28.36" r="1.9"></circle><circle cx="159.82" cy="169.08" r="1.9"></circle><circle cx="124.32" cy="142.39" r="1.9"></circle><circle cx="150.99" cy="181.65" r="1.9"></circle>
+                            <circle cx="103.64" cy="139.91" r="1.9"></circle><circle cx="132.27" cy="67.50" r="1.9"></circle><circle cx="79.61" cy="105.50" r="1.9"></circle><circle cx="66.93" cy="66.52" r="1.9"></circle><circle cx="126.61" cy="21.59" r="1.9"></circle>
+                            <circle cx="162.37" cy="149.68" r="1.9"></circle><circle cx="88.97" cy="96.81" r="1.9"></circle><circle cx="145.10" cy="168.32" r="1.9"></circle><circle cx="133.44" cy="108.58" r="1.9"></circle><circle cx="79.24" cy="121.36" r="1.9"></circle>
+                            <circle cx="127.58" cy="21.14" r="1.9"></circle>
+</g>
+<g class="iui-volcano-up">
+                            <circle cx="258.84" cy="174.47" r="1.9"></circle><circle cx="255.00" cy="127.02" r="1.9"></circle><circle cx="263.46" cy="162.04" r="1.9"></circle><circle cx="249.55" cy="164.44" r="1.9"></circle><circle cx="259.84" cy="161.55" r="1.9"></circle><circle cx="273.59" cy="156.85" r="1.9"></circle>
+                            <circle cx="259.79" cy="180.94" r="1.9"></circle><circle cx="256.29" cy="173.64" r="1.9"></circle><circle cx="257.08" cy="116.37" r="1.9"></circle><circle cx="254.70" cy="174.47" r="1.9"></circle><circle cx="276.89" cy="180.94" r="1.9"></circle><circle cx="248.72" cy="178.35" r="1.9"></circle>
+                            <circle cx="250.27" cy="171.31" r="1.9"></circle><circle cx="272.20" cy="167.79" r="1.9"></circle><circle cx="264.39" cy="122.71" r="1.9"></circle><circle cx="253.66" cy="179.34" r="1.9"></circle><circle cx="252.40" cy="132.82" r="1.9"></circle><circle cx="261.94" cy="162.76" r="1.9"></circle>
+                            <circle cx="271.18" cy="167.68" r="1.9"></circle><circle cx="294.04" cy="98.87" r="1.9"></circle><circle cx="320.50" cy="125.60" r="1.9"></circle>
+                            <circle cx="277.07" cy="163.09" r="1.9"></circle><circle cx="250.34" cy="112.36" r="1.9"></circle><circle cx="257.02" cy="147.45" r="1.9"></circle>
+                            <circle cx="309.31" cy="97.04" r="1.9"></circle><circle cx="288.89" cy="167.10" r="1.9"></circle><circle cx="284.09" cy="109.24" r="1.9"></circle>
+                            <circle cx="293.55" cy="159.73" r="1.9"></circle><circle cx="300.39" cy="96.88" r="1.9"></circle><circle cx="309.17" cy="43.65" r="1.9"></circle>
+                            <circle cx="353.67" cy="29.26" r="1.9"></circle><circle cx="293.81" cy="171.98" r="1.9"></circle><circle cx="317.36" cy="150.31" r="1.9"></circle><circle cx="334.45" cy="53.87" r="1.9"></circle><circle cx="281.28" cy="180.82" r="1.9"></circle>
+                            <circle cx="339.61" cy="124.58" r="1.9"></circle><circle cx="319.29" cy="99.02" r="1.9"></circle><circle cx="320.67" cy="42.52" r="1.9"></circle><circle cx="265.19" cy="94.88" r="1.9"></circle><circle cx="313.54" cy="133.34" r="1.9"></circle>
+                            <circle cx="264.42" cy="142.17" r="1.9"></circle><circle cx="251.57" cy="151.48" r="1.9"></circle><circle cx="335.65" cy="134.80" r="1.9"></circle><circle cx="264.70" cy="173.98" r="1.9"></circle><circle cx="336.15" cy="116.84" r="1.9"></circle>
+                            <circle cx="278.67" cy="157.95" r="1.9"></circle><circle cx="343.52" cy="109.24" r="1.9"></circle><circle cx="315.66" cy="40.89" r="1.9"></circle><circle cx="353.93" cy="88.73" r="1.9"></circle><circle cx="332.62" cy="91.53" r="1.9"></circle>
+                            <circle cx="290.02" cy="144.90" r="1.9"></circle><circle cx="252.43" cy="164.78" r="1.9"></circle><circle cx="332.12" cy="22.76" r="1.9"></circle>
+</g>
+<text class="iui-volcano-tick" x="48.0" y="221" text-anchor="middle">-4</text>
+<text class="iui-volcano-tick" x="127.5" y="221" text-anchor="middle">-2</text>
+<text class="iui-volcano-tick" x="207.0" y="221" text-anchor="middle">0</text>
+<text class="iui-volcano-tick" x="286.5" y="221" text-anchor="middle">2</text>
+<text class="iui-volcano-tick" x="366.0" y="221" text-anchor="middle">4</text>
+<text class="iui-volcano-tick" x="40" y="207.0" text-anchor="end">0</text>
+<text class="iui-volcano-tick" x="40" y="143.66666666666666" text-anchor="end">4</text>
+<text class="iui-volcano-tick" x="40" y="80.33333333333333" text-anchor="end">8</text>
+<text class="iui-volcano-tick" x="40" y="17.0" text-anchor="end">12</text>
+<text class="iui-volcano-label" x="207" y="243" text-anchor="middle">log2 fold change</text>
+<text class="iui-volcano-label" transform="translate(13,109) rotate(-90)" text-anchor="middle">−log10 adjusted p</text>
+</svg>
                         </div>
                       </div>
                       <aside class="iui-plot-summary">
@@ -291,13 +371,19 @@ model.volcano(
                       </aside>
                     </div>
                     <div class="iui-card-foot">
-                      <span class="iui-foot-label">Analysis definition shown</span>
+                      <span class="iui-foot-label">Illustrative gene positions</span>
                       <span class="iui-chip iui-chip-brand">FDR 0.05</span>
                       <span class="iui-chip iui-chip-sky">|log2FC| ≥ 1</span>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="insight-demo-switcher" role="group" aria-label="Choose an Insight demo view">
+              <button type="button" data-insight-phase="0" aria-label="Ask from your phone" title="Ask from your phone" aria-pressed="true"></button>
+              <button type="button" data-insight-phase="1" aria-label="Analyze on desktop" title="Analyze on desktop" aria-pressed="false"></button>
+              <button type="button" data-insight-phase="2" aria-label="Follow up with differential expression" title="Follow up with differential expression" aria-pressed="false"></button>
+              <button type="button" data-insight-phase="3" aria-label="Reproduce in a notebook" title="Reproduce in a notebook" aria-pressed="false"></button>
             </div>
             <figcaption>One BRCA/TP53 question: asked on a phone, analyzed and followed up on desktop, then exported as a notebook recipe.</figcaption>
           </figure>
@@ -315,6 +401,6 @@ model.volcano(
       </div>
     </footer>
     <script src="./assets/js/company-site/mobile-nav.js?v=2b3f612cd84d"></script>
-    <script src="./assets/js/company-site/insight-demo.js?v=c4689f1379e1"></script>
+    <script src="./assets/js/company-site/insight-demo.js?v=5f4fdb656711"></script>
   </body>
 </html>
