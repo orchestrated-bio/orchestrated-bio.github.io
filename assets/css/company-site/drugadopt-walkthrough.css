@@ -120,8 +120,11 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .artifact-canvas { margin: 0; padding: 0; background: #fff; }
 .artifact-canvas .artifact-image-link { overflow: hidden; }
 .artifact-canvas img { width: 100%; height: auto; }
-.report-window { aspect-ratio: 20 / 13; }
-.artifact-canvas .report-window img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+/* Keep report navigation stationary across page and figure aspect ratios. */
+#report-highlights .artifact-canvas { aspect-ratio: 20 / 13; }
+#report-highlights .artifact-image-link { width: 100%; height: 100%; }
+#report-highlights .artifact-canvas img { width: 100%; height: 100%; object-fit: contain; }
+#report-highlights .report-window img { object-fit: cover; object-position: top; }
 .report-figure-preview { padding: 1rem; }
 .artifact-workbook-page img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
 .artifact-controls { display: flex; justify-content: space-between; align-items: center; gap: .75rem; padding: .5rem .75rem; border-top: 1px solid var(--rule); }
