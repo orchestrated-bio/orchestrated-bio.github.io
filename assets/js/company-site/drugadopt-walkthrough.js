@@ -72,6 +72,7 @@
     var panels = Array.from(viewer.querySelectorAll('[data-artifact-panel]'));
     var selectors = Array.from(viewer.querySelectorAll('[data-artifact-select]'));
     var status = viewer.querySelector('[data-artifact-status]');
+    var heading = viewer.closest('.artifact-chapter').querySelector('[data-highlight-heading]');
     var index = 0;
     var updateBackcards = createBackcards(viewer.parentElement, panels, function (next) { show(next); });
     function show(next, moveFocus) {
@@ -81,6 +82,7 @@
         button.setAttribute('aria-pressed', String(i === index));
       });
       status.textContent = viewer.dataset.kind + ' · ' + (index + 1) + ' of ' + panels.length;
+      heading.textContent = panels[index].dataset.highlightTitle;
       updateBackcards(index);
       if (moveFocus) selectors[index].focus();
     }
@@ -136,10 +138,10 @@
       var figure = link.closest('figure');
       var description = figure.querySelector('figcaption');
       image.src = link.href;
-      image.alt = link.dataset.detailAlt || source.alt.replace(/^Excerpt from /, 'Full ');
+      image.alt = link.dataset.detailAlt || (source ? source.alt.replace(/^Excerpt from /, 'Full ') : link.getAttribute('aria-label'));
       // A wide worksheet needs its native width so the text remains readable.
       // Slides and report pages already render at useful reading dimensions.
-      image.style.setProperty('--artifact-detail-width', (Number(link.dataset.detailWidth) || Number(source.getAttribute('width')) || source.naturalWidth) + 'px');
+      image.style.setProperty('--artifact-detail-width', (Number(link.dataset.detailWidth) || (source && (Number(source.getAttribute('width')) || source.naturalWidth))) + 'px');
       title.textContent = link.dataset.detailTitle || description.querySelector('strong').textContent.replace('· Excerpt, ', '· Full ');
       caption.textContent = description.innerText.replace(/\s+/g, ' ').trim();
       zoom(false);

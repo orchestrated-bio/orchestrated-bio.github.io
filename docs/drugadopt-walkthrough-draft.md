@@ -2,6 +2,14 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Lower preview refinement, October 5
+
+Alex approved a focused polish pass after reviewing the lower visualizations. The original exploratory mouse RNA chart now appears at full section width before the four supporting cards. The report and slide cards use readable text excerpts instead of miniature images. The slide excerpt opens the complete original Slide 7, and the larger chart opens the original report figure. The sample-selection context and exploratory framing remain visible.
+
+The report gallery's clinical view now shows the existing kidney-volume figure from report Figure 1.2, with a direct link to that figure in the full HTML report. The detailed TEMPO/REPRISE filtration table remains in the report. The exposure view uses the existing Figure 4.4 excerpt, including both panels, axes, model notes, and caption. Clicking it still opens the complete report page 22. Each of the thirteen gallery topics now has a matching heading, updated by the existing selector, keyboard, backcard, and cross-link handlers. The approved hero, report reader, palette, and layered cards remain.
+
+Browser checks covered all thirteen topic headings, the new slide excerpt and chart enlargement, larger-text mode, focus return, the exact Slide 7 link, keyboard navigation, backcard selection, and the full exposure page. Desktop and 390px phone views were inspected; the phone page and cards stayed within the viewport. All 57 unique local file targets and their HTML anchors resolve across the five main pages, IDs are unique, and hashes for 50 retained scientific files plus the embedded report reader match the pre-edit snapshot. Prose was read and scanned, JavaScript syntax and whitespace checks passed, and the existing portable artifact was rebuilt. Its builder now rewrites report-section links to the existing internal fragment router, as it already did for company sections. A browser check confirmed the report figure destination, browser Back, slide enlargement from the embedded image, and the RNA worksheet heading in the portable version. Screenshots and check records are under `test-results/drugadopt-walkthrough/design-review/visual-polish-*`. This remains a local review version.
+
 ## Research customers without a drug, October 5
 
 Alex corrected an audience assumption: a biomarker-discovery customer may have no drug. The previous hero, “Discover what sets your drug apart,” and the introduction about comparing assets or studying a drug already in development both excluded that starting point.

@@ -137,7 +137,7 @@ def rewrite_nav(html: str) -> str:
                  ('href="./case.html"', 'href="#report"'),
                  ('href="./company.html"', 'href="#company"')):
         html = html.replace(a, b)
-    html = re.sub(r'href="\./company\.html#([^"]+)"', r'href="#\1"', html)
+    html = re.sub(r'href="\./(?:company|report|insight)\.html#([^"]+)"', r'href="#\1"', html)
     html = re.sub(r'href="\./((?:custom-analysis|privacy-policy|terms)\.html)"',
                   r'href="https://orchestrated.bio/\1"', html)
     return html

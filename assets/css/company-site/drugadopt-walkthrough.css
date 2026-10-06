@@ -53,6 +53,10 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .case-introduction { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 1.5rem; }
 .case-introduction p { margin: 0; font-size: 1rem; line-height: 1.75; max-width: 59ch; color: var(--ink-2); }
 .case-introduction strong { color: var(--ink); }
+.expression-highlight { margin: 2rem 0 0; padding: 1.25rem; background: #fff; border: 1px solid var(--rule-firm); border-radius: .6rem; }
+.expression-highlight img { width: 100%; height: auto; }
+.expression-highlight figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .5rem; margin-top: 1rem; color: var(--ink-2); font-size: .85rem; line-height: 1.6; }
+.expression-highlight figcaption a { margin-left: auto; color: var(--accent-deep); text-underline-offset: .2em; }
 .evidence-trace { padding-block: 0 4rem; border-bottom: 1px solid var(--rule); }
 .trace-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
 .trace-card { min-width: 0; display: flex; flex-direction: column; min-height: 28rem; border: 1px solid var(--rule-firm); border-radius: .6rem; overflow: hidden; background: var(--paper-raised); }
@@ -67,12 +71,14 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .trace-card footer a:hover { text-decoration: underline; }
 .trace-report-excerpt { font-family: Georgia, "Times New Roman", serif; background: #fff; color: #222; }
 .trace-report-excerpt .trace-document-title { font-size: 1rem; font-weight: 700; color: var(--accent-deep); line-height: 1.35; }
-.trace-report-excerpt a { display: block; margin-top: 1.3rem; }
-.trace-report-excerpt img { aspect-ratio: 1.7; object-fit: contain; }
-.trace-slide-preview { margin: 0 -1.2rem; }
-.trace-slide-preview figcaption { padding: .6rem 1.2rem; font-size: .8rem; color: var(--ink-3); }
-.trace-slide-preview figcaption strong { font-weight: 500; }
-.trace-slide-takeaway { margin-top: 1.2rem !important; }
+.trace-report-excerpt .trace-excerpt-context { margin-top: 1.8rem; font-family: var(--sans); font-size: .8rem; color: var(--ink-3); }
+.trace-slide-preview { margin: 0; }
+.trace-slide-preview figcaption { padding-top: .8rem; font-size: .75rem; color: var(--ink-3); }
+.trace-slide-excerpt { color: var(--ink); text-decoration: none; }
+.trace-slide-excerpt:hover .trace-slide-title { text-decoration: underline; text-underline-offset: .2em; }
+.trace-slide-excerpt .trace-slide-title { color: #1a753f; font-size: 1.08rem; line-height: 1.35; margin-bottom: 1.2rem; }
+.trace-slide-excerpt .trace-slide-key { line-height: 1.45; margin-bottom: 1.5rem; }
+.trace-slide-excerpt .trace-slide-context { color: var(--ink-3); font-size: .8rem; }
 .trace-sheet-preview { background: #fff; }
 .trace-sheet-title { font-size: .9rem; font-weight: 600; color: var(--ink); }
 .trace-sheet-preview table { width: 100%; border-collapse: collapse; font-size: .82rem; line-height: 1.5; }
@@ -110,11 +116,13 @@ body.drugadopt-home .band .pilot-terms + .pilot-terms { margin-top: 1rem; }
 .artifact-panel { margin: 0; }
 .artifact-panel > figcaption { padding: .75rem 1rem; font-size: .8rem; color: var(--ink-3); }
 .artifact-panel > figcaption strong { font-weight: 500; }
+.artifact-panel > figcaption a { color: var(--accent-deep); text-underline-offset: .2em; }
 .artifact-canvas { margin: 0; padding: 0; background: #fff; }
 .artifact-canvas .artifact-image-link { overflow: hidden; }
 .artifact-canvas img { width: 100%; height: auto; }
 .report-window { aspect-ratio: 20 / 13; }
 .artifact-canvas .report-window img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.report-figure-preview { padding: 1rem; }
 .artifact-workbook-page img { aspect-ratio: 16 / 10; object-fit: contain; background: #fff; }
 .artifact-controls { display: flex; justify-content: space-between; align-items: center; gap: .75rem; padding: .5rem .75rem; border-top: 1px solid var(--rule); }
 .artifact-controls p { margin: 0; font-size: .75rem; color: var(--ink-3); }
@@ -165,6 +173,9 @@ html:has(.artifact-dialog[open]) { overflow: hidden; }
   .trace-card-body { padding: 1.2rem; }
   .trace-card-body p { font-size: 1rem; }
   .trace-source-preview pre { font-size: .8rem; }
+  .expression-highlight { padding: .65rem; margin-top: 1.5rem; }
+  .expression-highlight figcaption { display: block; font-size: .8rem; }
+  .expression-highlight figcaption a { display: block; margin-top: .35rem; }
   .preview-stack { padding: 2.5rem .45rem 0; }
   .artifact-backcards { inset-inline: .45rem; }
   .artifact-backcard:first-child { left: 0; transform: rotate(-3deg); }
