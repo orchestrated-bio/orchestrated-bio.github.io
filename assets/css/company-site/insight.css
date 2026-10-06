@@ -791,71 +791,12 @@
   text-wrap: pretty;
 }
 
-.insight-demo-switcher {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 0.75rem;
-}
-
-.insight-demo-switcher > span {
-  margin-right: auto;
-  font-size: 0.68rem;
-  font-weight: 650;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-  color: var(--ink-4);
-}
-
-.insight-demo-switcher button {
-  min-height: 44px;
-  appearance: none;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  padding: 0.45rem 0.75rem;
-  background: transparent;
-  color: var(--ink-3);
-  font: inherit;
-  font-size: var(--step--1);
-  cursor: pointer;
-}
-
-.insight-demo-switcher button b {
-  margin-right: 0.3rem;
-  font-family: var(--mono);
-  font-size: max(0.72em, 10px);
-  font-weight: 500;
-  color: var(--ink-4);
-}
-
-.insight-demo-switcher button[aria-pressed="true"] {
-  border-color: var(--accent);
-  background: var(--accent-wash);
-  color: var(--accent);
-}
-
-.insight-demo-switcher button[aria-pressed="true"] b { color: var(--ink-3); }
-
-.insight-demo-switcher .insight-story-play {
-  margin-left: 0.25rem;
-  color: var(--ink-3);
-  font-family: var(--mono);
-  font-size: 0.67rem;
-}
-
-/* A glyph rather than markup, because the script rewrites the button's text
-   between Play and Pause. The class is toggled in insight-demo.js. */
-.insight-demo-switcher .insight-story-play::before {
-  content: "\25B6";
-  margin-right: 0.35rem;
-}
-
-.insight-demo-switcher .insight-story-play.is-playing::before { content: "\275A\275A"; }
-
-.insight-demo-switcher .insight-story-play:hover {
-  border-color: var(--ink-4);
-  color: var(--ink-2);
-}
+.insight-demo-switcher { display: flex; justify-content: center; gap: .15rem; margin-top: .5rem; }
+.insight-demo-switcher button { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.insight-demo-switcher button::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ink-4); opacity: .45; }
+.insight-demo-switcher button[aria-pressed="true"]::before { background: var(--accent); opacity: 1; }
+.insight-demo-switcher button:hover::before { opacity: 1; }
+.insight-demo-switcher button:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; border-radius: .3rem; }
 
 .iui-card-analysis,
 .iui-card-volcano {
@@ -1254,10 +1195,10 @@
 
 @keyframes iui-volcano-in { to { opacity: 0.9; } }
 
-.iui-volcano-label {
+.iui-volcano-label, .iui-volcano-tick {
   fill: var(--ink-3);
   font-family: var(--sans);
-  font-size: 9px;
+  font-size: 11px;
 }
 
 /* --- Demo type floors ---------------------------------------------------
@@ -1408,13 +1349,6 @@
 
 @media (max-width: 48rem) {
   .insight-product-proof .insight-ui { min-height: 32em; }
-  .insight-demo-switcher { align-items: stretch; flex-wrap: wrap; }
-  .insight-demo-switcher > span { flex-basis: 100%; }
-  .insight-demo-switcher button { flex: 1 1 auto; }
-  .insight-demo-switcher .insight-story-play {
-    flex: 0 0 auto;
-    margin-left: 0;
-  }
   .iui-mobile-story {
     grid-template-columns: minmax(0, 1fr) minmax(12em, 0.55fr);
     gap: 2em;
@@ -1427,9 +1361,6 @@
 /* On phones, use the available width for readable content. The desktop
    workspace becomes stacked panels; phone and notebook scenes size to content. */
 @media (max-width: 40rem) {
-  .insight-demo-switcher { display: grid; grid-template-columns: 1fr 1fr; }
-  .insight-demo-switcher > span { grid-column: 1 / -1; }
-  .insight-demo-switcher .insight-story-play { grid-column: 1 / -1; }
   .insight-product-proof .insight-ui { aspect-ratio: auto; min-height: 0; font-size: 16px; }
   .insight-product-proof .iui-side { display: none; }
   .insight-product-proof .iui-bar {
@@ -1457,7 +1388,7 @@
   .insight-product-proof .iui-card-head { flex-wrap: wrap; }
   .insight-product-proof .iui-card-note { margin-left: 0; font-size: 0.65em; }
   .insight-product-proof .iui-card-foot { flex-wrap: wrap; }
-  .insight-product-proof .iui-volcano-label { font-size: 16px; }
+  .insight-product-proof .iui-volcano-label { font-size: 12px; }
   .insight-product-proof .iui-plot-summary { padding: 0.7em; }
   .insight-product-proof .iui-plot-summary-label,
   .insight-product-proof .iui-rank-head,

@@ -4,7 +4,6 @@
 
   var ui = proof.querySelector('.insight-ui');
   var controls = [].slice.call(proof.querySelectorAll('[data-insight-phase]'));
-  var playControl = proof.querySelector('[data-insight-play]');
   var visualScenes = [].slice.call(ui.querySelectorAll('.iui-scene'));
   var query = ui.querySelector('.iui-query-text');
   var queryBox = ui.querySelector('.iui-query');
@@ -25,7 +24,10 @@
   ].filter(Boolean);
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var phase = 0;
-  var playing = false;
+  var playing = !reducedMotion;
+  var visible = true;
+  var hovering = false;
+  var focused = false;
   var phaseTimer = null;
   var phaseTimers = [];
   var typingTimer = null;
@@ -180,25 +182,16 @@
     });
   }
 
-  // The label carries the state on its own; an aria-pressed alongside it said
-  // the opposite ("pressed" while reading "Pause") and took the selected-phase
-  // pill styling.
-  function updatePlayControl() {
-    playControl.setAttribute('aria-label', playing ? 'Pause automatic demonstration' : 'Play automatic demonstration');
-    playControl.textContent = playing ? 'Pause' : 'Play';
-    playControl.classList.toggle('is-playing', playing);
-  }
-
   function scheduleNext() {
     window.clearTimeout(phaseTimer);
-    if (!playing || document.hidden || proof.getClientRects().length === 0) return;
-    var durations = [6200, 8200, 8200, 8600];
+    if (!playing || !visible || hovering || focused || document.hidden || proof.getClientRects().length === 0) return;
+    var durations = [8000, 12000, 12000, 10000];
     phaseTimer = window.setTimeout(function () {
       showPhase((phase + 1) % 4);
     }, durations[phase]);
   }
 
-  function showPhase(index) {
+  function showPhase(index, manual) {
     clearPhaseTimers();
     phase = index;
 
@@ -217,26 +210,31 @@
     });
 
     if (phase === 0) renderScene(0, false);
-    if (phase === 1) renderScene(0, playing);
-    if (phase === 2) renderScene(1, playing);
+    if (phase === 1) renderScene(0, playing && !manual);
+    if (phase === 2) renderScene(1, playing && !manual);
     if (phase === 3) renderScene(1, false);
 
     scheduleNext();
   }
 
   controls.forEach(function (button, index) {
-    button.addEventListener('click', function () {
-      playing = false;
-      updatePlayControl();
-      showPhase(index);
+    button.addEventListener('click', function () { showPhase(index, true); });
+    button.addEventListener('keydown', function (event) {
+      var next;
+      if (event.key === 'ArrowRight') next = (phase + 1) % controls.length;
+      if (event.key === 'ArrowLeft') next = (phase + controls.length - 1) % controls.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = controls.length - 1;
+      if (next !== undefined) { event.preventDefault(); showPhase(next, true); controls[next].focus(); }
     });
   });
-
-  playControl.addEventListener('click', function () {
-    playing = !playing;
-    updatePlayControl();
-    if (playing) scheduleNext();
-    else window.clearTimeout(phaseTimer);
+  // Keep the current view available while someone reads or uses its links.
+  proof.addEventListener('mouseenter', function () { hovering = true; scheduleNext(); });
+  proof.addEventListener('mouseleave', function () { hovering = false; scheduleNext(); });
+  proof.addEventListener('focusin', function () { focused = true; scheduleNext(); });
+  proof.addEventListener('focusout', function (event) {
+    focused = proof.contains(event.relatedTarget);
+    scheduleNext();
   });
 
   document.addEventListener('visibilitychange', function () {
@@ -247,11 +245,10 @@
   if (typeof window.IntersectionObserver === 'function') {
     new window.IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!playing) return;
-        if (entry.intersectionRatio >= 0.6) scheduleNext();
-        else window.clearTimeout(phaseTimer);
+        visible = entry.isIntersecting;
+        scheduleNext();
       });
-    }, { threshold: [0, 0.6] }).observe(proof);
+    }, { threshold: 0 }).observe(proof);
   }
 
   window.addEventListener('hashchange', function () {
@@ -262,6 +259,5 @@
     showPhase(0);
   });
 
-  updatePlayControl();
   showPhase(0);
 })();
