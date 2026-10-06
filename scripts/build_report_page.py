@@ -1171,9 +1171,9 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
         label = short_labels[key]
         preview_nav.append(f'<button class="dax-nav-item" type="button" data-page="{page_key}"><span class="dax-nav-label">{label}</span></button>')
         paragraphs = introductions.get(key, section.find_all("p")[:1])
-        if key == "exposure":
-            paragraphs = section.find(id="a-published-population-pharmacokinetic-model-generates-regimen-and-kidney-function-dependent-profiles").find_all("p")[:1]
         selected = ''.join(str(copy.deepcopy(p)) for p in paragraphs)
+        if key == "exposure":
+            selected = '<p>We used a published population pharmacokinetic model to simulate tolvaptan plasma exposure across historical dose schedules and kidney-function scenarios.</p>'
         if key == "overview":
             # Keep the source's disease and mechanism explanations short enough
             # that the complete graphical abstract fits in the opening reader.

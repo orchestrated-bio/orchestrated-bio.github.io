@@ -4,9 +4,14 @@
   var gallery = document.querySelector('[data-case-gallery]');
   var formats = gallery ? Array.from(gallery.querySelectorAll('[data-case-format]')) : [];
   var chapters = gallery ? Array.from(gallery.querySelectorAll('[data-case-panel]')) : [];
+  var activeFormat = 0;
+  function formatStorageKey() {
+    return 'drugadopt-preview:' + window.location.pathname + window.location.hash + ':format';
+  }
   function showFormat(next, moveFocus) {
     if (!chapters.length) return;
     var active = (next + chapters.length) % chapters.length;
+    activeFormat = active;
     chapters.forEach(function (chapter, i) { chapter.hidden = i !== active; });
     formats.forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === active)); });
     if (moveFocus) formats[active].focus();
@@ -26,7 +31,16 @@
         if (next !== undefined) { event.preventDefault(); showFormat(next, true); }
       });
     });
-    showFormat(Math.max(0, formatForHash()));
+    var initialFormat = Math.max(0, formatForHash());
+    try {
+      var rememberedFormat = window.sessionStorage.getItem(formatStorageKey());
+      var rememberedIndex = chapters.findIndex(function (chapter) { return chapter.id === rememberedFormat; });
+      if (rememberedIndex >= 0) initialFormat = rememberedIndex;
+    } catch (_) {}
+    showFormat(initialFormat);
+    window.addEventListener('pagehide', function () {
+      try { window.sessionStorage.setItem(formatStorageKey(), chapters[activeFormat].id); } catch (_) {}
+    });
     gallery.querySelector('.case-formats').hidden = false;
     window.addEventListener('hashchange', function () {
       var next = formatForHash();
@@ -73,7 +87,13 @@
     var selectors = Array.from(viewer.querySelectorAll('[data-artifact-select]'));
     var status = viewer.querySelector('[data-artifact-status]');
     var heading = viewer.closest('.artifact-chapter').querySelector('[data-highlight-heading]');
+    var chapterId = viewer.closest('.artifact-chapter').id;
+    var storageKey = 'drugadopt-preview:' + window.location.pathname + ':' + chapterId;
     var index = 0;
+    try {
+      var remembered = Number(window.sessionStorage.getItem(storageKey));
+      if (Number.isInteger(remembered) && remembered >= 0 && remembered < panels.length) index = remembered;
+    } catch (_) {}
     var updateBackcards = createBackcards(viewer.parentElement, panels, function (next) { show(next); });
     function show(next, moveFocus) {
       index = (next + panels.length) % panels.length;
@@ -99,7 +119,6 @@
     });
     viewer.querySelector('[data-artifact-prev]').addEventListener('click', function () { show(index - 1); });
     viewer.querySelector('[data-artifact-next]').addEventListener('click', function () { show(index + 1); });
-    var chapterId = viewer.closest('.artifact-chapter').id;
     document.querySelectorAll('a[href="#' + chapterId + '"][data-artifact-index]').forEach(function (link) {
       link.addEventListener('click', function () {
         var format = chapters.findIndex(function (chapter) { return chapter.id === chapterId; });
@@ -107,7 +126,10 @@
         show(Number(link.dataset.artifactIndex));
       });
     });
-    show(0);
+    show(index);
+    window.addEventListener('pagehide', function () {
+      try { window.sessionStorage.setItem(storageKey, String(index)); } catch (_) {}
+    });
     viewer.querySelector('.artifact-selector').hidden = false;
     viewer.querySelector('.artifact-controls').hidden = false;
   });
