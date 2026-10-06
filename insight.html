@@ -24,7 +24,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
-    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=fedae93bf650" />
+    <link rel="stylesheet" href="./assets/css/company-site/insight.css?v=a4a9a3bc9e23" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
   <body>
@@ -239,7 +239,7 @@ model.volcano(
                     <div class="iui-analysis-grid">
                       <div class="iui-plot-panel">
                         <div class="iui-volcano">
-                          <svg viewBox="0 0 380 250" role="img" aria-label="Illustrative volcano plot: genes cluster near zero fold change, with significant lower and higher expression on either side. Horizontal line: adjusted p equals 0.05; vertical lines: log2 fold change equals minus and plus one.">
+                          <svg viewBox="0 0 380 250" role="img" aria-label="Illustrative volcano plot: genes cluster near zero fold change, with significant lower and higher expression on either side. Example labels: ESR1, GATA3, FOXA1 on the lower-expression side; MKI67, CCNB1, CDK1 on the higher-expression side. Names and positions are illustrative, not ranked TCGA findings. Horizontal line: adjusted p equals 0.05; vertical lines: log2 fold change equals minus and plus one.">
 <title>Illustrative differential expression volcano plot</title>
 <line class="iui-volcano-axis" x1="48" y1="14" x2="48" y2="204"></line>
 <line class="iui-volcano-axis" x1="48" y1="204" x2="366" y2="204"></line>
@@ -340,6 +340,26 @@ model.volcano(
                             <circle cx="278.67" cy="157.95" r="1.9"></circle><circle cx="343.52" cy="109.24" r="1.9"></circle><circle cx="315.66" cy="40.89" r="1.9"></circle><circle cx="353.93" cy="88.73" r="1.9"></circle><circle cx="332.62" cy="91.53" r="1.9"></circle>
                             <circle cx="290.02" cy="144.90" r="1.9"></circle><circle cx="252.43" cy="164.78" r="1.9"></circle><circle cx="332.12" cy="22.76" r="1.9"></circle>
 </g>
+<g class="iui-volcano-annotations" aria-label="Illustrative gene labels, not ranked TCGA findings">
+  <line class="iui-volcano-gene-leader" x1="127.58" y1="21.14" x2="155" y2="20"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-down" cx="127.58" cy="21.14" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="193" y="24" text-anchor="end">ESR1</text>
+  <line class="iui-volcano-gene-leader" x1="126.61" y1="21.59" x2="155" y2="42"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-down" cx="126.61" cy="21.59" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="193" y="46" text-anchor="end">GATA3</text>
+  <line class="iui-volcano-gene-leader" x1="81.49" y1="28.36" x2="155" y2="64"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-down" cx="81.49" cy="28.36" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="193" y="68" text-anchor="end">FOXA1</text>
+  <line class="iui-volcano-gene-leader" x1="332.12" y1="22.76" x2="267" y2="20"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-up" cx="332.12" cy="22.76" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="223" y="24" text-anchor="start">MKI67</text>
+  <line class="iui-volcano-gene-leader" x1="353.67" y1="29.26" x2="267" y2="42"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-up" cx="353.67" cy="29.26" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="223" y="46" text-anchor="start">CCNB1</text>
+  <line class="iui-volcano-gene-leader" x1="315.66" y1="40.89" x2="267" y2="64"></line>
+  <circle class="iui-volcano-gene-point iui-volcano-up" cx="315.66" cy="40.89" r="3"></circle>
+  <text class="iui-volcano-gene-label" x="223" y="68" text-anchor="start">CDK1</text>
+</g>
 <text class="iui-volcano-tick" x="48.0" y="221" text-anchor="middle">-4</text>
 <text class="iui-volcano-tick" x="127.5" y="221" text-anchor="middle">-2</text>
 <text class="iui-volcano-tick" x="207.0" y="221" text-anchor="middle">0</text>
@@ -371,7 +391,7 @@ model.volcano(
                       </aside>
                     </div>
                     <div class="iui-card-foot">
-                      <span class="iui-foot-label">Illustrative gene positions</span>
+                      <span class="iui-foot-label">Illustrative genes and positions · not TCGA estimates</span>
                       <span class="iui-chip iui-chip-brand">FDR 0.05</span>
                       <span class="iui-chip iui-chip-sky">|log2FC| ≥ 1</span>
                     </div>
