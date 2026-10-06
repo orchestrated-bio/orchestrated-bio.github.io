@@ -1,0 +1,190 @@
+{
+  "workbook_sha256": "ea51c6eb26505602d70ded951f0d498764fbac99e6c93a316c98b7f2b38e96ae",
+  "workbook_name": "Evidence.xlsx",
+  "selections": [
+    {
+      "sheet": "Summary",
+      "range": "A5:F8",
+      "values": [
+        [
+          "Evidence",
+          "Measured contrast or endpoint",
+          "Value",
+          "Unit",
+          "CI lower",
+          "CI upper"
+        ],
+        [
+          "TEMPO 3:4 \u00b7 earlier-stage \u00b7 3 years",
+          "Annual kidney-volume growth difference",
+          -2.7,
+          "percentage points/year",
+          -3.3,
+          -2.1
+        ],
+        [
+          "TEMPO 3:4 \u00b7 earlier-stage \u00b7 3 years",
+          "Annual eGFR slope difference",
+          0.98,
+          "mL/min/1.73 m\u00b2/year",
+          0.6,
+          1.36
+        ],
+        [
+          "REPRISE \u00b7 later-stage \u00b7 1 year",
+          "Annualized off-treatment eGFR change difference",
+          1.27,
+          "mL/min/1.73 m\u00b2",
+          0.86,
+          1.68
+        ]
+      ]
+    },
+    {
+      "sheet": "Parameters",
+      "range": "A1:E4",
+      "values": [
+        [
+          "Parameter ID",
+          "Evidence domain",
+          "Endpoint",
+          "Value",
+          "Unit"
+        ],
+        [
+          "tempo_tkv_tolvaptan",
+          "Clinical",
+          "annual TKV percentage growth",
+          2.8,
+          "%/year"
+        ],
+        [
+          "tempo_tkv_placebo",
+          "Clinical",
+          "annual TKV percentage growth",
+          5.5,
+          "%/year"
+        ],
+        [
+          "tempo_tkv_diff",
+          "Clinical",
+          "annual TKV percentage growth",
+          -2.7,
+          "percentage points/year"
+        ]
+      ]
+    },
+    {
+      "sheet": "Sources",
+      "range": "A1:E5",
+      "values": [
+        [
+          "Source ID",
+          "Source type",
+          "Author or organization",
+          "Year",
+          "Title or identifier"
+        ],
+        [
+          "PMID:23121377",
+          "Publication",
+          "Torres et al.",
+          2012,
+          "Tolvaptan in patients with ADPKD"
+        ],
+        [
+          "PMID:29105594",
+          "Publication",
+          "Torres et al.",
+          2017,
+          "Tolvaptan in later-stage ADPKD"
+        ],
+        [
+          "PMID:36719158",
+          "Publication",
+          "Mekahli et al.",
+          2023,
+          "Tolvaptan for children and adolescents with ADPKD"
+        ],
+        [
+          "PMID:22344503",
+          "Publication",
+          "Chapman et al.",
+          2012,
+          "Kidney volume and functional outcomes in ADPKD"
+        ]
+      ]
+    },
+    {
+      "sheet": "Parameters",
+      "range": "Parameters: rows 26, 25, 28; columns C, D, L, M, T",
+      "rows": [
+        1,
+        26,
+        25,
+        28
+      ],
+      "columns": [
+        3,
+        4,
+        12,
+        13,
+        20
+      ],
+      "values": [
+        [
+          "Endpoint",
+          "Value",
+          "CI lower",
+          "CI upper",
+          "Adjusted P value"
+        ],
+        [
+          "Aqp2",
+          -0.4016666666666656,
+          -0.5719115727559061,
+          -0.23142176057742514,
+          0.00021765962463445084
+        ],
+        [
+          "Avpr2",
+          0.1150000000000011,
+          -0.016298872457169628,
+          0.24629887245717183,
+          0.22762106512724864
+        ],
+        [
+          "Pkd1",
+          -0.12749999999999964,
+          -0.22276036049567746,
+          -0.03223963950432182,
+          0.043608702868622055
+        ]
+      ]
+    }
+  ],
+  "umap": {
+    "source": "GSE185948_metadata_RNA.csv.gz",
+    "sha256": "73f21c765e263b6110dc417e02cb54ef1dd115429cbc2ae50110b8974990acae",
+    "n_nuclei": 102710,
+    "coordinates": "Published UMAP_1 and UMAP_2",
+    "labels": [
+      "CNT_PC",
+      "DCT",
+      "ENDO",
+      "FIB",
+      "ICA",
+      "ICB",
+      "LEUK",
+      "PEC",
+      "PODO",
+      "PT1",
+      "PT2",
+      "TAL1",
+      "TAL2",
+      "URO1",
+      "URO2"
+    ],
+    "purpose": "Descriptive kidney cell map from the single-nucleus follow-on"
+  }
+}

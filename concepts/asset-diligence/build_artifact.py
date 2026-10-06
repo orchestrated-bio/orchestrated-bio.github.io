@@ -37,6 +37,7 @@ PAGES = [
 STYLES = [
     "assets/css/company-site/base.css",
     "assets/css/company-site/drugadopt.css",
+    "assets/css/company-site/drugadopt-walkthrough.css",
     "assets/css/company-site/insight.css",
     "assets/css/company-site/report.css",
     "assets/css/company-site/company.css",
@@ -51,6 +52,9 @@ MIME = {
     ".jpeg": "image/jpeg",
     ".gif": "image/gif",
     ".svg": "image/svg+xml",
+    ".py": "text/plain;charset=utf-8",
+    ".qmd": "text/plain;charset=utf-8",
+    ".csv": "text/csv;charset=utf-8",
 }
 
 # JPEG-encode big report screenshots instead of PNG (q, max width).
@@ -100,7 +104,7 @@ def inline_srcs(html: str) -> str:
         if src.startswith("data:") or src.startswith("http"):
             return m.group(0)
         return f'{m.group(1)}="{data_uri(src)}"'
-    return re.sub(r'(src|href)="((?:\./|\.\./)[^"]+\.(?:png|jpe?g|gif|svg))"',
+    return re.sub(r'(src|href|data-trace-href)="((?:\./|\.\./)[^"]+\.(?:png|jpe?g|gif|svg|py|qmd|csv))"',
                   repl, html)
 
 # ---------------------------------------------------------------------------
@@ -109,12 +113,16 @@ def inline_srcs(html: str) -> str:
 def read(name): return (ROOT / name).read_text()
 
 def extract_main(html: str) -> str:
-    m = re.search(r"<main id=\"main\"[^>]*>(.*)</main>", html, re.S)
+    m = re.search(r'<main\b(?=[^>]*\bid="main")[^>]*>(.*)</main>', html, re.S)
     return m.group(1).strip()
 
 def extract_scripts(html: str) -> str:
     scripts = []
     for attrs, body in re.findall(r"<script([^>]*)>(.*?)</script>", html, re.S):
+        kind = re.search(r'\btype=["\']([^"\']+)["\']', attrs)
+        if kind and kind.group(1) not in ("text/javascript", "application/javascript", "module"):
+            # JSON-LD and other metadata are data, not executable JavaScript.
+            continue
         src = re.search(r'src="([^"]+)"', attrs)
         if src:
             scripts.append(_resolve(src.group(1)).read_text())
@@ -129,6 +137,9 @@ def rewrite_nav(html: str) -> str:
                  ('href="./case.html"', 'href="#report"'),
                  ('href="./company.html"', 'href="#company"')):
         html = html.replace(a, b)
+    html = re.sub(r'href="\./(?:company|report|insight)\.html#([^"]+)"', r'href="#\1"', html)
+    html = re.sub(r'href="\./((?:custom-analysis|privacy-policy|terms)\.html)"',
+                  r'href="https://orchestrated.bio/\1"', html)
     return html
 
 
@@ -145,7 +156,7 @@ def build() -> str:
     # Masthead + footer are identical across pages; take them from index.
     idx = read("index.html")
     masthead = re.search(r"(<header class=\"masthead\">.*?</header>)", idx, re.S).group(1)
-    footer = re.search(r"(<footer class=\"foot\">.*?</footer>)", idx, re.S).group(1)
+    footer = rewrite_nav(re.search(r"(<footer class=\"foot\">.*?</footer>)", idx, re.S).group(1))
     masthead = strip_aria_current(rewrite_nav(masthead))
 
     # One <main> section per route; extra <script> blocks (Insight) collected.
@@ -187,6 +198,7 @@ def build() -> str:
       var on = m.dataset.route===r; m.hidden=!on; if(on) found=true;
     });
     if(!found){ document.querySelector('[data-route=home]').hidden=false; r='home'; }
+    document.body.classList.toggle('drugadopt-home', r==='home');
     document.querySelectorAll('.site-nav a[href^="#"]').forEach(function(a){
       if(a.getAttribute('href')==='#'+r) a.setAttribute('aria-current','page');
       else a.removeAttribute('aria-current');
@@ -205,10 +217,10 @@ def build() -> str:
         "<head>\n"
         "<meta charset=\"utf-8\" />\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n"
-        "<title>Orchestrated Biosciences — Find the patients most likely to respond before your trial starts</title>\n"
+        "<title>DrugAdopt: Scientific Evidence for a Drug and Indication</title>\n"
         f"<style>\n{styles}\n</style>\n"
         "</head>\n"
-        "<body>\n"
+        "<body class=\"drugadopt-home\">\n"
         f"{body}\n"
         f"<script>\n{router}\n</script>\n"
         + "".join(f"<script>\n{s}\n</script>\n" for s in scripts)

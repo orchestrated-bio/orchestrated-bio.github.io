@@ -1,13 +1,12 @@
 /* --- DrugAdopt mockup --------------------------------------------------
-   Shows the real deliverable: a clickable section spine (left, dark app
-   chrome) that opens each part of the prexasertib report as an actual
-   K-Dense report page (right, on white paper). Serif headings, blue accents,
+   Shows the real deliverable: a clickable section spine that opens each
+   part of the report on white paper. Serif headings, green accents,
    boxed callouts, data tables, inline citations — faithful to the real PDF
    output. Each spine item opens a section under the reader's control.
-   Content is the real prexasertib view-model; sizes to content. */
+   Content comes from the completed report; sizes to content. */
 .dax-ui {
-  --kd-blue:   #1a5490;
-  --kd-blue-2: #2c6cb0;
+  --kd-blue:   #155e4a;
+  --kd-blue-2: #0d4436;
   --kd-amber:  #96570b;
   --kd-ink:    #1a1a1a;
   --kd-muted:  #5a6472;
@@ -17,10 +16,10 @@
   border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--rule);
-  background: #0c1522;
+  background: var(--paper-raised);
   font-family: var(--sans);
   font-size: clamp(10px, 1.12vw, 15px);
-  color: #cdd5df;
+  color: var(--ink-2);
   display: flex;
   box-shadow: 0 1px 2px rgb(0 0 0 / 0.10), 0 12px 32px -10px rgb(0 0 0 / 0.30);
   min-height: 32em;
@@ -29,8 +28,8 @@
 /* ── Spine (left, dark app chrome) ── */
 .dax-spine {
   flex: none; width: 12em;
-  background: #0e1826;
-  border-right: 1px solid rgb(255 255 255 / 0.06);
+  background: var(--paper-raised);
+  border-right: 1px solid var(--rule);
   display: flex; flex-direction: column;
   padding: 0.9em 0;
 }
@@ -45,8 +44,8 @@
 }
 .dax-spine-logo img { width: 1em; height: 1em; }
 /* An h2 on the homepage (the demo's one heading), a span in the report. */
-.dax-spine-title { margin: 0; font-size: 0.72em; font-weight: 600; color: #eaf1ee; letter-spacing: 0.02em; }
-.dax-spine-title span { display: block; font-weight: 400; color: #8b97a6; font-size: 0.85em; margin-top: 0.1em; }
+.dax-spine-title { margin: 0; font-size: 0.72em; font-weight: 600; color: var(--ink); letter-spacing: 0.02em; }
+.dax-spine-title span { display: block; font-weight: 400; color: var(--ink-3); font-size: 0.85em; margin-top: 0.1em; }
 
 .dax-nav { list-style: none; margin: 0; padding: 0.4em 0; display: flex; flex-direction: column; gap: 0.1em; }
 .dax-nav > li { margin: 0; padding: 0; }
@@ -58,21 +57,21 @@
   background: transparent; color: inherit; font: inherit; text-align: left;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
-.dax-nav-item:hover { background: rgb(255 255 255 / 0.03); }
+.dax-nav-item:hover { background: var(--accent-wash); }
 .dax-nav-item:focus-visible {
-  outline: 2px solid #8ee0c2;
+  outline: 2px solid var(--accent);
   outline-offset: -3px;
 }
 .dax-nav-num {
   font-family: var(--mono); font-size: 0.62em; color: #7d8a99; flex: none; min-width: 1.1em;
 }
-.dax-nav-label { font-size: 0.68em; line-height: 1.3; color: #9aa6b4; }
+.dax-nav-label { font-size: 0.68em; line-height: 1.3; color: var(--ink-2); }
 .dax-nav-short { display: none; }
 .dax-nav-item-active {
-  background: rgb(39 159 129 / 0.10);
-  border-left-color: #5fbf9c;
+  background: var(--accent-wash);
+  border-left-color: var(--accent);
 }
-.dax-nav-item-active .dax-nav-label { color: #eaf1ee; }
+.dax-nav-item-active .dax-nav-label { color: var(--accent-deep); }
 .dax-nav-item-active .dax-nav-num { color: #5fbf9c; }
 .dax-spine-foot {
   margin-top: auto; padding: 0.8em 1em 0;
@@ -350,3 +349,13 @@
   .shot-render .dax-body-p { font-size: 0.95em; }
   .shot-render .dax-sec-h { font-size: 1.2em; line-height: 1.3; }
 }
+
+/* Retained scientific sections shared by the full reader and homepage. */
+.published-report-section .dax-print-figure { margin-block: 1.5em; }
+.published-report-section img { display: block; width: 100%; height: auto; background: #fff; }
+.published-report-section h2, .published-report-section h3 { color: var(--kd-blue); font-family: var(--kd-serif); line-height: 1.25; }
+.published-report-section .dax-table-scroll { max-width: 100%; overflow-x: auto; }
+.published-report-section table { width: 100%; border-collapse: collapse; font-size: .8em; line-height: 1.45; }
+.published-report-section th, .published-report-section td { padding: .65em .75em; border: 1px solid var(--kd-rule); text-align: left; overflow-wrap: anywhere; }
+.published-report-section th { background: #edf3ef; }
+.published-report-section a { color: var(--kd-blue-2); }

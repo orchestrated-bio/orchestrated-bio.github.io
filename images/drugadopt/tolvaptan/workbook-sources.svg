@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="975" height="598" viewBox="0 0 975 598">
+<title>Evidence.xlsx: Sources, rows 1 to 5</title>
+<rect width="975" height="598" fill="#fff"/>
+<rect width="975" height="48" fill="#214f41"/>
+<text x="22" y="31" fill="#fff" font-family="Arial,sans-serif" font-size="21">Evidence.xlsx</text>
+<rect y="48" width="975" height="40" fill="#f2f5f3"/>
+<text x="130.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">A</text>
+<text x="282.5" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">B</text>
+<text x="430.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">C</text>
+<text x="555.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">D</text>
+<text x="785.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">E</text>
+<rect x="40" y="88" width="935" height="90" fill="#e7f0eb"/>
+<text x="20" y="139.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">1</text>
+<text x="52" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Source ID</text>
+<path d="M40 88v90" stroke="#dce5df"/>
+<text x="232" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Source type</text>
+<path d="M220 88v90" stroke="#dce5df"/>
+<text x="357" y="126.2" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Author or</text>
+<text x="357" y="151.0" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">organization</text>
+<path d="M345 88v90" stroke="#dce5df"/>
+<text x="527" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Year</text>
+<path d="M515 88v90" stroke="#dce5df"/>
+<text x="607" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Title or identifier</text>
+<path d="M595 88v90" stroke="#dce5df"/>
+<path d="M40 178H975" stroke="#dce5df"/>
+<rect x="40" y="178" width="935" height="90" fill="#fff"/>
+<text x="20" y="229.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">2</text>
+<text x="52" y="229.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">PMID:23121377</text>
+<path d="M40 178v90" stroke="#dce5df"/>
+<text x="232" y="229.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Publication</text>
+<path d="M220 178v90" stroke="#dce5df"/>
+<text x="357" y="229.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Torres et al.</text>
+<path d="M345 178v90" stroke="#dce5df"/>
+<text x="583" y="229.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">2012</text>
+<path d="M515 178v90" stroke="#dce5df"/>
+<text x="607" y="229.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Tolvaptan in patients with ADPKD</text>
+<path d="M595 178v90" stroke="#dce5df"/>
+<path d="M40 268H975" stroke="#dce5df"/>
+<rect x="40" y="268" width="935" height="90" fill="#f4f8f5"/>
+<text x="20" y="319.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">3</text>
+<text x="52" y="319.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">PMID:29105594</text>
+<path d="M40 268v90" stroke="#dce5df"/>
+<text x="232" y="319.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Publication</text>
+<path d="M220 268v90" stroke="#dce5df"/>
+<text x="357" y="319.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Torres et al.</text>
+<path d="M345 268v90" stroke="#dce5df"/>
+<text x="583" y="319.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">2017</text>
+<path d="M515 268v90" stroke="#dce5df"/>
+<text x="607" y="319.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Tolvaptan in later-stage ADPKD</text>
+<path d="M595 268v90" stroke="#dce5df"/>
+<path d="M40 358H975" stroke="#dce5df"/>
+<rect x="40" y="358" width="935" height="90" fill="#fff"/>
+<text x="20" y="409.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">4</text>
+<text x="52" y="409.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">PMID:36719158</text>
+<path d="M40 358v90" stroke="#dce5df"/>
+<text x="232" y="409.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Publication</text>
+<path d="M220 358v90" stroke="#dce5df"/>
+<text x="357" y="409.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Mekahli et al.</text>
+<path d="M345 358v90" stroke="#dce5df"/>
+<text x="583" y="409.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">2023</text>
+<path d="M515 358v90" stroke="#dce5df"/>
+<text x="607" y="395.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Tolvaptan for children and adolescents</text>
+<text x="607" y="423.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">with ADPKD</text>
+<path d="M595 358v90" stroke="#dce5df"/>
+<path d="M40 448H975" stroke="#dce5df"/>
+<rect x="40" y="448" width="935" height="90" fill="#f4f8f5"/>
+<text x="20" y="499.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">5</text>
+<text x="52" y="499.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">PMID:22344503</text>
+<path d="M40 448v90" stroke="#dce5df"/>
+<text x="232" y="499.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Publication</text>
+<path d="M220 448v90" stroke="#dce5df"/>
+<text x="357" y="499.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Chapman et al.</text>
+<path d="M345 448v90" stroke="#dce5df"/>
+<text x="583" y="499.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">2012</text>
+<path d="M515 448v90" stroke="#dce5df"/>
+<text x="607" y="485.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Kidney volume and functional outcomes</text>
+<text x="607" y="513.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">in ADPKD</text>
+<path d="M595 448v90" stroke="#dce5df"/>
+<path d="M40 538H975" stroke="#dce5df"/>
+<text x="52" y="578" font-family="Arial,sans-serif" font-size="17" fill="#406552">Sources!A1:E5</text></svg>

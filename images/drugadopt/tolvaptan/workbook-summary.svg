@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="970" height="598" viewBox="0 0 970 598">
+<title>Evidence.xlsx: Summary, rows 5 to 8</title>
+<rect width="970" height="598" fill="#fff"/>
+<rect width="970" height="48" fill="#214f41"/>
+<text x="22" y="31" fill="#fff" font-family="Arial,sans-serif" font-size="21">Evidence.xlsx</text>
+<rect y="48" width="970" height="40" fill="#f2f5f3"/>
+<text x="125.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">A</text>
+<text x="332.5" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">B</text>
+<text x="495.0" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">C</text>
+<text x="637.5" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">D</text>
+<text x="797.5" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">E</text>
+<text x="912.5" y="74" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" fill="#55675f">F</text>
+<rect x="40" y="88" width="930" height="90" fill="#e7f0eb"/>
+<text x="20" y="139.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">5</text>
+<text x="52" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Evidence</text>
+<path d="M40 88v90" stroke="#dce5df"/>
+<text x="222" y="126.2" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Measured contrast or</text>
+<text x="222" y="151.0" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">endpoint</text>
+<path d="M210 88v90" stroke="#dce5df"/>
+<text x="467" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Value</text>
+<path d="M455 88v90" stroke="#dce5df"/>
+<text x="547" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">Unit</text>
+<path d="M535 88v90" stroke="#dce5df"/>
+<text x="752" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">CI lower</text>
+<path d="M740 88v90" stroke="#dce5df"/>
+<text x="867" y="138.6" text-anchor="start" font-family="Arial,sans-serif" font-size="18" fill="#213e32" font-weight="600">CI upper</text>
+<path d="M855 88v90" stroke="#dce5df"/>
+<path d="M40 178H970" stroke="#dce5df"/>
+<rect x="40" y="178" width="930" height="120" fill="#fff"/>
+<text x="20" y="244.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">6</text>
+<text x="52" y="216.6" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">TEMPO 3:4 ·</text>
+<text x="52" y="244.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">earlier-stage · 3</text>
+<text x="52" y="271.8" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">years</text>
+<path d="M40 178v120" stroke="#dce5df"/>
+<text x="222" y="230.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Annual kidney-volume</text>
+<text x="222" y="258.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">growth difference</text>
+<path d="M210 178v120" stroke="#dce5df"/>
+<text x="523" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-2.7</text>
+<path d="M455 178v120" stroke="#dce5df"/>
+<text x="547" y="230.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">percentage</text>
+<text x="547" y="258.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">points/year</text>
+<path d="M535 178v120" stroke="#dce5df"/>
+<text x="843" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-3.3</text>
+<path d="M740 178v120" stroke="#dce5df"/>
+<text x="958" y="244.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">-2.1</text>
+<path d="M855 178v120" stroke="#dce5df"/>
+<path d="M40 298H970" stroke="#dce5df"/>
+<rect x="40" y="298" width="930" height="120" fill="#f4f8f5"/>
+<text x="20" y="364.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">7</text>
+<text x="52" y="336.6" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">TEMPO 3:4 ·</text>
+<text x="52" y="364.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">earlier-stage · 3</text>
+<text x="52" y="391.8" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">years</text>
+<path d="M40 298v120" stroke="#dce5df"/>
+<text x="222" y="350.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Annual eGFR slope</text>
+<text x="222" y="378.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">difference</text>
+<path d="M210 298v120" stroke="#dce5df"/>
+<text x="523" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.98</text>
+<path d="M455 298v120" stroke="#dce5df"/>
+<text x="547" y="350.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">mL/min/1.73</text>
+<text x="547" y="378.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">m²/year</text>
+<path d="M535 298v120" stroke="#dce5df"/>
+<text x="843" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.6</text>
+<path d="M740 298v120" stroke="#dce5df"/>
+<text x="958" y="364.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">1.36</text>
+<path d="M855 298v120" stroke="#dce5df"/>
+<path d="M40 418H970" stroke="#dce5df"/>
+<rect x="40" y="418" width="930" height="120" fill="#fff"/>
+<text x="20" y="484.0" text-anchor="middle" fill="#718078" font-family="Arial,sans-serif" font-size="16">8</text>
+<text x="52" y="456.6" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">REPRISE ·</text>
+<text x="52" y="484.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">later-stage · 1</text>
+<text x="52" y="511.8" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">year</text>
+<path d="M40 418v120" stroke="#dce5df"/>
+<text x="222" y="470.4" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">Annualized off-treatment</text>
+<text x="222" y="498.0" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">eGFR change difference</text>
+<path d="M210 418v120" stroke="#dce5df"/>
+<text x="523" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">1.27</text>
+<path d="M455 418v120" stroke="#dce5df"/>
+<text x="547" y="484.2" text-anchor="start" font-family="Arial,sans-serif" font-size="20" fill="#213e32">mL/min/1.73 m²</text>
+<path d="M535 418v120" stroke="#dce5df"/>
+<text x="843" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">0.86</text>
+<path d="M740 418v120" stroke="#dce5df"/>
+<text x="958" y="484.2" text-anchor="end" font-family="Arial,sans-serif" font-size="20" fill="#213e32">1.68</text>
+<path d="M855 418v120" stroke="#dce5df"/>
+<path d="M40 538H970" stroke="#dce5df"/>
+<text x="52" y="578" font-family="Arial,sans-serif" font-size="17" fill="#406552">Summary!A5:F8</text></svg>

@@ -19,12 +19,6 @@
   background: #e9ece9;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .rpt-stage {
-    background: var(--paper-sunk, #0b0e0d);
-  }
-}
-
 :root[data-theme="dark"] .rpt-stage {
   background: var(--paper-sunk, #0b0e0d);
 }
@@ -112,7 +106,7 @@
 .dax-full .dax-nav-item,
 .dax-full .dax-ov-link {
   text-decoration: none;
-  color: #cdd5df;
+  color: var(--ink-2);
 }
 
 .dax-full .dax-ov-link {
@@ -143,9 +137,9 @@
 
 .dax-full .dax-nav-item:hover,
 .dax-full .dax-nav-item:focus-visible {
-  background: rgb(255 255 255 / 0.05);
-  border-left-color: var(--brand-500, #16b17e);
-  color: #fff;
+  background: var(--accent-wash);
+  border-left-color: var(--accent);
+  color: var(--accent-deep);
 }
 
 /* ── paper: one continuous scroll, not stacked absolute pages ── */

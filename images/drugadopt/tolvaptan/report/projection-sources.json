@@ -1,0 +1,40 @@
+{
+  "source_sha256": "585e31c267546aa009fdf0fc7f2abd6f387e99f20ab08eb8fb7b6268ed134d48",
+  "source_name": "_bundle.qmd",
+  "sections": [
+    "overview",
+    "clinical-phenotype",
+    "mechanism",
+    "clinical-outcomes",
+    "exposure",
+    "safety",
+    "landscape",
+    "gaps",
+    "traceability"
+  ],
+  "figure_sha256": {
+    "hero.png": "bb426779570b55d204ed68224fd0583650181130149a059aeab8546451d38497",
+    "disease_frame_endpoint_trajectory-fig-crisp-observed-percent-change-output-1.png": "3562772be367b1c2cdb7136b50208b85da305f2694ac84dcfd320f36c25f6719",
+    "orientation_efficacy_landscape-fig-tempo-tkv-output-1.png": "a10139fad9396cb53d4bf0f241069394f6e27749abe82a158f0ef1a91c0f8be1",
+    "target_validation_expression-fig-v2r-mutant-functional-ic50-output-1.png": "0c290e423ec6e2017edff07c5cd65c85a6aa3029606422335cd78d0daf776454",
+    "sar-structures.png": "2e92e10f139ada23b355dbdcb22fcf3bd473b7aa831fe22c1c00f09096cf791d",
+    "receptor-pocket.png": "912de6c17c5454526a76d9de37bc996030cb3445d227e6ba1e085e6e2c864308",
+    "pose-test.png": "08bed5d005df6d3732b502a46d5cfa46c431d8a1a38dc4d29de5cdbadbab70d1",
+    "dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png": "c679646f7154b93df86df418e1c66f0dd9aff656e7994431912602119ae16b71",
+    "admet_pkpd_exposure-fig-assay-concentration-landmarks-output-1.png": "2d90eb1c9800426764f34442720e5109165c12af38379fddfaa8590955a787fa",
+    "admet_pkpd_exposure-fig-human-cmax-by-egfr-output-1.png": "1222da64b30b8b3e4be5cec4246ff1c93e9acdb5e89c8e120c8823eea80d9878",
+    "admet-report.png": "701e5ee57fc85b9c1860a0664835160e727e86572990f19a2e415ceb135ff464",
+    "pk-report.png": "23a1f22e0a507ee32d235a2f5e63e8ed88a7a63016820831809462b51a314a86",
+    "clinical_terminations-fig-termination-categories-output-1.png": "16c0f58e8d7a9603e828899e535d06d911526555e6bff697e195506ddfc35850",
+    "ip_estate_timeline-fig-ip-patent-timeline-output-1.png": "83c4a055a1af1b9e8035be56d29679ad2572ac862389bdb008eb117714a48da4"
+  },
+  "copy_replacements": {
+    "tested the same drug": "tested tolvaptan",
+    "Our same-study reanalysis of 12 treated and 12 untreated mice": "An analysis of 12 treated and 12 untreated mice",
+    "The annualized difference in eGFR change was +1.27 mL/min/1.73 m^2^ versus placebo": "In the annualized comparison, eGFR fell less with tolvaptan than with placebo, a difference of +1.27 mL/min/1.73 m^2^"
+  },
+  "omitted_internal_sections": [
+    "Quantitative data",
+    "Report provenance"
+  ]
+}

@@ -7,14 +7,14 @@
    reads as a signal rather than as decoration.
 
    Ground: cool green-grey neutrals biased toward the logo accent. No display
-   serif. Both themes are token-level, so the viewer's toggle wins either way.
+   serif. The site defaults to light. An explicit data-theme still selects either palette.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
   /* Ground — cool green-grey paper, deliberately not warm cream */
-  --paper:        #f2f3f1;
+  --paper:        #f4f6f2;
   --paper-raised: #fbfcfb;
   --paper-sunk:   #e7e9e6;
 
@@ -56,30 +56,6 @@
   --step-4:  clamp(2.2rem, 1.5rem + 3.2vw, 4rem);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --paper:        #101412;
-    --paper-raised: #171d1a;
-    --paper-sunk:   #0b0e0d;
-    --ink:      #e8ece9;
-    --ink-2:    #b0b9b3;
-    --ink-3:    #8b958e;
-    --ink-4:    #79837c;
-    --rule:       #262e2a;
-    --rule-firm:  #3a443f;
-    --accent:      #5fbf9c;
-    --accent-deep: #8ed6ba;
-    --accent-wash: #16261f;
-    --unresolved:      #e08a6e;
-    --unresolved-wash: #2a1a15;
-    --partial:         #d2b04c;
-    --partial-wash:    #26200e;
-    --resolved:        #5fbf9c;
-    --resolved-wash:   #16261f;
-  }
-}
-
 :root[data-theme="dark"] {
   color-scheme: dark;
   --paper:        #101412;
@@ -104,7 +80,7 @@
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --paper:        #f2f3f1;
+  --paper:        #f4f6f2;
   --paper-raised: #fbfcfb;
   --paper-sunk:   #e7e9e6;
   --ink:      #131815;
@@ -204,16 +180,11 @@ body {
 
 /* Two logo files: the black-ringed PNG for light grounds, the white-ringed
    SVG for dark. The near-black O disappears on the dark masthead, so swap by
-   theme rather than tint one file. Light shown by default; dark theme (via
-   media query or the toggle's data-theme) swaps them. */
+   theme rather than tint one file. Light shown by default; an explicit dark data-theme swaps them. */
 .brand-logo { width: 25px; height: 25px; object-fit: contain; }
 .brand-logo-light { display: block; }
 .brand-logo-dark  { display: none; }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .brand-logo-light { display: none; }
-  :root:not([data-theme="light"]) .brand-logo-dark  { display: block; }
-}
 :root[data-theme="dark"]  .brand-logo-light { display: none; }
 :root[data-theme="dark"]  .brand-logo-dark  { display: block; }
 :root[data-theme="light"] .brand-logo-light { display: block; }

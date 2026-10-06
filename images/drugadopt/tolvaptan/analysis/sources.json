@@ -1,0 +1,42 @@
+{
+  "dataset": "GSE198340",
+  "comparison": "12 tolvaptan-treated versus 12 untreated male Pkd1-knockout mice",
+  "scope": "Exploratory selected whole-kidney expression samples; variable collection times.",
+  "retained_files": {
+    "dependency.qmd": {
+      "source_name": "dependency.qmd",
+      "sha256": "c2ae885e141e9faa936389171133292da4d56a18b4829e600a2fbe44181580d6"
+    },
+    "dependency_result_summary.json": {
+      "source_name": "dependency_result_summary.json",
+      "sha256": "d48bd1b5a5f89f036904b3f53e65c9e9829cd392014ab559df412d961390ad94"
+    },
+    "run_array_de.py": {
+      "source_name": "run_array_de.py",
+      "sha256": "d1d23639f26abf9c60b44bca6939215dca1050ad8337dd81494f4c52df07d6a6"
+    }
+  },
+  "results": {
+    "source_name": "array_de_results.csv",
+    "source_sha256": "2cd7e542efd8a7ec29b7cd02c88efaf9ae35e9c041c6aaa47bb4cbbc7594e1e2",
+    "selected_probes": [
+      "17515813",
+      "17314833",
+      "17510983",
+      "17334304",
+      "17213676",
+      "17503031",
+      "17535712",
+      "17352862"
+    ],
+    "projection_sha256": "b569eb36e9e4d9b62234924b011661671872e4366672973d88f01663efcb5004"
+  },
+  "slide": {
+    "number": 7,
+    "deck_name": "Findings.pptx",
+    "deck_package": "tolvaptan-highlights-20261005",
+    "deck_sha256": "907dbdccfb938d120520d0ab0e8ef30a7ad34e1388885c7409b17bb1a215846d",
+    "retained_render_sha256": "573a30e70055ead080b750cb73687d66c5cb390ccdfbedcbf85b5da06732a2ea",
+    "preview_sha256": "e12427c0470adb16f40d13e373c3c147e63c57ab4f1535854d162f1ca2268634"
+  }
+}

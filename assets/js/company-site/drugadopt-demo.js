@@ -9,6 +9,18 @@
     var navItems = [].slice.call(ui.querySelectorAll('.dax-nav-item'));
     var pages = [].slice.call(ui.querySelectorAll('.dax-page'));
     var paper = ui.querySelector('.dax-paper');
+    var reader = ui.closest('[id]');
+    var storageKey = 'drugadopt-preview:' + window.location.pathname + ':' + (reader ? reader.id : 'sample');
+    var remembered = null;
+    try { remembered = JSON.parse(window.sessionStorage.getItem(storageKey)); } catch (_) {}
+
+    function remember() {
+      var active = pages.find(function (page) { return !page.hidden; });
+      if (!active) return;
+      try {
+        window.sessionStorage.setItem(storageKey, JSON.stringify({ page: active.dataset.page, scroll: active.scrollTop }));
+      } catch (_) {}
+    }
 
     // The panel is shorter than every section; the fade says there is more.
     function markEnd(page) {
@@ -17,7 +29,7 @@
       paper.classList.toggle('is-end', atEnd);
     }
 
-    function show(key) {
+    function show(key, scrollTop) {
       if (!pages.some(function (page) { return page.dataset.page === key; })) return;
       navItems.forEach(function (item) {
         var active = item.dataset.page === key;
@@ -33,7 +45,7 @@
         // stop there: Safari does not make scrollers focusable on its own.
         page.tabIndex = active && !phone.matches ? 0 : -1;
         if (active) {
-          page.scrollTop = 0;
+          page.scrollTop = scrollTop || 0;
           markEnd(page);
         }
       });
@@ -61,7 +73,9 @@
         }
       });
     });
-    show('cover');
+    var initial = remembered && pages.some(function (page) { return page.dataset.page === remembered.page; }) ? remembered : { page: 'cover', scroll: 0 };
+    show(initial.page, initial.scroll);
+    window.addEventListener('pagehide', remember);
 
     // Rotating across the 40rem line changes whether the panel scrolls, and
     // so whether it should be a tab stop.
@@ -69,7 +83,8 @@
       var current = navItems.find(function (item) {
         return item.classList.contains('dax-nav-item-active');
       });
-      show(current ? current.dataset.page : 'cover');
+      var active = pages.find(function (page) { return !page.hidden; });
+      show(current ? current.dataset.page : 'cover', active ? active.scrollTop : 0);
     };
     if (phone.addEventListener) phone.addEventListener('change', onWidthChange);
     else if (phone.addListener) phone.addListener(onWidthChange);

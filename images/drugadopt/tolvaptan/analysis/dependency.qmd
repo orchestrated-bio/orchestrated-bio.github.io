@@ -1,0 +1,101 @@
+---
+title: "Tolvaptan-associated kidney expression in a Pkd1 mouse model"
+format:
+  html:
+    toc: true
+execute:
+  echo: false
+---
+
+## Question and answer
+
+Does controlled AVPR2 antagonism change a disease-relevant phenotype in ADPKD models? The strongest controlled exact-asset animal source is a randomized conditional Pkd1 mouse study: the source reports improved kidney survival and lower kidney-weight/body-weight ratio with tolvaptan-SD, but its Figure 1 cystic-index comparison is not significant. The article's general Results prose suggests cystic-index reduction; the panel-specific result does not support that claim. A separate small primary human ADPKD epithelial assay reports lower AVP-stimulated cyst area with tolvaptan, while an abstract-only PKD2 organoid study reports no cyst response. This mixed pattern limits the transferable cyst-structure claim. No honest quantitative plot of the animal outcome comparison is supported by retained per-animal values/effect estimates; we therefore retain those source-reported outcomes in prose and show the separately computed deposited-array contrast below.
+
+Within the deposited Pkd1 conditional-knockout mouse kidney array, the labeled tolvaptan-only and untreated groups differ broadly at the transcript level. This is not a cyst-volume or kidney-function endpoint. The receptor-pathway marker **Avpr2** was not significantly different after multiplicity adjustment; **Aqp2** expression was lower. Neither result measures receptor blockade, cAMP, phosphorylation, cyst rescue or clinical effect.
+
+The deposited matrix labels male mouse whole-kidney samples with kidney-specific conditional Pkd1 loss as tolvaptan-treated or untreated. The linked paper reports treatment from P40 on 0.15% tolvaptan-SD food (66.7% active; authors equate it to 0.1% tolvaptan chow), individual ESRD/end-of-study collection rules, and selection of expression kidneys around each treatment-group median 2KW/BW (PMID 36743216; see `modules/dependency.md`). Thus study-level dose and schedule are known, but matrix samples cannot be linked to per-animal exposure, harvest age/outcome or batch. Endpoint/severity selection limits causal attribution of the expression difference to treatment and its generalizability. Whole-kidney signal aggregates cell types and cannot be interpreted as expression per cyst epithelial cell. The Pkd1 model represents one ADPKD-relevant genotype, not the heterozygous human disease population as a whole.
+
+## Fit and QC
+
+The fitted model includes 47 mutant arrays across four separate treatment terms to estimate residual variance; only 12 monotherapy and 12 untreated arrays define the reported contrast within Pkd1 KO. The other treatment arms are not pooled into monotherapy, and 10 wild-type arrays are excluded. The combination-treated arm remains separate. The model used probe-wise least squares with empirical-Bayes moderated t statistics and Benjamini–Hochberg adjustment. A broad response across probes does not establish a disease-modifying phenotype. The source labels are numbered samples, but the series matrix does not independently document animal-level independence; the denominators follow deposited group labels. Fit sizes and QC are generated from the retained summary and shown below.
+
+The plotted probe estimates and 95% intervals are loaded directly from the retained fit summary JSON. Positive logFC denotes higher signal in tolvaptan-labelled than untreated Pkd1 KO samples. Probe intensity is relative, and probe-level results do not equal receptor protein or function. The table below loads contrast denominators, fitted-probe count, BH-positive count and QC from the retained fit JSON; see the receipt-linked files for the complete probe table.
+
+```{python}
+#| label: tbl-gse198340-fit-summary
+#| tbl-cap: "Fit denominators and all-probe multiplicity summary for tolvaptan monotherapy versus untreated Pkd1 KO kidney arrays; probe-level result and QC counts; computed evidence; GSE198340."
+#| evidence: computed
+#| sources: GSE198340
+import json
+import pandas as pd
+from IPython.display import display, Markdown
+with open("dependency_result_summary.json") as f:
+    result = json.load(f)
+fit_rows = [
+    {"Measure": "Tolvaptan-treated biological-sample labels", "Value": result["groups"]["treated with Tolvaptan"]},
+    {"Measure": "Untreated biological-sample labels", "Value": result["groups"]["untreated"]},
+    {"Measure": "Recorded samples", "Value": result["sample_counts"]["recorded"]},
+    {"Measure": "Samples fitted", "Value": result["sample_counts"]["fitted"]},
+    {"Measure": "Samples excluded (outside genotype subset)", "Value": result["sample_counts"]["not_fitted"]},
+    {"Measure": "Probes fitted", "Value": result["probes_fitted"]},
+    {"Measure": f"Probes with BH-adjusted p < {result['BH_alpha']}", "Value": result["BH_significant_probes"]},
+    {"Measure": "QC flags", "Value": ", ".join(result["QC_flags"]) if result["QC_flags"] else "None"},
+]
+display(Markdown(pd.DataFrame(fit_rows).to_markdown(index=False)))
+```
+
+```{python}
+#| label: fig-gse198340-marker-expression
+#| fig-cap: "Probe-level expression difference (tolvaptan minus untreated) in Pkd1 KO mouse whole kidney; processed array intensity difference with 95% intervals; per-arm biological-sample denominators shown in the fit table; computed evidence; source GSE198340."
+#| evidence: computed
+#| sources: GSE198340
+import json
+import pandas as pd
+import altair as alt
+
+with open("dependency_result_summary.json") as f:
+    result = json.load(f)
+df = pd.DataFrame(result["selected_probes"])
+df["label"] = df["symbol"] + " (" + df["probe"].astype(str) + ")"
+base = alt.Chart(df).encode(
+    y=alt.Y("label:N", sort="-x", title="Annotated gene (probe)"),
+    x=alt.X("logFC:Q", title="Log2 RNA intensity difference: tolvaptan minus untreated")
+)
+intervals = df.melt(id_vars=["label"], value_vars=["CI.L", "CI.R"], var_name="bound", value_name="estimate")
+interval = alt.Chart(intervals).mark_line(color="#4C78A8", strokeWidth=3).encode(
+    y=alt.Y("label:N", sort="-x", title="Annotated gene (probe)"),
+    x=alt.X("estimate:Q", title="Log2 RNA intensity difference: tolvaptan minus untreated"),
+    detail="label:N",
+    order=alt.Order("bound:N", sort="ascending")
+)
+points = base.mark_circle(size=80, color="#E45756").encode(
+    tooltip=["symbol", "probe", alt.Tooltip("logFC:Q", format=".3f"),
+             alt.Tooltip("CI.L:Q", format=".3f"), alt.Tooltip("CI.R:Q", format=".3f"),
+             alt.Tooltip("adj.P.Val:Q", format=".3g")]
+)
+zero = alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color="black", strokeDash=[4,4]).encode(x="x:Q")
+(zero + interval + points).properties(width=620, height=210, title="Mouse kidney probe RNA: tolvaptan versus untreated Pkd1 knockout")
+```
+
+The panel is a post-fit exploratory mechanistic-context subset informed by the routed biology; it was not prespecified before this analysis and is not a confirmatory gene-set test. See the labeled probe table below; it reports estimates and 95% intervals from the full fitted table. These are probe-specific bulk RNA associations. The fit does not establish cAMP signaling or aquaporin-2 protein abundance/localization.
+
+```{python}
+#| label: tbl-gse198340-probe-estimates
+#| tbl-cap: "Selected receptor-pathway context probes in the GSE198340 monotherapy contrast; array intensity difference, 95% intervals and BH-adjusted p values; computed evidence; GSE198340."
+#| evidence: computed
+#| sources: GSE198340
+from IPython.display import display, Markdown
+with open("dependency_result_summary.json") as f:
+    result = json.load(f)
+table = pd.DataFrame(result["selected_probes"])[["symbol", "probe", "logFC", "CI.L", "CI.R", "adj.P.Val"]]
+table.columns = ["Gene", "Probe", "logFC", "95% CI lower", "95% CI upper", "BH-adjusted p"]
+display(Markdown(table.to_markdown(index=False, floatfmt=".4g")))
+```
+
+## Relation to controlled phenotype experiments
+
+The exact-asset randomized Pkd1 mouse study (PMID 36743216; full text and inspected Figure 1 in `analysis/raw/dependency/`) reports better kidney survival and lower kidney-weight/body-weight ratio for tolvaptan-SD, but a non-significant tolvaptan cystic-index comparison. The article's summary prose and panel-specific cystic-index result disagree; `modules/dependency.md` preserves this. The authors acknowledge Otsuka Pharmaceuticals supplied the modified tolvaptan-SD formulation. The GEO expression data are from that study and are not independent confirmation; deposited sample accessions do not map to per-animal outcomes. A separate exact-asset human ADPKD epithelial collagen-gel assay (PMID 21816754) reports lower AVP-stimulated two-dimensional cyst area with tolvaptan; short ligand-challenge culture is not oral chronic exposure and has no receptor loss-and-re-expression demonstration. AVP deprivation and dDAVP add-back in PCK rats are pathway-modifier evidence in recessive ARPKD, not exact-asset evidence. The PKD2-deficient organoid abstract reports no cyst response, with insufficient detail to judge exposure and replication.
+
+## Reproducibility and limits
+
+The sample-field survey is `GSE198340_fields.json` / `GSE198340_samples.csv`; design, all probes, QC and computation receipt are linked in `../modules/dependency_search_log.md` and `dependency_computation_receipt.json`. The array reanalysis is a new case computation on deposited author data, not a new experiment. Bulk-tissue cell mixture, severity-based expression-kidney selection, unavailable per-sample exposure/harvest-age/outcome linkage and uncertain independent-animal documentation limit causal and biological interpretation. This fit cannot establish a patient outcome or a tumor-dependency result.
