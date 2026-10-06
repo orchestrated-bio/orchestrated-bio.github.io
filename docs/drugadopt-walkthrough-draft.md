@@ -2,6 +2,12 @@
 
 The company pages now default to a soft off-white canvas, with muted green accents. The DrugAdopt homepage uses alternating text/preview rows inspired by Alex's Webistry screenshot and the supplied ConversionLab and Champ case studies. The implementation remains the existing static site: `index.html`, scoped CSS, reader controls, and the existing portable-artifact builder.
 
+## Mobile site navigation, October 5
+
+The mobile site menu previously enlarged the sticky masthead and pushed the page down, with small links. It now opens as a panel below the masthead, with larger text, 56px link targets, an active-page background, and a Menu/Close icon. Modern browsers use their native auto-popover behavior for outside dismissal, Escape, keyboard order and focus return. The existing toggle behavior remains available on older browsers, and navigation remains visible without JavaScript. Desktop navigation is unchanged.
+
+Browser checks covered 390px and 320px layouts, outside dismissal, keyboard opening and tab order, Escape focus return, the open-menu transition to desktop and back, and navigation through Custom analysis, Insight, Company, DrugAdopt and the full report. Opening the menu leaves the masthead height, page position and headline position unchanged. Shared asset versions were refreshed across the pages. The existing report projection now refreshes its asset versions too; regenerating the bound report changed only those references. All 26 HTML pages and 309 local references/anchors pass the source check, and all 49 retained scientific files are unchanged. Scopeify evaluation reports 46 passes with zero warnings or failures, and the existing portable artifact was rebuilt. Receipts and screenshots are under `test-results/mobile-navigation/`.
+
 ## Independent buyer and reader reviews, October 5
 
 At Alex's request, three fresh Astra reviewers independently assessed commit `e470324`: a founder seeking biomarker discovery with no drug, a small-biotech sponsor evaluating assets or pre-trial science, and a scientific reader checking the live desktop page. Each received the same page and relevant rendered evidence without the other reviewers' outputs. The two buyer reviews used source and screenshots; the reader used a separate temporary browser tab, with mobile assessment from existing screenshots. Both buyer personas understood the commissioned-analysis and diligence offer and supported the approved headline.
