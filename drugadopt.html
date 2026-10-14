@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Discover biomarkers and therapeutic possibilities. DrugAdopt combines original data analyses with scientific due diligence for research and biotech teams investigating disease, treatment response and therapeutic assets." />
+    <meta name="theme-color" content="#f4f6f2" />
+    <title>DrugAdopt: The Tolvaptan Example</title>
+    <link rel="canonical" href="https://orchestrated.bio/drugadopt.html" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="DrugAdopt | Orchestrated Biosciences" />
+    <meta property="og:description" content="Candidate biomarker discovery, disease biology and scientific due diligence for research and biotech teams. Start with a biological question, research data or therapeutic assets." />
+    <meta property="og:url" content="https://orchestrated.bio/drugadopt.html" />
+    <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=26c6a08ed541" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt-walkthrough.css?v=7fdd3b46b480" />
+    <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
+  </head>
+  <body class="drugadopt-home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a href="./drugadopt.html" aria-current="page">DrugAdopt</a>
+          <a href="./custom-analysis.html">Custom analysis</a>
+          <a href="./insight.html">Insight</a>
+          <a href="./company.html">Company</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="evidence-intro shell" id="evidence-walkthrough" aria-labelledby="evidence-title">
+        <p class="artifact-eyebrow">An example: tolvaptan in ADPKD</p>
+        <h2 id="evidence-title">What changed downstream of tolvaptan’s target?</h2>
+        <div class="case-introduction">
+          <p>Tolvaptan blocks the V2 receptor in the kidney’s water-handling pathway. We reanalyzed public kidney-expression data from 12 treated and 12 untreated male Pkd1-knockout mice selected for expression profiling.</p>
+          <p><strong>Aqp2 RNA was lower in treated mouse kidneys.</strong> Aqp2 encodes a water channel downstream of V2 signaling. This exploratory result adds a molecular signal to investigate alongside cyst-fluid secretion and the clinical kidney-volume findings.</p>
+        </div>
+        <figure class="expression-highlight">
+          <a class="artifact-image-link" data-artifact-zoom data-detail-width="1478" data-detail-title="Exploratory mouse expression analysis · Report Figure 2.5" href="./images/drugadopt/tolvaptan/report/dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png" target="_blank" rel="noopener" aria-label="View the mouse RNA comparison"><img src="./images/drugadopt/tolvaptan/report/dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png" width="1478" height="540" alt="Eight exploratory marker probes in mouse kidneys. Dots show tolvaptan-minus-untreated RNA differences, and bars show 95 percent confidence intervals." loading="lazy" decoding="async" /></a>
+          <figcaption><strong>Exploratory mouse analysis.</strong> Dots show RNA differences; bars show 95% confidence intervals. <a href="./report.html#fig-2-5">Report §2.1.7</a></figcaption>
+        </figure>
+      </section>
+
+      <section class="evidence-trace shell" id="trace-title" aria-label="The mouse expression analysis and its supporting work">
+        <div class="trace-grid">
+          <article class="trace-card" id="trace-report">
+            <header class="trace-card-head"><span>01</span><h3>Report</h3></header>
+            <div class="trace-card-body trace-report-excerpt">
+              <p class="trace-document-title">Mouse expression analysis</p>
+              <p>Aqp2 encodes aquaporin-2, a water channel, while Avpr2 encodes the receptor itself.</p>
+              <p>The Aqp2 probe showed a <strong>−0.4017 log2 difference</strong> between treated and untreated kidneys.</p>
+              <p class="trace-excerpt-context">Exploratory comparison of selected whole-kidney samples.</p>
+            </div>
+            <footer><a href="./report.html#claim-c-array">§2.1.7 · page 13 <span aria-hidden="true">→</span></a></footer>
+          </article>
+          <article class="trace-card" id="trace-slide">
+            <header class="trace-card-head"><span>02</span><h3>Slide deck</h3></header>
+            <div class="trace-card-body">
+              <figure class="trace-slide-preview"><a class="artifact-image-link trace-slide-excerpt" data-artifact-zoom data-detail-width="1600" data-detail-title="Mouse expression analysis · Slide 7" data-detail-alt="Slide 7 explains lower Aqp2 RNA in treated mouse kidneys and compares Aqp2, Avpr2, and Pkd1 estimates." href="./images/drugadopt/tolvaptan/slide-expression.jpg" target="_blank" rel="noopener" aria-label="View the full mouse expression slide"><p class="trace-slide-title">Mouse kidney expression</p><p class="trace-slide-key"><strong>Tolvaptan-treated mouse kidneys had lower RNA for Aqp2, which encodes a water channel.</strong></p><p>Avpr2 encodes the V2 receptor targeted by tolvaptan.</p><p class="trace-slide-context">12 treated and 12 untreated male Pkd1-knockout mice.</p></a><figcaption>Excerpt from Slide 7</figcaption></figure>
+            </div>
+            <footer><a href="#slide-highlights" data-artifact-index="5">Slide 7 <span aria-hidden="true">→</span></a></footer>
+          </article>
+          <article class="trace-card" id="trace-workbook">
+            <header class="trace-card-head"><span>03</span><h3>Spreadsheet</h3></header>
+            <div class="trace-card-body trace-sheet-preview">
+              <p class="trace-sheet-title">Aqp2 · probe 17314833</p>
+              <table><thead><tr><th scope="col">Measure</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">RNA difference</th><td>−0.4017<br /><span>log2 units</span></td></tr><tr><th scope="row">95% confidence interval</th><td>−0.5719 to −0.2314</td></tr><tr><th scope="row">Adjusted P value</th><td>0.000218</td></tr></tbody></table>
+              <p class="trace-sheet-note">Tolvaptan minus untreated. P values use Benjamini–Hochberg adjustment.</p>
+            </div>
+            <footer><a href="#data-highlights" data-artifact-index="3">Parameters · row 26 <span aria-hidden="true">→</span></a></footer>
+          </article>
+          <article class="trace-card" id="trace-source">
+            <header class="trace-card-head"><span>04</span><h3>Code &amp; source</h3></header>
+            <div class="trace-card-body trace-source-preview">
+              <p class="trace-code-label">Fitted RNA contrast · Python</p>
+              <pre tabindex="0" aria-label="Original Python fit excerpt"><code>estimate = coefficients @ c
+se = np.sqrt(s2_post) * unscaled
+t = estimate / se
+p_value = 2 * stats.t.sf(np.abs(t), df_total)
+margin = stats.t.ppf(0.975, df_total) * se</code></pre>
+              <div class="trace-source-links"><a href="./images/drugadopt/tolvaptan/analysis/run_array_de.py" download="run_array_de.py">Fit code</a><a href="./images/drugadopt/tolvaptan/analysis/dependency.qmd" download="dependency.qmd">Quarto analysis</a><a href="./images/drugadopt/tolvaptan/analysis/selected-probes.csv" download="selected-probes.csv">Results CSV</a></div>
+            </div>
+            <footer><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE198340" target="_blank" rel="noreferrer">GEO dataset · GSE198340 <span aria-hidden="true">↗</span></a></footer>
+          </article>
+        </div>
+      </section>
+
+      <div class="case-gallery" data-case-gallery>
+        <div class="case-gallery-heading shell">
+          <h2>More from the tolvaptan case.</h2>
+          <div class="case-formats" role="group" aria-label="Case preview format" hidden>
+            <button type="button" data-case-format="report-highlights" aria-controls="report-highlights" aria-pressed="true">Report</button>
+            <button type="button" data-case-format="slide-highlights" aria-controls="slide-highlights" aria-pressed="false">Slide deck</button>
+            <button type="button" data-case-format="data-highlights" aria-controls="data-highlights" aria-pressed="false">Spreadsheet</button>
+          </div>
+        </div>
+      <section class="artifact-chapter shell" id="report-highlights" data-case-panel aria-labelledby="report-title">
+        <div class="artifact-chapter-copy"><h3 id="report-title" data-highlight-heading>How kidney enlargement relates to filtration.</h3></div>
+        <div class="artifact-stack">
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Report" role="region" aria-label="Selected report pages">
+          <div class="artifact-selector" aria-label="Choose a report highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">Disease biology</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Clinical evidence</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Drug exposure</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="How kidney enlargement relates to filtration.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link report-window" data-artifact-zoom data-detail-width="1237" href="./images/drugadopt/tolvaptan/report-endpoints.jpg" target="_blank" rel="noopener" aria-label="Enlarge report page 6 on disease endpoints"><img src="./images/drugadopt/tolvaptan/report-endpoints.jpg" width="1237" height="1600" alt="Report page 6: plotted changes in kidney volume and measured filtration in 93 CRISP participants, with its caption, study reference, and analysis filename." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Disease biology · Report p. 6</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Kidney-volume growth in an adult trial.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link report-figure-preview" data-artifact-zoom data-detail-width="1800" href="./images/drugadopt/tolvaptan/report/orientation_efficacy_landscape-fig-tempo-tkv-output-1.png" target="_blank" rel="noopener" aria-label="View the report figure on kidney-volume growth in TEMPO"><img src="./images/drugadopt/tolvaptan/report/orientation_efficacy_landscape-fig-tempo-tkv-output-1.png" width="1800" height="700" alt="Report Figure 1.2: annual kidney-volume growth and source-reported 95 percent confidence intervals in the tolvaptan and placebo arms of the three-year TEMPO trial, with 1,307 primary MRI-analysis participants." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Clinical evidence · <a href="./report.html#fig-1-2">Report Figure 1.2</a></strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Simulated exposure across doses and kidney function.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1237" href="./images/drugadopt/tolvaptan/report-modeling.jpg" target="_blank" rel="noopener" aria-label="View report page 22 on plasma simulations"><img src="./images/drugadopt/tolvaptan/report-modeling-excerpt.jpg" width="1005" height="977" alt="Complete report Figure 4.4 and caption: published-parameter simulations of total plasma tolvaptan across historical regimens and kidney-function scenarios, with both panels, axes, and model assumptions." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Drug exposure · Report p. 22</strong></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous report highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next report highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      <section class="artifact-chapter shell" id="slide-highlights" data-case-panel aria-labelledby="slides-title">
+        <div class="artifact-chapter-copy"><h3 id="slides-title" data-highlight-heading>How tolvaptan acts on V2 signaling.</h3></div>
+        <div class="artifact-stack">
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Slides" role="region" aria-label="Selected presentation slides">
+          <div class="artifact-selector" aria-label="Choose a presentation highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">Drug mechanism</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Clinical outcomes</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Safety</button>
+            <button type="button" data-artifact-select="3" aria-pressed="false">Predictions</button>
+            <button type="button" data-artifact-select="4" aria-pressed="false">Receptor structure</button>
+            <button type="button" data-artifact-select="5" aria-pressed="false">RNA analysis</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="How tolvaptan acts on V2 signaling.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-mechanism.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 4 on V2 receptor mechanism"><img src="./images/drugadopt/tolvaptan/slide-mechanism.jpg" width="1600" height="900" alt="Slide 4: stimulated-signaling IC50 about 0.2 nM in three human ADPKD culture preparations; pediatric urine-osmolality changes with treatment and placebo groups. Clinical benefit in children remains unresolved." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Drug mechanism &amp; biomarkers · Slide 4</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Clinical outcomes in adult ADPKD trials.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-trials.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 8 on adult trial outcomes"><img src="./images/drugadopt/tolvaptan/slide-trials.jpg" width="1600" height="900" alt="Slide 8: TEMPO 3:4 kidney-volume growth difference was minus 2.7 percentage points per year; filtration contrasts were plus 0.98 for TEMPO annual slope and plus 1.27 for REPRISE annualized change, with source-reported confidence intervals." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Clinical outcomes · Slide 8</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Treatment tolerability and liver safety.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-safety.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 11 on treatment safety"><img src="./images/drugadopt/tolvaptan/slide-safety.jpg" width="1600" height="900" alt="Slide 11: treatment discontinuation, aquaretic events, and liver-enzyme elevations with treatment and placebo counts, percentages, observation windows, and serious liver-injury context." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Tolerability &amp; liver safety · Slide 11</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Predicted properties and plasma exposure.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-predictions.jpg" target="_blank" rel="noopener" aria-label="Enlarge slide 10 on ADME predictions and simulations"><img src="./images/drugadopt/tolvaptan/slide-predictions.jpg" width="1600" height="900" alt="Slide 10: ADME predictions include a 5.50 percent unbound fraction compared with the reported plasma limit below 2 percent. Assay conditions differ." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Predictions &amp; plasma simulations · Slide 10</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Tolvaptan in the V2 receptor pocket.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-structure.png" target="_blank" rel="noopener" aria-label="Enlarge slide 6 on receptor structure and docking"><img src="./images/drugadopt/tolvaptan/slide-structure.png" width="1600" height="900" alt="Slide 6: the observed tolvaptan receptor pocket and results from three docking runs, with notes on receptor preparation." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Receptor structure &amp; docking · Slide 6</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="RNA changes in treated mouse kidneys.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link" data-artifact-zoom data-detail-width="1600" href="./images/drugadopt/tolvaptan/slide-expression.jpg" target="_blank" rel="noopener" aria-label="View slide 7 on mouse expression analysis"><img src="./images/drugadopt/tolvaptan/slide-expression.jpg" width="1600" height="900" alt="Slide 7: lower Aqp2 RNA in tolvaptan-treated mouse kidneys, with Aqp2, Avpr2, and Pkd1 estimates and the report reference." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Mouse expression analysis · Slide 7</strong></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous slide highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next slide highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      <section class="artifact-chapter shell" id="data-highlights" data-case-panel aria-labelledby="data-title">
+        <div class="artifact-chapter-copy"><h3 id="data-title" data-highlight-heading>Clinical estimates with confidence intervals.</h3></div>
+        <div class="artifact-stack">
+        <div class="artifact-viewer" data-artifact-viewer data-kind="Spreadsheet" role="region" aria-label="Selected workbook ranges">
+          <div class="artifact-selector" aria-label="Choose a workbook highlight" hidden>
+            <button type="button" data-artifact-select="0" aria-pressed="true">Summary</button>
+            <button type="button" data-artifact-select="1" aria-pressed="false">Parameters</button>
+            <button type="button" data-artifact-select="2" aria-pressed="false">Sources</button>
+            <button type="button" data-artifact-select="3" aria-pressed="false">RNA analysis</button>
+          </div>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Clinical estimates with confidence intervals.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="970" data-detail-alt="Reflowed Summary A5:F8: three adult trial contrasts, values, units, and confidence intervals." data-detail-title="Summary · A5:F8" href="./images/drugadopt/tolvaptan/workbook-summary.svg" target="_blank" rel="noopener" aria-label="Enlarge workbook Summary range A5 to F8"><img src="./images/drugadopt/tolvaptan/workbook-summary.svg" width="970" height="598" alt="Reflowed Summary A5:F8: TEMPO kidney-volume growth contrast −2.7 percentage points per year, with confidence interval bounds −3.3 and −2.1." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Clinical results · Summary A5:F8</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Values behind the clinical comparison.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="975" data-detail-alt="Reflowed Parameters A1:E4: stable IDs, domains, endpoint, arm estimates, adjusted contrast, and units." data-detail-title="Parameters · A1:E4" href="./images/drugadopt/tolvaptan/workbook-parameters.svg" target="_blank" rel="noopener" aria-label="Enlarge workbook Parameters range A1 to E4"><img src="./images/drugadopt/tolvaptan/workbook-parameters.svg" width="975" height="598" alt="Reflowed Parameters A1:E4: kidney-volume endpoint, tolvaptan and placebo arm growth rates of 2.8 and 5.5 percent per year, and adjusted contrast −2.7 percentage points per year." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Parameter records · Parameters A1:E4</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="Publications behind the evidence.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="975" data-detail-alt="Reflowed Sources A1:E5: publication IDs, authors, years, and titles." data-detail-title="Sources · A1:E5" href="./images/drugadopt/tolvaptan/workbook-sources.svg" target="_blank" rel="noopener" aria-label="Study references from workbook Sources A1 to E5"><img src="./images/drugadopt/tolvaptan/workbook-sources.svg" width="975" height="598" alt="Reflowed Sources A1:E5: publication IDs, authors, years, and titles for four studies." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Study references · Sources A1:E5</strong></figcaption>
+          </figure>
+          <figure class="artifact-panel" data-artifact-panel data-highlight-title="RNA estimates from the mouse analysis.">
+            <div class="artifact-canvas" role="region" aria-label="Image preview"><a class="artifact-image-link artifact-workbook-page" data-artifact-zoom data-detail-width="930" data-detail-title="Mouse expression · Parameters rows 26, 25, 28" href="./images/drugadopt/tolvaptan/workbook-expression.svg" target="_blank" rel="noopener" aria-label="View mouse expression values from the evidence workbook"><img src="./images/drugadopt/tolvaptan/workbook-expression.svg" width="930" height="598" alt="Selected Parameters cells for Aqp2, Avpr2, and Pkd1, with RNA differences, confidence intervals, and adjusted P values." loading="lazy" decoding="async" /></a></div>
+            <figcaption><strong>Mouse expression · Parameters rows 26, 25, 28</strong></figcaption>
+          </figure>
+          <div class="artifact-controls" hidden><button type="button" data-artifact-prev aria-label="Previous workbook highlight">←</button><p data-artifact-status aria-live="polite" aria-atomic="true"></p><button type="button" data-artifact-next aria-label="Next workbook highlight">→</button></div>
+        </div>
+        </div>
+      </section>
+
+      </div>
+
+      <dialog class="artifact-dialog" aria-labelledby="artifact-dialog-title">
+        <div class="artifact-dialog-bar"><h2 id="artifact-dialog-title">Image detail</h2><div class="artifact-dialog-actions"><button type="button" data-artifact-fit aria-pressed="true">Fit</button><button type="button" data-artifact-detail aria-pressed="false">Larger text</button><button type="button" data-artifact-close autofocus>Close <span aria-hidden="true">×</span></button></div></div>
+        <div class="artifact-dialog-scroll" tabindex="0" role="region" aria-label="Enlarged page, slide, or table"><img alt="" /></div>
+        <p class="artifact-dialog-caption"></p>
+      </dialog>
+
+    </main>
+
+    <footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="./privacy-policy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./assets/js/company-site/mobile-nav.js?v=2b3f612cd84d"></script>
+    <script src="./assets/js/company-site/drugadopt-walkthrough.js?v=c7fb2089e4b0"></script>
+  </body>
+</html>
