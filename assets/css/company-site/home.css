@@ -1,0 +1,8 @@
+/* Home page: company header above the DrugAdopt opening. */
+.company-head { padding-block: clamp(3.5rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem); border-bottom: 1px solid var(--rule); }
+.company-head h1 { margin: 0; font-size: clamp(2.6rem, 1.35rem + 4.8vw, 5.6rem); line-height: 1; letter-spacing: -.035em; font-weight: 700; color: var(--ink); text-wrap: balance; }
+.company-slogan { margin: 1.1rem 0 0; font-size: var(--step-3); line-height: 1.15; letter-spacing: -.02em; font-weight: 600; color: var(--accent); text-wrap: balance; }
+.company-lede { margin: 1.4rem 0 0; max-width: 46ch; font-size: var(--step-1); line-height: 1.55; color: var(--ink-2); text-wrap: pretty; }
+
+/* The DrugAdopt opening heading is an h2 now that the company name is the h1. */
+body.drugadopt-home .opening .opening-title { margin: 0 0 1.1rem; font-size: clamp(2.3rem, 3.4vw, 3.7rem); line-height: 1.06; letter-spacing: -.03em; font-weight: 690; color: var(--ink); max-width: 19ch; text-wrap: balance; }
