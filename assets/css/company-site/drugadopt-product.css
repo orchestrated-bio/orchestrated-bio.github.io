@@ -1,0 +1,39 @@
+/* DrugAdopt product page: selling points above the tolvaptan case study. */
+body.drugadopt-product .opening { padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(2.5rem, 5vw, 4rem); }
+body.drugadopt-product .opening .shell { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 4rem); }
+body.drugadopt-product .opening h1 { font-size: clamp(2.6rem, 1.6rem + 4vw, 5rem); line-height: 1.02; max-width: 15ch; }
+body.drugadopt-product .opening-lede { max-width: 34ch; margin-bottom: 0; }
+
+/* Decorative fan of real deliverables beside the hero copy. */
+.deliverable-stack { position: relative; aspect-ratio: 1 / .82; max-width: 36rem; width: 100%; justify-self: end; }
+.deliverable-stack figure { position: absolute; margin: 0; background: #fff; border: 1px solid var(--rule-firm); border-radius: .6rem; overflow: hidden; box-shadow: 0 18px 48px rgb(0 0 0 / .14); }
+.deliverable-stack img { display: block; width: 100%; height: auto; }
+.deliverable-stack figcaption { position: absolute; left: .6rem; bottom: .6rem; padding: .25rem .55rem; border-radius: .35rem; background: var(--ink); color: var(--paper); font-size: .72rem; font-weight: 600; letter-spacing: .02em; }
+.stack-report figcaption { top: .6rem; right: .6rem; left: auto; bottom: auto; }
+.stack-report { width: 46%; left: 27%; top: 0; transform: rotate(2deg); z-index: 1; }
+.stack-slide { width: 64%; left: 0; top: 34%; transform: rotate(-3deg); z-index: 2; }
+.stack-workbook { width: 56%; right: 0; top: 52%; transform: rotate(2.5deg); z-index: 3; }
+
+.selling-band { background: var(--accent-wash); border-block: 1px solid var(--rule); padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+.selling-points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.selling-points li { border-top: 3px solid var(--accent); padding-top: 1.5rem; }
+.point-icon { display: block; width: 2.75rem; height: 2.75rem; margin-bottom: 1.25rem; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.selling-points h2 { margin: 0 0 .7rem; font-size: var(--step-2); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); }
+.selling-points p { margin: 0; font-size: 1.02rem; line-height: 1.6; color: var(--ink-2); }
+
+.selling-cta { display: flex; justify-content: center; padding-block: clamp(2rem, 5vw, 3rem) 0; }
+
+.case-study-head { padding-block: clamp(4rem, 9vw, 6.5rem) 0; }
+.case-study-head h2 { margin: 0; font-size: var(--step-4); line-height: 1.08; letter-spacing: -.03em; }
+.case-study-head > p:last-child { margin: .9rem 0 0; font-size: 1.08rem; line-height: 1.7; color: var(--ink-2); }
+.case-study-head a { color: var(--accent-deep); text-underline-offset: .2em; }
+#case-study { scroll-margin-top: 6rem; }
+
+@media (max-width: 60rem) {
+  body.drugadopt-product .opening .shell { grid-template-columns: 1fr; }
+  .deliverable-stack { justify-self: center; max-width: 30rem; }
+  .selling-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 30rem) {
+  .selling-points { grid-template-columns: 1fr; }
+}

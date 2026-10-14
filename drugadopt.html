@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="Discover biomarkers and therapeutic possibilities. DrugAdopt combines original data analyses with scientific due diligence for research and biotech teams investigating disease, treatment response and therapeutic assets." />
+    <meta name="description" content="DrugAdopt compresses weeks of bioinformatics work into a few days, with hands-on analytics support, nothing to install, and biomarker identification built into every analysis." />
     <meta name="theme-color" content="#f4f6f2" />
-    <title>DrugAdopt: The Tolvaptan Example</title>
+    <title>DrugAdopt: Bioinformatics in Days</title>
     <link rel="canonical" href="https://orchestrated.bio/drugadopt.html" />
     <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
@@ -26,9 +26,10 @@
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=26c6a08ed541" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt-walkthrough.css?v=7fdd3b46b480" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt-product.css?v=5e88b3b91a2e" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
-  <body class="drugadopt-home">
+  <body class="drugadopt-home drugadopt-product">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="masthead">
@@ -50,8 +51,44 @@
     </header>
 
     <main id="main">
+      <section class="opening product-opening">
+        <div class="shell">
+          <div class="opening-copy">
+            <p class="opening-eyebrow">DrugAdopt</p>
+            <h1>Weeks of bioinformatics, delivered in days.</h1>
+            <p class="opening-lede">An analytics team that works with you directly, with nothing to install.</p>
+          </div>
+          <div class="deliverable-stack" aria-hidden="true">
+            <figure class="stack-report"><img src="./images/drugadopt/tolvaptan/report-endpoints.jpg" width="1237" height="1600" alt="" decoding="async" /><figcaption>Report</figcaption></figure>
+            <figure class="stack-slide"><img src="./images/drugadopt/tolvaptan/slide-trials.jpg" width="1600" height="900" alt="" decoding="async" /><figcaption>Slide deck</figcaption></figure>
+            <figure class="stack-workbook"><img src="./images/drugadopt/tolvaptan/workbook-summary.svg" width="970" height="598" alt="" decoding="async" /><figcaption>Evidence workbook</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="selling-band" aria-label="Why teams use DrugAdopt">
+        <div class="shell">
+        <ul class="selling-points">
+          <li><svg class="point-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><h2>Days, not weeks</h2><p>We compress weeks of bioinformatics work into a few days.</p></li>
+          <li><svg class="point-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h11v8H8l-4 3z"/><path d="M15 9h5v8l-3-2h-6v-2"/></svg><h2>Hands-on support</h2><p>We iterate with you until the analysis answers the question you actually have.</p></li>
+          <li><svg class="point-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><h2>No installs, no IT</h2><p>Nothing to set up or approve. You keep control of your data.</p></li>
+          <li><svg class="point-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg><h2>Biomarkers built in</h2><p>Biomarker identification is part of every analysis, so findings hold up better.</p></li>
+        </ul>
+        </div>
+      </section>
+
+      <div class="selling-cta shell">
+        <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Discuss your project <span aria-hidden="true">↗</span></a>
+      </div>
+
+      <section class="case-study-head shell" id="case-study" aria-labelledby="case-study-title">
+        <p class="artifact-eyebrow">Case study</p>
+        <h2 id="case-study-title">Tolvaptan in ADPKD</h2>
+        <p>One finding, traced from the report to the code behind it. <a href="./report.html">Read the full report</a>.</p>
+      </section>
+
       <section class="evidence-intro shell" id="evidence-walkthrough" aria-labelledby="evidence-title">
-        <p class="artifact-eyebrow">An example: tolvaptan in ADPKD</p>
+        <p class="artifact-eyebrow">One finding</p>
         <h2 id="evidence-title">What changed downstream of tolvaptan’s target?</h2>
         <div class="case-introduction">
           <p>Tolvaptan blocks the V2 receptor in the kidney’s water-handling pathway. We reanalyzed public kidney-expression data from 12 treated and 12 untreated male Pkd1-knockout mice selected for expression profiling.</p>
