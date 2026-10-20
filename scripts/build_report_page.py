@@ -911,7 +911,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <!-- "true", not "page": this marks the current section, and the
                link goes to another page. -->
-          <a href="./" aria-current="true">DrugAdopt</a>
+          <a href="./drugadopt.html" aria-current="true">DrugAdopt</a>
           <a href="./custom-analysis.html">Custom analysis</a>
           <a href="./insight.html">Insight</a>
           <a href="./company.html">Company</a>
