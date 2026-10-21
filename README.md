@@ -8,7 +8,8 @@ The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no app
 
 | Surface | Source |
 | --- | --- |
-| DrugAdopt | `index.html` |
+| DrugAdopt | `index.html`, `drugadopt.html` |
+| DrugAdopt case study | `drugadopt-case-study.html` (tolvaptan walkthrough; shares DrugAdopt CSS and `drugadopt-walkthrough.js`) |
 | Custom analysis | `custom-analysis.html` |
 | Insight | `insight.html` |
 | Scopeify | `scopeify.html`, `_includes/scopeify-demo.html` |
