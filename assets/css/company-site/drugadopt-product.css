@@ -21,19 +21,43 @@ body.drugadopt-product .opening-lede { max-width: 34ch; margin-bottom: 0; }
 .selling-points h2 { margin: 0 0 .7rem; font-size: var(--step-2); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); }
 .selling-points p { margin: 0; font-size: 1.02rem; line-height: 1.6; color: var(--ink-2); }
 
+/* Module map: the eleven evidence modules, grouped for buyers. */
+.module-map { padding-block: clamp(3.5rem, 8vw, 6rem) 0; }
+.module-map h2 { margin: 0; max-width: 22ch; color: var(--ink); font-size: var(--step-3); line-height: 1.12; letter-spacing: -.025em; }
+.module-lede { max-width: 62ch; margin: 1rem 0 2rem; color: var(--ink-2); font-size: 1.08rem; line-height: 1.7; }
+.module-step { display: flex; gap: 1.25rem; align-items: baseline; padding: 1.25rem 1.5rem; background: var(--paper-raised); border: 1px solid var(--rule); border-radius: .6rem; }
+.module-step-label { flex: none; min-width: 4.5rem; color: var(--accent); font-size: .75rem; font-weight: 650; letter-spacing: .055em; text-transform: uppercase; }
+.module-step h3, .module-groups h3 { margin: 0 0 .4rem; color: var(--ink); font-size: var(--step-1); line-height: 1.25; }
+.module-step p { margin: 0; max-width: 72ch; color: var(--ink-2); line-height: 1.6; }
+.module-groups { list-style: none; margin: 1rem 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.module-groups li { padding: 1.5rem; background: var(--paper-raised); border: 1px solid var(--rule); border-top: 3px solid var(--accent); border-radius: .6rem; }
+.module-groups h3 { margin-bottom: 1rem; }
+.module-groups dl { margin: 0; }
+.module-groups dt { margin-top: 1rem; color: var(--ink); font-weight: 650; }
+.module-groups dt:first-child { margin-top: 0; }
+.module-groups dd { margin: .2rem 0 0; color: var(--ink-2); font-size: .97rem; line-height: 1.55; }
+
 .selling-cta { display: flex; justify-content: center; padding-block: clamp(2rem, 5vw, 3rem) 0; }
 
 .case-study-head { padding-block: clamp(4rem, 9vw, 6.5rem) 0; }
+.case-study-head h1,
 .case-study-head h2 { margin: 0; font-size: var(--step-4); line-height: 1.08; letter-spacing: -.03em; }
 .case-study-head > p:last-child { margin: .9rem 0 0; font-size: 1.08rem; line-height: 1.7; color: var(--ink-2); }
 .case-study-head a { color: var(--accent-deep); text-underline-offset: .2em; }
 #case-study { scroll-margin-top: 6rem; }
+.case-study-head .artifact-eyebrow a { color: inherit; }
+.case-study-teaser { padding-block-end: clamp(4rem, 9vw, 6.5rem); }
+.case-study-teaser > p:last-child { max-width: 68ch; }
+.drugadopt-case .selling-cta { padding-block-end: clamp(3rem, 7vw, 5rem); }
 
 @media (max-width: 60rem) {
   body.drugadopt-product .opening .shell { grid-template-columns: 1fr; }
   .deliverable-stack { justify-self: center; max-width: 30rem; }
   .selling-points { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .module-groups { grid-template-columns: 1fr; }
 }
 @media (max-width: 30rem) {
   .selling-points { grid-template-columns: 1fr; }
+  .module-step { flex-direction: column; gap: .5rem; padding: 1.1rem 1.15rem; }
+  .module-groups li { padding: 1.15rem; }
 }
