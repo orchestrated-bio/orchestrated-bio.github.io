@@ -1,6 +1,6 @@
 # Orchestrated Biosciences company website
 
-The static website for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, our flagship product, custom analysis, an inspectable DrugAdopt report, and the company.
+The static website for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, our flagship product, custom analysis, an Insight preview, an inspectable DrugAdopt report, and the company.
 
 ## Architecture
 
@@ -11,7 +11,7 @@ The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no app
 | DrugAdopt | `index.html`, `drugadopt.html` |
 | DrugAdopt case study | `drugadopt-case-study.html` (tolvaptan walkthrough; shares DrugAdopt CSS and `drugadopt-walkthrough.js`) |
 | Custom analysis | `custom-analysis.html` |
-| Insight inquiry page | `insight.html` |
+| Insight preview and inquiries | `insight.html` |
 | Scopeify | `scopeify.html`, `_includes/scopeify-demo.html` |
 | Example report | `report.html` — **generated**: `python3 scripts/build_report_page.py --case <deliverable dir>`; edit the generator or `scripts/*.json`, never `report.html` |
 | Company | `company.html` |
