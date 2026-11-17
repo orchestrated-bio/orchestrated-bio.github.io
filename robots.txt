@@ -6,7 +6,6 @@ Allow: /
 # not site content: keep them out of search results.
 Disallow: /scripts/
 Disallow: /_includes/
-Disallow: /docs/
 Disallow: /.github/
 Disallow: /README.md
 Disallow: /concepts/asset-diligence/build_artifact.py
