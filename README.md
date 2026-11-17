@@ -1,10 +1,10 @@
 # Orchestrated Biosciences company website
 
-The static website for [Orchestrated Biosciences](https://orchestrated.bio), centered on DrugAdopt, our flagship product, custom analysis, an Insight preview, an inspectable DrugAdopt report, and the company.
+This repository contains the static website for [Orchestrated Biosciences](https://orchestrated.bio). It covers DrugAdopt and its example report, custom analysis, the Insight preview, and company information.
 
 ## Architecture
 
-The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no application framework, package manager, template engine, Ruby environment, or deployment build.
+The site uses plain HTML, CSS, JavaScript, XML, and images. There is no application framework, package manager, template engine, Ruby environment, or deployment build.
 
 | Surface | Source |
 | --- | --- |
@@ -12,7 +12,7 @@ The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no app
 | DrugAdopt case study | `drugadopt-case-study.html` (tolvaptan walkthrough; shares DrugAdopt CSS and `drugadopt-walkthrough.js`) |
 | Custom analysis | `custom-analysis.html` |
 | Insight preview and inquiries | `insight.html` |
-| Example report | `report.html` — **generated**: `python3 scripts/build_report_page.py --case <deliverable dir>`; edit the generator or `scripts/*.json`, never `report.html` |
+| Example report | `report.html`, generated with `python3 scripts/build_report_page.py --case <deliverable dir>`; edit the generator or `scripts/*.json`, never `report.html` |
 | Company | `company.html` |
 | Privacy and terms | `privacy-policy.html`, `terms.html` |
 | Not found | `404.html` (root-absolute URLs: Pages serves it at any depth) |
@@ -41,7 +41,7 @@ Open <http://localhost:8767/>.
 python3 concepts/asset-diligence/build_artifact.py
 ```
 
-The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. That generated file is intentionally ignored by Git.
+The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. That generated file is ignored by Git.
 
 ## Common edits
 
@@ -56,4 +56,4 @@ The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. Tha
 
 ## Deployment
 
-Pushes to the publishing branch are served directly by GitHub Pages. Because the repository is fully static, deployment does not install dependencies or run a site generator. Publish frontend changes that depend on a backend change only after that backend change is live.
+Pushes to the publishing branch are served directly by GitHub Pages. Deployment does not install dependencies or run a site generator. Publish frontend changes that depend on a backend change only after that backend change is live.

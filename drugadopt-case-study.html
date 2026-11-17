@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="A DrugAdopt case study: one tolvaptan finding in ADPKD, traced from the report to the slides, spreadsheet and code behind it." />
+    <meta name="description" content="A DrugAdopt case study of one tolvaptan finding in ADPKD, with the report, slides, spreadsheet and supporting code." />
     <meta name="theme-color" content="#f4f6f2" />
     <title>Tolvaptan Case Study</title>
     <link rel="canonical" href="https://orchestrated.bio/drugadopt-case-study.html" />
@@ -16,7 +16,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Orchestrated Biosciences" />
     <meta property="og:title" content="Tolvaptan in ADPKD · DrugAdopt case study | Orchestrated Biosciences" />
-    <meta property="og:description" content="One tolvaptan finding in ADPKD, traced from the report to the slides, spreadsheet and code behind it." />
+    <meta property="og:description" content="One tolvaptan finding in ADPKD with the report, slides, spreadsheet and supporting code." />
     <meta property="og:url" content="https://orchestrated.bio/drugadopt-case-study.html" />
     <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
     <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
@@ -53,15 +53,15 @@
       <section class="case-study-head shell" id="case-study" aria-labelledby="case-study-title">
         <p class="artifact-eyebrow"><a href="./drugadopt.html">DrugAdopt</a> · Case study</p>
         <h1 id="case-study-title">Tolvaptan in ADPKD</h1>
-        <p>One finding, traced from the report to the code behind it. <a href="./report.html">Read the full report</a>.</p>
+        <p>Follow one finding from the report to the supporting code. <a href="./report.html">Read the full report</a>.</p>
       </section>
 
       <section class="evidence-intro shell" id="evidence-walkthrough" aria-labelledby="evidence-title">
-        <p class="artifact-eyebrow">One finding</p>
-        <h2 id="evidence-title">What changed downstream of tolvaptan’s target?</h2>
+        <p class="artifact-eyebrow">One mouse RNA finding</p>
+        <h2 id="evidence-title">Mouse kidney RNA after tolvaptan treatment</h2>
         <div class="case-introduction">
           <p>Tolvaptan blocks the V2 receptor in the kidney’s water-handling pathway. We reanalyzed public kidney-expression data from 12 treated and 12 untreated male Pkd1-knockout mice selected for expression profiling.</p>
-          <p><strong>Aqp2 RNA was lower in treated mouse kidneys.</strong> Aqp2 encodes a water channel downstream of V2 signaling. This exploratory result adds a molecular signal to investigate alongside cyst-fluid secretion and the clinical kidney-volume findings.</p>
+          <p><strong>Aqp2 RNA was lower in treated mouse kidneys.</strong> Aqp2 encodes a water channel downstream of V2 signaling. This exploratory RNA result alone does not establish changes in cyst-fluid secretion or explain the clinical kidney-volume findings.</p>
         </div>
         <figure class="expression-highlight">
           <a class="artifact-image-link" data-artifact-zoom data-detail-width="1478" data-detail-title="Exploratory mouse expression analysis · Report Figure 2.5" href="./images/drugadopt/tolvaptan/report/dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png" target="_blank" rel="noopener" aria-label="View the mouse RNA comparison"><img src="./images/drugadopt/tolvaptan/report/dependency-fig-gse198340-marker-expression-output-1-b95a61877042.png" width="1478" height="540" alt="Eight exploratory marker probes in mouse kidneys. Dots show tolvaptan-minus-untreated RNA differences, and bars show 95 percent confidence intervals." loading="lazy" decoding="async" /></a>
@@ -115,7 +115,7 @@ margin = stats.t.ppf(0.975, df_total) * se</code></pre>
 
       <div class="case-gallery" data-case-gallery>
         <div class="case-gallery-heading shell">
-          <h2>More from the tolvaptan case.</h2>
+          <h2>Tolvaptan report excerpts</h2>
           <div class="case-formats" role="group" aria-label="Case preview format" hidden>
             <button type="button" data-case-format="report-highlights" aria-controls="report-highlights" aria-pressed="true">Report</button>
             <button type="button" data-case-format="slide-highlights" aria-controls="slide-highlights" aria-pressed="false">Slide deck</button>
