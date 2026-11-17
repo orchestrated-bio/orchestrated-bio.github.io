@@ -12,7 +12,6 @@ The entire site is plain HTML, CSS, JavaScript, XML, and images. There is no app
 | DrugAdopt case study | `drugadopt-case-study.html` (tolvaptan walkthrough; shares DrugAdopt CSS and `drugadopt-walkthrough.js`) |
 | Custom analysis | `custom-analysis.html` |
 | Insight preview and inquiries | `insight.html` |
-| Scopeify | `scopeify.html`, `_includes/scopeify-demo.html` |
 | Example report | `report.html` — **generated**: `python3 scripts/build_report_page.py --case <deliverable dir>`; edit the generator or `scripts/*.json`, never `report.html` |
 | Company | `company.html` |
 | Privacy and terms | `privacy-policy.html`, `terms.html` |
@@ -26,9 +25,7 @@ The `.nojekyll` marker tells GitHub Pages to publish these files directly. `site
 
 The root product pages can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
 
-Scopeify is a static browser client that calls a separate backend service. Selected data files are parsed in the browser; only the bounded structural summary described in `privacy-policy.html` is sent to the backend.
-
-Legacy product, portfolio, team, case, and concept URLs contain lightweight redirects to the current pages.
+Legacy product, portfolio, team, case, concept and Scopeify URLs contain lightweight redirects to the current pages.
 
 ## Local preview
 
@@ -46,15 +43,6 @@ python3 concepts/asset-diligence/build_artifact.py
 
 The builder writes `concepts/asset-diligence/asset-diligence.artifact.html`. That generated file is intentionally ignored by Git.
 
-## Build and verify Scopeify
-
-```bash
-python3 scripts/build_scopeify_standalone.py
-python3 scripts/evaluate_scopeify_demo.py
-```
-
-The builder keeps the standalone review page and production `scopeify.html` synchronized with the checked-in include, CSS, JavaScript, and vendored SheetJS runtime. The evaluator must report no warnings or failures. GitHub Actions repeats both checks and rejects stale generated pages or a changed vendor checksum.
-
 ## Common edits
 
 | Task | File or directory |
@@ -63,7 +51,6 @@ The builder keeps the standalone review page and production `scopeify.html` sync
 | Change the example report | `scripts/build_report_page.py`, `scripts/module_sections.json`, `scripts/figure_alt.json`, then rerun the report builder |
 | Change shared layout or typography | `assets/css/company-site/base.css` |
 | Change one product page | Its page-specific CSS and JavaScript |
-| Change Scopeify | Edit its include, CSS, or JavaScript; run the Scopeify builder and evaluator |
 | Change policy styling | `assets/css/company-site/editorial.css` |
 | Rebuild the portable review artifact | `concepts/asset-diligence/build_artifact.py` |
 
