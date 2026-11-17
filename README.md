@@ -26,7 +26,7 @@ The `.nojekyll` marker tells GitHub Pages to publish these files directly. `site
 
 The root product pages can be opened directly from disk or served by any static web server. The portable artifact is generated from the same root pages, styles, scripts, and images so it does not become a second implementation.
 
-Scopeify is a static browser client in this public repository. Its API keys and archive/model integrations live only in the separate private Scopeify backend. Selected data files are parsed in the browser; only the bounded structural summary described in `privacy-policy.html` is sent to the backend. Production draft submissions use short-lived, single-use server tickets, and recovery attempts reuse one idempotency key so a lost response cannot create a duplicate paid job.
+Scopeify is a static browser client that calls a separate backend service. Selected data files are parsed in the browser; only the bounded structural summary described in `privacy-policy.html` is sent to the backend.
 
 Legacy product, portfolio, team, case, and concept URLs contain lightweight redirects to the current pages.
 
@@ -69,4 +69,4 @@ The builder keeps the standalone review page and production `scopeify.html` sync
 
 ## Deployment
 
-Pushes to the publishing branch are served directly by GitHub Pages. Because the repository is fully static, deployment does not install dependencies or run a site generator. Deploy the private Scopeify backend and verify its production contract before publishing frontend changes that depend on it.
+Pushes to the publishing branch are served directly by GitHub Pages. Because the repository is fully static, deployment does not install dependencies or run a site generator. Publish frontend changes that depend on a backend change only after that backend change is live.
