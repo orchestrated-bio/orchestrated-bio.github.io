@@ -912,7 +912,7 @@ def build(vm: dict, modules: dict, figures: dict, alts: dict) -> str:
           <!-- "true", not "page": this marks the current section, and the
                link goes to another page. -->
           <a href="./drugadopt.html" aria-current="true">DrugAdopt</a>
-          <a href="./custom-analysis.html">Custom analysis</a>
+          <a href="./custom-analysis.html">Custom Analysis</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
         </nav>
