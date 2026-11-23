@@ -1,15 +1,6 @@
-/* Custom Analysis page. Borrows the DrugAdopt page's vocabulary (eyebrow,
-   tinted selling band, raised cards with an accent top rule) so the two
-   service pages read as one site. Figure marks stay in company.css. */
-
-.ca-eyebrow {
-  margin: 0 0 0.75rem;
-  color: var(--accent);
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-}
+/* Custom Analysis page: the hero, the services band and the track-record
+   split card. The shared section kit (.sec-*) and the figure marks live in
+   company.css, which this page also loads. */
 
 /* --- Hero: the offer beside where it has been applied ------------------ */
 
@@ -82,17 +73,6 @@
   padding-block: clamp(2.75rem, 6vw, 4.5rem);
 }
 
-.ca-section-title {
-  margin: 0;
-  max-width: 24ch;
-  font-size: var(--step-3);
-  line-height: 1.12;
-  letter-spacing: -0.025em;
-  font-weight: 620;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
 .ca-service-grid {
   list-style: none;
   margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
@@ -113,62 +93,7 @@
   text-wrap: pretty;
 }
 
-.ca-icon {
-  display: block;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-bottom: 0.9rem;
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 /* --- Track record and examples ----------------------------------------- */
-
-.ca-section { padding-block: clamp(3rem, 7vw, 5rem) 0; }
-
-.ca-section-lede {
-  max-width: 62ch;
-  margin: 0.9rem 0 0;
-  color: var(--ink-2);
-  font-size: 1.05rem;
-  line-height: 1.65;
-  text-wrap: pretty;
-}
-
-.ca-cards {
-  display: grid;
-  gap: 1rem;
-  margin-top: clamp(1.5rem, 3.5vw, 2.25rem);
-}
-
-.ca-card {
-  padding: clamp(1.25rem, 3.5vw, 2.25rem);
-  background: var(--paper-raised);
-  border: 1px solid var(--rule);
-  border-top: 3px solid var(--accent);
-  border-radius: 0.6rem;
-}
-
-.ca-card h3 {
-  margin: 0 0 0.7rem;
-  font-size: var(--step-2);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  font-weight: 620;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.ca-card p {
-  margin: 0;
-  max-width: 60ch;
-  color: var(--ink-2);
-  line-height: 1.65;
-  text-wrap: pretty;
-}
 
 .ca-card-split {
   display: grid;
@@ -179,21 +104,10 @@
 
 /* company.css sizes panels at a 19rem minimum, wider than a card's inner
    width on a phone; cap the minimum at the card so the panels stack. */
-.ca-card .sc-panels { grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
+.sec-card .sc-panels { grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
 
-.ca-card .hm { margin-inline: auto; }
-.ca-card .hm-figure figcaption { margin-inline: auto; }
-
-/* --- Closing call to action -------------------------------------------- */
-
-.ca-cta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.9rem 1.4rem;
-  padding-block: clamp(3rem, 7vw, 5rem);
-}
+.sec-card .hm { margin-inline: auto; }
+.sec-card .hm-figure figcaption { margin-inline: auto; }
 
 @media (max-width: 60rem) {
   .ca-hero .shell,
@@ -204,5 +118,5 @@
 @media (max-width: 30rem) {
   .ca-service-grid { grid-template-columns: 1fr; }
   .ca-service-grid li { display: flex; align-items: center; gap: 0.9rem; padding: 1rem; }
-  .ca-icon { flex: none; margin-bottom: 0; width: 2rem; height: 2rem; }
+  .ca-service-grid .sec-icon { flex: none; margin-bottom: 0; width: 2rem; height: 2rem; }
 }
