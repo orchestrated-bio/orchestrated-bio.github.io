@@ -11,6 +11,7 @@ The site uses plain HTML, CSS, JavaScript, XML, and images. There is no applicat
 | DrugAdopt | `index.html`, `drugadopt.html` |
 | DrugAdopt case study | `drugadopt-case-study.html` (tolvaptan walkthrough; shares DrugAdopt CSS and `drugadopt-walkthrough.js`) |
 | Custom Analysis | `custom-analysis.html` |
+| Validated Workflows | `validated-workflows.html` (placeholder while the white paper is drafted) |
 | Insight preview and inquiries | `insight.html` |
 | Example report | `report.html`, generated with `python3 scripts/build_report_page.py --case <deliverable dir>`; edit the generator or `scripts/*.json`, never `report.html` |
 | Company | `company.html` |

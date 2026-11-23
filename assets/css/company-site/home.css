@@ -6,3 +6,30 @@
 
 /* The DrugAdopt opening heading is an h2 now that the company name is the h1. */
 body.drugadopt-home .opening .opening-title { margin: 0 0 1.1rem; font-size: clamp(2.3rem, 3.4vw, 3.7rem); line-height: 1.06; letter-spacing: -.03em; font-weight: 690; color: var(--ink); max-width: 19ch; text-wrap: balance; }
+
+/* Logo mark as a watermark behind the heading block: large, faint and
+   decorative, so the copy keeps its full width. It sits inside the shell's
+   right edge, so the whole mark shows at every width; hanging it past the
+   edge clipped it wherever the shell gutter was narrow. Inline SVG so the
+   ring takes the page ink in either theme; the helix keeps the logo green. */
+.company-head { position: relative; overflow: hidden; }
+.company-head .shell { position: relative; }
+.company-copy { position: relative; z-index: 1; }
+.company-watermark {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: clamp(14rem, 30vw, 25rem);
+  aspect-ratio: 566 / 640;
+  transform: translateY(-50%);
+  opacity: .08;
+  pointer-events: none;
+}
+.company-mark { display: block; width: 100%; height: 100%; }
+.company-mark .ink-dark { fill: var(--ink); }
+.company-mark .ink-green { fill: #279F81; }
+:root[data-theme="dark"] .company-watermark { opacity: .1; }
+
+@media (max-width: 40rem) {
+  .company-watermark { height: 13rem; }
+}
