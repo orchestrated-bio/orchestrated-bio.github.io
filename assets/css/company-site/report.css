@@ -698,6 +698,39 @@
   }
 }
 
+/* --- contained scrolling (desktop) ---------------------------------------
+   With the sidebar layout, the report is a window of its own: the frame is
+   one viewport tall under the masthead, the paper and the spine each scroll
+   inside it, and overscroll-behavior stops a scroll that reaches the end of
+   the report from carrying on into the page. Outside the frame, the wheel
+   moves the page as usual. Below 62rem the spine becomes a row above the
+   paper and the document flows with the page, where a nested scroller would
+   be cramped on a phone. Screen only, so print still gets the full report. */
+
+@media screen and (min-width: 62.01rem) {
+  .dax-full {
+    height: calc(100dvh - var(--masthead-height, 4.2rem) - 1.5rem);
+    min-height: 32rem;
+  }
+
+  .dax-full .dax-spine {
+    position: static;
+    align-self: stretch;
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .dax-full .dax-paper-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  /* Anchors land inside the paper's own scroll box, so they no longer need
+     the site-wide offset that clears the sticky masthead. */
+  .dax-paper-scroll [id] { scroll-margin-top: 1.25rem; }
+}
+
 /* --- print ---------------------------------------------------------------
    This page simulates a printed report, so printing it should produce the
    document and nothing else: no site chrome, no spine, no CTA. */
