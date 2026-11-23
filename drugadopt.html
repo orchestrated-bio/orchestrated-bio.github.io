@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt.css?v=26c6a08ed541" />
     <link rel="stylesheet" href="./assets/css/company-site/drugadopt-walkthrough.css?v=7fdd3b46b480" />
-    <link rel="stylesheet" href="./assets/css/company-site/drugadopt-product.css?v=1a8c7009bdb4" />
+    <link rel="stylesheet" href="./assets/css/company-site/drugadopt-product.css?v=7ed3002d1950" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
   <body class="drugadopt-home drugadopt-product">
@@ -42,7 +42,8 @@
         <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
           <a href="./drugadopt.html" aria-current="page">DrugAdopt</a>
-          <a href="./custom-analysis.html">Custom analysis</a>
+          <a href="./validated-workflows.html">Validated Workflows</a>
+          <a href="./custom-analysis.html">Custom Analysis</a>
           <a href="./company.html">Company</a>
           <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
         </nav>
@@ -58,7 +59,7 @@
             <p class="opening-lede">DrugAdopt examines public data on one preclinical asset in one indication, including evidence gaps and the measurements that could address them.</p>
           </div>
           <div class="deliverable-stack" aria-hidden="true">
-            <figure class="stack-report"><img src="./images/drugadopt/tolvaptan/report-endpoints.jpg" width="1237" height="1600" alt="" decoding="async" /><figcaption>Report</figcaption></figure>
+            <figure class="stack-report"><img src="./images/drugadopt/tolvaptan/report-structure-excerpt.jpg" width="1100" height="1004" alt="" decoding="async" /><figcaption>Report</figcaption></figure>
             <figure class="stack-slide"><img src="./images/drugadopt/tolvaptan/slide-trials.jpg" width="1600" height="900" alt="" decoding="async" /><figcaption>Slide deck</figcaption></figure>
             <figure class="stack-workbook"><img src="./images/drugadopt/tolvaptan/workbook-summary.svg" width="970" height="598" alt="" decoding="async" /><figcaption>Evidence workbook</figcaption></figure>
           </div>
@@ -88,12 +89,12 @@
               <dt>Disease biology</dt><dd>How the disease progresses, and how it is staged and measured.</dd>
               <dt>Target evidence</dt><dd>Evidence supporting or challenging the target rationale.</dd>
               <dt>Dependency</dt><dd>Whether perturbing the mechanism changes a disease-relevant phenotype in models.</dd>
-              <dt>Biomarkers</dt><dd>Candidate target-engagement and response markers, and the public data behind each.</dd>
             </dl>
           </li>
           <li>
-            <h3>Safety and exposure</h3>
+            <h3>Biomarkers, safety and exposure</h3>
             <dl>
+              <dt>Biomarkers</dt><dd>Candidate target-engagement and response markers, and the public data behind each.</dd>
               <dt>Safety</dt><dd>How mechanistic, nonclinical and human safety evidence compare.</dd>
               <dt>ADMET and PK/PD</dt><dd>Whether exposure is plausibly compatible with both activity and safety.</dd>
             </dl>
@@ -114,11 +115,21 @@
         <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Discuss your project <span aria-hidden="true">↗</span></a>
       </div>
 
-      <section class="case-study-head case-study-teaser shell" id="case-study" aria-labelledby="case-study-title">
-        <p class="artifact-eyebrow">Case study</p>
-        <h2 id="case-study-title">Tolvaptan in ADPKD</h2>
-        <p>We reanalyzed public kidney-expression data from tolvaptan-treated and untreated Pkd1-knockout mice and found lower RNA for Aqp2, a water channel downstream of tolvaptan’s V2 target. The case study traces that finding from the report to the slides, spreadsheet and code behind it. <a href="./drugadopt-case-study.html">See the full case study <span aria-hidden="true">→</span></a></p>
-      </section>
+      <div class="da-closing shell">
+        <section class="case-study-head case-study-teaser" id="case-study" aria-labelledby="case-study-title">
+          <p class="artifact-eyebrow">example case study</p>
+          <h2 id="case-study-title">Tolvaptan in ADPKD</h2>
+          <p>We reanalyzed public kidney-expression data from tolvaptan-treated and untreated Pkd1-knockout mice and found lower RNA for Aqp2, a water channel downstream of tolvaptan’s V2 target. The case study traces that finding from the report to the slides, spreadsheet and code behind it.</p>
+          <p class="case-study-report"><a href="./drugadopt-case-study.html">Explore the Case Study <span aria-hidden="true">→</span></a></p>
+        </section>
+
+        <section class="portal-card" aria-labelledby="portal-title">
+          <p class="portal-eyebrow"><span class="artifact-eyebrow">DrugAdopt portal</span><span class="portal-badge">In development</span></p>
+          <h2 id="portal-title">Browse example briefs online</h2>
+          <p>The DrugAdopt portal holds automated evidence briefs on drug programs and diseases, built from public trials, papers, drug labels and company filings. Read example briefs, trace each finding to its sources, and see new trials, papers and filings as they post.</p>
+          <a class="btn" href="https://drugadopt.orchestrated.bio/" target="_blank" rel="noreferrer">Explore the portal <span aria-hidden="true">↗</span></a>
+        </section>
+      </div>
 
     </main>
 

@@ -6,3 +6,151 @@
 
 /* The DrugAdopt opening heading is an h2 now that the company name is the h1. */
 body.drugadopt-home .opening .opening-title { margin: 0 0 1.1rem; font-size: clamp(2.3rem, 3.4vw, 3.7rem); line-height: 1.06; letter-spacing: -.03em; font-weight: 690; color: var(--ink); max-width: 19ch; text-wrap: balance; }
+
+/* Logo mark as a watermark behind the heading block: large, faint and
+   decorative, so the copy keeps its full width. It sits inside the shell's
+   right edge, so the whole mark shows at every width; hanging it past the
+   edge clipped it wherever the shell gutter was narrow. Inline SVG so the
+   ring takes the page ink in either theme; the helix keeps the logo green. */
+.company-head { position: relative; overflow: hidden; }
+.company-head .shell { position: relative; }
+.company-copy { position: relative; z-index: 1; }
+.company-watermark {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: clamp(14rem, 30vw, 25rem);
+  aspect-ratio: 566 / 640;
+  transform: translateY(-50%);
+  pointer-events: none;
+  --wm-ring: .08;
+  --wm-rest: .18;
+  --wm-glow: .85;
+}
+:root[data-theme="dark"] .company-watermark { --wm-ring: .1; --wm-rest: .2; --wm-glow: .9; }
+.company-mark { display: block; width: 100%; height: 100%; }
+.company-mark .ink-dark { fill: var(--ink); opacity: var(--wm-ring); }
+.company-mark .ink-green { fill: #279F81; }
+.company-mark .ink-green path { opacity: var(--wm-rest); }
+
+/* The helix lights up one piece at a time, top to bottom, alternating
+   from side to side as it follows the strand, then rests before the next
+   pass. Each piece's delay is its place on the strand. */
+@media (prefers-reduced-motion: no-preference) {
+  .company-mark .ink-green path { animation: wm-glow 7s ease-in-out infinite both; }
+}
+@keyframes wm-glow {
+  0%, 22%, 100% { opacity: var(--wm-rest); }
+  9% { opacity: var(--wm-glow); }
+}
+.company-mark .ink-green path:nth-child(1) { animation-delay: 0.00s; }
+.company-mark .ink-green path:nth-child(2) { animation-delay: 0.38s; }
+.company-mark .ink-green path:nth-child(3) { animation-delay: 0.76s; }
+.company-mark .ink-green path:nth-child(4) { animation-delay: 1.14s; }
+.company-mark .ink-green path:nth-child(5) { animation-delay: 1.52s; }
+.company-mark .ink-green path:nth-child(6) { animation-delay: 1.90s; }
+.company-mark .ink-green path:nth-child(7) { animation-delay: 2.28s; }
+.company-mark .ink-green path:nth-child(8) { animation-delay: 2.66s; }
+.company-mark .ink-green path:nth-child(9) { animation-delay: 3.04s; }
+.company-mark .ink-green path:nth-child(10) { animation-delay: 3.42s; }
+.company-mark .ink-green path:nth-child(11) { animation-delay: 3.80s; }
+.company-mark .ink-green path:nth-child(12) { animation-delay: 4.18s; }
+.company-mark .ink-green path:nth-child(13) { animation-delay: 4.56s; }
+
+@media (max-width: 40rem) {
+  .company-watermark { height: 13rem; }
+}
+
+/* "Questions we work on" follows the company head, whose bottom rule
+   already separates the two. */
+.company-head + .research-project { border-top: 0; }
+
+/* "Questions we work on": four short boxes that show only the question;
+   the box opens to show the detail on hover, or on focus for keyboard and touch (tapping a
+   box focuses it). The text stays in the DOM for screen readers. */
+.project-outcomes { gap: 1rem; }
+.project-outcomes .outcome {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 0fr;
+  row-gap: 0;
+  align-content: start;
+  min-height: 7.5rem;
+  padding: 1.4rem 1.4rem 1.5rem;
+  border: 1px solid var(--rule-firm);
+  border-radius: 14px;
+  background: var(--paper);
+  cursor: default;
+  outline: none;
+  transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease, grid-template-rows .3s ease, row-gap .3s ease;
+}
+.project-outcomes .outcome h3 {
+  min-height: 0;
+  margin: 0;
+  padding-right: 2rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+.project-outcomes .outcome p {
+  min-height: 0;
+  overflow: hidden;
+  font-size: .95rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(.5rem);
+  transition: opacity .25s ease, transform .25s ease;
+}
+/* A small plus in the corner says there is more to see. */
+.project-outcomes .outcome::after {
+  content: "+";
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  transition: transform .25s ease;
+}
+.project-outcomes .outcome:is(:hover, :focus-within) {
+  grid-template-rows: auto 1fr;
+  row-gap: .9rem;
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--accent-wash);
+}
+.project-outcomes .outcome:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+.project-outcomes .outcome:is(:hover, :focus-within) p { opacity: 1; transform: none; }
+.project-outcomes .outcome:is(:hover, :focus-within)::after { transform: rotate(45deg); background: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-outcomes .outcome, .project-outcomes .outcome p, .project-outcomes .outcome::after { transition: none; }
+}
+@media (max-width: 40rem) {
+  .project-outcomes .outcome { min-height: 0; }
+}
+
+/* Section headings in the page ink, matching the company and DrugAdopt
+   titles instead of the lighter body colour they inherited. */
+.project-heading h2, .project-enquiry h2 { color: var(--ink); font-weight: 690; }
+
+/* Heading and its one-line lede stack at the same left edge, instead of
+   the lede floating in a second column beside the heading. */
+.project-heading { display: block; }
+.project-heading > p { max-width: 62rem; margin: .85rem 0 0; }
+
+/* Section rhythm: "Problems we solve" gets the same padding as the other
+   bands, and its rules run edge to edge like the company head's (the
+   section is full width; its .shell is inside). */
+.research-project { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+/* Closing call to action on the brand tint, so it reads as the end of the
+   page rather than more white space after the report. */
+.project-enquiry { background: var(--accent-wash); border-top: 1px solid var(--rule); }

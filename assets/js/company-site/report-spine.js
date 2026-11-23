@@ -45,22 +45,76 @@
     })
     .filter(Boolean);
 
+  // On desktop the paper is its own scroll box (report.css). Below that
+  // breakpoint the document flows with the page.
+  var paper = document.querySelector('.dax-paper-scroll');
+  var frame = document.querySelector('.dax-full');
+
+  function contained() {
+    return !!paper && /(auto|scroll)/.test(getComputedStyle(paper).overflowY);
+  }
+
+  function scrollPaperTo(target, behavior) {
+    var top = target.getBoundingClientRect().top - paper.getBoundingClientRect().top + paper.scrollTop - 20;
+    paper.scrollTo({ top: Math.max(0, top), behavior: behavior });
+  }
+
+  // A plain #anchor jump scrolls every ancestor to reveal its target, so the
+  // page lurched along with the paper. When the paper is its own scroller,
+  // links into it move only the paper. The skip link keeps the browser's
+  // behaviour, which also moves focus.
+  document.addEventListener('click', function (event) {
+    var link = event.target.closest && event.target.closest('a[href^="#"]');
+    if (!link || link.classList.contains('skip-link') || !contained()) return;
+    var id = decodeURIComponent(link.getAttribute('href').slice(1));
+    var target = id && document.getElementById(id);
+    if (!target || !paper.contains(target)) return;
+    event.preventDefault();
+    scrollPaperTo(target, motion);
+    if (history.pushState) history.pushState(null, '', '#' + id);
+  });
+
+  // Arriving with a hash (the case study links to figures): bring the frame
+  // under the masthead and open the paper at the target.
+  window.addEventListener('load', function () {
+    if (!location.hash || !contained()) return;
+    var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!target || !paper.contains(target)) return;
+    var masthead = document.querySelector('.masthead');
+    var offset = (masthead ? masthead.offsetHeight : 0) + 12;
+    window.scrollTo(0, frame.getBoundingClientRect().top + window.scrollY - offset);
+    scrollPaperTo(target, 'instant');
+  });
+
   if (!('IntersectionObserver' in window) || !sections.length) {
     mark(links[0]);
     return;
   }
 
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var link = linkFor(entry.target.id);
-        if (link) mark(link);
-      });
-    },
-    { rootMargin: '-15% 0px -70% 0px', threshold: 0 }
-  );
+  // Sections are watched against whichever box scrolls them. Rebuilt when
+  // the layout crosses the breakpoint.
+  var observer;
 
-  sections.forEach(function (section) { observer.observe(section); });
+  function watch() {
+    if (observer) observer.disconnect();
+    observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var link = linkFor(entry.target.id);
+          if (link) mark(link);
+        });
+      },
+      { root: contained() ? paper : null, rootMargin: '-15% 0px -70% 0px', threshold: 0 }
+    );
+    sections.forEach(function (section) { observer.observe(section); });
+  }
+
+  watch();
+  var wide = window.matchMedia && window.matchMedia('(min-width: 62.01rem)');
+  if (wide) {
+    if (wide.addEventListener) wide.addEventListener('change', watch);
+    else if (wide.addListener) wide.addListener(watch);
+  }
   mark(links[0]);
 })();

@@ -1,0 +1,138 @@
+/* Validated Workflows page (placeholder while the white paper is drafted).
+   The section kit (.sec-*) lives in company.css, which this page also loads. */
+
+.vw-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2.75rem, 6vw, 4.5rem); }
+
+.vw-hero h1 {
+  max-width: 18ch;
+  margin: 0 0 1.2rem;
+  color: var(--ink);
+  font-size: var(--step-4);
+  font-weight: 620;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.vw-hero .opening-lede { margin-bottom: 1.75rem; }
+
+.vw-labels {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin: 0 0 1.2rem;
+}
+
+/* Same pill as the DrugAdopt page's eyebrow, so each product page names
+   itself the same way. */
+.vw-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 999px;
+  background: var(--accent-wash);
+  color: var(--accent-deep);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+/* Status colour, as on the DrugAdopt portal card: it marks a stage. */
+.vw-badge {
+  padding: 0.15rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: var(--partial-wash);
+  color: var(--partial);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.03em;
+}
+
+/* --- Three parts of the work, on the tinted band ------------------------ */
+
+.vw-band {
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+  background: var(--accent-wash);
+  border-block: 1px solid var(--rule);
+}
+
+.vw-pillars {
+  list-style: none;
+  margin: clamp(1.5rem, 3.5vw, 2.25rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.vw-pillars .sec-card h3 { font-size: var(--step-1); }
+
+/* --- Engagement steps --------------------------------------------------- */
+
+.vw-steps {
+  list-style: none;
+  margin: clamp(1.5rem, 3.5vw, 2.25rem) 0 0;
+  padding: 0;
+  counter-reset: vw-step;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem clamp(1rem, 3vw, 2rem);
+}
+
+.vw-steps li {
+  counter-increment: vw-step;
+  padding-top: 1rem;
+  border-top: 2px solid var(--rule-firm);
+}
+
+.vw-steps li::before {
+  content: counter(vw-step, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+}
+
+.vw-steps h3 {
+  margin: 0 0 0.4rem;
+  color: var(--ink);
+  font-size: var(--step-1);
+  line-height: 1.25;
+}
+
+.vw-steps p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 0.97rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* --- White paper note --------------------------------------------------- */
+
+.vw-paper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.25rem 2.5rem;
+  align-items: center;
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+.vw-paper .sec-cta { margin-top: 0; }
+
+.vw-end { padding-bottom: clamp(3rem, 7vw, 5rem); }
+
+@media (max-width: 60rem) {
+  .vw-pillars { grid-template-columns: 1fr; }
+  .vw-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vw-paper { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 30rem) {
+  .vw-steps { grid-template-columns: 1fr; }
+}
