@@ -1,11 +1,11 @@
-/* Validated Workflows page (placeholder while the white paper is drafted).
+/* Validated Workflows page: the DrugAdopt validation copy and graphics.
    The section kit (.sec-*) lives in company.css, which this page also loads. */
 
-.vw-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2.75rem, 6vw, 4.5rem); }
+.vw-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) 0; }
 
 .vw-hero h1 {
   max-width: 18ch;
-  margin: 0 0 1.2rem;
+  margin: 0 0 1.5rem;
   color: var(--ink);
   font-size: var(--step-4);
   font-weight: 620;
@@ -14,15 +14,7 @@
   text-wrap: balance;
 }
 
-.vw-hero .opening-lede { margin-bottom: 1.75rem; }
-
-.vw-labels {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 0.75rem;
-  margin: 0 0 1.2rem;
-}
+.vw-labels { margin: 0 0 1.2rem; }
 
 /* Same pill as the DrugAdopt page's eyebrow, so each product page names
    itself the same way. */
@@ -39,100 +31,73 @@
   letter-spacing: 0.01em;
 }
 
-/* Status colour, as on the DrugAdopt portal card: it marks a stage. */
-.vw-badge {
-  padding: 0.15rem 0.55rem;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  background: var(--partial-wash);
-  color: var(--partial);
-  font-size: 0.72rem;
-  font-weight: 650;
-  letter-spacing: 0.03em;
-}
-
-/* --- Three parts of the work, on the tinted band ------------------------ */
-
-.vw-band {
-  padding-block: clamp(2.75rem, 6vw, 4.5rem);
-  background: var(--accent-wash);
-  border-block: 1px solid var(--rule);
-}
-
-.vw-pillars {
-  list-style: none;
-  margin: clamp(1.5rem, 3.5vw, 2.25rem) 0 0;
-  padding: 0;
+.vw-intro {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: start;
 }
 
-.vw-pillars .sec-card h3 { font-size: var(--step-1); }
-
-/* --- Engagement steps --------------------------------------------------- */
-
-.vw-steps {
-  list-style: none;
-  margin: clamp(1.5rem, 3.5vw, 2.25rem) 0 0;
-  padding: 0;
-  counter-reset: vw-step;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem clamp(1rem, 3vw, 2rem);
-}
-
-.vw-steps li {
-  counter-increment: vw-step;
-  padding-top: 1rem;
-  border-top: 2px solid var(--rule-firm);
-}
-
-.vw-steps li::before {
-  content: counter(vw-step, decimal-leading-zero);
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 650;
-  letter-spacing: 0.05em;
-}
-
-.vw-steps h3 {
-  margin: 0 0 0.4rem;
-  color: var(--ink);
-  font-size: var(--step-1);
-  line-height: 1.25;
-}
-
-.vw-steps p {
+.vw-copy {
+  max-width: 68ch;
   margin: 0;
   color: var(--ink-2);
-  font-size: 0.97rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.65;
   text-wrap: pretty;
 }
 
-/* --- White paper note --------------------------------------------------- */
+.vw-figure { margin: 0; }
 
-.vw-paper {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1.25rem 2.5rem;
-  align-items: center;
-  margin-top: clamp(3rem, 7vw, 5rem);
+/* The graphics are light PNGs with their own frame; keep them on white in
+   both themes so they read as figures rather than as page chrome. */
+.vw-figure img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: 0.6rem;
+  background: #fff;
 }
 
-.vw-paper .sec-cta { margin-top: 0; }
+.vw-benchmark { max-width: 42rem; margin-top: 1.25rem; }
 
-.vw-end { padding-bottom: clamp(3rem, 7vw, 5rem); }
+.vw-figure figcaption {
+  margin-top: 0.75rem;
+  color: var(--ink-2);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.vw-sources {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(2.5rem, 6vw, 3.5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.vw-sources h3 {
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+  font-size: var(--step-0);
+}
+
+.vw-sources ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--ink-2);
+  font-size: 0.93rem;
+  line-height: 1.55;
+}
+
+.vw-sources li + li { margin-top: 0.4rem; }
+
+.vw-sources a { color: var(--accent-deep); }
+
+.vw-end { padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3rem, 7vw, 5rem); }
 
 @media (max-width: 60rem) {
-  .vw-pillars { grid-template-columns: 1fr; }
-  .vw-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .vw-paper { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 30rem) {
-  .vw-steps { grid-template-columns: 1fr; }
+  .vw-intro,
+  .vw-sources { grid-template-columns: 1fr; }
 }
