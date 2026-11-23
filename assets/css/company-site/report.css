@@ -807,6 +807,22 @@
   margin: 0 auto 1.2rem;
 }
 
+/* Most visitors arrive from the case study, so the way back sits above the
+   title rather than only in the masthead. */
+.rpt-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 0.9rem;
+  color: var(--accent-deep);
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding-bottom: 1px;
+}
+.rpt-back:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
 .rpt-intro-title {
   margin: 0;
   max-width: 30ch;

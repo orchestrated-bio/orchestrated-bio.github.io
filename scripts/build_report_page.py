@@ -1149,7 +1149,7 @@ def project_tolvaptan_report(source: pathlib.Path, output: pathlib.Path) -> None
     document.select_one('meta[property="og:title"]')["content"] = "Tolvaptan in ADPKD | DrugAdopt"
     main = document.find("main")
     main.clear()
-    main.append(BeautifulSoup('<div class="rpt-intro"><h1 class="rpt-intro-title">Tolvaptan in ADPKD</h1><p class="rpt-intro-lede">Disease biology, drug mechanism, clinical evidence, pharmacology, safety, and the IP landscape.</p></div>' + reader, "html.parser"))
+    main.append(BeautifulSoup('<div class="rpt-intro"><a class="rpt-back" href="./drugadopt-case-study.html"><span aria-hidden="true">←</span> Back to the case study</a><h1 class="rpt-intro-title">Tolvaptan in ADPKD</h1><p class="rpt-intro-lede">Disease biology, drug mechanism, clinical evidence, pharmacology, safety, and the IP landscape.</p></div>' + reader, "html.parser"))
     document.select_one('.skip-link')["href"] = "#overview"
     output.write_text(str(document))
 
