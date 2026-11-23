@@ -10,8 +10,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Let a running deploy finish rather than cancelling it, so a half-published
 # site is never left behind.
@@ -20,11 +18,14 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  # Build and deploy are separate jobs on purpose. When both ran as steps of one
+  # job, deploy-pages sometimes queried the Artifacts API before the freshly
+  # uploaded "github-pages" artifact was visible and failed with
+  # 'No artifacts named "github-pages" were found' (Deploy run #32), even though
+  # the artifact existed. A separate job starts on a new runner after the upload
+  # job has finished, which avoids that race.
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -41,6 +42,30 @@ jobs:
         with:
           path: .
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_first_try.outputs.page_url }}
+    steps:
+      # A transient Pages/Artifacts API error should not need a manual re-run.
+      # The first attempt fails while fetching artifact metadata, before any
+      # deployment is created, so trying once more is safe.
       - name: Deploy
+        id: deployment_first_try
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Wait before retrying
+        if: steps.deployment_first_try.outcome == 'failure'
+        run: sleep 20
+
+      - name: Deploy (retry)
         id: deployment
+        if: steps.deployment_first_try.outcome == 'failure'
         uses: actions/deploy-pages@v4
