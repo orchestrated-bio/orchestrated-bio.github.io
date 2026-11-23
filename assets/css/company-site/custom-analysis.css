@@ -1,0 +1,208 @@
+/* Custom Analysis page. Borrows the DrugAdopt page's vocabulary (eyebrow,
+   tinted selling band, raised cards with an accent top rule) so the two
+   service pages read as one site. Figure marks stay in company.css. */
+
+.ca-eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+/* --- Hero: the offer beside where it has been applied ------------------ */
+
+.ca-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+.ca-hero .shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+}
+
+.ca-hero h1 {
+  font-size: var(--step-4);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  font-weight: 620;
+  color: var(--ink);
+  margin: 0 0 1.2rem;
+  max-width: 14ch;
+  text-wrap: balance;
+}
+
+.ca-hero .opening-lede { margin-bottom: 1.75rem; }
+
+.ca-areas {
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: 0.6rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 14px 32px -18px rgb(0 0 0 / 0.18);
+}
+
+.ca-areas h2 {
+  margin: 0 0 1rem;
+  font-size: var(--step-1);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-weight: 620;
+  color: var(--ink);
+}
+
+.ca-areas ul { list-style: none; margin: 0; padding: 0; }
+
+.ca-areas li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid var(--rule);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.ca-areas li::before {
+  content: "";
+  flex: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* --- Services band ------------------------------------------------------ */
+
+.ca-services {
+  background: var(--accent-wash);
+  border-block: 1px solid var(--rule);
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+}
+
+.ca-section-title {
+  margin: 0;
+  max-width: 24ch;
+  font-size: var(--step-3);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  font-weight: 620;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.ca-service-grid {
+  list-style: none;
+  margin: clamp(1.75rem, 4vw, 2.5rem) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ca-service-grid li {
+  padding: 1.25rem 1.25rem 1.35rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  color: var(--ink);
+  font-weight: 620;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.ca-icon {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-bottom: 0.9rem;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Track record and examples ----------------------------------------- */
+
+.ca-section { padding-block: clamp(3rem, 7vw, 5rem) 0; }
+
+.ca-section-lede {
+  max-width: 62ch;
+  margin: 0.9rem 0 0;
+  color: var(--ink-2);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.ca-cards {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 3.5vw, 2.25rem);
+}
+
+.ca-card {
+  padding: clamp(1.25rem, 3.5vw, 2.25rem);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent);
+  border-radius: 0.6rem;
+}
+
+.ca-card h3 {
+  margin: 0 0 0.7rem;
+  font-size: var(--step-2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 620;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.ca-card p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ink-2);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.ca-card-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+/* company.css sizes panels at a 19rem minimum, wider than a card's inner
+   width on a phone; cap the minimum at the card so the panels stack. */
+.ca-card .sc-panels { grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr)); }
+
+.ca-card .hm { margin-inline: auto; }
+.ca-card .hm-figure figcaption { margin-inline: auto; }
+
+/* --- Closing call to action -------------------------------------------- */
+
+.ca-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 1.4rem;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+
+@media (max-width: 60rem) {
+  .ca-hero .shell,
+  .ca-card-split { grid-template-columns: 1fr; }
+  .ca-service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 30rem) {
+  .ca-service-grid { grid-template-columns: 1fr; }
+  .ca-service-grid li { display: flex; align-items: center; gap: 0.9rem; padding: 1rem; }
+  .ca-icon { flex: none; margin-bottom: 0; width: 2rem; height: 2rem; }
+}
