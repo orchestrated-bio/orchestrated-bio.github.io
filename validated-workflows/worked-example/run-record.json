@@ -1,0 +1,783 @@
+{
+  "accession": "GSE143939",
+  "review_id": "fd15a29d984026867cfa5973113a243b9fe255a376c05d94d59112d9be090746",
+  "count_matrix_sha256": "73e2cefec1a4346abaf7b7be881b261ed38141a0f4c240e5b4bed34cde31588a",
+  "comparison": {
+    "numerator": "Tumor, colon adenocarcinoma",
+    "denominator": "Normal, adjacent non-cancerous tissues",
+    "unit_field": "patient",
+    "condition_field": "tissue",
+    "filters": {},
+    "same_within_pair": [],
+    "nuisance_fields": [],
+    "model": "~ unit + group",
+    "minimum_pairs": 3,
+    "min_total_count": 10,
+    "nuisance_changes": {},
+    "pairs": 5,
+    "display_labels": {
+      "numerator": "colorectal tumor",
+      "denominator": "adjacent tissue"
+    }
+  },
+  "count_input": null,
+  "fit": {
+    "status": "fit",
+    "pairs": 5,
+    "modeled": 30400,
+    "p_values": 30400,
+    "adjusted_p_values": 28042,
+    "fdr_hits": 8376,
+    "effect_directions": {
+      "higher": 3633,
+      "lower": 4743
+    },
+    "heatmap": true,
+    "heatmap_genes": 20,
+    "heatmap_hits": 20,
+    "method": "DESeq2",
+    "method_version": "1.52.0",
+    "pair_addition": {},
+    "method_comparison": {
+      "status": "complete",
+      "alternative": "edgeR",
+      "panel": {
+        "status": "complete",
+        "methods": [
+          {
+            "method": "DESeq2",
+            "version": "1.52.0",
+            "modeled": 30400,
+            "adjusted": 28042,
+            "hits": 8376,
+            "common_hits": 8226
+          },
+          {
+            "method": "edgeR",
+            "version": "4.10.1",
+            "modeled": 30400,
+            "adjusted": 30400,
+            "hits": 8388,
+            "common_hits": 8388
+          },
+          {
+            "method": "limma-voom",
+            "version": "3.68.4",
+            "modeled": 30400,
+            "adjusted": 30400,
+            "hits": 7913,
+            "common_hits": 7913
+          }
+        ],
+        "shared_tests": 30400,
+        "all_same_direction": 7259
+      },
+      "alternative_version": "4.10.1",
+      "primary_hits": 8376,
+      "alternative_hits": 8388,
+      "primary_adjusted": 28042,
+      "alternative_adjusted": 30400,
+      "both": 7449,
+      "both_same_direction": 7449,
+      "shared_tests": 30400,
+      "primary_common_hits": 8226,
+      "alternative_common_hits": 8388,
+      "rank_correlation": 0.97165362381
+    },
+    "qc": {
+      "input_genes": 39376,
+      "retained_genes": 30400,
+      "count_total_range": [
+        16616822,
+        25951392
+      ],
+      "detected_range": [
+        26539,
+        30366
+      ],
+      "zero_libraries": 0
+    },
+    "pca": {
+      "features": 500,
+      "variance": [
+        61.9672503494,
+        12.8089539437
+      ],
+      "axes_overlap": false,
+      "transform": "DESeq2 variance-stabilized counts",
+      "show_pair_links": true,
+      "nearest_mates": 0,
+      "median_matched": 65.4387355957,
+      "median_other": 52.261719268,
+      "largest": {
+        "unit": "ZGT",
+        "denominator": "GSM4276882",
+        "numerator": "GSM4276876",
+        "PC1": -36.3766267844,
+        "PC2": -9.28964894,
+        "after_PC1": 44.5780288574,
+        "after_PC2": -10.6845706898,
+        "distance": 80.9666726299
+      },
+      "largest_counts": [
+        25374443,
+        23305632
+      ],
+      "largest_detected": [
+        29977,
+        28538
+      ]
+    },
+    "sensitivity": {
+      "status": "complete",
+      "refits": 5,
+      "requested": 5,
+      "primary_hits": 8376,
+      "stable_direction": 8375,
+      "stable_fdr": 5288,
+      "primary_hits_per_refit": [
+        6154,
+        7144
+      ]
+    },
+    "pair_effects": {
+      "genes": 20,
+      "opposing_directions": 0,
+      "plotted": 10
+    },
+    "design_rank": 6,
+    "residual_df": 4
+  },
+  "pathways": {
+    "collection": "MSigDB Hallmark 2026.2.Hs",
+    "collection_url": "https://docs.gsea-msigdb.org/MSigDB/Release_Notes/MSigDB_2026.2.Hs/",
+    "gmt_sha256": "a26578a72aed3171fffce4d2cda8672c41783f4deb7a3743f16b3f5af82b355e",
+    "software": "GSEApy 1.3.1",
+    "settings": {
+      "method": "multilevel",
+      "weight": 1,
+      "permutation_num": 1000,
+      "sample_size": 101,
+      "eps": 1e-30,
+      "seed": 20261123,
+      "min_size": 15,
+      "max_size": 500,
+      "ascending": null,
+      "threads": 1,
+      "outdir": null,
+      "no_plot": true
+    },
+    "ranked_genes": 30400,
+    "full_fit": [
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_E2F_TARGETS",
+        "enrichment_score": 0.808928462132594,
+        "normalized_enrichment_score": 3.7900474828135415,
+        "permutation_p_value": 1e-30,
+        "fdr_q_value": 1.6666666666666667e-29,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_G2M_CHECKPOINT",
+        "enrichment_score": 0.7466450431787403,
+        "normalized_enrichment_score": 3.483024565054635,
+        "permutation_p_value": 1e-30,
+        "fdr_q_value": 1.6666666666666667e-29,
+        "genes_matched": 199,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_MYC_TARGETS_V1",
+        "enrichment_score": 0.8045720565416796,
+        "normalized_enrichment_score": 3.7696365505533125,
+        "permutation_p_value": 1e-30,
+        "fdr_q_value": 1.6666666666666667e-29,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_MYC_TARGETS_V2",
+        "enrichment_score": 0.8285548345356314,
+        "normalized_enrichment_score": 3.1939242632363345,
+        "permutation_p_value": 4.7749515554516323e-23,
+        "fdr_q_value": 5.968689444314541e-22,
+        "genes_matched": 58,
+        "genes_in_set": 58
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_MTORC1_SIGNALING",
+        "enrichment_score": 0.5862515888184939,
+        "normalized_enrichment_score": 2.7467464213575545,
+        "permutation_p_value": 2.48433637824093e-22,
+        "fdr_q_value": 2.48433637824093e-21,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_MITOTIC_SPINDLE",
+        "enrichment_score": 0.48328532673937785,
+        "normalized_enrichment_score": 2.254477787460169,
+        "permutation_p_value": 2.4434439353244606e-13,
+        "fdr_q_value": 2.0362032794370505e-12,
+        "genes_matched": 199,
+        "genes_in_set": 199
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+        "enrichment_score": 0.5832778145263326,
+        "normalized_enrichment_score": 2.5326912418644865,
+        "permutation_p_value": 3.424985392016481e-13,
+        "fdr_q_value": 2.446418137154629e-12,
+        "genes_matched": 112,
+        "genes_in_set": 113
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_DNA_REPAIR",
+        "enrichment_score": 0.5345085241375983,
+        "normalized_enrichment_score": 2.412520044169229,
+        "permutation_p_value": 6.658974737788881e-13,
+        "fdr_q_value": 4.161859211118051e-12,
+        "genes_matched": 150,
+        "genes_in_set": 150
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_GLYCOLYSIS",
+        "enrichment_score": 0.42838712528206274,
+        "normalized_enrichment_score": 1.9983831598991417,
+        "permutation_p_value": 3.1514793778491907e-09,
+        "fdr_q_value": 1.7508218765828835e-08,
+        "genes_matched": 199,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ALLOGRAFT_REJECTION",
+        "enrichment_score": -0.4882811283023651,
+        "normalized_enrichment_score": -2.0288107092706893,
+        "permutation_p_value": 4.659191985262636e-09,
+        "fdr_q_value": 2.329595992631318e-08,
+        "genes_matched": 195,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_MYOGENESIS",
+        "enrichment_score": -0.4838700360918782,
+        "normalized_enrichment_score": -2.0095069294879235,
+        "permutation_p_value": 2.36628034354134e-08,
+        "fdr_q_value": 1.0755819743369728e-07,
+        "genes_matched": 192,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_COMPLEMENT",
+        "enrichment_score": -0.46822282494856937,
+        "normalized_enrichment_score": -1.9456354096949675,
+        "permutation_p_value": 4.044338886478668e-08,
+        "fdr_q_value": 1.6851412026994454e-07,
+        "genes_matched": 196,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_KRAS_SIGNALING_UP",
+        "enrichment_score": -0.4519770086892669,
+        "normalized_enrichment_score": -1.879593253728749,
+        "permutation_p_value": 5.064016854811627e-07,
+        "fdr_q_value": 1.9476987903121643e-06,
+        "genes_matched": 197,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_PANCREAS_BETA_CELLS",
+        "enrichment_score": -0.6618625048542428,
+        "normalized_enrichment_score": -2.1456312439578458,
+        "permutation_p_value": 1.9748047210592248e-06,
+        "fdr_q_value": 7.052874003782946e-06,
+        "genes_matched": 38,
+        "genes_in_set": 40
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_INFLAMMATORY_RESPONSE",
+        "enrichment_score": -0.4152198846901708,
+        "normalized_enrichment_score": -1.7351275652853226,
+        "permutation_p_value": 1.6751996073854457e-05,
+        "fdr_q_value": 5.583998691284819e-05,
+        "genes_matched": 199,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+        "enrichment_score": -0.41554937875003356,
+        "normalized_enrichment_score": -1.7342782637914826,
+        "permutation_p_value": 4.741991738540577e-05,
+        "fdr_q_value": 0.00014818724182939303,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_IL2_STAT5_SIGNALING",
+        "enrichment_score": -0.4018187356221392,
+        "normalized_enrichment_score": -1.6754188540177148,
+        "permutation_p_value": 8.219517586534503e-05,
+        "fdr_q_value": 0.00022831993295929174,
+        "genes_matched": 198,
+        "genes_in_set": 199
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+        "enrichment_score": 0.3540296280046075,
+        "normalized_enrichment_score": 1.6587240569121433,
+        "permutation_p_value": 7.861484555857451e-05,
+        "fdr_q_value": 0.00022831993295929174,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_KRAS_SIGNALING_DN",
+        "enrichment_score": -0.4163797684849858,
+        "normalized_enrichment_score": -1.7107717588920146,
+        "permutation_p_value": 9.955564830172959e-05,
+        "fdr_q_value": 0.0002619885481624463,
+        "genes_matched": 178,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_SPERMATOGENESIS",
+        "enrichment_score": 0.39737733056202207,
+        "normalized_enrichment_score": 1.7319145547463235,
+        "permutation_p_value": 0.00010667737376657626,
+        "fdr_q_value": 0.0002666934344164407,
+        "genes_matched": 117,
+        "genes_in_set": 135
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_XENOBIOTIC_METABOLISM",
+        "enrichment_score": -0.37263076083425123,
+        "normalized_enrichment_score": -1.5456822589627393,
+        "permutation_p_value": 0.0010592825122852623,
+        "fdr_q_value": 0.002522101219726815,
+        "genes_matched": 191,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_APICAL_JUNCTION",
+        "enrichment_score": -0.35394618562326513,
+        "normalized_enrichment_score": -1.4758100111551866,
+        "permutation_p_value": 0.003782786085872968,
+        "fdr_q_value": 0.008597241104256746,
+        "genes_matched": 198,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_HYPOXIA",
+        "enrichment_score": -0.3385980057463496,
+        "normalized_enrichment_score": -1.4118144139841748,
+        "permutation_p_value": 0.008635264650896155,
+        "fdr_q_value": 0.018772314458469903,
+        "genes_matched": 198,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_UV_RESPONSE_DN",
+        "enrichment_score": -0.36428146170801623,
+        "normalized_enrichment_score": -1.460284029007954,
+        "permutation_p_value": 0.009220475025061162,
+        "fdr_q_value": 0.01920932296887742,
+        "genes_matched": 144,
+        "genes_in_set": 144
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ANDROGEN_RESPONSE",
+        "enrichment_score": -0.3924735448229063,
+        "normalized_enrichment_score": -1.5048576971881136,
+        "permutation_p_value": 0.010539414199111027,
+        "fdr_q_value": 0.020268104229059666,
+        "genes_matched": 100,
+        "genes_in_set": 101
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_HEME_METABOLISM",
+        "enrichment_score": -0.3424218995532925,
+        "normalized_enrichment_score": -1.4220743766619626,
+        "permutation_p_value": 0.010244301110027606,
+        "fdr_q_value": 0.020268104229059666,
+        "genes_matched": 192,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ANGIOGENESIS",
+        "enrichment_score": 0.457374546685214,
+        "normalized_enrichment_score": 1.5569930906071305,
+        "permutation_p_value": 0.012315570421144909,
+        "fdr_q_value": 0.021992090037758764,
+        "genes_matched": 36,
+        "genes_in_set": 36
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_PROTEIN_SECRETION",
+        "enrichment_score": 0.3490731394617627,
+        "normalized_enrichment_score": 1.4799690728956658,
+        "permutation_p_value": 0.011985108875480172,
+        "fdr_q_value": 0.021992090037758764,
+        "genes_matched": 96,
+        "genes_in_set": 96
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_BILE_ACID_METABOLISM",
+        "enrichment_score": -0.37893056783181106,
+        "normalized_enrichment_score": -1.4612355926526779,
+        "permutation_p_value": 0.015988324631996263,
+        "fdr_q_value": 0.027566076951717693,
+        "genes_matched": 108,
+        "genes_in_set": 112
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ESTROGEN_RESPONSE_EARLY",
+        "enrichment_score": -0.32710881307180484,
+        "normalized_enrichment_score": -1.3639092061929783,
+        "permutation_p_value": 0.018498697189220766,
+        "fdr_q_value": 0.03083116198203461,
+        "genes_matched": 198,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+        "enrichment_score": -0.393715636912246,
+        "normalized_enrichment_score": -1.4740469694160008,
+        "permutation_p_value": 0.02652387234325642,
+        "fdr_q_value": 0.04278043926331681,
+        "genes_matched": 86,
+        "genes_in_set": 87
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_UV_RESPONSE_UP",
+        "enrichment_score": 0.26693670759175153,
+        "normalized_enrichment_score": 1.2213238036994563,
+        "permutation_p_value": 0.04891232069387617,
+        "fdr_q_value": 0.07642550108418152,
+        "genes_matched": 156,
+        "genes_in_set": 158
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ADIPOGENESIS",
+        "enrichment_score": -0.3093896018686537,
+        "normalized_enrichment_score": -1.2928822689104236,
+        "permutation_p_value": 0.052434456928838954,
+        "fdr_q_value": 0.0794461468618772,
+        "genes_matched": 199,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+        "enrichment_score": 0.260978671088815,
+        "normalized_enrichment_score": 1.2227552889170767,
+        "permutation_p_value": 0.05568880222062467,
+        "fdr_q_value": 0.08189529738327156,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_APICAL_SURFACE",
+        "enrichment_score": -0.42838759582855823,
+        "normalized_enrichment_score": -1.4098947215809297,
+        "permutation_p_value": 0.0671875,
+        "fdr_q_value": 0.09598214285714286,
+        "genes_matched": 43,
+        "genes_in_set": 44
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_WNT_BETA_CATENIN_SIGNALING",
+        "enrichment_score": 0.37068099252883113,
+        "normalized_enrichment_score": 1.3217059401035816,
+        "permutation_p_value": 0.08767123287671233,
+        "fdr_q_value": 0.121765601217656,
+        "genes_matched": 42,
+        "genes_in_set": 42
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_PEROXISOME",
+        "enrichment_score": 0.2860973253203458,
+        "normalized_enrichment_score": 1.224089290299708,
+        "permutation_p_value": 0.0979020979020979,
+        "fdr_q_value": 0.1323001323001323,
+        "genes_matched": 102,
+        "genes_in_set": 104
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_ESTROGEN_RESPONSE_LATE",
+        "enrichment_score": -0.2899992793987035,
+        "normalized_enrichment_score": -1.2091777144335045,
+        "permutation_p_value": 0.11180904522613065,
+        "fdr_q_value": 0.14711716477122455,
+        "genes_matched": 198,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_COAGULATION",
+        "enrichment_score": -0.3052314523833788,
+        "normalized_enrichment_score": -1.2025956859195885,
+        "permutation_p_value": 0.13386880856760375,
+        "fdr_q_value": 0.17162667765077402,
+        "genes_matched": 128,
+        "genes_in_set": 138
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_APOPTOSIS",
+        "enrichment_score": -0.2827595279901936,
+        "normalized_enrichment_score": -1.1435860928954937,
+        "permutation_p_value": 0.17277486910994763,
+        "fdr_q_value": 0.21596858638743455,
+        "genes_matched": 159,
+        "genes_in_set": 161
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_CHOLESTEROL_HOMEOSTASIS",
+        "enrichment_score": 0.2829909549081654,
+        "normalized_enrichment_score": 1.153176087606037,
+        "permutation_p_value": 0.18095238095238095,
+        "fdr_q_value": 0.22067363530778164,
+        "genes_matched": 74,
+        "genes_in_set": 74
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_REACTIVE_OXYGEN_SPECIES_PATHWAY",
+        "enrichment_score": 0.2910442978206443,
+        "normalized_enrichment_score": 1.077193533714737,
+        "permutation_p_value": 0.30362116991643456,
+        "fdr_q_value": 0.36145377371004117,
+        "genes_matched": 49,
+        "genes_in_set": 49
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_FATTY_ACID_METABOLISM",
+        "enrichment_score": -0.26215694589477107,
+        "normalized_enrichment_score": -1.051521138947639,
+        "permutation_p_value": 0.356763925729443,
+        "fdr_q_value": 0.41172595520421607,
+        "genes_matched": 155,
+        "genes_in_set": 158
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_P53_PATHWAY",
+        "enrichment_score": 0.22343174386804876,
+        "normalized_enrichment_score": 1.0468378330949788,
+        "permutation_p_value": 0.36231884057971014,
+        "fdr_q_value": 0.41172595520421607,
+        "genes_matched": 200,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+        "enrichment_score": 0.23798660833459315,
+        "normalized_enrichment_score": 1.0084555711382595,
+        "permutation_p_value": 0.43902439024390244,
+        "fdr_q_value": 0.48780487804878053,
+        "genes_matched": 97,
+        "genes_in_set": 97
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_NOTCH_SIGNALING",
+        "enrichment_score": 0.29030264954575874,
+        "normalized_enrichment_score": 0.972602858148986,
+        "permutation_p_value": 0.49612403100775193,
+        "fdr_q_value": 0.5392652510953826,
+        "genes_matched": 32,
+        "genes_in_set": 32
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_HEDGEHOG_SIGNALING",
+        "enrichment_score": -0.27044053860595646,
+        "normalized_enrichment_score": -0.865634707152668,
+        "permutation_p_value": 0.6571879936808847,
+        "fdr_q_value": 0.6991361634903028,
+        "genes_matched": 35,
+        "genes_in_set": 36
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_TNFA_SIGNALING_VIA_NFKB",
+        "enrichment_score": -0.2150325243364363,
+        "normalized_enrichment_score": -0.898581388238293,
+        "permutation_p_value": 0.7128589263420724,
+        "fdr_q_value": 0.7425613816063255,
+        "genes_matched": 199,
+        "genes_in_set": 200
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_PI3K_AKT_MTOR_SIGNALING",
+        "enrichment_score": -0.2213956698202841,
+        "normalized_enrichment_score": -0.8526819745586564,
+        "permutation_p_value": 0.781292984869326,
+        "fdr_q_value": 0.7972377396625775,
+        "genes_matched": 103,
+        "genes_in_set": 105
+      },
+      {
+        "analysis": "Full fit",
+        "gene_set": "HALLMARK_TGF_BETA_SIGNALING",
+        "enrichment_score": -0.19925796008749497,
+        "normalized_enrichment_score": -0.6845574121516727,
+        "permutation_p_value": 0.9544072948328267,
+        "fdr_q_value": 0.9544072948328267,
+        "genes_matched": 54,
+        "genes_in_set": 54
+      }
+    ],
+    "stable": [
+      "HALLMARK_ALLOGRAFT_REJECTION",
+      "HALLMARK_COMPLEMENT",
+      "HALLMARK_DNA_REPAIR",
+      "HALLMARK_E2F_TARGETS",
+      "HALLMARK_G2M_CHECKPOINT",
+      "HALLMARK_GLYCOLYSIS",
+      "HALLMARK_IL2_STAT5_SIGNALING",
+      "HALLMARK_INFLAMMATORY_RESPONSE",
+      "HALLMARK_KRAS_SIGNALING_DN",
+      "HALLMARK_KRAS_SIGNALING_UP",
+      "HALLMARK_MITOTIC_SPINDLE",
+      "HALLMARK_MTORC1_SIGNALING",
+      "HALLMARK_MYC_TARGETS_V1",
+      "HALLMARK_MYC_TARGETS_V2",
+      "HALLMARK_MYOGENESIS",
+      "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+      "HALLMARK_PANCREAS_BETA_CELLS",
+      "HALLMARK_SPERMATOGENESIS",
+      "HALLMARK_UNFOLDED_PROTEIN_RESPONSE",
+      "HALLMARK_XENOBIOTIC_METABOLISM"
+    ],
+    "refits_completed": 5,
+    "refits_requested": 5
+  },
+  "publication_review": [
+    {
+      "check": "Paper",
+      "status": "Checked",
+      "finding": "Chen and colleagues describe six paired colorectal specimens.",
+      "source": "https://www.thno.org/v11p4298.htm"
+    },
+    {
+      "check": "Methods",
+      "status": "Checked",
+      "finding": "Tumor and adjacent tissue were obtained after surgical resection.",
+      "source": "https://www.thno.org/v11p4298.htm"
+    },
+    {
+      "check": "Paper tables",
+      "status": "Checked",
+      "finding": "The main clinical table describes a separate tissue-chip cohort.",
+      "source": "https://www.thno.org/v11p4298.htm"
+    },
+    {
+      "check": "Supplements",
+      "status": "Checked",
+      "finding": "Table S1 lists clinical annotations for the six sequencing pairs.",
+      "source": "https://www.thno.org/v11/p4298/thnov11p4298s1.pdf"
+    },
+    {
+      "check": "Patient or sample metadata",
+      "status": "Found",
+      "finding": "All six sequencing pair codes match GEO. Five pairs have count data.",
+      "source": "https://www.thno.org/v11/p4298/thnov11p4298s1.pdf"
+    }
+  ],
+  "publication_review_added_on_export": true,
+  "additional_volcano_gene_ids": [
+    "286133",
+    "4316"
+  ],
+  "figure_notes": {
+    "pathways": {
+      "text": "E2F and G2/M gene sets ranked higher in tumors, a pattern associated with cell proliferation. In bulk tissue, this can reflect more cycling cells, changes in gene expression within cells, or both.",
+      "sources": [
+        {
+          "label": "MSigDB E2F targets",
+          "url": "https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/HALLMARK_E2F_TARGETS.html"
+        },
+        {
+          "label": "MSigDB G2/M checkpoint",
+          "url": "https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/HALLMARK_G2M_CHECKPOINT.html"
+        }
+      ]
+    },
+    "volcano": {
+      "text": "Tumors expressed more CLDN1, a cell-junction gene, and FOXQ1, a Wnt-responsive gene, in line with prior colorectal studies. Higher CHGA and C7 in adjacent tissue may reflect differences in the mix of enteroendocrine cells and fibroblasts.",
+      "sources": [
+        {
+          "label": "CLDN1 study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11939410/"
+        },
+        {
+          "label": "FOXQ1 study",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/23555880/"
+        },
+        {
+          "label": "CHGA study",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10943347/"
+        },
+        {
+          "label": "C7 fibroblast study",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10141529/"
+        }
+      ]
+    }
+  },
+  "runtime": {
+    "r": "4.6.0",
+    "platform": "aarch64-unknown-linux-gnu",
+    "os": "Ubuntu 24.04.4 LTS",
+    "locale": "LC_CTYPE=en_US.UTF-8;LC_NUMERIC=C;LC_TIME=en_US.UTF-8;LC_COLLATE=en_US.UTF-8;LC_MONETARY=en_US.UTF-8;LC_MESSAGES=en_US.UTF-8;LC_PAPER=en_US.UTF-8;LC_NAME=C;LC_ADDRESS=C;LC_TELEPHONE=C;LC_MEASUREMENT=en_US.UTF-8;LC_IDENTIFICATION=C",
+    "blas": "/usr/lib/aarch64-linux-gnu/openblas-pthread/libblas.so.3",
+    "lapack": "/usr/lib/aarch64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so",
+    "lapack_version": "3.12.0",
+    "blas_sha256": "d1067c9951f399d9f073027a4f550b7ac4e2642de36cf8fef9aa0c1728dd7e6f",
+    "lapack_sha256": "4f04c974ceb53b9bad6b6dc5d606881450e3a8835837ad07c4636d10c8acfe81"
+  },
+  "results_sha256": "c6ab0298fa082dff4329d5720d4e9cf540fcc3364fb94f7d283912bb944f83f9"
+}

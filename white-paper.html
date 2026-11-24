@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Alex Nesta on how DrugAdopt designs, validates and stress-tests AI workflows for gene-expression analysis." />
+    <meta name="theme-color" content="#f4f6f2" />
+    <title>How We Test AI for Gene-Expression Analysis</title>
+    <link rel="canonical" href="https://orchestrated.bio/white-paper.html" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="How we test AI for gene-expression analysis | Orchestrated Biosciences" />
+    <meta property="og:description" content="Alex Nesta on how DrugAdopt designs, validates and stress-tests AI workflows for gene-expression analysis." />
+    <meta property="og:url" content="https://orchestrated.bio/white-paper.html" />
+    <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
+    <link rel="stylesheet" href="./assets/css/company-site/validated-workflows.css?v=89b2808e15c8" />
+    <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
+  </head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a href="./drugadopt.html">DrugAdopt</a>
+          <a href="./validated-workflows.html" aria-current="true">Validated Workflows</a>
+          <a href="./custom-analysis.html">Custom Analysis</a>
+          <a href="./company.html">Company</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="vw-article">
+        <a class="vw-back" href="./validated-workflows.html"><span aria-hidden="true">←&nbsp;</span>Validated Workflows</a>
+        <h1>How we test AI for gene-expression analysis</h1>
+        <p class="vw-byline">Alex Nesta, PhD · Orchestrated Biosciences</p>
+
+        <p>I asked Claude Opus 5.5 to look for a response biomarker in a melanoma trial of nivolumab. It used the paper’s files and produced a heat map that looked convincing. When we checked the patient matching, four of the 13 responders with on-treatment samples were missing. The model had flagged a problem with how it selected the genes. The missing patients were a separate problem, upstream of the heat map. <a href="https://pubmed.ncbi.nlm.nih.gov/29033130/" target="_blank" rel="noreferrer">Riaz and colleagues’ study</a></p>
+        <p>That’s the kind of decision I want to be able to inspect before I use a result. At DrugAdopt, our scientists write the procedure an AI model follows and specify what the analysis must produce. The model can adapt to the study. The analyst can see which data it chose, whether the comparison answers the question, and why it kept or excluded a sample.</p>
+
+        <h2 id="reviewing-one-colorectal-analysis">Reviewing one colorectal analysis</h2>
+        <p>The exploratory plot below shows the ten samples from a colorectal RNA-seq analysis. Tumor and adjacent tissue separate along the first principal component. Each line connects samples from the same patient.</p>
+        <figure class="vw-figure">
+          <img src="./images/validated-workflows/colorectal-paired-pca.png" width="1332" height="810" loading="lazy" decoding="async" alt="Exploratory principal component plot for five colorectal tumor and adjacent tissue pairs. PC1 explains 62.0% of the variation and PC2 explains 12.8%." />
+        </figure>
+        <p>A clean replay reproduced the primary result table byte for byte for all <strong>30,400</strong> modeled genes. The worked example also shows library quality, changes within patient pairs, and what happened when we left out each pair in turn. Independent data would be needed to evaluate a candidate biomarker beyond these specimens. <a href="./worked-example.html">Worked example</a></p>
+
+        <h2 id="how-we-validate-the-workflow">How we validate the workflow</h2>
+        <p>We start with published best-practice guides and established methods. For paired RNA sequencing, for example, the analysis has to account for which measurements came from the same person. We reanalyze known datasets, including clinical trial biopsies, and compare with reference results for the same samples and question. We look for corroboration from independent datasets or other measurements when those sources address the same claim. <a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#can-i-use-deseq2-to-analyze-paired-samples" target="_blank" rel="noreferrer">DESeq2 guidance for paired samples</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9401502/" target="_blank" rel="noreferrer">Example trial study</a></p>
+        <p>Then we give the workflow known problems to handle. We swap labels, duplicate profiles, thin libraries, or mix in counts from another specimen. We also try to persuade a model to remove a clean sample. Those tests tell us what the workflow catches and where an analyst still needs to check the evidence.</p>
+        <p>The endpoint is a short report an expert can review. It states the question and the comparison, shows the key decisions, and gives each finding a source or an executed result. The checklist records what was checked and what still needs evidence. The confidence statement explains what those checks support. A newer model runs against the same kind of evidence and requirements so we can see which parts improve and which still need review.</p>
+
+        <h2 id="what-we-observed">What we observed</h2>
+        <p>Across 51 public studies, GPT-6 Luna received the same question and study materials twice. Only one condition included about 100 words of written analyst guidance. Exact sample pairs and comparison direction matched the reference in <strong>35 of 51</strong> plain requests and <strong>39 of 51</strong> guided requests. The estimated difference was 7.8 percentage points, with a 95% interval of −5.9 to +21.6. Fourteen studies had been used during development. Responses citing at least one supplied source rose from <strong>3 of 51</strong> to <strong>49 of 51</strong>. Only the guided condition asked for citations. We counted links separately from whether the cited evidence supported a finding. <a href="./workflow-benchmarks.html#cohort-selection-and-source-links">Case results and scoring</a></p>
+        <p>In a separate simulated sample-exclusion test, two of four models sometimes dropped a clean sample after reading a note asking them to. The clean sample was dropped in <strong>8 of 24</strong> cases with the base prompt and <strong>0 of 24</strong> with added instructions about which analysis to report. All four models still removed a named contaminated sample when the quality record flagged it. This comparison tested how models acted on the quality record they received. <a href="./workflow-benchmarks.html#sample-exclusion">Sample-exclusion results</a></p>
+        <p>Faults were harder to detect in real tumor data. A between-patient swap was flagged in <strong>0 of 10</strong> modified datasets by the main quality checks. A separate sex-marker check caught three of those swaps. Those are results on one source study. They tell us why a finding with an unresolved sample question needs a qualified interpretation. <a href="./workflow-benchmarks.html#sample-faults">Fault test scope</a></p>
+        <p>We are preparing a shared benchmark that gives GPT, Claude, and DeepSeek the same cases. It will score what each model proposes and what the workflow actually does. The final check is whether the report accurately describes the work.</p>
+        <div class="vw-article-end">
+          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
+          <a class="link-quiet" href="mailto:support@orchestrated.bio">support@orchestrated.bio</a>
+        </div>
+      </article>
+    </main>
+<footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="./insight.html">Insight</a>
+          <a href="./privacy-policy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./assets/js/company-site/mobile-nav.js?v=2b3f612cd84d"></script>
+  </body>
+</html>

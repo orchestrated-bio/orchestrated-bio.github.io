@@ -1,0 +1,11 @@
+"sample"	"group"	"unit"	"role"	"PC1"	"PC2"
+"GSM4276877"	"Normal, adjacent non-cancerous tissues"	"GDX"	"denominator"	-33.6776412442486	-12.2894174146126
+"GSM4276871"	"Tumor, colon adenocarcinoma"	"GDX"	"numerator"	31.5908279732229	-17.006942440885
+"GSM4276878"	"Normal, adjacent non-cancerous tissues"	"DX"	"denominator"	-33.0039726651265	9.51944531069707
+"GSM4276872"	"Tumor, colon adenocarcinoma"	"DX"	"numerator"	26.2943248587763	29.7363679124896
+"GSM4276880"	"Normal, adjacent non-cancerous tissues"	"QXQ"	"denominator"	-30.4826283288367	-7.33879888260529
+"GSM4276874"	"Tumor, colon adenocarcinoma"	"QXQ"	"numerator"	41.3172603977934	-13.597665369554
+"GSM4276881"	"Normal, adjacent non-cancerous tissues"	"XCZ"	"denominator"	-33.644452910198	10.3815381422026
+"GSM4276875"	"Tumor, colon adenocarcinoma"	"XCZ"	"numerator"	23.4048798456051	20.5696923720164
+"GSM4276882"	"Normal, adjacent non-cancerous tissues"	"ZGT"	"denominator"	-36.3766267843621	-9.28964893998601
+"GSM4276876"	"Tumor, colon adenocarcinoma"	"ZGT"	"numerator"	44.5780288573741	-10.6845706897628

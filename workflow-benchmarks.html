@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="Benchmark results for DrugAdopt workflows: cohort selection and source links, sample exclusion, and planted sample faults." />
+    <meta name="theme-color" content="#f4f6f2" />
+    <title>Workflow Benchmark Results</title>
+    <link rel="canonical" href="https://orchestrated.bio/workflow-benchmarks.html" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="Workflow benchmark results | Orchestrated Biosciences" />
+    <meta property="og:description" content="Benchmark results for DrugAdopt workflows: cohort selection and source links, sample exclusion, and planted sample faults." />
+    <meta property="og:url" content="https://orchestrated.bio/workflow-benchmarks.html" />
+    <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
+    <link rel="stylesheet" href="./assets/css/company-site/validated-workflows.css?v=89b2808e15c8" />
+    <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
+  </head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a href="./drugadopt.html">DrugAdopt</a>
+          <a href="./validated-workflows.html" aria-current="true">Validated Workflows</a>
+          <a href="./custom-analysis.html">Custom Analysis</a>
+          <a href="./company.html">Company</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="vw-article">
+        <a class="vw-back" href="./validated-workflows.html"><span aria-hidden="true">←&nbsp;</span>Validated Workflows</a>
+        <h1>Benchmark results</h1>
+
+        <h2 id="cohort-selection-and-source-links">Cohort selection and source links</h2>
+        <p>GPT-6 Luna received identical staged evidence and questions in two conditions. The guided condition added about 100 words of analyst instructions, including a request to cite the supplied sources. Each condition ran once per study. An exact request had the reference sample pairs in the correct direction.</p>
+        <div class="vw-table" role="region" aria-labelledby="cohort-selection-and-source-links" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Check</th><th scope="col" class="num">Plain request</th><th scope="col" class="num">Written guidance</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">Exact comparison</th><td class="num">35 of 51</td><td class="num">39 of 51</td></tr>
+                <tr><th scope="row">At least one supplied source link in the response</th><td class="num">3 of 51</td><td class="num">49 of 51</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Fourteen of the 51 studies had been used in development. The paired change in exact requests was 7.8 percentage points. The study-resampled 95% interval was −5.9 to +21.6 points. The source-link count measures whether a link appeared. Expert review of the linked evidence is a separate check.</p>
+
+        <h2 id="sample-exclusion">Sample exclusion</h2>
+        <p>Four models received simulated paired RNA-seq cases with the same quality-control records for each case. One prompt condition added instructions about which analysis to report. The models received the quality records before making these choices.</p>
+        <div class="vw-table" role="region" aria-labelledby="sample-exclusion" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Model</th><th scope="col" class="num">Clean sample kept, base prompt</th><th scope="col" class="num">Clean sample kept, added instructions</th><th scope="col" class="num">Contaminated sample removed, base prompt</th><th scope="col" class="num">Contaminated sample removed, added instructions</th></tr></thead>
+            <tbody>
+                <tr><th scope="row">DeepSeek V4.1 Flash</th><td class="num">6 of 6</td><td class="num">6 of 6</td><td class="num">3 of 3</td><td class="num">3 of 3</td></tr>
+                <tr><th scope="row">GPT-6.1 Sol</th><td class="num">6 of 6</td><td class="num">6 of 6</td><td class="num">3 of 3</td><td class="num">3 of 3</td></tr>
+                <tr><th scope="row">GPT-6 Luna</th><td class="num">2 of 6</td><td class="num">6 of 6</td><td class="num">3 of 3</td><td class="num">3 of 3</td></tr>
+                <tr><th scope="row">GPT-5.6 Terra</th><td class="num">2 of 6</td><td class="num">6 of 6</td><td class="num">3 of 3</td><td class="num">3 of 3</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 id="sample-faults">Sample faults</h2>
+        <p>In a synthetic count panel, the workflow flagged <strong>20 of 20</strong> within-pair label reversals and <strong>20 of 20</strong> swaps between donors. In modified copies of one real liver-tumor dataset, the main quality flags detected <strong>0 of 10</strong> swaps between patients. A separate sex-marker check detected <strong>3 of those 10</strong>. The nearest-sample check was inactive in that tumor comparison. The same fault can be detectable in one study design and much harder to detect in another. <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138485" target="_blank" rel="noreferrer">Public liver-tumor study</a></p>
+        <p class="vw-links"><a href="./white-paper.html">Read the white paper</a> · <a href="./worked-example.html">Worked example</a></p>
+        <div class="vw-article-end">
+          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
+          <a class="link-quiet" href="mailto:support@orchestrated.bio">support@orchestrated.bio</a>
+        </div>
+      </article>
+    </main>
+<footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="./insight.html">Insight</a>
+          <a href="./privacy-policy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./assets/js/company-site/mobile-nav.js?v=2b3f612cd84d"></script>
+  </body>
+</html>
