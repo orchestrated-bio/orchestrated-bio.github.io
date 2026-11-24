@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="description" content="A DrugAdopt worked example: paired colorectal tumor versus adjacent tissue RNA-seq, with sample decisions, checks and downloads." />
+    <meta name="theme-color" content="#f4f6f2" />
+    <title>Colorectal Worked Example</title>
+    <link rel="canonical" href="https://orchestrated.bio/worked-example.html" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon.png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orchestrated Biosciences" />
+    <meta property="og:title" content="Colorectal tumor versus adjacent tissue | Orchestrated Biosciences" />
+    <meta property="og:description" content="A DrugAdopt worked example: paired colorectal tumor versus adjacent tissue RNA-seq, with sample decisions, checks and downloads." />
+    <meta property="og:url" content="https://orchestrated.bio/worked-example.html" />
+    <meta property="og:image" content="https://orchestrated.bio/images/og-image.png" />
+    <meta property="og:image:alt" content="Orchestrated.bio: the DNA-helix mark and wordmark, with the lines Biomarker discovery for patient selection and DrugAdopt, Custom analysis, Insight" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
+    <link rel="stylesheet" href="./assets/css/company-site/validated-workflows.css?v=89b2808e15c8" />
+    <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
+  </head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="shell">
+        <a class="brand" href="./" aria-label="Orchestrated Biosciences home">
+          <img class="brand-logo brand-logo-light" src="./images/logo-icon.png" alt="" aria-hidden="true" />
+          <img class="brand-logo brand-logo-dark" src="./images/logo-icon-white.svg" alt="" aria-hidden="true" />
+          <span class="brand-word">rchestrated<span>.bio</span></span>
+        </a>
+        <button class="site-nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+        <nav class="site-nav" id="site-nav" aria-label="Primary">
+          <a href="./drugadopt.html">DrugAdopt</a>
+          <a href="./validated-workflows.html" aria-current="true">Validated Workflows</a>
+          <a href="./custom-analysis.html">Custom Analysis</a>
+          <a href="./company.html">Company</a>
+          <a class="nav-cta" href="mailto:support@orchestrated.bio">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <article class="vw-article">
+        <a class="vw-back" href="./validated-workflows.html"><span aria-hidden="true">←&nbsp;</span>Validated Workflows</a>
+        <h1>Colorectal tumor versus adjacent tissue</h1>
+        <p class="vw-lede"><strong>E2F targets, MYC targets V1 and G2/M checkpoint ranked higher in colorectal tumor.</strong></p>
+        <p>In this colorectal cancer study, how does expression in the tumor differ from adjacent noncancerous tissue from the same patient?</p>
+        <p>The comparison used 5 matched pairs. The primary method was DESeq2. 10 of 12 GEO sample records had count columns. One pair lacked both count columns.</p>
+        <p>The pathway result is exploratory.</p>
+
+        <h2 id="exploratory-pathway-results">Exploratory pathway results</h2>
+        <figure class="vw-pathways">
+          <div class="vw-pathway-groups">
+            <section><h3>Higher in colorectal tumor</h3><ul><li><span>E2F targets</span><span class="vw-score">+3.79</span><span class="vw-track" aria-hidden="true"><i style="width:100.00%"></i></span></li><li><span>MYC targets V1</span><span class="vw-score">+3.77</span><span class="vw-track" aria-hidden="true"><i style="width:99.47%"></i></span></li><li><span>G2/M checkpoint</span><span class="vw-score">+3.48</span><span class="vw-track" aria-hidden="true"><i style="width:91.82%"></i></span></li><li><span>MYC targets V2</span><span class="vw-score">+3.19</span><span class="vw-track" aria-hidden="true"><i style="width:84.17%"></i></span></li></ul></section>
+            <section class="vw-lower"><h3>Higher in adjacent tissue</h3><ul><li><span>Pancreas beta cells</span><span class="vw-score">−2.15</span><span class="vw-track" aria-hidden="true"><i style="width:56.73%"></i></span></li><li><span>Allograft rejection</span><span class="vw-score">−2.03</span><span class="vw-track" aria-hidden="true"><i style="width:53.56%"></i></span></li><li><span>Myogenesis</span><span class="vw-score">−2.01</span><span class="vw-track" aria-hidden="true"><i style="width:53.03%"></i></span></li><li><span>Complement</span><span class="vw-score">−1.95</span><span class="vw-track" aria-hidden="true"><i style="width:51.45%"></i></span></li></ul></section>
+          </div>
+          <figcaption>
+            <p>Up to four sets per direction at 5% FDR, ordered by the absolute normalized enrichment score (NES). Bar lengths use the same scale across both groups.</p>
+            <p>E2F and G2/M gene sets ranked higher in tumors, a pattern associated with cell proliferation. In bulk tissue, this can reflect more cycling cells, changes in gene expression within cells, or both. <sup><a href="https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/HALLMARK_E2F_TARGETS.html" target="_blank" rel="noreferrer" aria-label="MSigDB E2F targets">1</a> <a href="https://www.gsea-msigdb.org/gsea/msigdb/human/geneset/HALLMARK_G2M_CHECKPOINT.html" target="_blank" rel="noreferrer" aria-label="MSigDB G2/M checkpoint">2</a></sup></p>
+          </figcaption>
+        </figure>
+        <p>31 of 50 Hallmark sets met 5% FDR.</p>
+        <p>The headline sets kept their direction and met 5% FDR in all 5 leave-one-pair-out refits.</p>
+        <p class="vw-links"><a href="./validated-workflows/worked-example/hallmark-results.tsv">Hallmark results and refits</a></p>
+
+        <h2 id="paired-expression-results">Paired expression results</h2>
+        <p>8,376 of 28,042 tested genes met 5% FDR. The fit modeled 30,400 genes.</p>
+        <p>3,633 had higher expression in colorectal tumor and 4,743 had lower expression.</p>
+        <figure class="vw-figure">
+          <img src="./validated-workflows/worked-example/volcano.png" width="1512" height="987" loading="lazy" decoding="async" alt="Gene-level effects with the top discoveries labeled" />
+          <figcaption>Tumors expressed more CLDN1, a cell-junction gene, and FOXQ1, a Wnt-responsive gene, in line with prior colorectal studies. Higher CHGA and C7 in adjacent tissue may reflect differences in the mix of enteroendocrine cells and fibroblasts. <sup><a href="https://pubmed.ncbi.nlm.nih.gov/11939410/" target="_blank" rel="noreferrer" aria-label="CLDN1 study">1</a> <a href="https://pubmed.ncbi.nlm.nih.gov/23555880/" target="_blank" rel="noreferrer" aria-label="FOXQ1 study">2</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10943347/" target="_blank" rel="noreferrer" aria-label="CHGA study">3</a> <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10141529/" target="_blank" rel="noreferrer" aria-label="C7 fibroblast study">4</a></sup></figcaption>
+        </figure>
+        <p class="vw-links"><a href="./validated-workflows/worked-example/results.tsv.gz">Full gene results</a> · <a href="./validated-workflows/worked-example/volcano-selected-genes.png">Larger volcano plot with selected genes</a> · <a href="./validated-workflows/worked-example/paired-heatmap.png">Heatmap of within-pair changes</a></p>
+
+        <h2 id="changes-within-each-pair">Changes within each pair</h2>
+        <p>The fit ranks genes by adjusted p-value, then by nominal p-value, decreasing absolute fold change and gene ID. The plot shows the first ten ranked genes with available paired effects. Each dot is a patient pair. Bars give nominal 95% intervals for the across-pair mean and are descriptive after gene selection.</p>
+        <figure class="vw-figure">
+          <img src="./validated-workflows/worked-example/pair-effects.png" width="1134" height="782" loading="lazy" decoding="async" alt="Within-pair changes for selected genes" />
+        </figure>
+        <p class="vw-links"><a href="./validated-workflows/worked-example/pair-effects.tsv">Values for each matched pair</a></p>
+        <p>Among 8,376 full-fit discoveries, 8,375 kept the same direction and 5,288 met 5% FDR in all 5 leave-one-pair-out refits.</p>
+        <p>7,259 genes met 5% FDR with the same direction in DESeq2, edgeR and limma-voom in this cohort.</p>
+
+        <h2 id="study-design-and-sample-checks">Study design and sample checks</h2>
+        <p>DESeq2 1.52.0 estimated the difference within pairs. Positive estimates mean higher expression in colorectal tumor.</p>
+        <p>Genes needed at least 10 total counts across the selected samples. Gene-level p-values were adjusted by the Benjamini–Hochberg method.</p>
+        <p>Raw-read quality was not verified.</p>
+        <p>Excluded 2 samples (no count column).</p>
+        <p>The smallest retained library had 16.6 million counts. The largest had 26.0 million.</p>
+        <p>Included libraries had 26,539 to 30,366 detected genes.</p>
+        <figure class="vw-figure">
+          <img src="./validated-workflows/worked-example/library-qc.png" width="1332" height="648" loading="lazy" decoding="async" alt="Library totals and detected genes in the fitted samples" />
+        </figure>
+        <p>GSM4276882 and GSM4276876 had the largest within-pair shift on those two axes. Both samples were retained.</p>
+        <figure class="vw-figure">
+          <img src="./validated-workflows/worked-example/pca.png" width="1332" height="810" loading="lazy" decoding="async" alt="Sample PCA from the fitted count matrix" />
+        </figure>
+        <p class="vw-links"><a href="./validated-workflows/worked-example/pca.html">Explore sample annotations in the PCA</a></p>
+
+        <h2 id="sources-and-downloads">Sources and downloads</h2>
+        <p>Publication and supplement checks were recorded after this fit.</p>
+        <ul class="vw-checks">
+          <li><strong>Paper</strong> · Checked. Chen and colleagues describe six paired colorectal specimens. <a href="https://www.thno.org/v11p4298.htm" target="_blank" rel="noreferrer">Source</a></li>
+          <li><strong>Methods</strong> · Checked. Tumor and adjacent tissue were obtained after surgical resection. <a href="https://www.thno.org/v11p4298.htm" target="_blank" rel="noreferrer">Source</a></li>
+          <li><strong>Paper tables</strong> · Checked. The main clinical table describes a separate tissue-chip cohort. <a href="https://www.thno.org/v11p4298.htm" target="_blank" rel="noreferrer">Source</a></li>
+          <li><strong>Supplements</strong> · Checked. Table S1 lists clinical annotations for the six sequencing pairs. <a href="https://www.thno.org/v11/p4298/thnov11p4298s1.pdf" target="_blank" rel="noreferrer">Source</a></li>
+          <li><strong>Patient or sample metadata</strong> · Found. All six sequencing pair codes match GEO. Five pairs have count data. <a href="https://www.thno.org/v11/p4298/thnov11p4298s1.pdf" target="_blank" rel="noreferrer">Source</a></li>
+        </ul>
+        <p>GSEApy 1.3.1 ranked 30,400 genes by their signed Wald statistics. FDR was adjusted across eligible sets in each fit.</p>
+        <p class="vw-links"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE143939" target="_blank" rel="noreferrer">GSE143939</a> · <a href="./validated-workflows/worked-example/samples.tsv">Sample decisions</a> · <a href="./validated-workflows/worked-example/checks.tsv">Run checks</a> · <a href="./validated-workflows/worked-example/sample-qc.tsv">Library QC values</a> · <a href="./validated-workflows/worked-example/pca.tsv">PCA values</a> · <a href="./validated-workflows/worked-example/refit-status.tsv">Refit status</a> · <a href="./validated-workflows/worked-example/run-record.json">Run record</a> · <a href="https://docs.gsea-msigdb.org/MSigDB/Release_Notes/MSigDB_2026.2.Hs/" target="_blank" rel="noreferrer">MSigDB Hallmark 2026.2.Hs</a></p>
+        <p class="vw-links"><a href="./white-paper.html">Read the white paper</a> · <a href="./workflow-benchmarks.html">Benchmark results</a></p>
+        <div class="vw-article-end">
+          <a class="btn" href="https://calendar.app.google/HNzF6R9HYb7xhypd7" target="_blank" rel="noreferrer">Book a call&nbsp;<span aria-hidden="true">↗</span></a>
+          <a class="link-quiet" href="mailto:support@orchestrated.bio">support@orchestrated.bio</a>
+        </div>
+      </article>
+    </main>
+<footer class="foot">
+      <div class="shell">
+        <p>© 2026 Orchestrated Biosciences · Cromwell, CT</p>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="./insight.html">Insight</a>
+          <a href="./privacy-policy.html">Privacy</a>
+          <a href="./terms.html">Terms</a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./assets/js/company-site/mobile-nav.js?v=2b3f612cd84d"></script>
+  </body>
+</html>

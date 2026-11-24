@@ -1,5 +1,6 @@
-/* Validated Workflows page: the DrugAdopt validation copy and graphics.
-   The section kit (.sec-*) lives in company.css, which this page also loads. */
+/* Validated Workflows page and its three reading pages (white paper, worked
+   example, benchmark results). The landing page also loads company.css for
+   the section kit (.sec-*); the reading pages use only base.css and this file. */
 
 .vw-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) 0; }
 
@@ -14,26 +15,10 @@
   text-wrap: balance;
 }
 
-.vw-labels { margin: 0 0 1.2rem; }
-
-/* Same pill as the DrugAdopt page's eyebrow, so each product page names
-   itself the same way. */
-.vw-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.35rem 0.85rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-  border-radius: 999px;
-  background: var(--accent-wash);
-  color: var(--accent-deep);
-  font-size: 0.95rem;
-  font-weight: 650;
-  letter-spacing: 0.01em;
-}
-
+/* Same columns as .vw-split so the two figures share edges down the page. */
 .vw-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   gap: clamp(1.25rem, 4vw, 2.5rem);
   align-items: start;
 }
@@ -45,6 +30,41 @@
   font-size: 1.05rem;
   line-height: 1.65;
   text-wrap: pretty;
+}
+
+.vw-copy p { margin: 0 0 1rem; }
+.vw-copy p:last-child { margin-bottom: 0; }
+
+.vw-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(1.25rem, 4vw, 2.5rem);
+  align-items: start;
+}
+
+/* The heading sits in the left column so the figure's top lines up with it. */
+.vw-split .sec-title { margin-bottom: 1.25rem; }
+
+.vw-more {
+  color: var(--accent-deep);
+  font-weight: 650;
+  text-underline-offset: 0.18em;
+}
+
+.vw-example {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  margin-top: 1rem;
+}
+
+.vw-reading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
 }
 
 .vw-figure { margin: 0; }
@@ -59,7 +79,7 @@
   background: #fff;
 }
 
-.vw-benchmark { max-width: 42rem; margin-top: 1.25rem; }
+.vw-benchmark { max-width: 36rem; }
 
 .vw-figure figcaption {
   margin-top: 0.75rem;
@@ -68,36 +88,191 @@
   line-height: 1.55;
 }
 
-.vw-sources {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem clamp(1.5rem, 4vw, 3rem);
-  margin-top: clamp(2.5rem, 6vw, 3.5rem);
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--rule);
-}
-
-.vw-sources h3 {
-  margin: 0 0 0.6rem;
-  color: var(--ink);
-  font-size: var(--step-0);
-}
-
-.vw-sources ul {
-  margin: 0;
-  padding-left: 1.1rem;
-  color: var(--ink-2);
-  font-size: 0.93rem;
-  line-height: 1.55;
-}
-
-.vw-sources li + li { margin-top: 0.4rem; }
-
-.vw-sources a { color: var(--accent-deep); }
-
 .vw-end { padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3rem, 7vw, 5rem); }
 
 @media (max-width: 60rem) {
   .vw-intro,
-  .vw-sources { grid-template-columns: 1fr; }
+  .vw-split { grid-template-columns: 1fr; }
+}
+
+/* ---- Reading pages ------------------------------------------------------ */
+
+.vw-article {
+  width: min(100% - 2.5rem, 46rem);
+  margin-inline: auto;
+  padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3rem, 7vw, 5rem);
+  color: var(--ink-2);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.vw-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 0.5rem;
+  color: var(--accent-deep);
+  font-size: 0.93rem;
+  font-weight: 600;
+  text-underline-offset: 0.18em;
+}
+
+.vw-article h1 {
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-size: var(--step-3);
+  font-weight: 620;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.vw-byline { margin: 0 0 2rem; color: var(--ink-3); font-size: 0.95rem; }
+
+.vw-lede { color: var(--ink); font-size: 1.12rem; }
+
+.vw-article h2 {
+  margin: 2.6rem 0 0.8rem;
+  color: var(--ink);
+  font-size: var(--step-2);
+  font-weight: 620;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  scroll-margin-top: 1.5rem;
+}
+
+.vw-article h3 { margin: 0 0 0.6rem; color: var(--ink); font-size: var(--step-0); }
+
+.vw-article p { margin: 0 0 1.1rem; text-wrap: pretty; }
+
+.vw-article strong { color: var(--ink); font-weight: 650; }
+
+/* Unclassed links only, like base.css, so .btn and .link-quiet keep their own colors. */
+.vw-article a:not([class]) {
+  color: var(--accent);
+  text-underline-offset: 0.16em;
+  overflow-wrap: anywhere;
+}
+
+.vw-article a:not([class]):hover { color: var(--accent-deep); }
+
+.vw-article .vw-figure { margin: 1.5rem 0; }
+
+.vw-article .vw-figure img { border: 1px solid var(--rule); }
+
+.vw-links { font-size: 0.95rem; }
+
+.vw-note { color: var(--ink-3); font-size: 0.93rem; }
+
+/* Tables scroll inside their own box so a wide table never widens the page. */
+.vw-table {
+  margin: 1.25rem 0 1.5rem;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  background: var(--paper-raised);
+}
+
+.vw-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.vw-table th,
+.vw-table td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.vw-table thead th {
+  color: var(--ink-3);
+  font-size: 0.82rem;
+  font-weight: 600;
+  vertical-align: bottom;
+}
+
+.vw-table tbody tr:last-child > * { border-bottom: 0; }
+
+.vw-table tbody th { color: var(--ink); font-weight: 550; }
+
+.vw-table .num { text-align: right; white-space: nowrap; }
+
+/* Long column headers wrap so the row labels (model names) stay on one line. */
+.vw-table thead th.num { white-space: normal; min-width: 7.5rem; }
+.vw-table tbody th { white-space: nowrap; }
+
+/* Exploratory pathway results: one bar per gene set, same scale both sides. */
+.vw-pathways {
+  --tumor: #a1451e;
+  --adjacent: #186692;
+  margin: 1.25rem 0 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.6rem;
+  background: var(--paper-raised);
+}
+
+:root[data-theme="dark"] .vw-pathways { --tumor: #e08a6e; --adjacent: #6fb3dc; }
+
+.vw-pathway-groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.75rem;
+}
+
+.vw-pathway-groups ul { margin: 0; padding: 0; list-style: none; }
+
+.vw-pathway-groups li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 0.5rem;
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+  font-size: 0.93rem;
+}
+
+.vw-score { font-variant-numeric: tabular-nums; }
+
+.vw-track {
+  grid-column: 1 / -1;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--paper-sunk);
+}
+
+.vw-track i { display: block; height: 100%; border-radius: 2px; background: var(--tumor); }
+
+.vw-lower .vw-track i { background: var(--adjacent); }
+
+.vw-pathways figcaption,
+.vw-article .vw-figure figcaption { color: var(--ink-3); font-size: 0.9rem; line-height: 1.55; }
+
+.vw-pathways figcaption { margin-top: 0.5rem; }
+
+.vw-pathways figcaption p { margin: 0.4rem 0 0; }
+
+.vw-checks { padding-left: 1.2rem; }
+
+.vw-checks li { margin-bottom: 0.45rem; }
+
+.vw-article-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 34rem) {
+  .vw-pathway-groups { grid-template-columns: 1fr; }
+  .vw-table th,
+  .vw-table td { padding: 0.5rem 0.6rem; }
 }

@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.googletagmanager.com https://static.cloudflareinsights.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://cloudflareinsights.com" />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta name="description" content="DrugAdopt workflows are built from published best-practice guides, tested on known analyses and stress-tested with planted faults." />
+    <meta name="description" content="DrugAdopt’s scientists design workflows that guide AI analysis and let reviewers check the decisions behind each result, tested on published studies and planted errors." />
     <meta name="theme-color" content="#f4f6f2" />
     <title>Validated Workflows for Drug Development</title>
     <link rel="canonical" href="https://orchestrated.bio/validated-workflows.html" />
@@ -25,7 +25,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="./assets/css/company-site/base.css?v=3c37607a530f" />
     <link rel="stylesheet" href="./assets/css/company-site/company.css?v=deeba2494e99" />
-    <link rel="stylesheet" href="./assets/css/company-site/validated-workflows.css?v=5b42a57c6a88" />
+    <link rel="stylesheet" href="./assets/css/company-site/validated-workflows.css?v=89b2808e15c8" />
     <script src="./assets/js/cookie-consent.js?v=f70f2f295f30"></script>
   </head>
 <body>
@@ -51,45 +51,44 @@
     <main id="main">
       <section class="vw-hero">
         <div class="shell">
-          <p class="vw-labels"><span class="vw-pill">Validated Workflows</span></p>
-          <h1>Expert-designed workflows for drug development.</h1>
           <div class="vw-intro">
-            <p class="vw-copy">DrugAdopt uses expert-designed workflows to answer questions such as whether a biomarker could help identify patients likely to benefit from a drug. Our scientists build the procedures from published best-practice guides. We rerun known analyses and look for independent evidence. Then we introduce faults such as swapped labels or low-quality samples to see what the checks catch. We use the same benchmarks to evaluate new AI models. Your team gets a short report that shows what was analyzed and what supports or challenges the finding. The report shows which criteria were met and explains what confidence the evidence warrants.</p>
+            <div class="vw-copy">
+              <h1>Validated Workflows in DrugAdopt</h1>
+              <p>A model can make a convincing figure from the wrong samples. DrugAdopt’s scientists design workflows that guide the analysis and give reviewers a way to check the decisions behind the result.</p>
+              <p>We use the same cases to check what changes when a new model comes out.</p>
+            </div>
             <figure class="vw-figure">
-              <img src="./images/validated-workflows/drugadopt-workflow-validation.png" width="1920" height="1136" decoding="async" alt="How we validate workflows. Design expert procedures. Reanalyze known datasets. Check independent evidence. Stress-test with known faults. Report for expert review." />
+              <img src="./images/validated-workflows/how-we-validate.png" width="1028" height="640" decoding="async" alt="How we validate a workflow. Start with expert procedures and best-practice guides, reanalyze published studies and check independent evidence, introduce realistic errors, and review the report’s decisions, checklist, and confidence." />
             </figure>
           </div>
         </div>
       </section>
 
-      <section class="sec" aria-labelledby="models-title">
+      <section class="sec" aria-labelledby="exclusion-title">
         <div class="shell">
-          <h2 class="sec-title" id="models-title">Testing new AI models</h2>
-          <figure class="vw-figure vw-benchmark">
-            <img src="./images/validated-workflows/drugadopt-model-stress-test.png" width="2000" height="1160" loading="lazy" decoding="async" alt="Sample exclusion stress test. DeepSeek V4.1 Flash, GPT-6.1 Sol, GPT-6 Luna, and GPT-5.6 Terra kept the named clean sample in 6 of 6 cases each with added instructions. With the base prompt, DeepSeek and Sol kept it in 6 of 6, and Luna and Terra in 2 of 6. All four removed the named contaminated sample in 3 of 3 cases in both conditions." />
-            <figcaption>Both prompt conditions supplied the quality-control records for the case. The second added instructions about which analysis to report. The cases used simulated paired RNA-seq counts.</figcaption>
-          </figure>
+          <div class="vw-split">
+            <div class="vw-copy">
+              <h2 class="sec-title" id="exclusion-title">Sample exclusion stress test</h2>
+              <p>We gave models a note asking them to drop a clean sample. We checked whether they kept it and whether they removed a sample that the quality record flagged as contaminated.</p>
+              <p>Some errors are harder to catch. In a separate liver-tumor dataset, the main quality checks missed all ten planted swaps between patients. A sex-marker check detected three.</p>
+              <p><a class="vw-more" href="./workflow-benchmarks.html">Benchmark results <span aria-hidden="true">→</span></a></p>
+            </div>
+            <figure class="vw-figure vw-benchmark">
+              <img src="./images/validated-workflows/sample-exclusion.png" width="1128" height="928" loading="lazy" decoding="async" alt="Four models compared on whether they kept clean samples and removed contaminated samples. Two kept clean samples in 2 of 6 cases with the base prompt. With added instructions, all four kept them in 6 of 6. All four removed the flagged sample in 3 of 3 cases with either prompt." />
+            </figure>
+          </div>
+        </div>
+      </section>
 
-          <div class="vw-sources">
-            <div>
-              <h3>Guides and procedures</h3>
-              <ul>
-                <li><a href="https://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#can-i-use-deseq2-to-analyze-paired-samples" target="_blank" rel="noreferrer">Bioconductor’s guide to paired RNA-seq designs in DESeq2</a></li>
-                <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK338448/" target="_blank" rel="noreferrer">FDA–NIH BEST biomarker glossary</a></li>
-                <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK202165/" target="_blank" rel="noreferrer">Institute of Medicine guidance on developing and confirming omics analyses</a></li>
-                <li><a href="https://github.com/orchestrated-bio/drugadopt-methods/blob/main/docs/method-contract.md" target="_blank" rel="noreferrer">DrugAdopt Methods contract and known-answer tests</a></li>
-              </ul>
-            </div>
-            <div>
-              <h3>Examples behind the graphics</h3>
-              <ul>
-                <li><a href="https://github.com/orchestrated-bio/drugadopt-methods/blob/main/panels/real-study-set/RESULT-2026-11-17-paper-tables.md" target="_blank" rel="noreferrer">Published-study result comparisons</a></li>
-                <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9401502/" target="_blank" rel="noreferrer">Phase I ivuxolimab trial</a> and <a href="https://github.com/orchestrated-bio/gene-expression-white-paper/blob/590d22491468755feb0bbac3563d46e5a7e508d3/release/geo-rnaseq/README.md#run-a-known-example" target="_blank" rel="noreferrer">DrugAdopt’s paired-biopsy reanalysis procedure</a></li>
-                <li><a href="https://github.com/orchestrated-bio/gene-expression-white-paper/blob/590d22491468755feb0bbac3563d46e5a7e508d3/evals/geo-release/replication/GSE121212.json" target="_blank" rel="noreferrer">Cross-dataset comparison</a></li>
-                <li>Planted faults <a href="https://github.com/orchestrated-bio/drugadopt-methods/blob/main/panels/paired-two-level/RESULT-2026-11-14-poison-3.md" target="_blank" rel="noreferrer">in simulated data</a> and <a href="https://github.com/orchestrated-bio/drugadopt-methods/blob/main/panels/cancer-study-set/RESULT-2026-11-17-runs-and-faults.md#part-3-planted-faults-in-gse138485" target="_blank" rel="noreferrer">in a real liver-tumor dataset</a></li>
-                <li><a href="https://github.com/orchestrated-bio/drugadopt-methods/blob/main/panels/paired-two-level/agents/RESULT-2026-11-14-rule.md" target="_blank" rel="noreferrer">Sample-exclusion benchmark</a></li>
-              </ul>
-            </div>
+      <section class="sec" aria-labelledby="example-title">
+        <div class="shell">
+          <h2 class="sec-title" id="example-title">Review a real analysis</h2>
+          <div class="vw-example">
+            <p class="vw-copy">See which five pairs went into a colorectal RNA-seq analysis, why a sixth pair was left out, and what changed when we left one pair out at a time.</p>
+            <nav class="vw-reading" aria-label="Further reading">
+              <a class="btn" href="./worked-example.html">Worked example</a>
+              <a class="vw-more" href="./white-paper.html">Read the white paper <span aria-hidden="true">→</span></a>
+            </nav>
           </div>
         </div>
       </section>

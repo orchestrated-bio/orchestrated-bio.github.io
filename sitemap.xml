@@ -32,8 +32,23 @@
   </url>
   <url>
     <loc>https://orchestrated.bio/validated-workflows.html</loc>
-    <lastmod>2026-11-23</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://orchestrated.bio/white-paper.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://orchestrated.bio/worked-example.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://orchestrated.bio/workflow-benchmarks.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://orchestrated.bio/company.html</loc>
